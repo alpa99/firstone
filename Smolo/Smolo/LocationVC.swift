@@ -103,7 +103,8 @@ class LocationVC: UIViewController, UITableViewDelegate,/* UITableViewDataSource
     
     
     func getPlaceMarkFromAdress (adress: BarInfos){
-        CLGeocoder().geocodeAddressString(adresses) { (placemarks: [CLPlacemark]?,error: Error?) in
+
+        CLGeocoder().geocodeAddressString(adresses){ (placemarks: [CLPlacemark]?,error: Error?) in
             if let marks = placemarks , marks.count > 0 {
                 if let loc = marks[0].location {
                     self.createAnnotationForLocation(location: loc)
@@ -113,7 +114,7 @@ class LocationVC: UIViewController, UITableViewDelegate,/* UITableViewDataSource
         
     }
 
-    */
+   
 
-
+*/
 }

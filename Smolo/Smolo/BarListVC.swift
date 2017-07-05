@@ -24,7 +24,7 @@ class BarListVC: UIViewController, UITableViewDataSource, UITableViewDelegate, U
         searchBar()
 
     }
-    // kokokokokoko
+    
     func fetchBars() {
         var ref: DatabaseReference!
         ref = Database.database().reference()
@@ -43,7 +43,6 @@ class BarListVC: UIViewController, UITableViewDataSource, UITableViewDelegate, U
         
     }
     
-// testttt
     
     func searchBar () {
         
