@@ -34,5 +34,7 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+	<key>LocationWhenInUseUsageDescription</key>
+	<string>Erlaube deinen Standort zu nutzen, um Bars in deiner Nähe zu finden.</string>
 </dict>
 </plist>

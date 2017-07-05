@@ -80,6 +80,10 @@
                             <constraint firstAttribute="trailing" secondItem="kPq-Vs-cDR" secondAttribute="trailing" id="ykm-uw-u06"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="map" destination="kPq-Vs-cDR" id="efj-1H-Uhk"/>
+                        <outlet property="mapTV" destination="mUZ-24-fwo" id="gMV-dx-vUe"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2Ub-Qy-OXM" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -102,7 +106,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="cellID" id="eTk-xX-8B3">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="cellID" id="eTk-xX-8B3" customClass="barCell" customModule="Smolo" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="eTk-xX-8B3" id="i7L-Fs-kbR">

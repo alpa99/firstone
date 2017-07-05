@@ -18,6 +18,8 @@
 		4EE1DFC71F0D25A60050422C /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4EE1DFC61F0D25A60050422C /* GoogleService-Info.plist */; };
 		4EE1DFC91F0D27410050422C /* BarListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EE1DFC81F0D27410050422C /* BarListVC.swift */; };
 		4EE1DFCB1F0D27910050422C /* LocationVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EE1DFCA1F0D27910050422C /* LocationVC.swift */; };
+		4EE1DFCE1F0D2D4A0050422C /* BarInfos.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EE1DFCD1F0D2D4A0050422C /* BarInfos.swift */; };
+		4EE1DFD01F0D2D5C0050422C /* BarAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EE1DFCF1F0D2D5C0050422C /* BarAnnotation.swift */; };
 		CC5BF67686819D6F7276F333 /* Pods_SmoloTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D1FFD86F71D587286D5BA44 /* Pods_SmoloTests.framework */; };
 		EE95FAA504F68A956AD17FE7 /* Pods_Smolo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F370A73201638A4878B45E31 /* Pods_Smolo.framework */; };
 /* End PBXBuildFile section */
@@ -60,6 +62,8 @@
 		4EE1DFC61F0D25A60050422C /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = SOURCE_ROOT; };
 		4EE1DFC81F0D27410050422C /* BarListVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BarListVC.swift; sourceTree = "<group>"; };
 		4EE1DFCA1F0D27910050422C /* LocationVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationVC.swift; sourceTree = "<group>"; };
+		4EE1DFCD1F0D2D4A0050422C /* BarInfos.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BarInfos.swift; sourceTree = "<group>"; };
+		4EE1DFCF1F0D2D5C0050422C /* BarAnnotation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BarAnnotation.swift; sourceTree = "<group>"; };
 		62CCBADF96E3F30A8CF0F703 /* Pods-Smolo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Smolo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Smolo/Pods-Smolo.debug.xcconfig"; sourceTree = "<group>"; };
 		B28D06CD6424BCFEC02C8A6C /* Pods-SmoloUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SmoloUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SmoloUITests/Pods-SmoloUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		D0B6B046336055B82B626B07 /* Pods-SmoloUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SmoloUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-SmoloUITests/Pods-SmoloUITests.release.xcconfig"; sourceTree = "<group>"; };
@@ -108,6 +112,7 @@
 		4EE1DF8A1F0D22E00050422C = {
 			isa = PBXGroup;
 			children = (
+				4EE1DFCC1F0D2D2F0050422C /* Models */,
 				4EE1DF951F0D22E00050422C /* Smolo */,
 				4EE1DFAA1F0D22E00050422C /* SmoloTests */,
 				4EE1DFB51F0D22E00050422C /* SmoloUITests */,
@@ -159,6 +164,15 @@
 				4EE1DFB81F0D22E00050422C /* Info.plist */,
 			);
 			path = SmoloUITests;
+			sourceTree = "<group>";
+		};
+		4EE1DFCC1F0D2D2F0050422C /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				4EE1DFCD1F0D2D4A0050422C /* BarInfos.swift */,
+				4EE1DFCF1F0D2D5C0050422C /* BarAnnotation.swift */,
+			);
+			name = Models;
 			sourceTree = "<group>";
 		};
 		FB84DAA13BDD7328D6DBC151 /* Pods */ = {
@@ -456,9 +470,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4EE1DFD01F0D2D5C0050422C /* BarAnnotation.swift in Sources */,
 				4EE1DFC91F0D27410050422C /* BarListVC.swift in Sources */,
 				4EE1DFCB1F0D27910050422C /* LocationVC.swift in Sources */,
 				4EE1DF991F0D22E00050422C /* ViewController.swift in Sources */,
+				4EE1DFCE1F0D2D4A0050422C /* BarInfos.swift in Sources */,
 				4EE1DF971F0D22E00050422C /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
