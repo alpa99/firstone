@@ -43,6 +43,8 @@ class BarListVC: UIViewController, UITableViewDataSource, UITableViewDelegate, U
         
     }
     
+    //hallihallo
+    
     func searchBar () {
         
         let searchBar = UISearchBar(frame: CGRect(x: 0.0, y: 0.0, width: self.view.frame.width, height: 50.0))
