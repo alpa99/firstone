@@ -43,7 +43,7 @@ class BarListVC: UIViewController, UITableViewDataSource, UITableViewDelegate, U
         
     }
     
-    //hallihallo
+
     
     func searchBar () {
         
