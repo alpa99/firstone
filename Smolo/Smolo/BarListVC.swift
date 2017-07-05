@@ -16,7 +16,7 @@ class BarListVC: UIViewController, UITableViewDataSource, UITableViewDelegate, U
     var bar = [BarInfos]()
     let cellID = "cellID"
     
-    
+
 
     override func viewDidLoad() {
         super.viewDidLoad()
