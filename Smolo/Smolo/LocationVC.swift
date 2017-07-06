@@ -15,7 +15,7 @@ class LocationVC: UIViewController, UITableViewDelegate,/* UITableViewDataSource
     @IBOutlet weak var map: MKMapView!
     @IBOutlet weak var mapTV: UITableView!
     
-  /*
+  
     let regionRadius: CLLocationDistance = 1500
     
     let locationManager = CLLocationManager()
@@ -27,11 +27,11 @@ class LocationVC: UIViewController, UITableViewDelegate,/* UITableViewDataSource
         mapTV.delegate = self
         //  tableView.dataSource = self
         
-        for add in adresses{
+       for add in adresses{
             getPlaceMarkFromAdress(adress: add)
         }
         fetchAdress()
-        
+
     }
     func fetchAdress() {
         var datref: DatabaseReference!
@@ -41,7 +41,7 @@ class LocationVC: UIViewController, UITableViewDelegate,/* UITableViewDataSource
             if let dictionary = snapshot.value as? [String: AnyObject]{
                 let adresses  = BarInfos(dictionary: dictionary)
                 self.adresses.append(adresses)
-                
+                print(dictionary)
             }
             
         }, withCancel: nil)
@@ -116,5 +116,5 @@ class LocationVC: UIViewController, UITableViewDelegate,/* UITableViewDataSource
 
    
 
-*/
+
 }
