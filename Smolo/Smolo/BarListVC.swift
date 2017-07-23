@@ -11,9 +11,9 @@ import Firebase
 
 class BarListVC: UIViewController, UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate {
    
-    @IBOutlet weak var BarListTV: UITableView!
+    @IBOutlet weak var tableView: UITableView!
     
-    var bar = [BarInfos]()
+    var bars = [BarInfos]()
     let cellID = "cellID"
     
 
@@ -32,10 +32,10 @@ class BarListVC: UIViewController, UITableViewDataSource, UITableViewDelegate, U
             
             if let dictionary = snapshot.value as? [String: AnyObject]{
                 let bar  = BarInfos(dictionary: dictionary)
-                self.bar.append(bar)
+                self.bars.append(bar)
                 
                 DispatchQueue.main.async(execute: {
-                    self.BarListTV.reloadData()
+                    self.tableView.reloadData()
                 })
             }
             
@@ -51,10 +51,10 @@ class BarListVC: UIViewController, UITableViewDataSource, UITableViewDelegate, U
         searchBar.showsScopeBar = true
         searchBar.tintColor = UIColor.lightGray
         searchBar.scopeButtonTitles = ["Bar suche", "Stadt suche"]
-        self.BarListTV.tableHeaderView = searchBar
+        self.tableView.tableHeaderView = searchBar
         
     }
-    
+ /*
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         if searchText == ""{
             fetchBars()
@@ -71,15 +71,15 @@ class BarListVC: UIViewController, UITableViewDataSource, UITableViewDelegate, U
             
         }
         self.BarListTV.reloadData()
-    }
+    }*/
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: cellID, for: indexPath)
-        let bars = bar[indexPath.row]
+        let bar = bars[indexPath.row]
         
-        cell.textLabel?.text =  bars.Name
-        cell.detailTextLabel?.text = bars.Stadt
+        cell.textLabel?.text =  bar.Name
+        cell.detailTextLabel?.text = bar.Stadt
         return cell
     }
     
@@ -87,7 +87,7 @@ class BarListVC: UIViewController, UITableViewDataSource, UITableViewDelegate, U
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        return bar.count
+        return bars.count
         
     }
    
