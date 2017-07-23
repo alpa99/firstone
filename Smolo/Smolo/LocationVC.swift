@@ -20,9 +20,10 @@ class LocationVC: UIViewController, UITableViewDelegate, UITableViewDataSource, 
     
     let locationManager = CLLocationManager()
     
-    let adresses = ["Goseriede 12, 30159 Hannover, Deutschland"]
+    // var adresses = ["Goseriede 12, 30159 Hannover, Deutschland"]
     
     var adresse = [BarInfos]()
+    var BarAdressen = [String]()
     
     
     override func viewDidLoad() {
@@ -32,13 +33,9 @@ class LocationVC: UIViewController, UITableViewDelegate, UITableViewDataSource, 
         mapTV.delegate = self
         mapTV.dataSource = self
         
-        
-        for add in adresses{
-            getPlaceMarkFromAdress(adress: add)
-        }
+    
         fetchAdress()
         
-        // print(adressesb)
         
         
     }
@@ -53,7 +50,12 @@ class LocationVC: UIViewController, UITableViewDelegate, UITableViewDataSource, 
             if let dictionary = snapshot.value as? [String: AnyObject]{
                 let adresse = BarInfos(dictionary: dictionary)
                 adresse.setValuesForKeys(dictionary)
-                print(adresse.Adresse!)
+                //print(adresse.Adresse!)
+                self.BarAdressen.append(adresse.Adresse!)
+                print(self.BarAdressen)
+                for a in 0 ..< self.BarAdressen.count {
+                    self.getPlaceMarkFromAdress(adress: "\(a)")
+                }
             }
             
             
@@ -62,26 +64,6 @@ class LocationVC: UIViewController, UITableViewDelegate, UITableViewDataSource, 
         
     }
     
-    
-    
-    /*
-     
-     func fetchAdress() {
-     
-     var datref: DatabaseReference!
-     datref = Database.database().reference()
-     datref.child("Barliste").observe(.childAdded, with: { (snapshot) in
-     
-     if let dictionary = snapshot.value as? [String: AnyObject]{
-     let adressesb  = BarInfos(dictionary: dictionary)
-     self.adressesb.append(adressesb)
-     print("\(self.adressesb)")
-     }
-     
-     }, withCancel: nil)
-     
-     }
-     */
     
     
     
@@ -121,18 +103,18 @@ class LocationVC: UIViewController, UITableViewDelegate, UITableViewDataSource, 
         }
     }
     
-    func centerMapOnLocation(location:CLLocation){
+  /*  func centerMapOnLocation(location:CLLocation){
         let coordinateRegion = MKCoordinateRegionMakeWithDistance(location.coordinate, regionRadius * 2 , regionRadius * 2)
         map.setRegion(coordinateRegion, animated: true)
     }
-    
+   
     
     
     func mapView(_ mapView: MKMapView, didUpdate userLocation: MKUserLocation){
         if let loc = userLocation.location {
             centerMapOnLocation(location: loc)
         }
-    }
+    } */
     
     
     func createAnnotationForLocation(location: CLLocation){

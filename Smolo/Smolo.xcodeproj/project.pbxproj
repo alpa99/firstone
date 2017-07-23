@@ -265,6 +265,7 @@
 				TargetAttributes = {
 					4EE1DF921F0D22E00050422C = {
 						CreatedOnToolsVersion = 8.3.3;
+						DevelopmentTeam = 8G282R5UXU;
 						ProvisioningStyle = Automatic;
 					};
 					4EE1DFA61F0D22E00050422C = {
@@ -628,6 +629,7 @@
 			baseConfigurationReference = 62CCBADF96E3F30A8CF0F703 /* Pods-Smolo.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = 8G282R5UXU;
 				INFOPLIST_FILE = Smolo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = AM.Smolo;
@@ -641,6 +643,7 @@
 			baseConfigurationReference = 1F5016CB8E2E6D8726D43074 /* Pods-Smolo.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = 8G282R5UXU;
 				INFOPLIST_FILE = Smolo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = AM.Smolo;
