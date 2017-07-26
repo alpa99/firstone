@@ -125,7 +125,7 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="BarListTV" destination="JsW-jY-H3e" id="FOS-t6-sq4"/>
+                        <outlet property="tableView" destination="JsW-jY-H3e" id="o4U-i9-c0k"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uJB-HX-NWv" userLabel="First Responder" sceneMemberID="firstResponder"/>

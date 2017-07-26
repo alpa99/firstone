@@ -11,7 +11,9 @@ import Firebase
 
 class BarListVC: UIViewController, UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate {
    
+   
     @IBOutlet weak var tableView: UITableView!
+    
     
     var bars = [BarInfos]()
     let cellID = "cellID"
