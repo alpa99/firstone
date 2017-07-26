@@ -6,4 +6,13 @@
 //  Copyright © 2017 AM. All rights reserved.
 //
 
-import Foundation
+import UIKit
+import MapKit
+
+class BarAnnotation: NSObject, MKAnnotation {
+    var coordinate = CLLocationCoordinate2D()
+    
+    init(coordinate: CLLocationCoordinate2D) {
+        self.coordinate = coordinate
+    }
+}

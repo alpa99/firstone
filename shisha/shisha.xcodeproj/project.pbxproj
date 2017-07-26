@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		08D923E01F290FA400E67230 /* LocationVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D923DF1F290FA400E67230 /* LocationVC.swift */; };
 		4E0C37DC1F2909060004DCE6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E0C37DB1F2909060004DCE6 /* AppDelegate.swift */; };
 		4E0C37DE1F2909060004DCE6 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E0C37DD1F2909060004DCE6 /* ViewController.swift */; };
 		4E0C37E11F2909060004DCE6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4E0C37DF1F2909060004DCE6 /* Main.storyboard */; };
@@ -40,6 +41,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		08D923DF1F290FA400E67230 /* LocationVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationVC.swift; sourceTree = "<group>"; };
 		10C74F16B9B59CC0E4F996CA /* Pods_shishaTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_shishaTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1E801B7DCFDE10E9BBD0F35F /* Pods-shishaTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-shishaTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-shishaTests/Pods-shishaTests.release.xcconfig"; sourceTree = "<group>"; };
 		3457CDDAEE1DCDAF8B0BD369 /* Pods-shisha.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-shisha.release.xcconfig"; path = "Pods/Target Support Files/Pods-shisha/Pods-shisha.release.xcconfig"; sourceTree = "<group>"; };
@@ -128,6 +130,7 @@
 				4E0C37E41F2909060004DCE6 /* LaunchScreen.storyboard */,
 				4E0C380B1F290A8C0004DCE6 /* GoogleService-Info.plist */,
 				4E0C37E71F2909060004DCE6 /* Info.plist */,
+				08D923DF1F290FA400E67230 /* LocationVC.swift */,
 			);
 			path = shisha;
 			sourceTree = "<group>";
@@ -464,6 +467,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				08D923E01F290FA400E67230 /* LocationVC.swift in Sources */,
 				4E0C38141F290F360004DCE6 /* BarAnnotation.swift in Sources */,
 				4E0C38161F290F420004DCE6 /* BarInfo.swift in Sources */,
 				4E0C37DE1F2909060004DCE6 /* ViewController.swift in Sources */,
