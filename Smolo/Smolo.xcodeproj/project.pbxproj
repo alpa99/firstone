@@ -112,7 +112,6 @@
 		4EE1DF8A1F0D22E00050422C = {
 			isa = PBXGroup;
 			children = (
-				4EE1DFCC1F0D2D2F0050422C /* Models */,
 				4EE1DF951F0D22E00050422C /* Smolo */,
 				4EE1DFAA1F0D22E00050422C /* SmoloTests */,
 				4EE1DFB51F0D22E00050422C /* SmoloUITests */,
@@ -135,6 +134,7 @@
 		4EE1DF951F0D22E00050422C /* Smolo */ = {
 			isa = PBXGroup;
 			children = (
+				4EE1DFCC1F0D2D2F0050422C /* Models */,
 				4EE1DF961F0D22E00050422C /* AppDelegate.swift */,
 				4EE1DF981F0D22E00050422C /* ViewController.swift */,
 				4EE1DF9A1F0D22E00050422C /* Main.storyboard */,
@@ -173,6 +173,7 @@
 				4EE1DFCF1F0D2D5C0050422C /* BarAnnotation.swift */,
 			);
 			name = Models;
+			path = ..;
 			sourceTree = "<group>";
 		};
 		FB84DAA13BDD7328D6DBC151 /* Pods */ = {

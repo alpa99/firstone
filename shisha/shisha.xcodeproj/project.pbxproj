@@ -15,6 +15,8 @@
 		4E0C37F11F2909060004DCE6 /* shishaTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E0C37F01F2909060004DCE6 /* shishaTests.swift */; };
 		4E0C37FC1F2909060004DCE6 /* shishaUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E0C37FB1F2909060004DCE6 /* shishaUITests.swift */; };
 		4E0C380C1F290A8C0004DCE6 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4E0C380B1F290A8C0004DCE6 /* GoogleService-Info.plist */; };
+		4E0C38141F290F360004DCE6 /* BarAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E0C38131F290F360004DCE6 /* BarAnnotation.swift */; };
+		4E0C38161F290F420004DCE6 /* BarInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E0C38151F290F420004DCE6 /* BarInfo.swift */; };
 		4E3790E47F30DB5EA80FBFD2 /* Pods_shishaUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 91D453B6D8F2943D5788BE62 /* Pods_shishaUITests.framework */; };
 		9C1CFFD09A46B8A974BC3035 /* Pods_shisha.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C67B9B85FDE561447FFFF1C /* Pods_shisha.framework */; };
 		CFD19BD31CF0EA980EECC361 /* Pods_shishaTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 10C74F16B9B59CC0E4F996CA /* Pods_shishaTests.framework */; };
@@ -55,6 +57,8 @@
 		4E0C37FB1F2909060004DCE6 /* shishaUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = shishaUITests.swift; sourceTree = "<group>"; };
 		4E0C37FD1F2909060004DCE6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4E0C380B1F290A8C0004DCE6 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = SOURCE_ROOT; };
+		4E0C38131F290F360004DCE6 /* BarAnnotation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BarAnnotation.swift; sourceTree = "<group>"; };
+		4E0C38151F290F420004DCE6 /* BarInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BarInfo.swift; sourceTree = "<group>"; };
 		5AEACA75387DCBFFC19C1E02 /* Pods-shishaUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-shishaUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-shishaUITests/Pods-shishaUITests.release.xcconfig"; sourceTree = "<group>"; };
 		5C67B9B85FDE561447FFFF1C /* Pods_shisha.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_shisha.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		91D453B6D8F2943D5788BE62 /* Pods_shishaUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_shishaUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -116,6 +120,7 @@
 		4E0C37DA1F2909060004DCE6 /* shisha */ = {
 			isa = PBXGroup;
 			children = (
+				4E0C38121F290F200004DCE6 /* Models */,
 				4E0C37DB1F2909060004DCE6 /* AppDelegate.swift */,
 				4E0C37DD1F2909060004DCE6 /* ViewController.swift */,
 				4E0C37DF1F2909060004DCE6 /* Main.storyboard */,
@@ -143,6 +148,15 @@
 				4E0C37FD1F2909060004DCE6 /* Info.plist */,
 			);
 			path = shishaUITests;
+			sourceTree = "<group>";
+		};
+		4E0C38121F290F200004DCE6 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				4E0C38131F290F360004DCE6 /* BarAnnotation.swift */,
+				4E0C38151F290F420004DCE6 /* BarInfo.swift */,
+			);
+			name = Models;
 			sourceTree = "<group>";
 		};
 		5F411CCC2F6F6E9956BC0CDD /* Pods */ = {
@@ -450,6 +464,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4E0C38141F290F360004DCE6 /* BarAnnotation.swift in Sources */,
+				4E0C38161F290F420004DCE6 /* BarInfo.swift in Sources */,
 				4E0C37DE1F2909060004DCE6 /* ViewController.swift in Sources */,
 				4E0C37DC1F2909060004DCE6 /* AppDelegate.swift in Sources */,
 			);
