@@ -1,0 +1,23 @@
+# Uncomment the next line to define a global platform for your project
+# platform :ios, '9.0'
+
+target 'shisha' do
+  # Comment the next line if you're not using Swift and don't want to use dynamic frameworks
+  use_frameworks!
+
+  # Pods for shisha
+pod 'Firebase/Core'
+pod 'Firebase/Database‘
+pod 'Firebase'
+
+  target 'shishaTests' do
+    inherit! :search_paths
+    # Pods for testing
+  end
+
+  target 'shishaUITests' do
+    inherit! :search_paths
+    # Pods for testing
+  end
+
+end
