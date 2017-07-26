@@ -9,11 +9,18 @@
 import UIKit
 import Firebase
 
+
+// habe die var bars aus der klasse raus genommen und drüer geschrieben damit man von jeder datei auf den array bars zugreifen kann und dann in die methode didSelectRow also wenn man eine cell auswählt nimmt er den index von der cell und BarIndex hat die gleiche Nummer -> guck jetzt auf datei BarDetailVC
+
+
+var BarIndex = 0
+var bars = [BarInfos] ()
+
+
 class SearchTVC: UITableViewController {
 
     let cellID = "cellID"
     
-    var bars = [BarInfos] ()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,7 +39,7 @@ class SearchTVC: UITableViewController {
                 let bar = BarInfos(dictionary: dictionary)
                 bar.setValuesForKeys(dictionary)
                 print(bar.Name!, bar.Stadt!)
-                self.bars.append(bar)
+                bars.append(bar)
                 
                 DispatchQueue.main.async(execute: {
                     self.tableView.reloadData()
@@ -78,6 +85,10 @@ class SearchTVC: UITableViewController {
         return cell
     }
     
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        BarIndex = indexPath.row
+        performSegue(withIdentifier: cellID, sender: self)
+    }
 
     /*
     // Override to support conditional editing of the table view.

@@ -59,7 +59,7 @@
                                 <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="T6e-Xu-6IR" id="Jy1-91-BhN">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
                             </tableViewCell>
@@ -69,6 +69,9 @@
                             <outlet property="delegate" destination="ONh-mr-uuW" id="ZGd-tm-rwj"/>
                         </connections>
                     </tableView>
+                    <connections>
+                        <segue destination="wyr-i9-goh" kind="show" identifier="cellID" id="kbu-jC-NlD"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iHK-So-NXr" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -100,7 +103,7 @@
                                         <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Pby-2E-eiy" id="WMN-Bl-ZXj">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -126,6 +129,24 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Onn-Oi-dMJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1895.2" y="600.44977511244383"/>
+        </scene>
+        <!--Bar DetailVC-->
+        <scene sceneID="8DH-i0-uDY">
+            <objects>
+                <viewController id="wyr-i9-goh" customClass="BarDetailVC" customModule="shisha" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="OL0-g1-h1G"/>
+                        <viewControllerLayoutGuide type="bottom" id="Uy5-o2-SiQ"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="bNk-C8-HJX">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="kLr-qy-mIE" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2943" y="283"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Qau-Ru-M4D">
