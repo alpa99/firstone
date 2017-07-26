@@ -71,6 +71,7 @@ class SearchTVC: UITableViewController {
         
         
         cell.textLabel?.text = bar.Name
+        cell.detailTextLabel?.text = bar.Stadt
 
         return cell
     }
