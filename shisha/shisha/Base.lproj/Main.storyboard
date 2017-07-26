@@ -25,9 +25,6 @@
                                 <rect key="frame" x="140" y="173" width="94" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Stadtsuche"/>
-                                <connections>
-                                    <segue destination="r4V-XX-hpT" kind="show" id="cjn-Ss-LfE"/>
-                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vkQ-DT-Eoz">
                                 <rect key="frame" x="140" y="390" width="94" height="30"/>
@@ -45,10 +42,10 @@
             </objects>
             <point key="canvasLocation" x="136.80000000000001" y="107.49625187406298"/>
         </scene>
-        <!--View Controller-->
+        <!--LocationVC-->
         <scene sceneID="yMY-X5-tFs">
             <objects>
-                <viewController id="JVW-KB-tRY" sceneMemberID="viewController">
+                <viewController id="JVW-KB-tRY" customClass="LocationVC" customModule="shisha" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="ZoX-7i-xP6"/>
                         <viewControllerLayoutGuide type="bottom" id="B5o-EA-Enx"/>
@@ -79,40 +76,14 @@
                             <constraint firstItem="0W9-bc-Y80" firstAttribute="leading" secondItem="jTJ-n2-CO3" secondAttribute="leading" id="y5a-Ai-qD5"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="map" destination="Wc6-Z7-N7x" id="jbA-UM-9Rc"/>
+                        <outlet property="mapTV" destination="0W9-bc-Y80" id="Chw-Oc-hAd"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Onn-Oi-dMJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="957.5" y="600.5"/>
-        </scene>
-        <!--View Controller-->
-        <scene sceneID="lVd-Vg-4PZ">
-            <objects>
-                <viewController id="r4V-XX-hpT" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="JSh-b2-JBB"/>
-                        <viewControllerLayoutGuide type="bottom" id="VoO-Tf-aUE"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="E6V-up-NMe">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="i8i-Ep-McG">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            </tableView>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstAttribute="trailing" secondItem="i8i-Ep-McG" secondAttribute="trailing" id="337-02-o0b"/>
-                            <constraint firstItem="i8i-Ep-McG" firstAttribute="top" secondItem="E6V-up-NMe" secondAttribute="top" id="GTK-ki-dv0"/>
-                            <constraint firstItem="i8i-Ep-McG" firstAttribute="leading" secondItem="E6V-up-NMe" secondAttribute="leading" id="PyW-PT-0PG"/>
-                            <constraint firstItem="VoO-Tf-aUE" firstAttribute="top" secondItem="i8i-Ep-McG" secondAttribute="bottom" id="Ug2-Bu-6C9"/>
-                        </constraints>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="1xp-wz-2WN" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="957.60000000000002" y="-148.87556221889056"/>
         </scene>
     </scenes>
 </document>
