@@ -25,7 +25,7 @@ class SearchTVC: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.register(barCell.self, forCellReuseIdentifier: cellID)
-        
+        bars = [BarInfos]()
         fetchBars()
         
     }
