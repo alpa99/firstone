@@ -23,6 +23,8 @@ class BarListVC: UIViewController, UITableViewDataSource, UITableViewDelegate, U
     override func viewDidLoad() {
         super.viewDidLoad()
         fetchBars ()
+        tableView.register(barCell.self, forCellReuseIdentifier: cellID)
+
         searchBar()
 
     }

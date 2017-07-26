@@ -17,6 +17,8 @@ class SearchTVC: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        tableView.register(barCell.self, forCellReuseIdentifier: cellID)
+        
         fetchBars()
         
     }
@@ -65,8 +67,8 @@ class SearchTVC: UITableViewController {
 
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-       // let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
-        let cell = UITableViewCell(style: .subtitle, reuseIdentifier: cellID)
+        let cell = tableView.dequeueReusableCell(withIdentifier: cellID, for: indexPath)
+        //let cell = UITableViewCell(style: .subtitle, reuseIdentifier: cellID)
         let bar = bars[indexPath.row]
         
         
@@ -122,4 +124,16 @@ class SearchTVC: UITableViewController {
     }
     */
 
+}
+
+class barCell: UITableViewCell {
+    
+    override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
+        super.init(style: .subtitle, reuseIdentifier: reuseIdentifier)
+    }
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    
 }
