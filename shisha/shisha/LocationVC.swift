@@ -10,10 +10,11 @@ import UIKit
 import Firebase
 import MapKit
 
-class LocationVC: UIViewController, UITableViewDelegate, UITableViewDataSource, MKMapViewDelegate {
+class LocationVC: UIViewController,/* UITableViewDelegate, UITableViewDataSource,*/ MKMapViewDelegate {
     
+   
     @IBOutlet weak var map: MKMapView!
-    @IBOutlet weak var mapTV: UITableView!
+   // @IBOutlet weak var mapTV: UITableView!
     
     let cellID2 = "cellID2"
     
@@ -34,12 +35,13 @@ class LocationVC: UIViewController, UITableViewDelegate, UITableViewDataSource, 
         super.viewDidLoad()
         
         map.delegate = self
-        mapTV.delegate = self
+    /*    mapTV.delegate = self
         mapTV.dataSource = self
         
         mapTV.register(barCell2.self, forCellReuseIdentifier: cellID2)
+ */
         fetchAdress()
-        fetchBars2()
+       // fetchBars2()
         
         
     }
@@ -68,7 +70,7 @@ class LocationVC: UIViewController, UITableViewDelegate, UITableViewDataSource, 
         
     }
     
-    func fetchBars2 () {
+ /*   func fetchBars2 () {
         var ref: DatabaseReference!
         ref = Database.database().reference()
         ref.child("Barliste").observe(.childAdded, with: { (snapshot) in
@@ -95,7 +97,7 @@ class LocationVC: UIViewController, UITableViewDelegate, UITableViewDataSource, 
     }
 
     
-    
+    */
     
     
     override func didReceiveMemoryWarning(){
@@ -108,7 +110,7 @@ class LocationVC: UIViewController, UITableViewDelegate, UITableViewDataSource, 
         locationAuthStatus()
     }
     
-    
+  /*
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
@@ -132,7 +134,7 @@ class LocationVC: UIViewController, UITableViewDelegate, UITableViewDataSource, 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return bars2.count
     }
-    
+    */
     
     func locationAuthStatus(){
         if CLLocationManager.authorizationStatus() == .authorizedWhenInUse{

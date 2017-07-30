@@ -268,7 +268,7 @@
 				TargetAttributes = {
 					4E0C37D71F2909060004DCE6 = {
 						CreatedOnToolsVersion = 8.3.3;
-						DevelopmentTeam = NR8A659GLT;
+						DevelopmentTeam = 84R3VSG74G;
 						ProvisioningStyle = Automatic;
 					};
 					4E0C37EB1F2909060004DCE6 = {
@@ -633,12 +633,14 @@
 			baseConfigurationReference = 92CE5692E4CF64DFD79A451D /* Pods-shisha.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = NR8A659GLT;
+				DEVELOPMENT_TEAM = 84R3VSG74G;
 				INFOPLIST_FILE = shisha/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = AM.shishaa;
+				PRODUCT_BUNDLE_IDENTIFIER = AM.shisha;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -647,12 +649,14 @@
 			baseConfigurationReference = 3457CDDAEE1DCDAF8B0BD369 /* Pods-shisha.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = NR8A659GLT;
+				DEVELOPMENT_TEAM = 84R3VSG74G;
 				INFOPLIST_FILE = shisha/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = AM.shishaa;
+				PRODUCT_BUNDLE_IDENTIFIER = AM.shisha;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
