@@ -144,18 +144,20 @@ class LocationVC: UIViewController,/* UITableViewDelegate, UITableViewDataSource
         }
     }
     
-    /*  func centerMapOnLocation(location:CLLocation){
+      func centerMapOnLocation(location:CLLocation){
      let coordinateRegion = MKCoordinateRegionMakeWithDistance(location.coordinate, regionRadius * 2 , regionRadius * 2)
      map.setRegion(coordinateRegion, animated: true)
-     }
+
+    }
      
      
      
      func mapView(_ mapView: MKMapView, didUpdate userLocation: MKUserLocation){
-     if let loc = userLocation.location {
+        if let loc = userLocation.location {
      centerMapOnLocation(location: loc)
+        }
+    
      }
-     } */
     
     
     func createAnnotationForLocation(location: CLLocation){
