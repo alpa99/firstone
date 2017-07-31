@@ -20,11 +20,13 @@ PODS:
   - GoogleToolboxForMac/Defines (2.1.1)
   - GoogleToolboxForMac/NSData+zlib (2.1.1):
     - GoogleToolboxForMac/Defines (= 2.1.1)
+  - Pulley (1.4)
 
 DEPENDENCIES:
   - Firebase
   - Firebase/Core
   - Firebase/Database
+  - Pulley
 
 SPEC CHECKSUMS:
   Firebase: c7ad0731eab26d18a3fc547dd048b0f7cd9c63ae
@@ -33,7 +35,8 @@ SPEC CHECKSUMS:
   FirebaseDatabase: d829b3a8c3e2ac7a16773c5df226966b0805dfc2
   FirebaseInstanceID: 9fbf536668f4d3f0880e7438456dabd1376e294b
   GoogleToolboxForMac: 8e329f1b599f2512c6b10676d45736bcc2cbbeb0
+  Pulley: 3d47a5ca819b8f35a63e9a4811d35035d484d1d9
 
-PODFILE CHECKSUM: ba294c76656c0da0f80e487ff8fb8402141b2077
+PODFILE CHECKSUM: 49b12b1d4d009692d4cf5325144835d46a1a8f14
 
 COCOAPODS: 1.2.1

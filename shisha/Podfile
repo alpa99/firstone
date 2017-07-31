@@ -9,6 +9,8 @@ target 'shisha' do
 pod 'Firebase/Core'
 pod 'Firebase/Database‘
 pod 'Firebase'
+pod 'Pulley'
+
 
   target 'shishaTests' do
     inherit! :search_paths

@@ -24,6 +24,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>Pulley.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
@@ -32,7 +37,12 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>8743BC73A2A4FB4DBAE6073B01013F79</key>
+		<key>173EF9FF6828E45541D99D79C81F72EB</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>2D35FE8E4A464B759D5B32A28CE8F222</key>
 		<dict>
 			<key>primary</key>
 			<true/>
