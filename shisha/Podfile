@@ -10,7 +10,9 @@ pod 'Firebase/Core'
 pod 'Firebase/Database‘
 pod 'Firebase'
 pod 'Pulley'
-
+pod 'FBSDKCoreKit'
+pod 'FBSDKShareKit'
+pod 'FBSDKLoginKit'
 
   target 'shishaTests' do
     inherit! :search_paths
