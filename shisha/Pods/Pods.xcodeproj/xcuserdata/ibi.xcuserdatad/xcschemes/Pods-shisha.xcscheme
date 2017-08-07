@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "0830"
+   LastUpgradeVersion = "0700"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "8743BC73A2A4FB4DBAE6073B01013F79"
+               BlueprintIdentifier = "D0E6580A8060E3E7702945544EADFB2D"
                BuildableName = "Pods_shisha.framework"
                BlueprintName = "Pods-shisha"
                ReferencedContainer = "container:Pods.xcodeproj">
@@ -45,7 +45,7 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "8743BC73A2A4FB4DBAE6073B01013F79"
+            BlueprintIdentifier = "D0E6580A8060E3E7702945544EADFB2D"
             BuildableName = "Pods_shisha.framework"
             BlueprintName = "Pods-shisha"
             ReferencedContainer = "container:Pods.xcodeproj">
@@ -60,15 +60,6 @@
       savedToolIdentifier = ""
       useCustomWorkingDirectory = "NO"
       debugDocumentVersioning = "YES">
-      <MacroExpansion>
-         <BuildableReference
-            BuildableIdentifier = "primary"
-            BlueprintIdentifier = "8743BC73A2A4FB4DBAE6073B01013F79"
-            BuildableName = "Pods_shisha.framework"
-            BlueprintName = "Pods-shisha"
-            ReferencedContainer = "container:Pods.xcodeproj">
-         </BuildableReference>
-      </MacroExpansion>
    </ProfileAction>
    <AnalyzeAction
       buildConfiguration = "Debug">

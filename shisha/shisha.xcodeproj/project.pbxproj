@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		08647CAF1F2F3CA900A60D8D /* LogInVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08647CAE1F2F3CA900A60D8D /* LogInVC.swift */; };
 		08D923E01F290FA400E67230 /* LocationVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D923DF1F290FA400E67230 /* LocationVC.swift */; };
 		4E0C37DC1F2909060004DCE6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E0C37DB1F2909060004DCE6 /* AppDelegate.swift */; };
 		4E0C37DE1F2909060004DCE6 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E0C37DD1F2909060004DCE6 /* ViewController.swift */; };
@@ -45,6 +46,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		08647CAE1F2F3CA900A60D8D /* LogInVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogInVC.swift; sourceTree = "<group>"; };
+		08647CB01F2F673900A60D8D /* shisha.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = shisha.entitlements; sourceTree = "<group>"; };
 		08D923DF1F290FA400E67230 /* LocationVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationVC.swift; sourceTree = "<group>"; };
 		10C74F16B9B59CC0E4F996CA /* Pods_shishaTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_shishaTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1E801B7DCFDE10E9BBD0F35F /* Pods-shishaTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-shishaTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-shishaTests/Pods-shishaTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -130,6 +133,7 @@
 		4E0C37DA1F2909060004DCE6 /* shisha */ = {
 			isa = PBXGroup;
 			children = (
+				08647CB01F2F673900A60D8D /* shisha.entitlements */,
 				4E0C38121F290F200004DCE6 /* Models */,
 				4E0C37DB1F2909060004DCE6 /* AppDelegate.swift */,
 				4E0C37DD1F2909060004DCE6 /* ViewController.swift */,
@@ -138,6 +142,7 @@
 				4E0C37E41F2909060004DCE6 /* LaunchScreen.storyboard */,
 				4E0C380B1F290A8C0004DCE6 /* GoogleService-Info.plist */,
 				4E0C37E71F2909060004DCE6 /* Info.plist */,
+				08647CAE1F2F3CA900A60D8D /* LogInVC.swift */,
 				4E0C38191F2917E50004DCE6 /* SearchTVC.swift */,
 				08D923DF1F290FA400E67230 /* LocationVC.swift */,
 				4E0C381D1F29467E0004DCE6 /* BarDetailVC.swift */,
@@ -276,6 +281,11 @@
 						CreatedOnToolsVersion = 8.3.3;
 						DevelopmentTeam = 84R3VSG74G;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.Keychain = {
+								enabled = 1;
+							};
+						};
 					};
 					4E0C37EB1F2909060004DCE6 = {
 						CreatedOnToolsVersion = 8.3.3;
@@ -488,6 +498,7 @@
 				4E0C38161F290F420004DCE6 /* BarInfos.swift in Sources */,
 				4E0C37DE1F2909060004DCE6 /* ViewController.swift in Sources */,
 				4E0C37DC1F2909060004DCE6 /* AppDelegate.swift in Sources */,
+				08647CAF1F2F3CA900A60D8D /* LogInVC.swift in Sources */,
 				4E272ECB1F2EA98C00CF7ED1 /* PulleyViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -641,6 +652,7 @@
 			baseConfigurationReference = 92CE5692E4CF64DFD79A451D /* Pods-shisha.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = shisha/shisha.entitlements;
 				DEVELOPMENT_TEAM = 84R3VSG74G;
 				INFOPLIST_FILE = shisha/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
@@ -657,6 +669,7 @@
 			baseConfigurationReference = 3457CDDAEE1DCDAF8B0BD369 /* Pods-shisha.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = shisha/shisha.entitlements;
 				DEVELOPMENT_TEAM = 84R3VSG74G;
 				INFOPLIST_FILE = shisha/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
