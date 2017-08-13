@@ -8,8 +8,11 @@
 
 import UIKit
 import FBSDKLoginKit
+import Firebase
 
 class LogInVC: UIViewController, FBSDKLoginButtonDelegate {
+    
+    @IBOutlet weak var testlbl: UILabel!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -20,8 +23,36 @@ class LogInVC: UIViewController, FBSDKLoginButtonDelegate {
         
         
         loginButton.delegate = self
+        loginButton.readPermissions = ["email", "public_profile"]
+    
+        let customFbBtn = UIButton(type: .system)
+        customFbBtn.backgroundColor = .blue
+        customFbBtn.frame = CGRect(x: 16, y: 150, width: view.frame.width-32, height: 50)
+        customFbBtn.setTitle("facebook login here", for: .normal)
+        customFbBtn.titleLabel?.font = UIFont.boldSystemFont(ofSize: 16)
+        customFbBtn.setTitleColor(.white, for: .normal)
+        view.addSubview(customFbBtn)
+        
+        customFbBtn.addTarget(self, action: #selector(handleCustomFbLogIn), for: .touchUpInside)
+
     }
 
+    
+    func handleCustomFbLogIn(){
+        FBSDKLoginManager().logIn(withReadPermissions: ["email", "public_profile"], from: self) { (result, err) in
+            if err != nil {
+            
+            print("custon fb login failed:", err!)
+                return
+            }
+            self.testlbl.text = "hi"
+
+        self.showEmailAdress()
+            
+        }
+    
+    }
+    
  
     func loginButtonDidLogOut(_ loginButton: FBSDKLoginButton!) {
         print("Facebook log out")
@@ -31,9 +62,26 @@ class LogInVC: UIViewController, FBSDKLoginButtonDelegate {
         if error != nil {
             print(error)
             return
-        } else {
-        print("erfolgreich eingeloggt")
+            }
+        
+        showEmailAdress()
+        
+    }
+    
+    
+    func showEmailAdress(){
+
+        
+        FBSDKGraphRequest(graphPath: "/me", parameters: ["fields": "id, email, name"]).start{ (connection, result, err) in
+            
+            if err != nil {
+                print("failed graph request", err!)
+                return
+            }
+            print(result!)
+            
         }
+    
     }
     
  
