@@ -12,7 +12,7 @@ import Firebase
 
 class LogInVC: UIViewController, FBSDKLoginButtonDelegate {
     
-    @IBOutlet weak var testlbl: UILabel!
+   // @IBOutlet weak var testlbl: UILabel!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -45,9 +45,10 @@ class LogInVC: UIViewController, FBSDKLoginButtonDelegate {
             print("custon fb login failed:", err!)
                 return
             }
-            self.testlbl.text = "hi"
+            // self.testlbl.text = result?.token.tokenString
 
         self.showEmailAdress()
+        
             
         }
     
@@ -70,15 +71,31 @@ class LogInVC: UIViewController, FBSDKLoginButtonDelegate {
     
     
     func showEmailAdress(){
-
+        let accessToken = FBSDKAccessToken.current()
+        guard let accessTokenString = accessToken?.tokenString else
+        { return }
+        /*let credentials = FacebookAuthProvider.credential(withAccessToken: accessTokenString)
+        Auth.auth().signIn(with: credentials) { (user, error) in*/
+        
+        let credentials = OAuthProvider.credential(withProviderID: (Auth.auth().currentUser?.providerID)!, accessToken: accessTokenString)
+Auth.auth().signIn(with: credentials) { (user, error) in
+    
+    if error != nil {
+    
+        print("something went wrong", error ?? "hi1")
+        return
+    }
+    
+    print("user logged in:", user ?? "hi2")
+        }
         
         FBSDKGraphRequest(graphPath: "/me", parameters: ["fields": "id, email, name"]).start{ (connection, result, err) in
             
             if err != nil {
-                print("failed graph request", err!)
+                print("failed graph request", err ?? "hi3")
                 return
             }
-            print(result!)
+            print(result ?? "hi4")
             
         }
     
