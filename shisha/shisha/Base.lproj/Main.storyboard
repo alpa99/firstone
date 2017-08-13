@@ -4,7 +4,6 @@
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -38,12 +37,11 @@
                     </tabBar>
                     <connections>
                         <segue destination="MiV-cY-U9S" kind="relationship" relationship="viewControllers" id="NIl-O1-0GK"/>
-                        <segue destination="F6g-yi-vdG" kind="relationship" relationship="viewControllers" id="TTj-Aw-QYZ"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uWK-BL-4Zw" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="620" y="692"/>
+            <point key="canvasLocation" x="833" y="283"/>
         </scene>
         <!--Pulley View Controller-->
         <scene sceneID="hmi-AO-dcU">
@@ -57,8 +55,9 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JQO-7e-0tS">
+                            <containerView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="JQO-7e-0tS">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                 <connections>
                                     <segue destination="1Sx-1n-u44" kind="embed" id="pdS-Lg-7bX"/>
                                 </connections>
@@ -72,17 +71,9 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="trailing" secondItem="KN6-nh-Aif" secondAttribute="trailing" id="0u7-VM-Ssf"/>
-                            <constraint firstItem="KN6-nh-Aif" firstAttribute="top" secondItem="E8e-GE-Xjo" secondAttribute="bottom" constant="50" id="3gU-pw-gtB"/>
                             <constraint firstAttribute="bottom" secondItem="KN6-nh-Aif" secondAttribute="bottom" id="4c3-B7-mef"/>
                             <constraint firstItem="KN6-nh-Aif" firstAttribute="leading" secondItem="JtF-Ly-FJm" secondAttribute="leading" id="6qT-lP-0VX"/>
-                            <constraint firstItem="JQO-7e-0tS" firstAttribute="top" secondItem="JtF-Ly-FJm" secondAttribute="top" id="NT8-AL-Ggg"/>
-                            <constraint firstItem="JQO-7e-0tS" firstAttribute="leading" secondItem="JtF-Ly-FJm" secondAttribute="leading" id="VSv-K4-Q0H"/>
-                            <constraint firstAttribute="bottom" secondItem="JQO-7e-0tS" secondAttribute="bottom" id="VmZ-fi-6KR"/>
-                            <constraint firstAttribute="trailing" secondItem="JQO-7e-0tS" secondAttribute="trailing" id="brx-07-hwN"/>
-                            <constraint firstAttribute="bottom" secondItem="KN6-nh-Aif" secondAttribute="bottom" id="eTB-Pc-QT3"/>
                             <constraint firstItem="KN6-nh-Aif" firstAttribute="top" secondItem="E8e-GE-Xjo" secondAttribute="bottom" constant="50" id="gk0-6p-iyc"/>
-                            <constraint firstItem="KN6-nh-Aif" firstAttribute="leading" secondItem="JtF-Ly-FJm" secondAttribute="leading" id="i4T-za-Tke"/>
                             <constraint firstAttribute="trailing" secondItem="KN6-nh-Aif" secondAttribute="trailing" id="xZq-vz-TXE"/>
                         </constraints>
                     </view>
@@ -108,17 +99,12 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="f8C-mE-fuX">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="f8C-mE-fuX">
+                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </mapView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstItem="f8C-mE-fuX" firstAttribute="leading" secondItem="aqf-Yl-rCa" secondAttribute="leading" id="UrJ-jo-D8E"/>
-                            <constraint firstAttribute="trailing" secondItem="f8C-mE-fuX" secondAttribute="trailing" id="c8E-sm-Zqt"/>
-                            <constraint firstItem="f8C-mE-fuX" firstAttribute="top" secondItem="Ric-42-5nQ" secondAttribute="bottom" id="syP-Bh-s32"/>
-                            <constraint firstItem="o6J-7o-KKg" firstAttribute="top" secondItem="f8C-mE-fuX" secondAttribute="bottom" id="yhy-mc-Shp"/>
-                        </constraints>
                     </view>
                     <connections>
                         <outlet property="map" destination="f8C-mE-fuX" id="jAF-XT-Xsk"/>
@@ -127,34 +113,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iJg-9A-tAq" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2413.5999999999999" y="-125.4872563718141"/>
-        </scene>
-        <!--Controller-->
-        <scene sceneID="ofG-AB-rc9">
-            <objects>
-                <viewController id="F6g-yi-vdG" customClass="QRController" customModule="shisha" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="n7L-PU-hII"/>
-                        <viewControllerLayoutGuide type="bottom" id="a8f-VP-1Rv"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="ajM-oC-nBN">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="square" translatesAutoresizingMaskIntoConstraints="NO" id="hW1-Fp-36Y">
-                                <rect key="frame" x="67" y="213" width="240" height="240"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </imageView>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                    <tabBarItem key="tabBarItem" systemItem="featured" id="Cpy-ag-mD3"/>
-                    <connections>
-                        <outlet property="square" destination="hW1-Fp-36Y" id="0pi-e4-whv"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="biz-AQ-nGk" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="620" y="1571"/>
         </scene>
         <!--Drawer Content View Controller-->
         <scene sceneID="WfU-Nm-ubB">
@@ -195,7 +153,4 @@
             <point key="canvasLocation" x="2413.5999999999999" y="581.55922038980509"/>
         </scene>
     </scenes>
-    <resources>
-        <image name="square" width="623" height="626"/>
-    </resources>
 </document>
