@@ -4,7 +4,7 @@
 <dict>
 	<key>keychain-access-groups</key>
 	<array>
-		<string>$(AppIdentifierPrefix)AM.shisha1</string>
+		<string>$(AppIdentifierPrefix)AM.shisha112</string>
 	</array>
 </dict>
 </plist>
