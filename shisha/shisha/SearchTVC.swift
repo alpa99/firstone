@@ -13,8 +13,7 @@ import Firebase
 // habe die var bars aus der klasse raus genommen und drüer geschrieben damit man von jeder datei auf den array bars zugreifen kann und dann in die methode didSelectRow also wenn man eine cell auswählt nimmt er den index von der cell und BarIndex hat die gleiche Nummer -> guck jetzt auf datei BarDetailVC
 
 
-var BarIndex = 0
-var bars = [BarInfos] ()
+
 
 
 class SearchTVC: UITableViewController {
@@ -137,7 +136,7 @@ class SearchTVC: UITableViewController {
 
 }
 
-class barCell: UITableViewCell {
+class barCell3: UITableViewCell {
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: .subtitle, reuseIdentifier: reuseIdentifier)

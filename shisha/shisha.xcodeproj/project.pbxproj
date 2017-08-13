@@ -21,9 +21,8 @@
 		4E0C38161F290F420004DCE6 /* BarInfos.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E0C38151F290F420004DCE6 /* BarInfos.swift */; };
 		4E0C381A1F2917E50004DCE6 /* SearchTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E0C38191F2917E50004DCE6 /* SearchTVC.swift */; };
 		4E0C381E1F29467E0004DCE6 /* BarDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E0C381D1F29467E0004DCE6 /* BarDetailVC.swift */; };
-		4E272ECB1F2EA98C00CF7ED1 /* PulleyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E272ECA1F2EA98C00CF7ED1 /* PulleyViewController.swift */; };
-		4E272ECD1F2EABC700CF7ED1 /* PulleyPassthroughScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E272ECC1F2EABC700CF7ED1 /* PulleyPassthroughScrollView.swift */; };
 		4E3790E47F30DB5EA80FBFD2 /* Pods_shishaUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 91D453B6D8F2943D5788BE62 /* Pods_shishaUITests.framework */; };
+		4E3C37721F38A21D008A9188 /* DrawerContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E3C37711F38A21D008A9188 /* DrawerContentViewController.swift */; };
 		9C1CFFD09A46B8A974BC3035 /* Pods_shisha.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C67B9B85FDE561447FFFF1C /* Pods_shisha.framework */; };
 		CFD19BD31CF0EA980EECC361 /* Pods_shishaTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 10C74F16B9B59CC0E4F996CA /* Pods_shishaTests.framework */; };
 /* End PBXBuildFile section */
@@ -70,8 +69,7 @@
 		4E0C38151F290F420004DCE6 /* BarInfos.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BarInfos.swift; sourceTree = "<group>"; };
 		4E0C38191F2917E50004DCE6 /* SearchTVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchTVC.swift; sourceTree = "<group>"; };
 		4E0C381D1F29467E0004DCE6 /* BarDetailVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BarDetailVC.swift; sourceTree = "<group>"; };
-		4E272ECA1F2EA98C00CF7ED1 /* PulleyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PulleyViewController.swift; sourceTree = "<group>"; };
-		4E272ECC1F2EABC700CF7ED1 /* PulleyPassthroughScrollView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PulleyPassthroughScrollView.swift; sourceTree = "<group>"; };
+		4E3C37711F38A21D008A9188 /* DrawerContentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DrawerContentViewController.swift; sourceTree = "<group>"; };
 		5AEACA75387DCBFFC19C1E02 /* Pods-shishaUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-shishaUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-shishaUITests/Pods-shishaUITests.release.xcconfig"; sourceTree = "<group>"; };
 		5C67B9B85FDE561447FFFF1C /* Pods_shisha.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_shisha.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		91D453B6D8F2943D5788BE62 /* Pods_shishaUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_shishaUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -146,8 +144,7 @@
 				4E0C38191F2917E50004DCE6 /* SearchTVC.swift */,
 				08D923DF1F290FA400E67230 /* LocationVC.swift */,
 				4E0C381D1F29467E0004DCE6 /* BarDetailVC.swift */,
-				4E272ECA1F2EA98C00CF7ED1 /* PulleyViewController.swift */,
-				4E272ECC1F2EABC700CF7ED1 /* PulleyPassthroughScrollView.swift */,
+				4E3C37711F38A21D008A9188 /* DrawerContentViewController.swift */,
 			);
 			path = shisha;
 			sourceTree = "<group>";
@@ -490,7 +487,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4E272ECD1F2EABC700CF7ED1 /* PulleyPassthroughScrollView.swift in Sources */,
+				4E3C37721F38A21D008A9188 /* DrawerContentViewController.swift in Sources */,
 				4E0C381E1F29467E0004DCE6 /* BarDetailVC.swift in Sources */,
 				08D923E01F290FA400E67230 /* LocationVC.swift in Sources */,
 				4E0C381A1F2917E50004DCE6 /* SearchTVC.swift in Sources */,
@@ -499,7 +496,6 @@
 				4E0C37DE1F2909060004DCE6 /* ViewController.swift in Sources */,
 				4E0C37DC1F2909060004DCE6 /* AppDelegate.swift in Sources */,
 				08647CAF1F2F3CA900A60D8D /* LogInVC.swift in Sources */,
-				4E272ECB1F2EA98C00CF7ED1 /* PulleyViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
