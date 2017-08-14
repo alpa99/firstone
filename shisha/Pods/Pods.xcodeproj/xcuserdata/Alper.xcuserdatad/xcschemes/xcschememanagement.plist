@@ -24,6 +24,11 @@
 			<key>orderHint</key>
 			<integer>9</integer>
 		</dict>
+		<key>GTMSessionFetcher.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>10</integer>
+		</dict>
 		<key>GoogleToolboxForMac.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -67,6 +72,11 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>107A9565F9DF88517DFD3E28C05B2B96</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>173EF9FF6828E45541D99D79C81F72EB</key>
 		<dict>
 			<key>primary</key>
@@ -78,6 +88,11 @@
 			<true/>
 		</dict>
 		<key>44CAD6CE523055ED339E87154473A254</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>758095983406AEF136799406EDCF9E80</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -102,7 +117,17 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>C052BEBFBD0AB5218CC64BA3450F6547</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>D0E6580A8060E3E7702945544EADFB2D</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>D3314AA59478F1E0B472D4BD1066425C</key>
 		<dict>
 			<key>primary</key>
 			<true/>

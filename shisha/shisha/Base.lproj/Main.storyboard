@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Hfu-Yr-iEA">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="odY-F2-VRf">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -37,6 +37,7 @@
                     </tabBar>
                     <connections>
                         <segue destination="MiV-cY-U9S" kind="relationship" relationship="viewControllers" id="NIl-O1-0GK"/>
+                        <segue destination="spI-DT-GI0" kind="relationship" relationship="viewControllers" id="kIy-LC-1eg"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uWK-BL-4Zw" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -114,6 +115,41 @@
             </objects>
             <point key="canvasLocation" x="2413.5999999999999" y="-125.4872563718141"/>
         </scene>
+        <!--Controller-->
+        <scene sceneID="Hhq-Ur-og2">
+            <objects>
+                <viewController id="spI-DT-GI0" customClass="QRController" customModule="shisha" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="zN2-vM-JJ9"/>
+                        <viewControllerLayoutGuide type="bottom" id="FAN-Dc-6VF"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="JlZ-yZ-l0p">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="square" translatesAutoresizingMaskIntoConstraints="NO" id="5jH-iu-vsQ">
+                                <rect key="frame" x="67" y="213" width="240" height="241"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="240" id="5yH-Qf-RcK"/>
+                                    <constraint firstAttribute="height" constant="241" id="T1E-kd-4h2"/>
+                                </constraints>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="5jH-iu-vsQ" firstAttribute="centerX" secondItem="JlZ-yZ-l0p" secondAttribute="centerX" id="C9O-Mf-0v7"/>
+                            <constraint firstItem="5jH-iu-vsQ" firstAttribute="centerY" secondItem="JlZ-yZ-l0p" secondAttribute="centerY" id="Mb9-DQ-m9K"/>
+                        </constraints>
+                    </view>
+                    <tabBarItem key="tabBarItem" systemItem="bookmarks" id="wOc-u7-aaW"/>
+                    <connections>
+                        <outlet property="square" destination="5jH-iu-vsQ" id="twC-eU-UeF"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="90l-jZ-0oB" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1693.5999999999999" y="1005.2473763118442"/>
+        </scene>
         <!--Drawer Content View Controller-->
         <scene sceneID="WfU-Nm-ubB">
             <objects>
@@ -153,4 +189,7 @@
             <point key="canvasLocation" x="2413.5999999999999" y="581.55922038980509"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="square" width="623" height="621"/>
+    </resources>
 </document>
