@@ -46,4 +46,12 @@ class ScanDetailVC: UIViewController {
         , withCancel: nil)
 
         }
+    
+    func setupNavigationBar (){
+        
+        navigationItem.title = qrbarnamen[0]
+        print(qrbarnamen)
+        
+    }
+
 }

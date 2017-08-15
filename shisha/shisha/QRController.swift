@@ -59,7 +59,7 @@ class QRController: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
                    
                  ergebnis = Int(object.stringValue)!
                     
-                 barnummer = ergebnis/100*100
+                 barnummer = ergebnis/1000*1000
                     
                     print(barnummer)
                     
