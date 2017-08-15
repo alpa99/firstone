@@ -1,0 +1,6 @@
+framework module Pods_SmoLocTests {
+  umbrella header "Pods-SmoLocTests-umbrella.h"
+
+  export *
+  module * { export * }
+}

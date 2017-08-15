@@ -100,12 +100,17 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="f8C-mE-fuX">
-                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="f8C-mE-fuX">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                             </mapView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="o6J-7o-KKg" firstAttribute="top" secondItem="f8C-mE-fuX" secondAttribute="bottom" id="VLH-Mv-Fdt"/>
+                            <constraint firstItem="f8C-mE-fuX" firstAttribute="leading" secondItem="aqf-Yl-rCa" secondAttribute="leading" id="bAJ-LU-NkZ"/>
+                            <constraint firstAttribute="trailing" secondItem="f8C-mE-fuX" secondAttribute="trailing" id="kGK-yJ-wLZ"/>
+                            <constraint firstItem="f8C-mE-fuX" firstAttribute="top" secondItem="Ric-42-5nQ" secondAttribute="bottom" id="qYs-dM-oBN"/>
+                        </constraints>
                     </view>
                     <connections>
                         <outlet property="map" destination="f8C-mE-fuX" id="jAF-XT-Xsk"/>

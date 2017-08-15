@@ -1,0 +1,725 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		14C15089CF15AD046FC4620A /* Pods_SmoLocUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BEA528558D0C56D8E5BC4CB2 /* Pods_SmoLocUITests.framework */; };
+		4B6147CA8566AED39FFF64BA /* Pods_SmoLoc.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E5138330DE67E45BC785DBFE /* Pods_SmoLoc.framework */; };
+		4E59C7051F4268AF00DB32D4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E59C7041F4268AF00DB32D4 /* AppDelegate.swift */; };
+		4E59C7071F4268AF00DB32D4 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E59C7061F4268AF00DB32D4 /* ViewController.swift */; };
+		4E59C70A1F4268AF00DB32D4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4E59C7081F4268AF00DB32D4 /* Main.storyboard */; };
+		4E59C70C1F4268AF00DB32D4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4E59C70B1F4268AF00DB32D4 /* Assets.xcassets */; };
+		4E59C70F1F4268AF00DB32D4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4E59C70D1F4268AF00DB32D4 /* LaunchScreen.storyboard */; };
+		4E59C71A1F4268AF00DB32D4 /* SmoLocTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E59C7191F4268AF00DB32D4 /* SmoLocTests.swift */; };
+		4E59C7251F4268AF00DB32D4 /* SmoLocUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E59C7241F4268AF00DB32D4 /* SmoLocUITests.swift */; };
+		4E59C7331F4269DB00DB32D4 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4E59C7321F4269DB00DB32D4 /* GoogleService-Info.plist */; };
+		E8789834FA1F74079B5B4262 /* Pods_SmoLocTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F74AC088999B594BD80C729 /* Pods_SmoLocTests.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		4E59C7161F4268AF00DB32D4 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4E59C6F91F4268AF00DB32D4 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 4E59C7001F4268AF00DB32D4;
+			remoteInfo = SmoLoc;
+		};
+		4E59C7211F4268AF00DB32D4 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4E59C6F91F4268AF00DB32D4 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 4E59C7001F4268AF00DB32D4;
+			remoteInfo = SmoLoc;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		0162CCC0C451221B8C7B627F /* Pods-SmoLoc.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SmoLoc.release.xcconfig"; path = "Pods/Target Support Files/Pods-SmoLoc/Pods-SmoLoc.release.xcconfig"; sourceTree = "<group>"; };
+		29630D68B452222B56F836BF /* Pods-SmoLocTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SmoLocTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SmoLocTests/Pods-SmoLocTests.debug.xcconfig"; sourceTree = "<group>"; };
+		4E59C7011F4268AF00DB32D4 /* SmoLoc.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SmoLoc.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		4E59C7041F4268AF00DB32D4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		4E59C7061F4268AF00DB32D4 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		4E59C7091F4268AF00DB32D4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		4E59C70B1F4268AF00DB32D4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		4E59C70E1F4268AF00DB32D4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		4E59C7101F4268AF00DB32D4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4E59C7151F4268AF00DB32D4 /* SmoLocTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SmoLocTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		4E59C7191F4268AF00DB32D4 /* SmoLocTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmoLocTests.swift; sourceTree = "<group>"; };
+		4E59C71B1F4268AF00DB32D4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4E59C7201F4268AF00DB32D4 /* SmoLocUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SmoLocUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		4E59C7241F4268AF00DB32D4 /* SmoLocUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmoLocUITests.swift; sourceTree = "<group>"; };
+		4E59C7261F4268AF00DB32D4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4E59C7321F4269DB00DB32D4 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = SOURCE_ROOT; };
+		7F74AC088999B594BD80C729 /* Pods_SmoLocTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SmoLocTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		BEA528558D0C56D8E5BC4CB2 /* Pods_SmoLocUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SmoLocUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		C5917EA6E33218470D0905C4 /* Pods-SmoLocTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SmoLocTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-SmoLocTests/Pods-SmoLocTests.release.xcconfig"; sourceTree = "<group>"; };
+		C9C398E9ED271A34A4996B8A /* Pods-SmoLoc.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SmoLoc.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SmoLoc/Pods-SmoLoc.debug.xcconfig"; sourceTree = "<group>"; };
+		D64A14F23722DA613A523286 /* Pods-SmoLocUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SmoLocUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-SmoLocUITests/Pods-SmoLocUITests.release.xcconfig"; sourceTree = "<group>"; };
+		E5138330DE67E45BC785DBFE /* Pods_SmoLoc.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SmoLoc.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		EAB93F39FBFA2A7AF58FEBE5 /* Pods-SmoLocUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SmoLocUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SmoLocUITests/Pods-SmoLocUITests.debug.xcconfig"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		4E59C6FE1F4268AF00DB32D4 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4B6147CA8566AED39FFF64BA /* Pods_SmoLoc.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4E59C7121F4268AF00DB32D4 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E8789834FA1F74079B5B4262 /* Pods_SmoLocTests.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4E59C71D1F4268AF00DB32D4 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				14C15089CF15AD046FC4620A /* Pods_SmoLocUITests.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		4BAFF03EAF54EF2B45C59E56 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				C9C398E9ED271A34A4996B8A /* Pods-SmoLoc.debug.xcconfig */,
+				0162CCC0C451221B8C7B627F /* Pods-SmoLoc.release.xcconfig */,
+				29630D68B452222B56F836BF /* Pods-SmoLocTests.debug.xcconfig */,
+				C5917EA6E33218470D0905C4 /* Pods-SmoLocTests.release.xcconfig */,
+				EAB93F39FBFA2A7AF58FEBE5 /* Pods-SmoLocUITests.debug.xcconfig */,
+				D64A14F23722DA613A523286 /* Pods-SmoLocUITests.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		4E59C6F81F4268AF00DB32D4 = {
+			isa = PBXGroup;
+			children = (
+				4E59C7031F4268AF00DB32D4 /* SmoLoc */,
+				4E59C7181F4268AF00DB32D4 /* SmoLocTests */,
+				4E59C7231F4268AF00DB32D4 /* SmoLocUITests */,
+				4E59C7021F4268AF00DB32D4 /* Products */,
+				4BAFF03EAF54EF2B45C59E56 /* Pods */,
+				616983C0A728168C28170443 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		4E59C7021F4268AF00DB32D4 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				4E59C7011F4268AF00DB32D4 /* SmoLoc.app */,
+				4E59C7151F4268AF00DB32D4 /* SmoLocTests.xctest */,
+				4E59C7201F4268AF00DB32D4 /* SmoLocUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		4E59C7031F4268AF00DB32D4 /* SmoLoc */ = {
+			isa = PBXGroup;
+			children = (
+				4E59C7041F4268AF00DB32D4 /* AppDelegate.swift */,
+				4E59C7061F4268AF00DB32D4 /* ViewController.swift */,
+				4E59C7081F4268AF00DB32D4 /* Main.storyboard */,
+				4E59C70B1F4268AF00DB32D4 /* Assets.xcassets */,
+				4E59C7321F4269DB00DB32D4 /* GoogleService-Info.plist */,
+				4E59C70D1F4268AF00DB32D4 /* LaunchScreen.storyboard */,
+				4E59C7101F4268AF00DB32D4 /* Info.plist */,
+			);
+			path = SmoLoc;
+			sourceTree = "<group>";
+		};
+		4E59C7181F4268AF00DB32D4 /* SmoLocTests */ = {
+			isa = PBXGroup;
+			children = (
+				4E59C7191F4268AF00DB32D4 /* SmoLocTests.swift */,
+				4E59C71B1F4268AF00DB32D4 /* Info.plist */,
+			);
+			path = SmoLocTests;
+			sourceTree = "<group>";
+		};
+		4E59C7231F4268AF00DB32D4 /* SmoLocUITests */ = {
+			isa = PBXGroup;
+			children = (
+				4E59C7241F4268AF00DB32D4 /* SmoLocUITests.swift */,
+				4E59C7261F4268AF00DB32D4 /* Info.plist */,
+			);
+			path = SmoLocUITests;
+			sourceTree = "<group>";
+		};
+		616983C0A728168C28170443 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				E5138330DE67E45BC785DBFE /* Pods_SmoLoc.framework */,
+				7F74AC088999B594BD80C729 /* Pods_SmoLocTests.framework */,
+				BEA528558D0C56D8E5BC4CB2 /* Pods_SmoLocUITests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		4E59C7001F4268AF00DB32D4 /* SmoLoc */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 4E59C7291F4268AF00DB32D4 /* Build configuration list for PBXNativeTarget "SmoLoc" */;
+			buildPhases = (
+				99CCB5FC393444D8EF2C56AD /* [CP] Check Pods Manifest.lock */,
+				4E59C6FD1F4268AF00DB32D4 /* Sources */,
+				4E59C6FE1F4268AF00DB32D4 /* Frameworks */,
+				4E59C6FF1F4268AF00DB32D4 /* Resources */,
+				F18987BB447424430176807F /* [CP] Embed Pods Frameworks */,
+				240031AF021AC5316B8A7578 /* [CP] Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = SmoLoc;
+			productName = SmoLoc;
+			productReference = 4E59C7011F4268AF00DB32D4 /* SmoLoc.app */;
+			productType = "com.apple.product-type.application";
+		};
+		4E59C7141F4268AF00DB32D4 /* SmoLocTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 4E59C72C1F4268AF00DB32D4 /* Build configuration list for PBXNativeTarget "SmoLocTests" */;
+			buildPhases = (
+				8DECDCA83909A5951572A015 /* [CP] Check Pods Manifest.lock */,
+				4E59C7111F4268AF00DB32D4 /* Sources */,
+				4E59C7121F4268AF00DB32D4 /* Frameworks */,
+				4E59C7131F4268AF00DB32D4 /* Resources */,
+				CAE9D0EDEABEFFE6A803ED68 /* [CP] Embed Pods Frameworks */,
+				2CB3B96F4D4491FEE91281E3 /* [CP] Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				4E59C7171F4268AF00DB32D4 /* PBXTargetDependency */,
+			);
+			name = SmoLocTests;
+			productName = SmoLocTests;
+			productReference = 4E59C7151F4268AF00DB32D4 /* SmoLocTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		4E59C71F1F4268AF00DB32D4 /* SmoLocUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 4E59C72F1F4268AF00DB32D4 /* Build configuration list for PBXNativeTarget "SmoLocUITests" */;
+			buildPhases = (
+				33C32E20A590CE35B8875682 /* [CP] Check Pods Manifest.lock */,
+				4E59C71C1F4268AF00DB32D4 /* Sources */,
+				4E59C71D1F4268AF00DB32D4 /* Frameworks */,
+				4E59C71E1F4268AF00DB32D4 /* Resources */,
+				6E6FF858EC5700842A54F2CD /* [CP] Embed Pods Frameworks */,
+				F1FD28D30301DA8FE7F3EAC4 /* [CP] Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				4E59C7221F4268AF00DB32D4 /* PBXTargetDependency */,
+			);
+			name = SmoLocUITests;
+			productName = SmoLocUITests;
+			productReference = 4E59C7201F4268AF00DB32D4 /* SmoLocUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		4E59C6F91F4268AF00DB32D4 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0830;
+				LastUpgradeCheck = 0830;
+				ORGANIZATIONNAME = AM;
+				TargetAttributes = {
+					4E59C7001F4268AF00DB32D4 = {
+						CreatedOnToolsVersion = 8.3.3;
+						ProvisioningStyle = Automatic;
+					};
+					4E59C7141F4268AF00DB32D4 = {
+						CreatedOnToolsVersion = 8.3.3;
+						ProvisioningStyle = Automatic;
+						TestTargetID = 4E59C7001F4268AF00DB32D4;
+					};
+					4E59C71F1F4268AF00DB32D4 = {
+						CreatedOnToolsVersion = 8.3.3;
+						ProvisioningStyle = Automatic;
+						TestTargetID = 4E59C7001F4268AF00DB32D4;
+					};
+				};
+			};
+			buildConfigurationList = 4E59C6FC1F4268AF00DB32D4 /* Build configuration list for PBXProject "SmoLoc" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 4E59C6F81F4268AF00DB32D4;
+			productRefGroup = 4E59C7021F4268AF00DB32D4 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				4E59C7001F4268AF00DB32D4 /* SmoLoc */,
+				4E59C7141F4268AF00DB32D4 /* SmoLocTests */,
+				4E59C71F1F4268AF00DB32D4 /* SmoLocUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		4E59C6FF1F4268AF00DB32D4 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4E59C70F1F4268AF00DB32D4 /* LaunchScreen.storyboard in Resources */,
+				4E59C7331F4269DB00DB32D4 /* GoogleService-Info.plist in Resources */,
+				4E59C70C1F4268AF00DB32D4 /* Assets.xcassets in Resources */,
+				4E59C70A1F4268AF00DB32D4 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4E59C7131F4268AF00DB32D4 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4E59C71E1F4268AF00DB32D4 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		240031AF021AC5316B8A7578 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SmoLoc/Pods-SmoLoc-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		2CB3B96F4D4491FEE91281E3 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SmoLocTests/Pods-SmoLocTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		33C32E20A590CE35B8875682 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		6E6FF858EC5700842A54F2CD /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SmoLocUITests/Pods-SmoLocUITests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		8DECDCA83909A5951572A015 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		99CCB5FC393444D8EF2C56AD /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		CAE9D0EDEABEFFE6A803ED68 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SmoLocTests/Pods-SmoLocTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		F18987BB447424430176807F /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SmoLoc/Pods-SmoLoc-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		F1FD28D30301DA8FE7F3EAC4 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SmoLocUITests/Pods-SmoLocUITests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		4E59C6FD1F4268AF00DB32D4 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4E59C7071F4268AF00DB32D4 /* ViewController.swift in Sources */,
+				4E59C7051F4268AF00DB32D4 /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4E59C7111F4268AF00DB32D4 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4E59C71A1F4268AF00DB32D4 /* SmoLocTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4E59C71C1F4268AF00DB32D4 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4E59C7251F4268AF00DB32D4 /* SmoLocUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		4E59C7171F4268AF00DB32D4 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 4E59C7001F4268AF00DB32D4 /* SmoLoc */;
+			targetProxy = 4E59C7161F4268AF00DB32D4 /* PBXContainerItemProxy */;
+		};
+		4E59C7221F4268AF00DB32D4 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 4E59C7001F4268AF00DB32D4 /* SmoLoc */;
+			targetProxy = 4E59C7211F4268AF00DB32D4 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		4E59C7081F4268AF00DB32D4 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				4E59C7091F4268AF00DB32D4 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		4E59C70D1F4268AF00DB32D4 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				4E59C70E1F4268AF00DB32D4 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		4E59C7271F4268AF00DB32D4 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		4E59C7281F4268AF00DB32D4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		4E59C72A1F4268AF00DB32D4 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = C9C398E9ED271A34A4996B8A /* Pods-SmoLoc.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = SmoLoc/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = AM.SmoLoc;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Debug;
+		};
+		4E59C72B1F4268AF00DB32D4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0162CCC0C451221B8C7B627F /* Pods-SmoLoc.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = SmoLoc/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = AM.SmoLoc;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Release;
+		};
+		4E59C72D1F4268AF00DB32D4 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 29630D68B452222B56F836BF /* Pods-SmoLocTests.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = SmoLocTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = AM.SmoLocTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SmoLoc.app/SmoLoc";
+			};
+			name = Debug;
+		};
+		4E59C72E1F4268AF00DB32D4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = C5917EA6E33218470D0905C4 /* Pods-SmoLocTests.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = SmoLocTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = AM.SmoLocTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SmoLoc.app/SmoLoc";
+			};
+			name = Release;
+		};
+		4E59C7301F4268AF00DB32D4 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = EAB93F39FBFA2A7AF58FEBE5 /* Pods-SmoLocUITests.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				INFOPLIST_FILE = SmoLocUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = AM.SmoLocUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+				TEST_TARGET_NAME = SmoLoc;
+			};
+			name = Debug;
+		};
+		4E59C7311F4268AF00DB32D4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = D64A14F23722DA613A523286 /* Pods-SmoLocUITests.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				INFOPLIST_FILE = SmoLocUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = AM.SmoLocUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+				TEST_TARGET_NAME = SmoLoc;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		4E59C6FC1F4268AF00DB32D4 /* Build configuration list for PBXProject "SmoLoc" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4E59C7271F4268AF00DB32D4 /* Debug */,
+				4E59C7281F4268AF00DB32D4 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		4E59C7291F4268AF00DB32D4 /* Build configuration list for PBXNativeTarget "SmoLoc" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4E59C72A1F4268AF00DB32D4 /* Debug */,
+				4E59C72B1F4268AF00DB32D4 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		4E59C72C1F4268AF00DB32D4 /* Build configuration list for PBXNativeTarget "SmoLocTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4E59C72D1F4268AF00DB32D4 /* Debug */,
+				4E59C72E1F4268AF00DB32D4 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		4E59C72F1F4268AF00DB32D4 /* Build configuration list for PBXNativeTarget "SmoLocUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4E59C7301F4268AF00DB32D4 /* Debug */,
+				4E59C7311F4268AF00DB32D4 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 4E59C6F91F4268AF00DB32D4 /* Project object */;
+}

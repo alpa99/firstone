@@ -53,10 +53,18 @@ class QRController: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
             if let object = metadataObjects[0] as? AVMetadataMachineReadableCodeObject{
                 
                 if object.type == AVMetadataObjectTypeQRCode {
-                    let alert = UIAlertController(title: "Erfolgreich", message: "Code gescannt", preferredStyle: .alert)
-                    alert.addAction(UIAlertAction(title: "nochmal", style: .default, handler: nil))
+                   
+                let ergebnis = Int(object.stringValue)!
                     
-                    present(alert, animated: true, completion: nil)
+                let barnummer = ergebnis/100*100
+                    
+                    print(barnummer)
+                    
+//                    
+//                    let alert = UIAlertController(title: "Erfolgreich", message: "df", preferredStyle: .alert)
+//                    alert.addAction(UIAlertAction(title: "nochmal", style: .default, handler: nil))
+//                   
+//                    present(alert, animated: true, completion: nil)
                 }
             }
         }
