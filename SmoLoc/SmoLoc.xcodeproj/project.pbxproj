@@ -245,6 +245,7 @@
 				TargetAttributes = {
 					4E59C7001F4268AF00DB32D4 = {
 						CreatedOnToolsVersion = 8.3.3;
+						DevelopmentTeam = NR8A659GLT;
 						ProvisioningStyle = Automatic;
 					};
 					4E59C7141F4268AF00DB32D4 = {
@@ -604,7 +605,9 @@
 			baseConfigurationReference = C9C398E9ED271A34A4996B8A /* Pods-SmoLoc.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = NR8A659GLT;
 				INFOPLIST_FILE = SmoLoc/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = AM.SmoLoc;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -617,7 +620,9 @@
 			baseConfigurationReference = 0162CCC0C451221B8C7B627F /* Pods-SmoLoc.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = NR8A659GLT;
 				INFOPLIST_FILE = SmoLoc/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = AM.SmoLoc;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -702,6 +707,7 @@
 				4E59C72B1F4268AF00DB32D4 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		4E59C72C1F4268AF00DB32D4 /* Build configuration list for PBXNativeTarget "SmoLocTests" */ = {
 			isa = XCConfigurationList;
@@ -710,6 +716,7 @@
 				4E59C72E1F4268AF00DB32D4 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		4E59C72F1F4268AF00DB32D4 /* Build configuration list for PBXNativeTarget "SmoLocUITests" */ = {
 			isa = XCConfigurationList;
@@ -718,6 +725,7 @@
 				4E59C7311F4268AF00DB32D4 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
