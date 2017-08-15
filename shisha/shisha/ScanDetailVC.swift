@@ -11,7 +11,7 @@ import Firebase
 
 class ScanDetailVC: UIViewController {
     
-    var qrbarname = [QRBar]()
+    var qrbarname = [BarInfos]()
     var qrbarnamen = [String]()
 
     override func viewDidLoad() {
@@ -33,10 +33,10 @@ class ScanDetailVC: UIViewController {
         datref.child("QRBereich").child("\(barnummer)").observe(.childAdded, with: { (snapshot) in
             
             if let dictionary = snapshot.value as? [String: AnyObject]{
-                let qrbarname = QRBar(dictionary: dictionary)
+                let qrbarname = BarInfos(dictionary: dictionary)
                 qrbarname.setValuesForKeys(dictionary)
                 print(qrbarname.Name!)
-                qrbarnamen.append(qrbarname)
+                self.qrbarnamen.append(qrbarname.Name!)
                 
                
                 }
