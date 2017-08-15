@@ -9,6 +9,9 @@
 import UIKit
 import AVFoundation
 
+var ergebnis = 0
+var barnummer = 0
+
 class QRController: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
     
     var video = AVCaptureVideoPreviewLayer()
@@ -16,7 +19,7 @@ class QRController: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
     @IBOutlet weak var square: UIImageView!
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         let session = AVCaptureSession()
         
         let captureDevice = AVCaptureDevice.defaultDevice(withMediaType: AVMediaTypeVideo)
@@ -54,11 +57,13 @@ class QRController: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
                 
                 if object.type == AVMetadataObjectTypeQRCode {
                    
-                let ergebnis = Int(object.stringValue)!
+                 ergebnis = Int(object.stringValue)!
                     
-                let barnummer = ergebnis/100*100
+                 barnummer = ergebnis/100*100
                     
                     print(barnummer)
+                    
+                performSegue(withIdentifier: "codescan", sender: self)
                     
 //                    
 //                    let alert = UIAlertController(title: "Erfolgreich", message: "df", preferredStyle: .alert)
