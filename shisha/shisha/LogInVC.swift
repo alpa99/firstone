@@ -2,12 +2,17 @@
 import UIKit
 import FacebookCore
 import FacebookLogin
+import FirebaseDatabase
+import Firebase
 
 class LogInVC: UIViewController {
     
-
+    var ref: DatabaseReference?
     
-    @IBOutlet weak var fbInfoLbl: UILabel!
+    var userFbName: String!
+    var userFbID: String!
+    var userFbEmail: String!
+    
     
     @IBAction func fbLoginBtnPressed(_ sender: UIButton) {
         
@@ -27,10 +32,17 @@ class LogInVC: UIViewController {
                     }
                     
                     if let userInfo = userInfo, let id = userInfo["id"], let name = userInfo["name"], let email = userInfo["email"]{
-                        self.fbInfoLbl.text = "ID: \(id), Name: \(name), Email: \(email)"
+                        self.userFbID = "\(id)"
+                        self.userFbName = "\(name)"
+                        self.userFbEmail = "\(email)"
+
                     }
+                    
+                 self.addUserToFirebase()
+
                 }
             }
+            
         }
     }
     
@@ -46,6 +58,21 @@ class LogInVC: UIViewController {
             }
         }
     }
+    
+    func addUserToFirebase(){
+        self.ref = Database.database().reference()
+        self.ref?.child("Users").child("\(self.userFbID)").child("Name").setValue(self.userFbName)
+        self.ref?.child("Users").child("\(self.userFbID)").child("Email").setValue(self.userFbEmail)
+        self.performSegue(withIdentifier: "loggedIn", sender: self)
+        
+    }
+    
+   /* func addUserInfo(){
+        
+        ref = Database.database().reference()
+    ref?.child("users").childByAutoId().setValue("\(id)")
+    }*/
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
