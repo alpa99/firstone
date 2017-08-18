@@ -20,7 +20,10 @@ class DrawerContentViewController: UIViewController, PulleyDrawerViewControllerD
     @IBOutlet weak var SearchTV: UITableView!
     
      let cellID = "cellID"
-    
+    override func viewWillAppear(_ animated: Bool) {
+        self.navigationController?.setNavigationBarHidden(true, animated: true)
+
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         SearchTV.delegate = self
@@ -75,6 +78,11 @@ class DrawerContentViewController: UIViewController, PulleyDrawerViewControllerD
 
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        BarIndex = indexPath.row
+        performSegue(withIdentifier: "bardetail", sender: self)
+    }
+    
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -82,7 +90,7 @@ class DrawerContentViewController: UIViewController, PulleyDrawerViewControllerD
     }
     
     func collapsedDrawerHeight() -> CGFloat {
-        return 100.0
+        return 120.0
     }
     func partialRevealDrawerHeight() -> CGFloat {
         
