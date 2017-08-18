@@ -21,6 +21,7 @@
 		4E0C38161F290F420004DCE6 /* BarInfos.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E0C38151F290F420004DCE6 /* BarInfos.swift */; };
 		4E0C381A1F2917E50004DCE6 /* SearchTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E0C38191F2917E50004DCE6 /* SearchTVC.swift */; };
 		4E0C381E1F29467E0004DCE6 /* BarDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E0C381D1F29467E0004DCE6 /* BarDetailVC.swift */; };
+		4E0F22061F431EF500D13CDC /* QRBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E0F22051F431EF500D13CDC /* QRBar.swift */; };
 		4E1E24E21F41245E000F4AAB /* QRController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E1E24E11F41245E000F4AAB /* QRController.swift */; };
 		4E3790E47F30DB5EA80FBFD2 /* Pods_shishaUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 91D453B6D8F2943D5788BE62 /* Pods_shishaUITests.framework */; };
 		4E3C37721F38A21D008A9188 /* DrawerContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E3C37711F38A21D008A9188 /* DrawerContentViewController.swift */; };
@@ -71,6 +72,7 @@
 		4E0C38151F290F420004DCE6 /* BarInfos.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BarInfos.swift; sourceTree = "<group>"; };
 		4E0C38191F2917E50004DCE6 /* SearchTVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchTVC.swift; sourceTree = "<group>"; };
 		4E0C381D1F29467E0004DCE6 /* BarDetailVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BarDetailVC.swift; sourceTree = "<group>"; };
+		4E0F22051F431EF500D13CDC /* QRBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QRBar.swift; sourceTree = "<group>"; };
 		4E1E24E11F41245E000F4AAB /* QRController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QRController.swift; sourceTree = "<group>"; };
 		4E3C37711F38A21D008A9188 /* DrawerContentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DrawerContentViewController.swift; sourceTree = "<group>"; };
 		4E59C7341F427C9500DB32D4 /* ScanDetailVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScanDetailVC.swift; sourceTree = "<group>"; };
@@ -177,6 +179,7 @@
 			isa = PBXGroup;
 			children = (
 				4E0C38131F290F360004DCE6 /* BarAnnotation.swift */,
+				4E0F22051F431EF500D13CDC /* QRBar.swift */,
 				4E0C38151F290F420004DCE6 /* BarInfos.swift */,
 			);
 			name = Models;
@@ -519,6 +522,7 @@
 			files = (
 				4E3C37721F38A21D008A9188 /* DrawerContentViewController.swift in Sources */,
 				4E0C381E1F29467E0004DCE6 /* BarDetailVC.swift in Sources */,
+				4E0F22061F431EF500D13CDC /* QRBar.swift in Sources */,
 				4E1E24E21F41245E000F4AAB /* QRController.swift in Sources */,
 				08D923E01F290FA400E67230 /* LocationVC.swift in Sources */,
 				4E0C381A1F2917E50004DCE6 /* SearchTVC.swift in Sources */,
