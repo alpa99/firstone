@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		085D04111F45FFD20047BDD7 /* FacebookUsers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085D04101F45FFD20047BDD7 /* FacebookUsers.swift */; };
 		08647CAF1F2F3CA900A60D8D /* LogInVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08647CAE1F2F3CA900A60D8D /* LogInVC.swift */; };
 		08D923E01F290FA400E67230 /* LocationVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D923DF1F290FA400E67230 /* LocationVC.swift */; };
 		4E0C37DC1F2909060004DCE6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E0C37DB1F2909060004DCE6 /* AppDelegate.swift */; };
@@ -48,6 +49,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		085D04101F45FFD20047BDD7 /* FacebookUsers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FacebookUsers.swift; sourceTree = "<group>"; };
 		08647CAE1F2F3CA900A60D8D /* LogInVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogInVC.swift; sourceTree = "<group>"; };
 		08647CB01F2F673900A60D8D /* shisha.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = shisha.entitlements; sourceTree = "<group>"; };
 		08D923DF1F290FA400E67230 /* LocationVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationVC.swift; sourceTree = "<group>"; };
@@ -181,6 +183,7 @@
 				4E0C38131F290F360004DCE6 /* BarAnnotation.swift */,
 				4E0F22051F431EF500D13CDC /* QRBar.swift */,
 				4E0C38151F290F420004DCE6 /* BarInfos.swift */,
+				085D04101F45FFD20047BDD7 /* FacebookUsers.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -526,7 +529,11 @@
 			files = (
 				4E3C37721F38A21D008A9188 /* DrawerContentViewController.swift in Sources */,
 				4E0C381E1F29467E0004DCE6 /* BarDetailVC.swift in Sources */,
+<<<<<<< HEAD
+				085D04111F45FFD20047BDD7 /* FacebookUsers.swift in Sources */,
+=======
 				4E0F22061F431EF500D13CDC /* QRBar.swift in Sources */,
+>>>>>>> df26fef34bb64f1b353b3648ab980f22c78a3a03
 				4E1E24E21F41245E000F4AAB /* QRController.swift in Sources */,
 				08D923E01F290FA400E67230 /* LocationVC.swift in Sources */,
 				4E0C381A1F2917E50004DCE6 /* SearchTVC.swift in Sources */,
