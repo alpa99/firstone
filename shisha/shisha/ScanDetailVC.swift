@@ -11,14 +11,13 @@ import Firebase
 
 class ScanDetailVC: UIViewController {
     
-    var qrbarname = [BarInfos]()
-    var qrbarnamen = [String]()
+  
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
 
-        fetchInfos()
+    //    fetchInfos()
     }
 
     override func didReceiveMemoryWarning() {
@@ -26,26 +25,26 @@ class ScanDetailVC: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    func fetchInfos() {
-        
-        var datref: DatabaseReference!
-        datref = Database.database().reference()
-        datref.child("QRBereich").child("\(barnummer)").observe(.childAdded, with: { (snapshot) in
-            
-            if let dictionary = snapshot.value as? [String: AnyObject]{
-                let qrbarname = BarInfos(dictionary: dictionary)
-                qrbarname.setValuesForKeys(dictionary)
-                print(qrbarname.Name!)
-                self.qrbarnamen.append(qrbarname.Name!)
-                
-               
-                }
-            }
-            
-        
-        , withCancel: nil)
-
-        }
+//    func fetchInfos() {
+//        
+//        var datref: DatabaseReference!
+//        datref = Database.database().reference()
+//        datref.child("QRBereich").child("\(barnummer)").observe(.childAdded, with: { (snapshot) in
+//            
+//            if let dictionary = snapshot.value as? [String: AnyObject]{
+//                let qrbarname = BarInfos(dictionary: dictionary)
+//                qrbarname.setValuesForKeys(dictionary)
+//                print(qrbarname.Name!)
+//                self.qrbarnamen.append(qrbarname.Name!)
+//                
+//               
+//                }
+//            }
+//            
+//        
+//        , withCancel: nil)
+//
+//        }
     
     func setupNavigationBar (){
         
@@ -53,5 +52,5 @@ class ScanDetailVC: UIViewController {
         print(qrbarnamen)
         
     }
-
+//
 }
