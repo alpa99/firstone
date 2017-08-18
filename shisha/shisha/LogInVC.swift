@@ -2,6 +2,8 @@
 import UIKit
 import FacebookCore
 import FacebookLogin
+import FBSDKCoreKit
+import FBSDKLoginKit
 import FirebaseDatabase
 import Firebase
 
@@ -9,15 +11,15 @@ class LogInVC: UIViewController {
     
     var ref: DatabaseReference?
     
-    var userFbName: String!
-    var userFbID: String!
-    var userFbEmail: String!
+    var userFbName = ""
+    var userFbID = ""
+    var userFbEmail = ""
     
     
     @IBAction func fbLoginBtnPressed(_ sender: UIButton) {
         
         let loginManager = LoginManager()
-        
+        loginManager.logOut()
         loginManager.logIn([.publicProfile, .email], viewController: self) { result in
             
             switch result {
@@ -63,22 +65,31 @@ class LogInVC: UIViewController {
         self.ref = Database.database().reference()
         self.ref?.child("Users").child("\(self.userFbID)").child("Name").setValue(self.userFbName)
         self.ref?.child("Users").child("\(self.userFbID)").child("Email").setValue(self.userFbEmail)
-        self.performSegue(withIdentifier: "loggedIn", sender: self)
-        
+        segueToLocationVC()
     }
     
-   /* func addUserInfo(){
-        
-        ref = Database.database().reference()
-    ref?.child("users").childByAutoId().setValue("\(id)")
-    }*/
+    func segueToLocationVC(){
+        performSegue(withIdentifier: "loggedIn", sender: self)
+
+    }
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
+       
         // Do any additional setup after loading the view, typically from a nib.
     }
     
+    
+    override func viewDidAppear(_ animated: Bool) {
+        if FBSDKAccessToken.current() != nil {
+            print("kein token")
+            
+            segueToLocationVC()
+        } else{
+        print(FBSDKAccessToken.current())
+        }
+    }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
