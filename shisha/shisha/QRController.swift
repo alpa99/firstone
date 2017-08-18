@@ -13,8 +13,8 @@ import Firebase
 var ergebnis = 0
 var barnummer = 0
 
-var qrbarname = [QRBar]()
-var qrbarnamen = [String]()
+var qrbar = [QRBar]()
+var qrbarname = [String]()
 
 class QRController: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
     
@@ -25,11 +25,7 @@ class QRController: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-         qrbarname = [QRBar]()
-         qrbarnamen = [String]()
-
-        
-        
+       
         let captureDevice = AVCaptureDevice.defaultDevice(withMediaType: AVMediaTypeVideo)
         
         do {
@@ -61,13 +57,19 @@ class QRController: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
         print (barnummer+12)
         var datref: DatabaseReference!
         datref = Database.database().reference()
-        datref.child("QRBereich").child("1000").observe(.childAdded, with: { (snapshot) in
+        datref.child("QRBereich").child("\(barnummer)").observe(.value, with: { (snapshot) in
             
-            if let dictionary = snapshot.value as? [String: AnyObject]{
-                let qrbarname = QRBar(dictionary: dictionary)
-                qrbarnamen.append(qrbarname.Name!)
+            if let dict = snapshot.value as? [String: AnyObject]{
                 
-                print(qrbarnamen)
+//                for a in (dict.keys){
+//                    print(a)
+//                }
+                let qrbar = QRBar(dictionary: dict)
+                qrbar.setValuesForKeys(dict)
+                
+                qrbarname.append(qrbar.Name!)
+                
+               print(qrbarname)
                 
                 
 
@@ -77,7 +79,7 @@ class QRController: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
             
             , withCancel: nil)
         
-        let alert = UIAlertController(title: "Erfolgreich", message: "Du bist bei \(qrbarnamen)", preferredStyle: .alert)
+        let alert = UIAlertController(title: "Erfolgreich", message: "Du bist bei \(qrbarname)", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "Weiter", style: .default, handler:{ (action) in self.performSegue(withIdentifier: "codescan", sender: self)}))
         
         self.present(alert, animated: true, completion: nil)
@@ -100,7 +102,7 @@ class QRController: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
                 fetchNumber()
 
             
-               print(barnummer)
+               //print(barnummer)
                     
 
                     

@@ -24,6 +24,16 @@
 			<key>orderHint</key>
 			<integer>9</integer>
 		</dict>
+		<key>FacebookCore.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>11</integer>
+		</dict>
+		<key>FacebookLogin.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>12</integer>
+		</dict>
 		<key>GTMSessionFetcher.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
@@ -92,6 +102,21 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>593E9479C06FB200807D11AB29EB50BD</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>5B5AC3C06B783F8674FDB4C0F900B56A</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>7335E9C9689F3B8A16F063A884748533</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>758095983406AEF136799406EDCF9E80</key>
 		<dict>
 			<key>primary</key>
@@ -108,6 +133,11 @@
 			<true/>
 		</dict>
 		<key>BC5000D645EEAF961C85907CDC796FE1</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>BE1BC9219482D4071664CA4414383913</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -132,12 +162,22 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>DDBCFDE490CDFDABF6F16A26F346932D</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>E396A93E4C79B22B7816E9F02F62ECED</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
 		<key>F76631ABB59A46C7CC1484AD5831A9DE</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>FD440456097C78A622E4448627ED69F2</key>
 		<dict>
 			<key>primary</key>
 			<true/>

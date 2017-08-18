@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Hfu-Yr-iEA">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Hfu-Yr-iEA">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -43,7 +43,7 @@
                         </constraints>
                     </view>
                     <connections>
-                        <segue destination="MiV-cY-U9S" kind="show" identifier="loggedIn" id="38t-va-RYn"/>
+                        <segue destination="odY-F2-VRf" kind="show" identifier="loggedIn" id="frV-db-Lwm"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bhh-m7-ElA" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -66,7 +66,7 @@
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uWK-BL-4Zw" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="833" y="283"/>
+            <point key="canvasLocation" x="833" y="302"/>
         </scene>
         <!--Pulley View Controller-->
         <scene sceneID="hmi-AO-dcU">
@@ -259,7 +259,4 @@
     <resources>
         <image name="square" width="623" height="621"/>
     </resources>
-    <inferredMetricsTieBreakers>
-        <segue reference="38t-va-RYn"/>
-    </inferredMetricsTieBreakers>
 </document>

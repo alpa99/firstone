@@ -58,7 +58,7 @@ class LocationVC: UIViewController,/* UITableViewDelegate, UITableViewDataSource
                 adresse.setValuesForKeys(dictionary)
                 //print(adresse.Adresse!)
                 self.BarAdressen.append(adresse.Adresse!)
-                print(self.BarAdressen)
+                //print(self.BarAdressen)
                 for a in 0 ..< self.BarAdressen.count {
                     self.getPlaceMarkFromAdress(adress: self.BarAdressen[a])
                 }
