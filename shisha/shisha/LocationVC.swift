@@ -20,9 +20,6 @@ class LocationVC: UIViewController,/* UITableViewDelegate, UITableViewDataSource
     
     let cellID2 = "cellID2"
     
-    
-    
-    
     let regionRadius: CLLocationDistance = 500
     
     let locationManager = CLLocationManager()
@@ -31,13 +28,19 @@ class LocationVC: UIViewController,/* UITableViewDelegate, UITableViewDataSource
     
     
     var BarAdressen = [String]()
-    var bars = [BarInfos] ()
+    var BarNamen = [String]()
+    // var bars = [BarInfos] ()
+    
+    var barPointTitle = "Shishabarname"
+    var barPointSubtitle = "shishabar sonst was"
 
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         map.delegate = self
+        
+
     /*    mapTV.delegate = self
         mapTV.dataSource = self
         
@@ -61,9 +64,12 @@ class LocationVC: UIViewController,/* UITableViewDelegate, UITableViewDataSource
                 bars.setValuesForKeys(dictionary)
                 //print(adresse.Adresse!)
                 self.BarAdressen.append(bars.Adresse!)
+                self.BarNamen.append(bars.Name!)
                 //print(self.BarAdressen)
-                for a in 0 ..< self.BarAdressen.count {
-                    self.getPlaceMarkFromAdress(adress: self.BarAdressen[a])
+                for BarIndex in 0 ..< self.BarAdressen.count {
+                    self.getPlaceMarkFromAdress(adress: self.BarAdressen[BarIndex])
+                    // zeigt immer namen der letzten bar
+                    self.barPointTitle = self.BarNamen[BarIndex]
                 }
             }
             
@@ -71,36 +77,8 @@ class LocationVC: UIViewController,/* UITableViewDelegate, UITableViewDataSource
         }, withCancel: nil)
         
         
-    }
-    
- /*   func fetchBars2 () {
-        var ref: DatabaseReference!
-        ref = Database.database().reference()
-        ref.child("Barliste").observe(.childAdded, with: { (snapshot) in
-            
-            if let dictionary = snapshot.value as? [String: AnyObject]{
-                let bar2 = BarInfos(dictionary: dictionary)
-                bar2.setValuesForKeys(dictionary)
-                print(bar2.Name!, bar2.Stadt!)
-                self.bars2.append(bar2)
-                
-                DispatchQueue.main.async(execute: {
-                    self.mapTV.reloadData()
-                } )
-            }
-            
-            //  print(snapshot)
-            
-            
-            
-            
-        }, withCancel: nil)
-        
         
     }
-
-    
-    */
     
     
     override func didReceiveMemoryWarning(){
@@ -113,31 +91,7 @@ class LocationVC: UIViewController,/* UITableViewDelegate, UITableViewDataSource
         locationAuthStatus()
     }
     
-  /*
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell2 = tableView.dequeueReusableCell(withIdentifier: cellID2, for: indexPath)
-        //let cell = UITableViewCell(style: .subtitle, reuseIdentifier: cellID)
-        let bar2 = bars2[indexPath.row]
-        
-        
-        cell2.textLabel?.text = bar2.Name
-        cell2.detailTextLabel?.text = bar2.Stadt
-        
-        return cell2
-    }
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
-    }
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return bars2.count
-    }
-    */
+  
     
     func locationAuthStatus(){
         if CLLocationManager.authorizationStatus() == .authorizedWhenInUse{
@@ -164,7 +118,7 @@ class LocationVC: UIViewController,/* UITableViewDelegate, UITableViewDataSource
     
     
     func createAnnotationForLocation(location: CLLocation){
-        let barpoint = BarAnnotation(coordinate: location.coordinate)
+       let barpoint = BarAnnotation(coordinate: location.coordinate, title: barPointTitle, subtitle: barPointSubtitle)
         map.addAnnotation(barpoint)
     }
     
@@ -194,4 +148,61 @@ class barCell2: UITableViewCell {
     
     
 }
+
+
+/*   func fetchBars2 () {
+ var ref: DatabaseReference!
+ ref = Database.database().reference()
+ ref.child("Barliste").observe(.childAdded, with: { (snapshot) in
+ 
+ if let dictionary = snapshot.value as? [String: AnyObject]{
+ let bar2 = BarInfos(dictionary: dictionary)
+ bar2.setValuesForKeys(dictionary)
+ print(bar2.Name!, bar2.Stadt!)
+ self.bars2.append(bar2)
+ 
+ DispatchQueue.main.async(execute: {
+ self.mapTV.reloadData()
+ } )
+ }
+ 
+ //  print(snapshot)
+ 
+ 
+ 
+ 
+ }, withCancel: nil)
+ 
+ 
+ }
+ 
+ 
+ 
+ 
+ */
+/*
+ func numberOfSections(in tableView: UITableView) -> Int {
+ return 1
+ }
+ 
+ func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+ let cell2 = tableView.dequeueReusableCell(withIdentifier: cellID2, for: indexPath)
+ //let cell = UITableViewCell(style: .subtitle, reuseIdentifier: cellID)
+ let bar2 = bars2[indexPath.row]
+ 
+ 
+ cell2.textLabel?.text = bar2.Name
+ cell2.detailTextLabel?.text = bar2.Stadt
+ 
+ return cell2
+ }
+ 
+ func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+ 
+ }
+ 
+ func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+ return bars2.count
+ }
+ */
 
