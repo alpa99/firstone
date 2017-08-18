@@ -14,6 +14,8 @@ pod 'FBSDKCoreKit'
 pod 'FBSDKShareKit'
 pod 'FBSDKLoginKit'
 pod 'Firebase/Auth‘
+pod 'FacebookCore'
+pod 'FacebookLogin'
 
   target 'shishaTests' do
     inherit! :search_paths
