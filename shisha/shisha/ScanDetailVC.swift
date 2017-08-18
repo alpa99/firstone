@@ -9,6 +9,8 @@
 import UIKit
 import Firebase
 
+
+
 class ScanDetailVC: UIViewController {
     
   
@@ -32,11 +34,11 @@ class ScanDetailVC: UIViewController {
 //        datref.child("QRBereich").child("\(barnummer)").observe(.childAdded, with: { (snapshot) in
 //            
 //            if let dictionary = snapshot.value as? [String: AnyObject]{
-//                let qrbarname = BarInfos(dictionary: dictionary)
-//                qrbarname.setValuesForKeys(dictionary)
-//                print(qrbarname.Name!)
-//                self.qrbarnamen.append(qrbarname.Name!)
+//                let qrbarinfo = QRBar(dictionary: dictionary)
+//               
 //                
+//                self.qrbarname.append(qrbar.Name!)
+//                print(qrbarname.Name!)
 //               
 //                }
 //            }
@@ -48,7 +50,7 @@ class ScanDetailVC: UIViewController {
     
     func setupNavigationBar (){
         
-        navigationItem.title = qrbarname[0]
+        navigationItem.title = ("\(qrbarname)")
         print(qrbarname)
         
     }
