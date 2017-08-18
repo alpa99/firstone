@@ -22,27 +22,72 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7as-fE-qfT">
-                                <rect key="frame" x="106" y="146" width="163" height="30"/>
+                                <rect key="frame" x="96" y="160" width="183" height="30"/>
                                 <color key="backgroundColor" red="0.10654991220146703" green="0.41776933526893045" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="11O-zL-JtP"/>
                                 </constraints>
-                                <state key="normal" title="Login with Facebook">
+                                <state key="normal" title="Facebook Login">
                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <connections>
                                     <action selector="fbLoginBtnPressed:" destination="Hfu-Yr-iEA" eventType="touchUpInside" id="Jst-XM-saw"/>
                                 </connections>
                             </button>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Kellner ID" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="HcS-ED-XCN">
+                                <rect key="frame" x="96" y="364" width="183" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Passwort" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="X6H-2i-fnp">
+                                <rect key="frame" x="96" y="402" width="183" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qXB-cS-EXM">
+                                <rect key="frame" x="131" y="440" width="112" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Login als Kellner"/>
+                                <connections>
+                                    <action selector="kellnerLogInPressed:" destination="Hfu-Yr-iEA" eventType="touchUpInside" id="MTx-JI-TVJ"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Bist du Gast" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="85r-27-q9Q">
+                                <rect key="frame" x="96" y="120" width="183" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="oder" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Iij-uC-JIY">
+                                <rect key="frame" x="166" y="260" width="36" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="musst du arbeiten?" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="agU-dp-w6G">
+                                <rect key="frame" x="96" y="323" width="183" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="7as-fE-qfT" firstAttribute="leading" secondItem="t4T-u2-O3T" secondAttribute="leadingMargin" constant="90" id="C6j-LQ-KZ0"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="7as-fE-qfT" secondAttribute="trailing" constant="90" id="JnM-Vc-TOM"/>
-                            <constraint firstItem="7as-fE-qfT" firstAttribute="top" secondItem="B6r-i4-u1U" secondAttribute="bottom" constant="126" id="QrI-uU-dUe"/>
+                            <constraint firstItem="7as-fE-qfT" firstAttribute="leading" secondItem="t4T-u2-O3T" secondAttribute="leadingMargin" constant="80" id="C6j-LQ-KZ0"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="7as-fE-qfT" secondAttribute="trailing" constant="80" id="JnM-Vc-TOM"/>
+                            <constraint firstItem="7as-fE-qfT" firstAttribute="top" secondItem="B6r-i4-u1U" secondAttribute="bottom" constant="140" id="QrI-uU-dUe"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="kellnerID" destination="HcS-ED-XCN" id="EJv-qn-NAG"/>
+                        <outlet property="kellnerPW" destination="X6H-2i-fnp" id="pCm-Vb-bUv"/>
                         <segue destination="MiV-cY-U9S" kind="show" identifier="loggedIn" id="38t-va-RYn"/>
                     </connections>
                 </viewController>
