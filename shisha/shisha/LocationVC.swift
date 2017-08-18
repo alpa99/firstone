@@ -10,6 +10,8 @@ import UIKit
 import Firebase
 import MapKit
 
+
+
 class LocationVC: UIViewController,/* UITableViewDelegate, UITableViewDataSource,*/ MKMapViewDelegate {
     
    
@@ -18,7 +20,7 @@ class LocationVC: UIViewController,/* UITableViewDelegate, UITableViewDataSource
     
     let cellID2 = "cellID2"
     
-    var bars2 = [BarInfos] ()
+    
     
     
     let regionRadius: CLLocationDistance = 500
@@ -27,9 +29,10 @@ class LocationVC: UIViewController,/* UITableViewDelegate, UITableViewDataSource
     
     // var adresses = ["Goseriede 12, 30159 Hannover, Deutschland"]
     
-    var adresse = [BarInfos]()
-    var BarAdressen = [String]()
     
+    var BarAdressen = [String]()
+    var bars = [BarInfos] ()
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -54,10 +57,10 @@ class LocationVC: UIViewController,/* UITableViewDelegate, UITableViewDataSource
         datref.child("Barliste").observe(.childAdded, with: { (snapshot) in
             
             if let dictionary = snapshot.value as? [String: AnyObject]{
-                let adresse = BarInfos(dictionary: dictionary)
-                adresse.setValuesForKeys(dictionary)
+                let bars = BarInfos(dictionary: dictionary)
+                bars.setValuesForKeys(dictionary)
                 //print(adresse.Adresse!)
-                self.BarAdressen.append(adresse.Adresse!)
+                self.BarAdressen.append(bars.Adresse!)
                 //print(self.BarAdressen)
                 for a in 0 ..< self.BarAdressen.count {
                     self.getPlaceMarkFromAdress(adress: self.BarAdressen[a])
