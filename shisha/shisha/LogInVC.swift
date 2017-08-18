@@ -7,30 +7,12 @@ import Firebase
 
 class LogInVC: UIViewController {
     
-    
     var ref: DatabaseReference?
     
-    var userFbName = ""
-    var userFbID = ""
-    var userFbEmail = ""
+    var userFbName: String!
+    var userFbID: String!
+    var userFbEmail: String!
     
-    @IBOutlet weak var kellnerID: UITextField!
-    @IBOutlet weak var kellnerPW: UITextField!
-    
-   
- /*   @IBAction func kellnerLogInPressed(_ sender: UIButton) {
-        if kellnerID.text != "" && kellnerPW.text != ""{
-
-            if kellnerID.text = 
-        
-        
-        
-        } else {
-            print("id und passwort eingeben")
-        }
-    }
-    */
- 
     
     @IBAction func fbLoginBtnPressed(_ sender: UIButton) {
         
@@ -63,8 +45,6 @@ class LogInVC: UIViewController {
             
         }
     }
-    
-    
     
     func getUserInfo(completion: @escaping (_ : [String: Any]?, _ : Error?) -> Void) {
         let request = GraphRequest(graphPath: "me", parameters: ["fields": "id,name,email"])
