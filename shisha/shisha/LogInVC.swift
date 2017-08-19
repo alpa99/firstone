@@ -65,10 +65,10 @@ class LogInVC: UIViewController {
         self.ref = Database.database().reference()
         self.ref?.child("Users").child("\(self.userFbID)").child("Name").setValue(self.userFbName)
         self.ref?.child("Users").child("\(self.userFbID)").child("Email").setValue(self.userFbEmail)
-        segueToLocationVC()
+        segueToTabBar()
     }
     
-    func segueToLocationVC(){
+    func segueToTabBar(){
         performSegue(withIdentifier: "loggedIn", sender: self)
 
     }
@@ -85,7 +85,7 @@ class LogInVC: UIViewController {
         if FBSDKAccessToken.current() != nil {
             print("kein token")
             
-            segueToLocationVC()
+            segueToTabBar()
         } else{
         print(FBSDKAccessToken.current())
         }
