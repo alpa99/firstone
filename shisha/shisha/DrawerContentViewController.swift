@@ -80,8 +80,12 @@ class DrawerContentViewController: UIViewController, PulleyDrawerViewControllerD
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         BarIndex = indexPath.row
+        
+       
+        
         performSegue(withIdentifier: "bardetail", sender: self)
     }
+    
     
     
     override func didReceiveMemoryWarning() {

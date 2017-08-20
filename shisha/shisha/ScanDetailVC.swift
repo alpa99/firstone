@@ -50,7 +50,7 @@ class ScanDetailVC: UIViewController {
     
     func setupNavigationBar (){
         
-        navigationItem.title = ("\(qrbarname)")
+        navigationItem.title = ("\([qrbarname])")
         print(qrbarname)
         
     }

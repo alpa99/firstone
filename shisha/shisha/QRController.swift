@@ -22,6 +22,9 @@ class QRController: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
     let session = AVCaptureSession()
 
     @IBOutlet weak var square: UIImageView!
+    
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -49,6 +52,10 @@ class QRController: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
         
         
     
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        session.startRunning()
     }
     
     func fetchNumber(){
@@ -93,7 +100,7 @@ class QRController: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
             if let object = metadataObjects[0] as? AVMetadataMachineReadableCodeObject{
                 
                 if object.type == AVMetadataObjectTypeQRCode {
-                   
+                   self.session.stopRunning()
                  ergebnis = Int(object.stringValue)!
                     
                  barnummer = ergebnis/1000*1000
