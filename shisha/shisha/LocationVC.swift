@@ -29,6 +29,7 @@ class LocationVC: UIViewController,/* UITableViewDelegate, UITableViewDataSource
     
     var BarAdressen = [String]()
     var BarNamen = [String]()
+    
     // var bars = [BarInfos] ()
     
     var barPointTitle = "Shishabarname"
@@ -65,17 +66,21 @@ class LocationVC: UIViewController,/* UITableViewDelegate, UITableViewDataSource
                 //print(adresse.Adresse!)
                 self.BarAdressen.append(bars.Adresse!)
                 self.BarNamen.append(bars.Name!)
+        
                 //print(self.BarAdressen)
                 for BarIndex in 0 ..< self.BarAdressen.count {
                     self.getPlaceMarkFromAdress(adress: self.BarAdressen[BarIndex])
                     // zeigt immer namen der letzten bar
-                    self.barPointTitle = self.BarNamen[BarIndex]
+                    
                 }
             }
             
             
+            
         }, withCancel: nil)
         
+  
+       
         
         
     }
@@ -88,7 +93,7 @@ class LocationVC: UIViewController,/* UITableViewDelegate, UITableViewDataSource
     
     
     override func viewDidAppear(_ animated: Bool){
-        locationAuthStatus()
+       locationAuthStatus()
     }
     
   
@@ -106,10 +111,11 @@ class LocationVC: UIViewController,/* UITableViewDelegate, UITableViewDataSource
      map.setRegion(coordinateRegion, animated: true)
 
     }
-     
-     
-     
-     func mapView(_ mapView: MKMapView, didUpdate userLocation: MKUserLocation){
+    
+
+    
+ 
+    func mapView(_ mapView: MKMapView, didUpdate userLocation: MKUserLocation){
         if let loc = userLocation.location {
      centerMapOnLocation(location: loc)
         }
@@ -118,8 +124,11 @@ class LocationVC: UIViewController,/* UITableViewDelegate, UITableViewDataSource
     
     
     func createAnnotationForLocation(location: CLLocation){
-       let barpoint = BarAnnotation(coordinate: location.coordinate, title: barPointTitle, subtitle: barPointSubtitle)
-        map.addAnnotation(barpoint)
+        for x in 0..<BarNamen.count{
+           // let barpoint = BarAnnotation(coordinate: location.coordinate, title: BarNamen[x], subtitle: barPointSubtitle)
+//            map.addAnnotation(barpoint)
+        }
+       
     }
     
     
