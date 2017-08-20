@@ -34,7 +34,6 @@ class SearchTVC: UITableViewController {
             if let dictionary = snapshot.value as? [String: AnyObject]{
                 let bar = BarInfos(dictionary: dictionary)
                 bar.setValuesForKeys(dictionary)
-                print(bar.Name!, bar.Stadt!)
                 bars.append(bar)
                 
                 DispatchQueue.main.async(execute: {

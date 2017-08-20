@@ -65,7 +65,7 @@ class LocationVC: UIViewController,/* UITableViewDelegate, UITableViewDataSource
                 bars.setValuesForKeys(dictionary)
                 //print(adresse.Adresse!)
                 self.BarAdressen.append(bars.Adresse!)
-                self.BarNamen.append(bars.Name!)
+                self.BarNamen.insert(bars.Name!, at: self.BarNamen.count)
         
                 //print(self.BarAdressen)
                 for BarIndex in 0 ..< self.BarAdressen.count {
@@ -125,8 +125,9 @@ class LocationVC: UIViewController,/* UITableViewDelegate, UITableViewDataSource
     
     func createAnnotationForLocation(location: CLLocation){
         for x in 0..<BarNamen.count{
-           // let barpoint = BarAnnotation(coordinate: location.coordinate, title: BarNamen[x], subtitle: barPointSubtitle)
-//            map.addAnnotation(barpoint)
+           let barpoint = BarAnnotation(coordinate: location.coordinate, title: BarNamen[x], subtitle: barPointSubtitle)
+      map.addAnnotation(barpoint)
+            print(x)
         }
        
     }
