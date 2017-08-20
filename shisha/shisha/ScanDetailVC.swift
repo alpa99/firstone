@@ -13,13 +13,17 @@ import Firebase
 
 class ScanDetailVC: UIViewController {
     
+    var scannummer = Int()
   
+    @IBOutlet weak var scanlabel: UILabel!
+    var qrbar = [QRBar]()
+    var scanbarname = ""
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-
-    //    fetchInfos()
+        print(scannummer)
+        fetchInfos()
     }
 
     override func didReceiveMemoryWarning() {
@@ -27,32 +31,32 @@ class ScanDetailVC: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-//    func fetchInfos() {
-//        
-//        var datref: DatabaseReference!
-//        datref = Database.database().reference()
-//        datref.child("QRBereich").child("\(barnummer)").observe(.childAdded, with: { (snapshot) in
-//            
-//            if let dictionary = snapshot.value as? [String: AnyObject]{
-//                let qrbarinfo = QRBar(dictionary: dictionary)
-//               
-//                
-//                self.qrbarname.append(qrbar.Name!)
-//                print(qrbarname.Name!)
-//               
-//                }
-//            }
-//            
-//        
-//        , withCancel: nil)
-//
-//        }
-    
-    func setupNavigationBar (){
+    func fetchInfos() {
         
-        navigationItem.title = ("\([qrbarname])")
-        print(qrbarname)
+        var datref: DatabaseReference!
+        datref = Database.database().reference()
+        datref.child("QRBereich").child("\(scannummer)").observe(.value, with: { (snapshot) in
+            
+            if let dictionary = snapshot.value as? [String: AnyObject]{
+                let qrbar = QRBar(dictionary: dictionary)
+                qrbar.setValuesForKeys(dictionary)
+                
+                self.scanbarname.append(qrbar.Name!)
+               print(self.scanbarname)
+            self.setupNavigationBar()
+            }
+            }
+            
+        
+        , withCancel: nil)
+
+        }
+    func setupNavigationBar (){
+        let xbar = scanbarname
+        self.navigationItem.title = xbar
+        print(xbar+"df")
+        scanlabel.text = scanbarname
         
     }
-//
+
 }

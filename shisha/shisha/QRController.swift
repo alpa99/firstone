@@ -13,8 +13,7 @@ import Firebase
 var ergebnis = 0
 var barnummer = 0
 
-var qrbar = [QRBar]()
-var qrbarname = ""
+
 
 class QRController: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
     
@@ -23,7 +22,8 @@ class QRController: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
 
     @IBOutlet weak var square: UIImageView!
     
-    
+    var qrbar = [QRBar]()
+    var qrbarname = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -58,6 +58,13 @@ class QRController: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
         session.startRunning()
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "codescan"{
+        let vc = segue.destination as! ScanDetailVC
+            vc.scannummer = barnummer
+        }
+    }
+    
     func fetchNumber(){
         
         print (barnummer+12)
@@ -73,11 +80,11 @@ class QRController: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
                 let qrbar = QRBar(dictionary: dict)
                 qrbar.setValuesForKeys(dict)
                 
-                qrbarname.append(qrbar.Name!)
+                self.qrbarname.append(qrbar.Name!)
                 
-               print(qrbarname)
+               print(self.qrbarname)
                 
-                let alert = UIAlertController(title: "Erfolgreich", message: "Du bist bei \(qrbarname)!", preferredStyle: .alert)
+                let alert = UIAlertController(title: "Erfolgreich", message: "Du bist bei \(self.qrbarname)!", preferredStyle: .alert)
                 alert.addAction(UIAlertAction(title: "Weiter", style: .default, handler:{ (action) in self.performSegue(withIdentifier: "codescan", sender: self)}))
                 
                 self.present(alert, animated: true, completion: nil)
