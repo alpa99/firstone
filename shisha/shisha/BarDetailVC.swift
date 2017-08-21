@@ -9,7 +9,7 @@
 import UIKit
 import Pulley
 
-class BarDetailVC: UIViewController {
+class BarDetailVC: UIViewController, PulleyDrawerViewControllerDelegate {
     
     override func viewWillAppear(_ animated: Bool) {
         self.navigationController?.setNavigationBarHidden(false, animated: true)
@@ -21,6 +21,20 @@ class BarDetailVC: UIViewController {
         let tableVC:UIViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "DrawerContentViewController") as UIViewController
         (parent as? PulleyViewController)?.setDrawerContentViewController(controller: tableVC, animated: true)
 
+        
+    }
+    func collapsedDrawerHeight() -> CGFloat {
+        return 102.0
+    }
+    func partialRevealDrawerHeight() -> CGFloat {
+        
+        return 340.0
+        
+        
+    }
+    func supportedDrawerPositions() -> [PulleyPosition]{
+        
+        return PulleyPosition.all
         
     }
 
