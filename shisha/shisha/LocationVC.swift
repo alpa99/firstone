@@ -65,15 +65,15 @@ class LocationVC: UIViewController,/* UITableViewDelegate, UITableViewDataSource
                 bars.setValuesForKeys(dictionary)
                 //print(adresse.Adresse!)
                 self.BarAdressen.append(bars.Adresse!)
-                self.BarNamen.insert(bars.Name!, at: self.BarNamen.count)
-        
+                self.BarNamen.append(bars.Name!)
                 //print(self.BarAdressen)
                 for BarIndex in 0 ..< self.BarAdressen.count {
-                    self.getPlaceMarkFromAdress(adress: self.BarAdressen[BarIndex])
+                    self.getPlaceMarkFromAdress(adress: self.BarAdressen[BarIndex], c: self.BarNamen[BarIndex])
                     // zeigt immer namen der letzten bar
                     
                 }
             }
+            
             
             
             
@@ -122,23 +122,34 @@ class LocationVC: UIViewController,/* UITableViewDelegate, UITableViewDataSource
     
      }
     
+    func createAnnotationForLocation(location: CLLocation, x: String){
+  
+        
+            let barpoint = BarAnnotation(coordinate: location.coordinate, title: x, subtitle: barPointSubtitle)
+            map.addAnnotation(barpoint)}
     
-    func createAnnotationForLocation(location: CLLocation){
-        for x in 0..<BarNamen.count{
+    
+        
+    
+   /* func createAnnotationForLocation(location: CLLocation){
+        var x = 0
+        while x < BarNamen.count{
+        //for x in 0..<BarNamen.count{
            let barpoint = BarAnnotation(coordinate: location.coordinate, title: BarNamen[x], subtitle: barPointSubtitle)
       map.addAnnotation(barpoint)
             print(x)
+            x = x+1
         }
        
-    }
+    }*/
     
     
-    func getPlaceMarkFromAdress (adress: String){
+    func getPlaceMarkFromAdress (adress: String, c: String){
         CLGeocoder().geocodeAddressString(adress){ (placemarks: [CLPlacemark]?,error: Error?) -> Void in
             if let marks = placemarks, marks.count > 0 {
                 if let loc = marks[0].location {
-                    self.createAnnotationForLocation(location: loc)
-                }
+                        self.createAnnotationForLocation(location: loc, x: c)}
+                
             }
         }
         
