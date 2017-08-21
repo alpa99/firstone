@@ -148,17 +148,17 @@
         <!--Controller-->
         <scene sceneID="Hhq-Ur-og2">
             <objects>
-                <viewController id="spI-DT-GI0" customClass="QRController" customModule="shisha" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="scanID" id="spI-DT-GI0" customClass="QRController" customModule="shisha" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="zN2-vM-JJ9"/>
                         <viewControllerLayoutGuide type="bottom" id="FAN-Dc-6VF"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="JlZ-yZ-l0p">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="597"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="square" translatesAutoresizingMaskIntoConstraints="NO" id="5jH-iu-vsQ">
-                                <rect key="frame" x="67" y="213" width="240" height="241"/>
+                                <rect key="frame" x="67" y="178" width="240" height="241"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="240" id="5yH-Qf-RcK"/>
                                     <constraint firstAttribute="height" constant="241" id="T1E-kd-4h2"/>
@@ -239,11 +239,12 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZaM-ct-68R">
-                                <rect key="frame" x="164" y="283" width="46" height="30"/>
+                                <rect key="frame" x="113" y="283" width="97" height="63"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button"/>
                                 <connections>
-                                    <segue destination="Ek8-6u-TGx" kind="show" id="CDf-GU-Tex"/>
+                                    <action selector="verify:" destination="orn-TG-hjP" eventType="touchUpInside" id="SAU-ov-Ef3"/>
+                                    <segue destination="spI-DT-GI0" kind="show" identifier="verify" id="Dsy-8J-wGi"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -327,6 +328,6 @@
         <image name="square" width="623" height="621"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="CDf-GU-Tex"/>
+        <segue reference="Dsy-8J-wGi"/>
     </inferredMetricsTieBreakers>
 </document>

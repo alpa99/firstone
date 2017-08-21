@@ -22,6 +22,12 @@ class BarDetailVC: UIViewController {
     setupNavigationBar ()
         
     }
+    @IBAction func verify(_ sender: Any) {
+        let scanVC = self.storyboard?.instantiateViewController(withIdentifier: "scanID") as! QRController
+        self.present(scanVC, animated: true, completion: nil)
+        
+//        performSegue(withIdentifier: "verify", sender: self)
+    }
     
     //hier greife ich die nummer von BarIndex auf und gehe in das array Bars und sage das meine neue variable xbar genau dieser Nummer entspricht.
     //ich glaube das doppeln entsteht dadurch dass das array bars jetzt public ist also nicht mehr nur in der class steht
