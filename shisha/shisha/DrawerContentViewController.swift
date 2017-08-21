@@ -29,6 +29,11 @@ class NavController: UINavigationController, PulleyDrawerViewControllerDelegate{
         return PulleyPosition.all
         
     }
+    
+    override func viewDidLoad() {
+        self.navigationController?.setNavigationBarHidden(true, animated: true)
+
+    }
 
 }
 
@@ -37,6 +42,9 @@ class DrawerContentViewController: UIViewController, PulleyDrawerViewControllerD
     @IBOutlet weak var SearchTV: UITableView!
     
      let cellID = "cellID"
+    
+    
+    
     override func viewWillAppear(_ animated: Bool) {
         self.navigationController?.setNavigationBarHidden(true, animated: true)
 
@@ -74,10 +82,13 @@ class DrawerContentViewController: UIViewController, PulleyDrawerViewControllerD
             
             
         }, withCancel: nil)
-        
+      
         
     }
     
+  
+
+ 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return bars.count
     }
@@ -98,9 +109,10 @@ class DrawerContentViewController: UIViewController, PulleyDrawerViewControllerD
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         BarIndex = indexPath.row
         
-       
+        let detailVC:UIViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "BarDetailVC") as UIViewController
+        (parent as? PulleyViewController)?.setDrawerContentViewController(controller: detailVC, animated: true)
         
-        performSegue(withIdentifier: "bardetail", sender: self)
+     //  performSegue(withIdentifier: "bardetail", sender: self)
     }
     
     
@@ -111,18 +123,18 @@ class DrawerContentViewController: UIViewController, PulleyDrawerViewControllerD
     }
     
     func collapsedDrawerHeight() -> CGFloat {
-        return 120.0
+        return 102.0
     }
     func partialRevealDrawerHeight() -> CGFloat {
         
-        return 264.0
+        return 304.0
         
         
     }
     func supportedDrawerPositions() -> [PulleyPosition]{
        
             return PulleyPosition.all
-        
+    
 }
 }
 

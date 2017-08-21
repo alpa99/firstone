@@ -15,6 +15,14 @@ class BarDetailVC: UIViewController {
         self.navigationController?.setNavigationBarHidden(false, animated: true)
         
     }
+    
+    
+    @IBAction func BackButton(_ sender: Any) {
+        let tableVC:UIViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "DrawerContentViewController") as UIViewController
+        (parent as? PulleyViewController)?.setDrawerContentViewController(controller: tableVC, animated: true)
+
+        
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
