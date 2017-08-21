@@ -12,7 +12,7 @@ import Pulley
 class BarDetailVC: UIViewController, PulleyDrawerViewControllerDelegate {
     
     override func viewWillAppear(_ animated: Bool) {
-        self.navigationController?.setNavigationBarHidden(false, animated: true)
+        self.navigationController?.setNavigationBarHidden(true, animated: true)
         
     }
     
@@ -79,5 +79,13 @@ class BarDetailVC: UIViewController, PulleyDrawerViewControllerDelegate {
         // Pass the selected object to the new view controller.
     }
     */
+
+}
+
+class testseite: UIViewController{
+    override func viewWillAppear(_ animated: Bool) {
+        self.navigationController?.setNavigationBarHidden(false, animated: true)
+        
+    }
 
 }

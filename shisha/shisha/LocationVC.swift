@@ -34,7 +34,11 @@ class LocationVC: UIViewController,/* UITableViewDelegate, UITableViewDataSource
     
     var barPointSubtitle = "shishabar sonst was"
 
-    
+    override func viewWillAppear(_ animated: Bool) {
+        self.navigationController?.setNavigationBarHidden(true, animated: true)
+        
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -107,21 +111,21 @@ class LocationVC: UIViewController,/* UITableViewDelegate, UITableViewDataSource
         }
     }
     
-      func centerMapOnLocation(location:CLLocation){
-     let coordinateRegion = MKCoordinateRegionMakeWithDistance(location.coordinate, regionRadius * 2 , regionRadius * 2)
-     map.setRegion(coordinateRegion, animated: true)
-
-    }
-    
-
-    
- 
-    func mapView(_ mapView: MKMapView, didUpdate userLocation: MKUserLocation){
-        if let loc = userLocation.location {
-     centerMapOnLocation(location: loc)
-        }
-    
-     }
+//      func centerMapOnLocation(location:CLLocation){
+//     let coordinateRegion = MKCoordinateRegionMakeWithDistance(location.coordinate, regionRadius * 2 , regionRadius * 2)
+//     map.setRegion(coordinateRegion, animated: true)
+//
+//    }
+//    
+//
+//    
+// 
+//    func mapView(_ mapView: MKMapView, didUpdate userLocation: MKUserLocation){
+//        if let loc = userLocation.location {
+//     centerMapOnLocation(location: loc)
+//        }
+//    
+//     }
     
     func createAnnotationForLocation(location: CLLocation, Title: String){
   

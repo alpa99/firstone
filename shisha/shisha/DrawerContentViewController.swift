@@ -30,7 +30,7 @@ class NavController: UINavigationController, PulleyDrawerViewControllerDelegate{
         
     }
     
-    override func viewDidLoad() {
+    override func viewWillAppear(_ animated: Bool) {
         self.navigationController?.setNavigationBarHidden(true, animated: true)
 
     }
@@ -108,6 +108,7 @@ class DrawerContentViewController: UIViewController, PulleyDrawerViewControllerD
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         BarIndex = indexPath.row
+        (parent as? PulleyViewController)?.setDrawerPosition(position: PulleyPosition(rawValue: 2)!)
         
         let detailVC:UIViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "BarDetailVC") as UIViewController
         (parent as? PulleyViewController)?.setDrawerContentViewController(controller: detailVC, animated: true)
