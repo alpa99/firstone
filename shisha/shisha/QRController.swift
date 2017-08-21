@@ -9,6 +9,7 @@
 import UIKit
 import AVFoundation
 import Firebase
+import Pulley
 
 var ergebnis = 0
 var barnummer = 0
@@ -27,6 +28,7 @@ class QRController: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+    
         
         let captureDevice = AVCaptureDevice.defaultDevice(withMediaType: AVMediaTypeVideo)
         

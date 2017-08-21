@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Pulley
 
 class BarDetailVC: UIViewController {
     
@@ -17,6 +18,7 @@ class BarDetailVC: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
 
 
     setupNavigationBar ()
@@ -29,8 +31,7 @@ class BarDetailVC: UIViewController {
 //        performSegue(withIdentifier: "verify", sender: self)
     }
     
-    //hier greife ich die nummer von BarIndex auf und gehe in das array Bars und sage das meine neue variable xbar genau dieser Nummer entspricht.
-    //ich glaube das doppeln entsteht dadurch dass das array bars jetzt public ist also nicht mehr nur in der class steht
+    
 
      func setupNavigationBar (){
         let xbar = bars[BarIndex]

@@ -13,7 +13,24 @@ import Firebase
 var BarIndex = 0
 var bars = [BarInfos] ()
 
+class NavController: UINavigationController, PulleyDrawerViewControllerDelegate{
+    
+    func collapsedDrawerHeight() -> CGFloat {
+        return 102.0
+    }
+    func partialRevealDrawerHeight() -> CGFloat {
+        
+        return 340.0
+        
+        
+    }
+    func supportedDrawerPositions() -> [PulleyPosition]{
+        
+        return PulleyPosition.all
+        
+    }
 
+}
 
 class DrawerContentViewController: UIViewController, PulleyDrawerViewControllerDelegate, UITableViewDataSource, UITableViewDelegate {
 
@@ -32,7 +49,7 @@ class DrawerContentViewController: UIViewController, PulleyDrawerViewControllerD
         bars = [BarInfos]()
         fetchBars()
 
-    
+        
     }
 
     func fetchBars () {

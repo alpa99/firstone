@@ -80,7 +80,12 @@ class LocationVC: UIViewController,/* UITableViewDelegate, UITableViewDataSource
         
         
     }
-    
+//    func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
+//        let annotation = view.annotation
+//        let index = (self.mapView.annotations as NSArray).index(of: annotation!)
+//        print ("Annotation Index = \(index)")
+//        
+//    }
     
     override func didReceiveMemoryWarning(){
         super.didReceiveMemoryWarning()
@@ -137,7 +142,37 @@ class LocationVC: UIViewController,/* UITableViewDelegate, UITableViewDataSource
         
     }
     
+    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView?
+    {
+        if annotation is MKUserLocation {return nil}
+        
+        let reuseId = "pin"
+        
+        var pinView = mapView.dequeueReusableAnnotationView(withIdentifier: reuseId) as? MKPinAnnotationView
+        if pinView == nil {
+            pinView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: reuseId)
+            pinView!.canShowCallout = true
+            pinView!.animatesDrop = true
+            let calloutButton = UIButton(type: .detailDisclosure)
+            pinView!.rightCalloutAccessoryView = calloutButton
+            pinView!.sizeToFit()
+        }
+        else {
+            pinView!.annotation = annotation
+        }
+        
+        
+        return pinView
+    }
     
+    func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
+        if control == view.rightCalloutAccessoryView{
+
+            //Perform a segue here to navigate to another viewcontroller
+            
+        }
+    }
+
 }
 
 class barCell2: UITableViewCell {
