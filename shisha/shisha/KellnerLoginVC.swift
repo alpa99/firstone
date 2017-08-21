@@ -7,24 +7,45 @@
 //
 
 import UIKit
+import FirebaseDatabase
 
 class KellnerLoginVC: UIViewController {
 
+    var ref: DatabaseReference?
     
     @IBOutlet weak var barIDTextfield: UITextField!
     
     @IBOutlet weak var passwortTextfield: UITextField!
     
+    var pw = ""
+    var pws = [BarInfos]()
+    
     
     @IBAction func kellnerLoginBtnPressed(_ sender: Any) {
         if (barIDTextfield.text != "") && (passwortTextfield.text != ""){
-            print("\(barIDTextfield.text!)" + "\(passwortTextfield.text!)")
             
+            var ref: DatabaseReference!
+            ref = Database.database().reference()
+            ref.child("Barliste").child(barIDTextfield.text!).observe(.childAdded, with: { (snapshot) in
+                
+                if let dictionary = snapshot.value as? [String: AnyObject]{
+                    let pws = BarInfos(dictionary: dictionary)
+                    pws.setValuesForKeys(dictionary)
+                
+
+                }
+                print(snapshot)
+                print(snapshot.value ?? "")
+
+                
+            }, withCancel: nil)
         }
-        else{
-        print("bitte daten eingeben")
-        }
+        
+            
+       
     }
+    
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
