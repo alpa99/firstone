@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		08647CAF1F2F3CA900A60D8D /* LogInVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08647CAE1F2F3CA900A60D8D /* LogInVC.swift */; };
+		08D8B1FE1F4B4FE7000C7F40 /* KellnerLoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D8B1FD1F4B4FE7000C7F40 /* KellnerLoginVC.swift */; };
 		08D923E01F290FA400E67230 /* LocationVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D923DF1F290FA400E67230 /* LocationVC.swift */; };
 		4E0C37DC1F2909060004DCE6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E0C37DB1F2909060004DCE6 /* AppDelegate.swift */; };
 		4E0C37DE1F2909060004DCE6 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E0C37DD1F2909060004DCE6 /* ViewController.swift */; };
@@ -50,6 +51,7 @@
 /* Begin PBXFileReference section */
 		08647CAE1F2F3CA900A60D8D /* LogInVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogInVC.swift; sourceTree = "<group>"; };
 		08647CB01F2F673900A60D8D /* shisha.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = shisha.entitlements; sourceTree = "<group>"; };
+		08D8B1FD1F4B4FE7000C7F40 /* KellnerLoginVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KellnerLoginVC.swift; sourceTree = "<group>"; };
 		08D923DF1F290FA400E67230 /* LocationVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationVC.swift; sourceTree = "<group>"; };
 		10C74F16B9B59CC0E4F996CA /* Pods_shishaTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_shishaTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1E801B7DCFDE10E9BBD0F35F /* Pods-shishaTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-shishaTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-shishaTests/Pods-shishaTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -181,6 +183,7 @@
 				4E0C38131F290F360004DCE6 /* BarAnnotation.swift */,
 				4E0F22051F431EF500D13CDC /* QRBar.swift */,
 				4E0C38151F290F420004DCE6 /* BarInfos.swift */,
+				08D8B1FD1F4B4FE7000C7F40 /* KellnerLoginVC.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -529,6 +532,7 @@
 				4E0F22061F431EF500D13CDC /* QRBar.swift in Sources */,
 				4E1E24E21F41245E000F4AAB /* QRController.swift in Sources */,
 				08D923E01F290FA400E67230 /* LocationVC.swift in Sources */,
+				08D8B1FE1F4B4FE7000C7F40 /* KellnerLoginVC.swift in Sources */,
 				4E0C381A1F2917E50004DCE6 /* SearchTVC.swift in Sources */,
 				4E0C38141F290F360004DCE6 /* BarAnnotation.swift in Sources */,
 				4E0C38161F290F420004DCE6 /* BarInfos.swift in Sources */,
