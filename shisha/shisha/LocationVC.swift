@@ -32,7 +32,6 @@ class LocationVC: UIViewController,/* UITableViewDelegate, UITableViewDataSource
     
     // var bars = [BarInfos] ()
     
-    var barPointTitle = "Shishabarname"
     var barPointSubtitle = "shishabar sonst was"
 
     
@@ -68,7 +67,7 @@ class LocationVC: UIViewController,/* UITableViewDelegate, UITableViewDataSource
                 self.BarNamen.append(bars.Name!)
                 //print(self.BarAdressen)
                 for BarIndex in 0 ..< self.BarAdressen.count {
-                    self.getPlaceMarkFromAdress(adress: self.BarAdressen[BarIndex], c: self.BarNamen[BarIndex])
+                    self.getPlaceMarkFromAdress(adress: self.BarAdressen[BarIndex], Titlex: self.BarNamen[BarIndex])
                     // zeigt immer namen der letzten bar
                     
                 }
@@ -122,10 +121,10 @@ class LocationVC: UIViewController,/* UITableViewDelegate, UITableViewDataSource
     
      }
     
-    func createAnnotationForLocation(location: CLLocation, x: String){
+    func createAnnotationForLocation(location: CLLocation, Title: String){
   
         
-            let barpoint = BarAnnotation(coordinate: location.coordinate, title: x, subtitle: barPointSubtitle)
+            let barpoint = BarAnnotation(coordinate: location.coordinate, title: Title, subtitle: barPointSubtitle)
             map.addAnnotation(barpoint)}
     
     
@@ -144,11 +143,11 @@ class LocationVC: UIViewController,/* UITableViewDelegate, UITableViewDataSource
     }*/
     
     
-    func getPlaceMarkFromAdress (adress: String, c: String){
+    func getPlaceMarkFromAdress (adress: String, Titlex: String){
         CLGeocoder().geocodeAddressString(adress){ (placemarks: [CLPlacemark]?,error: Error?) -> Void in
             if let marks = placemarks, marks.count > 0 {
                 if let loc = marks[0].location {
-                        self.createAnnotationForLocation(location: loc, x: c)}
+                        self.createAnnotationForLocation(location: loc, Title: Titlex)}
                 
             }
         }
