@@ -73,9 +73,6 @@ class LocationVC: UIViewController,/* UITableViewDelegate, UITableViewDataSource
                 }
             }
             
-            
-            
-            
         }, withCancel: nil)
         
   
@@ -125,22 +122,8 @@ class LocationVC: UIViewController,/* UITableViewDelegate, UITableViewDataSource
   
         
             let barpoint = BarAnnotation(coordinate: location.coordinate, title: Title, subtitle: barPointSubtitle)
-            map.addAnnotation(barpoint)}
-    
-    
-        
-    
-   /* func createAnnotationForLocation(location: CLLocation){
-        var x = 0
-        while x < BarNamen.count{
-        //for x in 0..<BarNamen.count{
-           let barpoint = BarAnnotation(coordinate: location.coordinate, title: BarNamen[x], subtitle: barPointSubtitle)
-      map.addAnnotation(barpoint)
-            print(x)
-            x = x+1
-        }
-       
-    }*/
+            map.addAnnotation(barpoint)
+    }
     
     
     func getPlaceMarkFromAdress (adress: String, Titlex: String){
