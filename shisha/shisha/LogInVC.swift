@@ -86,7 +86,7 @@ class LogInVC: UIViewController {
             
             segueToTabBar()
         } else{
-        print(FBSDKAccessToken.current())
+        print(FBSDKAccessToken.current(), "access")
         }
     }
     override func didReceiveMemoryWarning() {
