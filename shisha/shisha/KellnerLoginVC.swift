@@ -17,7 +17,6 @@ class KellnerLoginVC: UIViewController {
     
     @IBOutlet weak var passwortTextfield: UITextField!
     
-    var pw = ""
     var pws = [BarInfos]()
     
     
@@ -26,17 +25,16 @@ class KellnerLoginVC: UIViewController {
             
             var ref: DatabaseReference!
             ref = Database.database().reference()
-            ref.child("Barliste").child(barIDTextfield.text!).observe(.childAdded, with: { (snapshot) in
+            ref.child("Barliste").child(barIDTextfield.text!).observe(.value, with: { (snapshot) in
                 
                 if let dictionary = snapshot.value as? [String: AnyObject]{
-                    let pws = BarInfos(dictionary: dictionary)
-                    pws.setValuesForKeys(dictionary)
-                
+                    let pw = BarInfos(dictionary: dictionary)
+                    pw.setValuesForKeys(dictionary)
+                    self.pws.append(pw)
+                    print(pw.Passwort ?? "")
 
                 }
-                print(snapshot)
-                print(snapshot.value ?? "")
-
+               
                 
             }, withCancel: nil)
         }
