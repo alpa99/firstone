@@ -10,8 +10,6 @@ import UIKit
 import Pulley
 import Firebase
 
-var BarIndex = 0
-var bars = [BarInfos] ()
 
 class NavController: UINavigationController, PulleyDrawerViewControllerDelegate{
     
@@ -43,7 +41,9 @@ class DrawerContentViewController: UIViewController, PulleyDrawerViewControllerD
     
      let cellID = "cellID"
     
-    
+    var BarIndex = 0
+    var bars = [BarInfos] ()
+
     
     override func viewWillAppear(_ animated: Bool) {
         self.navigationController?.setNavigationBarHidden(true, animated: true)
@@ -68,8 +68,8 @@ class DrawerContentViewController: UIViewController, PulleyDrawerViewControllerD
             if let dictionary = snapshot.value as? [String: AnyObject]{
                 let bar = BarInfos(dictionary: dictionary)
                 bar.setValuesForKeys(dictionary)
-                print(bar.Name!, bar.Stadt!)
-                bars.append(bar)
+               // print(bar.Name!, bar.Stadt!)
+                self.bars.append(bar)
                 
                 DispatchQueue.main.async(execute: {
                     self.SearchTV.reloadData()
@@ -108,9 +108,20 @@ class DrawerContentViewController: UIViewController, PulleyDrawerViewControllerD
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         BarIndex = indexPath.row
+        
+        let selBar = bars[BarIndex]
+        var selBarName = ""
+         selBarName = selBar.Name!
+        print(selBarName)
+        
+        
         (parent as? PulleyViewController)?.setDrawerPosition(position: PulleyPosition(rawValue: 2)!)
         
         let detailVC:UIViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "BarDetailVC") as UIViewController
+        
+        let vcbar = BarDetailVC()
+            vcbar.barname = selBarName
+        
         (parent as? PulleyViewController)?.setDrawerContentViewController(controller: detailVC, animated: true)
         
      //  performSegue(withIdentifier: "bardetail", sender: self)
@@ -128,7 +139,7 @@ class DrawerContentViewController: UIViewController, PulleyDrawerViewControllerD
     }
     func partialRevealDrawerHeight() -> CGFloat {
         
-        return 304.0
+        return 340.0
         
         
     }

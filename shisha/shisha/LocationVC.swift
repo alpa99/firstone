@@ -9,6 +9,7 @@
 import UIKit
 import Firebase
 import MapKit
+import Pulley
 
 
 
@@ -23,14 +24,12 @@ class LocationVC: UIViewController,/* UITableViewDelegate, UITableViewDataSource
     let regionRadius: CLLocationDistance = 500
     
     let locationManager = CLLocationManager()
-    
-    // var adresses = ["Goseriede 12, 30159 Hannover, Deutschland"]
+
     
     
     var BarAdressen = [String]()
     var BarNamen = [String]()
     
-    // var bars = [BarInfos] ()
     
     var barPointSubtitle = "shishabar sonst was"
 
@@ -52,8 +51,6 @@ class LocationVC: UIViewController,/* UITableViewDelegate, UITableViewDataSource
  */
         fetchAdress()
        // fetchBars2()
-        
-        
     }
     
     
@@ -111,21 +108,23 @@ class LocationVC: UIViewController,/* UITableViewDelegate, UITableViewDataSource
         }
     }
     
-//      func centerMapOnLocation(location:CLLocation){
-//     let coordinateRegion = MKCoordinateRegionMakeWithDistance(location.coordinate, regionRadius * 2 , regionRadius * 2)
-//     map.setRegion(coordinateRegion, animated: true)
-//
-//    }
-//    
-//
-//    
+      func centerMapOnLocation(location:CLLocation){
+     
+        let coordinateRegion = MKCoordinateRegionMakeWithDistance(location.coordinate, regionRadius * 2 , regionRadius * 2)
+     map.setRegion(coordinateRegion, animated: true)
+        
+
+    }
+    
+
+    
 // 
 //    func mapView(_ mapView: MKMapView, didUpdate userLocation: MKUserLocation){
 //        if let loc = userLocation.location {
 //     centerMapOnLocation(location: loc)
 //        }
 //    
-//     }
+  //   }
     
     func createAnnotationForLocation(location: CLLocation, Title: String){
   
@@ -168,12 +167,20 @@ class LocationVC: UIViewController,/* UITableViewDelegate, UITableViewDataSource
         
         return pinView
     }
+
     
     func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
         if control == view.rightCalloutAccessoryView{
-
+          let annotation = self.map.selectedAnnotations[0] as MKAnnotation!
             //Perform a segue here to navigate to another viewcontroller
+            print(((annotation?.title)!)!)
             
+             (parent as? PulleyViewController)?.setDrawerPosition(position: PulleyPosition(rawValue: 2)!)
+            let detailVC:UIViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "BarDetailVC") as UIViewController
+            
+             (parent as? PulleyViewController)?.setDrawerContentViewController(controller: detailVC, animated: true)
+            let vcbar = BarDetailVC()
+            vcbar.barname = ((annotation?.title)!)!
         }
     }
 

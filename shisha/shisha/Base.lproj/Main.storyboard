@@ -281,7 +281,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="PP9-ye-6mg">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="597"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="553"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="cellID" id="Sd7-5F-lIh" customClass="barCell" customModule="shisha" customModuleProvider="target">
@@ -341,10 +341,20 @@
                                     <segue destination="qEC-gS-QAq" kind="show" id="sc0-If-IhK"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2Yg-DR-zmu">
+                                <rect key="frame" x="137" y="124" width="85" height="33"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" id="WdA-os-7XZ"/>
+                    <connections>
+                        <outlet property="LabelName" destination="2Yg-DR-zmu" id="Szo-oJ-4mj"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dFl-no-lgr" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -375,7 +385,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="g9g-yd-Lgb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="6488.8000000000002" y="600.44977511244383"/>
+            <point key="canvasLocation" x="6495" y="570"/>
         </scene>
         <!--Scan DetailVC-->
         <scene sceneID="EXw-6t-DW9">
@@ -429,7 +439,6 @@
         <!--Nav Controller-->
         <scene sceneID="ZtV-7h-Ssj">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="y8m-0d-Bxb" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="3l8-VO-M72" customClass="NavController" customModule="shisha" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" systemItem="search" id="Osq-D3-w9X"/>
                     <toolbarItems/>
@@ -442,6 +451,7 @@
                         <segue destination="MiV-cY-U9S" kind="relationship" relationship="rootViewController" id="dgi-M3-q1S"/>
                     </connections>
                 </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="y8m-0d-Bxb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1716" y="321"/>
         </scene>

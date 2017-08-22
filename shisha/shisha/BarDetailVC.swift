@@ -8,13 +8,21 @@
 
 import UIKit
 import Pulley
+import Firebase
 
 class BarDetailVC: UIViewController, PulleyDrawerViewControllerDelegate {
+    
+    var barname = String()
+    
+    var bars = [BarInfos] ()
     
     override func viewWillAppear(_ animated: Bool) {
         self.navigationController?.setNavigationBarHidden(true, animated: true)
         
     }
+    
+    @IBOutlet weak var LabelName: UILabel!
+    
     
     
     @IBAction func BackButton(_ sender: Any) {
@@ -41,28 +49,39 @@ class BarDetailVC: UIViewController, PulleyDrawerViewControllerDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-
-
-    setupNavigationBar ()
+        fetchData()
+        
         
     }
-    @IBAction func verify(_ sender: Any) {
-        let scanVC = self.storyboard?.instantiateViewController(withIdentifier: "scanID") as! QRController
-        self.present(scanVC, animated: true, completion: nil)
-        
-//        performSegue(withIdentifier: "verify", sender: self)
+    func fetchData(){
+        print(barname,12)
+        var datref: DatabaseReference!
+        datref = Database.database().reference()
+        datref.child("Barliste").child("\(barname)").observe(.value, with: { (snapshot) in
+            
+            if let dict = snapshot.value as? [String: AnyObject]{
+                
+                let bar = BarInfos(dictionary: dict)
+                bar.setValuesForKeys(dict)
+                self.bars.append(bar)
+                print(self.bars)
+                self.LabelName.text = "\(self.barname)"
+            }
+        }
+            , withCancel: nil)
     }
     
     
-
-     func setupNavigationBar (){
-        let xbar = bars[BarIndex]
-        
-        navigationItem.title = xbar.Name
-        print(xbar.Name!)
-        
-    }
     
+
+//     func setupNavigationBar (){
+//        let xbar = bars
+//        
+//        navigationItem.title = xbar.Name
+//        //print(xbar.Name!)
+//        
+//    }
+//    
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

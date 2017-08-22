@@ -20,7 +20,6 @@
 		4E0C380C1F290A8C0004DCE6 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4E0C380B1F290A8C0004DCE6 /* GoogleService-Info.plist */; };
 		4E0C38141F290F360004DCE6 /* BarAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E0C38131F290F360004DCE6 /* BarAnnotation.swift */; };
 		4E0C38161F290F420004DCE6 /* BarInfos.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E0C38151F290F420004DCE6 /* BarInfos.swift */; };
-		4E0C381A1F2917E50004DCE6 /* SearchTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E0C38191F2917E50004DCE6 /* SearchTVC.swift */; };
 		4E0C381E1F29467E0004DCE6 /* BarDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E0C381D1F29467E0004DCE6 /* BarDetailVC.swift */; };
 		4E0F22061F431EF500D13CDC /* QRBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E0F22051F431EF500D13CDC /* QRBar.swift */; };
 		4E1E24E21F41245E000F4AAB /* QRController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E1E24E11F41245E000F4AAB /* QRController.swift */; };
@@ -72,7 +71,6 @@
 		4E0C380B1F290A8C0004DCE6 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = SOURCE_ROOT; };
 		4E0C38131F290F360004DCE6 /* BarAnnotation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BarAnnotation.swift; sourceTree = "<group>"; };
 		4E0C38151F290F420004DCE6 /* BarInfos.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BarInfos.swift; sourceTree = "<group>"; };
-		4E0C38191F2917E50004DCE6 /* SearchTVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchTVC.swift; sourceTree = "<group>"; };
 		4E0C381D1F29467E0004DCE6 /* BarDetailVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BarDetailVC.swift; sourceTree = "<group>"; };
 		4E0F22051F431EF500D13CDC /* QRBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QRBar.swift; sourceTree = "<group>"; };
 		4E1E24E11F41245E000F4AAB /* QRController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QRController.swift; sourceTree = "<group>"; };
@@ -150,7 +148,6 @@
 				4E0C37E71F2909060004DCE6 /* Info.plist */,
 				08647CAE1F2F3CA900A60D8D /* LogInVC.swift */,
 				08D8B1FD1F4B4FE7000C7F40 /* KellnerLoginVC.swift */,
-				4E0C38191F2917E50004DCE6 /* SearchTVC.swift */,
 				08D923DF1F290FA400E67230 /* LocationVC.swift */,
 				4E0C381D1F29467E0004DCE6 /* BarDetailVC.swift */,
 				4E3C37711F38A21D008A9188 /* DrawerContentViewController.swift */,
@@ -533,7 +530,6 @@
 				4E1E24E21F41245E000F4AAB /* QRController.swift in Sources */,
 				08D923E01F290FA400E67230 /* LocationVC.swift in Sources */,
 				08D8B1FE1F4B4FE7000C7F40 /* KellnerLoginVC.swift in Sources */,
-				4E0C381A1F2917E50004DCE6 /* SearchTVC.swift in Sources */,
 				4E0C38141F290F360004DCE6 /* BarAnnotation.swift in Sources */,
 				4E0C38161F290F420004DCE6 /* BarInfos.swift in Sources */,
 				4E0C37DE1F2909060004DCE6 /* ViewController.swift in Sources */,
