@@ -119,8 +119,8 @@ class DrawerContentViewController: UIViewController, PulleyDrawerViewControllerD
         
         let detailVC:UIViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "BarDetailVC") as UIViewController
         
-        let vcbar = BarDetailVC()
-            vcbar.barname = selBarName
+      //  let vcbar = BarDetailVC()
+       //     vcbar.barname = selBarName
         
         (parent as? PulleyViewController)?.setDrawerContentViewController(controller: detailVC, animated: true)
         

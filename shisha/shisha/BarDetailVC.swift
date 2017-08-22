@@ -12,7 +12,7 @@ import Firebase
 
 class BarDetailVC: UIViewController, PulleyDrawerViewControllerDelegate {
     
-    var barname = String()
+    var barname = " "
     
     var bars = [BarInfos] ()
     

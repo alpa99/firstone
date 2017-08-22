@@ -179,8 +179,8 @@ class LocationVC: UIViewController,/* UITableViewDelegate, UITableViewDataSource
             let detailVC:UIViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "BarDetailVC") as UIViewController
             
              (parent as? PulleyViewController)?.setDrawerContentViewController(controller: detailVC, animated: true)
-            let vcbar = BarDetailVC()
-            vcbar.barname = ((annotation?.title)!)!
+         //   let vcbar = BarDetailVC()
+         //   vcbar.barname = ((annotation?.title)!)!
         }
     }
 
