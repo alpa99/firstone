@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		081F305D1F4CED5B00C3461E /* BestellungTestVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081F305C1F4CED5B00C3461E /* BestellungTestVC.swift */; };
 		08647CAF1F2F3CA900A60D8D /* LogInVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08647CAE1F2F3CA900A60D8D /* LogInVC.swift */; };
 		08D8B1FE1F4B4FE7000C7F40 /* KellnerLoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D8B1FD1F4B4FE7000C7F40 /* KellnerLoginVC.swift */; };
 		08D923E01F290FA400E67230 /* LocationVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D923DF1F290FA400E67230 /* LocationVC.swift */; };
@@ -49,6 +50,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		081F305C1F4CED5B00C3461E /* BestellungTestVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BestellungTestVC.swift; sourceTree = "<group>"; };
 		08647CAE1F2F3CA900A60D8D /* LogInVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogInVC.swift; sourceTree = "<group>"; };
 		08647CB01F2F673900A60D8D /* shisha.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = shisha.entitlements; sourceTree = "<group>"; };
 		08D8B1FD1F4B4FE7000C7F40 /* KellnerLoginVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KellnerLoginVC.swift; sourceTree = "<group>"; };
@@ -155,6 +157,7 @@
 				4E3C37711F38A21D008A9188 /* DrawerContentViewController.swift */,
 				4E1E24E11F41245E000F4AAB /* QRController.swift */,
 				4E59C7341F427C9500DB32D4 /* ScanDetailVC.swift */,
+				081F305C1F4CED5B00C3461E /* BestellungTestVC.swift */,
 			);
 			path = shisha;
 			sourceTree = "<group>";
@@ -528,6 +531,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4E3C37721F38A21D008A9188 /* DrawerContentViewController.swift in Sources */,
+				081F305D1F4CED5B00C3461E /* BestellungTestVC.swift in Sources */,
 				4E0C381E1F29467E0004DCE6 /* BarDetailVC.swift in Sources */,
 				4E0F22061F431EF500D13CDC /* QRBar.swift in Sources */,
 				4E1E24E21F41245E000F4AAB /* QRController.swift in Sources */,
