@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		081F305D1F4CED5B00C3461E /* BestellungTestVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081F305C1F4CED5B00C3461E /* BestellungTestVC.swift */; };
-		081F30611F4D047300C3461E /* iCarousel.m in Sources */ = {isa = PBXBuildFile; fileRef = 081F30601F4D047300C3461E /* iCarousel.m */; };
 		08647CAF1F2F3CA900A60D8D /* LogInVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08647CAE1F2F3CA900A60D8D /* LogInVC.swift */; };
 		08D8B1FE1F4B4FE7000C7F40 /* KellnerLoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D8B1FD1F4B4FE7000C7F40 /* KellnerLoginVC.swift */; };
 		08D923E01F290FA400E67230 /* LocationVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D923DF1F290FA400E67230 /* LocationVC.swift */; };
@@ -25,6 +24,7 @@
 		4E0C38161F290F420004DCE6 /* BarInfos.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E0C38151F290F420004DCE6 /* BarInfos.swift */; };
 		4E0C381E1F29467E0004DCE6 /* BarDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E0C381D1F29467E0004DCE6 /* BarDetailVC.swift */; };
 		4E0F22061F431EF500D13CDC /* QRBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E0F22051F431EF500D13CDC /* QRBar.swift */; };
+		4E0F22091F4DAD7900D13CDC /* iCarousel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E0F22081F4DAD7900D13CDC /* iCarousel.m */; };
 		4E1E24E21F41245E000F4AAB /* QRController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E1E24E11F41245E000F4AAB /* QRController.swift */; };
 		4E3790E47F30DB5EA80FBFD2 /* Pods_shishaUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 91D453B6D8F2943D5788BE62 /* Pods_shishaUITests.framework */; };
 		4E3C37721F38A21D008A9188 /* DrawerContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E3C37711F38A21D008A9188 /* DrawerContentViewController.swift */; };
@@ -53,8 +53,6 @@
 /* Begin PBXFileReference section */
 		081F305C1F4CED5B00C3461E /* BestellungTestVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BestellungTestVC.swift; sourceTree = "<group>"; };
 		081F305E1F4D047100C3461E /* shisha-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "shisha-Bridging-Header.h"; sourceTree = "<group>"; };
-		081F305F1F4D047300C3461E /* iCarousel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = iCarousel.h; path = ../../../../../Downloads/iCarousel/iCarousel.h; sourceTree = "<group>"; };
-		081F30601F4D047300C3461E /* iCarousel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = iCarousel.m; path = ../../../../../Downloads/iCarousel/iCarousel.m; sourceTree = "<group>"; };
 		08647CAE1F2F3CA900A60D8D /* LogInVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogInVC.swift; sourceTree = "<group>"; };
 		08647CB01F2F673900A60D8D /* shisha.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = shisha.entitlements; sourceTree = "<group>"; };
 		08D8B1FD1F4B4FE7000C7F40 /* KellnerLoginVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KellnerLoginVC.swift; sourceTree = "<group>"; };
@@ -81,6 +79,8 @@
 		4E0C38151F290F420004DCE6 /* BarInfos.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BarInfos.swift; sourceTree = "<group>"; };
 		4E0C381D1F29467E0004DCE6 /* BarDetailVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BarDetailVC.swift; sourceTree = "<group>"; };
 		4E0F22051F431EF500D13CDC /* QRBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QRBar.swift; sourceTree = "<group>"; };
+		4E0F22071F4DAD6600D13CDC /* iCarousel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = iCarousel.h; sourceTree = "<group>"; };
+		4E0F22081F4DAD7900D13CDC /* iCarousel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iCarousel.m; sourceTree = "<group>"; };
 		4E1E24E11F41245E000F4AAB /* QRController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QRController.swift; sourceTree = "<group>"; };
 		4E3C37711F38A21D008A9188 /* DrawerContentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DrawerContentViewController.swift; sourceTree = "<group>"; };
 		4E59C7341F427C9500DB32D4 /* ScanDetailVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScanDetailVC.swift; sourceTree = "<group>"; };
@@ -162,8 +162,8 @@
 				4E1E24E11F41245E000F4AAB /* QRController.swift */,
 				4E59C7341F427C9500DB32D4 /* ScanDetailVC.swift */,
 				081F305C1F4CED5B00C3461E /* BestellungTestVC.swift */,
-				081F305F1F4D047300C3461E /* iCarousel.h */,
-				081F30601F4D047300C3461E /* iCarousel.m */,
+				4E0F22081F4DAD7900D13CDC /* iCarousel.m */,
+				4E0F22071F4DAD6600D13CDC /* iCarousel.h */,
 				081F305E1F4D047100C3461E /* shisha-Bridging-Header.h */,
 			);
 			path = shisha;
@@ -544,7 +544,7 @@
 				4E0F22061F431EF500D13CDC /* QRBar.swift in Sources */,
 				4E1E24E21F41245E000F4AAB /* QRController.swift in Sources */,
 				08D923E01F290FA400E67230 /* LocationVC.swift in Sources */,
-				081F30611F4D047300C3461E /* iCarousel.m in Sources */,
+				4E0F22091F4DAD7900D13CDC /* iCarousel.m in Sources */,
 				08D8B1FE1F4B4FE7000C7F40 /* KellnerLoginVC.swift in Sources */,
 				4E0C38141F290F360004DCE6 /* BarAnnotation.swift in Sources */,
 				4E0C38161F290F420004DCE6 /* BarInfos.swift in Sources */,
