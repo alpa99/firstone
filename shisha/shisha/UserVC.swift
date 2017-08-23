@@ -7,9 +7,19 @@
 //
 
 import UIKit
+import FacebookLogin
+import FBSDKLoginKit
 
-class ViewController: UIViewController {
 
+class UserVC: UIViewController {
+
+    
+    @IBAction func LogoutPressed(_ sender: Any) {
+            let loginManager = LoginManager()
+        loginManager.logOut()
+       
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.

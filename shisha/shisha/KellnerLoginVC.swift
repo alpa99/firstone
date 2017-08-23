@@ -17,7 +17,8 @@ class KellnerLoginVC: UIViewController {
     
     @IBOutlet weak var passwortTextfield: UITextField!
     
-    var pws = [BarInfos]()
+    var pws = [KellnerInfos]()
+    var passwort = ""
     
     
     @IBAction func kellnerLoginBtnPressed(_ sender: Any) {
@@ -25,25 +26,38 @@ class KellnerLoginVC: UIViewController {
             
             var ref: DatabaseReference!
             ref = Database.database().reference()
-            ref.child("Barliste").child(barIDTextfield.text!).observe(.value, with: { (snapshot) in
+            ref.child("Kellner").child(barIDTextfield.text!).observe(.value, with: { (snapshot) in
                 
                 if let dictionary = snapshot.value as? [String: AnyObject]{
-                    let pw = BarInfos(dictionary: dictionary)
+                    let pw = KellnerInfos(dictionary: dictionary)
                     pw.setValuesForKeys(dictionary)
                     self.pws.append(pw)
-                    print(pw.Passwort ?? "")
-
+                    self.passwort = pw.Passwort!
+                    
+                    if self.passwortTextfield.text == self.passwort {
+                    
+                        self.segueToKellnerLogin()
+                    } else {
+                        let alert = UIAlertController(title: "KellnerID oder Passwort falsch", message: nil, preferredStyle: UIAlertControllerStyle.alert)
+                        alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
+                            
+                            self.present(alert, animated: true, completion: nil)
+                    
+                    }
+                    
                 }
                
                 
             }, withCancel: nil)
         }
         
-            
-       
+        
     }
     
 
+    func segueToKellnerLogin(){
+    performSegue(withIdentifier: "kellnerLogin", sender: self)
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()

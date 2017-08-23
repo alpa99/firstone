@@ -7,11 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		081F305D1F4CED5B00C3461E /* BestellungTestVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081F305C1F4CED5B00C3461E /* BestellungTestVC.swift */; };
 		08647CAF1F2F3CA900A60D8D /* LogInVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08647CAE1F2F3CA900A60D8D /* LogInVC.swift */; };
 		08D8B1FE1F4B4FE7000C7F40 /* KellnerLoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D8B1FD1F4B4FE7000C7F40 /* KellnerLoginVC.swift */; };
 		08D923E01F290FA400E67230 /* LocationVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D923DF1F290FA400E67230 /* LocationVC.swift */; };
+		08EF152D1F4CE167003E0F20 /* KellnerInfos.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EF152C1F4CE167003E0F20 /* KellnerInfos.swift */; };
 		4E0C37DC1F2909060004DCE6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E0C37DB1F2909060004DCE6 /* AppDelegate.swift */; };
-		4E0C37DE1F2909060004DCE6 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E0C37DD1F2909060004DCE6 /* ViewController.swift */; };
+		4E0C37DE1F2909060004DCE6 /* UserVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E0C37DD1F2909060004DCE6 /* UserVC.swift */; };
 		4E0C37E11F2909060004DCE6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4E0C37DF1F2909060004DCE6 /* Main.storyboard */; };
 		4E0C37E31F2909060004DCE6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4E0C37E21F2909060004DCE6 /* Assets.xcassets */; };
 		4E0C37E61F2909060004DCE6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4E0C37E41F2909060004DCE6 /* LaunchScreen.storyboard */; };
@@ -48,16 +50,18 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		081F305C1F4CED5B00C3461E /* BestellungTestVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BestellungTestVC.swift; sourceTree = "<group>"; };
 		08647CAE1F2F3CA900A60D8D /* LogInVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogInVC.swift; sourceTree = "<group>"; };
 		08647CB01F2F673900A60D8D /* shisha.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = shisha.entitlements; sourceTree = "<group>"; };
 		08D8B1FD1F4B4FE7000C7F40 /* KellnerLoginVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KellnerLoginVC.swift; sourceTree = "<group>"; };
 		08D923DF1F290FA400E67230 /* LocationVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationVC.swift; sourceTree = "<group>"; };
+		08EF152C1F4CE167003E0F20 /* KellnerInfos.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KellnerInfos.swift; sourceTree = "<group>"; };
 		10C74F16B9B59CC0E4F996CA /* Pods_shishaTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_shishaTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1E801B7DCFDE10E9BBD0F35F /* Pods-shishaTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-shishaTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-shishaTests/Pods-shishaTests.release.xcconfig"; sourceTree = "<group>"; };
 		3457CDDAEE1DCDAF8B0BD369 /* Pods-shisha.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-shisha.release.xcconfig"; path = "Pods/Target Support Files/Pods-shisha/Pods-shisha.release.xcconfig"; sourceTree = "<group>"; };
 		4E0C37D81F2909060004DCE6 /* shisha.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = shisha.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4E0C37DB1F2909060004DCE6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		4E0C37DD1F2909060004DCE6 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		4E0C37DD1F2909060004DCE6 /* UserVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserVC.swift; sourceTree = "<group>"; };
 		4E0C37E01F2909060004DCE6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		4E0C37E21F2909060004DCE6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4E0C37E51F2909060004DCE6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -140,7 +144,7 @@
 				08647CB01F2F673900A60D8D /* shisha.entitlements */,
 				4E0C38121F290F200004DCE6 /* Models */,
 				4E0C37DB1F2909060004DCE6 /* AppDelegate.swift */,
-				4E0C37DD1F2909060004DCE6 /* ViewController.swift */,
+				4E0C37DD1F2909060004DCE6 /* UserVC.swift */,
 				4E0C37DF1F2909060004DCE6 /* Main.storyboard */,
 				4E0C37E21F2909060004DCE6 /* Assets.xcassets */,
 				4E0C37E41F2909060004DCE6 /* LaunchScreen.storyboard */,
@@ -153,6 +157,7 @@
 				4E3C37711F38A21D008A9188 /* DrawerContentViewController.swift */,
 				4E1E24E11F41245E000F4AAB /* QRController.swift */,
 				4E59C7341F427C9500DB32D4 /* ScanDetailVC.swift */,
+				081F305C1F4CED5B00C3461E /* BestellungTestVC.swift */,
 			);
 			path = shisha;
 			sourceTree = "<group>";
@@ -181,6 +186,7 @@
 				4E0C38131F290F360004DCE6 /* BarAnnotation.swift */,
 				4E0F22051F431EF500D13CDC /* QRBar.swift */,
 				4E0C38151F290F420004DCE6 /* BarInfos.swift */,
+				08EF152C1F4CE167003E0F20 /* KellnerInfos.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -525,6 +531,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4E3C37721F38A21D008A9188 /* DrawerContentViewController.swift in Sources */,
+				081F305D1F4CED5B00C3461E /* BestellungTestVC.swift in Sources */,
 				4E0C381E1F29467E0004DCE6 /* BarDetailVC.swift in Sources */,
 				4E0F22061F431EF500D13CDC /* QRBar.swift in Sources */,
 				4E1E24E21F41245E000F4AAB /* QRController.swift in Sources */,
@@ -532,8 +539,9 @@
 				08D8B1FE1F4B4FE7000C7F40 /* KellnerLoginVC.swift in Sources */,
 				4E0C38141F290F360004DCE6 /* BarAnnotation.swift in Sources */,
 				4E0C38161F290F420004DCE6 /* BarInfos.swift in Sources */,
-				4E0C37DE1F2909060004DCE6 /* ViewController.swift in Sources */,
+				4E0C37DE1F2909060004DCE6 /* UserVC.swift in Sources */,
 				4E0C37DC1F2909060004DCE6 /* AppDelegate.swift in Sources */,
+				08EF152D1F4CE167003E0F20 /* KellnerInfos.swift in Sources */,
 				08647CAF1F2F3CA900A60D8D /* LogInVC.swift in Sources */,
 				4E59C7351F427C9500DB32D4 /* ScanDetailVC.swift in Sources */,
 			);

@@ -16,6 +16,9 @@ class LogInVC: UIViewController {
     var userFbEmail = ""
     
     
+    
+   
+    
     @IBAction func fbLoginBtnPressed(_ sender: UIButton) {
         
         let loginManager = LoginManager()
@@ -86,7 +89,7 @@ class LogInVC: UIViewController {
             
             segueToTabBar()
         } else{
-        print(FBSDKAccessToken.current())
+        print(FBSDKAccessToken.current(), "access")
         }
     }
     override func didReceiveMemoryWarning() {
