@@ -28,11 +28,9 @@ class BestellungTestVC: UIViewController {
     
     func handleBestellung(){
         
-        
-        
-      
+              
         if bestellungTextfield.text != nil{
-            let values = ["text:": bestellungTextfield.text!, "User": "\(FBSDKAccessToken.current().tokenString)"]
+            let values = ["text:": bestellungTextfield.text!, "User": "ibo"]
         self.ref = Database.database().reference().child("Bestellungen")
         let childRef = ref?.childByAutoId()
         childRef?.updateChildValues(values)
