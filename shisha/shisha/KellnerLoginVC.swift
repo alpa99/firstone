@@ -38,6 +38,7 @@ class KellnerLoginVC: UIViewController {
                     
                         self.segueToKellnerLogin()
                     } else {
+                        self.passwortTextfield.text = ""
                         let alert = UIAlertController(title: "KellnerID oder Passwort falsch", message: nil, preferredStyle: UIAlertControllerStyle.alert)
                         alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
                             

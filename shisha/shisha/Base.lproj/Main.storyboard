@@ -45,7 +45,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="l4O-Nm-Kjh" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-704.79999999999995" y="-376.46176911544228"/>
+            <point key="canvasLocation" x="5441" y="-507"/>
         </scene>
         <!--Log InVC-->
         <scene sceneID="KNq-Vy-jOH">
@@ -77,14 +77,6 @@
                                 <state key="normal" title="Als Kellner einloggen"/>
                                 <connections>
                                     <segue destination="Np0-56-TRu" kind="presentation" modalPresentationStyle="fullScreen" modalTransitionStyle="flipHorizontal" id="6sw-QG-03J"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pk2-ld-rsZ">
-                                <rect key="frame" x="164" y="382" width="46" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Button"/>
-                                <connections>
-                                    <segue destination="VZb-Ij-n79" kind="show" id="du5-ar-OMa"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -291,6 +283,14 @@
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="f8C-mE-fuX">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                             </mapView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1rk-6M-gcC">
+                                <rect key="frame" x="73" y="75" width="46" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button"/>
+                                <connections>
+                                    <segue destination="VZb-Ij-n79" kind="show" id="5nz-gn-XM6"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -389,7 +389,7 @@
             </objects>
             <point key="canvasLocation" x="4386" y="570"/>
         </scene>
-        <!--BarDetailVC-->
+        <!--Data Source-->
         <scene sceneID="9Oe-KT-4wc">
             <objects>
                 <viewController storyboardIdentifier="BarDetailVC" title="BarDetailVC" id="orn-TG-hjP" customClass="BarDetailVC" customModule="shisha" customModuleProvider="target" sceneMemberID="viewController">
@@ -417,8 +417,17 @@
                                     <segue destination="qEC-gS-QAq" kind="show" id="sc0-If-IhK"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2Yg-DR-zmu">
-                                <rect key="frame" x="137" y="124" width="85" height="33"/>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="N9t-ph-of4" customClass="iCarousel">
+                                <rect key="frame" x="16" y="55" width="343" height="220"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="orn-TG-hjP" id="V4O-d7-kXP"/>
+                                    <outlet property="delegate" destination="orn-TG-hjP" id="UK8-52-obw"/>
+                                </connections>
+                            </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4l0-wC-IZi">
+                                <rect key="frame" x="164" y="402" width="175" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
@@ -429,7 +438,8 @@
                     </view>
                     <navigationItem key="navigationItem" id="WdA-os-7XZ"/>
                     <connections>
-                        <outlet property="LabelName" destination="2Yg-DR-zmu" id="Szo-oJ-4mj"/>
+                        <outlet property="LabelName" destination="4l0-wC-IZi" id="Xl7-z4-t9s"/>
+                        <outlet property="carouselView" destination="N9t-ph-of4" id="PCt-2R-JWL"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dFl-no-lgr" userLabel="First Responder" sceneMemberID="firstResponder"/>

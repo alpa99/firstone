@@ -10,18 +10,23 @@ import UIKit
 import Pulley
 import Firebase
 
-class BarDetailVC: UIViewController, PulleyDrawerViewControllerDelegate {
+class BarDetailVC: UIViewController, PulleyDrawerViewControllerDelegate, iCarouselDelegate, iCarouselDataSource {
     
     var barname = " "
     
     var bars = [BarInfos] ()
+    
+    @IBOutlet weak var LabelName: UILabel!
+    
+    @IBOutlet weak var carouselView: iCarousel!
+    
+    var carouselNumbers = [Int]()
     
     override func viewWillAppear(_ animated: Bool) {
         self.navigationController?.setNavigationBarHidden(true, animated: true)
         
     }
     
-    @IBOutlet weak var LabelName: UILabel!
     
     
     
@@ -48,8 +53,9 @@ class BarDetailVC: UIViewController, PulleyDrawerViewControllerDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         fetchData()
+        
+        carouselView.type = .coverFlow2
         
         
     }
@@ -66,10 +72,12 @@ class BarDetailVC: UIViewController, PulleyDrawerViewControllerDelegate {
                 self.bars.append(bar)
                 print(self.bars)
                 self.LabelName.text = "\(self.barname)"
+ 
             }
         }
             , withCancel: nil)
     }
+    
     
     
     
@@ -98,6 +106,32 @@ class BarDetailVC: UIViewController, PulleyDrawerViewControllerDelegate {
         // Pass the selected object to the new view controller.
     }
     */
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        carouselNumbers = [1,2,3,4]
+
+    }
+    
+    
+    func numberOfItems(in carousel: iCarousel) -> Int {
+        return carouselNumbers.count
+    }
+    
+    func carousel(_ carousel: iCarousel, viewForItemAt index: Int, reusing view: UIView?) -> UIView {
+         let tempView = UIView(frame: CGRect(x: 0, y: 0, width: 200, height: 200))
+        
+        tempView.backgroundColor = UIColor.cyan
+            
+        return tempView
+    }
+    
+    func carousel(_ carousel: iCarousel, valueFor option: iCarouselOption, withDefault value: CGFloat) -> CGFloat {
+        if option == iCarouselOption.spacing{
+        return value * 1.1
+        }
+        return value
+    }
 
 }
 

@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		081F305D1F4CED5B00C3461E /* BestellungTestVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081F305C1F4CED5B00C3461E /* BestellungTestVC.swift */; };
+		081F30611F4D047300C3461E /* iCarousel.m in Sources */ = {isa = PBXBuildFile; fileRef = 081F30601F4D047300C3461E /* iCarousel.m */; };
 		08647CAF1F2F3CA900A60D8D /* LogInVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08647CAE1F2F3CA900A60D8D /* LogInVC.swift */; };
 		08D8B1FE1F4B4FE7000C7F40 /* KellnerLoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D8B1FD1F4B4FE7000C7F40 /* KellnerLoginVC.swift */; };
 		08D923E01F290FA400E67230 /* LocationVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D923DF1F290FA400E67230 /* LocationVC.swift */; };
@@ -51,6 +52,9 @@
 
 /* Begin PBXFileReference section */
 		081F305C1F4CED5B00C3461E /* BestellungTestVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BestellungTestVC.swift; sourceTree = "<group>"; };
+		081F305E1F4D047100C3461E /* shisha-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "shisha-Bridging-Header.h"; sourceTree = "<group>"; };
+		081F305F1F4D047300C3461E /* iCarousel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = iCarousel.h; path = ../../../../../Downloads/iCarousel/iCarousel.h; sourceTree = "<group>"; };
+		081F30601F4D047300C3461E /* iCarousel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = iCarousel.m; path = ../../../../../Downloads/iCarousel/iCarousel.m; sourceTree = "<group>"; };
 		08647CAE1F2F3CA900A60D8D /* LogInVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogInVC.swift; sourceTree = "<group>"; };
 		08647CB01F2F673900A60D8D /* shisha.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = shisha.entitlements; sourceTree = "<group>"; };
 		08D8B1FD1F4B4FE7000C7F40 /* KellnerLoginVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KellnerLoginVC.swift; sourceTree = "<group>"; };
@@ -158,6 +162,9 @@
 				4E1E24E11F41245E000F4AAB /* QRController.swift */,
 				4E59C7341F427C9500DB32D4 /* ScanDetailVC.swift */,
 				081F305C1F4CED5B00C3461E /* BestellungTestVC.swift */,
+				081F305F1F4D047300C3461E /* iCarousel.h */,
+				081F30601F4D047300C3461E /* iCarousel.m */,
+				081F305E1F4D047100C3461E /* shisha-Bridging-Header.h */,
 			);
 			path = shisha;
 			sourceTree = "<group>";
@@ -292,6 +299,7 @@
 					4E0C37D71F2909060004DCE6 = {
 						CreatedOnToolsVersion = 8.3.3;
 						DevelopmentTeam = 84R3VSG74G;
+						LastSwiftMigration = 0830;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.Keychain = {
@@ -536,6 +544,7 @@
 				4E0F22061F431EF500D13CDC /* QRBar.swift in Sources */,
 				4E1E24E21F41245E000F4AAB /* QRController.swift in Sources */,
 				08D923E01F290FA400E67230 /* LocationVC.swift in Sources */,
+				081F30611F4D047300C3461E /* iCarousel.m in Sources */,
 				08D8B1FE1F4B4FE7000C7F40 /* KellnerLoginVC.swift in Sources */,
 				4E0C38141F290F360004DCE6 /* BarAnnotation.swift in Sources */,
 				4E0C38161F290F420004DCE6 /* BarInfos.swift in Sources */,
@@ -696,6 +705,7 @@
 			baseConfigurationReference = 92CE5692E4CF64DFD79A451D /* Pods-shisha.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = shisha/shisha.entitlements;
 				DEVELOPMENT_TEAM = 84R3VSG74G;
 				INFOPLIST_FILE = shisha/Info.plist;
@@ -703,6 +713,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = AM.shisha11m;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "shisha/shisha-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -713,6 +725,7 @@
 			baseConfigurationReference = 3457CDDAEE1DCDAF8B0BD369 /* Pods-shisha.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = shisha/shisha.entitlements;
 				DEVELOPMENT_TEAM = 84R3VSG74G;
 				INFOPLIST_FILE = shisha/Info.plist;
@@ -720,6 +733,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = AM.shisha11m;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "shisha/shisha-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
