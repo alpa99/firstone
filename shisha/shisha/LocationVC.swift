@@ -11,7 +11,7 @@ import Firebase
 import MapKit
 import Pulley
 
-
+var barnamexy = ""
 
 class LocationVC: UIViewController,/* UITableViewDelegate, UITableViewDataSource,*/ MKMapViewDelegate {
     
@@ -175,12 +175,14 @@ class LocationVC: UIViewController,/* UITableViewDelegate, UITableViewDataSource
             //Perform a segue here to navigate to another viewcontroller
             print(((annotation?.title)!)!)
             
-             (parent as? PulleyViewController)?.setDrawerPosition(position: PulleyPosition(rawValue: 2)!)
-            let detailVC:UIViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "BarDetailVC") as UIViewController
+            let detvc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "BarDetailVC") as! BarDetailVC
+            detvc.barname = ((annotation?.title)!)!
             
-             (parent as? PulleyViewController)?.setDrawerContentViewController(controller: detailVC, animated: true)
-         //   let vcbar = BarDetailVC()
-         //   vcbar.barname = ((annotation?.title)!)!
+             (parent as? PulleyViewController)?.setDrawerPosition(position: PulleyPosition(rawValue: 2)!)
+            
+            
+             (parent as? PulleyViewController)?.setDrawerContentViewController(controller: detvc, animated: true)
+            
         }
     }
 

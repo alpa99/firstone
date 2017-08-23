@@ -116,15 +116,15 @@ class DrawerContentViewController: UIViewController, PulleyDrawerViewControllerD
         
         
         (parent as? PulleyViewController)?.setDrawerPosition(position: PulleyPosition(rawValue: 2)!)
+        let detvc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "BarDetailVC") as! BarDetailVC
+        detvc.barname = selBarName
         
-        let detailVC:UIViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "BarDetailVC") as UIViewController
+  
         
-      //  let vcbar = BarDetailVC()
-       //     vcbar.barname = selBarName
-        
-        (parent as? PulleyViewController)?.setDrawerContentViewController(controller: detailVC, animated: true)
-        
-     //  performSegue(withIdentifier: "bardetail", sender: self)
+        (parent as? PulleyViewController)?.setDrawerContentViewController(controller: detvc, animated: true)
+
+        //  performSegue(withIdentifier: "bardetail", sender: self)
+      
     }
     
     
