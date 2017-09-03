@@ -23,19 +23,27 @@ class BestellungTestVC: UIViewController {
         handleBestellung()
     }
     
+  
     var bestellung = ""
     var bestellungen = [KellnerInfos]()
+    
     
     func handleBestellung(){
         
               
         if bestellungTextfield.text != nil{
-            let values = ["text:": bestellungTextfield.text!, "User": "ibo"]
+            let timestamp = Double(NSDate().timeIntervalSince1970)
+            let values = ["text": bestellungTextfield.text!, "toKellnerID": "Kellner1", "fromUserID": FBSDKAccessToken.current().userID, "timeStamp": timestamp] as [String : Any]
         self.ref = Database.database().reference().child("Bestellungen")
         let childRef = ref?.childByAutoId()
         childRef?.updateChildValues(values)
+            print(Date(timeIntervalSince1970: timestamp))
+     
             
+    
         }
+        
+        
           /*  childByAutoId().child("text").setValue("\(bestellungTextfield.text ?? "")")
             
             
@@ -63,7 +71,7 @@ class BestellungTestVC: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         // Do any additional setup after loading the view.
     }
 

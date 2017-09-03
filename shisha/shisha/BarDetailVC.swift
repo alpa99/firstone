@@ -119,7 +119,7 @@ class BarDetailVC: UIViewController, PulleyDrawerViewControllerDelegate, iCarous
     }
     
     func carousel(_ carousel: iCarousel, viewForItemAt index: Int, reusing view: UIView?) -> UIView {
-         let tempView = UIView(frame: CGRect(x: 0, y: 0, width: 200, height: 200))
+         let tempView = UIView(frame: CGRect(x: 0, y: 0, width: 270, height: 150))
         
         tempView.backgroundColor = UIColor.cyan
             
