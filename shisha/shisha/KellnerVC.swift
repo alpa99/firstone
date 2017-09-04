@@ -60,13 +60,15 @@ class KellnerVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = UITableViewCell(style: .subtitle, reuseIdentifier: "bestellcell")
+       
+        let cell = tableView.dequeueReusableCell(withIdentifier: "bestellCell", for: indexPath) as! KellnerVCTVC
+        //let cell = UITableViewCell(style: .subtitle, reuseIdentifier: "bestellcell")
         
         let bestellung = Bestellungen[indexPath.row]
-        cell.textLabel?.text = "TISCH NUMMER XY"
-        cell.detailTextLabel?.text = bestellung
+        cell.tischnummerLbl.text = "TISCH NUMMER XY"
+        cell.bestellungtextLbl.text = bestellung
         return cell
-    }
+    } 
     
     
     override func viewDidLoad() {

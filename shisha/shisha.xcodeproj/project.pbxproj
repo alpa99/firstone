@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0810B44C1F5DE104006A1E97 /* KellnerVCTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0810B44B1F5DE104006A1E97 /* KellnerVCTVC.swift */; };
 		081F305D1F4CED5B00C3461E /* BestellungTestVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081F305C1F4CED5B00C3461E /* BestellungTestVC.swift */; };
 		0825FEA01F596E1700C9FA0E /* UserInfos.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0825FE9F1F596E1700C9FA0E /* UserInfos.swift */; };
 		083BB6FB1F5C7E93002FEF82 /* KellnerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083BB6FA1F5C7E93002FEF82 /* KellnerVC.swift */; };
@@ -54,6 +55,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0810B44B1F5DE104006A1E97 /* KellnerVCTVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KellnerVCTVC.swift; sourceTree = "<group>"; };
 		081F305C1F4CED5B00C3461E /* BestellungTestVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BestellungTestVC.swift; sourceTree = "<group>"; };
 		081F305E1F4D047100C3461E /* shisha-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "shisha-Bridging-Header.h"; sourceTree = "<group>"; };
 		0825FE9F1F596E1700C9FA0E /* UserInfos.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserInfos.swift; sourceTree = "<group>"; };
@@ -156,6 +158,7 @@
 				4E0C37DB1F2909060004DCE6 /* AppDelegate.swift */,
 				4E0C37DD1F2909060004DCE6 /* UserVC.swift */,
 				083BB6FA1F5C7E93002FEF82 /* KellnerVC.swift */,
+				0810B44B1F5DE104006A1E97 /* KellnerVCTVC.swift */,
 				4E0C37DF1F2909060004DCE6 /* Main.storyboard */,
 				4E0C37E21F2909060004DCE6 /* Assets.xcassets */,
 				4E0C37E41F2909060004DCE6 /* LaunchScreen.storyboard */,
@@ -550,6 +553,7 @@
 				4E3C37721F38A21D008A9188 /* DrawerContentViewController.swift in Sources */,
 				081F305D1F4CED5B00C3461E /* BestellungTestVC.swift in Sources */,
 				4E0C381E1F29467E0004DCE6 /* BarDetailVC.swift in Sources */,
+				0810B44C1F5DE104006A1E97 /* KellnerVCTVC.swift in Sources */,
 				4E0F22061F431EF500D13CDC /* QRBar.swift in Sources */,
 				4E1E24E21F41245E000F4AAB /* QRController.swift in Sources */,
 				08D923E01F290FA400E67230 /* LocationVC.swift in Sources */,
