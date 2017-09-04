@@ -51,6 +51,7 @@ class ScanDetailVC: UIViewController {
         , withCancel: nil)
 
         }
+    
     func setupNavigationBar (){
         let xbar = scanbarname
         self.navigationItem.title = xbar

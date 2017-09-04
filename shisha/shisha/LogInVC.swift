@@ -40,7 +40,6 @@ class LogInVC: UIViewController {
                         self.userFbID = "\(id)"
                         self.userFbName = "\(name)"
                         self.userFbEmail = "\(email)"
-
                     }
                     
                  self.addUserToFirebase()
@@ -72,6 +71,8 @@ class LogInVC: UIViewController {
     }
     
     func segueToTabBar(){
+      
+        
         performSegue(withIdentifier: "loggedIn", sender: self)
 
     }

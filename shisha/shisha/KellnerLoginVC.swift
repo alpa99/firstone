@@ -60,6 +60,13 @@ class KellnerLoginVC: UIViewController {
     performSegue(withIdentifier: "kellnerLogin", sender: self)
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "kellnerLogin"{
+            let KVC = segue.destination as! KellnerVC
+            KVC.kellnerID = barIDTextfield.text!
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 

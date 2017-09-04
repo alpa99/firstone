@@ -11,12 +11,12 @@ class BarInfos: NSObject {
     var Name: String?
     var Stadt: String?
     var Adresse: String?
-    var Passwort: String?
+    var KellnerID: String?
     init(dictionary: [String: Any]) {
         self.Name = dictionary["Name"] as? String ?? ""
         self.Stadt = dictionary["Stadt"] as? String ?? ""
         self.Adresse = dictionary["Adresse"] as? String ?? ""
-        self.Passwort = dictionary["Passwort"] as? String ?? ""
+        self.KellnerID = dictionary["KellnerID"] as? String ?? ""
         
 }
 }
