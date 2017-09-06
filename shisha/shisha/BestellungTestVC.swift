@@ -11,11 +11,22 @@ import FirebaseDatabase
 import Firebase
 import FBSDKLoginKit
 
-class BestellungTestVC: UIViewController {
+class BestellungTestVC: UIViewController, UITableViewDataSource, UITableViewDelegate, ExpandableHeaderViewDelegate {
     
     var ref: DatabaseReference?
     
     @IBOutlet weak var bestellungTextfield: UITextField!
+    
+    @IBOutlet weak var bestellTableView: UITableView!
+    
+    var sections = [
+        ExpandTVSection(genre: "😚💨 Shishas", movies: ["Lemon Fresh", "Wild Berry Chill","Acai Zitrone"], expanded: false),
+        ExpandTVSection(genre: " 🍹  Getränke", movies: ["Jacky Cola", "Long Island Icetea","Cay"], expanded: false),
+        ExpandTVSection(genre: " 🍔  Snacks", movies: ["Körner", "gerösteter Mais","Erdnüsse"], expanded: false)
+    ]
+    
+    
+    
     
     
     @IBAction func bestellenPressed(_ sender: Any) {
@@ -79,16 +90,75 @@ class BestellungTestVC: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+  
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return sections.count
     }
-    */
 
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+            return sections[section].movies.count
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 44
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        if (sections[indexPath.section].expanded){
+        return 44
+        }
+        else {
+        return 0
+        }
+        
+    }
+    
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return 2
+    }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let header = ExpandableHeaderView()
+        header.customInit(title: sections[section].genre, section: section, delegate: self as ExpandableHeaderViewDelegate)
+        return header
+    }
+    
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "labelCell")!
+        cell.textLabel?.text = sections[indexPath.section].movies[indexPath.row]
+        return cell
+    }
+    
+    
+    func toggleSection(header: ExpandableHeaderView, section: Int) {
+        sections[section].expanded = !sections[section].expanded
+        
+        bestellTableView.beginUpdates()
+        for i in 0..<sections[section].movies.count{
+            bestellTableView.reloadRows(at: [IndexPath(row: i, section: section)], with: .automatic)
+        }
+        bestellTableView.endUpdates()
+    
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 }
