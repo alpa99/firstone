@@ -33,7 +33,7 @@ class BestellungTestVC: UIViewController {
               
         if bestellungTextfield.text != nil{
             let timestamp = Double(NSDate().timeIntervalSince1970)
-            let values = ["text": bestellungTextfield.text!, "toKellnerID": "Kellner1", "fromUserID": FBSDKAccessToken.current().userID, "timeStamp": timestamp] as [String : Any]
+            let values = ["shishas": bestellungTextfield.text!, "getränke": "cola", "toKellnerID": "Kellner1", "fromUserID": FBSDKAccessToken.current().userID, "timeStamp": timestamp] as [String : Any]
         self.ref = Database.database().reference().child("Bestellungen")
         let childRef = ref?.childByAutoId()
         childRef?.updateChildValues(values)

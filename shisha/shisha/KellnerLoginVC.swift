@@ -69,6 +69,8 @@ class KellnerLoginVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        barIDTextfield.text = "Kellner1"
+        passwortTextfield.text = "hi"
 
         // Do any additional setup after loading the view.
     }

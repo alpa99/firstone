@@ -11,13 +11,17 @@ class BestellungInfos: NSObject {
     var fromUserID: String?
     var toKellnerID: String?
     var timeStamp: NSNumber?
-    var text: String?
+    var shishas: String?
+    var getränke: String?
 
+    
     init(dictionary: [String: Any]) {
         self.fromUserID = dictionary["fromUserID"] as? String ?? ""
         self.toKellnerID = dictionary["toKellnerID"] as? String ?? ""
         self.timeStamp = dictionary["timeStamp"] as? NSNumber ?? 0
-        self.text = dictionary["text"] as? String ?? ""
+        self.shishas = dictionary["shishas"] as? String ?? ""
+        self.getränke = dictionary["getränke"] as? String ?? ""
+
 
     }
 }

@@ -10,19 +10,14 @@ import UIKit
 
 class KellnerVCTVC: UITableViewCell {
 
-    @IBOutlet weak var tischnummerLbl: UILabel!
+    @IBOutlet weak var bestellungView: UITextView!
     
-    
-    @IBOutlet weak var bestellungtextLbl: UILabel!
-    
-    @IBOutlet weak var timeStampLbl: UILabel!
     
     
     
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        timeStampLbl.textColor = UIColor.darkGray
         // Initialization code
     }
 

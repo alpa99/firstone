@@ -24,7 +24,8 @@ class KellnerVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     var kellnerID = String()
     
-    var Bestellungen = [String]()
+    var Shishas = [String]()
+    var Getraenke = [String]()
     
     var TimeStamps = [Double]()
 
@@ -40,11 +41,11 @@ class KellnerVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
                 bestellungen.setValuesForKeys(dictionary)
                 let timestamps = BestellungInfos(dictionary: dictionary)
                 timestamps.setValuesForKeys(dictionary)
-                self.Bestellungen.append(bestellungen.text!)
+                self.Shishas.append(bestellungen.shishas!)
+                self.Getraenke.append(bestellungen.getränke!)
                 
                 
                 self.TimeStamps.append((timestamps.timeStamp?.doubleValue)!)
-                print(self.Bestellungen)
                 
                 /*         self.Bestellungen.sort(by: { (time1, time2) -> Bool in
                  
@@ -74,7 +75,7 @@ class KellnerVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        return(Bestellungen.count)
+        return(Shishas.count)
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -82,17 +83,28 @@ class KellnerVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: "bestellCell", for: indexPath) as! KellnerVCTVC
         //let cell = UITableViewCell(style: .subtitle, reuseIdentifier: "bestellcell")
         
-        let bestellung = Bestellungen[indexPath.row]
-        cell.tischnummerLbl.text = "TISCH NUMMER XY"
+        let shishas = Shishas[indexPath.row]
+        let getränke = Getraenke[indexPath.row]
+        let timeStampDate = NSDate(timeIntervalSince1970: TimeStamps[indexPath.row])
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "hh:mm a"
+        cell.bestellungView.text = "Tischnummer \n shishas: \(shishas) \n Getränke: \(getränke) \n \(dateFormatter.string(from: timeStampDate as Date))"
+        
+        
+        /*cell.tischnummerLbl.text = "TISCH NUMMER XY"
         cell.bestellungtextLbl.text = bestellung
         let timeStampDate = NSDate(timeIntervalSince1970: TimeStamps[indexPath.row])
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "hh:mm a"
-        cell.timeStampLbl.text =  dateFormatter.string(from: timeStampDate as Date)
+        cell.timeStampLbl.text =  dateFormatter.string(from: timeStampDate as Date)*/
         
         return cell
     } 
     
+    override func viewWillAppear(_ animated: Bool) {
+        bestellungenTV.estimatedRowHeight = 100
+        bestellungenTV.rowHeight = UITableViewAutomaticDimension
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
