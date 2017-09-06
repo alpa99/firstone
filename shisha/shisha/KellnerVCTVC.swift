@@ -15,8 +15,14 @@ class KellnerVCTVC: UITableViewCell {
     
     @IBOutlet weak var bestellungtextLbl: UILabel!
     
+    @IBOutlet weak var timeStampLbl: UILabel!
+    
+    
+    
     override func awakeFromNib() {
         super.awakeFromNib()
+        
+        timeStampLbl.textColor = UIColor.darkGray
         // Initialization code
     }
 

@@ -26,28 +26,46 @@ class KellnerVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     var Bestellungen = [String]()
     
+    var TimeStamps = [Double]()
+
+    
     
     func handleBestellungen() {
     
         var datref: DatabaseReference!
         datref = Database.database().reference()
         datref.child("Bestellungen").observe(.childAdded, with: { (snapshot) in
-
             if let dictionary = snapshot.value as? [String: AnyObject]{
                 let bestellungen = BestellungInfos(dictionary: dictionary)
                 bestellungen.setValuesForKeys(dictionary)
+                let timestamps = BestellungInfos(dictionary: dictionary)
+                timestamps.setValuesForKeys(dictionary)
                 self.Bestellungen.append(bestellungen.text!)
+                
+                
+                self.TimeStamps.append((timestamps.timeStamp?.doubleValue)!)
                 print(self.Bestellungen)
+                
+                /*         self.Bestellungen.sort(by: { (time1, time2) -> Bool in
+                 
+                 return (time1.timestamps.timeStamp?.intValue)! > (time2.timestamps.timeStamp?.intValue)!
+                 })
+                 self.TimeStamps.sort(by: { (time1, time2) -> Bool in
+                 
+                 return time1.description > time2.description
+                 
+                 })*/
+                
                 
                 DispatchQueue.main.async(execute: {
                     self.bestellungenTV.reloadData()
                 } )
-                }
+            }
             
             
-
-        
-        
+            
+            
+            
         }, withCancel: nil)
     
     
@@ -67,6 +85,11 @@ class KellnerVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         let bestellung = Bestellungen[indexPath.row]
         cell.tischnummerLbl.text = "TISCH NUMMER XY"
         cell.bestellungtextLbl.text = bestellung
+        let timeStampDate = NSDate(timeIntervalSince1970: TimeStamps[indexPath.row])
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "hh:mm a"
+        cell.timeStampLbl.text =  dateFormatter.string(from: timeStampDate as Date)
+        
         return cell
     } 
     
