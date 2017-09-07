@@ -8,19 +8,17 @@
 
 import Foundation
 class SpeisekarteInfos: NSObject {
-    var fromUserID: String?
-    var toKellnerID: String?
-    var timeStamp: NSNumber?
-    var shishas: String?
-    var getränke: String?
+    var Name: String?
+    var Preis: String?
+
+    
+   
 
     
     init(dictionary: [String: Any]) {
-        self.fromUserID = dictionary["fromUserID"] as? String ?? ""
-        self.toKellnerID = dictionary["toKellnerID"] as? String ?? ""
-        self.timeStamp = dictionary["timeStamp"] as? NSNumber ?? 0
-        self.shishas = dictionary["shishas"] as? String ?? ""
-        self.getränke = dictionary["getränke"] as? String ?? ""
+        self.Name = dictionary["Name"] as? String ?? ""
+        self.Preis = dictionary["Preis"] as? String ?? ""
+
 
 
     }

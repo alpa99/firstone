@@ -19,14 +19,21 @@ class BestellungTestVC: UIViewController, UITableViewDataSource, UITableViewDele
     
     @IBOutlet weak var bestellTableView: UITableView!
     
+    
+    var shishas = [String]()
+    var shishaPreise = [String]()
+    var getränke = [String]()
+    var getränkePreise = [String]()
+
+    
     var sections = [
         ExpandTVSection(genre: "😚💨 Shishas", movies: ["Lemon Fresh", "Wild Berry Chill","Acai Zitrone"], expanded: false),
         ExpandTVSection(genre: " 🍹  Getränke", movies: ["Jacky Cola", "Long Island Icetea","Cay"], expanded: false),
         ExpandTVSection(genre: " 🍔  Snacks", movies: ["Körner", "gerösteter Mais","Erdnüsse"], expanded: false)
     ]
     
-    
-    
+  
+
     
     
     @IBAction func bestellenPressed(_ sender: Any) {
@@ -34,10 +41,49 @@ class BestellungTestVC: UIViewController, UITableViewDataSource, UITableViewDele
         handleBestellung()
     }
     
-  
-    var bestellung = ""
-    var bestellungen = [KellnerInfos]()
+
     
+    func fetchSpeisekarte(){
+        var datref: DatabaseReference!
+        datref = Database.database().reference()
+        
+    
+        
+        datref.child("Speisekarten").child("SpeisekarteDeluxxe").child("Getränke").observe(.childAdded, with: { (snapshot) in
+            
+            if let dictionary = snapshot.value as? [String: AnyObject]{
+                let speisekarte = SpeisekarteInfos(dictionary: dictionary)
+                speisekarte.setValuesForKeys(dictionary)
+
+                self.getränke.append(speisekarte.Name!)
+                self.getränkePreise.append(speisekarte.Preis!)
+            
+                print(self.getränke, self.getränkePreise)
+            }
+            
+        }, withCancel: nil)
+        
+        datref.child("Speisekarten").child("SpeisekarteDeluxxe").child("Shisha").observe(.childAdded, with: { (snapshot) in
+            
+            if let dictionary = snapshot.value as? [String: AnyObject]{
+                let speisekarte = SpeisekarteInfos(dictionary: dictionary)
+                speisekarte.setValuesForKeys(dictionary)
+                
+   
+                self.shishas.append(speisekarte.Name!)
+                self.shishaPreise.append(speisekarte.Preis!)
+                print(self.shishas, self.shishaPreise)
+            }
+            
+        }, withCancel: nil)
+
+        
+        
+        
+    }
+    
+    
+    var bestellungen = [KellnerInfos]()
     
     func handleBestellung(){
         
@@ -53,35 +99,12 @@ class BestellungTestVC: UIViewController, UITableViewDataSource, UITableViewDele
             
     
         }
-        
-        
-          /*  childByAutoId().child("text").setValue("\(bestellungTextfield.text ?? "")")
-            
-            
-       self.refff?.child("Bestellungen").child("-KsDpzzOuVFFanYnQykH").observe(.value, with: { (snapshot) in
-                
-                if let dictionary = snapshot.value as? [String: AnyObject]{
-                    let bs = KellnerInfos(dictionary: dictionary)
-                    bs.setValuesForKeys(dictionary)
-                    self.bestellungen.append(bs)
-                    self.bestellung = bs.Bestellung!
-                    print(self.bestellung)
-                  
-                    
-                }
-                
-                
-            }, withCancel: nil)
-            
-            
-            
-       self.refff?.child("Kellner").child("Kellner1").child("Bestellungen").childByAutoId().setValue("\(bestellungTextfield.text!)")
-            }*/
     }
-    
+  
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        fetchSpeisekarte()
         
         // Do any additional setup after loading the view.
     }
