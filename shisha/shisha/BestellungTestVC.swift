@@ -19,8 +19,6 @@ class BestellungTestVC: UIViewController, UITableViewDataSource, UITableViewDele
     
     @IBOutlet weak var bestellTableView: UITableView!
     
-    var newShishas = [String]()
-    var newGetränke = [String]()
     var shishas = [String]()
     var shishaPreise = [String]()
     var getränke = [String]()
@@ -41,39 +39,17 @@ class BestellungTestVC: UIViewController, UITableViewDataSource, UITableViewDele
         datref = Database.database().reference()
 
         
-     /* datref.child("Speisekarten").child("SpeisekarteDeluxxe").observe(.childAdded, with: { (snapshot) in
-        
-        
-    
-        }, withCancel: nil)*/
-
-        
-       datref.child("Speisekarten").child("SpeisekarteDeluxxe").observe(.childAdded, with: { (snapshot) in
+       datref.child("Speisekarten").child("SpeisekarteDeluxxe").child("Shisha").observe(.childAdded, with: { (snapshot) in
             
-           /* if let dictionary = snapshot.value as? [String: AnyObject]{
+           if let dictionary = snapshot.value as? [String: AnyObject]{
                 let speisekarte = SpeisekarteInfos(dictionary: dictionary)
                 speisekarte.setValuesForKeys(dictionary)
-                self.shishas.append(speisekarte.Name!)*/
-               
-                //print(snapshot.children.nextObject() ?? "no next object")
-      
-              /*  var childrenCount = [String]()
-                childrenCount.append(String(snapshot.childrenCount))
-                print(childrenCount)
-                print(self.shishas)
+                self.shishas.append(speisekarte.Name!)
 
-               if self.shishas.count == 10 {
-                    print(self.shishas)
-                    self.setSections()
-
+            print(self.shishas)
+      self.setSections()
                 }
-            }*/
         
-      
-        
-      
-        
-
         }, withCancel: nil)
 
 
