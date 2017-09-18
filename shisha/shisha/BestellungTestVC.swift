@@ -19,22 +19,15 @@ class BestellungTestVC: UIViewController, UITableViewDataSource, UITableViewDele
     
     @IBOutlet weak var bestellTableView: UITableView!
     
-    
+    var newShishas = [String]()
+    var newGetränke = [String]()
     var shishas = [String]()
     var shishaPreise = [String]()
     var getränke = [String]()
     var getränkePreise = [String]()
 
     
-    var sections = [
-        ExpandTVSection(genre: "😚💨 Shishas", movies: ["Lemon Fresh", "Wild Berry Chill","Acai Zitrone"], expanded: false),
-        ExpandTVSection(genre: " 🍹  Getränke", movies: ["Jacky Cola", "Long Island Icetea","Cay"], expanded: false),
-        ExpandTVSection(genre: " 🍔  Snacks", movies: ["Körner", "gerösteter Mais","Erdnüsse"], expanded: false)
-    ]
-    
-  
-
-    
+    var sections = [ExpandTVSection]()
     
     @IBAction func bestellenPressed(_ sender: Any) {
         
@@ -46,41 +39,55 @@ class BestellungTestVC: UIViewController, UITableViewDataSource, UITableViewDele
     func fetchSpeisekarte(){
         var datref: DatabaseReference!
         datref = Database.database().reference()
+
+        
+     /* datref.child("Speisekarten").child("SpeisekarteDeluxxe").observe(.childAdded, with: { (snapshot) in
+        
         
     
-        
-        datref.child("Speisekarten").child("SpeisekarteDeluxxe").child("Getränke").observe(.childAdded, with: { (snapshot) in
-            
-            if let dictionary = snapshot.value as? [String: AnyObject]{
-                let speisekarte = SpeisekarteInfos(dictionary: dictionary)
-                speisekarte.setValuesForKeys(dictionary)
-
-                self.getränke.append(speisekarte.Name!)
-                self.getränkePreise.append(speisekarte.Preis!)
-            
-                print(self.getränke, self.getränkePreise)
-            }
-            
-        }, withCancel: nil)
-        
-        datref.child("Speisekarten").child("SpeisekarteDeluxxe").child("Shisha").observe(.childAdded, with: { (snapshot) in
-            
-            if let dictionary = snapshot.value as? [String: AnyObject]{
-                let speisekarte = SpeisekarteInfos(dictionary: dictionary)
-                speisekarte.setValuesForKeys(dictionary)
-                
-   
-                self.shishas.append(speisekarte.Name!)
-                self.shishaPreise.append(speisekarte.Preis!)
-                print(self.shishas, self.shishaPreise)
-            }
-            
-        }, withCancel: nil)
+        }, withCancel: nil)*/
 
         
+       datref.child("Speisekarten").child("SpeisekarteDeluxxe").observe(.childAdded, with: { (snapshot) in
+            
+           /* if let dictionary = snapshot.value as? [String: AnyObject]{
+                let speisekarte = SpeisekarteInfos(dictionary: dictionary)
+                speisekarte.setValuesForKeys(dictionary)
+                self.shishas.append(speisekarte.Name!)*/
+               
+                //print(snapshot.children.nextObject() ?? "no next object")
+      
+              /*  var childrenCount = [String]()
+                childrenCount.append(String(snapshot.childrenCount))
+                print(childrenCount)
+                print(self.shishas)
+
+               if self.shishas.count == 10 {
+                    print(self.shishas)
+                    self.setSections()
+
+                }
+            }*/
         
+      
         
+      
+        
+
+        }, withCancel: nil)
+
+
+    
     }
+    
+    func setSections()
+    {
+        self.sections.append(ExpandTVSection(genre: "shishas", movies: self.shishas, expanded: false))
+
+        self.bestellTableView.reloadData()
+    
+    }
+    
     
     
     var bestellungen = [KellnerInfos]()
@@ -94,13 +101,14 @@ class BestellungTestVC: UIViewController, UITableViewDataSource, UITableViewDele
         self.ref = Database.database().reference().child("Bestellungen")
         let childRef = ref?.childByAutoId()
         childRef?.updateChildValues(values)
-            print(Date(timeIntervalSince1970: timestamp))
+          //  print(Date(timeIntervalSince1970: timestamp))
      
             
     
         }
     }
   
+   
 
     override func viewDidLoad() {
         super.viewDidLoad()
