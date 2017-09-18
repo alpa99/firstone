@@ -35,6 +35,7 @@
 		4E1E24E21F41245E000F4AAB /* QRController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E1E24E11F41245E000F4AAB /* QRController.swift */; };
 		4E3790E47F30DB5EA80FBFD2 /* Pods_shishaUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 91D453B6D8F2943D5788BE62 /* Pods_shishaUITests.framework */; };
 		4E3C37721F38A21D008A9188 /* DrawerContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E3C37711F38A21D008A9188 /* DrawerContentViewController.swift */; };
+		4E485A5C1F702B9500322BE6 /* BarDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E485A5B1F702B9500322BE6 /* BarDetail.swift */; };
 		4E59C7351F427C9500DB32D4 /* ScanDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E59C7341F427C9500DB32D4 /* ScanDetailVC.swift */; };
 		9C1CFFD09A46B8A974BC3035 /* Pods_shisha.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C67B9B85FDE561447FFFF1C /* Pods_shisha.framework */; };
 		CFD19BD31CF0EA980EECC361 /* Pods_shishaTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 10C74F16B9B59CC0E4F996CA /* Pods_shishaTests.framework */; };
@@ -97,6 +98,7 @@
 		4E0F22081F4DAD7900D13CDC /* iCarousel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iCarousel.m; sourceTree = "<group>"; };
 		4E1E24E11F41245E000F4AAB /* QRController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QRController.swift; sourceTree = "<group>"; };
 		4E3C37711F38A21D008A9188 /* DrawerContentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DrawerContentViewController.swift; sourceTree = "<group>"; };
+		4E485A5B1F702B9500322BE6 /* BarDetail.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BarDetail.swift; sourceTree = "<group>"; };
 		4E59C7341F427C9500DB32D4 /* ScanDetailVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScanDetailVC.swift; sourceTree = "<group>"; };
 		5AEACA75387DCBFFC19C1E02 /* Pods-shishaUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-shishaUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-shishaUITests/Pods-shishaUITests.release.xcconfig"; sourceTree = "<group>"; };
 		5C67B9B85FDE561447FFFF1C /* Pods_shisha.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_shisha.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -215,6 +217,7 @@
 				085811091F609436002710F3 /* ExpandTVSection.swift */,
 				0858110B1F60954C002710F3 /* ExpandableHeaderView.swift */,
 				0858110D1F60AA87002710F3 /* SpeisekarteInfos.swift */,
+				4E485A5B1F702B9500322BE6 /* BarDetail.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -574,6 +577,7 @@
 				083BB6FB1F5C7E93002FEF82 /* KellnerVC.swift in Sources */,
 				08D8B1FE1F4B4FE7000C7F40 /* KellnerLoginVC.swift in Sources */,
 				0825FEA01F596E1700C9FA0E /* UserInfos.swift in Sources */,
+				4E485A5C1F702B9500322BE6 /* BarDetail.swift in Sources */,
 				4E0C38141F290F360004DCE6 /* BarAnnotation.swift in Sources */,
 				4E0C38161F290F420004DCE6 /* BarInfos.swift in Sources */,
 				4E0C37DE1F2909060004DCE6 /* UserVC.swift in Sources */,

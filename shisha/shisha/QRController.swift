@@ -69,7 +69,7 @@ class QRController: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
     
     func fetchNumber(){
         
-        print (barnummer+12)
+        print (barnummer+12232)
         var datref: DatabaseReference!
         datref = Database.database().reference()
         datref.child("QRBereich").child("\(barnummer)").observe(.value, with: { (snapshot) in

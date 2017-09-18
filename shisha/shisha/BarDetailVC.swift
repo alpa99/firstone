@@ -10,17 +10,22 @@ import UIKit
 import Pulley
 import Firebase
 
-class BarDetailVC: UIViewController, PulleyDrawerViewControllerDelegate, iCarouselDelegate, iCarouselDataSource {
-    
-    var barname = ""
-    
-    var bars = [BarInfos] ()
-    
+class BarDetailVC: UIViewController, PulleyDrawerViewControllerDelegate /*, iCarouselDelegate, iCarouselDataSource */{
     @IBOutlet weak var LabelName: UILabel!
     
-    @IBOutlet weak var carouselView: iCarousel!
+    @IBOutlet weak var ScrollView: UIScrollView!
+    var barname = ""
     
-    var carouselNumbers = [Int]()
+    @IBOutlet weak var dfdfd: UILabel!
+    var bars = [BarInfos] ()
+    
+    var Adresse = String()
+    
+    @IBOutlet weak var test: UILabel!
+    
+   // @IBOutlet weak var carouselView: iCarousel!
+    
+    //var carouselNumbers = [Int]()
     
     override func viewWillAppear(_ animated: Bool) {
         self.navigationController?.setNavigationBarHidden(true, animated: true)
@@ -55,7 +60,9 @@ class BarDetailVC: UIViewController, PulleyDrawerViewControllerDelegate, iCarous
         super.viewDidLoad()
         fetchData()
         
-        carouselView.type = .coverFlow2
+        
+        
+     //   carouselView.type = .coverFlow2
         
         
     }
@@ -70,7 +77,8 @@ class BarDetailVC: UIViewController, PulleyDrawerViewControllerDelegate, iCarous
                 let bar = BarInfos(dictionary: dict)
                 bar.setValuesForKeys(dict)
                 self.bars.append(bar)
-                print(self.bars)
+                self.Adresse.append(bar.Adresse!)
+                print("\(self.bars)")
                 self.LabelName.text = "\(self.barname)"
  
             }
@@ -79,8 +87,10 @@ class BarDetailVC: UIViewController, PulleyDrawerViewControllerDelegate, iCarous
     }
     
     
-    
-    
+    func labelnamen () {
+        self.test.text = "\(self.Adresse)"
+        print(Adresse)
+    }
 
 //     func setupNavigationBar (){
 //        let xbar = bars
@@ -97,41 +107,33 @@ class BarDetailVC: UIViewController, PulleyDrawerViewControllerDelegate, iCarous
     }
     
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
+   
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        carouselNumbers = [1,2,3,4]
+        //carouselNumbers = [1,2,3,4]
 
     }
     
     
-    func numberOfItems(in carousel: iCarousel) -> Int {
-        return carouselNumbers.count
-    }
-    
-    func carousel(_ carousel: iCarousel, viewForItemAt index: Int, reusing view: UIView?) -> UIView {
-         let tempView = UIView(frame: CGRect(x: 0, y: 0, width: 270, height: 150))
-        
-        tempView.backgroundColor = UIColor.cyan
-            
-        return tempView
-    }
-    
-    func carousel(_ carousel: iCarousel, valueFor option: iCarouselOption, withDefault value: CGFloat) -> CGFloat {
-        if option == iCarouselOption.spacing{
-        return value * 1.1
-        }
-        return value
-    }
+//    func numberOfItems(in carousel: iCarousel) -> Int {
+//        return carouselNumbers.count
+//    }
+//    
+//    func carousel(_ carousel: iCarousel, viewForItemAt index: Int, reusing view: UIView?) -> UIView {
+//         let tempView = UIView(frame: CGRect(x: 0, y: 0, width: 270, height: 150))
+//        
+//        tempView.backgroundColor = UIColor.cyan
+//            
+//        return tempView
+//    }
+//    
+//    func carousel(_ carousel: iCarousel, valueFor option: iCarouselOption, withDefault value: CGFloat) -> CGFloat {
+//        if option == iCarouselOption.spacing{
+//        return value * 1.1
+//        }
+//        return value
+//    }
 
 }
 
