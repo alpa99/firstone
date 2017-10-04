@@ -15,11 +15,15 @@
 		4E43CF2C1F851DF6007B53A0 /* SmoloTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E43CF2B1F851DF6007B53A0 /* SmoloTests.swift */; };
 		4E43CF371F851DF6007B53A0 /* SmoloUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E43CF361F851DF6007B53A0 /* SmoloUITests.swift */; };
 		4E43CF461F8524B1007B53A0 /* LogInVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E43CF451F8524B1007B53A0 /* LogInVC.swift */; };
-		4E43CF481F8524C4007B53A0 /* LocationVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E43CF471F8524C4007B53A0 /* LocationVC.swift */; };
 		4E43CF4A1F8524D4007B53A0 /* BarDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E43CF491F8524D4007B53A0 /* BarDetailVC.swift */; };
 		4E43CF4C1F8524EB007B53A0 /* DrawerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E43CF4B1F8524EB007B53A0 /* DrawerVC.swift */; };
 		4E43CF4E1F85250B007B53A0 /* QRVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E43CF4D1F85250B007B53A0 /* QRVC.swift */; };
 		4E43CF501F852533007B53A0 /* ScanDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E43CF4F1F852533007B53A0 /* ScanDetailVC.swift */; };
+		4E43CF551F854897007B53A0 /* LocationVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E43CF541F854897007B53A0 /* LocationVC.swift */; };
+		4E43CF591F85568D007B53A0 /* QRBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E43CF581F85568D007B53A0 /* QRBar.swift */; };
+		4E43CF5B1F855A0B007B53A0 /* BarInfos.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E43CF5A1F855A0B007B53A0 /* BarInfos.swift */; };
+		4E43CF5D1F855A3B007B53A0 /* BarAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E43CF5C1F855A3B007B53A0 /* BarAnnotation.swift */; };
+		4E43CF5E1F855E38007B53A0 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4E43CF561F855515007B53A0 /* GoogleService-Info.plist */; };
 		6767E6928BD919AF1352CCF0 /* Pods_Smolo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 70E91ED2CD715C81E26D9E65 /* Pods_Smolo.framework */; };
 		912D828A3821152389C6F54D /* Pods_SmoloUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE3364A529F33F6591794A72 /* Pods_SmoloUITests.framework */; };
 		A7DF70D3B86E328377F7B5F2 /* Pods_SmoloTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C40B516FE0EB9FA730DC5D25 /* Pods_SmoloTests.framework */; };
@@ -57,12 +61,15 @@
 		4E43CF361F851DF6007B53A0 /* SmoloUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmoloUITests.swift; sourceTree = "<group>"; };
 		4E43CF381F851DF6007B53A0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4E43CF451F8524B1007B53A0 /* LogInVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInVC.swift; sourceTree = "<group>"; };
-		4E43CF471F8524C4007B53A0 /* LocationVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationVC.swift; sourceTree = "<group>"; };
 		4E43CF491F8524D4007B53A0 /* BarDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarDetailVC.swift; sourceTree = "<group>"; };
 		4E43CF4B1F8524EB007B53A0 /* DrawerVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawerVC.swift; sourceTree = "<group>"; };
 		4E43CF4D1F85250B007B53A0 /* QRVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRVC.swift; sourceTree = "<group>"; };
 		4E43CF4F1F852533007B53A0 /* ScanDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanDetailVC.swift; sourceTree = "<group>"; };
-		4E43CF511F852625007B53A0 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = SOURCE_ROOT; };
+		4E43CF541F854897007B53A0 /* LocationVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationVC.swift; sourceTree = "<group>"; };
+		4E43CF561F855515007B53A0 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = SOURCE_ROOT; };
+		4E43CF581F85568D007B53A0 /* QRBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRBar.swift; sourceTree = "<group>"; };
+		4E43CF5A1F855A0B007B53A0 /* BarInfos.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarInfos.swift; sourceTree = "<group>"; };
+		4E43CF5C1F855A3B007B53A0 /* BarAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarAnnotation.swift; sourceTree = "<group>"; };
 		70E91ED2CD715C81E26D9E65 /* Pods_Smolo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Smolo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8675327440B859DCCE66D51D /* Pods-SmoloUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SmoloUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SmoloUITests/Pods-SmoloUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		89C80FDF6D47FC6B87FF0F7A /* Pods-Smolo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Smolo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Smolo/Pods-Smolo.debug.xcconfig"; sourceTree = "<group>"; };
@@ -150,19 +157,20 @@
 		4E43CF151F851DF6007B53A0 /* Smolo */ = {
 			isa = PBXGroup;
 			children = (
+				4E43CF571F85566F007B53A0 /* Models */,
 				4E43CF161F851DF6007B53A0 /* AppDelegate.swift */,
 				4E43CF181F851DF6007B53A0 /* ViewController.swift */,
 				4E43CF1A1F851DF6007B53A0 /* Main.storyboard */,
 				4E43CF1D1F851DF6007B53A0 /* Assets.xcassets */,
 				4E43CF1F1F851DF6007B53A0 /* LaunchScreen.storyboard */,
-				4E43CF511F852625007B53A0 /* GoogleService-Info.plist */,
+				4E43CF561F855515007B53A0 /* GoogleService-Info.plist */,
 				4E43CF221F851DF6007B53A0 /* Info.plist */,
 				4E43CF451F8524B1007B53A0 /* LogInVC.swift */,
-				4E43CF471F8524C4007B53A0 /* LocationVC.swift */,
 				4E43CF491F8524D4007B53A0 /* BarDetailVC.swift */,
 				4E43CF4B1F8524EB007B53A0 /* DrawerVC.swift */,
 				4E43CF4D1F85250B007B53A0 /* QRVC.swift */,
 				4E43CF4F1F852533007B53A0 /* ScanDetailVC.swift */,
+				4E43CF541F854897007B53A0 /* LocationVC.swift */,
 			);
 			path = Smolo;
 			sourceTree = "<group>";
@@ -183,6 +191,16 @@
 				4E43CF381F851DF6007B53A0 /* Info.plist */,
 			);
 			path = SmoloUITests;
+			sourceTree = "<group>";
+		};
+		4E43CF571F85566F007B53A0 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				4E43CF581F85568D007B53A0 /* QRBar.swift */,
+				4E43CF5A1F855A0B007B53A0 /* BarInfos.swift */,
+				4E43CF5C1F855A3B007B53A0 /* BarAnnotation.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -302,6 +320,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4E43CF211F851DF6007B53A0 /* LaunchScreen.storyboard in Resources */,
+				4E43CF5E1F855E38007B53A0 /* GoogleService-Info.plist in Resources */,
 				4E43CF1E1F851DF6007B53A0 /* Assets.xcassets in Resources */,
 				4E43CF1C1F851DF6007B53A0 /* Main.storyboard in Resources */,
 			);
@@ -468,10 +487,13 @@
 			files = (
 				4E43CF191F851DF6007B53A0 /* ViewController.swift in Sources */,
 				4E43CF4C1F8524EB007B53A0 /* DrawerVC.swift in Sources */,
+				4E43CF591F85568D007B53A0 /* QRBar.swift in Sources */,
+				4E43CF5B1F855A0B007B53A0 /* BarInfos.swift in Sources */,
 				4E43CF4A1F8524D4007B53A0 /* BarDetailVC.swift in Sources */,
-				4E43CF481F8524C4007B53A0 /* LocationVC.swift in Sources */,
 				4E43CF4E1F85250B007B53A0 /* QRVC.swift in Sources */,
 				4E43CF171F851DF6007B53A0 /* AppDelegate.swift in Sources */,
+				4E43CF5D1F855A3B007B53A0 /* BarAnnotation.swift in Sources */,
+				4E43CF551F854897007B53A0 /* LocationVC.swift in Sources */,
 				4E43CF501F852533007B53A0 /* ScanDetailVC.swift in Sources */,
 				4E43CF461F8524B1007B53A0 /* LogInVC.swift in Sources */,
 			);

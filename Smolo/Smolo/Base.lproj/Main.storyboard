@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="G8c-aF-u3H">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -23,6 +23,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="162" y="133"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="wLY-6k-xHb">
@@ -68,6 +69,9 @@
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
+                    <connections>
+                        <segue destination="qOw-8j-sJv" kind="relationship" relationship="rootViewController" id="6Vv-Gl-wmf"/>
+                    </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ARk-7w-hOG" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -80,28 +84,38 @@
                     <view key="view" contentMode="scaleToFill" id="Krw-bT-IgU">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="square" translatesAutoresizingMaskIntoConstraints="NO" id="IMj-Nd-6NF">
+                                <rect key="frame" x="67" y="213" width="240" height="240"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <viewLayoutGuide key="safeArea" id="jsU-L1-c1W"/>
                     </view>
+                    <navigationItem key="navigationItem" id="P09-b0-N5e"/>
+                    <connections>
+                        <segue destination="pND-tH-iEE" kind="show" identifier="codescan" id="mg7-Vz-geT"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aRx-Gp-0Zm" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3065" y="502"/>
         </scene>
-        <!--View Controller-->
-        <scene sceneID="AKz-Wl-DiO">
+        <!--Scan DetailVC-->
+        <scene sceneID="kAs-hx-bbX">
             <objects>
-                <viewController id="Ecf-i3-ATi" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="5SN-Ca-He4">
+                <viewController id="pND-tH-iEE" customClass="ScanDetailVC" customModule="Smolo" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="NJ4-A2-J3S">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <viewLayoutGuide key="safeArea" id="VVb-Jb-X0r"/>
+                        <viewLayoutGuide key="safeArea" id="BK5-Xe-Htl"/>
                     </view>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="rcm-X6-0A7" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="rwB-Zb-Hog" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3996" y="499"/>
+            <point key="canvasLocation" x="4020" y="501"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Lw0-VG-oJU">
@@ -112,40 +126,127 @@
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
+                    <connections>
+                        <segue destination="Qun-fr-HLh" kind="relationship" relationship="rootViewController" id="sSg-5O-be5"/>
+                    </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dPf-uO-z1z" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2218" y="-242"/>
         </scene>
-        <!--View Controller-->
+        <!--Pulley View Controller-->
         <scene sceneID="3t1-up-fwg">
             <objects>
-                <viewController id="Qun-fr-HLh" sceneMemberID="viewController">
+                <viewController id="Qun-fr-HLh" customClass="PulleyViewController" customModule="Pulley" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="n3x-Xy-emr">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <containerView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="RZ4-Eh-unb" userLabel="Primary Content Container View">
+                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                                <connections>
+                                    <segue destination="eNm-8X-B6E" kind="embed" id="Cjf-l4-agC"/>
+                                </connections>
+                            </containerView>
+                            <containerView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="LZj-Hi-GJT" userLabel="Drawer Content Container View">
+                                <rect key="frame" x="0.0" y="98" width="375" height="569"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                                <connections>
+                                    <segue destination="awE-5j-6rm" kind="embed" id="l5s-Ny-onP"/>
+                                </connections>
+                            </containerView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <viewLayoutGuide key="safeArea" id="8iK-N0-y7j"/>
                     </view>
+                    <navigationItem key="navigationItem" id="JD6-Kd-SVH"/>
+                    <connections>
+                        <outlet property="drawerContentContainerView" destination="LZj-Hi-GJT" id="5Lw-7t-eIf"/>
+                        <outlet property="primaryContentContainerView" destination="RZ4-Eh-unb" id="pd5-ZS-Naa"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0Mf-fL-baM" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3079" y="-243"/>
+            <point key="canvasLocation" x="3077.5999999999999" y="-243.32833583208398"/>
         </scene>
-        <!--View Controller-->
-        <scene sceneID="1kJ-iH-gbn">
+        <!--LocationVC-->
+        <scene sceneID="heD-gc-sYw">
             <objects>
-                <viewController id="wRf-v0-3Qa" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="wSJ-U5-KE1">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                <viewController id="eNm-8X-B6E" customClass="LocationVC" customModule="Smolo" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="6pl-fY-obN">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="647"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="LHo-oA-hMU">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="647"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </mapView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <viewLayoutGuide key="safeArea" id="Aco-Ku-MRS"/>
+                    </view>
+                    <connections>
+                        <outlet property="map" destination="LHo-oA-hMU" id="sW1-HX-v2w"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="K7i-kH-8uG" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4114" y="-989"/>
+        </scene>
+        <!--DrawerVC-->
+        <scene sceneID="J2x-Jv-Snc">
+            <objects>
+                <viewController id="awE-5j-6rm" customClass="DrawerVC" customModule="Smolo" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="cRO-hh-E2D">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="569"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="buS-72-IWO">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="569"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="cellID" id="05y-Hb-qYj">
+                                        <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="05y-Hb-qYj" id="GeH-ms-igM">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <viewLayoutGuide key="safeArea" id="mGS-pU-pPe"/>
+                    </view>
+                    <connections>
+                        <outlet property="SearchTV" destination="buS-72-IWO" id="XDq-bN-IAJ"/>
+                        <segue destination="5ZN-gg-U7b" kind="show" identifier="bardetail" id="2fp-0I-Xp9"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="zMH-MN-vz3" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4112.8000000000002" y="-287.40629685157421"/>
+        </scene>
+        <!--Bar DetailVC-->
+        <scene sceneID="GuV-yQ-Wrn">
+            <objects>
+                <viewController id="5ZN-gg-U7b" customClass="BarDetailVC" customModule="Smolo" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="YRP-y8-chL">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="569"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <viewLayoutGuide key="safeArea" id="WxC-1p-HOd"/>
+                        <viewLayoutGuide key="safeArea" id="4Wr-qi-BJh"/>
                     </view>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="XTh-hJ-FCe" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="AyJ-nZ-RyQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4004" y="-257"/>
+            <point key="canvasLocation" x="5186" y="-287"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="square" width="623" height="621"/>
+    </resources>
 </document>

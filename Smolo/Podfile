@@ -7,7 +7,10 @@ target 'Smolo' do
 
   # Pods for Smolo
 pod ‘Firebase/Core’
+pod ‘Firebase/Database’
+
 pod ‘Firebase’
+pod ‘Pulley’
 
   target 'SmoloTests' do
     inherit! :search_paths
