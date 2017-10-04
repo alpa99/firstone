@@ -1,6 +1,0 @@
-framework module Pods_SmoLocUITests {
-  umbrella header "Pods-SmoLocUITests-umbrella.h"
-
-  export *
-  module * { export * }
-}
