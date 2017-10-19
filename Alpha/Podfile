@@ -7,13 +7,20 @@ target 'Alpha' do
 
   # Pods for Alpha
 pod 'Pulley'
+<<<<<<< HEAD
 
+=======
+>>>>>>> 41bfa2c75e2c2a1832f998baf7bd445e385ba513
 pod 'FacebookCore'
 pod 'FacebookLogin'
 
 pod 'Firebase/Core'
 pod 'Firebase/Database‘
 pod 'Firebase'
+<<<<<<< HEAD
+=======
+
+>>>>>>> 41bfa2c75e2c2a1832f998baf7bd445e385ba513
 
 
   target 'AlphaTests' do
