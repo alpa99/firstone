@@ -7,14 +7,19 @@
 //
 
 import UIKit
+import Firebase
 import FacebookCore
 import FacebookLogin
+import FBSDKCoreKit
+import FBSDKLoginKit
 
 class LoginVC: UIViewController {
-
-    @IBOutlet weak var label1: UILabel!
     
-    @IBOutlet weak var label2: UILabel!
+    
+    var userFbID = ""
+    var userFbName = ""
+    var userFbEmail = ""
+    
     @IBAction func loginTapped(_ sender: UIButton) {
         
         let loginManager = LoginManager()
@@ -33,12 +38,11 @@ class LoginVC: UIViewController {
                     }
                     
                     if let userInfo = userInfo, let id = userInfo["id"], let name = userInfo["name"], let email = userInfo["email"]{
-                        self.label1.text = "ID: \(id), Name: \(name), Email: \(email)"
-                       /* self.userFbID = "\(id)"
+                        self.userFbID = "\(id)"
                         self.userFbName = "\(name)"
-                        self.userFbEmail = "\(email)"*/
+                        self.userFbEmail = "\(email)"
                     }
-                    
+                    self.addUserToFirebase()
                 }
             }
             
@@ -57,6 +61,34 @@ class LoginVC: UIViewController {
             }
         }
     }
+    
+    
+    func addUserToFirebase(){
+        var ref: DatabaseReference?
+
+        ref = Database.database().reference()
+        ref?.child("Users").child("\(self.userFbID)").child("Name").setValue(self.userFbName)
+        ref?.child("Users").child("\(self.userFbID)").child("Email").setValue(self.userFbEmail)
+        print(self.userFbID)
+        segueToTabBar()
+    }
+    
+    func segueToTabBar(){
+        
+        
+        performSegue(withIdentifier: "login", sender: self)
+        
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        if FBSDKAccessToken.current() != nil {
+            
+            segueToTabBar()
+        } else{
+            print(FBSDKAccessToken.current(), "access")
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
