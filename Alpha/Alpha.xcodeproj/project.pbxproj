@@ -17,6 +17,8 @@
 		4EC247EB1F98F90500910AA8 /* AlphaUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EC247EA1F98F90500910AA8 /* AlphaUITests.swift */; };
 		4EC247FA1F98FE6A00910AA8 /* QRBereich.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EC247F91F98FE6A00910AA8 /* QRBereich.swift */; };
 		4EC247FE1F99377100910AA8 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4EC247FD1F99377100910AA8 /* GoogleService-Info.plist */; };
+		4EC248001F9950CE00910AA8 /* DrawerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EC247FF1F9950CE00910AA8 /* DrawerVC.swift */; };
+		4EC248021F9950E700910AA8 /* LocationVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EC248011F9950E700910AA8 /* LocationVC.swift */; };
 		CC7293123DD294CC7591DAA2 /* Pods_AlphaUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AC56C89A3508D2D118AE9C1D /* Pods_AlphaUITests.framework */; };
 		FCBCA28E5975849AF85ED466 /* Pods_AlphaTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D92BA6E8AA26233EE5256989 /* Pods_AlphaTests.framework */; };
 		FF80403D46CB28555C94CA04 /* Pods_Alpha.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A57EBBF91158C1B719B66FE6 /* Pods_Alpha.framework */; };
@@ -58,6 +60,8 @@
 		4EC247EC1F98F90500910AA8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4EC247F91F98FE6A00910AA8 /* QRBereich.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRBereich.swift; sourceTree = "<group>"; };
 		4EC247FD1F99377100910AA8 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		4EC247FF1F9950CE00910AA8 /* DrawerVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawerVC.swift; sourceTree = "<group>"; };
+		4EC248011F9950E700910AA8 /* LocationVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationVC.swift; sourceTree = "<group>"; };
 		6639B3E49BB97F15D4F1FC24 /* Pods-Alpha.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Alpha.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Alpha/Pods-Alpha.debug.xcconfig"; sourceTree = "<group>"; };
 		809CF401238084F1706DE109 /* Pods-Alpha.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Alpha.release.xcconfig"; path = "Pods/Target Support Files/Pods-Alpha/Pods-Alpha.release.xcconfig"; sourceTree = "<group>"; };
 		90669C4C2B51C6114E01DF85 /* Pods-AlphaUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AlphaUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-AlphaUITests/Pods-AlphaUITests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -139,6 +143,8 @@
 				4EC247D31F98F90500910AA8 /* LaunchScreen.storyboard */,
 				4EC247D61F98F90500910AA8 /* Info.plist */,
 				081461F31F9927FA00121943 /* LoginVC.swift */,
+				4EC247FF1F9950CE00910AA8 /* DrawerVC.swift */,
+				4EC248011F9950E700910AA8 /* LocationVC.swift */,
 			);
 			path = Alpha;
 			sourceTree = "<group>";
@@ -493,9 +499,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				4EC247FA1F98FE6A00910AA8 /* QRBereich.swift in Sources */,
+				4EC248001F9950CE00910AA8 /* DrawerVC.swift in Sources */,
 				4EC247CD1F98F90500910AA8 /* ViewController.swift in Sources */,
 				4EC247CB1F98F90500910AA8 /* AppDelegate.swift in Sources */,
 				081461F41F9927FA00121943 /* LoginVC.swift in Sources */,
+				4EC248021F9950E700910AA8 /* LocationVC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
