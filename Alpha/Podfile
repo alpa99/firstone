@@ -6,6 +6,8 @@ target 'Alpha' do
   use_frameworks!
 
   # Pods for Alpha
+pod 'FacebookCore'
+pod 'FacebookLogin'
 
 pod 'Firebase/Core'
 pod 'Firebase/Database‘
