@@ -11,7 +11,7 @@ import Firebase
 
 class ViewController: UIViewController {
     
-    var name = [String]()
+    var name = ""
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,12 +22,12 @@ class ViewController: UIViewController {
         
         var ref: DatabaseReference!
         ref = Database.database().reference()
-        ref.child("QRBereich").observe(.childAdded, with: { (snapshot) in
+        ref.child("QRBereich").child("1000").observe(.value, with: { (snapshot) in
             
             if let dict = snapshot.value as? [String: AnyObject]{
                 
                 let qrbar = QRBereich(dictionary: dict)
-                qrbar.setValuesForKeys(dict)
+               // qrbar.setValuesForKeys(dict)
                 
                 self.name.append(qrbar.Name!)
                 
