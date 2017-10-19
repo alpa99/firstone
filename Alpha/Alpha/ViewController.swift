@@ -11,7 +11,7 @@ import Firebase
 
 class ViewController: UIViewController {
     
-    var name = ""
+    var name = [String]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,7 +22,7 @@ class ViewController: UIViewController {
         
         var ref: DatabaseReference!
         ref = Database.database().reference()
-        ref.child("QRBereich").child("1000").observe(.value, with: { (snapshot) in
+        ref.child("QRBereich").observe(.childAdded, with: { (snapshot) in
             
             if let dict = snapshot.value as? [String: AnyObject]{
                 
