@@ -217,13 +217,27 @@
                     <view key="view" contentMode="scaleToFill" id="CU6-fQ-J7Q">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="6O3-8I-x3v">
+                                <rect key="frame" x="16" y="20" width="343" height="627"/>
+                            </mapView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="6O3-8I-x3v" firstAttribute="top" secondItem="5sc-C6-4dM" secondAttribute="top" id="YMT-Pc-yba"/>
+                            <constraint firstItem="5sc-C6-4dM" firstAttribute="bottom" secondItem="6O3-8I-x3v" secondAttribute="bottom" constant="20" id="d9j-l2-Vjm"/>
+                            <constraint firstItem="5sc-C6-4dM" firstAttribute="trailing" secondItem="6O3-8I-x3v" secondAttribute="trailing" constant="16" id="i5L-TC-Ety"/>
+                            <constraint firstItem="6O3-8I-x3v" firstAttribute="leading" secondItem="5sc-C6-4dM" secondAttribute="leading" constant="16" id="sI6-uY-FAe"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="5sc-C6-4dM"/>
                     </view>
+                    <connections>
+                        <outlet property="map" destination="6O3-8I-x3v" id="Prq-bX-4dn"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yO8-K2-STf" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5146" y="-1388"/>
+            <point key="canvasLocation" x="5144.8000000000002" y="-1388.4557721139431"/>
         </scene>
         <!--DrawerVC-->
         <scene sceneID="qCK-WD-OF5">
