@@ -18,9 +18,9 @@ class LocationVC: UIViewController, MKMapViewDelegate {
     // was ist das
     let cellID2 = "cellID2"
     
-    let regionRadius: CLLocationDistance = 500
+    let regionRadius: CLLocationDistance = 100
     
-    let locationManager = CLLocationManager()
+    var locationManager = CLLocationManager()
     
     var barPointSubtitle = "shishabar sonst was"
     
@@ -36,6 +36,7 @@ class LocationVC: UIViewController, MKMapViewDelegate {
         super.viewDidLoad()
         map.delegate = self
         fetchAdress()
+        
     }
     
     func fetchAdress() {
@@ -69,13 +70,29 @@ class LocationVC: UIViewController, MKMapViewDelegate {
         }
     }
     
+    
     func centerMapOnLocation(location:CLLocation){
+       /* let userlocation = MKUserLocation()
+        var centerloc = CLLocationCoordinate2DMake(userlocation.coordinate.latitude, userlocation.coordinate.longitude)
+        let region = MKCoordinateRegionMakeWithDistance(centerloc, 10, 10)
+        map.setRegion(region, animated: true)*/
         
         let coordinateRegion = MKCoordinateRegionMakeWithDistance(location.coordinate, regionRadius * 2 , regionRadius * 2)
         map.setRegion(coordinateRegion, animated: true)
-        
-        
+    
     }
+    
+   func mapView(_ mapView: MKMapView, didUpdate userLocation: MKUserLocation){
+     if let loc = userLocation.location {
+        centerMapOnLocation(location: loc)
+        locationManager.stopUpdatingLocation()
+        locationManager.delegate = nil
+              }
+          }
+    
+    
+    
+ 
     
     
     func createAnnotationForLocation(location: CLLocation, Title: String){
@@ -135,4 +152,4 @@ class LocationVC: UIViewController, MKMapViewDelegate {
             (parent as? PulleyViewController)?.setDrawerContentViewController(controller: detvc, animated: true)
             
         }*/
-}
+ }
