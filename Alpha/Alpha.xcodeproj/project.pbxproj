@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		081461F41F9927FA00121943 /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081461F31F9927FA00121943 /* LoginVC.swift */; };
+		0895B3631F9B5F28007D97DE /* UserVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0895B3621F9B5F28007D97DE /* UserVC.swift */; };
 		08C881671F9962EB00AD8F20 /* BarInfos.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C881661F9962EB00AD8F20 /* BarInfos.swift */; };
 		08C881691F9963F100AD8F20 /* BarAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C881681F9963F100AD8F20 /* BarAnnotation.swift */; };
 		4EC247CB1F98F90500910AA8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EC247CA1F98F90500910AA8 /* AppDelegate.swift */; };
@@ -45,6 +46,7 @@
 
 /* Begin PBXFileReference section */
 		081461F31F9927FA00121943 /* LoginVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; };
+		0895B3621F9B5F28007D97DE /* UserVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserVC.swift; sourceTree = "<group>"; };
 		08C881661F9962EB00AD8F20 /* BarInfos.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarInfos.swift; sourceTree = "<group>"; };
 		08C881681F9963F100AD8F20 /* BarAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarAnnotation.swift; sourceTree = "<group>"; };
 		1EA076F87397E3B0B510A4B4 /* Pods-AlphaTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AlphaTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-AlphaTests/Pods-AlphaTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -149,6 +151,7 @@
 				081461F31F9927FA00121943 /* LoginVC.swift */,
 				4EC247FF1F9950CE00910AA8 /* DrawerVC.swift */,
 				4EC248011F9950E700910AA8 /* LocationVC.swift */,
+				0895B3621F9B5F28007D97DE /* UserVC.swift */,
 			);
 			path = Alpha;
 			sourceTree = "<group>";
@@ -511,6 +514,7 @@
 				4EC247CB1F98F90500910AA8 /* AppDelegate.swift in Sources */,
 				081461F41F9927FA00121943 /* LoginVC.swift in Sources */,
 				08C881691F9963F100AD8F20 /* BarAnnotation.swift in Sources */,
+				0895B3631F9B5F28007D97DE /* UserVC.swift in Sources */,
 				4EC248021F9950E700910AA8 /* LocationVC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

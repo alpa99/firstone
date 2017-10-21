@@ -23,7 +23,7 @@ class LoginVC: UIViewController {
     @IBAction func loginTapped(_ sender: UIButton) {
         
         let loginManager = LoginManager()
-        
+        loginManager.logOut()
         loginManager.logIn(readPermissions: [.publicProfile, .email], viewController: self) { result in
             
             switch result {
