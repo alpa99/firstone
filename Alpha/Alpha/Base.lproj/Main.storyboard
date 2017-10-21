@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="1rU-Ub-WRG">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="x8o-de-CAN">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -255,17 +255,72 @@
         <!--DrawerVC-->
         <scene sceneID="qCK-WD-OF5">
             <objects>
-                <viewController id="Hp6-oH-c35" customClass="DrawerVC" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="DrawerVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Hp6-oH-c35" customClass="DrawerVC" customModule="Alpha" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="nWH-sa-Zbn">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="550"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="UfE-2g-B3z">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="550"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cellID" id="DV3-1S-3qd" customClass="barCell" customModule="Alpha" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="DV3-1S-3qd" id="2Nf-8z-6wX">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="Hp6-oH-c35" id="SAs-Pe-UPr"/>
+                                    <outlet property="delegate" destination="Hp6-oH-c35" id="hJv-js-eDE"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="UfE-2g-B3z" firstAttribute="bottom" secondItem="Azo-S7-7OP" secondAttribute="bottom" id="0Af-C8-0Ya"/>
+                            <constraint firstItem="UfE-2g-B3z" firstAttribute="trailing" secondItem="Azo-S7-7OP" secondAttribute="trailing" id="OzT-jC-Or2"/>
+                            <constraint firstItem="UfE-2g-B3z" firstAttribute="leading" secondItem="Azo-S7-7OP" secondAttribute="leading" id="g3H-PU-0IS"/>
+                            <constraint firstItem="UfE-2g-B3z" firstAttribute="top" secondItem="nWH-sa-Zbn" secondAttribute="top" id="j5j-qZ-lfJ"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="Azo-S7-7OP"/>
                     </view>
+                    <connections>
+                        <outlet property="BarTV" destination="UfE-2g-B3z" id="Bye-yG-lSm"/>
+                        <segue destination="WVD-Ys-cXo" kind="show" id="gux-hW-yip"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="klC-zV-RJ2" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5177" y="-572"/>
+            <point key="canvasLocation" x="5176.8000000000002" y="-572.11394302848578"/>
+        </scene>
+        <!--Bar DetailVC-->
+        <scene sceneID="xUo-bn-6nf">
+            <objects>
+                <viewController restorationIdentifier="BarDetailVC" storyboardIdentifier="BarDetailVC" id="WVD-Ys-cXo" customClass="BarDetailVC" customModule="Alpha" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="QlD-bd-NV7">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="550"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="l5t-Ap-uDQ">
+                                <rect key="frame" x="0.0" y="9" width="98" height="41"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Back"/>
+                                <connections>
+                                    <action selector="Back:" destination="WVD-Ys-cXo" eventType="touchUpInside" id="imi-V5-Puh"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <viewLayoutGuide key="safeArea" id="Xq4-os-Abi"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="PI5-JP-ryS" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="6468" y="-570.31484257871068"/>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
