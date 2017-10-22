@@ -10,6 +10,8 @@ import UIKit
 import Firebase
 import MapKit
 import Pulley
+import CoreLocation
+import AddressBookUI
 
 class LocationVC: UIViewController, MKMapViewDelegate {
 
@@ -27,6 +29,8 @@ class LocationVC: UIViewController, MKMapViewDelegate {
     var BarAdressen = [String]()
     var BarNamen = [String]()
     
+    var barlocation = [CLLocationCoordinate2D]()
+    
     override func viewWillAppear(_ animated: Bool) {
         self.navigationController?.setNavigationBarHidden(true, animated: true)
         
@@ -35,9 +39,36 @@ class LocationVC: UIViewController, MKMapViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         map.delegate = self
+        
         fetchAdress()
         
     }
+    
+    func forwardGeocoding(address: String) {
+        CLGeocoder().geocodeAddressString(address, completionHandler: { (placemarks, error) in
+            if error != nil {
+                print(error ?? "erorrrrr")
+                return
+            }
+            if placemarks?.count != nil {
+                let placemark = placemarks?[0]
+                let location = placemark?.location
+                let coordinate = location?.coordinate
+                //print("\nlat: \(coordinate!.latitude), long: \(coordinate!.longitude)", "IT WORKED")
+                self.barlocation.append(coordinate!)
+                
+                print(self.barlocation)
+                if placemark?.areasOfInterest?.count != nil {
+                    let areaOfInterest = placemark!.areasOfInterest![0]
+                    print(areaOfInterest)
+                } else {
+                    print("No area of interest found.")
+                }
+            }
+        })
+    }
+    
+    
     
     func fetchAdress() {
         
@@ -51,7 +82,10 @@ class LocationVC: UIViewController, MKMapViewDelegate {
                 self.BarNamen.append(bars.Name!)
                 for BarIndex in 0 ..< self.BarAdressen.count {
                     self.getPlaceMarkFromAdress(adress: self.BarAdressen[BarIndex], Titlex: self.BarNamen[BarIndex])
+                    self.forwardGeocoding(address: self.BarAdressen[BarIndex])
                     
+
+  
                 }
             }
             
@@ -72,29 +106,27 @@ class LocationVC: UIViewController, MKMapViewDelegate {
     
     
     func centerMapOnLocation(location:CLLocation){
-       /* let userlocation = MKUserLocation()
-        var centerloc = CLLocationCoordinate2DMake(userlocation.coordinate.latitude, userlocation.coordinate.longitude)
-        let region = MKCoordinateRegionMakeWithDistance(centerloc, 10, 10)
-        map.setRegion(region, animated: true)*/
-        
+
         let coordinateRegion = MKCoordinateRegionMakeWithDistance(location.coordinate, regionRadius * 2 , regionRadius * 2)
         map.setRegion(coordinateRegion, animated: true)
     
     }
     
    func mapView(_ mapView: MKMapView, didUpdate userLocation: MKUserLocation){
+    if let location = userLocation.location {
+        //this is the place where you get the new location
+        
+        print("\(location.coordinate.latitude) hgjvghvgvgvgvgggvhghvhg")
+        
+        print("\(location.coordinate.longitude)")
+        
+    }
      if let loc = userLocation.location {
         centerMapOnLocation(location: loc)
         locationManager.stopUpdatingLocation()
-        locationManager.delegate = nil
               }
           }
-    
-    
-    
- 
-    
-    
+  
     func createAnnotationForLocation(location: CLLocation, Title: String){
         
         
