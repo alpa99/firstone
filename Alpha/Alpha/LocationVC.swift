@@ -44,6 +44,8 @@ class LocationVC: UIViewController, MKMapViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         map.delegate = self
+        map.region.span = MKCoordinateSpanMake(2*regionRadius, 2*regionRadius)
+        
         
         //fetchAdress()
         
@@ -106,9 +108,10 @@ class LocationVC: UIViewController, MKMapViewDelegate {
     
     func centerMapOnLocation(location:CLLocation){
 
-        let coordinateRegion = MKCoordinateRegionMakeWithDistance(location.coordinate, regionRadius * 2 , regionRadius * 2)
+        let coordinateRegion = MKCoordinateRegionMake(map.centerCoordinate, map.region.span)
         map.setRegion(coordinateRegion, animated: true)
-    
+        
+
     }
     
    func mapView(_ mapView: MKMapView, didUpdate userLocation: MKUserLocation){
@@ -168,6 +171,7 @@ class LocationVC: UIViewController, MKMapViewDelegate {
     
      if let loc = userLocation.location {
         centerMapOnLocation(location: loc)
+        
         locationManager.stopUpdatingLocation()
               }
           }
@@ -185,9 +189,9 @@ class LocationVC: UIViewController, MKMapViewDelegate {
 //        print(coordinate1, "THIS IS COORDINATE1")
 //
 //    }
-//    
-//    
-//    
+//
+//
+//
 //    func distance(calCoordinate1: CLLocation, calCoordinate2: CLLocation)
 //    {
 //        let distance = calCoordinate1.distance(from: calCoordinate2)
