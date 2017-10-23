@@ -44,7 +44,7 @@ class LocationVC: UIViewController, MKMapViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         map.delegate = self
-        map.region.span = MKCoordinateSpanMake(2*regionRadius, 2*regionRadius)
+       // map.region.span = MKCoordinateSpanMake(2*regionRadius, 2*regionRadius)
         
         
         //fetchAdress()
@@ -116,6 +116,8 @@ class LocationVC: UIViewController, MKMapViewDelegate {
     
    func mapView(_ mapView: MKMapView, didUpdate userLocation: MKUserLocation){
     if let location = userLocation.location {
+        self.locationManager.stopUpdatingLocation()
+
         //this is the place where you get the new location
         
         var datref: DatabaseReference!
@@ -138,13 +140,12 @@ class LocationVC: UIViewController, MKMapViewDelegate {
                             let loc = placemark?.location
                             //let coordinate = loc?.coordinate
                             self.barlocation.append(loc!)
-                        self.Distances.append(Double(location.distance(from: self.barlocation[BarIndex])))
-                        self.strecken.append(self.Distances[BarIndex]/1000.0)
-                        self.streckendouble.append(String(format: "%.1f", self.strecken))
+                        self.Distances.append(Double(location.distance(from: loc!))/1000.0)
+                       // self.strecken.append(self.Distances[BarIndex]/1000.0)
+                        self.streckendouble.append(String(format: "%.1f", self.Distances))
                             print(self.Distances, "DISTANCES")
                         print(self.strecken, "STRECKE")
                         print(self.streckendouble, "STRECKENDOUBLE")
-                            self.locationManager.stopUpdatingLocation()
                             
                             self.getPlaceMarkFromAdress(adress: self.BarAdressen[BarIndex], Titlex: self.BarNamen[BarIndex], Subtitlex: String(describing: self.streckendouble[BarIndex]))
 

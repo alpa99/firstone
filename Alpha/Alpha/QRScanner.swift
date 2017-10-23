@@ -15,57 +15,60 @@ var barnummer = 0
 
 class QRScanner: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
     
-    /*var name = ""
+    var name = ""
 
     @IBOutlet weak var square: UIImageView!
     
     var qrbar = [QRBereich]()
     var qrbarname = ""
+    var video = AVCaptureVideoPreviewLayer()
+    let session = AVCaptureSession()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        let captureDevice = AVCaptureDevice.defaultDevice(withMediaType: AVMediaTypeVideo)
-        
+        let captureDevice = AVCaptureDevice.default(for: AVMediaType.video)
+     
         do {
-            let input = try AVCaptureDeviceInput(device: captureDevice)
+            let input = try AVCaptureDeviceInput(device: captureDevice!)
             session.addInput(input)
         }
         catch{
             print("ERROR!!")
         }
-        
+     
         let output = AVCaptureMetadataOutput()
         session.addOutput(output)
         output.setMetadataObjectsDelegate(self, queue: DispatchQueue.main)
         output.metadataObjectTypes = [AVMetadataObject.ObjectType.qr]
-        
+     
         video = AVCaptureVideoPreviewLayer(session: session)
         video.frame = view.layer.bounds
         view.layer.addSublayer(video)
         self.view.bringSubview(toFront: square)
-        
+     
         session.startRunning()
-        
+     
    
     }
     
-    func captureOutput(_ captureOutput: AVCaptureOutput!, didOutputMetadataObjects metadataObjects: [Any]!, from connection: AVCaptureConnection!) {
+    func metadataOutput(_ output: AVCaptureMetadataOutput, didOutput metadataObjects: [AVMetadataObject], from connection: AVCaptureConnection){
+
         
         if metadataObjects != nil && metadataObjects.count != 0 {
-            
+     
             if let object = metadataObjects[0] as? AVMetadataMachineReadableCodeObject{
-                
+     
                 if object.type == AVMetadataObject.ObjectType.qr {
                     self.session.stopRunning()
                     ergebnis = Int(object.stringValue!)!
                     
                     barnummer = ergebnis/1000*1000
-                    
-                    qrbar = [QRBar]()
+     
+                    qrbar = [QRBereich]()
                     qrbarname = ""
                     
                     fetchData()
-                    
+     
                 }
             }
         }
@@ -84,17 +87,17 @@ class QRScanner: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
         var ref: DatabaseReference!
         ref = Database.database().reference()
         ref.child("QRBereich").child("\(barnummer)").observe(.value, with: { (snapshot) in
-            
+     
             if let dict = snapshot.value as? [String: AnyObject]{
                 
                 let qrbar = QRBereich(dictionary: dict)
                // qrbar.setValuesForKeys(dict)
-                
+     
                 self.name.append(qrbar.Name!)
                 
-                
+     
                 print(self.qrbarname)
-                
+     
                 let alert = UIAlertController(title: "Erfolgreich", message: "Du bist bei \(self.qrbarname)!", preferredStyle: .alert)
                 alert.addAction(UIAlertAction(title: "Weiter", style: .default, handler:{ (action) in self.performSegue(withIdentifier: "codescan", sender: self)}))
                 
@@ -106,7 +109,7 @@ class QRScanner: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
             , withCancel: nil)
         
         
-        
+     
         
     }
     
@@ -116,6 +119,7 @@ class QRScanner: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
         // Dispose of any resources that can be recreated.
     }
 
-*/
+
 }
+
 
