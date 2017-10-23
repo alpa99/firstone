@@ -50,28 +50,7 @@ class LocationVC: UIViewController, MKMapViewDelegate {
         //fetchAdress()
         
     }
-    
-//    func forwardGeocoding(address: String) {
-//        CLGeocoder().geocodeAddressString(address, completionHandler: { (placemarks, error) in
-//            if error != nil {
-//                print(error ?? "erorrrrr")
-//                return
-//            }
-//            if placemarks?.count != nil {
-//                let placemark = placemarks?[0]
-//                let location = placemark?.location
-//                let coordinate = location?.coordinate
-//                self.barlocation.append(coordinate!)
-//
-//                print(self.barlocation)
-//
-//
-//            }
-//        })
-//    }
-    
-    
-    
+
 //    func fetchAdress() {
 //
 //        var datref: DatabaseReference!
