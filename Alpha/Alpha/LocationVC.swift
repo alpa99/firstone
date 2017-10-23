@@ -35,6 +35,11 @@ class LocationVC: UIViewController, MKMapViewDelegate {
     var BarNamen = [String]()
     
     var barlocation = [CLLocation]()
+<<<<<<< HEAD
+    
+    var ort = [CLLocationCoordinate2D]()
+=======
+>>>>>>> 73c6a05fcbd8f88843d83d401e3acd7117e2ce05
     
     override func viewWillAppear(_ animated: Bool) {
         self.navigationController?.setNavigationBarHidden(true, animated: true)
@@ -51,6 +56,59 @@ class LocationVC: UIViewController, MKMapViewDelegate {
         
     }
     
+<<<<<<< HEAD
+    func forwardGeocoding(address: String) {
+        CLGeocoder().geocodeAddressString(address, completionHandler: { (placemarks, error) in
+            if error != nil {
+                print(error ?? "erorrrrr")
+                return
+            }
+            if placemarks?.count != nil {
+                let placemark = placemarks?[0]
+                let location = placemark?.location
+                let coordinate = location?.coordinate
+                //print("\nlat: \(coordinate!.latitude), long: \(coordinate!.longitude)", "IT WORKED")
+                self.barlocation.append(location!)
+                if self.barlocation.count != 0 {
+                    
+                    if let loc = self.locationManager.location {
+                    let distance = loc.distance(from: self.barlocation[1])
+                        print(distance , "dfdfasdfgd")}
+                    print("3d5msj34jfjfjfjfjfj")
+                }else { print ("leer")}
+                
+                print(self.barlocation, "ioioio")
+                
+            }
+        })
+    }
+    
+    
+    
+    func fetchAdress() {
+        
+        var datref: DatabaseReference!
+        datref = Database.database().reference()
+        datref.child("BarInfo").observe(.childAdded, with: { (snapshot) in
+            
+            if let dictionary = snapshot.value as? [String: AnyObject]{
+                let bars = BarInfos(dictionary: dictionary)
+                self.BarAdressen.append(bars.Adresse!)
+                self.BarNamen.append(bars.Name!)
+                for BarIndex in 0 ..< self.BarAdressen.count {
+                    self.getPlaceMarkFromAdress(adress: self.BarAdressen[BarIndex], Titlex: self.BarNamen[BarIndex])
+                    self.forwardGeocoding(address: self.BarAdressen[BarIndex])
+                    
+            
+
+  
+                }
+            }
+            
+        }, withCancel: nil)
+    }
+    
+=======
 //    func forwardGeocoding(address: String) {
 //        CLGeocoder().geocodeAddressString(address, completionHandler: { (placemarks, error) in
 //            if error != nil {
@@ -93,6 +151,7 @@ class LocationVC: UIViewController, MKMapViewDelegate {
 //        }, withCancel: nil)
 //    }
 //
+>>>>>>> 73c6a05fcbd8f88843d83d401e3acd7117e2ce05
     override func viewDidAppear(_ animated: Bool){
         locationAuthStatus()
     }
@@ -114,10 +173,14 @@ class LocationVC: UIViewController, MKMapViewDelegate {
 
     }
     
+    
+    
    func mapView(_ mapView: MKMapView, didUpdate userLocation: MKUserLocation){
     if let location = userLocation.location {
         //this is the place where you get the new location
         
+<<<<<<< HEAD
+=======
         var datref: DatabaseReference!
         datref = Database.database().reference()
         datref.child("BarInfo").observe(.childAdded, with: { (snapshot) in
@@ -161,6 +224,7 @@ class LocationVC: UIViewController, MKMapViewDelegate {
         
         
         
+>>>>>>> 73c6a05fcbd8f88843d83d401e3acd7117e2ce05
         
         print("\(location.coordinate.latitude) hgjvghvgvgvgvgggvhghvhg")
         
@@ -173,7 +237,9 @@ class LocationVC: UIViewController, MKMapViewDelegate {
         centerMapOnLocation(location: loc)
         
         locationManager.stopUpdatingLocation()
-              }
+       
+        
+    }
           }
   
 //    func getcoordinate2(location2 : CLLocation){
@@ -207,7 +273,10 @@ class LocationVC: UIViewController, MKMapViewDelegate {
         
         let barpoint = BarAnnotation(coordinate: location.coordinate, title: Title, subtitle: Subtitle)
         map.addAnnotation(barpoint)
+<<<<<<< HEAD
+=======
         //getcoordinate1(location1: CLLocation(latitude: barpoint.coordinate.latitude, longitude: barpoint.coordinate.longitude))
+>>>>>>> 73c6a05fcbd8f88843d83d401e3acd7117e2ce05
         
         
     }
@@ -247,6 +316,8 @@ class LocationVC: UIViewController, MKMapViewDelegate {
         return pinView
     }
     
+    
+  
     
    /* func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
         if control == view.rightCalloutAccessoryView{
