@@ -29,7 +29,9 @@ class LocationVC: UIViewController, MKMapViewDelegate {
     var BarAdressen = [String]()
     var BarNamen = [String]()
     
-    var barlocation = [CLLocationCoordinate2D]()
+    var barlocation = [CLLocation]()
+    
+    var ort = [CLLocationCoordinate2D]()
     
     override func viewWillAppear(_ animated: Bool) {
         self.navigationController?.setNavigationBarHidden(true, animated: true)
@@ -55,15 +57,17 @@ class LocationVC: UIViewController, MKMapViewDelegate {
                 let location = placemark?.location
                 let coordinate = location?.coordinate
                 //print("\nlat: \(coordinate!.latitude), long: \(coordinate!.longitude)", "IT WORKED")
-                self.barlocation.append(coordinate!)
+                self.barlocation.append(location!)
+                if self.barlocation.count != 0 {
+                    
+                    if let loc = self.locationManager.location {
+                    let distance = loc.distance(from: self.barlocation[1])
+                        print(distance , "dfdfasdfgd")}
+                    print("3d5msj34jfjfjfjfjfj")
+                }else { print ("leer")}
                 
-                print(self.barlocation)
-                if placemark?.areasOfInterest?.count != nil {
-                    let areaOfInterest = placemark!.areasOfInterest![0]
-                    print(areaOfInterest)
-                } else {
-                    print("No area of interest found.")
-                }
+                print(self.barlocation, "ioioio")
+                
             }
         })
     }
@@ -84,6 +88,7 @@ class LocationVC: UIViewController, MKMapViewDelegate {
                     self.getPlaceMarkFromAdress(adress: self.BarAdressen[BarIndex], Titlex: self.BarNamen[BarIndex])
                     self.forwardGeocoding(address: self.BarAdressen[BarIndex])
                     
+            
 
   
                 }
@@ -112,9 +117,12 @@ class LocationVC: UIViewController, MKMapViewDelegate {
     
     }
     
+    
+    
    func mapView(_ mapView: MKMapView, didUpdate userLocation: MKUserLocation){
     if let location = userLocation.location {
         //this is the place where you get the new location
+        
         
         print("\(location.coordinate.latitude) hgjvghvgvgvgvgggvhghvhg")
         
@@ -124,7 +132,9 @@ class LocationVC: UIViewController, MKMapViewDelegate {
      if let loc = userLocation.location {
         centerMapOnLocation(location: loc)
         locationManager.stopUpdatingLocation()
-              }
+       
+        
+    }
           }
   
     func createAnnotationForLocation(location: CLLocation, Title: String){
@@ -132,6 +142,8 @@ class LocationVC: UIViewController, MKMapViewDelegate {
         
         let barpoint = BarAnnotation(coordinate: location.coordinate, title: Title, subtitle: barPointSubtitle)
         map.addAnnotation(barpoint)
+        
+        
     }
     
     
@@ -169,6 +181,8 @@ class LocationVC: UIViewController, MKMapViewDelegate {
         return pinView
     }
     
+    
+  
     
    /* func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
         if control == view.rightCalloutAccessoryView{
