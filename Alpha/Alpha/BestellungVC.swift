@@ -23,12 +23,11 @@ class BestellungVC: UIViewController, UITableViewDataSource, UITableViewDelegate
         var datref: DatabaseReference!
         datref = Database.database().reference()
         datref.child("Speisekarten").child("SpeisekarteDeluxxe")
-        var x = Int()
+        var x = [Int]()
         datref.child("Speisekarten").child("SpeisekarteDeluxxe").observe(.childAdded, with: { (snapshot) in
             
-            x = Int(snapshot.childrenCount)
-            print(x, "das ist x1")
-            
+            x.append(Int(snapshot.childrenCount))
+print(x, "DAS ist X ARRAY")
             datref.child("Speisekarten").child("SpeisekarteDeluxxe").child("Shishas").observe(.childAdded, with: { (snapshot) in
                 
                 if let dictionary = snapshot.value as? [String: AnyObject]{
@@ -37,7 +36,7 @@ class BestellungVC: UIViewController, UITableViewDataSource, UITableViewDelegate
                     print(x, "das ist x")
                     print(self.shishas.count, "das ist shishas.count")
                     print(self.shishas, "asfsdfsd")
-                    if self.shishas.count == x{
+                    if self.shishas.count == x[1]{
                         self.setSections(genre: "Shishas")}
                     
                 }
