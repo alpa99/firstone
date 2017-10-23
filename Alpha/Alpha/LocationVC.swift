@@ -162,7 +162,7 @@ class LocationVC: UIViewController, MKMapViewDelegate {
         print("\(location.coordinate.latitude) hgjvghvgvgvgvgggvhghvhg")
         
         print("\(location.coordinate.longitude)")
-        getcoordinate2(location2: location)
+       // getcoordinate2(location2: location)
         
     }
     
@@ -172,28 +172,28 @@ class LocationVC: UIViewController, MKMapViewDelegate {
               }
           }
   
-    func getcoordinate2(location2 : CLLocation){
-        
-        let coordinate2 = location2
-        print(coordinate2, "THIS IS COORDINATE2")
-        
-    }
-    
-    func getcoordinate1(location1 : CLLocation){
-        
-        let coordinate1 = location1
-        print(coordinate1, "THIS IS COORDINATE1")
-        
-    }
-    
-    
-    
-    func distance(calCoordinate1: CLLocation, calCoordinate2: CLLocation)
-    {
-        let distance = calCoordinate1.distance(from: calCoordinate2)
-        print(distance, "DISTANCE")
-
-    }
+//    func getcoordinate2(location2 : CLLocation){
+//
+//        let coordinate2 = location2
+//        print(coordinate2, "THIS IS COORDINATE2")
+//
+//    }
+//
+//    func getcoordinate1(location1 : CLLocation){
+//
+//        let coordinate1 = location1
+//        print(coordinate1, "THIS IS COORDINATE1")
+//
+//    }
+//    
+//    
+//    
+//    func distance(calCoordinate1: CLLocation, calCoordinate2: CLLocation)
+//    {
+//        let distance = calCoordinate1.distance(from: calCoordinate2)
+//        print(distance, "DISTANCE")
+//
+//    }
     
     
     
