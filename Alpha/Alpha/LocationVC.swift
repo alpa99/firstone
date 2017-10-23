@@ -15,21 +15,26 @@ import AddressBookUI
 
 class LocationVC: UIViewController, MKMapViewDelegate {
 
+
     @IBOutlet weak var map: MKMapView!
 
     // was ist das
     let cellID2 = "cellID2"
     
     let regionRadius: CLLocationDistance = 100
-    
+    var strecken  = [Double]()
+    var streckendouble = [String]()
     var locationManager = CLLocationManager()
     
-    var barPointSubtitle = "shishabar sonst was"
+    var barPointSubtitle = [String]()
     
     var BarAdressen = [String]()
+    var Distances = [Double]()
+    var DistancesDouble = [String]()
+    
     var BarNamen = [String]()
     
-    var barlocation = [CLLocationCoordinate2D]()
+    var barlocation = [CLLocation]()
     
     override func viewWillAppear(_ animated: Bool) {
         self.navigationController?.setNavigationBarHidden(true, animated: true)
@@ -40,58 +45,52 @@ class LocationVC: UIViewController, MKMapViewDelegate {
         super.viewDidLoad()
         map.delegate = self
         
-        fetchAdress()
+        //fetchAdress()
         
     }
     
-    func forwardGeocoding(address: String) {
-        CLGeocoder().geocodeAddressString(address, completionHandler: { (placemarks, error) in
-            if error != nil {
-                print(error ?? "erorrrrr")
-                return
-            }
-            if placemarks?.count != nil {
-                let placemark = placemarks?[0]
-                let location = placemark?.location
-                let coordinate = location?.coordinate
-                //print("\nlat: \(coordinate!.latitude), long: \(coordinate!.longitude)", "IT WORKED")
-                self.barlocation.append(coordinate!)
-                
-                print(self.barlocation)
-                if placemark?.areasOfInterest?.count != nil {
-                    let areaOfInterest = placemark!.areasOfInterest![0]
-                    print(areaOfInterest)
-                } else {
-                    print("No area of interest found.")
-                }
-            }
-        })
-    }
+//    func forwardGeocoding(address: String) {
+//        CLGeocoder().geocodeAddressString(address, completionHandler: { (placemarks, error) in
+//            if error != nil {
+//                print(error ?? "erorrrrr")
+//                return
+//            }
+//            if placemarks?.count != nil {
+//                let placemark = placemarks?[0]
+//                let location = placemark?.location
+//                let coordinate = location?.coordinate
+//                self.barlocation.append(coordinate!)
+//
+//                print(self.barlocation)
+//
+//
+//            }
+//        })
+//    }
     
     
     
-    func fetchAdress() {
-        
-        var datref: DatabaseReference!
-        datref = Database.database().reference()
-        datref.child("BarInfo").observe(.childAdded, with: { (snapshot) in
-            
-            if let dictionary = snapshot.value as? [String: AnyObject]{
-                let bars = BarInfos(dictionary: dictionary)
-                self.BarAdressen.append(bars.Adresse!)
-                self.BarNamen.append(bars.Name!)
-                for BarIndex in 0 ..< self.BarAdressen.count {
-                    self.getPlaceMarkFromAdress(adress: self.BarAdressen[BarIndex], Titlex: self.BarNamen[BarIndex])
-                    self.forwardGeocoding(address: self.BarAdressen[BarIndex])
-                    
-
-  
-                }
-            }
-            
-        }, withCancel: nil)
-    }
-    
+//    func fetchAdress() {
+//
+//        var datref: DatabaseReference!
+//        datref = Database.database().reference()
+//        datref.child("BarInfo").observe(.childAdded, with: { (snapshot) in
+//
+//            if let dictionary = snapshot.value as? [String: AnyObject]{
+//                let bars = BarInfos(dictionary: dictionary)
+//                self.BarAdressen.append(bars.Adresse!)
+//                self.BarNamen.append(bars.Name!)
+//                for BarIndex in 0 ..< self.BarAdressen.count {
+//                    self.getPlaceMarkFromAdress(adress: self.BarAdressen[BarIndex], Titlex: self.BarNamen[BarIndex], Subtitlex: Distances, Subtitlex: )
+//
+//
+//
+//                }
+//            }
+//
+//        }, withCancel: nil)
+//    }
+//
     override func viewDidAppear(_ animated: Bool){
         locationAuthStatus()
     }
@@ -116,30 +115,105 @@ class LocationVC: UIViewController, MKMapViewDelegate {
     if let location = userLocation.location {
         //this is the place where you get the new location
         
+        var datref: DatabaseReference!
+        datref = Database.database().reference()
+        datref.child("BarInfo").observe(.childAdded, with: { (snapshot) in
+
+            if let dictionary = snapshot.value as? [String: AnyObject]{
+                let bars = BarInfos(dictionary: dictionary)
+                self.BarAdressen.append(bars.Adresse!)
+                self.BarNamen.append(bars.Name!)
+
+                for BarIndex in 0 ..< self.BarAdressen.count {
+
+                    CLGeocoder().geocodeAddressString(bars.Adresse!, completionHandler: { (placemarks, error) in
+                        if error != nil {
+                            print(error ?? "erorrrrr")
+                            return
+                        }
+                            let placemark = placemarks?[0]
+                            let loc = placemark?.location
+                            //let coordinate = loc?.coordinate
+                            self.barlocation.append(loc!)
+                        self.Distances.append(Double(location.distance(from: self.barlocation[BarIndex])))
+                        self.strecken.append(self.Distances[BarIndex]/1000.0)
+                        self.streckendouble.append(String(format: "%.1f", self.strecken))
+                            print(self.Distances, "DISTANCES")
+                        print(self.strecken, "STRECKE")
+                        print(self.streckendouble, "STRECKENDOUBLE")
+                            self.locationManager.stopUpdatingLocation()
+                            
+                            self.getPlaceMarkFromAdress(adress: self.BarAdressen[BarIndex], Titlex: self.BarNamen[BarIndex], Subtitlex: String(describing: self.streckendouble[BarIndex]))
+
+                        
+                    })
+
+                }
+            }
+
+        }, withCancel: nil)
+
+
+        
+        
+        
+        
+        
         print("\(location.coordinate.latitude) hgjvghvgvgvgvgggvhghvhg")
         
         print("\(location.coordinate.longitude)")
+        getcoordinate2(location2: location)
         
     }
+    
      if let loc = userLocation.location {
         centerMapOnLocation(location: loc)
         locationManager.stopUpdatingLocation()
               }
           }
   
-    func createAnnotationForLocation(location: CLLocation, Title: String){
+    func getcoordinate2(location2 : CLLocation){
         
+        let coordinate2 = location2
+        print(coordinate2, "THIS IS COORDINATE2")
         
-        let barpoint = BarAnnotation(coordinate: location.coordinate, title: Title, subtitle: barPointSubtitle)
-        map.addAnnotation(barpoint)
+    }
+    
+    func getcoordinate1(location1 : CLLocation){
+        
+        let coordinate1 = location1
+        print(coordinate1, "THIS IS COORDINATE1")
+        
     }
     
     
-    func getPlaceMarkFromAdress (adress: String, Titlex: String){
+    
+    func distance(calCoordinate1: CLLocation, calCoordinate2: CLLocation)
+    {
+        let distance = calCoordinate1.distance(from: calCoordinate2)
+        print(distance, "DISTANCE")
+
+    }
+    
+    
+    
+    
+    func createAnnotationForLocation(location: CLLocation, Title: String, Subtitle: String){
+        
+        
+        let barpoint = BarAnnotation(coordinate: location.coordinate, title: Title, subtitle: Subtitle)
+        map.addAnnotation(barpoint)
+        //getcoordinate1(location1: CLLocation(latitude: barpoint.coordinate.latitude, longitude: barpoint.coordinate.longitude))
+        
+        
+    }
+    
+    
+    func getPlaceMarkFromAdress (adress: String, Titlex: String, Subtitlex: String){
         CLGeocoder().geocodeAddressString(adress){ (placemarks: [CLPlacemark]?,error: Error?) -> Void in
             if let marks = placemarks, marks.count > 0 {
                 if let loc = marks[0].location {
-                    self.createAnnotationForLocation(location: loc, Title: Titlex)}
+                    self.createAnnotationForLocation(location: loc, Title: Titlex, Subtitle: "\(Subtitlex) km")}
                 
             }
         }

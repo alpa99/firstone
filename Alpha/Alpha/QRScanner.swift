@@ -15,7 +15,7 @@ var barnummer = 0
 
 class QRScanner: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
     
-    var name = ""
+    /*var name = ""
 
     @IBOutlet weak var square: UIImageView!
     
@@ -37,7 +37,7 @@ class QRScanner: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
         let output = AVCaptureMetadataOutput()
         session.addOutput(output)
         output.setMetadataObjectsDelegate(self, queue: DispatchQueue.main)
-        output.metadataObjectTypes = [AVMetadataObjectTypeQRCode]
+        output.metadataObjectTypes = [AVMetadataObject.ObjectType.qr]
         
         video = AVCaptureVideoPreviewLayer(session: session)
         video.frame = view.layer.bounds
@@ -55,16 +55,16 @@ class QRScanner: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
             
             if let object = metadataObjects[0] as? AVMetadataMachineReadableCodeObject{
                 
-                if object.type == AVMetadataObjectTypeQRCode {
+                if object.type == AVMetadataObject.ObjectType.qr {
                     self.session.stopRunning()
-                    ergebnis = Int(object.stringValue)!
+                    ergebnis = Int(object.stringValue!)!
                     
                     barnummer = ergebnis/1000*1000
                     
                     qrbar = [QRBar]()
                     qrbarname = ""
                     
-                    fetchData()()
+                    fetchData()
                     
                 }
             }
@@ -116,6 +116,6 @@ class QRScanner: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
         // Dispose of any resources that can be recreated.
     }
 
-
+*/
 }
 
