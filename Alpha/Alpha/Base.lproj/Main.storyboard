@@ -197,10 +197,10 @@
             </objects>
             <point key="canvasLocation" x="4096.8000000000002" y="-1020.5397301349326"/>
         </scene>
-        <!--View Controller-->
+        <!--Scanner-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="Alpha" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="QRScanner" customModule="Alpha" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -215,7 +215,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="J6B-KR-Obv"/>
                     <connections>
-                        <outlet property="square" destination="oMC-KD-mEQ" id="tPT-W7-dOY"/>
+                        <outlet property="square" destination="oMC-KD-mEQ" id="NtD-AJ-hgO"/>
                         <segue destination="RD5-Hb-S63" kind="show" identifier="codescan" id="iu8-vW-H79"/>
                     </connections>
                 </viewController>

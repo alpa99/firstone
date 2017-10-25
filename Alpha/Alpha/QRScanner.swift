@@ -15,7 +15,6 @@ var barnummer = 0
 
 class QRScanner: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
     
-    var name = ""
 
     @IBOutlet weak var square: UIImageView!
     
@@ -49,6 +48,10 @@ class QRScanner: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
         session.startRunning()
      
    
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        session.startRunning()
     }
     
     func metadataOutput(_ output: AVCaptureMetadataOutput, didOutput metadataObjects: [AVMetadataObject], from connection: AVCaptureConnection){
@@ -93,7 +96,7 @@ class QRScanner: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
                 let qrbar = QRBereich(dictionary: dict)
                // qrbar.setValuesForKeys(dict)
      
-                self.name.append(qrbar.Name!)
+                self.qrbarname.append(qrbar.Name!)
                 
      
                 print(self.qrbarname)
