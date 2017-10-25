@@ -22,19 +22,15 @@ class LocationVC: UIViewController, MKMapViewDelegate {
     let cellID2 = "cellID2"
     
     let regionRadius: CLLocationDistance = 100
-    var strecken  = [Double]()
-    var streckendouble = [String]()
+   
     var locationManager = CLLocationManager()
     
     var barPointSubtitle = [String]()
     
     var BarAdressen = [String]()
-    var Distances = [Double]()
-    var DistancesDouble = [String]()
-    
+   
     var BarNamen = [String]()
     
-    var barlocation = [CLLocation]()
     
     override func viewWillAppear(_ animated: Bool) {
         self.navigationController?.setNavigationBarHidden(true, animated: true)
@@ -44,33 +40,37 @@ class LocationVC: UIViewController, MKMapViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         map.delegate = self
+<<<<<<< HEAD
+=======
+       // map.region.span = MKCoordinateSpanMake(2*regionRadius, 2*regionRadius)
+>>>>>>> b403863fb4917f1bda2b8307add352c199a94f38
         
         
-        //fetchAdress()
+        fetchAdress()
         
     }
 
-//    func fetchAdress() {
-//
-//        var datref: DatabaseReference!
-//        datref = Database.database().reference()
-//        datref.child("BarInfo").observe(.childAdded, with: { (snapshot) in
-//
-//            if let dictionary = snapshot.value as? [String: AnyObject]{
-//                let bars = BarInfos(dictionary: dictionary)
-//                self.BarAdressen.append(bars.Adresse!)
-//                self.BarNamen.append(bars.Name!)
-//                for BarIndex in 0 ..< self.BarAdressen.count {
-//                    self.getPlaceMarkFromAdress(adress: self.BarAdressen[BarIndex], Titlex: self.BarNamen[BarIndex], Subtitlex: Distances, Subtitlex: )
-//
-//
-//
-//                }
-//            }
-//
-//        }, withCancel: nil)
-//    }
-//
+    func fetchAdress() {
+
+        var datref: DatabaseReference!
+        datref = Database.database().reference()
+        datref.child("BarInfo").observe(.childAdded, with: { (snapshot) in
+
+            if let dictionary = snapshot.value as? [String: AnyObject]{
+                let bars = BarInfos(dictionary: dictionary)
+                self.BarAdressen.append(bars.Adresse!)
+                self.BarNamen.append(bars.Name!)
+                for BarIndex in 0 ..< self.BarAdressen.count {
+                    self.getPlaceMarkFromAdress(adress: self.BarAdressen[BarIndex], Titlex: self.BarNamen[BarIndex], Subtitlex: "irgendwas" )
+
+
+
+                }
+            }
+
+        }, withCancel: nil)
+    }
+
     override func viewDidAppear(_ animated: Bool){
         locationAuthStatus()
     }
@@ -93,56 +93,13 @@ class LocationVC: UIViewController, MKMapViewDelegate {
     }
     
    func mapView(_ mapView: MKMapView, didUpdate userLocation: MKUserLocation){
-    if let location = userLocation.location {
-        //this is the place where you get the new location
-        
-        var datref: DatabaseReference!
-        datref = Database.database().reference()
-        datref.child("BarInfo").observe(.childAdded, with: { (snapshot) in
-
-            if let dictionary = snapshot.value as? [String: AnyObject]{
-                let bars = BarInfos(dictionary: dictionary)
-                self.BarAdressen.append(bars.Adresse!)
-                self.BarNamen.append(bars.Name!)
-
-                for BarIndex in 0 ..< self.BarAdressen.count {
-
-                    CLGeocoder().geocodeAddressString(bars.Adresse!, completionHandler: { (placemarks, error) in
-                        if error != nil {
-                            print(error ?? "erorrrrr")
-                            return
-                        }
-                            let placemark = placemarks?[0]
-                            let loc = placemark?.location
-                            //let coordinate = loc?.coordinate
-                            self.barlocation.append(loc!)
-                        self.Distances.append(Double(location.distance(from: self.barlocation[BarIndex])))
-                        self.strecken.append(self.Distances[BarIndex]/1000.0)
-                        self.streckendouble.append(String(format: "%.1f", self.strecken))
-                            print(self.Distances, "DISTANCES")
-                        print(self.strecken, "STRECKE")
-                        print(self.streckendouble, "STRECKENDOUBLE")
-                            self.locationManager.stopUpdatingLocation()
-                            
-                            self.getPlaceMarkFromAdress(adress: self.BarAdressen[BarIndex], Titlex: self.BarNamen[BarIndex], Subtitlex: String(describing: self.streckendouble[BarIndex]))
-
-                        
-                    })
-
-                }
-            }
-
-        }, withCancel: nil)
-
-        
-    }
     
      if let loc = userLocation.location {
         centerMapOnLocation(location: loc)
         
         locationManager.stopUpdatingLocation()
               }
-          }
+    }
   
     
     func createAnnotationForLocation(location: CLLocation, Title: String, Subtitle: String){
@@ -190,7 +147,7 @@ class LocationVC: UIViewController, MKMapViewDelegate {
     }
     
     
-   /* func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
+    func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
         if control == view.rightCalloutAccessoryView{
             let annotation = self.map.selectedAnnotations[0] as MKAnnotation!
             //Perform a segue here to navigate to another viewcontroller
@@ -203,5 +160,6 @@ class LocationVC: UIViewController, MKMapViewDelegate {
             
             (parent as? PulleyViewController)?.setDrawerContentViewController(controller: detvc, animated: true)
             
-        }*/
+        }
  }
+}

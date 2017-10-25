@@ -197,15 +197,15 @@
             </objects>
             <point key="canvasLocation" x="4096.8000000000002" y="-1020.5397301349326"/>
         </scene>
-        <!--View Controller-->
+        <!--Scanner-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="Alpha" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="QRScanner" customModule="Alpha" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="square" translatesAutoresizingMaskIntoConstraints="NO" id="oMC-KD-mEQ">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" restorationIdentifier="square" image="square" translatesAutoresizingMaskIntoConstraints="NO" id="oMC-KD-mEQ">
                                 <rect key="frame" x="67" y="213" width="240" height="240"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
@@ -215,7 +215,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="J6B-KR-Obv"/>
                     <connections>
-                        <outlet property="square" destination="oMC-KD-mEQ" id="tPT-W7-dOY"/>
+                        <outlet property="square" destination="oMC-KD-mEQ" id="NtD-AJ-hgO"/>
                         <segue destination="RD5-Hb-S63" kind="show" identifier="codescan" id="iu8-vW-H79"/>
                     </connections>
                 </viewController>
@@ -223,10 +223,10 @@
             </objects>
             <point key="canvasLocation" x="4097" y="74"/>
         </scene>
-        <!--View Controller-->
+        <!--Scan DetailVC-->
         <scene sceneID="bfF-gB-4Zv">
             <objects>
-                <viewController id="RD5-Hb-S63" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ScanDetailVC" id="RD5-Hb-S63" customClass="ScanDetailVC" customModule="Alpha" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="1Xn-jN-LJF">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
