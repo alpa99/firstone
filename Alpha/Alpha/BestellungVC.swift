@@ -13,67 +13,74 @@ class BestellungVC: UIViewController, UITableViewDataSource, UITableViewDelegate
 
     @IBOutlet weak var bestellungTableView: UITableView!
     
+    var genres = [String]()
     var shishas = [String]()
+    var genreDetail = [String]()
+
+    //var getränke = [String]()
+    
     
     var sections = [ExpandTVSection]()
     
 
     
     func fetchSpeisekarte(){
+        var z = [Int: String]()
         var datref: DatabaseReference!
         datref = Database.database().reference()
-        datref.child("Speisekarten").child("SpeisekarteDeluxxe")
-        var x = [Int]()
+        datref.child("Speisekarten").observe(.childAdded, with: { (snapshotx) in
+            
+
+            
         datref.child("Speisekarten").child("SpeisekarteDeluxxe").observe(.childAdded, with: { (snapshot) in
             
-            x.append(Int(snapshot.childrenCount))
-print(x, "DAS ist X ARRAY")
-            datref.child("Speisekarten").child("SpeisekarteDeluxxe").child("Shishas").observe(.childAdded, with: { (snapshot) in
+            z.updateValue(snapshot.key, forKey: Int(snapshot.childrenCount))
+            if z.count == snapshotx.childrenCount {
+            for (number, genre) in z {
+            
+            datref.child("Speisekarten").child("SpeisekarteDeluxxe").child("\(genre)").observe(.childAdded, with: { (snapshot) in
                 
                 if let dictionary = snapshot.value as? [String: AnyObject]{
                     let speisekarte = SpeisekarteInfos(dictionary: dictionary)
-                    self.shishas.append(speisekarte.Name!)
-                    print(x, "das ist x")
-                    print(self.shishas.count, "das ist shishas.count")
-                    print(self.shishas, "asfsdfsd")
-                    if self.shishas.count == x[1]{
-                        self.setSections(genre: "Shishas")}
+                    self.genreDetail.append(speisekarte.Name!)
+                    print(self.genreDetail, "das  ist GENREDETAIL")
+//                    print(self.getränke.count, "das ist getränke.count")
+//                    print(self.getränke, "self.getränke")
+                    print(self.genreDetail.count, "DAS ist genredetai.count")
+                    if self.genreDetail.count == number {
+                        self.setSections(genre: "\(genre) ", movies: self.genreDetail)
+                        self.genreDetail = [String]()
+                    }
                     
                 }
             }, withCancel: nil)
 
-        }, withCancel: nil)
-        
-        
-       /* datref.child("Speisekarten").child("SpeisekarteDeluxxe").observe(.childAdded, with: { (snapshot) in
-            
-            if let dictionary = snapshot.value as? [String: AnyObject]{
-                let speisekarte = SpeisekarteInfos(dictionary: dictionary)
-                self.shishas.append(speisekarte.Name!)
-                print(x, "das ist x")
-                print(self.shishas.count, "das ist shishas.count")
-                print(self.shishas, "asfsdfsd")
-                if self.shishas.count == x{
-                    self.setSections(genre: "Shishas")}
+                }
                 
             }
-        }, withCancel: nil)*/
+            
+        }, withCancel: nil)
+    }, withCancel: nil)
+
         
-        
+
     }
     
-    func setSections(genre: String){
+    func setSections(genre: String, movies: [String]){
         
-        self.sections.append(ExpandTVSection(genre: genre, movies: self.shishas, expanded: false))
+        self.sections.append(ExpandTVSection(genre: genre, movies: movies, expanded: false))
         
         self.bestellungTableView.reloadData()
 
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        fetchSpeisekarte()
+
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        fetchSpeisekarte()
 
         // Do any additional setup after loading the view.
     }

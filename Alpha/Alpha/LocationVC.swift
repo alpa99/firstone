@@ -44,7 +44,6 @@ class LocationVC: UIViewController, MKMapViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         map.delegate = self
-        map.region.span = MKCoordinateSpanMake(2*regionRadius, 2*regionRadius)
         
         
         //fetchAdress()
@@ -147,7 +146,7 @@ class LocationVC: UIViewController, MKMapViewDelegate {
   
     
     func createAnnotationForLocation(location: CLLocation, Title: String, Subtitle: String){
-        
+
         
         let barpoint = BarAnnotation(coordinate: location.coordinate, title: Title, subtitle: Subtitle)
         map.addAnnotation(barpoint)

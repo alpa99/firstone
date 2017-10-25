@@ -8,11 +8,13 @@
 
 import Foundation
 class SpeisekarteInfos: NSObject {
+    var Genre: String?
     var Name: String?
     var Preis: String?
     
     
     init(dictionary: [String: Any]) {
+        self.Genre = dictionary["Genre"] as? String ?? ""
         self.Name = dictionary["Name"] as? String ?? ""
         self.Preis = dictionary["Preis"] as? String ?? ""
         
