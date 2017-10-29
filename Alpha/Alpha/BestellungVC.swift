@@ -8,9 +8,40 @@
 
 import UIKit
 import Firebase
+import Pulley
 
-class BestellungVC: UIViewController, UITableViewDataSource, UITableViewDelegate, ExpandableHeaderViewDelegate {
+class BestellungVC: UIViewController, UITableViewDataSource, UITableViewDelegate, ExpandableHeaderViewDelegate, PulleyDrawerViewControllerDelegate {
 
+    @IBOutlet weak var label: UILabel!
+    func collapsedDrawerHeight(bottomSafeArea: CGFloat) -> CGFloat {
+        return 102.0
+    }
+    
+    func partialRevealDrawerHeight(bottomSafeArea: CGFloat) -> CGFloat {
+        return 340.0
+    }
+    
+    func supportedDrawerPositions() -> [PulleyPosition] {
+        return PulleyPosition.all
+    }
+    
+
+    
+    var barname = ""
+    
+    var bars = [BarInfos]()
+    var adresse = String ()
+    
+    
+    
+    @IBAction func Back(_ sender: Any) {
+        
+        let tableVC:UIViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "DrawerVC") as UIViewController
+        (parent as? PulleyViewController)?.setDrawerContentViewController(controller: tableVC, animated: true)
+    }
+    
+    
+    
     @IBOutlet weak var bestellungTableView: UITableView!
     
     var genres = [String]()
@@ -25,41 +56,37 @@ class BestellungVC: UIViewController, UITableViewDataSource, UITableViewDelegate
 
     
     func fetchSpeisekarte(){
-        var z = [Int: String]()
+        var z = [String: Int]()
         var datref: DatabaseReference!
         datref = Database.database().reference()
         datref.child("Speisekarten").observe(.childAdded, with: { (snapshotx) in
-            
 
-            
-        datref.child("Speisekarten").child("SpeisekarteDeluxxe").observe(.childAdded, with: { (snapshot) in
-            
-            z.updateValue(snapshot.key, forKey: Int(snapshot.childrenCount))
-            if z.count == snapshotx.childrenCount {
-            for (number, genre) in z {
-            
-            datref.child("Speisekarten").child("SpeisekarteDeluxxe").child("\(genre)").observe(.childAdded, with: { (snapshot) in
+        datref.child("Speisekarten").child("\(self.barname)").observe(.childAdded, with: { (snapshot) in
+                
+            self.label.text = self.barname
+
+            z.updateValue(Int(snapshotx.childrenCount), forKey: snapshotx.key)
+            print(snapshotx.childrenCount, "AFDSFSDF")
+
+            for (genre, number) in z {
+                datref.child("Speisekarten").child("\(self.barname)").child("\(genre)").observe(.childAdded, with: { (snapshot) in
                 
                 if let dictionary = snapshot.value as? [String: AnyObject]{
                     let speisekarte = SpeisekarteInfos(dictionary: dictionary)
                     self.genreDetail.append(speisekarte.Name!)
                     print(self.genreDetail, "das  ist GENREDETAIL")
-//                    print(self.getränke.count, "das ist getränke.count")
-//                    print(self.getränke, "self.getränke")
                     print(self.genreDetail.count, "DAS ist genredetai.count")
-                    if self.genreDetail.count == number {
+                    if self.genreDetail.count == z[self.barname] {
                         self.setSections(genre: "\(genre) ", movies: self.genreDetail)
                         self.genreDetail = [String]()
                     }
                     
                 }
             }, withCancel: nil)
-
                 }
-                
-            }
             
         }, withCancel: nil)
+            
     }, withCancel: nil)
 
         
@@ -73,15 +100,11 @@ class BestellungVC: UIViewController, UITableViewDataSource, UITableViewDelegate
         self.bestellungTableView.reloadData()
 
     }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        fetchSpeisekarte()
-
-    }
+  
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+fetchSpeisekarte()
         // Do any additional setup after loading the view.
     }
 

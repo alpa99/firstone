@@ -40,11 +40,10 @@ class LocationVC: UIViewController, MKMapViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         map.delegate = self
-<<<<<<< HEAD
-=======
+
        // map.region.span = MKCoordinateSpanMake(2*regionRadius, 2*regionRadius)
->>>>>>> b403863fb4917f1bda2b8307add352c199a94f38
-        
+
+            
         
         fetchAdress()
         
@@ -152,7 +151,7 @@ class LocationVC: UIViewController, MKMapViewDelegate {
             let annotation = self.map.selectedAnnotations[0] as MKAnnotation!
             //Perform a segue here to navigate to another viewcontroller
             
-            let detvc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "BarDetailVC") as! BarDetailVC
+            let detvc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "BestellungVC") as! BestellungVC
             detvc.barname = ((annotation?.title)!)!
             
             (parent as? PulleyViewController)?.setDrawerPosition(position: PulleyPosition(rawValue: 2)!)

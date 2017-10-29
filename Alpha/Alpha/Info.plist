@@ -40,6 +40,8 @@
 	</array>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSCameraUsageDescription</key>
+	<string>Erlaube Cam</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>You are about to use location!</string>
 	<key>UILaunchStoryboardName</key>
@@ -63,7 +65,5 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
-	<key>NSCameraUsageDescription</key>
-	<string>Erlaube Cam</string>
 </dict>
 </plist>
