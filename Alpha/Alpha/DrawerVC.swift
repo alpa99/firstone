@@ -10,28 +10,15 @@ import UIKit
 import Pulley
 import Firebase
 
-class DrawerVC: UIViewController, PulleyDrawerViewControllerDelegate, UITableViewDataSource, UITableViewDelegate {
+class DrawerVC: UIViewController, PulleyDrawerViewControllerDelegate, UITableViewDataSource, UITableViewDelegate, UISearchResultsUpdating {
     
     @IBOutlet weak var BarTV: UITableView!
     
     var bars = [BarInfos]()
+    var filteredbars = [BarInfos]()
     var barIndex = 0
     let cellID = "cellID"
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-       return bars.count
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: cellID, for: indexPath)
-        
-        let bar = bars[indexPath.row]
-        
-        cell.textLabel?.text = bar.Name
-        
-        return cell
-    }
-    
+    let searchController = UISearchController(searchResultsController: nil)
     
     
     override func viewDidLoad() {
@@ -43,12 +30,58 @@ class DrawerVC: UIViewController, PulleyDrawerViewControllerDelegate, UITableVie
         bars = [BarInfos]()
         fetchBars()
         
+        searchController.searchResultsUpdater = self
+        searchController.dimsBackgroundDuringPresentation  = false
+        definesPresentationContext = true
+        BarTV.tableHeaderView = searchController.searchBar
+        
     }
     
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    
+    func filteredContent (searchText: String, scope: String = "All"){
+        
+        filteredbars = bars.filter{ bar in
+            
+            return (bar.Name?.lowercased().contains(searchText.lowercased()))!
+        }
+        BarTV.reloadData()
     }
+
+    
+    func updateSearchResults(for: UISearchController){
+        filteredContent(searchText: searchController.searchBar.text!)
+
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        
+        if searchController.isActive == true && searchController.searchBar.text != ""{
+            return filteredbars.count
+            
+        }
+        
+       return bars.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: cellID, for: indexPath)
+        
+      //  let bar = bars[indexPath.row]
+        
+        let bar : BarInfos
+        
+        if searchController.isActive == true && searchController.searchBar.text != ""{
+            bar = filteredbars[indexPath.row]
+        } else {
+            bar = bars[indexPath.row]
+        }
+            
+        
+        cell.textLabel?.text = bar.Name
+        
+        return cell
+    }
+    
     
 
     func fetchBars () {
@@ -81,7 +114,15 @@ class DrawerVC: UIViewController, PulleyDrawerViewControllerDelegate, UITableVie
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         barIndex = indexPath.row
         
-        let selBar = bars[barIndex]
+        //let selBar = bars[barIndex]
+        
+        let selBar : BarInfos
+        if searchController.isActive == true && searchController.searchBar.text != ""{
+            selBar = filteredbars[barIndex]
+        } else { 
+            selBar = bars[barIndex]
+        }
+        
         var selBarName = ""
         selBarName = selBar.Name!
         print(selBarName)
@@ -117,7 +158,12 @@ class DrawerVC: UIViewController, PulleyDrawerViewControllerDelegate, UITableVie
 
    
     
- 
+    
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
+    }
+    
 
 }
 
