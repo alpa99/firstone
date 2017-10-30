@@ -59,44 +59,34 @@ class BestellungVC: UIViewController, UITableViewDataSource, UITableViewDelegate
         var z = [String: Int]()
         var datref: DatabaseReference!
         datref = Database.database().reference()
-        datref.child("Speisekarten").observe(.childAdded, with: { (snapshotx) in
+//        datref.child("Speisekarten").observe(.childAdded, with: { (snapshotx) in
 
-        datref.child("Speisekarten").child("\(self.barname)").observe(.childAdded, with: { (snapshot) in
-                
-            self.label.text = self.barname
+//        datref.child("Speisekarten").child("\(self.barname)").observe(.childAdded, with: { (snapshot) in
 
-            z.updateValue(Int(snapshotx.childrenCount), forKey: snapshotx.key)
-            print(snapshotx.childrenCount, "AFDSFSDF")
+//            z.updateValue(Int(snapshot.childrenCount), forKey: snapshot.key)
+//            print(z, "AFDSFSDF")
+//
+//            for (genre, number) in z {
+            
+            datref.child("Speisekarten").child("\(self.barname)").child("Shishas").observe(.childAdded, with: { (snapshot) in
+                self.label.text = self.barname
 
-            for (genre, number) in z {
-                datref.child("Speisekarten").child("\(self.barname)").child("\(genre)").observe(.childAdded, with: { (snapshot) in
-                
                 if let dictionary = snapshot.value as? [String: AnyObject]{
                     let speisekarte = SpeisekarteInfos(dictionary: dictionary)
                     self.genreDetail.append(speisekarte.Name!)
-                    print(self.genreDetail, "das  ist GENREDETAIL")
-                    print(self.genreDetail.count, "DAS ist genredetai.count")
-                    if self.genreDetail.count == z[self.barname] {
-                        self.setSections(genre: "\(genre) ", movies: self.genreDetail)
-                        self.genreDetail = [String]()
-                    }
-                    
                 }
-            }, withCancel: nil)
-                }
-            
-        }, withCancel: nil)
-            
-    }, withCancel: nil)
+                self.setSections(genre: "Shishas", movies: self.genreDetail)
+                print(self.genreDetail)
 
+            }, withCancel: nil)
         
 
     }
+
+    
     
     func setSections(genre: String, movies: [String]){
-        
         self.sections.append(ExpandTVSection(genre: genre, movies: movies, expanded: false))
-        
         self.bestellungTableView.reloadData()
 
     }
