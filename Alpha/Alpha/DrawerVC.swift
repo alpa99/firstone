@@ -10,7 +10,7 @@ import UIKit
 import Pulley
 import Firebase
 
-class DrawerVC: UIViewController, PulleyDrawerViewControllerDelegate, UITableViewDataSource, UITableViewDelegate, UISearchResultsUpdating {
+class DrawerVC: UIViewController, PulleyDrawerViewControllerDelegate, UITableViewDataSource, UITableViewDelegate, UISearchResultsUpdating, UISearchBarDelegate {
     
     @IBOutlet weak var BarTV: UITableView!
     
@@ -24,6 +24,7 @@ class DrawerVC: UIViewController, PulleyDrawerViewControllerDelegate, UITableVie
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        
         BarTV.delegate = self
         BarTV.dataSource = self
         BarTV.register(barCell.self, forCellReuseIdentifier: cellID)
@@ -34,9 +35,16 @@ class DrawerVC: UIViewController, PulleyDrawerViewControllerDelegate, UITableVie
         searchController.dimsBackgroundDuringPresentation  = false
         definesPresentationContext = true
         BarTV.tableHeaderView = searchController.searchBar
+        searchController.searchBar.delegate = self
         
     }
     
+    func searchBarShouldBeginEditing(_ searchBar: UISearchBar) -> Bool {
+        return (((parent as? PulleyViewController)?.setDrawerPosition(position: PulleyPosition(rawValue: 2)!)) != nil)
+    }
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        (parent as? PulleyViewController)?.setDrawerPosition(position: PulleyPosition(rawValue: 2)!)
+    }
     
     func filteredContent (searchText: String, scope: String = "All"){
         
@@ -119,7 +127,7 @@ class DrawerVC: UIViewController, PulleyDrawerViewControllerDelegate, UITableVie
         let selBar : BarInfos
         if searchController.isActive == true && searchController.searchBar.text != ""{
             selBar = filteredbars[barIndex]
-        } else { 
+        } else {
             selBar = bars[barIndex]
         }
         
