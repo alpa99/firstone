@@ -37,7 +37,12 @@ class DrawerVC: UIViewController, PulleyDrawerViewControllerDelegate, UITableVie
         BarTV.tableHeaderView = searchController.searchBar
         searchController.searchBar.delegate = self
         
+    
     }
+     func touchesBegan(touches: NSSet, withEvent event: UIEvent) {
+        self.searchController.searchBar.endEditing(true)
+    }
+    
     
     func searchBarShouldBeginEditing(_ searchBar: UISearchBar) -> Bool {
         return (((parent as? PulleyViewController)?.setDrawerPosition(position: PulleyPosition(rawValue: 2)!)) != nil)
