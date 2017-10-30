@@ -13,7 +13,7 @@ import Pulley
 import CoreLocation
 import AddressBookUI
 
-class LocationVC: UIViewController, MKMapViewDelegate {
+class LocationVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
 
 
     @IBOutlet weak var map: MKMapView!
@@ -25,6 +25,8 @@ class LocationVC: UIViewController, MKMapViewDelegate {
    
     var locationManager = CLLocationManager()
     
+    var startLocation: CLLocation!
+    
     var barPointSubtitle = [String]()
     
     var BarAdressen = [String]()
@@ -35,6 +37,7 @@ class LocationVC: UIViewController, MKMapViewDelegate {
     override func viewWillAppear(_ animated: Bool) {
         self.navigationController?.setNavigationBarHidden(true, animated: true)
         
+        
     }
     
     override func viewDidLoad() {
@@ -42,11 +45,12 @@ class LocationVC: UIViewController, MKMapViewDelegate {
         map.delegate = self
 
        // map.region.span = MKCoordinateSpanMake(2*regionRadius, 2*regionRadius)
-
-            
+        locationManager.requestWhenInUseAuthorization()
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        locationManager.delegate = self
         
         fetchAdress()
-        
+        centerMapOnLocation(location: locationManager.location!)
     }
 
     func fetchAdress() {
@@ -85,20 +89,21 @@ class LocationVC: UIViewController, MKMapViewDelegate {
     
     func centerMapOnLocation(location:CLLocation){
 
-        let coordinateRegion = MKCoordinateRegionMake(map.centerCoordinate, map.region.span)
+        let coordinateRegion = MKCoordinateRegionMakeWithDistance((locationManager.location?.coordinate)!, regionRadius, regionRadius)
+       // Make((MKUserLocation().location?.coordinate)! , regionRadius)
+//        (map.centerCoordinate, map.region.span)
         map.setRegion(coordinateRegion, animated: true)
+        locationManager.stopUpdatingLocation()
         
 
     }
     
-   func mapView(_ mapView: MKMapView, didUpdate userLocation: MKUserLocation){
-    
-     if let loc = userLocation.location {
-        centerMapOnLocation(location: loc)
-        
-        locationManager.stopUpdatingLocation()
-              }
-    }
+//   func mapView(_ mapView: MKMapView, didUpdate userLocation: MKUserLocation){
+//
+//     if let loc = userLocation.location {
+//        centerMapOnLocation(location: loc)
+//      }
+//    }
   
     
     func createAnnotationForLocation(location: CLLocation, Title: String, Subtitle: String){
