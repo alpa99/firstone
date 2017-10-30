@@ -25,6 +25,7 @@ class ScanDetailVC: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
     func fetchInfos() {
         
         var datref: DatabaseReference!

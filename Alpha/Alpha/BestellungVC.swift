@@ -46,6 +46,7 @@ class BestellungVC: UIViewController, UITableViewDataSource, UITableViewDelegate
     
     var genres = [String]()
     var shishas = [String]()
+    var getränke = [String]()
     var genreDetail = [String]()
 
     //var getränke = [String]()
@@ -53,32 +54,55 @@ class BestellungVC: UIViewController, UITableViewDataSource, UITableViewDelegate
     
     var sections = [ExpandTVSection]()
     
+    
 
+    func printsjdgskjd(ab: Dictionary<String, Int>){
+        print(ab, "DAS IST AB")
+        
+    }
     
     func fetchSpeisekarte(){
         var z = [String: Int]()
         var datref: DatabaseReference!
         datref = Database.database().reference()
-//        datref.child("Speisekarten").observe(.childAdded, with: { (snapshotx) in
 
-//        datref.child("Speisekarten").child("\(self.barname)").observe(.childAdded, with: { (snapshot) in
+        datref.child("Speisekarten").child("\(self.barname)").observe(.childAdded, with: { (snapshot) in
 
-//            z.updateValue(Int(snapshot.childrenCount), forKey: snapshot.key)
-//            print(z, "AFDSFSDF")
-//
-//            for (genre, number) in z {
+            z.updateValue(Int(snapshot.childrenCount), forKey: snapshot.key)
+            print(z, "AFDSFSDF")
+
+
+        
             
             datref.child("Speisekarten").child("\(self.barname)").child("Shishas").observe(.childAdded, with: { (snapshot) in
                 self.label.text = self.barname
 
                 if let dictionary = snapshot.value as? [String: AnyObject]{
-                    let speisekarte = SpeisekarteInfos(dictionary: dictionary)
-                    self.genreDetail.append(speisekarte.Name!)
+                    let shisha = SpeisekarteInfos(dictionary: dictionary)
+                    self.shishas.append(shisha.Name!)
                 }
-                self.setSections(genre: "Shishas", movies: self.genreDetail)
+                if self.shishas.count == z["Shishas"]{
+                self.setSections(genre: "Shishas", movies: self.shishas)
                 print(self.genreDetail)
-
+                }
+                
             }, withCancel: nil)
+            
+            datref.child("Speisekarten").child("\(self.barname)").child("Getränke").observe(.childAdded, with: { (snapshot) in
+                
+                if let dictionary = snapshot.value as? [String: AnyObject]{
+                    let getränk = SpeisekarteInfos(dictionary: dictionary)
+                    self.getränke.append(getränk.Name!)
+                }
+                if self.getränke.count == z["Getränke"]{
+                    self.setSections(genre: "Getränke", movies: self.getränke)
+                }
+                
+            }, withCancel: nil)
+            
+            
+        }, withCancel: nil)
+
         
 
     }
@@ -88,7 +112,6 @@ class BestellungVC: UIViewController, UITableViewDataSource, UITableViewDelegate
     func setSections(genre: String, movies: [String]){
         self.sections.append(ExpandTVSection(genre: genre, movies: movies, expanded: false))
         self.bestellungTableView.reloadData()
-
     }
   
     
