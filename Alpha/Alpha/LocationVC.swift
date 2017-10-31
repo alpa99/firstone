@@ -21,9 +21,11 @@ class LocationVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate
     // was ist das
     let cellID2 = "cellID2"
     
-    let regionRadius: CLLocationDistance = 100
+    let regionRadius: CLLocationDistance = 1000
    
     var locationManager = CLLocationManager()
+    
+    var testLocation = CLLocation(latitude: 52.375892, longitude: 9.732010)
     
     var startLocation: CLLocation!
     
@@ -50,7 +52,7 @@ class LocationVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate
         locationManager.delegate = self
         
         fetchAdress()
-        centerMapOnLocation(location: locationManager.location!)
+        centerMapOnLocation()
     }
 
     func fetchAdress() {
@@ -87,23 +89,17 @@ class LocationVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate
     }
     
     
-    func centerMapOnLocation(location:CLLocation){
+    func centerMapOnLocation(){
 
-        let coordinateRegion = MKCoordinateRegionMakeWithDistance((locationManager.location?.coordinate)!, regionRadius, regionRadius)
-       // Make((MKUserLocation().location?.coordinate)! , regionRadius)
-//        (map.centerCoordinate, map.region.span)
+//        let coordinateRegion = MKCoordinateRegionMakeWithDistance((locationManager.location?.coordinate)!, regionRadius, regionRadius)
+        let coordinateRegion = MKCoordinateRegionMakeWithDistance(testLocation.coordinate, 2*regionRadius, 2*regionRadius)
+
         map.setRegion(coordinateRegion, animated: true)
         locationManager.stopUpdatingLocation()
         
 
     }
-    
-//   func mapView(_ mapView: MKMapView, didUpdate userLocation: MKUserLocation){
-//
-//     if let loc = userLocation.location {
-//        centerMapOnLocation(location: loc)
-//      }
-//    }
+
   
     
     func createAnnotationForLocation(location: CLLocation, Title: String, Subtitle: String){

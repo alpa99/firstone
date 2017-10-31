@@ -55,12 +55,6 @@ class BestellungVC: UIViewController, UITableViewDataSource, UITableViewDelegate
     var sections = [ExpandTVSection]()
     
     
-
-    func printsjdgskjd(ab: Dictionary<String, Int>){
-        print(ab, "DAS IST AB")
-        
-    }
-    
     func fetchSpeisekarte(){
         var z = [String: Int]()
         var datref: DatabaseReference!
@@ -79,11 +73,12 @@ class BestellungVC: UIViewController, UITableViewDataSource, UITableViewDelegate
 
                 if let dictionary = snapshot.value as? [String: AnyObject]{
                     let shisha = SpeisekarteInfos(dictionary: dictionary)
-                    self.shishas.append(shisha.Name!)
+                    let shishaInfo = "\(shisha.Name!) \(shisha.Preis!)€"
+                    self.shishas.append(shishaInfo)
+                    
                 }
                 if self.shishas.count == z["Shishas"]{
                 self.setSections(genre: "Shishas", movies: self.shishas)
-                print(self.genreDetail)
                 }
                 
             }, withCancel: nil)
@@ -92,7 +87,8 @@ class BestellungVC: UIViewController, UITableViewDataSource, UITableViewDelegate
                 
                 if let dictionary = snapshot.value as? [String: AnyObject]{
                     let getränk = SpeisekarteInfos(dictionary: dictionary)
-                    self.getränke.append(getränk.Name!)
+                    let getränkeInfo = "\(getränk.Name!) \(getränk.Preis!)€"
+                    self.getränke.append(getränkeInfo)
                 }
                 if self.getränke.count == z["Getränke"]{
                     self.setSections(genre: "Getränke", movies: self.getränke)
