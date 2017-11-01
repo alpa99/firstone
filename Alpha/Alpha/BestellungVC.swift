@@ -99,8 +99,7 @@ class BestellungVC: UIViewController, UITableViewDataSource, UITableViewDelegate
             
         }, withCancel: nil)
 
-        
-
+    
     }
 
     
@@ -113,7 +112,10 @@ class BestellungVC: UIViewController, UITableViewDataSource, UITableViewDelegate
     
     override func viewDidLoad() {
         super.viewDidLoad()
-fetchSpeisekarte()
+        
+        fetchSpeisekarte()
+
+        
         // Do any additional setup after loading the view.
     }
 
@@ -137,7 +139,7 @@ fetchSpeisekarte()
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if (sections[indexPath.section].expanded){
-            return 44
+            return 144
         }
         else {
             return 0
@@ -157,8 +159,9 @@ fetchSpeisekarte()
     
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = bestellungTableView.dequeueReusableCell(withIdentifier: "labelCell")!
-        cell.textLabel?.text = sections[indexPath.section].movies[indexPath.row]
+        let cell = bestellungTableView.dequeueReusableCell(withIdentifier: "labelCell", for: indexPath) as! CustomTableViewCell
+        cell.label1.text = "\(sections[indexPath.section].movies[indexPath.row])"
+
         return cell
     }
     

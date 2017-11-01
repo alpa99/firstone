@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		081461F41F9927FA00121943 /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081461F31F9927FA00121943 /* LoginVC.swift */; };
+		0888A49C1FAA23DA0045689C /* CustomTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0888A49A1FAA23DA0045689C /* CustomTableViewCell.swift */; };
 		0895B3631F9B5F28007D97DE /* UserVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0895B3621F9B5F28007D97DE /* UserVC.swift */; };
 		08C881671F9962EB00AD8F20 /* BarInfos.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C881661F9962EB00AD8F20 /* BarInfos.swift */; };
 		08C881691F9963F100AD8F20 /* BarAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C881681F9963F100AD8F20 /* BarAnnotation.swift */; };
@@ -53,6 +54,7 @@
 
 /* Begin PBXFileReference section */
 		081461F31F9927FA00121943 /* LoginVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; };
+		0888A49A1FAA23DA0045689C /* CustomTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTableViewCell.swift; sourceTree = "<group>"; };
 		0895B3621F9B5F28007D97DE /* UserVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserVC.swift; sourceTree = "<group>"; };
 		08C881661F9962EB00AD8F20 /* BarInfos.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarInfos.swift; sourceTree = "<group>"; };
 		08C881681F9963F100AD8F20 /* BarAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarAnnotation.swift; sourceTree = "<group>"; };
@@ -169,6 +171,7 @@
 				4E1132FC1F9B7EF600AD9AEF /* BarDetailVC.swift */,
 				08EF4C471F9CFE9800F01096 /* BestellungVC.swift */,
 				4E6020481F9E2F88001B2909 /* ScanDetailVC.swift */,
+				0888A49A1FAA23DA0045689C /* CustomTableViewCell.swift */,
 			);
 			path = Alpha;
 			sourceTree = "<group>";
@@ -542,6 +545,7 @@
 				08EF4C401F9CF0FE00F01096 /* BestellungInfos.swift in Sources */,
 				08EF4C4A1F9CFFA500F01096 /* ExpandTVSection.swift in Sources */,
 				0895B3631F9B5F28007D97DE /* UserVC.swift in Sources */,
+				0888A49C1FAA23DA0045689C /* CustomTableViewCell.swift in Sources */,
 				4E6020491F9E2F88001B2909 /* ScanDetailVC.swift in Sources */,
 				4EC248021F9950E700910AA8 /* LocationVC.swift in Sources */,
 			);
