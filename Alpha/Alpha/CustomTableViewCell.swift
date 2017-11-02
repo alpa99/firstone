@@ -13,8 +13,13 @@ class CustomTableViewCell: UITableViewCell {
 
     @IBOutlet weak var label1: UILabel!
     @IBOutlet weak var label2: UILabel!
+
+
+    @IBAction func add(_ sender: Any) {
+        print(label1.text ?? "no text")
+    }
     
-    
+
     
     override func awakeFromNib() {
         super.awakeFromNib()
