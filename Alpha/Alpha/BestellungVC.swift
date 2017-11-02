@@ -139,7 +139,7 @@ class BestellungVC: UIViewController, UITableViewDataSource, UITableViewDelegate
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if (sections[indexPath.section].expanded){
-            return 144
+            return 59
         }
         else {
             return 0
