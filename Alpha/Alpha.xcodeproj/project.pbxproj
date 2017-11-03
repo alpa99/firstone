@@ -19,6 +19,7 @@
 		08EF4C4E1F9D2AC000F01096 /* SpeisekarteInfos.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EF4C4D1F9D2AC000F01096 /* SpeisekarteInfos.swift */; };
 		4E1132FD1F9B7EF600AD9AEF /* BarDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E1132FC1F9B7EF600AD9AEF /* BarDetailVC.swift */; };
 		4E6020491F9E2F88001B2909 /* ScanDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E6020481F9E2F88001B2909 /* ScanDetailVC.swift */; };
+		4E78E53D1FABE03400B81EB2 /* pin.png in Resources */ = {isa = PBXBuildFile; fileRef = 4E78E53C1FABE03300B81EB2 /* pin.png */; };
 		4EC247CB1F98F90500910AA8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EC247CA1F98F90500910AA8 /* AppDelegate.swift */; };
 		4EC247CD1F98F90500910AA8 /* QRScanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EC247CC1F98F90500910AA8 /* QRScanner.swift */; };
 		4EC247D01F98F90500910AA8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4EC247CE1F98F90500910AA8 /* Main.storyboard */; };
@@ -67,6 +68,7 @@
 		3266058303F90426C7363152 /* Pods-AlphaTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AlphaTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-AlphaTests/Pods-AlphaTests.debug.xcconfig"; sourceTree = "<group>"; };
 		4E1132FC1F9B7EF600AD9AEF /* BarDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarDetailVC.swift; sourceTree = "<group>"; };
 		4E6020481F9E2F88001B2909 /* ScanDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanDetailVC.swift; sourceTree = "<group>"; };
+		4E78E53C1FABE03300B81EB2 /* pin.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pin.png; sourceTree = SOURCE_ROOT; };
 		4EC247C71F98F90500910AA8 /* Alpha.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Alpha.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4EC247CA1F98F90500910AA8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4EC247CC1F98F90500910AA8 /* QRScanner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRScanner.swift; sourceTree = "<group>"; };
@@ -172,6 +174,7 @@
 				08EF4C471F9CFE9800F01096 /* BestellungVC.swift */,
 				4E6020481F9E2F88001B2909 /* ScanDetailVC.swift */,
 				0888A49A1FAA23DA0045689C /* CustomTableViewCell.swift */,
+				4E78E53C1FABE03300B81EB2 /* pin.png */,
 			);
 			path = Alpha;
 			sourceTree = "<group>";
@@ -340,6 +343,7 @@
 				4EC247D51F98F90500910AA8 /* LaunchScreen.storyboard in Resources */,
 				4EC247FE1F99377100910AA8 /* GoogleService-Info.plist in Resources */,
 				4EC247D21F98F90500910AA8 /* Assets.xcassets in Resources */,
+				4E78E53D1FABE03400B81EB2 /* pin.png in Resources */,
 				4EC247D01F98F90500910AA8 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -715,11 +719,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 8G282R5UXU;
+				DEVELOPMENT_TEAM = 84R3VSG74G;
 				INFOPLIST_FILE = Alpha/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = AM.Alpha;
+				PRODUCT_BUNDLE_IDENTIFIER = AM.Alpha1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -732,11 +736,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 8G282R5UXU;
+				DEVELOPMENT_TEAM = 84R3VSG74G;
 				INFOPLIST_FILE = Alpha/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = AM.Alpha;
+				PRODUCT_BUNDLE_IDENTIFIER = AM.Alpha1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

@@ -91,8 +91,8 @@ class LocationVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate
     
     func centerMapOnLocation(){
 
-//        let coordinateRegion = MKCoordinateRegionMakeWithDistance((locationManager.location?.coordinate)!, regionRadius, regionRadius)
-        let coordinateRegion = MKCoordinateRegionMakeWithDistance(testLocation.coordinate, 2*regionRadius, 2*regionRadius)
+       let coordinateRegion = MKCoordinateRegionMakeWithDistance((locationManager.location?.coordinate)!, regionRadius, regionRadius)
+  //      let coordinateRegion = MKCoordinateRegionMakeWithDistance(testLocation.coordinate, 2*regionRadius, 2*regionRadius)
 
         map.setRegion(coordinateRegion, animated: true)
         locationManager.stopUpdatingLocation()
@@ -129,11 +129,11 @@ class LocationVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate
         
         let reuseId = "pin"
         
-        var pinView = mapView.dequeueReusableAnnotationView(withIdentifier: reuseId) as? MKPinAnnotationView
+        var pinView = mapView.dequeueReusableAnnotationView(withIdentifier: reuseId)
         if pinView == nil {
-            pinView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: reuseId)
+            pinView = MKAnnotationView(annotation: annotation, reuseIdentifier: reuseId)
             pinView!.canShowCallout = true
-            pinView!.animatesDrop = true
+           // pinView!.animatesDrop = true
             let calloutButton = UIButton(type: .detailDisclosure)
             pinView!.rightCalloutAccessoryView = calloutButton
             pinView!.sizeToFit()
@@ -142,6 +142,15 @@ class LocationVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate
             pinView!.annotation = annotation
         }
         
+      //  pinView!.image = UIImage(named: "pin.png")
+        let pinImage = UIImage(named: "pin.png")
+        let size = CGSize(width: 35, height: 50)
+        UIGraphicsBeginImageContext(size)
+        pinImage!.draw(in: CGRect(x:0, y:-5, width:size.width, height:size.height))
+        let resizedImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        pinView!.layer.anchorPoint = CGPoint(x: 0.6, y: 0.8)
+        pinView!.image = resizedImage
         
         return pinView
     }
