@@ -13,6 +13,7 @@ import Firebase
 class DrawerVC: UIViewController, PulleyDrawerViewControllerDelegate, UITableViewDataSource, UITableViewDelegate, UISearchResultsUpdating, UISearchBarDelegate {
     
     @IBOutlet weak var BarTV: UITableView!
+    @IBOutlet weak var topView: UIView!
     
     var bars = [BarInfos]()
     var filteredbars = [BarInfos]()
@@ -34,14 +35,22 @@ class DrawerVC: UIViewController, PulleyDrawerViewControllerDelegate, UITableVie
         searchController.searchResultsUpdater = self
         searchController.dimsBackgroundDuringPresentation  = false
         definesPresentationContext = true
-        BarTV.tableHeaderView = searchController.searchBar
+        //BarTV.tableHeaderView = searchController.searchBar
         searchController.searchBar.delegate = self
+        
+        // Add the search bar as a subview of the UIView you added above the table view
+        self.topView.addSubview(self.searchController.searchBar)
+        // Call sizeToFit() on the search bar so it fits nicely in the UIView
+        self.searchController.searchBar.sizeToFit()
+        // For some reason, the search bar will extend outside the view to the left after calling sizeToFit. This next line corrects this.
+        self.searchController.searchBar.frame.size.width = self.view.frame.size.width
         
     
     }
      func touchesBegan(touches: NSSet, withEvent event: UIEvent) {
         self.searchController.searchBar.endEditing(true)
     }
+    
     
     
     func searchBarShouldBeginEditing(_ searchBar: UISearchBar) -> Bool {
