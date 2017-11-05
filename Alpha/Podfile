@@ -6,6 +6,8 @@ target 'Alpha' do
   use_frameworks!
 
   # Pods for Alpha
+
+ pod 'GoogleMaps'
 pod 'Pulley'
 
 pod 'FacebookCore'
@@ -14,8 +16,6 @@ pod 'FacebookLogin'
 pod 'Firebase/Core'
 pod 'Firebase/Database‘
 pod 'Firebase'
-
-
 
   target 'AlphaTests' do
     inherit! :search_paths
