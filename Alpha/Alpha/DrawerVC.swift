@@ -51,7 +51,9 @@ class DrawerVC: UIViewController, PulleyDrawerViewControllerDelegate, UITableVie
         self.searchController.searchBar.endEditing(true)
     }
     
-    
+    func drawerPositionDidChange(drawer: PulleyViewController, bottomSafeArea: CGFloat) {
+        self.searchController.searchBar.endEditing(true)
+    }
     
     func searchBarShouldBeginEditing(_ searchBar: UISearchBar) -> Bool {
         return (((parent as? PulleyViewController)?.setDrawerPosition(position: PulleyPosition(rawValue: 2)!)) != nil)
