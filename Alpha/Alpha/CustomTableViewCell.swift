@@ -8,15 +8,29 @@
 
 import UIKit
 
+protocol CustomTableCellDelegate {
+    func shishaBtn(sender: CustomTableViewCell)
+}
+
 class CustomTableViewCell: UITableViewCell {
-
-
-    @IBOutlet weak var label1: UILabel!
-    @IBOutlet weak var label2: UILabel!
-
     
-    @IBAction func add(_ sender: Any) {
-        print(label1.text ?? "asfasd")
+    var delegate: CustomTableCellDelegate?
+ 
+    var bestellung = [String]()
+    
+    @IBOutlet weak var shishaPreisLbl: UILabel!
+    
+    @IBOutlet weak var shishaNameLbl: UILabel!
+    
+    @IBOutlet weak var shishaBtn: UIButton!
+    
+    @IBAction func shishaBtnPressed(_ sender: UIButton) {
+        if delegate != nil {
+            delegate?.shishaBtn(sender: self)
+            }
+        bestellung.append(shishaNameLbl.text!)
+        
+        
     }
     
     

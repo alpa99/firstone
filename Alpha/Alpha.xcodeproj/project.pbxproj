@@ -20,7 +20,6 @@
 		4E1132FD1F9B7EF600AD9AEF /* BarDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E1132FC1F9B7EF600AD9AEF /* BarDetailVC.swift */; };
 		4E6020491F9E2F88001B2909 /* ScanDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E6020481F9E2F88001B2909 /* ScanDetailVC.swift */; };
 		4E78E53D1FABE03400B81EB2 /* pin.png in Resources */ = {isa = PBXBuildFile; fileRef = 4E78E53C1FABE03300B81EB2 /* pin.png */; };
-		4EBF02531FAFDC050058D47A /* googlemap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EBF02521FAFDC050058D47A /* googlemap.swift */; };
 		4EC247CB1F98F90500910AA8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EC247CA1F98F90500910AA8 /* AppDelegate.swift */; };
 		4EC247CD1F98F90500910AA8 /* QRScanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EC247CC1F98F90500910AA8 /* QRScanner.swift */; };
 		4EC247D01F98F90500910AA8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4EC247CE1F98F90500910AA8 /* Main.storyboard */; };
@@ -70,7 +69,6 @@
 		4E1132FC1F9B7EF600AD9AEF /* BarDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarDetailVC.swift; sourceTree = "<group>"; };
 		4E6020481F9E2F88001B2909 /* ScanDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanDetailVC.swift; sourceTree = "<group>"; };
 		4E78E53C1FABE03300B81EB2 /* pin.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pin.png; sourceTree = SOURCE_ROOT; };
-		4EBF02521FAFDC050058D47A /* googlemap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = googlemap.swift; sourceTree = "<group>"; };
 		4EC247C71F98F90500910AA8 /* Alpha.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Alpha.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4EC247CA1F98F90500910AA8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4EC247CC1F98F90500910AA8 /* QRScanner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRScanner.swift; sourceTree = "<group>"; };
@@ -177,7 +175,6 @@
 				4E6020481F9E2F88001B2909 /* ScanDetailVC.swift */,
 				0888A49A1FAA23DA0045689C /* CustomTableViewCell.swift */,
 				4E78E53C1FABE03300B81EB2 /* pin.png */,
-				4EBF02521FAFDC050058D47A /* googlemap.swift */,
 			);
 			path = Alpha;
 			sourceTree = "<group>";
@@ -374,12 +371,9 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-Alpha/Pods-Alpha-resources.sh",
-				"${PODS_ROOT}/GoogleMaps/Maps/Frameworks/GoogleMaps.framework/Resources/GoogleMaps.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -548,7 +542,6 @@
 				4EC248001F9950CE00910AA8 /* DrawerVC.swift in Sources */,
 				4EC247CD1F98F90500910AA8 /* QRScanner.swift in Sources */,
 				08C881671F9962EB00AD8F20 /* BarInfos.swift in Sources */,
-				4EBF02531FAFDC050058D47A /* googlemap.swift in Sources */,
 				4EC247CB1F98F90500910AA8 /* AppDelegate.swift in Sources */,
 				081461F41F9927FA00121943 /* LoginVC.swift in Sources */,
 				08EF4C481F9CFE9800F01096 /* BestellungVC.swift in Sources */,

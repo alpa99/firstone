@@ -10,9 +10,14 @@ import UIKit
 import Firebase
 import Pulley
 
-class BestellungVC: UIViewController, UITableViewDataSource, UITableViewDelegate, ExpandableHeaderViewDelegate, PulleyDrawerViewControllerDelegate {
+class BestellungVC: UIViewController, UITableViewDataSource, UITableViewDelegate, ExpandableHeaderViewDelegate, PulleyDrawerViewControllerDelegate, CustomTableCellDelegate {
 
+    
+    
     @IBOutlet weak var label: UILabel!
+    
+    @IBOutlet weak var bestellungLbl: UILabel!
+    
     func collapsedDrawerHeight(bottomSafeArea: CGFloat) -> CGFloat {
         return 102.0
     }
@@ -160,7 +165,9 @@ class BestellungVC: UIViewController, UITableViewDataSource, UITableViewDelegate
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = bestellungTableView.dequeueReusableCell(withIdentifier: "labelCell", for: indexPath) as! CustomTableViewCell
-        cell.label1.text = "\(sections[indexPath.section].movies[indexPath.row])"
+        
+        cell.delegate = self
+        cell.shishaNameLbl.text = "\(sections[indexPath.section].movies[indexPath.row])"
 
         return cell
     }
@@ -176,6 +183,12 @@ class BestellungVC: UIViewController, UITableViewDataSource, UITableViewDelegate
         bestellungTableView.endUpdates()
         
     }
+    
+    func shishaBtn(sender: CustomTableViewCell) {
+        print("hjvjh")
+        
+    }
+
     
 }
 
