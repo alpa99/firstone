@@ -9,22 +9,31 @@
 import UIKit
 import Firebase
 import AVFoundation
+import CoreLocation
 
 var ergebnis = 0
 var barnummer = 0
 
-class QRScanner: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
+class QRScanner: UIViewController, AVCaptureMetadataOutputObjectsDelegate, CLLocationManagerDelegate {
     
 
     @IBOutlet weak var square: UIImageView!
     
     var qrbar = [QRBereich]()
     var qrbarname = ""
+    var qrbaradresse = ""
     var video = AVCaptureVideoPreviewLayer()
     let session = AVCaptureSession()
+    var locationManager = CLLocationManager()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        locationManager.requestWhenInUseAuthorization()
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        locationManager.delegate = self
+        
+        
         let captureDevice = AVCaptureDevice.default(for: AVMediaType.video)
      
         do {
@@ -97,25 +106,54 @@ class QRScanner: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
                // qrbar.setValuesForKeys(dict)
      
                 self.qrbarname.append(qrbar.Name!)
-                
+                self.qrbaradresse.append(qrbar.Adresse!)
      
                 print(self.qrbarname)
-     
-                let alert = UIAlertController(title: "Erfolgreich", message: "Du bist bei \(self.qrbarname)!", preferredStyle: .alert)
-                alert.addAction(UIAlertAction(title: "Weiter", style: .default, handler:{ (action) in self.performSegue(withIdentifier: "codescan", sender: self)}))
                 
-                self.present(alert, animated: true, completion: nil)
-                
+                CLGeocoder().geocodeAddressString(self.qrbaradresse) { (placemarks, error) in
+                    guard
+                    let placemarks = placemarks,
+                    let locationone = placemarks.first?.location
+                        else {
+                            let alert = UIAlertController(title: "Fehler", message: "Dies ist kein Smolo-Code", preferredStyle: .alert)
+                            alert.addAction(UIAlertAction(title: "Abbrechen", style: .default, handler:{ (action) in self.session.startRunning()}))
+                            
+                            self.present(alert, animated: true, completion: nil)
+                            
+                    return}
+                    
+                    self.distanceCondition(locat: locationone)
+            }
             }
         }
             
             , withCancel: nil)
         
-        
-     
-        
     }
     
+    func distanceCondition (locat: CLLocation){
+
+        let distancebar = self.locationManager.location?.distance(from: locat)
+        print (distancebar!, " entfernung")
+        let distanceint = Int(distancebar!)
+        
+        if distanceint < 50 {
+          
+            let alert = UIAlertController(title: "Erfolgreich", message: "Du bist bei \(self.qrbarname)!", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Weiter", style: .default, handler:{ (action) in self.performSegue(withIdentifier: "codescan", sender: self)}))
+            
+            self.present(alert, animated: true, completion: nil)
+        }else{
+          
+            let alert = UIAlertController(title: "Fehler", message: "Du bist nicht in der Nähe von \(self.qrbarname)!", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Abbrechen", style: .default, handler:{ (action) in self.session.startRunning()}))
+            
+            self.present(alert, animated: true, completion: nil)
+            
+            
+            
+        }
+    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

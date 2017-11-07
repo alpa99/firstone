@@ -91,8 +91,8 @@ class LocationVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate
     
     func centerMapOnLocation(){
 
-//       let coordinateRegion = MKCoordinateRegionMakeWithDistance((locationManager.location?.coordinate)!, regionRadius, regionRadius)
-    let coordinateRegion = MKCoordinateRegionMakeWithDistance(testLocation.coordinate, 2*regionRadius, 2*regionRadius)
+       let coordinateRegion = MKCoordinateRegionMakeWithDistance((locationManager.location?.coordinate)!, regionRadius, regionRadius)
+   // let coordinateRegion = MKCoordinateRegionMakeWithDistance(testLocation.coordinate, 2*regionRadius, 2*regionRadius)
 
         map.setRegion(coordinateRegion, animated: true)
         locationManager.stopUpdatingLocation()
