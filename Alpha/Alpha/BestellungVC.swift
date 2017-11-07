@@ -18,6 +18,7 @@ class BestellungVC: UIViewController, UITableViewDataSource, UITableViewDelegate
     
     @IBOutlet weak var bestellungLbl: UILabel!
     
+    
     func collapsedDrawerHeight(bottomSafeArea: CGFloat) -> CGFloat {
         return 102.0
     }
@@ -33,6 +34,8 @@ class BestellungVC: UIViewController, UITableViewDataSource, UITableViewDelegate
 
     
     var barname = ""
+    
+    var bestellungsText = "noch keine Bestellung"
     
     var bars = [BarInfos]()
     var adresse = String ()
@@ -119,7 +122,7 @@ class BestellungVC: UIViewController, UITableViewDataSource, UITableViewDelegate
         super.viewDidLoad()
         
         fetchSpeisekarte()
-
+        bestellungLbl.text = bestellungsText
         
         // Do any additional setup after loading the view.
     }
@@ -168,7 +171,7 @@ class BestellungVC: UIViewController, UITableViewDataSource, UITableViewDelegate
         
         cell.delegate = self
         cell.shishaNameLbl.text = "\(sections[indexPath.section].movies[indexPath.row])"
-
+        
         return cell
     }
     
@@ -185,11 +188,11 @@ class BestellungVC: UIViewController, UITableViewDataSource, UITableViewDelegate
     }
     
     func shishaBtn(sender: CustomTableViewCell) {
-        print("hjvjh")
+        print("Button2")
         
     }
 
-    
+
 }
 
 

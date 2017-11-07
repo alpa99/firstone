@@ -18,9 +18,8 @@ class CustomTableViewCell: UITableViewCell {
  
     var bestellung = [String]()
     
-    @IBOutlet weak var shishaPreisLbl: UILabel!
-    
     @IBOutlet weak var shishaNameLbl: UILabel!
+    @IBOutlet weak var shishaPreisLbl: UILabel!
     
     @IBOutlet weak var shishaBtn: UIButton!
     
@@ -30,9 +29,14 @@ class CustomTableViewCell: UITableViewCell {
             }
         bestellung.append(shishaNameLbl.text!)
         
+        let bestellungText = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "BestellungVC") as! BestellungVC
+        
+
+        bestellungText.bestellungsText = "ERSTE BESTELLUNG"
         
     }
     
+ 
     
     override func awakeFromNib() {
         super.awakeFromNib()

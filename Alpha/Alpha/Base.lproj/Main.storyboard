@@ -356,7 +356,7 @@
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="shishaBtn" destination="FYF-ac-s1M" id="rce-ir-IsP"/>
-                                            <outlet property="shishaNameLbl" destination="bgS-cX-tzj" id="Qfh-OJ-35j"/>
+                                            <outlet property="shishaNameLbl" destination="5eE-cY-mFc" id="xxd-XI-y1D"/>
                                             <outlet property="shishaPreisLbl" destination="bgS-cX-tzj" id="HgW-4J-O1U"/>
                                         </connections>
                                     </tableViewCell>
