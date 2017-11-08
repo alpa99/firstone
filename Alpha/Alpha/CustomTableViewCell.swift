@@ -33,7 +33,10 @@ class CustomTableViewCell: UITableViewCell {
     // ACTIONS
     
     
- 
+    @IBAction func shishaBtnPressed(_ sender: Any) {
+        print("Button1")
+    }
+    
     // OTHERS
     
     override func awakeFromNib() {

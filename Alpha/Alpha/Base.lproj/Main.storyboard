@@ -327,7 +327,7 @@
                                                                     <rect key="frame" x="38" y="0.0" width="275" height="29"/>
                                                                     <state key="normal" title="Button"/>
                                                                     <connections>
-                                                                        <action selector="shishaBtnPressed:" destination="yy6-ne-Y6V" eventType="touchUpInside" id="CbK-RR-rlX"/>
+                                                                        <action selector="shishaBtnPressed:" destination="yy6-ne-Y6V" eventType="touchUpInside" id="4fg-xb-a41"/>
                                                                     </connections>
                                                                 </button>
                                                             </subviews>
