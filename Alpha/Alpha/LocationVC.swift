@@ -10,50 +10,27 @@ import UIKit
 import Firebase
 import MapKit
 import Pulley
-import CoreLocation
-import AddressBookUI
+import CoreLocation // BRAUCHEN WIR DAS
+import AddressBookUI // BRAUCHEN WIR DAS
 
 class LocationVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
 
 
-    @IBOutlet weak var map: MKMapView!
-
-    // was ist das
-    let cellID2 = "cellID2"
-    
+    // VARS
+    let cellID2 = "cellID2" // BRAUCHEN WIR DAS?
     let regionRadius: CLLocationDistance = 1000
-   
     var locationManager = CLLocationManager()
-    
     var testLocation = CLLocation(latitude: 52.375892, longitude: 9.732010)
-    
     var startLocation: CLLocation!
-    
     var barPointSubtitle = [String]()
-    
     var BarAdressen = [String]()
-   
     var BarNamen = [String]()
     
+    // OUTLETS
     
-    override func viewWillAppear(_ animated: Bool) {
-        self.navigationController?.setNavigationBarHidden(true, animated: true)
-        
-        
-    }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        map.delegate = self
+    @IBOutlet weak var map: MKMapView!
 
-       // map.region.span = MKCoordinateSpanMake(2*regionRadius, 2*regionRadius)
-        locationManager.requestWhenInUseAuthorization()
-        locationManager.desiredAccuracy = kCLLocationAccuracyBest
-        locationManager.delegate = self
-        
-        fetchAdress()
-        centerMapOnLocation()
-    }
+    // FUNTIONS FIREBASE
 
     func fetchAdress() {
 
@@ -68,18 +45,14 @@ class LocationVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate
                 for BarIndex in 0 ..< self.BarAdressen.count {
                     self.getPlaceMarkFromAdress(adress: self.BarAdressen[BarIndex], Titlex: self.BarNamen[BarIndex], Subtitlex: "irgendwas" )
 
-
-
                 }
             }
 
         }, withCancel: nil)
     }
 
-    override func viewDidAppear(_ animated: Bool){
-        locationAuthStatus()
-    }
-    
+    // FUNCS LOCATION AND ANNOTATION
+
     func locationAuthStatus(){
         if CLLocationManager.authorizationStatus() == .authorizedWhenInUse{
             map.showsUserLocation = true
@@ -88,10 +61,10 @@ class LocationVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate
         }
     }
     
-    
+
     func centerMapOnLocation(){
         
-   //     let coordinateRegion = MKCoordinateRegionMakeWithDistance((locationManager.location?.coordinate)!, regionRadius, regionRadius)
+// let coordinateRegion = MKCoordinateRegionMakeWithDistance((locationManager.location?.coordinate)!, regionRadius, regionRadius)
    let coordinateRegion = MKCoordinateRegionMakeWithDistance(testLocation.coordinate, 2*regionRadius, 2*regionRadius)
 
         map.setRegion(coordinateRegion, animated: true)
@@ -100,14 +73,11 @@ class LocationVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate
 
     }
 
-  
-    
     func createAnnotationForLocation(location: CLLocation, Title: String, Subtitle: String){
 
         
         let barpoint = BarAnnotation(coordinate: location.coordinate, title: Title, subtitle: Subtitle)
         map.addAnnotation(barpoint)
-        
         
     }
     
@@ -122,6 +92,7 @@ class LocationVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate
         }
         
     }
+    
     
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView?
     {
@@ -171,4 +142,29 @@ class LocationVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate
             
         }
  }
+    
+    // OTHERS
+    override func viewWillAppear(_ animated: Bool) {
+        self.navigationController?.setNavigationBarHidden(true, animated: true)
+        
+        
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        map.delegate = self
+        locationManager.requestWhenInUseAuthorization()
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        locationManager.delegate = self
+        
+        fetchAdress()
+        centerMapOnLocation()
+    }
+    
+    override func viewDidAppear(_ animated: Bool){
+        locationAuthStatus()
+    }
+    
+    
+    
 }

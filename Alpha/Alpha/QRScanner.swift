@@ -17,8 +17,7 @@ var barnummer = 0
 class QRScanner: UIViewController, AVCaptureMetadataOutputObjectsDelegate, CLLocationManagerDelegate {
     
 
-    @IBOutlet weak var square: UIImageView!
-    
+    // VARS
     var qrbar = [QRBereich]()
     var qrbarname = ""
     var qrbaradresse = ""
@@ -26,43 +25,10 @@ class QRScanner: UIViewController, AVCaptureMetadataOutputObjectsDelegate, CLLoc
     let session = AVCaptureSession()
     var locationManager = CLLocationManager()
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        locationManager.requestWhenInUseAuthorization()
-        locationManager.desiredAccuracy = kCLLocationAccuracyBest
-        locationManager.delegate = self
-        
-        
-        let captureDevice = AVCaptureDevice.default(for: AVMediaType.video)
-     
-        do {
-            let input = try AVCaptureDeviceInput(device: captureDevice!)
-            session.addInput(input)
-        }
-        catch{
-            print("ERROR!!")
-        }
-     
-        let output = AVCaptureMetadataOutput()
-        session.addOutput(output)
-        output.setMetadataObjectsDelegate(self, queue: DispatchQueue.main)
-        output.metadataObjectTypes = [AVMetadataObject.ObjectType.qr]
-     
-        video = AVCaptureVideoPreviewLayer(session: session)
-        video.frame = view.layer.bounds
-        view.layer.addSublayer(video)
-        self.view.bringSubview(toFront: square)
-     
-        session.startRunning()
-     
-   
-    }
+    // OUTLETS
+    @IBOutlet weak var square: UIImageView!
     
-    override func viewWillAppear(_ animated: Bool) {
-        session.startRunning()
-    }
-    
+    // FUNC
     func metadataOutput(_ output: AVCaptureMetadataOutput, didOutput metadataObjects: [AVMetadataObject], from connection: AVCaptureConnection){
 
         
@@ -87,13 +53,6 @@ class QRScanner: UIViewController, AVCaptureMetadataOutputObjectsDelegate, CLLoc
         
     }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "codescan"{
-            let vc = segue.destination as! ScanDetailVC
-            vc.scannummer = barnummer
-        }
-    }
-    
     func fetchData() {
         
         var ref: DatabaseReference!
@@ -102,9 +61,7 @@ class QRScanner: UIViewController, AVCaptureMetadataOutputObjectsDelegate, CLLoc
      
             if let dict = snapshot.value as? [String: AnyObject]{
                 
-                let qrbar = QRBereich(dictionary: dict)
-               // qrbar.setValuesForKeys(dict)
-     
+                let qrbar = QRBereich(dictionary: dict)     
                 self.qrbarname.append(qrbar.Name!)
                 self.qrbaradresse.append(qrbar.Adresse!)
      
@@ -154,7 +111,52 @@ class QRScanner: UIViewController, AVCaptureMetadataOutputObjectsDelegate, CLLoc
             
         }
     }
-
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "codescan"{
+            let vc = segue.destination as! ScanDetailVC
+            vc.scannummer = barnummer
+        }
+    }
+    // OTHERS
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        locationManager.requestWhenInUseAuthorization()
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        locationManager.delegate = self
+        
+        
+        let captureDevice = AVCaptureDevice.default(for: AVMediaType.video)
+        
+        do {
+            let input = try AVCaptureDeviceInput(device: captureDevice!)
+            session.addInput(input)
+        }
+        catch{
+            print("ERROR!!")
+        }
+        
+        let output = AVCaptureMetadataOutput()
+        session.addOutput(output)
+        output.setMetadataObjectsDelegate(self, queue: DispatchQueue.main)
+        output.metadataObjectTypes = [AVMetadataObject.ObjectType.qr]
+        
+        video = AVCaptureVideoPreviewLayer(session: session)
+        video.frame = view.layer.bounds
+        view.layer.addSublayer(video)
+        self.view.bringSubview(toFront: square)
+        
+        session.startRunning()
+        
+        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        session.startRunning()
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.

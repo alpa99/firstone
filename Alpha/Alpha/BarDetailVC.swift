@@ -11,6 +11,25 @@ import Pulley
 import Firebase
 
 class BarDetailVC: UIViewController, PulleyDrawerViewControllerDelegate {
+    
+    // VARS
+    
+    var barname = " "
+    var bars = [BarInfos]()
+    var adresse = String ()
+    
+    
+    // ACTIONS
+    
+    @IBAction func Back(_ sender: Any) {
+        
+        let tableVC:UIViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "DrawerVC") as UIViewController
+        (parent as? PulleyViewController)?.setDrawerContentViewController(controller: tableVC, animated: true)
+    }
+    
+    
+    // PULLEY
+    
     func collapsedDrawerHeight(bottomSafeArea: CGFloat) -> CGFloat {
         return 102.0
     }
@@ -23,6 +42,8 @@ class BarDetailVC: UIViewController, PulleyDrawerViewControllerDelegate {
         return PulleyPosition.all
     }
     
+    
+    // OTHERS
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,19 +53,7 @@ class BarDetailVC: UIViewController, PulleyDrawerViewControllerDelegate {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
-    
-    var barname = " "
-    
-    var bars = [BarInfos]()
-    var adresse = String () 
-    
-    
-    
-    @IBAction func Back(_ sender: Any) {
-        
-        let tableVC:UIViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "DrawerVC") as UIViewController
-        (parent as? PulleyViewController)?.setDrawerContentViewController(controller: tableVC, animated: true)
-    }
-    
+
+
 
 }

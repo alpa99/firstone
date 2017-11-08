@@ -14,14 +14,21 @@ protocol CustomTableCellDelegate {
 
 class CustomTableViewCell: UITableViewCell {
     
+    
+    // VARS
+    
     var delegate: CustomTableCellDelegate?
  
     var bestellung = [String]()
+    
+    // OUTLETS
     
     @IBOutlet weak var shishaNameLbl: UILabel!
     @IBOutlet weak var shishaPreisLbl: UILabel!
     
     @IBOutlet weak var shishaBtn: UIButton!
+    
+    // ACTIONS
     
     @IBAction func shishaBtnPressed(_ sender: UIButton) {
         if delegate != nil {
@@ -37,6 +44,7 @@ class CustomTableViewCell: UITableViewCell {
     }
     
  
+    // OTHERS
     
     override func awakeFromNib() {
         super.awakeFromNib()

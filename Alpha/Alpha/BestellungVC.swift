@@ -12,26 +12,7 @@ import Pulley
 
 class BestellungVC: UIViewController, UITableViewDataSource, UITableViewDelegate, ExpandableHeaderViewDelegate, PulleyDrawerViewControllerDelegate, CustomTableCellDelegate {
 
-    
-    
-    @IBOutlet weak var label: UILabel!
-    
-    @IBOutlet weak var bestellungLbl: UILabel!
-    
-    
-    func collapsedDrawerHeight(bottomSafeArea: CGFloat) -> CGFloat {
-        return 102.0
-    }
-    
-    func partialRevealDrawerHeight(bottomSafeArea: CGFloat) -> CGFloat {
-        return 340.0
-    }
-    
-    func supportedDrawerPositions() -> [PulleyPosition] {
-        return PulleyPosition.all
-    }
-    
-
+    // VARS
     
     var barname = ""
     
@@ -41,44 +22,51 @@ class BestellungVC: UIViewController, UITableViewDataSource, UITableViewDelegate
     var adresse = String ()
     
     
+    var genres = [String]()
+    var shishas = [String]()
+    var getränke = [String]()
+    var genreDetail = [String]()
     
+    var sections = [ExpandTVSection]()
+    
+    
+    // OUTLETS
+    
+    @IBOutlet weak var label: UILabel!
+    
+    @IBOutlet weak var bestellungLbl: UILabel!
+    
+    @IBOutlet weak var bestellungTableView: UITableView!
+
+    
+    // ACTIONS
+    
+
     @IBAction func Back(_ sender: Any) {
         
         let tableVC:UIViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "DrawerVC") as UIViewController
         (parent as? PulleyViewController)?.setDrawerContentViewController(controller: tableVC, animated: true)
     }
     
-    
-    
-    @IBOutlet weak var bestellungTableView: UITableView!
-    
-    var genres = [String]()
-    var shishas = [String]()
-    var getränke = [String]()
-    var genreDetail = [String]()
 
-    //var getränke = [String]()
     
-    
-    var sections = [ExpandTVSection]()
-    
+
+    // FUNCTIONS
     
     func fetchSpeisekarte(){
         var z = [String: Int]()
         var datref: DatabaseReference!
         datref = Database.database().reference()
-
+        
         datref.child("Speisekarten").child("\(self.barname)").observe(.childAdded, with: { (snapshot) in
-
+            
             z.updateValue(Int(snapshot.childrenCount), forKey: snapshot.key)
             print(z, "AFDSFSDF")
-
-
-        
+            
             
             datref.child("Speisekarten").child("\(self.barname)").child("Shishas").observe(.childAdded, with: { (snapshot) in
                 self.label.text = self.barname
-
+                
                 if let dictionary = snapshot.value as? [String: AnyObject]{
                     let shisha = SpeisekarteInfos(dictionary: dictionary)
                     let shishaInfo = "\(shisha.Name!) \(shisha.Preis!)€"
@@ -86,7 +74,7 @@ class BestellungVC: UIViewController, UITableViewDataSource, UITableViewDelegate
                     
                 }
                 if self.shishas.count == z["Shishas"]{
-                self.setSections(genre: "Shishas", movies: self.shishas)
+                    self.setSections(genre: "Shishas", movies: self.shishas)
                 }
                 
             }, withCancel: nil)
@@ -106,32 +94,44 @@ class BestellungVC: UIViewController, UITableViewDataSource, UITableViewDelegate
             
             
         }, withCancel: nil)
-
-    
+        
+        
     }
-
     
+    
+    func shishaBtn(sender: CustomTableViewCell) {
+        print("Button2")
+        
+    }
+    
+    
+    
+    // PULLEY
+    
+    
+    func collapsedDrawerHeight(bottomSafeArea: CGFloat) -> CGFloat {
+        return 102.0
+    }
+    
+    func partialRevealDrawerHeight(bottomSafeArea: CGFloat) -> CGFloat {
+        return 340.0
+    }
+    
+    func supportedDrawerPositions() -> [PulleyPosition] {
+        return PulleyPosition.all
+    }
+    
+    
+
+
+    // TABLEVIEW FUNCTIONS
     
     func setSections(genre: String, movies: [String]){
         self.sections.append(ExpandTVSection(genre: genre, movies: movies, expanded: false))
         self.bestellungTableView.reloadData()
     }
   
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        fetchSpeisekarte()
-        bestellungLbl.text = bestellungsText
-        
-        // Do any additional setup after loading the view.
-    }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
 
     func numberOfSections(in tableView: UITableView) -> Int {
         return sections.count
@@ -186,11 +186,23 @@ class BestellungVC: UIViewController, UITableViewDataSource, UITableViewDelegate
         bestellungTableView.endUpdates()
         
     }
+
+    // OTHERS
     
-    func shishaBtn(sender: CustomTableViewCell) {
-        print("Button2")
+    override func viewDidLoad() {
+        super.viewDidLoad()
         
+        fetchSpeisekarte()
+        bestellungLbl.text = bestellungsText
+        
+        // Do any additional setup after loading the view.
     }
+    
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
+    }
+    
 
 
 }

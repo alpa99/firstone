@@ -11,20 +11,13 @@ import Firebase
 
 class ScanDetailVC: UIViewController {
 
+    // VARS
+    
     var scannummer = Int()
     var qrbar = [QRBereich]()
     var scanbarname = ""
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
+    // FUNCTIONS 
     
     func fetchInfos() {
         
@@ -33,26 +26,33 @@ class ScanDetailVC: UIViewController {
         datref.child("QRBereich").child("\(scannummer)").observe(.value, with: { (snapshot) in
             
             if let dictionary = snapshot.value as? [String: AnyObject]{
-                let qrbar = QRBereich(dictionary: dictionary)
-              //  qrbar.setValuesForKeys(dictionary)
-                
+                let qrbar = QRBereich(dictionary: dictionary)                
                 self.scanbarname.append(qrbar.Name!)
                 print(self.scanbarname)
                 self.setupNavigationBar()
             }
         }
-            
-            
             , withCancel: nil)
-        
     }
+    
+    
     
     func setupNavigationBar (){
         let xbar = scanbarname
         self.navigationItem.title = xbar
-        print(xbar+"df")
-//        scanlabel.text = scanbarname
+    }
+    
+    
+    // OTHERS
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
         
     }
-
+    
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+    }
+    
+    
 }

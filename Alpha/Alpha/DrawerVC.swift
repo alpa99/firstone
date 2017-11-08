@@ -12,9 +12,7 @@ import Firebase
 
 class DrawerVC: UIViewController, PulleyDrawerViewControllerDelegate, UITableViewDataSource, UITableViewDelegate, UISearchResultsUpdating, UISearchBarDelegate {
     
-    @IBOutlet weak var BarTV: UITableView!
-    @IBOutlet weak var topView: UIView!
-    
+    // VARS
     var bars = [BarInfos]()
     var filteredbars = [BarInfos]()
     var barIndex = 0
@@ -22,31 +20,33 @@ class DrawerVC: UIViewController, PulleyDrawerViewControllerDelegate, UITableVie
     let searchController = UISearchController(searchResultsController: nil)
     
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        
-        BarTV.delegate = self
-        BarTV.dataSource = self
-        BarTV.register(barCell.self, forCellReuseIdentifier: cellID)
-        bars = [BarInfos]()
-        fetchBars()
-        
-        searchController.searchResultsUpdater = self
-        searchController.dimsBackgroundDuringPresentation  = false
-        definesPresentationContext = true
-        //BarTV.tableHeaderView = searchController.searchBar
-        searchController.searchBar.delegate = self
-        
-        // Add the search bar as a subview of the UIView you added above the table view
-        self.topView.addSubview(self.searchController.searchBar)
-        // Call sizeToFit() on the search bar so it fits nicely in the UIView
-        self.searchController.searchBar.sizeToFit()
-        // For some reason, the search bar will extend outside the view to the left after calling sizeToFit. This next line corrects this.
-        self.searchController.searchBar.frame.size.width = self.view.frame.size.width
-        
+    // OUTLETS
+    @IBOutlet weak var BarTV: UITableView!
+    @IBOutlet weak var topView: UIView!
+
     
+    // FUNS
+    
+    func fetchBars () {
+        var ref: DatabaseReference!
+        ref = Database.database().reference()
+        ref.child("BarInfo").observe(.childAdded, with: { (snapshot) in
+            
+            if let dictionary = snapshot.value as? [String: AnyObject]{
+                let bar = BarInfos(dictionary: dictionary)
+                
+                self.bars.append(bar)
+                
+                DispatchQueue.main.async(execute: {
+                    self.BarTV.reloadData()
+                } )
+            }
+        }, withCancel: nil)
+
     }
+    
+    // SEARCHBAR FUNCS
+    
      func touchesBegan(touches: NSSet, withEvent event: UIEvent) {
         self.searchController.searchBar.endEditing(true)
     }
@@ -77,6 +77,8 @@ class DrawerVC: UIViewController, PulleyDrawerViewControllerDelegate, UITableVie
 
     }
     
+    // TABLEVIEW FUNCS
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         if searchController.isActive == true && searchController.searchBar.text != ""{
@@ -105,35 +107,6 @@ class DrawerVC: UIViewController, PulleyDrawerViewControllerDelegate, UITableVie
         
         return cell
     }
-    
-    
-
-    func fetchBars () {
-        var ref: DatabaseReference!
-        ref = Database.database().reference()
-        ref.child("BarInfo").observe(.childAdded, with: { (snapshot) in
-            
-            if let dictionary = snapshot.value as? [String: AnyObject]{
-                let bar = BarInfos(dictionary: dictionary)
-               // bar.setValuesForKeys(dictionary)
-                // print(bar.Name!, bar.Stadt!)
-                self.bars.append(bar)
-                
-                DispatchQueue.main.async(execute: {
-                    self.BarTV.reloadData()
-                } )
-            }
-            
-            //  print(snapshot)
-            
-            
-            
-            
-        }, withCancel: nil)
-        
-        
-    }
-    
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         barIndex = indexPath.row
@@ -165,6 +138,7 @@ class DrawerVC: UIViewController, PulleyDrawerViewControllerDelegate, UITableVie
     }
     
    
+    // PULLEY
     
     func collapsedDrawerHeight(bottomSafeArea: CGFloat) -> CGFloat {
         return 102.0
@@ -180,16 +154,45 @@ class DrawerVC: UIViewController, PulleyDrawerViewControllerDelegate, UITableVie
     }
     
 
-   
     
+    // OTHERS
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        
+        BarTV.delegate = self
+        BarTV.dataSource = self
+        BarTV.register(barCell.self, forCellReuseIdentifier: cellID)
+        bars = [BarInfos]()
+        fetchBars()
+        
+        searchController.searchResultsUpdater = self
+        searchController.dimsBackgroundDuringPresentation  = false
+        definesPresentationContext = true
+        //BarTV.tableHeaderView = searchController.searchBar
+        searchController.searchBar.delegate = self
+        
+        // Add the search bar as a subview of the UIView you added above the table view
+        self.topView.addSubview(self.searchController.searchBar)
+        // Call sizeToFit() on the search bar so it fits nicely in the UIView
+        self.searchController.searchBar.sizeToFit()
+        // For some reason, the search bar will extend outside the view to the left after calling sizeToFit. This next line corrects this.
+        self.searchController.searchBar.frame.size.width = self.view.frame.size.width
+        
+        
+    }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     
+    
 
 }
+
+// NEW CLASS
 
 class barCell: UITableViewCell {
     
