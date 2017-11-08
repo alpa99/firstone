@@ -308,8 +308,8 @@
                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="8vA-yP-9dD">
                                                     <rect key="frame" x="15" y="4" width="313" height="49.5"/>
                                                     <subviews>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5eE-cY-mFc">
-                                                            <rect key="frame" x="0.0" y="0.0" width="42" height="20.5"/>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5eE-cY-mFc">
+                                                            <rect key="frame" x="0.0" y="0.0" width="45" height="20.5"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
@@ -317,14 +317,14 @@
                                                         <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rNf-V4-hog">
                                                             <rect key="frame" x="0.0" y="20.5" width="313" height="29"/>
                                                             <subviews>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bgS-cX-tzj">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="42" height="29"/>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Preis" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bgS-cX-tzj">
+                                                                    <rect key="frame" x="0.0" y="0.0" width="38" height="29"/>
                                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                     <nil key="textColor"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FYF-ac-s1M">
-                                                                    <rect key="frame" x="42" y="0.0" width="271" height="29"/>
+                                                                    <rect key="frame" x="38" y="0.0" width="275" height="29"/>
                                                                     <state key="normal" title="Button"/>
                                                                     <connections>
                                                                         <action selector="shishaBtnPressed:" destination="yy6-ne-Y6V" eventType="touchUpInside" id="CbK-RR-rlX"/>
@@ -356,8 +356,8 @@
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="shishaBtn" destination="FYF-ac-s1M" id="rce-ir-IsP"/>
-                                            <outlet property="shishaNameLbl" destination="5eE-cY-mFc" id="xxd-XI-y1D"/>
-                                            <outlet property="shishaPreisLbl" destination="bgS-cX-tzj" id="HgW-4J-O1U"/>
+                                            <outlet property="shishaNameLbl" destination="5eE-cY-mFc" id="YFf-NO-cyM"/>
+                                            <outlet property="shishaPreisLbl" destination="bgS-cX-tzj" id="apb-X2-GLA"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
