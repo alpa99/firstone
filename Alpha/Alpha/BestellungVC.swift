@@ -13,7 +13,8 @@ import Pulley
 class BestellungVC: UIViewController, UITableViewDataSource, UITableViewDelegate, ExpandableHeaderViewDelegate, PulleyDrawerViewControllerDelegate, CustomTableCellDelegate {
 
     // VARS
-    
+    var items = ["1","2","3","4"]
+    private var selectedItems = [String]()
     var barname = ""
     
     var bestellungsText = "noch keine Bestellung"
@@ -50,6 +51,12 @@ class BestellungVC: UIViewController, UITableViewDataSource, UITableViewDelegate
     
 
     // FUNCTIONS
+
+    func cellItemBtnTapped(sender: CustomTableViewCell) {
+        let indexPath = self.bestellungTableView.indexPathForRow(at: sender.center)!
+        let selectedItems = "\(sections[0].items[indexPath.row])"
+        bestellungLbl.text = selectedItems
+    }
     
     func fetchSpeisekarte(){
         var z = [String: Int]()
@@ -69,6 +76,7 @@ class BestellungVC: UIViewController, UITableViewDataSource, UITableViewDelegate
                     let shisha = SpeisekarteInfos(dictionary: dictionary)
                     self.shishas.append(shisha.Name!)
                     self.shishasPreise.append(shisha.Preis!)
+                    
                     
                 }
                 if self.shishas.count == z["Shishas"]{
@@ -93,12 +101,6 @@ class BestellungVC: UIViewController, UITableViewDataSource, UITableViewDelegate
             
         }, withCancel: nil)
         
-        
-    }
-    
-    
-    func shishaBtn(sender: CustomTableViewCell) {
-        print("Button2")
         
     }
     

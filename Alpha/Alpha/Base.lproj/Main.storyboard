@@ -323,20 +323,17 @@
                                                                     <nil key="textColor"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
-                                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FYF-ac-s1M">
+                                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4QL-Tl-eWm">
                                                                     <rect key="frame" x="38" y="0.0" width="275" height="29"/>
                                                                     <state key="normal" title="Button"/>
                                                                     <connections>
-                                                                        <action selector="shishaBtnPressed:" destination="yy6-ne-Y6V" eventType="touchUpInside" id="4fg-xb-a41"/>
+                                                                        <action selector="itemBtnTapped:" destination="yy6-ne-Y6V" eventType="touchUpInside" id="5oM-ZS-Kgh"/>
                                                                     </connections>
                                                                 </button>
                                                             </subviews>
                                                             <constraints>
-                                                                <constraint firstAttribute="trailing" secondItem="FYF-ac-s1M" secondAttribute="trailing" id="X6g-h3-Sv5"/>
-                                                                <constraint firstItem="FYF-ac-s1M" firstAttribute="top" secondItem="rNf-V4-hog" secondAttribute="top" id="hDo-9I-0gK"/>
                                                                 <constraint firstItem="bgS-cX-tzj" firstAttribute="top" secondItem="rNf-V4-hog" secondAttribute="top" id="lsy-GY-P1N"/>
                                                                 <constraint firstItem="bgS-cX-tzj" firstAttribute="leading" secondItem="rNf-V4-hog" secondAttribute="leading" id="s9y-Tl-fVh"/>
-                                                                <constraint firstAttribute="bottom" secondItem="FYF-ac-s1M" secondAttribute="bottom" id="sot-zL-PM0"/>
                                                                 <constraint firstAttribute="bottom" secondItem="bgS-cX-tzj" secondAttribute="bottom" id="y8l-SS-sbm"/>
                                                             </constraints>
                                                         </stackView>
@@ -355,7 +352,7 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <outlet property="shishaBtn" destination="FYF-ac-s1M" id="rce-ir-IsP"/>
+                                            <outlet property="itemBtn" destination="4QL-Tl-eWm" id="64a-7Q-CAe"/>
                                             <outlet property="shishaNameLbl" destination="5eE-cY-mFc" id="YFf-NO-cyM"/>
                                             <outlet property="shishaPreisLbl" destination="bgS-cX-tzj" id="apb-X2-GLA"/>
                                         </connections>
