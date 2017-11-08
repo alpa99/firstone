@@ -32,18 +32,6 @@ class CustomTableViewCell: UITableViewCell {
     
     // ACTIONS
     
-    @IBAction func shishaBtnPressed(_ sender: UIButton) {
-//        if delegate != nil {
-//            delegate?.shishaBtn(sender: self)
-//            }
-//        bestellung.append(shishaNameLbl.text!)
-//
-//        let bestellungText = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "BestellungVC") as! BestellungVC
-//
-//
-//        bestellungText.bestellungsText = "ERSTE BESTELLUNG"
-        
-    }
     
  
     // OTHERS

@@ -11,13 +11,13 @@ import Foundation
 struct ExpandTVSection {
     
     var genre: String!
-    var movies: [String]!
+    var items: [String]!
     var preise: [Int]!
     var expanded: Bool!
     
-    init(genre: String, movies: [String], preise: [Int], expanded: Bool) {
+    init(genre: String, items: [String], preise: [Int], expanded: Bool) {
         self.genre = genre
-        self.movies = movies
+        self.items = items
         self.preise = preise
         self.expanded = expanded
     }

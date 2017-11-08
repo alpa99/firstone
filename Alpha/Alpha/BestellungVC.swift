@@ -72,7 +72,7 @@ class BestellungVC: UIViewController, UITableViewDataSource, UITableViewDelegate
                     
                 }
                 if self.shishas.count == z["Shishas"]{
-                    self.setSections(genre: "Shishas", movies: self.shishas, preise: self.shishasPreise)
+                    self.setSections(genre: "Shishas", items: self.shishas, preise: self.shishasPreise)
                 }
                 
             }, withCancel: nil)
@@ -85,7 +85,7 @@ class BestellungVC: UIViewController, UITableViewDataSource, UITableViewDelegate
                     self.getränkePreise.append(getränk.Preis!)
                 }
                 if self.getränke.count == z["Getränke"]{
-                    self.setSections(genre: "Getränke", movies: self.getränke, preise: self.getränkePreise)
+                    self.setSections(genre: "Getränke", items: self.getränke, preise: self.getränkePreise)
                 }
                 
             }, withCancel: nil)
@@ -124,8 +124,8 @@ class BestellungVC: UIViewController, UITableViewDataSource, UITableViewDelegate
 
     // TABLEVIEW FUNCTIONS
     
-    func setSections(genre: String, movies: [String], preise: [Int]){
-        self.sections.append(ExpandTVSection(genre: genre, movies: movies, preise: preise, expanded: false))
+    func setSections(genre: String, items: [String], preise: [Int]){
+        self.sections.append(ExpandTVSection(genre: genre, items: items, preise: preise, expanded: false))
         self.bestellungTableView.reloadData()
     }
   
@@ -136,7 +136,7 @@ class BestellungVC: UIViewController, UITableViewDataSource, UITableViewDelegate
     
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return sections[section].movies.count
+        return sections[section].items.count
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
@@ -168,7 +168,7 @@ class BestellungVC: UIViewController, UITableViewDataSource, UITableViewDelegate
         let cell = bestellungTableView.dequeueReusableCell(withIdentifier: "labelCell", for: indexPath) as! CustomTableViewCell
         
         cell.delegate = self
-        cell.shishaNameLbl.text = "\(sections[indexPath.section].movies[indexPath.row])"
+        cell.shishaNameLbl.text = "\(sections[indexPath.section].items[indexPath.row])"
         cell.shishaPreisLbl.text = "\(sections[indexPath.section].preise[indexPath.row]) €"
         
         return cell
@@ -179,7 +179,7 @@ class BestellungVC: UIViewController, UITableViewDataSource, UITableViewDelegate
         sections[section].expanded = !sections[section].expanded
         
         bestellungTableView.beginUpdates()
-        for i in 0..<sections[section].movies.count{
+        for i in 0..<sections[section].items.count{
             bestellungTableView.reloadRows(at: [IndexPath(row: i, section: section)], with: .automatic)
         }
         bestellungTableView.endUpdates()
