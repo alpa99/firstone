@@ -12,11 +12,13 @@ struct ExpandTVSection {
     
     var genre: String!
     var movies: [String]!
+    var preise: [Int]!
     var expanded: Bool!
     
-    init(genre: String, movies: [String], expanded: Bool) {
+    init(genre: String, movies: [String], preise: [Int], expanded: Bool) {
         self.genre = genre
         self.movies = movies
+        self.preise = preise
         self.expanded = expanded
     }
     

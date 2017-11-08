@@ -21,12 +21,10 @@ class BestellungVC: UIViewController, UITableViewDataSource, UITableViewDelegate
     var bars = [BarInfos]()
     var adresse = String ()
     
-    
-    var genres = [String]()
     var shishas = [String]()
+    var shishasPreise = [Int]()
     var getränke = [String]()
-    var genreDetail = [String]()
-    
+    var getränkePreise = [Int]()
     var sections = [ExpandTVSection]()
     
     
@@ -69,12 +67,12 @@ class BestellungVC: UIViewController, UITableViewDataSource, UITableViewDelegate
                 
                 if let dictionary = snapshot.value as? [String: AnyObject]{
                     let shisha = SpeisekarteInfos(dictionary: dictionary)
-                    let shishaInfo = "\(shisha.Name!) \(shisha.Preis!)€"
-                    self.shishas.append(shishaInfo)
+                    self.shishas.append(shisha.Name!)
+                    self.shishasPreise.append(shisha.Preis!)
                     
                 }
                 if self.shishas.count == z["Shishas"]{
-                    self.setSections(genre: "Shishas", movies: self.shishas)
+                    self.setSections(genre: "Shishas", movies: self.shishas, preise: self.shishasPreise)
                 }
                 
             }, withCancel: nil)
@@ -83,11 +81,11 @@ class BestellungVC: UIViewController, UITableViewDataSource, UITableViewDelegate
                 
                 if let dictionary = snapshot.value as? [String: AnyObject]{
                     let getränk = SpeisekarteInfos(dictionary: dictionary)
-                    let getränkeInfo = "\(getränk.Name!) \(getränk.Preis!)€"
-                    self.getränke.append(getränkeInfo)
+                    self.getränke.append(getränk.Name!)
+                    self.getränkePreise.append(getränk.Preis!)
                 }
                 if self.getränke.count == z["Getränke"]{
-                    self.setSections(genre: "Getränke", movies: self.getränke)
+                    self.setSections(genre: "Getränke", movies: self.getränke, preise: self.getränkePreise)
                 }
                 
             }, withCancel: nil)
@@ -126,8 +124,8 @@ class BestellungVC: UIViewController, UITableViewDataSource, UITableViewDelegate
 
     // TABLEVIEW FUNCTIONS
     
-    func setSections(genre: String, movies: [String]){
-        self.sections.append(ExpandTVSection(genre: genre, movies: movies, expanded: false))
+    func setSections(genre: String, movies: [String], preise: [Int]){
+        self.sections.append(ExpandTVSection(genre: genre, movies: movies, preise: preise, expanded: false))
         self.bestellungTableView.reloadData()
     }
   
@@ -171,6 +169,7 @@ class BestellungVC: UIViewController, UITableViewDataSource, UITableViewDelegate
         
         cell.delegate = self
         cell.shishaNameLbl.text = "\(sections[indexPath.section].movies[indexPath.row])"
+        cell.shishaPreisLbl.text = "\(sections[indexPath.section].preise[indexPath.row]) €"
         
         return cell
     }
