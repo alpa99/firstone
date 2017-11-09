@@ -329,6 +329,9 @@
                                                                         <constraint firstAttribute="width" constant="50" id="l8n-p1-pR8"/>
                                                                     </constraints>
                                                                     <state key="normal" title="Minus"/>
+                                                                    <connections>
+                                                                        <action selector="minusBtnTapped:" destination="yy6-ne-Y6V" eventType="touchUpInside" id="p8C-K5-trX"/>
+                                                                    </connections>
                                                                 </button>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Count" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lef-W5-ihT">
                                                                     <rect key="frame" x="114.5" y="0.5" width="50" height="20.5"/>
@@ -345,6 +348,9 @@
                                                                         <constraint firstAttribute="width" constant="50" id="3MB-zR-xCj"/>
                                                                     </constraints>
                                                                     <state key="normal" title="Plus"/>
+                                                                    <connections>
+                                                                        <action selector="plusBtnTapped:" destination="yy6-ne-Y6V" eventType="touchUpInside" id="AR1-xl-HLc"/>
+                                                                    </connections>
                                                                 </button>
                                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4QL-Tl-eWm">
                                                                     <rect key="frame" x="214.5" y="-4" width="128.5" height="30"/>
@@ -376,7 +382,10 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <outlet property="itemBtn" destination="4QL-Tl-eWm" id="64a-7Q-CAe"/>
+                                            <outlet property="countLbl" destination="lef-W5-ihT" id="SDe-uH-fmH"/>
+                                            <outlet property="itemBtn" destination="Kty-Z5-SXu" id="5w2-8E-9yF"/>
+                                            <outlet property="minusBtn" destination="Kty-Z5-SXu" id="XCp-3H-lxm"/>
+                                            <outlet property="plusBtn" destination="0Vh-GW-Okl" id="2we-Fb-Fnv"/>
                                             <outlet property="shishaNameLbl" destination="5eE-cY-mFc" id="YFf-NO-cyM"/>
                                             <outlet property="shishaPreisLbl" destination="bgS-cX-tzj" id="apb-X2-GLA"/>
                                         </connections>

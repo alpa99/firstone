@@ -13,7 +13,6 @@ import Pulley
 class BestellungVC: UIViewController, UITableViewDataSource, UITableViewDelegate, ExpandableHeaderViewDelegate, PulleyDrawerViewControllerDelegate, CustomTableCellDelegate {
 
     // VARS
-    var items = ["1","2","3","4"]
     private var selectedItems = [String]()
     var barname = ""
     
@@ -28,7 +27,11 @@ class BestellungVC: UIViewController, UITableViewDataSource, UITableViewDelegate
     var getränkePreise = [Int]()
     var sections = [ExpandTVSection]()
     
+    var count = 0
+    var cellIndexPathSection = 0
+    var cellIndexPathRow = 0
     
+    var bestellung  = [String: Int]()
     // OUTLETS
     
     @IBOutlet weak var label: UILabel!
@@ -51,13 +54,6 @@ class BestellungVC: UIViewController, UITableViewDataSource, UITableViewDelegate
     
 
     // FUNCTIONS
-
-    func cellItemBtnTapped(sender: CustomTableViewCell) {
-        let indexPath = self.bestellungTableView.indexPathForRow(at: sender.center)!
-        let selectedItems = "\(sections[indexPath.section].items[indexPath.row])"
-        bestellungLbl.text = selectedItems
-    }
-    
     func fetchSpeisekarte(){
         var z = [String: Int]()
         var datref: DatabaseReference!
@@ -105,6 +101,60 @@ class BestellungVC: UIViewController, UITableViewDataSource, UITableViewDelegate
     }
     
     
+    
+    func cellItemBtnTapped(sender: CustomTableViewCell) {
+        let indexPath = self.bestellungTableView.indexPathForRow(at: sender.center)!
+    
+        let selectedItems = "\(sections[indexPath.section].items[indexPath.row])"
+        let cell = bestellungTableView.cellForRow(at: indexPath) as! CustomTableViewCell
+        bestellungLbl.text = "\(cell.countLbl.text!) \(selectedItems)"
+        bestellung.updateValue(Int(cell.countLbl.text!)!, forKey: selectedItems)
+        print(bestellung)
+    }
+    
+    
+    func cellMinusBtnTapped(sender: CustomTableViewCell) {
+        let indexPath = self.bestellungTableView.indexPathForRow(at: sender.center)!
+        
+        if cellIndexPathRow == indexPath.row && cellIndexPathSection == indexPath.section {
+            count = count-1
+        } else {
+            count = 0
+            cellIndexPathRow = indexPath.row
+            cellIndexPathSection = indexPath.section
+            count = -1
+        }
+
+        let cell = bestellungTableView.cellForRow(at: indexPath) as! CustomTableViewCell
+        if count > 0{
+            cell.countLbl.text = "\(count)"}
+        else {
+            cell.countLbl.text = "0"
+            
+        }
+    }
+    
+    func cellPlusBtnTapped(sender: CustomTableViewCell){
+        let indexPath = self.bestellungTableView.indexPathForRow(at: sender.center)!
+        
+        if cellIndexPathRow == indexPath.row && cellIndexPathSection == indexPath.section {
+            count = count+1
+        } else {
+            count = 0
+            cellIndexPathRow = indexPath.row
+            cellIndexPathSection = indexPath.section
+            count = 1
+        }
+    
+        let cell = bestellungTableView.cellForRow(at: indexPath) as! CustomTableViewCell
+        
+        if count > 0{
+            cell.countLbl.text = "\(count)"}
+        else {
+            cell.countLbl.text = "0"
+            
+        }
+    }
     
     // PULLEY
     
@@ -168,7 +218,6 @@ class BestellungVC: UIViewController, UITableViewDataSource, UITableViewDelegate
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = bestellungTableView.dequeueReusableCell(withIdentifier: "labelCell", for: indexPath) as! CustomTableViewCell
-        
         cell.delegate = self
         cell.shishaNameLbl.text = "\(sections[indexPath.section].items[indexPath.row])"
         cell.shishaPreisLbl.text = "\(sections[indexPath.section].preise[indexPath.row]) €"
