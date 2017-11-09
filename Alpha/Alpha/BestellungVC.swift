@@ -192,7 +192,6 @@ class BestellungVC: UIViewController, UITableViewDataSource, UITableViewDelegate
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         fetchSpeisekarte()
         bestellungLbl.text = bestellungsText
         
