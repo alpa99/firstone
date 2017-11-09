@@ -54,7 +54,7 @@ class BestellungVC: UIViewController, UITableViewDataSource, UITableViewDelegate
 
     func cellItemBtnTapped(sender: CustomTableViewCell) {
         let indexPath = self.bestellungTableView.indexPathForRow(at: sender.center)!
-        let selectedItems = "\(sections[0].items[indexPath.row])"
+        let selectedItems = "\(sections[indexPath.section].items[indexPath.row])"
         bestellungLbl.text = selectedItems
     }
     
