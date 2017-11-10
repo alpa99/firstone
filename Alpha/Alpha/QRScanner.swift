@@ -16,7 +16,7 @@ var barnummer = 0
 
 class QRScanner: UIViewController, AVCaptureMetadataOutputObjectsDelegate, CLLocationManagerDelegate {
     
-
+    
     // VARS
     var qrbar = [QRBereich]()
     var qrbarname = ""
@@ -31,23 +31,23 @@ class QRScanner: UIViewController, AVCaptureMetadataOutputObjectsDelegate, CLLoc
     
     // FUNC
     func metadataOutput(_ output: AVCaptureMetadataOutput, didOutput metadataObjects: [AVMetadataObject], from connection: AVCaptureConnection){
-
+        
         
         if metadataObjects.count != 0 {
-     
+            
             if let object = metadataObjects[0] as? AVMetadataMachineReadableCodeObject{
-     
+                
                 if object.type == AVMetadataObject.ObjectType.qr {
                     self.session.stopRunning()
                     ergebnis = Int(object.stringValue!)!
                     
                     barnummer = ergebnis/1000*1000
-     
+                    
                     qrbar = [QRBereich]()
                     qrbarname = ""
                     
                     fetchData()
-     
+                    
                 }
             }
         }
@@ -59,40 +59,35 @@ class QRScanner: UIViewController, AVCaptureMetadataOutputObjectsDelegate, CLLoc
         var ref: DatabaseReference!
         ref = Database.database().reference()
         ref.child("QRBereich").child("\(barnummer)").observe(.value, with: { (snapshot) in
-     
+            
             if let dict = snapshot.value as? [String: AnyObject]{
                 let qrbar = QRBereich(dictionary: dict)
                 self.qrbarname.append(qrbar.Name!)
                 let qrBarAdresse = qrbar.Adresse!
-//                self.qrbaradresse.append(qrbar.Adresse!)
-     
+                //                self.qrbaradresse.append(qrbar.Adresse!)
+                
                 print(self.qrbarname)
                 
                 CLGeocoder().geocodeAddressString(qrBarAdresse, completionHandler: { (placemarks, error) -> Void in
-        
+                    
                     if let placemark = placemarks?[0] {
                         let latitude = placemark.location?.coordinate.latitude
                         let longitude = placemark.location?.coordinate.longitude
                         
                         let location: CLLocationCoordinate2D = CLLocationCoordinate2D(latitude: latitude!,longitude: longitude!)
                         self.distanceCondition(locat: location)}
-//                    let placemarks = placemarks,
-//                        let locationone = placemarks.first?.location
-//                        else {
-//                            let alert = UIAlertController(title: "Fehler", message: "Dies ist kein Smolo-Code", preferredStyle: .alert)
-////                            alert.addAction(UIAlertAction(title: "Abbrechen", style: .default, handler:{ (action) in self.session.startRunning()}))
-////
-////                            self.present(alert, animated: true, completion: nil)
-////
-////                    return}
-//                    self.distanceCondition(locat: locationone)
+                    //                    let placemarks = placemarks,
+                    //                        let locationone = placemarks.first?.location
+                    //                        else {
+                    //                            let alert = UIAlertController(title: "Fehler", message: "Dies ist kein Smolo-Code", preferredStyle: .alert)
+                    ////                            alert.addAction(UIAlertAction(title: "Abbrechen", style: .default, handler:{ (action) in self.session.startRunning()}))
+                    ////
+                    ////                            self.present(alert, animated: true, completion: nil)
+                    ////
+                    ////                    return}
+                    //                    self.distanceCondition(locat: locationone)
                     
-<<<<<<< HEAD
-            })
-=======
-                    self.distanceCondition(locat: locationone, placema: placemarks)
-            }
->>>>>>> 9ab3eb68c1e8bbebbc35c41727cb0b509ddc675d
+                })
             }
         }
             
@@ -100,35 +95,30 @@ class QRScanner: UIViewController, AVCaptureMetadataOutputObjectsDelegate, CLLoc
         
     }
     
-<<<<<<< HEAD
     func distanceCondition (locat: CLLocationCoordinate2D){
-=======
-    func distanceCondition (locat: CLLocation, placema: [CLPlacemark]){
->>>>>>> 9ab3eb68c1e8bbebbc35c41727cb0b509ddc675d
-
+        
         print(locat, "LOCAT")
         let loCat = CLLocation(latitude: locat.latitude, longitude: locat.longitude)
         let distancebar = self.locationManager.location?.distance(from: loCat)
         print (distancebar!, " entfernung")
         let distanceint = Int(distancebar!)
-
+        
         if distanceint < 50 {
-
+            
             let alert = UIAlertController(title: "Erfolgreich", message: "Du bist bei \(self.qrbarname)!", preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "Weiter", style: .default, handler:{ (action) in self.performSegue(withIdentifier: "codescan", sender: self)}))
-
-            self.present(alert, animated: true, completion: nil)
             
+            self.present(alert, animated: true, completion: nil)
         }else{
-
+            
             let alert = UIAlertController(title: "Fehler", message: "Du bist nicht in der Nähe von \(self.qrbarname)!", preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "Abbrechen", style: .default, handler:{ (action) in self.session.startRunning()}))
-
+            
             self.present(alert, animated: true, completion: nil)
-        
-
-
-
+            
+            
+            
+            
         }
     }
     
@@ -136,9 +126,7 @@ class QRScanner: UIViewController, AVCaptureMetadataOutputObjectsDelegate, CLLoc
         if segue.identifier == "codescan"{
             let vc = segue.destination as! ScanDetailVC
             vc.scannummer = barnummer
-            
         }
-      
     }
     // OTHERS
     
@@ -183,8 +171,7 @@ class QRScanner: UIViewController, AVCaptureMetadataOutputObjectsDelegate, CLLoc
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
-
+    
+    
 }
-
 
