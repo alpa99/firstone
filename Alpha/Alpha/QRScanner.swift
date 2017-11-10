@@ -25,6 +25,7 @@ class QRScanner: UIViewController, AVCaptureMetadataOutputObjectsDelegate, CLLoc
     let session = AVCaptureSession()
     var locationManager = CLLocationManager()
     
+    
     // OUTLETS
     @IBOutlet weak var square: UIImageView!
     
@@ -32,7 +33,7 @@ class QRScanner: UIViewController, AVCaptureMetadataOutputObjectsDelegate, CLLoc
     func metadataOutput(_ output: AVCaptureMetadataOutput, didOutput metadataObjects: [AVMetadataObject], from connection: AVCaptureConnection){
 
         
-        if metadataObjects != nil && metadataObjects.count != 0 {
+        if metadataObjects.count != 0 {
      
             if let object = metadataObjects[0] as? AVMetadataMachineReadableCodeObject{
      
@@ -54,33 +55,39 @@ class QRScanner: UIViewController, AVCaptureMetadataOutputObjectsDelegate, CLLoc
     }
     
     func fetchData() {
-        
+        print("fetchDATA")
         var ref: DatabaseReference!
         ref = Database.database().reference()
         ref.child("QRBereich").child("\(barnummer)").observe(.value, with: { (snapshot) in
      
             if let dict = snapshot.value as? [String: AnyObject]{
-                
-                let qrbar = QRBereich(dictionary: dict)     
+                let qrbar = QRBereich(dictionary: dict)
                 self.qrbarname.append(qrbar.Name!)
-                self.qrbaradresse.append(qrbar.Adresse!)
+                let qrBarAdresse = qrbar.Adresse!
+//                self.qrbaradresse.append(qrbar.Adresse!)
      
                 print(self.qrbarname)
                 
-                CLGeocoder().geocodeAddressString(self.qrbaradresse) { (placemarks, error) in
-                    guard
-                    let placemarks = placemarks,
-                        let locationone = placemarks.first?.location
-                        else {
-                            let alert = UIAlertController(title: "Fehler", message: "Dies ist kein Smolo-Code", preferredStyle: .alert)
-                            alert.addAction(UIAlertAction(title: "Abbrechen", style: .default, handler:{ (action) in self.session.startRunning()}))
-                            
-                            self.present(alert, animated: true, completion: nil)
-                            
-                    return}
+                CLGeocoder().geocodeAddressString(qrBarAdresse, completionHandler: { (placemarks, error) -> Void in
+        
+                    if let placemark = placemarks?[0] {
+                        let latitude = placemark.location?.coordinate.latitude
+                        let longitude = placemark.location?.coordinate.longitude
+                        
+                        let location: CLLocationCoordinate2D = CLLocationCoordinate2D(latitude: latitude!,longitude: longitude!)
+                        self.distanceCondition(locat: location)}
+//                    let placemarks = placemarks,
+//                        let locationone = placemarks.first?.location
+//                        else {
+//                            let alert = UIAlertController(title: "Fehler", message: "Dies ist kein Smolo-Code", preferredStyle: .alert)
+////                            alert.addAction(UIAlertAction(title: "Abbrechen", style: .default, handler:{ (action) in self.session.startRunning()}))
+////
+////                            self.present(alert, animated: true, completion: nil)
+////
+////                    return}
+//                    self.distanceCondition(locat: locationone)
                     
-                    self.distanceCondition(locat: locationone)
-            }
+            })
             }
         }
             
@@ -88,27 +95,30 @@ class QRScanner: UIViewController, AVCaptureMetadataOutputObjectsDelegate, CLLoc
         
     }
     
-    func distanceCondition (locat: CLLocation){
+    func distanceCondition (locat: CLLocationCoordinate2D){
 
-        let distancebar = self.locationManager.location?.distance(from: locat)
+        print(locat, "LOCAT")
+        let loCat = CLLocation(latitude: locat.latitude, longitude: locat.longitude)
+        let distancebar = self.locationManager.location?.distance(from: loCat)
         print (distancebar!, " entfernung")
         let distanceint = Int(distancebar!)
-        
+
         if distanceint < 50 {
-          
+
             let alert = UIAlertController(title: "Erfolgreich", message: "Du bist bei \(self.qrbarname)!", preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "Weiter", style: .default, handler:{ (action) in self.performSegue(withIdentifier: "codescan", sender: self)}))
-            
+
             self.present(alert, animated: true, completion: nil)
         }else{
-          
+
             let alert = UIAlertController(title: "Fehler", message: "Du bist nicht in der Nähe von \(self.qrbarname)!", preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "Abbrechen", style: .default, handler:{ (action) in self.session.startRunning()}))
-            
+
             self.present(alert, animated: true, completion: nil)
-            
-            
-            
+        
+
+
+
         }
     }
     
