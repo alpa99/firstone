@@ -87,7 +87,12 @@ class QRScanner: UIViewController, AVCaptureMetadataOutputObjectsDelegate, CLLoc
 ////                    return}
 //                    self.distanceCondition(locat: locationone)
                     
+<<<<<<< HEAD
             })
+=======
+                    self.distanceCondition(locat: locationone, placema: placemarks)
+            }
+>>>>>>> 9ab3eb68c1e8bbebbc35c41727cb0b509ddc675d
             }
         }
             
@@ -95,7 +100,11 @@ class QRScanner: UIViewController, AVCaptureMetadataOutputObjectsDelegate, CLLoc
         
     }
     
+<<<<<<< HEAD
     func distanceCondition (locat: CLLocationCoordinate2D){
+=======
+    func distanceCondition (locat: CLLocation, placema: [CLPlacemark]){
+>>>>>>> 9ab3eb68c1e8bbebbc35c41727cb0b509ddc675d
 
         print(locat, "LOCAT")
         let loCat = CLLocation(latitude: locat.latitude, longitude: locat.longitude)
@@ -109,6 +118,7 @@ class QRScanner: UIViewController, AVCaptureMetadataOutputObjectsDelegate, CLLoc
             alert.addAction(UIAlertAction(title: "Weiter", style: .default, handler:{ (action) in self.performSegue(withIdentifier: "codescan", sender: self)}))
 
             self.present(alert, animated: true, completion: nil)
+            
         }else{
 
             let alert = UIAlertController(title: "Fehler", message: "Du bist nicht in der Nähe von \(self.qrbarname)!", preferredStyle: .alert)
@@ -126,7 +136,9 @@ class QRScanner: UIViewController, AVCaptureMetadataOutputObjectsDelegate, CLLoc
         if segue.identifier == "codescan"{
             let vc = segue.destination as! ScanDetailVC
             vc.scannummer = barnummer
+            
         }
+      
     }
     // OTHERS
     
