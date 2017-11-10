@@ -70,7 +70,7 @@ class QRScanner: UIViewController, AVCaptureMetadataOutputObjectsDelegate, CLLoc
                 CLGeocoder().geocodeAddressString(self.qrbaradresse) { (placemarks, error) in
                     guard
                     let placemarks = placemarks,
-                    let locationone = placemarks.first?.location
+                        let locationone = placemarks.first?.location
                         else {
                             let alert = UIAlertController(title: "Fehler", message: "Dies ist kein Smolo-Code", preferredStyle: .alert)
                             alert.addAction(UIAlertAction(title: "Abbrechen", style: .default, handler:{ (action) in self.session.startRunning()}))

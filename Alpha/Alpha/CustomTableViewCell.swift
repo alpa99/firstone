@@ -10,6 +10,9 @@ import UIKit
 
 protocol CustomTableCellDelegate {
     func cellItemBtnTapped(sender: CustomTableViewCell)
+    func cellMinusBtnTapped(sender: CustomTableViewCell)
+    func cellPlusBtnTapped(sender: CustomTableViewCell)
+
 }
 
 class CustomTableViewCell: UITableViewCell {
@@ -24,18 +27,27 @@ class CustomTableViewCell: UITableViewCell {
     // OUTLETS
     
     @IBOutlet weak var shishaNameLbl: UILabel!
-    
     @IBOutlet weak var shishaPreisLbl: UILabel!
+    @IBOutlet weak var countLbl: UILabel!
     
-
     @IBOutlet weak var itemBtn: UIButton!
+    @IBOutlet weak var minusBtn: UIButton!
+    @IBOutlet weak var plusBtn: UIButton!
+    
     
     // ACTIONS
 
-    
+
     @IBAction func itemBtnTapped(_ sender: Any) {
+        delegate?.cellItemBtnTapped(sender: self)
+    }
     
-    delegate?.cellItemBtnTapped(sender: self)
+    @IBAction func minusBtnTapped(_ sender: Any) {
+        delegate?.cellMinusBtnTapped(sender: self)
+    }
+    
+    @IBAction func plusBtnTapped(_ sender: Any) {
+        delegate?.cellPlusBtnTapped(sender: self)
     }
     
     // OTHERS
