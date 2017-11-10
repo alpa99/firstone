@@ -119,11 +119,7 @@ class QRScanner: UIViewController, AVCaptureMetadataOutputObjectsDelegate, CLLoc
             vc.scannummer = barnummer
             
         }
-        if segue.identifier == "codescan"{
-            let vc = segue.destination as! ScanDetailVC
-            vc.scannummer = barnummer
-            
-        }
+      
     }
     // OTHERS
     
