@@ -36,8 +36,8 @@ class BestellungVC: UIViewController, UITableViewDataSource, UITableViewDelegate
     
     @IBOutlet weak var label: UILabel!
     
-    @IBOutlet weak var bestellungLbl: UILabel!
     
+    @IBOutlet weak var bestellungTextfield: UITextView!
     @IBOutlet weak var bestellungTableView: UITableView!
 
     
@@ -107,9 +107,15 @@ class BestellungVC: UIViewController, UITableViewDataSource, UITableViewDelegate
     
         let selectedItems = "\(sections[indexPath.section].items[indexPath.row])"
         let cell = bestellungTableView.cellForRow(at: indexPath) as! CustomTableViewCell
-        bestellungLbl.text = "\(cell.countLbl.text!) \(selectedItems)"
+        if count > 0{
         bestellung.updateValue(Int(cell.countLbl.text!)!, forKey: selectedItems)
-        print(bestellung)
+        } else {
+            
+            print("Bitte Stückzahl auswählen")
+        }
+        
+        bestellungTextfield.text = bestellung.description
+
     }
     
     
@@ -242,7 +248,7 @@ class BestellungVC: UIViewController, UITableViewDataSource, UITableViewDelegate
     override func viewDidLoad() {
         super.viewDidLoad()
         fetchSpeisekarte()
-        bestellungLbl.text = bestellungsText
+        bestellungTextfield.text = bestellungsText
         
         // Do any additional setup after loading the view.
     }
