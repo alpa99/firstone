@@ -67,39 +67,37 @@ class QRScanner: UIViewController, AVCaptureMetadataOutputObjectsDelegate, CLLoc
                 //                self.qrbaradresse.append(qrbar.Adresse!)
                 
                 print(self.qrbarname)
-                
+              
                 CLGeocoder().geocodeAddressString(qrBarAdresse, completionHandler: { (placemarks, error) -> Void in
                     
                     if let placemark = placemarks?[0] {
-                        let latitude = placemark.location?.coordinate.latitude
-                        let longitude = placemark.location?.coordinate.longitude
                         
-                        let location: CLLocationCoordinate2D = CLLocationCoordinate2D(latitude: latitude!,longitude: longitude!)
-                        self.distanceCondition(locat: location)}
+                        let location = placemark.location
+                        self.distanceCondition(locat: location!)}
                     //                    let placemarks = placemarks,
                     //                        let locationone = placemarks.first?.location
-                    //                        else {
-                    //                            let alert = UIAlertController(title: "Fehler", message: "Dies ist kein Smolo-Code", preferredStyle: .alert)
-                    ////                            alert.addAction(UIAlertAction(title: "Abbrechen", style: .default, handler:{ (action) in self.session.startRunning()}))
-                    ////
-                    ////                            self.present(alert, animated: true, completion: nil)
-                    ////
-                    ////                    return}
+                    
                     //                    self.distanceCondition(locat: locationone)
                     
                 })
+            }else {
+                    let alert = UIAlertController(title: "Fehler", message: "Dies ist kein Smolo-Code", preferredStyle: .alert)
+                    alert.addAction(UIAlertAction(title: "Abbrechen", style: .default, handler:{ (action) in self.session.startRunning()}))
+                    
+                    self.present(alert, animated: true, completion: nil)
+                    self.session.startRunning()
+                    return}
             }
-        }
+        
             
             , withCancel: nil)
         
     }
     
-    func distanceCondition (locat: CLLocationCoordinate2D){
+    func distanceCondition (locat: CLLocation){
         
         print(locat, "LOCAT")
-        let loCat = CLLocation(latitude: locat.latitude, longitude: locat.longitude)
-        let distancebar = self.locationManager.location?.distance(from: loCat)
+        let distancebar = self.locationManager.location?.distance(from: locat)
         print (distancebar!, " entfernung")
         let distanceint = Int(distancebar!)
         
