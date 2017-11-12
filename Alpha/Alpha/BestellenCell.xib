@@ -39,46 +39,46 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="T93-Lj-m01">
-                        <rect key="frame" x="16" y="116" width="30" height="30"/>
+                        <rect key="frame" x="16" y="102" width="30" height="30"/>
                         <state key="normal" title="Plus"/>
                         <connections>
                             <action selector="plusBtnTapped:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="46A-xc-RHQ"/>
                         </connections>
                     </button>
-                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Lrd-tW-ze2">
-                        <rect key="frame" x="274" y="115" width="30" height="30"/>
-                        <state key="normal" title="add"/>
-                        <connections>
-                            <action selector="itemBtnTapped:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="JGa-Kb-scH"/>
-                        </connections>
-                    </button>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WVb-e9-5w6">
-                        <rect key="frame" x="140" y="116" width="41" height="30"/>
+                        <rect key="frame" x="140" y="102" width="41" height="30"/>
                         <state key="normal" title="Minus"/>
                         <connections>
                             <action selector="minusBtnTapped:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="dt0-YR-aAo"/>
                         </connections>
                     </button>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Lrd-tW-ze2">
+                        <rect key="frame" x="274" y="102" width="30" height="30"/>
+                        <state key="normal" title="add"/>
+                        <connections>
+                            <action selector="itemBtnTapped:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="JGa-Kb-scH"/>
+                        </connections>
+                    </button>
                 </subviews>
                 <constraints>
-                    <constraint firstAttribute="bottomMargin" secondItem="WVb-e9-5w6" secondAttribute="bottom" constant="-1" id="0oc-By-juA"/>
-                    <constraint firstItem="FcT-vy-Yl6" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="20C-1P-c3w"/>
-                    <constraint firstItem="zDT-O1-GAp" firstAttribute="top" secondItem="4C4-ac-MbN" secondAttribute="bottom" constant="35" id="6LC-39-51P"/>
-                    <constraint firstItem="T93-Lj-m01" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="6Zt-y0-ehZ"/>
-                    <constraint firstItem="T93-Lj-m01" firstAttribute="top" secondItem="FcT-vy-Yl6" secondAttribute="bottom" constant="28" id="D6k-gg-5MY"/>
-                    <constraint firstAttribute="trailing" secondItem="Lrd-tW-ze2" secondAttribute="trailing" constant="16" id="E93-Tf-ubb"/>
-                    <constraint firstItem="4C4-ac-MbN" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="EGA-1a-CDa"/>
-                    <constraint firstItem="zDT-O1-GAp" firstAttribute="leading" secondItem="FcT-vy-Yl6" secondAttribute="trailing" constant="100" id="IqB-sn-Uhg"/>
-                    <constraint firstItem="Lrd-tW-ze2" firstAttribute="top" secondItem="4C4-ac-MbN" secondAttribute="bottom" constant="83" id="Ljj-HT-ae1"/>
-                    <constraint firstAttribute="bottomMargin" secondItem="T93-Lj-m01" secondAttribute="bottom" constant="-1" id="Lne-Ee-iAH"/>
-                    <constraint firstItem="4C4-ac-MbN" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="NCl-Uu-ivU"/>
-                    <constraint firstItem="WVb-e9-5w6" firstAttribute="leading" secondItem="T93-Lj-m01" secondAttribute="trailing" constant="94" id="aVV-VZ-CHa"/>
-                    <constraint firstItem="4C4-ac-MbN" firstAttribute="trailing" secondItem="H2p-sc-9uM" secondAttribute="trailingMargin" id="fb3-Lw-WpG"/>
-                    <constraint firstItem="Lrd-tW-ze2" firstAttribute="bottom" secondItem="H2p-sc-9uM" secondAttribute="bottomMargin" id="fx9-Dr-erD"/>
-                    <constraint firstItem="WVb-e9-5w6" firstAttribute="top" secondItem="zDT-O1-GAp" secondAttribute="bottom" constant="28.5" id="h1Z-f9-UBi"/>
-                    <constraint firstAttribute="trailingMargin" secondItem="zDT-O1-GAp" secondAttribute="trailing" constant="138" id="la5-sn-gkj"/>
-                    <constraint firstItem="FcT-vy-Yl6" firstAttribute="top" secondItem="4C4-ac-MbN" secondAttribute="bottom" constant="35" id="mME-o2-Qr8"/>
-                    <constraint firstItem="Lrd-tW-ze2" firstAttribute="leading" secondItem="WVb-e9-5w6" secondAttribute="trailing" constant="93" id="wdG-h6-313"/>
+                    <constraint firstItem="T93-Lj-m01" firstAttribute="top" secondItem="FcT-vy-Yl6" secondAttribute="bottom" constant="14" id="0df-NO-uQs"/>
+                    <constraint firstItem="4C4-ac-MbN" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="1Y6-Tb-qnd"/>
+                    <constraint firstItem="FcT-vy-Yl6" firstAttribute="top" secondItem="4C4-ac-MbN" secondAttribute="bottom" constant="35" id="31W-lq-DXs"/>
+                    <constraint firstItem="4C4-ac-MbN" firstAttribute="trailing" secondItem="H2p-sc-9uM" secondAttribute="trailingMargin" id="3XS-Hs-fG4"/>
+                    <constraint firstItem="zDT-O1-GAp" firstAttribute="leading" secondItem="FcT-vy-Yl6" secondAttribute="trailing" constant="100" id="4Gj-Ca-gas"/>
+                    <constraint firstItem="Lrd-tW-ze2" firstAttribute="trailing" secondItem="H2p-sc-9uM" secondAttribute="trailingMargin" id="4xp-wl-POJ"/>
+                    <constraint firstItem="zDT-O1-GAp" firstAttribute="top" secondItem="4C4-ac-MbN" secondAttribute="bottom" constant="35" id="K5c-ai-i9i"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="T93-Lj-m01" secondAttribute="bottom" constant="13" id="M33-IR-DVs"/>
+                    <constraint firstItem="WVb-e9-5w6" firstAttribute="top" secondItem="zDT-O1-GAp" secondAttribute="bottom" constant="14.5" id="OmG-Ve-zbY"/>
+                    <constraint firstItem="FcT-vy-Yl6" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="SJx-8A-9TW"/>
+                    <constraint firstItem="4C4-ac-MbN" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="Wvz-0D-gY3"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="WVb-e9-5w6" secondAttribute="bottom" constant="13" id="brh-xa-2oK"/>
+                    <constraint firstItem="Lrd-tW-ze2" firstAttribute="leading" secondItem="WVb-e9-5w6" secondAttribute="trailing" constant="93" id="fZ8-8h-5Kp"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="Lrd-tW-ze2" secondAttribute="bottom" constant="13" id="hn7-hl-srP"/>
+                    <constraint firstItem="T93-Lj-m01" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="oZf-AV-e3L"/>
+                    <constraint firstItem="Lrd-tW-ze2" firstAttribute="top" secondItem="4C4-ac-MbN" secondAttribute="bottom" constant="70" id="pJU-GO-X8o"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="zDT-O1-GAp" secondAttribute="trailing" constant="138" id="w1D-Jl-Qkl"/>
+                    <constraint firstItem="WVb-e9-5w6" firstAttribute="leading" secondItem="T93-Lj-m01" secondAttribute="trailing" constant="94" id="wJO-eV-WUt"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>

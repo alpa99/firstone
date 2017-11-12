@@ -10,8 +10,7 @@ import UIKit
 
 class KellnerCell: UITableViewCell {
 
-    @IBOutlet weak var Label1: UILabel!
-    @IBOutlet weak var Label2: UILabel!
+
     
     override func awakeFromNib() {
         super.awakeFromNib()

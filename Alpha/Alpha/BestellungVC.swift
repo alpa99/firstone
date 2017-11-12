@@ -8,6 +8,7 @@
 
 import UIKit
 import Firebase
+import FBSDKLoginKit
 import Pulley
 
 class BestellungVC: UIViewController, UITableViewDataSource, UITableViewDelegate, ExpandableHeaderViewDelegate, PulleyDrawerViewControllerDelegate, BestellenCellDelegate {
@@ -41,6 +42,7 @@ class BestellungVC: UIViewController, UITableViewDataSource, UITableViewDelegate
     @IBOutlet weak var bestellungTableView: UITableView!
 
     
+    
     // ACTIONS
     
 
@@ -50,7 +52,11 @@ class BestellungVC: UIViewController, UITableViewDataSource, UITableViewDelegate
         (parent as? PulleyViewController)?.setDrawerContentViewController(controller: tableVC, animated: true)
     }
     
-
+    @IBAction func sendToFirebase(_ sender: Any) {
+        handleBestellung()
+    }
+    
+    
     
 
     // FUNCTIONS
@@ -109,6 +115,7 @@ class BestellungVC: UIViewController, UITableViewDataSource, UITableViewDelegate
         let cell = bestellungTableView.cellForRow(at: indexPath) as! BestellenCell
         if count > 0 && cell.countLbl.text != "Count"{
         bestellung.updateValue(Int(cell.countLbl.text!)!, forKey: selectedItems)
+            
         } else {
             
             print("Bitte Stückzahl auswählen")
@@ -163,6 +170,25 @@ class BestellungVC: UIViewController, UITableViewDataSource, UITableViewDelegate
         }
     }
     
+    
+    func handleBestellung(){
+        
+        var ref: DatabaseReference!
+
+        if bestellungTextfield.text != nil{
+            let timestamp = Double(NSDate().timeIntervalSince1970)
+            let values = ["shishas": "Lemon Fresh", "getränke": "cola", "toKellnerID": "Kellner1", "fromUserID": FBSDKAccessToken.current().userID, "timeStamp": timestamp] as [String : Any]
+            ref = Database.database().reference().child("Bestellungen")
+            
+            let childRef = ref?.childByAutoId()
+            childRef?.updateChildValues(values)
+            print(Date(timeIntervalSince1970: timestamp))
+            
+            
+            
+        }
+    }
+    
     // PULLEY
     
     
@@ -204,7 +230,7 @@ class BestellungVC: UIViewController, UITableViewDataSource, UITableViewDelegate
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if (sections[indexPath.section].expanded){
-            return 156
+            return 155.5
         }
         else {
             return 0

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Firebase
 
 class KellnerVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
@@ -30,15 +31,15 @@ class KellnerVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = Bundle.main.loadNibNamed("KellnerCell", owner: self, options: nil)?.first as! KellnerCell
-        cell.Label1.text = "test1"
-        cell.Label2.text = "test2"
+
             return cell
 
         
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 250
+        return 170
+        
     }
     
     

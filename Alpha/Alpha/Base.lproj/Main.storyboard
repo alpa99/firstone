@@ -412,6 +412,9 @@
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jqS-Z5-0Ia">
                                         <rect key="frame" x="0.0" y="77" width="343" height="30"/>
                                         <state key="normal" title="Button"/>
+                                        <connections>
+                                            <action selector="sendToFirebase:" destination="Yts-F3-2fU" eventType="touchUpInside" id="onF-sT-Zw2"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                             </stackView>
