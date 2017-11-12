@@ -7,8 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		081143C91FB793FA00CA2522 /* KellnerInfos.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081143C81FB793FA00CA2522 /* KellnerInfos.swift */; };
 		081461F41F9927FA00121943 /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081461F31F9927FA00121943 /* LoginVC.swift */; };
-		0888A49C1FAA23DA0045689C /* CustomTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0888A49A1FAA23DA0045689C /* CustomTableViewCell.swift */; };
+		08210EE11FB7B09000EABA32 /* KellnerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08210EDF1FB7B09000EABA32 /* KellnerCell.swift */; };
+		08210EE21FB7B09000EABA32 /* KellnerCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08210EE01FB7B09000EABA32 /* KellnerCell.xib */; };
+		08210EE51FB83AE300EABA32 /* BestellenCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08210EE31FB83AE300EABA32 /* BestellenCell.swift */; };
+		08210EE61FB83AE300EABA32 /* BestellenCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08210EE41FB83AE300EABA32 /* BestellenCell.xib */; };
+		08779BA51FB7898400B99D19 /* LoginKellnerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08779BA41FB7898400B99D19 /* LoginKellnerVC.swift */; };
+		088728691FB7A50D00FF2448 /* KellnerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088728671FB7A50D00FF2448 /* KellnerVC.swift */; };
 		0895B3631F9B5F28007D97DE /* UserVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0895B3621F9B5F28007D97DE /* UserVC.swift */; };
 		08C881671F9962EB00AD8F20 /* BarInfos.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C881661F9962EB00AD8F20 /* BarInfos.swift */; };
 		08C881691F9963F100AD8F20 /* BarAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C881681F9963F100AD8F20 /* BarAnnotation.swift */; };
@@ -54,8 +60,14 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		081143C81FB793FA00CA2522 /* KellnerInfos.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KellnerInfos.swift; sourceTree = "<group>"; };
 		081461F31F9927FA00121943 /* LoginVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; };
-		0888A49A1FAA23DA0045689C /* CustomTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTableViewCell.swift; sourceTree = "<group>"; };
+		08210EDF1FB7B09000EABA32 /* KellnerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KellnerCell.swift; sourceTree = "<group>"; };
+		08210EE01FB7B09000EABA32 /* KellnerCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = KellnerCell.xib; sourceTree = "<group>"; };
+		08210EE31FB83AE300EABA32 /* BestellenCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BestellenCell.swift; sourceTree = "<group>"; };
+		08210EE41FB83AE300EABA32 /* BestellenCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BestellenCell.xib; sourceTree = "<group>"; };
+		08779BA41FB7898400B99D19 /* LoginKellnerVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginKellnerVC.swift; sourceTree = "<group>"; };
+		088728671FB7A50D00FF2448 /* KellnerVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KellnerVC.swift; sourceTree = "<group>"; };
 		0895B3621F9B5F28007D97DE /* UserVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserVC.swift; sourceTree = "<group>"; };
 		08C881661F9962EB00AD8F20 /* BarInfos.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarInfos.swift; sourceTree = "<group>"; };
 		08C881681F9963F100AD8F20 /* BarAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarAnnotation.swift; sourceTree = "<group>"; };
@@ -167,13 +179,18 @@
 				4EC247D31F98F90500910AA8 /* LaunchScreen.storyboard */,
 				4EC247D61F98F90500910AA8 /* Info.plist */,
 				081461F31F9927FA00121943 /* LoginVC.swift */,
+				08779BA41FB7898400B99D19 /* LoginKellnerVC.swift */,
 				4EC247FF1F9950CE00910AA8 /* DrawerVC.swift */,
 				4EC248011F9950E700910AA8 /* LocationVC.swift */,
 				0895B3621F9B5F28007D97DE /* UserVC.swift */,
 				4E1132FC1F9B7EF600AD9AEF /* BarDetailVC.swift */,
 				08EF4C471F9CFE9800F01096 /* BestellungVC.swift */,
 				4E6020481F9E2F88001B2909 /* ScanDetailVC.swift */,
-				0888A49A1FAA23DA0045689C /* CustomTableViewCell.swift */,
+				08210EE31FB83AE300EABA32 /* BestellenCell.swift */,
+				08210EE41FB83AE300EABA32 /* BestellenCell.xib */,
+				088728671FB7A50D00FF2448 /* KellnerVC.swift */,
+				08210EDF1FB7B09000EABA32 /* KellnerCell.swift */,
+				08210EE01FB7B09000EABA32 /* KellnerCell.xib */,
 				4E78E53C1FABE03300B81EB2 /* pin.png */,
 			);
 			path = Alpha;
@@ -207,6 +224,7 @@
 				08EF4C491F9CFFA500F01096 /* ExpandTVSection.swift */,
 				08EF4C4B1F9D006700F01096 /* ExpandableHeaderView.swift */,
 				08EF4C4D1F9D2AC000F01096 /* SpeisekarteInfos.swift */,
+				081143C81FB793FA00CA2522 /* KellnerInfos.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -345,6 +363,8 @@
 				4EC247D21F98F90500910AA8 /* Assets.xcassets in Resources */,
 				4E78E53D1FABE03400B81EB2 /* pin.png in Resources */,
 				4EC247D01F98F90500910AA8 /* Main.storyboard in Resources */,
+				08210EE61FB83AE300EABA32 /* BestellenCell.xib in Resources */,
+				08210EE21FB7B09000EABA32 /* KellnerCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -535,23 +555,27 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				088728691FB7A50D00FF2448 /* KellnerVC.swift in Sources */,
 				4EC247FA1F98FE6A00910AA8 /* QRBereich.swift in Sources */,
 				08EF4C4E1F9D2AC000F01096 /* SpeisekarteInfos.swift in Sources */,
 				08EF4C4C1F9D006700F01096 /* ExpandableHeaderView.swift in Sources */,
 				4E1132FD1F9B7EF600AD9AEF /* BarDetailVC.swift in Sources */,
 				4EC248001F9950CE00910AA8 /* DrawerVC.swift in Sources */,
+				08210EE51FB83AE300EABA32 /* BestellenCell.swift in Sources */,
 				4EC247CD1F98F90500910AA8 /* QRScanner.swift in Sources */,
 				08C881671F9962EB00AD8F20 /* BarInfos.swift in Sources */,
 				4EC247CB1F98F90500910AA8 /* AppDelegate.swift in Sources */,
 				081461F41F9927FA00121943 /* LoginVC.swift in Sources */,
+				081143C91FB793FA00CA2522 /* KellnerInfos.swift in Sources */,
 				08EF4C481F9CFE9800F01096 /* BestellungVC.swift in Sources */,
 				08C881691F9963F100AD8F20 /* BarAnnotation.swift in Sources */,
 				08EF4C401F9CF0FE00F01096 /* BestellungInfos.swift in Sources */,
 				08EF4C4A1F9CFFA500F01096 /* ExpandTVSection.swift in Sources */,
 				0895B3631F9B5F28007D97DE /* UserVC.swift in Sources */,
-				0888A49C1FAA23DA0045689C /* CustomTableViewCell.swift in Sources */,
 				4E6020491F9E2F88001B2909 /* ScanDetailVC.swift in Sources */,
+				08779BA51FB7898400B99D19 /* LoginKellnerVC.swift in Sources */,
 				4EC248021F9950E700910AA8 /* LocationVC.swift in Sources */,
+				08210EE11FB7B09000EABA32 /* KellnerCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

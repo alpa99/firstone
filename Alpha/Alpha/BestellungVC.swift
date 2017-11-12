@@ -8,9 +8,10 @@
 
 import UIKit
 import Firebase
+import FBSDKLoginKit
 import Pulley
 
-class BestellungVC: UIViewController, UITableViewDataSource, UITableViewDelegate, ExpandableHeaderViewDelegate, PulleyDrawerViewControllerDelegate, CustomTableCellDelegate {
+class BestellungVC: UIViewController, UITableViewDataSource, UITableViewDelegate, ExpandableHeaderViewDelegate, PulleyDrawerViewControllerDelegate, BestellenCellDelegate {
 
     // VARS
     private var selectedItems = [String]()
@@ -41,6 +42,7 @@ class BestellungVC: UIViewController, UITableViewDataSource, UITableViewDelegate
     @IBOutlet weak var bestellungTableView: UITableView!
 
     
+    
     // ACTIONS
     
 
@@ -50,7 +52,11 @@ class BestellungVC: UIViewController, UITableViewDataSource, UITableViewDelegate
         (parent as? PulleyViewController)?.setDrawerContentViewController(controller: tableVC, animated: true)
     }
     
-
+    @IBAction func sendToFirebase(_ sender: Any) {
+        handleBestellung()
+    }
+    
+    
     
 
     // FUNCTIONS
@@ -102,24 +108,26 @@ class BestellungVC: UIViewController, UITableViewDataSource, UITableViewDelegate
     
     
     
-    func cellItemBtnTapped(sender: CustomTableViewCell) {
+    func cellItemBtnTapped(sender: BestellenCell) {
         let indexPath = self.bestellungTableView.indexPathForRow(at: sender.center)!
     
         let selectedItems = "\(sections[indexPath.section].items[indexPath.row])"
-        let cell = bestellungTableView.cellForRow(at: indexPath) as! CustomTableViewCell
-        if count > 0{
+        let cell = bestellungTableView.cellForRow(at: indexPath) as! BestellenCell
+        if count > 0 && cell.countLbl.text != "Count"{
         bestellung.updateValue(Int(cell.countLbl.text!)!, forKey: selectedItems)
+            
         } else {
             
             print("Bitte Stückzahl auswählen")
         }
         
         bestellungTextfield.text = bestellung.description
+    
 
     }
     
     
-    func cellMinusBtnTapped(sender: CustomTableViewCell) {
+    func cellMinusBtnTapped(sender: BestellenCell) {
         let indexPath = self.bestellungTableView.indexPathForRow(at: sender.center)!
         
         if cellIndexPathRow == indexPath.row && cellIndexPathSection == indexPath.section {
@@ -131,7 +139,7 @@ class BestellungVC: UIViewController, UITableViewDataSource, UITableViewDelegate
             count = -1
         }
 
-        let cell = bestellungTableView.cellForRow(at: indexPath) as! CustomTableViewCell
+        let cell = bestellungTableView.cellForRow(at: indexPath) as! BestellenCell
         if count > 0{
             cell.countLbl.text = "\(count)"}
         else {
@@ -140,7 +148,7 @@ class BestellungVC: UIViewController, UITableViewDataSource, UITableViewDelegate
         }
     }
     
-    func cellPlusBtnTapped(sender: CustomTableViewCell){
+    func cellPlusBtnTapped(sender: BestellenCell){
         let indexPath = self.bestellungTableView.indexPathForRow(at: sender.center)!
         
         if cellIndexPathRow == indexPath.row && cellIndexPathSection == indexPath.section {
@@ -152,12 +160,31 @@ class BestellungVC: UIViewController, UITableViewDataSource, UITableViewDelegate
             count = 1
         }
     
-        let cell = bestellungTableView.cellForRow(at: indexPath) as! CustomTableViewCell
+        let cell = bestellungTableView.cellForRow(at: indexPath) as! BestellenCell
         
         if count > 0{
             cell.countLbl.text = "\(count)"}
         else {
             cell.countLbl.text = "0"
+            
+        }
+    }
+    
+    
+    func handleBestellung(){
+        
+        var ref: DatabaseReference!
+
+        if bestellungTextfield.text != nil{
+            let timestamp = Double(NSDate().timeIntervalSince1970)
+            let values = ["shishas": "Lemon Fresh", "getränke": "cola", "toKellnerID": "Kellner1", "fromUserID": FBSDKAccessToken.current().userID, "timeStamp": timestamp] as [String : Any]
+            ref = Database.database().reference().child("Bestellungen")
+            
+            let childRef = ref?.childByAutoId()
+            childRef?.updateChildValues(values)
+            print(Date(timeIntervalSince1970: timestamp))
+            
+            
             
         }
     }
@@ -203,7 +230,7 @@ class BestellungVC: UIViewController, UITableViewDataSource, UITableViewDelegate
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if (sections[indexPath.section].expanded){
-            return 59
+            return 155.5
         }
         else {
             return 0
@@ -223,11 +250,12 @@ class BestellungVC: UIViewController, UITableViewDataSource, UITableViewDelegate
     
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = bestellungTableView.dequeueReusableCell(withIdentifier: "labelCell", for: indexPath) as! CustomTableViewCell
-        cell.delegate = self
+        
+        let cell = Bundle.main.loadNibNamed("BestellenCell", owner: self, options: nil)?.first as! BestellenCell
+
+        cell.delegate = self 
         cell.shishaNameLbl.text = "\(sections[indexPath.section].items[indexPath.row])"
         cell.shishaPreisLbl.text = "\(sections[indexPath.section].preise[indexPath.row]) €"
-        
         return cell
     }
     
