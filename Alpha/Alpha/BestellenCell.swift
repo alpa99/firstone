@@ -1,27 +1,26 @@
 //
-//  TableViewCell.swift
+//  BestellenCell.swift
 //  Alpha
 //
-//  Created by Ibrahim Akcam on 01.11.17.
+//  Created by Ibrahim Akcam on 12.11.17.
 //  Copyright © 2017 AM. All rights reserved.
 //
 
 import UIKit
 
-protocol CustomTableCellDelegate {
-    func cellItemBtnTapped(sender: CustomTableViewCell)
-    func cellMinusBtnTapped(sender: CustomTableViewCell)
-    func cellPlusBtnTapped(sender: CustomTableViewCell)
-
+protocol BestellenCellDelegate {
+    func cellItemBtnTapped(sender: BestellenCell)
+    func cellMinusBtnTapped(sender: BestellenCell)
+    func cellPlusBtnTapped(sender: BestellenCell)
+    
 }
 
-class CustomTableViewCell: UITableViewCell {
-    
-    
+class BestellenCell: UITableViewCell {
+
     // VARS
     
-    var delegate: CustomTableCellDelegate?
- 
+    var delegate: BestellenCellDelegate?
+    
     var bestellung = [String]()
     
     // OUTLETS
@@ -30,14 +29,15 @@ class CustomTableViewCell: UITableViewCell {
     @IBOutlet weak var shishaPreisLbl: UILabel!
     @IBOutlet weak var countLbl: UILabel!
     
-    @IBOutlet weak var itemBtn: UIButton!
-    @IBOutlet weak var minusBtn: UIButton!
     @IBOutlet weak var plusBtn: UIButton!
+    @IBOutlet weak var minusBtn: UIButton!
+    @IBOutlet weak var itemBtn: UIButton!
     
     
+
     // ACTIONS
-
-
+    
+    
     @IBAction func itemBtnTapped(_ sender: Any) {
         delegate?.cellItemBtnTapped(sender: self)
     }
@@ -50,7 +50,9 @@ class CustomTableViewCell: UITableViewCell {
         delegate?.cellPlusBtnTapped(sender: self)
     }
     
-    // OTHERS
+    
+    
+    
     
     override func awakeFromNib() {
         super.awakeFromNib()
