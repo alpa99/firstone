@@ -25,7 +25,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="h4S-g2-UB9">
-                                <rect key="frame" x="16" y="20" width="343" height="627"/>
+                                <rect key="frame" x="16" y="20" width="343" height="494"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="KellnerCell" id="PVE-x6-dfO">
@@ -42,20 +42,34 @@
                                     <outlet property="delegate" destination="rCt-0z-cZc" id="w3a-s7-t5H"/>
                                 </connections>
                             </tableView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="x9E-Xh-huc">
+                                <rect key="frame" x="16" y="522" width="343" height="30"/>
+                                <state key="normal" title="Logout"/>
+                                <connections>
+                                    <action selector="kellnerLogOutTapped:" destination="rCt-0z-cZc" eventType="touchUpInside" id="Gxt-4s-xiC"/>
+                                    <segue destination="4eY-fY-ZWz" kind="show" identifier="kellnerLoggedOut" id="LaO-lI-cXB"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="f39-Hh-r9l" firstAttribute="bottom" secondItem="h4S-g2-UB9" secondAttribute="bottom" constant="20" id="0dI-Tg-u9j"/>
+                            <constraint firstItem="x9E-Xh-huc" firstAttribute="top" secondItem="h4S-g2-UB9" secondAttribute="bottom" constant="8" id="1zf-kx-fdl"/>
+                            <constraint firstItem="f39-Hh-r9l" firstAttribute="bottom" secondItem="x9E-Xh-huc" secondAttribute="bottom" constant="115" id="6gQ-Bm-g0S"/>
                             <constraint firstItem="h4S-g2-UB9" firstAttribute="leading" secondItem="f39-Hh-r9l" secondAttribute="leading" constant="16" id="BCc-Dy-Srq"/>
                             <constraint firstItem="f39-Hh-r9l" firstAttribute="trailing" secondItem="h4S-g2-UB9" secondAttribute="trailing" constant="16" id="CNH-VO-SX3"/>
                             <constraint firstItem="h4S-g2-UB9" firstAttribute="top" secondItem="f39-Hh-r9l" secondAttribute="top" id="Gx5-er-MHf"/>
+                            <constraint firstItem="f39-Hh-r9l" firstAttribute="trailing" secondItem="x9E-Xh-huc" secondAttribute="trailing" constant="16" id="Q0X-y1-uAv"/>
+                            <constraint firstItem="x9E-Xh-huc" firstAttribute="leading" secondItem="f39-Hh-r9l" secondAttribute="leading" constant="16" id="QgP-HP-fH7"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="f39-Hh-r9l"/>
                     </view>
+                    <connections>
+                        <outlet property="bestellungenTV" destination="h4S-g2-UB9" id="4CK-RI-hXr"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="78V-nG-HDK" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1418.4000000000001" y="709.29535232383819"/>
+            <point key="canvasLocation" x="-1618.4000000000001" y="92.203898050974516"/>
         </scene>
         <!--Login KellnerVC-->
         <scene sceneID="Eit-CD-Tuq">
@@ -107,7 +121,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="i5f-qK-j4n" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-682.39999999999998" y="709.29535232383819"/>
+            <point key="canvasLocation" x="-734" y="93"/>
         </scene>
         <!--LoginVC-->
         <scene sceneID="kDu-Eb-toC">
@@ -512,5 +526,6 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="yYz-ya-YcO"/>
+        <segue reference="LaO-lI-cXB"/>
     </inferredMetricsTieBreakers>
 </document>

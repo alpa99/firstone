@@ -177,9 +177,12 @@ class BestellungVC: UIViewController, UITableViewDataSource, UITableViewDelegate
 
         if bestellungTextfield.text != nil{
             let timestamp = Double(NSDate().timeIntervalSince1970)
-            let values = ["shishas": "Lemon Fresh", "getränke": "cola", "toKellnerID": "Kellner1", "fromUserID": FBSDKAccessToken.current().userID, "timeStamp": timestamp] as [String : Any]
-            ref = Database.database().reference().child("Bestellungen")
+            let values = ["shishas": "Lemon Fresh", "getränke": "cola", "toKellnerID": "Kellner1", "tischnummer": "3", "fromUserID": FBSDKAccessToken.current().userID, "timeStamp": timestamp] as [String : Any]
             
+            ref = Database.database().reference().child("Users").child("\(FBSDKAccessToken.current().userID!)").child("Bestellungen")
+            let childReff = ref?.childByAutoId()
+            childReff?.updateChildValues(values)
+            ref = Database.database().reference().child("Bestellungen")
             let childRef = ref?.childByAutoId()
             childRef?.updateChildValues(values)
             print(Date(timeIntervalSince1970: timestamp))
@@ -230,7 +233,7 @@ class BestellungVC: UIViewController, UITableViewDataSource, UITableViewDelegate
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if (sections[indexPath.section].expanded){
-            return 155.5
+            return 170
         }
         else {
             return 0
@@ -249,6 +252,7 @@ class BestellungVC: UIViewController, UITableViewDataSource, UITableViewDelegate
     }
     
     
+  
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = Bundle.main.loadNibNamed("BestellenCell", owner: self, options: nil)?.first as! BestellenCell

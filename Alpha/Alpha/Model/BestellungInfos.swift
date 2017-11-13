@@ -13,6 +13,7 @@ class BestellungInfos: NSObject {
     var timeStamp: NSNumber?
     var shishas: String?
     var getränke: String?
+    var tischnummer: String?
     
     
     init(dictionary: [String: Any]) {
@@ -21,6 +22,7 @@ class BestellungInfos: NSObject {
         self.timeStamp = dictionary["timeStamp"] as? NSNumber ?? 0
         self.shishas = dictionary["shishas"] as? String ?? ""
         self.getränke = dictionary["getränke"] as? String ?? ""
+        self.tischnummer = dictionary["tischnummer"] as? String ?? "leer"
         
         
     }

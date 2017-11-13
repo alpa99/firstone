@@ -11,6 +11,11 @@ import UIKit
 class KellnerCell: UITableViewCell {
 
 
+    @IBOutlet weak var tischnummer: UILabel!
+    
+    @IBOutlet weak var bestellungsText: UITextView!
+    
+    @IBOutlet weak var timeLbl: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
