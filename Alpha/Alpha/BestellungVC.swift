@@ -32,7 +32,9 @@ class BestellungVC: UIViewController, UITableViewDataSource, UITableViewDelegate
     var cellIndexPathSection = 0
     var cellIndexPathRow = 0
     
-    var bestellung  = [String: Int]()
+    var bestellteShishas  = [String: Int]()
+    var bestellteGetränke  = [String: Int]()
+
     // OUTLETS
     
     @IBOutlet weak var label: UILabel!
@@ -110,20 +112,25 @@ class BestellungVC: UIViewController, UITableViewDataSource, UITableViewDelegate
     
     func cellItemBtnTapped(sender: BestellenCell) {
         let indexPath = self.bestellungTableView.indexPathForRow(at: sender.center)!
-    
         let selectedItems = "\(sections[indexPath.section].items[indexPath.row])"
         let cell = bestellungTableView.cellForRow(at: indexPath) as! BestellenCell
         if count > 0 && cell.countLbl.text != "Count"{
-        bestellung.updateValue(Int(cell.countLbl.text!)!, forKey: selectedItems)
-            
+            if indexPath.section == 0{
+        bestellteShishas.updateValue(Int(cell.countLbl.text!)!, forKey: selectedItems)
+            } else {
+                
+                bestellteGetränke.updateValue(Int(cell.countLbl.text!)!, forKey: selectedItems)
+
+            }
         } else {
             
             print("Bitte Stückzahl auswählen")
         }
-        
-        bestellungTextfield.text = bestellung.description
+        print(bestellteGetränke, "getränke")
+        print(bestellteShishas, "shishas")
     
-
+        bestellungTextfield.text = bestellteShishas.description + bestellteGetränke.description
+        
     }
     
     

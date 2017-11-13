@@ -19,12 +19,15 @@ class KellnerVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     var bestellteGetränke = [String]()
     var TimeStamps = [Double]()
     var tischnummer = [String]()
-
+    
+    var bestellungen = [BestellungInfos]()
     
     @IBOutlet weak var bestellungenTV: UITableView!
     
     
     // OUTLETS
+    
+    
     
     // ACTIONS
     
@@ -41,12 +44,16 @@ class KellnerVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         datref = Database.database().reference()
         datref.child("Bestellungen").observe(.childAdded, with: { (snapshot) in
             if let dictionary = snapshot.value as? [String: AnyObject]{
+                let bestellung = BestellungInfos(dictionary: dictionary)
+                self.bestellungen.append(bestellung)
+                
                 let bestellungInfos = BestellungInfos(dictionary: dictionary)
+                if case self.KellnerID? = bestellungInfos.toKellnerID {
                 self.bestellteShishas.append(bestellungInfos.shishas!)
                 self.bestellteGetränke.append(bestellungInfos.getränke!)
                 self.TimeStamps.append((bestellungInfos.timeStamp?.doubleValue)!)
                 self.tischnummer.append(bestellungInfos.tischnummer!)
-                
+                }
                 
                 /*         self.Bestellungen.sort(by: { (time1, time2) -> Bool in
                  
@@ -106,7 +113,26 @@ class KellnerVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         super.viewDidLoad()
         loadBestellungen()
         print(KellnerID)
+        
+        if #available(iOS 10.0, *) {
+            let refreshControl = UIRefreshControl()
+            let title = NSLocalizedString("aktualisiere", comment: "Pull to refresh")
+            refreshControl.attributedTitle = NSAttributedString(string: title)
+            refreshControl.addTarget(self, action: #selector(refreshOptions(sender:)), for: .valueChanged)
+            bestellungenTV.refreshControl = refreshControl
+        }
 
+    }
+    
+    @objc private func refreshOptions(sender: UIRefreshControl) {
+        loadBestellungen()
+        bestellteShishas = [String]()
+        bestellteGetränke = [String]()
+        TimeStamps = [Double]()
+        tischnummer = [String]()
+        
+        bestellungen = [BestellungInfos]()
+        sender.endRefreshing()
     }
 
     override func didReceiveMemoryWarning() {
