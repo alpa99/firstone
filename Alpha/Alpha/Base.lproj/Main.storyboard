@@ -425,42 +425,119 @@
                                     </textView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jqS-Z5-0Ia">
                                         <rect key="frame" x="0.0" y="77" width="343" height="30"/>
-                                        <state key="normal" title="Button"/>
+                                        <state key="normal" title="Bestellung überprüfen"/>
                                         <connections>
                                             <action selector="sendToFirebase:" destination="Yts-F3-2fU" eventType="touchUpInside" id="onF-sT-Zw2"/>
                                         </connections>
                                     </button>
                                 </subviews>
                             </stackView>
+                            <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0cM-y6-yY0">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="550"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="HbQ-p0-KbN">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="550"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    <subviews>
+                                        <visualEffectView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bnQ-AB-2Ew">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="550"/>
+                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" ambiguous="YES" insetsLayoutMarginsFromSafeArea="NO" id="Dx3-AG-f74">
+                                                <rect key="frame" x="0.0" y="0.0" width="375" height="550"/>
+                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                            </view>
+                                            <vibrancyEffect>
+                                                <blurEffect style="extraLight"/>
+                                            </vibrancyEffect>
+                                        </visualEffectView>
+                                    </subviews>
+                                </view>
+                                <blurEffect style="dark"/>
+                            </visualEffectView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="LGv-5b-phS" firstAttribute="top" secondItem="CxV-wT-GD7" secondAttribute="bottom" constant="8" symbolic="YES" id="27c-Ak-Izs"/>
+                            <constraint firstItem="0cM-y6-yY0" firstAttribute="trailing" secondItem="yw1-aG-qeX" secondAttribute="trailing" id="4DY-qq-qfB"/>
                             <constraint firstItem="yw1-aG-qeX" firstAttribute="trailing" secondItem="CxV-wT-GD7" secondAttribute="trailing" constant="66" id="7Y2-8a-g1w"/>
                             <constraint firstItem="CxV-wT-GD7" firstAttribute="leading" secondItem="iYb-iD-LEP" secondAttribute="trailing" constant="16" id="FMz-Sv-zl8"/>
                             <constraint firstAttribute="bottomMargin" secondItem="LGv-5b-phS" secondAttribute="bottom" constant="210" id="GjG-XY-JOv"/>
                             <constraint firstItem="F2v-jd-cA2" firstAttribute="leading" secondItem="yw1-aG-qeX" secondAttribute="leading" constant="16" id="Oc3-dj-hc1"/>
+                            <constraint firstItem="0cM-y6-yY0" firstAttribute="top" secondItem="tt5-ed-sm5" secondAttribute="top" id="Uhr-Zd-Sq8"/>
                             <constraint firstItem="CxV-wT-GD7" firstAttribute="centerX" secondItem="LGv-5b-phS" secondAttribute="centerX" id="VSE-Vi-4NJ"/>
                             <constraint firstItem="LGv-5b-phS" firstAttribute="top" secondItem="iYb-iD-LEP" secondAttribute="bottom" constant="8" id="XbL-bQ-fPX"/>
                             <constraint firstItem="iYb-iD-LEP" firstAttribute="top" secondItem="yw1-aG-qeX" secondAttribute="top" constant="17" id="c99-Oz-MjK"/>
                             <constraint firstItem="LGv-5b-phS" firstAttribute="top" secondItem="yw1-aG-qeX" secondAttribute="top" constant="46" id="chu-CK-19n"/>
+                            <constraint firstItem="0cM-y6-yY0" firstAttribute="leading" secondItem="yw1-aG-qeX" secondAttribute="leading" id="gVd-Jk-1R4"/>
                             <constraint firstItem="CxV-wT-GD7" firstAttribute="top" secondItem="yw1-aG-qeX" secondAttribute="top" constant="17" id="kId-KZ-ul5"/>
                             <constraint firstItem="yw1-aG-qeX" firstAttribute="trailing" secondItem="F2v-jd-cA2" secondAttribute="trailing" constant="16" id="lXB-dR-CqV"/>
                             <constraint firstItem="iYb-iD-LEP" firstAttribute="leading" secondItem="yw1-aG-qeX" secondAttribute="leading" constant="16" id="mad-mt-E5V"/>
                             <constraint firstItem="LGv-5b-phS" firstAttribute="leading" secondItem="yw1-aG-qeX" secondAttribute="leading" constant="16" id="pd4-nR-SfY"/>
                             <constraint firstItem="yw1-aG-qeX" firstAttribute="trailing" secondItem="LGv-5b-phS" secondAttribute="trailing" constant="16" id="rRp-k6-DqY"/>
                             <constraint firstItem="F2v-jd-cA2" firstAttribute="top" secondItem="LGv-5b-phS" secondAttribute="bottom" constant="8" id="vHF-Te-FG4"/>
+                            <constraint firstItem="0cM-y6-yY0" firstAttribute="bottom" secondItem="yw1-aG-qeX" secondAttribute="bottom" id="vvY-he-RY3"/>
                             <constraint firstItem="yw1-aG-qeX" firstAttribute="bottom" secondItem="F2v-jd-cA2" secondAttribute="bottom" constant="95" id="z7z-jJ-90V"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="yw1-aG-qeX"/>
                     </view>
                     <connections>
+                        <outlet property="addItemView" destination="Z91-jV-uAB" id="f2X-F0-wj7"/>
                         <outlet property="bestellungTableView" destination="LGv-5b-phS" id="eZ6-Sf-Unr"/>
                         <outlet property="bestellungTextfield" destination="xE1-UL-lEf" id="V51-zn-gnc"/>
+                        <outlet property="bestellungVCView" destination="tt5-ed-sm5" id="Q47-Og-asF"/>
+                        <outlet property="dismissPopUp" destination="MgL-ck-P5m" id="kGr-dd-iQ3"/>
+                        <outlet property="itemCountLbl" destination="B9n-Ig-zZi" id="qEa-WO-KUM"/>
+                        <outlet property="itemNameLbl" destination="Ocp-2A-uzN" id="ygy-KY-1ha"/>
                         <outlet property="label" destination="CxV-wT-GD7" id="1MU-aU-Qxh"/>
+                        <outlet property="visualEffectView" destination="0cM-y6-yY0" id="nKo-w5-tIF"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lv3-yq-TAT" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <view contentMode="scaleToFill" id="Z91-jV-uAB">
+                    <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MgL-ck-P5m">
+                            <rect key="frame" x="89" y="98" width="63" height="30"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <state key="normal" title="bestellen"/>
+                            <connections>
+                                <action selector="dismissPopUp:" destination="Yts-F3-2fU" eventType="touchUpInside" id="oLn-xm-EeE"/>
+                            </connections>
+                        </button>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="B9n-Ig-zZi">
+                            <rect key="frame" x="99" y="54" width="42" height="21"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YDh-rl-w2n">
+                            <rect key="frame" x="157" y="49" width="30" height="30"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <state key="normal" title="plus"/>
+                            <connections>
+                                <action selector="funcItemPlusTapped:" destination="Yts-F3-2fU" eventType="touchUpInside" id="eh2-O7-Flo"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xPs-S4-fnJ">
+                            <rect key="frame" x="48" y="49" width="41" height="30"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <state key="normal" title="minus"/>
+                            <connections>
+                                <action selector="funcItemMinusTapped:" destination="Yts-F3-2fU" eventType="touchUpInside" id="TnL-NR-5Tp"/>
+                            </connections>
+                        </button>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ocp-2A-uzN">
+                            <rect key="frame" x="99" y="20" width="42" height="21"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <viewLayoutGuide key="safeArea" id="QXt-e5-qSA"/>
+                </view>
             </objects>
             <point key="canvasLocation" x="6724" y="-573.01349325337333"/>
         </scene>

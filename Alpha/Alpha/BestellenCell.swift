@@ -9,9 +9,10 @@
 import UIKit
 
 protocol BestellenCellDelegate {
-    func cellItemBtnTapped(sender: BestellenCell)
-    func cellMinusBtnTapped(sender: BestellenCell)
-    func cellPlusBtnTapped(sender: BestellenCell)
+    func cellItemAddTapped(sender: BestellenCell)
+//    func cellItemBtnTapped(sender: BestellenCell)
+//    func cellMinusBtnTapped(sender: BestellenCell)
+//    func cellPlusBtnTapped(sender: BestellenCell)
     
 }
 
@@ -25,38 +26,26 @@ class BestellenCell: UITableViewCell {
     
     // OUTLETS
     
-    @IBOutlet weak var shishaNameLbl: UILabel!
-    @IBOutlet weak var shishaPreisLbl: UILabel!
-    @IBOutlet weak var countLbl: UILabel!
+    @IBOutlet weak var itemNameLbl: UILabel!
     
-    @IBOutlet weak var plusBtn: UIButton!
-    @IBOutlet weak var minusBtn: UIButton!
-    @IBOutlet weak var itemBtn: UIButton!
+    @IBOutlet weak var itemPreisLbl: UILabel!
     
+    @IBOutlet weak var itemAddBtn: UIButton!
     
-
     // ACTIONS
     
-    
-    @IBAction func itemBtnTapped(_ sender: Any) {
-        delegate?.cellItemBtnTapped(sender: self)
+
+    @IBAction func itemAddTapped(_ sender: Any) {
+        delegate?.cellItemAddTapped(sender: self)
     }
     
-    @IBAction func minusBtnTapped(_ sender: Any) {
-        delegate?.cellMinusBtnTapped(sender: self)
-    }
-    
-    @IBAction func plusBtnTapped(_ sender: Any) {
-        delegate?.cellPlusBtnTapped(sender: self)
-    }
-    
-    
+
     
     
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+    
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

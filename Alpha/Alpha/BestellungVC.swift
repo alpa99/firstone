@@ -14,6 +14,7 @@ import Pulley
 class BestellungVC: UIViewController, UITableViewDataSource, UITableViewDelegate, ExpandableHeaderViewDelegate, PulleyDrawerViewControllerDelegate, BestellenCellDelegate {
 
     // VARS
+
     private var selectedItems = [String]()
     var barname = ""
     
@@ -31,22 +32,43 @@ class BestellungVC: UIViewController, UITableViewDataSource, UITableViewDelegate
     var count = 0
     var cellIndexPathSection = 0
     var cellIndexPathRow = 0
+    var i = Int()
     
     var bestellteShishas  = [String: Int]()
     var bestellteGetränke  = [String: Int]()
+    
+    var effect: UIVisualEffect!
 
-    // OUTLETS
     
     @IBOutlet weak var label: UILabel!
+
+    
+    // OUTLETS
+    
+    @IBOutlet var bestellungVCView: UIView!
+    
+    @IBOutlet var addItemView: UIView!
+    @IBOutlet weak var itemNameLbl: UILabel!
+
+    @IBOutlet weak var itemCountLbl: UILabel!
     
     
     @IBOutlet weak var bestellungTextfield: UITextView!
     @IBOutlet weak var bestellungTableView: UITableView!
 
     
+
+    @IBOutlet weak var visualEffectView: UIVisualEffectView!
+    
+    @IBOutlet weak var dismissPopUp: UIButton!
     
     // ACTIONS
     
+    
+    @IBAction func dismissPopUp(_ sender: Any) {
+        animateOut()
+    }
+
 
     @IBAction func Back(_ sender: Any) {
         
@@ -109,73 +131,56 @@ class BestellungVC: UIViewController, UITableViewDataSource, UITableViewDelegate
     }
     
     
+//
+//    func cellItemBtnTapped(sender: BestellenCell) {
+//
+//
+//        let indexPath = self.bestellungTableView.indexPathForRow(at: sender.center)!
+//        let selectedItems = "\(sections[indexPath.section].items[indexPath.row])"
+//        let cell = bestellungTableView.cellForRow(at: indexPath) as! BestellenCell
+//        if count > 0 && cell.countLbl.text != "Count"{
+//            if indexPath.section == 0{
+//        bestellteShishas.updateValue(Int(cell.countLbl.text!)!, forKey: selectedItems)
+//            } else {
+//
+//                bestellteGetränke.updateValue(Int(cell.countLbl.text!)!, forKey: selectedItems)
+//
+//            }
+//        } else {
+//
+//            print("Bitte Stückzahl auswählen")
+//        }
+//        print(bestellteGetränke, "getränke")
+//        print(bestellteShishas, "shishas")
+//
+//        bestellungTextfield.text = bestellteShishas.description + bestellteGetränke.description
+//
+//    }
     
-    func cellItemBtnTapped(sender: BestellenCell) {
+    func cellItemAddTapped(sender: BestellenCell){
+        i = 0
+        itemCountLbl.text = "\(i)"
         let indexPath = self.bestellungTableView.indexPathForRow(at: sender.center)!
-        let selectedItems = "\(sections[indexPath.section].items[indexPath.row])"
-        let cell = bestellungTableView.cellForRow(at: indexPath) as! BestellenCell
-        if count > 0 && cell.countLbl.text != "Count"{
-            if indexPath.section == 0{
-        bestellteShishas.updateValue(Int(cell.countLbl.text!)!, forKey: selectedItems)
-            } else {
-                
-                bestellteGetränke.updateValue(Int(cell.countLbl.text!)!, forKey: selectedItems)
+        cellIndexPathRow = indexPath.row
+        cellIndexPathSection = indexPath.section
+        animateIn()
+        
+    }
+    
 
-            }
-        } else {
-            
-            print("Bitte Stückzahl auswählen")
-        }
-        print(bestellteGetränke, "getränke")
-        print(bestellteShishas, "shishas")
-    
-        bestellungTextfield.text = bestellteShishas.description + bestellteGetränke.description
+    @IBAction func funcItemPlusTapped(_ sender: Any) {
+        i = i+1
+        itemCountLbl.text = "\(i)"
         
     }
     
-    
-    func cellMinusBtnTapped(sender: BestellenCell) {
-        let indexPath = self.bestellungTableView.indexPathForRow(at: sender.center)!
-        
-        if cellIndexPathRow == indexPath.row && cellIndexPathSection == indexPath.section {
-            count = count-1
-        } else {
-            count = 0
-            cellIndexPathRow = indexPath.row
-            cellIndexPathSection = indexPath.section
-            count = -1
-        }
+    @IBAction func funcItemMinusTapped(_ sender: Any) {
+        if i > 0{
+        i = i-1
+            itemCountLbl.text = "\(i)" }
 
-        let cell = bestellungTableView.cellForRow(at: indexPath) as! BestellenCell
-        if count > 0{
-            cell.countLbl.text = "\(count)"}
-        else {
-            cell.countLbl.text = "0"
-            
-        }
     }
     
-    func cellPlusBtnTapped(sender: BestellenCell){
-        let indexPath = self.bestellungTableView.indexPathForRow(at: sender.center)!
-        
-        if cellIndexPathRow == indexPath.row && cellIndexPathSection == indexPath.section {
-            count = count+1
-        } else {
-            count = 0
-            cellIndexPathRow = indexPath.row
-            cellIndexPathSection = indexPath.section
-            count = 1
-        }
-    
-        let cell = bestellungTableView.cellForRow(at: indexPath) as! BestellenCell
-        
-        if count > 0{
-            cell.countLbl.text = "\(count)"}
-        else {
-            cell.countLbl.text = "0"
-            
-        }
-    }
     
     
     func handleBestellung(){
@@ -184,21 +189,72 @@ class BestellungVC: UIViewController, UITableViewDataSource, UITableViewDelegate
 
         if bestellungTextfield.text != nil{
             let timestamp = Double(NSDate().timeIntervalSince1970)
-            let values = ["shishas": "Lemon Fresh", "getränke": "cola", "toKellnerID": "Kellner1", "tischnummer": "3", "fromUserID": FBSDKAccessToken.current().userID, "timeStamp": timestamp] as [String : Any]
+            let values = ["shishas": bestellteShishas, "getränke": bestellteGetränke, "toKellnerID": "Kellner1", "tischnummer": "3", "fromUserID": FBSDKAccessToken.current().userID, "timeStamp": timestamp] as [String : Any]
             
             ref = Database.database().reference().child("Users").child("\(FBSDKAccessToken.current().userID!)").child("Bestellungen")
             let childReff = ref?.childByAutoId()
-            childReff?.updateChildValues(values)
             ref = Database.database().reference().child("Bestellungen")
             let childRef = ref?.childByAutoId()
+            if bestellteGetränke.count != 0 || bestellteShishas.count != 0{
+            childReff?.updateChildValues(values)
             childRef?.updateChildValues(values)
-            print(Date(timeIntervalSince1970: timestamp))
-            
-            
-            
+                print(Date(timeIntervalSince1970: timestamp)) }
+            else {
+                let alert = UIAlertController(title: "Deine Bestellung ist leer", message: nil, preferredStyle: UIAlertControllerStyle.alert)
+                alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
+                
+                self.present(alert, animated: true, completion: nil)
+            }
         }
     }
     
+    func animateIn(){
+        itemNameLbl.text = "\(sections[cellIndexPathSection].items[cellIndexPathRow])"
+        self.view.addSubview(addItemView)
+        addItemView.center = self.view.center
+        addItemView.transform = CGAffineTransform.init(scaleX: 1.3, y: 1.3)
+        addItemView.alpha = 0
+        UIView.animate(withDuration: 1) {
+            self.visualEffectView.isHidden = false
+
+            self.visualEffectView.effect = self.effect
+
+            self.addItemView.alpha = 1
+            self.addItemView.transform = CGAffineTransform.identity
+        }
+        
+    }
+    
+    func animateOut(){
+    
+        UIView.animate(withDuration: 0.5, animations: {
+            self.addItemView.transform = CGAffineTransform.init(scaleX: 1.3, y: 1.3)
+            self.addItemView.alpha = 0
+            self.visualEffectView.effect = nil
+
+        }){ (success:Bool) in
+        self.addItemView.removeFromSuperview()
+            self.visualEffectView.isHidden = true
+
+        }
+        
+        if i > 0 && cellIndexPathSection == 0 {
+            bestellteShishas.updateValue(i, forKey: itemNameLbl.text!)
+        } else if i > 0 && cellIndexPathSection == 1 {
+            bestellteGetränke.updateValue(i, forKey: itemNameLbl.text!)
+        } else if i == 0{
+            bestellteGetränke.removeValue(forKey: itemNameLbl.text!)
+            bestellteShishas.removeValue(forKey: itemNameLbl.text!)
+            
+        }
+        bestellungTextfield.text = "\(bestellteShishas) \(bestellteGetränke)"
+        
+//        visualEffectView.isHidden = true
+        
+    }
+    
+    
+
     // PULLEY
     
     
@@ -240,7 +296,7 @@ class BestellungVC: UIViewController, UITableViewDataSource, UITableViewDelegate
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if (sections[indexPath.section].expanded){
-            return 170
+            return 71
         }
         else {
             return 0
@@ -264,9 +320,10 @@ class BestellungVC: UIViewController, UITableViewDataSource, UITableViewDelegate
         
         let cell = Bundle.main.loadNibNamed("BestellenCell", owner: self, options: nil)?.first as! BestellenCell
 
-        cell.delegate = self 
-        cell.shishaNameLbl.text = "\(sections[indexPath.section].items[indexPath.row])"
-        cell.shishaPreisLbl.text = "\(sections[indexPath.section].preise[indexPath.row]) €"
+        cell.delegate = self
+        cell.itemNameLbl.text = "\(sections[indexPath.section].items[indexPath.row])"
+        cell.itemPreisLbl.text = "\(sections[indexPath.section].preise[indexPath.row]) €"
+
         return cell
     }
     
@@ -286,9 +343,18 @@ class BestellungVC: UIViewController, UITableViewDataSource, UITableViewDelegate
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        effect = visualEffectView.effect
+//        visualEffectView.isHidden = true
+        visualEffectView.effect = nil
+        visualEffectView.isHidden = true
+
+        addItemView.layer.cornerRadius = 5
+        
         fetchSpeisekarte()
         bestellungTextfield.text = bestellungsText
         
+
         // Do any additional setup after loading the view.
     }
     
