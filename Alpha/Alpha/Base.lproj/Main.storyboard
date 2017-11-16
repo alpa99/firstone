@@ -360,6 +360,39 @@
             </objects>
             <point key="canvasLocation" x="5144.8000000000002" y="-1388.4557721139431"/>
         </scene>
+        <!--SpeisekarteVC-->
+        <scene sceneID="lu2-6N-ix5">
+            <objects>
+                <viewController storyboardIdentifier="SpeisekarteVC" id="M2X-w1-nQL" customClass="SpeisekarteVC" customModule="Alpha" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="qqT-46-pRQ">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9G0-hY-aGB">
+                                <rect key="frame" x="16" y="20" width="46" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Back"/>
+                                <connections>
+                                    <action selector="BackBtn:" destination="M2X-w1-nQL" eventType="touchUpInside" id="KEj-H2-QyA"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EZ2-Pq-KfM">
+                                <rect key="frame" x="313" y="20" width="46" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="DetailVC"/>
+                                <connections>
+                                    <action selector="toDetailVC:" destination="M2X-w1-nQL" eventType="touchUpInside" id="Ywb-dG-V05"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <viewLayoutGuide key="safeArea" id="vzY-IE-Bfh"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="RS7-cg-aUD" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="6577" y="-1342"/>
+        </scene>
         <!--BestellungVC-->
         <scene sceneID="nQr-aN-vbV">
             <objects>

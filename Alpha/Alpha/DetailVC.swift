@@ -12,7 +12,7 @@ import Firebase
 
 class DetailVC: UIViewController, PulleyDrawerViewControllerDelegate {
  
-    var barname = " "
+    var barname = ""
     var bars = [BarInfos]()
     var adresse = String ()
     
@@ -30,11 +30,11 @@ class DetailVC: UIViewController, PulleyDrawerViewControllerDelegate {
     @IBOutlet weak var Namelbl: UILabel!
     
     @IBAction func bestellung(_ sender: UIButton) {(parent as? PulleyViewController)?.setDrawerPosition(position: PulleyPosition(rawValue: 2)!)
-        let bestelvc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "BestellungVC") as! BestellungVC
+        let speisekartevc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "SpeisekarteVC") as! SpeisekarteVC
         
-        bestelvc.barname = barname
+        speisekartevc.barname = barname
         
-        (parent as? PulleyViewController)?.setDrawerContentViewController(controller: bestelvc, animated: true)
+        (parent as? PulleyViewController)?.setDrawerContentViewController(controller: speisekartevc, animated: true)
         
         
     }
