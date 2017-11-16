@@ -71,15 +71,48 @@ class BestellungVC: UIViewController, UITableViewDataSource, UITableViewDelegate
 
 
     @IBAction func Back(_ sender: Any) {
+        (parent as? PulleyViewController)?.setDrawerPosition(position: PulleyPosition(rawValue: 2)!)
+        let drawervc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "DrawerVC") as! DrawerVC
         
-        let tableVC:UIViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "DrawerVC") as UIViewController
-        (parent as? PulleyViewController)?.setDrawerContentViewController(controller: tableVC, animated: true)
+        
+        
+        (parent as? PulleyViewController)?.setDrawerContentViewController(controller: drawervc, animated: true)
     }
     
     @IBAction func sendToFirebase(_ sender: Any) {
         handleBestellung()
     }
     
+//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+//        if segue.identifier == "showBarDetail" {
+//            let KVC = segue.destination as! DetailVC
+//            KVC.barname = barname
+//
+//        }
+//    }
+//
+    @IBAction func bardetail(_ sender: UIButton) {
+        
+        (parent as? PulleyViewController)?.setDrawerPosition(position: PulleyPosition(rawValue: 2)!)
+        let detvc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "DetailVC") as! DetailVC
+        detvc.barname = barname
+        
+        
+        
+        (parent as? PulleyViewController)?.setDrawerContentViewController(controller: detvc, animated: true)
+        //segueToKellnerVC()
+    }
+    
+//    func segueToKellnerVC(){
+//        performSegue(withIdentifier: "showBarDetail", sender: self)
+//
+//    }
+    
+    
+//    @IBAction func swiperight(_ sender: UISwipeGestureRecognizer) {
+//        segueToKellnerVC()
+//
+//    }
     
     
 
