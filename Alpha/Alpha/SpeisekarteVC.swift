@@ -8,25 +8,26 @@
 
 import UIKit
 import Pulley
+import Firebase
 
-class SpeisekarteVC: UIViewController, PulleyDrawerViewControllerDelegate {
-    
+class SpeisekarteVC: UIViewController, UITableViewDataSource, UITableViewDelegate, PulleyDrawerViewControllerDelegate, ExpandableHeaderViewDelegate {
+
+
+    // VARS
     var barname = ""
     
-    func collapsedDrawerHeight(bottomSafeArea: CGFloat) -> CGFloat {
-        return 102.0
-    }
-    
-    func partialRevealDrawerHeight(bottomSafeArea: CGFloat) -> CGFloat {
-        return 340.0
-    }
-    
-    func supportedDrawerPositions() -> [PulleyPosition] {
-        return PulleyPosition.all
-    }
-    
-    
+    var shishas = [String]()
+    var shishasPreise = [Int]()
+    var getränke = [String]()
+    var getränkePreise = [Int]()
 
+    
+    var sections = [ExpandTVSection]()
+    
+    
+    @IBOutlet weak var speisekarteTV: UITableView!
+    
+    // ACTIONS
     
     @IBAction func BackBtn(_ sender: Any) {
         (parent as? PulleyViewController)?.setDrawerPosition(position: PulleyPosition(rawValue: 2)!)
@@ -45,28 +46,160 @@ class SpeisekarteVC: UIViewController, PulleyDrawerViewControllerDelegate {
         
     }
     
+    // FUNCS
     
+    func fetchSpeisekarte(){
+        var z = [String: Int]()
+        var datref: DatabaseReference!
+        datref = Database.database().reference()
+        
+        datref.child("Speisekarten").child("\(self.barname)").observe(.childAdded, with: { (snapshot) in
+            
+            z.updateValue(Int(snapshot.childrenCount), forKey: snapshot.key)
+            print(z, "AFDSFSDF")
+            
+            
+            datref.child("Speisekarten").child("\(self.barname)").child("Shishas").observe(.childAdded, with: { (snapshot) in
+                
+                if let dictionary = snapshot.value as? [String: AnyObject]{
+                    let shisha = SpeisekarteInfos(dictionary: dictionary)
+                    self.shishas.append(shisha.Name!)
+                    self.shishasPreise.append(shisha.Preis!)
+                    
+                    
+                }
+                if self.shishas.count == z["Shishas"]{
+                    self.setSections(genre: "Shishas", items: self.shishas, preise: self.shishasPreise)
+                }
+                
+            }, withCancel: nil)
+            
+            datref.child("Speisekarten").child("\(self.barname)").child("Getränke").observe(.childAdded, with: { (snapshot) in
+                
+                if let dictionary = snapshot.value as? [String: AnyObject]{
+                    let getränk = SpeisekarteInfos(dictionary: dictionary)
+                    self.getränke.append(getränk.Name!)
+                    self.getränkePreise.append(getränk.Preis!)
+                }
+                if self.getränke.count == z["Getränke"]{
+                    self.setSections(genre: "Getränke", items: self.getränke, preise: self.getränkePreise)
+                }
+                
+            }, withCancel: nil)
+            
+            
+        }, withCancel: nil)
+        
+        
+    }
+    
+    
+    func setSections(genre: String, items: [String], preise: [Int]){
+        self.sections.append(ExpandTVSection(genre: genre, items: items, preise: preise, expanded: false))
+        self.speisekarteTV.reloadData()
+    }
+    
+    
+    // TABLE
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return sections.count
+    }
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return sections[section].items.count
+    }
+    
+    func tableView(_ tableView: UITableView, estimatedHeightForHeaderInSection section: Int) -> CGFloat {
+        return 44
+    }
+    
+    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
+        if (sections[indexPath.section].expanded){
+            return 115
+        }
+        else {
+            return 0
+            
+        }
+    }
+        
+        func tableView(_ tableView: UITableView, heightForFooterInSection: Int) -> CGFloat {
+            return 2
+        }
+        
+        func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+            let header = ExpandableHeaderView()
+            header.customInit(title: sections[section].genre, section: section, delegate: self as ExpandableHeaderViewDelegate)
+            return header
+        }
+        
+  
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+//        let cell = speisekarteTV.dequeueReusableCell(withIdentifier: "itemCell")!
+        let cell = Bundle.main.loadNibNamed("SpeisekarteCell", owner: self, options: nil)?.first as! SpeisekarteCell
+
+        cell.itemNameLbl.text = "\(sections[indexPath.section].items[indexPath.row])"
+        cell.itemPreisLbl.text = "\(sections[indexPath.section].preise[indexPath.row]) €"
+        
+        return cell
+        
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 44
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        if (sections[indexPath.section].expanded){
+            return 71
+        }
+        else {
+            return 0
+        }
+    }
+
+    
+
+    
+    func toggleSection(header: ExpandableHeaderView, section: Int) {
+        sections[section].expanded = !sections[section].expanded
+        
+        speisekarteTV.beginUpdates()
+        for i in 0..<sections[section].items.count{
+            speisekarteTV.reloadRows(at: [IndexPath(row: i, section: section)], with: .automatic)
+        }
+        speisekarteTV.endUpdates()
+    }
+    
+    
+    // PULLEY
+    
+    func collapsedDrawerHeight(bottomSafeArea: CGFloat) -> CGFloat {
+        return 102.0
+    }
+    
+    func partialRevealDrawerHeight(bottomSafeArea: CGFloat) -> CGFloat {
+        return 340.0
+    }
+    
+    func supportedDrawerPositions() -> [PulleyPosition] {
+        return PulleyPosition.all
+    }
+
+    
+    // OTHERS
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        fetchSpeisekarte()
 
-        // Do any additional setup after loading the view.
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }
