@@ -29,6 +29,16 @@ class SpeisekarteVC: UIViewController, UITableViewDataSource, UITableViewDelegat
     
     // ACTIONS
     
+    @IBAction func toBestellungVC(_ sender: Any){
+        (parent as? PulleyViewController)?.setDrawerPosition(position: PulleyPosition(rawValue: 2)!)
+        let bestellungVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "BestellungVC") as! BestellungVC
+        bestellungVC.barname = barname
+        
+        
+        (parent as? PulleyViewController)?.setDrawerContentViewController(controller: bestellungVC, animated: true)
+        
+    }
+    
     @IBAction func BackBtn(_ sender: Any) {
         (parent as? PulleyViewController)?.setDrawerPosition(position: PulleyPosition(rawValue: 2)!)
         let drawervc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "DrawerVC") as! DrawerVC
@@ -71,7 +81,7 @@ class SpeisekarteVC: UIViewController, UITableViewDataSource, UITableViewDelegat
                 if self.shishas.count == z["Shishas"]{
                     self.setSections(genre: "Shishas", items: self.shishas, preise: self.shishasPreise)
                 }
-                
+
             }, withCancel: nil)
             
             datref.child("Speisekarten").child("\(self.barname)").child("Getränke").observe(.childAdded, with: { (snapshot) in
@@ -115,6 +125,7 @@ class SpeisekarteVC: UIViewController, UITableViewDataSource, UITableViewDelegat
     
     func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
         if (sections[indexPath.section].expanded){
+            
             return 115
         }
         else {
@@ -136,11 +147,16 @@ class SpeisekarteVC: UIViewController, UITableViewDataSource, UITableViewDelegat
   
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-//        let cell = speisekarteTV.dequeueReusableCell(withIdentifier: "itemCell")!
         let cell = Bundle.main.loadNibNamed("SpeisekarteCell", owner: self, options: nil)?.first as! SpeisekarteCell
-
-        cell.itemNameLbl.text = "\(sections[indexPath.section].items[indexPath.row])"
-        cell.itemPreisLbl.text = "\(sections[indexPath.section].preise[indexPath.row]) €"
+        if (sections[indexPath.section].expanded){
+            cell.itemNameLbl.text = "\(sections[indexPath.section].items[indexPath.row])"
+            cell.itemPreisLbl.text = "\(sections[indexPath.section].preise[indexPath.row]) €"
+        }
+        else {
+            cell.itemNameLbl.isHidden = true
+            cell.itemPreisLbl.isHidden = true
+            
+        }
         
         return cell
         
@@ -156,6 +172,7 @@ class SpeisekarteVC: UIViewController, UITableViewDataSource, UITableViewDelegat
         }
         else {
             return 0
+        
         }
     }
 
@@ -192,7 +209,9 @@ class SpeisekarteVC: UIViewController, UITableViewDataSource, UITableViewDelegat
     
     override func viewDidLoad() {
         super.viewDidLoad()
+
         fetchSpeisekarte()
+        
 
     }
 

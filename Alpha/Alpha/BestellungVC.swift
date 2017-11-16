@@ -327,14 +327,17 @@ class BestellungVC: UIViewController, UITableViewDataSource, UITableViewDelegate
         return 44
     }
     
+
+    
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+
         if (sections[indexPath.section].expanded){
             return 71
         }
         else {
             return 0
         }
-        
+
     }
     
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
@@ -352,11 +355,17 @@ class BestellungVC: UIViewController, UITableViewDataSource, UITableViewDelegate
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = Bundle.main.loadNibNamed("BestellenCell", owner: self, options: nil)?.first as! BestellenCell
-
         cell.delegate = self
-        cell.itemNameLbl.text = "\(sections[indexPath.section].items[indexPath.row])"
-        cell.itemPreisLbl.text = "\(sections[indexPath.section].preise[indexPath.row]) €"
-
+        if (sections[indexPath.section].expanded){
+            cell.itemNameLbl.text = "\(sections[indexPath.section].items[indexPath.row])"
+            cell.itemPreisLbl.text = "\(sections[indexPath.section].preise[indexPath.row]) €"
+        }
+        else {
+            cell.itemNameLbl.isHidden = true
+            cell.itemPreisLbl.isHidden = true
+            cell.itemAddBtn.isHidden = true
+        }
+   
         return cell
     }
     
