@@ -41,6 +41,15 @@ class DetailVC: UIViewController, PulleyDrawerViewControllerDelegate {
         
     }
     
+    @IBAction func votefortrump(_ sender: UIButton) {
+        (parent as? PulleyViewController)?.setDrawerPosition(position: PulleyPosition(rawValue: 2)!)
+        let votecv = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "votevc") as! votevc
+        
+        votecv.barname = barname
+        
+        (parent as? PulleyViewController)?.setDrawerContentViewController(controller: votecv, animated: true)
+    }
+    
     @IBAction func Backbtn(_ sender: UIButton) {
         (parent as? PulleyViewController)?.setDrawerPosition(position: PulleyPosition(rawValue: 2)!)
         let drawervc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "DrawerVC") as! DrawerVC
