@@ -16,6 +16,7 @@ class DetailVC: UIViewController, PulleyDrawerViewControllerDelegate {
     var bars = [BarInfos]()
     var adresse = String ()
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -23,6 +24,7 @@ class DetailVC: UIViewController, PulleyDrawerViewControllerDelegate {
         fetchData()
     }
 
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
