@@ -197,14 +197,12 @@ class BestellungVC: UIViewController, UITableViewDataSource, UITableViewDelegate
         cellIndexPathRow = indexPath.row
         cellIndexPathSection = indexPath.section
         animateIn()
-        
     }
     
 
     @IBAction func funcItemPlusTapped(_ sender: Any) {
         i = i+1
         itemCountLbl.text = "\(i)"
-        
     }
     
     @IBAction func funcItemMinusTapped(_ sender: Any) {

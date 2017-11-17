@@ -429,7 +429,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="RS7-cg-aUD" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="6576.8000000000002" y="-1342.5787106446778"/>
+            <point key="canvasLocation" x="6545" y="-599"/>
         </scene>
         <!--BestellungVC-->
         <scene sceneID="nQr-aN-vbV">
@@ -629,7 +629,7 @@
                     </connections>
                 </swipeGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="6815" y="-176"/>
+            <point key="canvasLocation" x="6545" y="156"/>
         </scene>
         <!--DetailVC-->
         <scene sceneID="fti-hC-lyI">
