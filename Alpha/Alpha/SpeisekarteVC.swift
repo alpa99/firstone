@@ -20,6 +20,9 @@ class SpeisekarteVC: UIViewController, UITableViewDataSource, UITableViewDelegat
     var shishasPreise = [Int]()
     var getränke = [String]()
     var getränkePreise = [Int]()
+    var quantitiy = [Double]()
+    var quality = [Double]()
+    var voteresult = [Double]()
 
     
     var sections = [ExpandTVSection]()
