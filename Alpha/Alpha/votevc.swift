@@ -95,12 +95,9 @@ class votevc: UIViewController, PulleyDrawerViewControllerDelegate {
                     
                        self.quality = vote.quality! + Double(self.Note1.text!)!
                     self.quantity = vote.quantity! + 1.0
-<<<<<<< HEAD
-                    
+             
                     print(self.quantity, "quantity", self.quality, "quality")
-=======
->>>>>>> dec29bb7e3c1cea295de4f98680cc1d64509ade8
-                    
+
                     self.finalgrade = self.quality / self.quantity
                 print(self.quantity, "quantity", self.quality, "quality", self.finalgrade, "finalgrade")
                 }
