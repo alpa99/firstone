@@ -106,13 +106,6 @@ class votevc: UIViewController, PulleyDrawerViewControllerDelegate {
         }
             
         }
-        
-        
-        
-        
-    
-   
-    
     
     
     
