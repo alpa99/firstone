@@ -47,13 +47,15 @@ class BestellungVC: UIViewController, UITableViewDataSource, UITableViewDelegate
     
     @IBOutlet var bestellungVCView: UIView!
     
+    @IBOutlet var myBestellungView: UIView!
+    
+    
     @IBOutlet var addItemView: UIView!
     @IBOutlet weak var itemNameLbl: UILabel!
 
     @IBOutlet weak var itemCountLbl: UILabel!
     
     
-    @IBOutlet weak var bestellungTextfield: UITextView!
     @IBOutlet weak var bestellungTableView: UITableView!
 
     
@@ -80,8 +82,29 @@ class BestellungVC: UIViewController, UITableViewDataSource, UITableViewDelegate
     }
     
     @IBAction func sendToFirebase(_ sender: Any) {
-        handleBestellung()
+    
+        self.view.addSubview(myBestellungView)
+        myBestellungView.center = self.view.center
+        myBestellungView.transform = CGAffineTransform.init(scaleX: 1.3, y: 1.3)
+        myBestellungView.alpha = 0
+        UIView.animate(withDuration: 1) {
+            self.visualEffectView.isHidden = false
+            
+            self.visualEffectView.effect = self.effect
+            
+            self.myBestellungView.alpha = 1
+            self.myBestellungView.transform = CGAffineTransform.identity
+        }
+        
+//        handleBestellung()
     }
+    
+    @IBAction func dismissMyBestellungView(_ sender: Any) {
+        
+        dismissMyBestellungView()
+    }
+    
+    
     
 //    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 //        if segue.identifier == "showBarDetail" {
@@ -216,27 +239,27 @@ class BestellungVC: UIViewController, UITableViewDataSource, UITableViewDelegate
     
     func handleBestellung(){
         
-        var ref: DatabaseReference!
+//        var ref: DatabaseReference!
 
-        if bestellungTextfield.text != nil{
-            let timestamp = Double(NSDate().timeIntervalSince1970)
-            let values = ["shishas": bestellteShishas, "getränke": bestellteGetränke, "toKellnerID": "Kellner1", "tischnummer": "3", "fromUserID": FBSDKAccessToken.current().userID, "timeStamp": timestamp] as [String : Any]
-            
-            ref = Database.database().reference().child("Users").child("\(FBSDKAccessToken.current().userID!)").child("Bestellungen")
-            let childReff = ref?.childByAutoId()
-            ref = Database.database().reference().child("Bestellungen")
-            let childRef = ref?.childByAutoId()
-            if bestellteGetränke.count != 0 || bestellteShishas.count != 0{
-            childReff?.updateChildValues(values)
-            childRef?.updateChildValues(values)
-                print(Date(timeIntervalSince1970: timestamp)) }
-            else {
-                let alert = UIAlertController(title: "Deine Bestellung ist leer", message: nil, preferredStyle: UIAlertControllerStyle.alert)
-                alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
-                
-                self.present(alert, animated: true, completion: nil)
-            }
-        }
+//        if bestellungTextfield.text != nil{
+//            let timestamp = Double(NSDate().timeIntervalSince1970)
+//            let values = ["shishas": bestellteShishas, "getränke": bestellteGetränke, "toKellnerID": "Kellner1", "tischnummer": "3", "fromUserID": FBSDKAccessToken.current().userID, "timeStamp": timestamp] as [String : Any]
+//
+//            ref = Database.database().reference().child("Users").child("\(FBSDKAccessToken.current().userID!)").child("Bestellungen")
+//            let childReff = ref?.childByAutoId()
+//            ref = Database.database().reference().child("Bestellungen")
+//            let childRef = ref?.childByAutoId()
+//            if bestellteGetränke.count != 0 || bestellteShishas.count != 0{
+//            childReff?.updateChildValues(values)
+//            childRef?.updateChildValues(values)
+//                print(Date(timeIntervalSince1970: timestamp)) }
+//            else {
+//                let alert = UIAlertController(title: "Deine Bestellung ist leer", message: nil, preferredStyle: UIAlertControllerStyle.alert)
+//                alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
+//
+//                self.present(alert, animated: true, completion: nil)
+//            }
+//        }
     }
     
     func animateIn(){
@@ -278,13 +301,25 @@ class BestellungVC: UIViewController, UITableViewDataSource, UITableViewDelegate
             bestellteShishas.removeValue(forKey: itemNameLbl.text!)
             
         }
-        bestellungTextfield.text = "\(bestellteShishas) \(bestellteGetränke)"
+//        bestellungTextfield.text = "\(bestellteShishas) \(bestellteGetränke)"
         
 //        visualEffectView.isHidden = true
         
     }
     
-    
+    func dismissMyBestellungView() {
+        
+        UIView.animate(withDuration: 0.5, animations: {
+            self.myBestellungView.transform = CGAffineTransform.init(scaleX: 1.3, y: 1.3)
+            self.myBestellungView.alpha = 0
+            self.visualEffectView.effect = nil
+            
+        }){ (success:Bool) in
+            self.myBestellungView.removeFromSuperview()
+            self.visualEffectView.isHidden = true
+        }
+        
+    }
 
     // PULLEY
     
@@ -380,6 +415,17 @@ class BestellungVC: UIViewController, UITableViewDataSource, UITableViewDelegate
     }
 
     // OTHERS
+
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        let touch: UITouch? = touches.first
+        
+        if touch?.view != addItemView {
+            animateOut()
+            
+        } else if touch?.view != myBestellungView {
+            dismissMyBestellungView()
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -392,7 +438,7 @@ class BestellungVC: UIViewController, UITableViewDataSource, UITableViewDelegate
         addItemView.layer.cornerRadius = 5
         
         fetchSpeisekarte()
-        bestellungTextfield.text = bestellungsText
+//        bestellungTextfield.text = bestellungsText
         
 
         // Do any additional setup after loading the view.

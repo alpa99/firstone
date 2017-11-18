@@ -16,8 +16,8 @@ class votevc: UIViewController, PulleyDrawerViewControllerDelegate {
     var barname = ""
     var vote = [VoteInfos]()
     var quantity = Double ()
-    var quality: Double = 0.0
-    
+    var quality = Double ()
+    var finalgrade = Double ()
     
    
     
@@ -73,7 +73,6 @@ class votevc: UIViewController, PulleyDrawerViewControllerDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        Note1.text = ""
 
     }
 
@@ -89,15 +88,21 @@ class votevc: UIViewController, PulleyDrawerViewControllerDelegate {
             print("asdad")
             var ref: DatabaseReference!
             ref = Database.database().reference()
-            ref.child("BarInfo").child("Barracuda").child("Votes").child("Blaubeere").observe(.value, with: { (snapshot) in
+            ref.child("BarInfo").child("Barracuda").child("Votes").child("Blaubeere").observe(.value , with: { (snapshot) in
                 print(snapshot, "snapshot")
                 if let dictionary = snapshot.value as? [String: AnyObject]{
                     let vote = VoteInfos(dictionary: dictionary)
                     
+                       self.quality = vote.quality! + Double(self.Note1.text!)!
                     self.quantity = vote.quantity! + 1.0
-                    print(self.quantity, "quantity", self.quality, "quality")
+<<<<<<< HEAD
                     
-                
+                    print(self.quantity, "quantity", self.quality, "quality")
+=======
+>>>>>>> dec29bb7e3c1cea295de4f98680cc1d64509ade8
+                    
+                    self.finalgrade = self.quality / self.quantity
+                print(self.quantity, "quantity", self.quality, "quality", self.finalgrade, "finalgrade")
                 }
             }, withCancel: nil)
             

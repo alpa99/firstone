@@ -412,9 +412,9 @@
                                 </connections>
                             </tableView>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pKO-c8-r04">
-                                <rect key="frame" x="164" y="416" width="46" height="30"/>
+                                <rect key="frame" x="156" y="416" width="63" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Button"/>
+                                <state key="normal" title="Bestellen"/>
                                 <connections>
                                     <action selector="toBestellungVC:" destination="M2X-w1-nQL" eventType="touchUpInside" id="tgq-TL-XV2"/>
                                 </connections>
@@ -488,14 +488,8 @@
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="F2v-jd-cA2">
                                 <rect key="frame" x="16" y="465" width="343" height="107"/>
                                 <subviews>
-                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="xE1-UL-lEf">
+                                    <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="myk-DP-MrH">
                                         <rect key="frame" x="0.0" y="0.0" width="343" height="77"/>
-                                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                                    </textView>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="myk-DP-MrH">
-                                        <rect key="frame" x="0.0" y="77" width="343" height="0.0"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="19"/>
                                         <state key="normal" title="bardetail">
                                             <color key="titleColor" red="1" green="0.3098628437" blue="0.22524397730000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -504,7 +498,7 @@
                                             <action selector="bardetail:" destination="Yts-F3-2fU" eventType="touchUpInside" id="4d3-M5-3oC"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jqS-Z5-0Ia">
+                                    <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jqS-Z5-0Ia">
                                         <rect key="frame" x="0.0" y="77" width="343" height="30"/>
                                         <state key="normal" title="Bestellung überprüfen"/>
                                         <connections>
@@ -567,12 +561,12 @@
                     <connections>
                         <outlet property="addItemView" destination="Z91-jV-uAB" id="f2X-F0-wj7"/>
                         <outlet property="bestellungTableView" destination="LGv-5b-phS" id="eZ6-Sf-Unr"/>
-                        <outlet property="bestellungTextfield" destination="xE1-UL-lEf" id="V51-zn-gnc"/>
                         <outlet property="bestellungVCView" destination="tt5-ed-sm5" id="Q47-Og-asF"/>
                         <outlet property="dismissPopUp" destination="MgL-ck-P5m" id="kGr-dd-iQ3"/>
                         <outlet property="itemCountLbl" destination="B9n-Ig-zZi" id="qEa-WO-KUM"/>
                         <outlet property="itemNameLbl" destination="Ocp-2A-uzN" id="ygy-KY-1ha"/>
                         <outlet property="label" destination="CxV-wT-GD7" id="1MU-aU-Qxh"/>
+                        <outlet property="myBestellungView" destination="SjS-ze-1e5" id="DTk-Tf-7Hz"/>
                         <outlet property="visualEffectView" destination="0cM-y6-yY0" id="nKo-w5-tIF"/>
                     </connections>
                 </viewController>
@@ -623,6 +617,29 @@
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <viewLayoutGuide key="safeArea" id="QXt-e5-qSA"/>
                 </view>
+                <view contentMode="scaleToFill" id="SjS-ze-1e5">
+                    <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="deine bestellung" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eBV-cg-8bT">
+                            <rect key="frame" x="57" y="20" width="127" height="21"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xmq-kg-DJD">
+                            <rect key="frame" x="97" y="78" width="46" height="30"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <state key="normal" title="Button"/>
+                            <connections>
+                                <action selector="dismissMyBestellungView:" destination="Yts-F3-2fU" eventType="touchUpInside" id="XIX-om-jz8"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <viewLayoutGuide key="safeArea" id="lj9-4s-ScA"/>
+                </view>
                 <swipeGestureRecognizer direction="right" id="QR6-bj-0Ow">
                     <connections>
                         <action selector="swiperight:" destination="Yts-F3-2fU" id="EoY-UT-Jx7"/>
@@ -644,6 +661,24 @@
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XT3-ss-KWX">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="883"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tg4-Ds-Tgh">
+                                                <rect key="frame" x="115" y="8" width="144" height="30"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <state key="normal" title="Speisekarte ansehen"/>
+                                                <connections>
+                                                    <action selector="bestellung:" destination="RQu-h7-DDh" eventType="touchUpInside" id="TMX-TS-HZu"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mjt-E6-UaG">
+                                                <rect key="frame" x="136" y="46" width="102" height="40"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <state key="normal" title="Bewerten"/>
+                                                <connections>
+                                                    <action selector="votefortrump:" destination="RQu-h7-DDh" eventType="touchUpInside" id="fi1-i5-rWf"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="883" id="uqG-6e-3pT"/>
@@ -656,22 +691,6 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tg4-Ds-Tgh">
-                                        <rect key="frame" x="154" y="393" width="81" height="30"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <state key="normal" title="Bewertung"/>
-                                        <connections>
-                                            <action selector="bestellung:" destination="RQu-h7-DDh" eventType="touchUpInside" id="TMX-TS-HZu"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mjt-E6-UaG">
-                                        <rect key="frame" x="133" y="545" width="102" height="40"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <state key="normal" title="vote"/>
-                                        <connections>
-                                            <action selector="votefortrump:" destination="RQu-h7-DDh" eventType="touchUpInside" id="fi1-i5-rWf"/>
-                                        </connections>
-                                    </button>
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="XT3-ss-KWX" firstAttribute="leading" secondItem="vPZ-U3-fKa" secondAttribute="leading" id="MEq-Io-tZD"/>
