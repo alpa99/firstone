@@ -17,6 +17,7 @@ class votevc: UIViewController, PulleyDrawerViewControllerDelegate {
     var vote = [VoteInfos]()
     var quantity = Double ()
     var quality: Double = 0.0
+    var finalgrade = Double()
     
     
    
@@ -89,15 +90,17 @@ class votevc: UIViewController, PulleyDrawerViewControllerDelegate {
             var ref: DatabaseReference!
             ref = Database.database().reference()
             ref.child("BarInfo").child("Barracuda").child("Votes").child("Blaubeere").observe(.value, with: { (snapshot) in
-                print(snapshot, "snapshot")
+                
                 if let dictionary = snapshot.value as? [String: AnyObject]{
                     let vote = VoteInfos(dictionary: dictionary)
                     
                     self.quantity = vote.quantity! + 1.0
+                    self.quality = vote.quality! + Double(self.Note1.text!)!
+                    self.finalgrade = self.quality / self.quantity
                     
-                    print(self.quantity, "quantity", self.quality, "quality")
+                    print(self.quantity, "quantity", self.quality, "quality", self.finalgrade, "finalgrade")
                     
-                
+                self.votetofire(quantity: self.quantity, quality: self.quality, finalgrade: self.finalgrade)
                 }
             }, withCancel: nil)
             
@@ -108,7 +111,14 @@ class votevc: UIViewController, PulleyDrawerViewControllerDelegate {
         
         
         
+    func votetofire (quantity: Double, quality: Double, finalgrade: Double){
+        
+        let value = ["quality": quality, "quantity": quantity, "finalgrade": finalgrade]
+        var votref: DatabaseReference!
+        votref = Database.database().reference().child("BarInfo").child("Barracuda").child("Votes").child("Blaubeere")
+        votref.updateChildValues(value)
     
+    }
    
     
     
