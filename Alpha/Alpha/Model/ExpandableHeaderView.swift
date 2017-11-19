@@ -10,14 +10,13 @@
 import UIKit
 
 protocol ExpandableHeaderViewDelegate {
-    func toggleSection(tableView: UITableView, header: ExpandableHeaderView, section: Int)
+    func toggleSection(header: ExpandableHeaderView, section: Int)
 }
 
 class ExpandableHeaderView: UITableViewHeaderFooterView {
     
     var delegate: ExpandableHeaderViewDelegate?
     var section: Int!
-    var tableView = UITableView()
     override init(reuseIdentifier: String?) {
         super.init(reuseIdentifier: reuseIdentifier)
         self.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(selectHeaderAction)))
@@ -30,15 +29,14 @@ class ExpandableHeaderView: UITableViewHeaderFooterView {
     @objc func selectHeaderAction(gestureRecognizer: UITapGestureRecognizer){
         
         let cell = gestureRecognizer.view as! ExpandableHeaderView
-        delegate?.toggleSection(tableView: tableView, header: self, section: cell.section)
+        delegate?.toggleSection(header: self, section: cell.section)
     }
     
-    func customInit(tableView: UITableView, title: String, section: Int, delegate: ExpandableHeaderViewDelegate) {
+    func customInit(title: String, section: Int, delegate: ExpandableHeaderViewDelegate) {
         
         self.textLabel?.text = title
         self.section = section
         self.delegate = delegate
-        self.tableView = tableView
     }
     
     
@@ -46,7 +44,6 @@ class ExpandableHeaderView: UITableViewHeaderFooterView {
         super.layoutSubviews()
         self.textLabel?.textColor = UIColor.white
         self.contentView.backgroundColor = UIColor.darkGray
-  
     }
     
     
