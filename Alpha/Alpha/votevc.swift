@@ -100,18 +100,13 @@ class votevc: UIViewController, PulleyDrawerViewControllerDelegate {
 
                     self.finalgrade = self.quality / self.quantity
                 print(self.quantity, "quantity", self.quality, "quality", self.finalgrade, "finalgrade")
-                    
-                    self.addvotetofire(quantity: self.quantity, quality: self.quality, finalgrade: self.finalgrade)
-                    
-//
                 }
-                
             }, withCancel: nil)
             
         }
-        
             
         }
+<<<<<<< HEAD
 
     
     
@@ -125,8 +120,9 @@ class votevc: UIViewController, PulleyDrawerViewControllerDelegate {
         votref.updateChildValues(values)
             
         
+=======
+>>>>>>> parent of fdad9be... kl
         
-    }
         
         
         
