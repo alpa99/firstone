@@ -106,7 +106,6 @@ class votevc: UIViewController, PulleyDrawerViewControllerDelegate {
         }
             
         }
-<<<<<<< HEAD
 
     
     
@@ -120,10 +119,7 @@ class votevc: UIViewController, PulleyDrawerViewControllerDelegate {
         votref.updateChildValues(values)
             
         
-=======
->>>>>>> parent of fdad9be... kl
-        
-        
+    }
         
         
     
