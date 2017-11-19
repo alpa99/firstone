@@ -73,7 +73,6 @@ class votevc: UIViewController, PulleyDrawerViewControllerDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        Note1.text = ""
 
     }
 
@@ -96,7 +95,9 @@ class votevc: UIViewController, PulleyDrawerViewControllerDelegate {
                     
                        self.quality = vote.quality! + Double(self.Note1.text!)!
                     self.quantity = vote.quantity! + 1.0
-                    
+             
+                    print(self.quantity, "quantity", self.quality, "quality")
+
                     self.finalgrade = self.quality / self.quantity
                 print(self.quantity, "quantity", self.quality, "quality", self.finalgrade, "finalgrade")
                     
@@ -111,6 +112,7 @@ class votevc: UIViewController, PulleyDrawerViewControllerDelegate {
         
             
         }
+
     
     
     
@@ -130,7 +132,7 @@ class votevc: UIViewController, PulleyDrawerViewControllerDelegate {
         
     
    
-    
+
     
     
     
