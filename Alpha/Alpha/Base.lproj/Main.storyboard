@@ -643,19 +643,12 @@
                                 <rect key="frame" x="0.0" y="99" width="375" height="801"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XT3-ss-KWX">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="883"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="801"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="883" id="uqG-6e-3pT"/>
+                                            <constraint firstAttribute="height" constant="801" id="uqG-6e-3pT"/>
                                         </constraints>
                                     </view>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="49U-3M-naz">
-                                        <rect key="frame" x="133" y="801" width="75" height="21"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tg4-Ds-Tgh">
                                         <rect key="frame" x="154" y="393" width="81" height="30"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -676,7 +669,7 @@
                                 <constraints>
                                     <constraint firstItem="XT3-ss-KWX" firstAttribute="leading" secondItem="vPZ-U3-fKa" secondAttribute="leading" id="MEq-Io-tZD"/>
                                     <constraint firstItem="XT3-ss-KWX" firstAttribute="top" secondItem="vPZ-U3-fKa" secondAttribute="top" id="Srs-Qq-XdC"/>
-                                    <constraint firstAttribute="bottom" secondItem="XT3-ss-KWX" secondAttribute="bottom" constant="-82" id="eXs-O4-cLS"/>
+                                    <constraint firstAttribute="bottom" secondItem="XT3-ss-KWX" secondAttribute="bottom" id="eXs-O4-cLS"/>
                                     <constraint firstItem="XT3-ss-KWX" firstAttribute="centerX" secondItem="vPZ-U3-fKa" secondAttribute="centerX" id="ieS-5L-fwm"/>
                                     <constraint firstAttribute="trailing" secondItem="XT3-ss-KWX" secondAttribute="trailing" id="pEi-GH-b9Y"/>
                                 </constraints>

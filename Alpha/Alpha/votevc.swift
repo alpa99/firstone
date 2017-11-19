@@ -99,13 +99,32 @@ class votevc: UIViewController, PulleyDrawerViewControllerDelegate {
                     
                     self.finalgrade = self.quality / self.quantity
                 print(self.quantity, "quantity", self.quality, "quality", self.finalgrade, "finalgrade")
+                    
+                    self.addvotetofire(quantity: self.quantity, quality: self.quality, finalgrade: self.finalgrade)
+                    
+//
                 }
+                
             }, withCancel: nil)
             
         }
+        
             
         }
+    
+    
+    
+    func addvotetofire (quantity: Double, quality: Double, finalgrade: Double) {
         
+        var votref: DatabaseReference!
+        
+        votref = Database.database().reference().child("BarInfo").child("Barracuda").child("Votes").child("Blaubeere")
+        let values = ["quality": quality, "quantity": quantity, "finalgrade": finalgrade]
+        votref.updateChildValues(values)
+            
+        
+        
+    }
         
         
         
