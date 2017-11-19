@@ -566,6 +566,7 @@
                         <outlet property="itemCountLbl" destination="B9n-Ig-zZi" id="qEa-WO-KUM"/>
                         <outlet property="itemNameLbl" destination="Ocp-2A-uzN" id="ygy-KY-1ha"/>
                         <outlet property="label" destination="CxV-wT-GD7" id="1MU-aU-Qxh"/>
+                        <outlet property="myBestellungTV" destination="vUA-7l-QCo" id="WaS-iU-gus"/>
                         <outlet property="myBestellungView" destination="SjS-ze-1e5" id="DTk-Tf-7Hz"/>
                         <outlet property="visualEffectView" destination="0cM-y6-yY0" id="nKo-w5-tIF"/>
                     </connections>
@@ -617,25 +618,44 @@
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <viewLayoutGuide key="safeArea" id="QXt-e5-qSA"/>
                 </view>
-                <view contentMode="scaleToFill" id="SjS-ze-1e5" customClass="myBestellungView" customModule="Alpha" customModuleProvider="target">
-                    <rect key="frame" x="0.0" y="0.0" width="260" height="365"/>
+                <view contentMode="scaleToFill" id="SjS-ze-1e5">
+                    <rect key="frame" x="0.0" y="0.0" width="327" height="457"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <subviews>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="deine bestellung" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eBV-cg-8bT">
-                            <rect key="frame" x="57" y="20" width="127" height="21"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                            <nil key="textColor"/>
-                            <nil key="highlightedColor"/>
-                        </label>
                         <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xmq-kg-DJD">
-                            <rect key="frame" x="107" y="315" width="46" height="30"/>
+                            <rect key="frame" x="140" y="407" width="46" height="30"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <state key="normal" title="Button"/>
                             <connections>
                                 <action selector="dismissMyBestellungView:" destination="Yts-F3-2fU" eventType="touchUpInside" id="XIX-om-jz8"/>
                             </connections>
                         </button>
+                        <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="vUA-7l-QCo">
+                            <rect key="frame" x="20" y="73" width="291" height="326"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <prototypes>
+                                <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="myBestellungCell" id="QYv-OI-hYI">
+                                    <rect key="frame" x="0.0" y="28" width="291" height="44"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="QYv-OI-hYI" id="GpR-1d-83S">
+                                        <rect key="frame" x="0.0" y="0.0" width="291" height="43.5"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                    </tableViewCellContentView>
+                                </tableViewCell>
+                            </prototypes>
+                            <connections>
+                                <outlet property="dataSource" destination="Yts-F3-2fU" id="eBI-dU-F4k"/>
+                                <outlet property="delegate" destination="Yts-F3-2fU" id="vXK-F2-rtH"/>
+                            </connections>
+                        </tableView>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="deine bestellung" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eBV-cg-8bT">
+                            <rect key="frame" x="100" y="20" width="127" height="21"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <viewLayoutGuide key="safeArea" id="lj9-4s-ScA"/>
