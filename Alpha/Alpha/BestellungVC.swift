@@ -12,6 +12,7 @@ import FBSDKLoginKit
 import Pulley
 
 class BestellungVC: UIViewController, UITableViewDataSource, UITableViewDelegate, ExpandableHeaderViewDelegate, PulleyDrawerViewControllerDelegate, BestellenCellDelegate {
+    
 
     // VARS
 
@@ -50,6 +51,7 @@ class BestellungVC: UIViewController, UITableViewDataSource, UITableViewDelegate
     @IBOutlet var myBestellungView: UIView!
     
     
+
     @IBOutlet var addItemView: UIView!
     @IBOutlet weak var itemNameLbl: UILabel!
 
@@ -82,7 +84,16 @@ class BestellungVC: UIViewController, UITableViewDataSource, UITableViewDelegate
     }
     
     @IBAction func sendToFirebase(_ sender: Any) {
-    
+//        myBestellungTV.delegate = self
+//        myBestellungTV.dataSource = self
+//        myBestellungTV.numberOfRows(inSection: 3)
+//
+//
+//        let indexPath = self.myBestellungTV.indexPathForRow(at: (sender as AnyObject).center)!
+//        let myBestellungCell = myBestellungTV.dequeueReusableCell(withIdentifier: "myBestellungCell", for: indexPath)
+//        myBestellungCell.textLabel?.text = "hi"
+
+        
         self.view.addSubview(myBestellungView)
         myBestellungView.center = self.view.center
         myBestellungView.transform = CGAffineTransform.init(scaleX: 1.3, y: 1.3)
@@ -386,7 +397,6 @@ class BestellungVC: UIViewController, UITableViewDataSource, UITableViewDelegate
     
   
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
         let cell = Bundle.main.loadNibNamed("BestellenCell", owner: self, options: nil)?.first as! BestellenCell
         cell.delegate = self
         if (sections[indexPath.section].expanded){
@@ -398,9 +408,11 @@ class BestellungVC: UIViewController, UITableViewDataSource, UITableViewDelegate
             cell.itemPreisLbl.isHidden = true
             cell.itemAddBtn.isHidden = true
         }
-   
-        return cell
+            return cell
+       
     }
+    
+
     
     
     func toggleSection(header: ExpandableHeaderView, section: Int) {
@@ -421,10 +433,10 @@ class BestellungVC: UIViewController, UITableViewDataSource, UITableViewDelegate
         
         if touch?.view != addItemView {
             animateOut()
-            
-        } else if touch?.view != myBestellungView {
+         
             dismissMyBestellungView()
         }
+        
     }
     
     override func viewDidLoad() {
