@@ -359,7 +359,6 @@ class BestellungVC: UIViewController, UITableViewDataSource, UITableViewDelegate
 
 
     func numberOfSections(in tableView: UITableView) -> Int {
-        return sections.count
         if tableView == bestellungTableView {
             return sections.count }
         else {
