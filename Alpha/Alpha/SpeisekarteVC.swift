@@ -143,7 +143,7 @@ class SpeisekarteVC: UIViewController, UITableViewDataSource, UITableViewDelegat
         
         func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
             let header = ExpandableHeaderView()
-            header.customInit(title: sections[section].genre, section: section, delegate: self as ExpandableHeaderViewDelegate)
+            header.customInit(tableView: tableView, title: sections[section].genre, section: section, delegate: self as ExpandableHeaderViewDelegate)
             return header
         }
         
@@ -182,7 +182,7 @@ class SpeisekarteVC: UIViewController, UITableViewDataSource, UITableViewDelegat
     
 
     
-    func toggleSection(header: ExpandableHeaderView, section: Int) {
+    func toggleSection(tableView: UITableView, header: ExpandableHeaderView, section: Int) {
         sections[section].expanded = !sections[section].expanded
         
         speisekarteTV.beginUpdates()

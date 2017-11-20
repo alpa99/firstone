@@ -37,6 +37,9 @@ class BestellungVC: UIViewController, UITableViewDataSource, UITableViewDelegate
     var bestellteShishas  = [String: Int]()
     var bestellteGetränke  = [String: Int]()
     
+    var bestellung = ["Lemon Fresh", "Wild Berry Fresh", "2x Cola", "Eistee", "Cay", "Zitrone", "minze"]
+
+    
     var effect: UIVisualEffect!
 
     
@@ -47,7 +50,6 @@ class BestellungVC: UIViewController, UITableViewDataSource, UITableViewDelegate
     
     @IBOutlet var bestellungVCView: UIView!
     
-    @IBOutlet var myBestellungView: UIView!
     
     
     @IBOutlet var addItemView: UIView!
@@ -55,11 +57,13 @@ class BestellungVC: UIViewController, UITableViewDataSource, UITableViewDelegate
 
     @IBOutlet weak var itemCountLbl: UILabel!
     
+    @IBOutlet weak var myBestellungTV: UITableView!
     
     @IBOutlet weak var bestellungTableView: UITableView!
 
+    @IBOutlet var myBestellungView: UIView!
     
-
+    
     @IBOutlet weak var visualEffectView: UIVisualEffectView!
     
     @IBOutlet weak var dismissPopUp: UIButton!
@@ -99,11 +103,17 @@ class BestellungVC: UIViewController, UITableViewDataSource, UITableViewDelegate
 //        handleBestellung()
     }
     
+    
     @IBAction func dismissMyBestellungView(_ sender: Any) {
-        
         dismissMyBestellungView()
+        myBestellungView.isHidden = true
     }
     
+//    @IBAction func dismissMyBestellungView(_ sender: Any) {
+//
+//        dismissMyBestellungView()
+//    }
+//
     
     
 //    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -350,11 +360,21 @@ class BestellungVC: UIViewController, UITableViewDataSource, UITableViewDelegate
 
     func numberOfSections(in tableView: UITableView) -> Int {
         return sections.count
-    
+        if tableView == bestellungTableView {
+            return sections.count }
+        else {
+            
+            return 1
+        }
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return sections[section].items.count
-    }
+        
+        if tableView == bestellungTableView {
+            return sections[section].items.count }
+        else {
+            
+            return bestellung.count
+        }    }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 44
@@ -379,7 +399,7 @@ class BestellungVC: UIViewController, UITableViewDataSource, UITableViewDelegate
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let header = ExpandableHeaderView()
-        header.customInit(title: sections[section].genre, section: section, delegate: self as ExpandableHeaderViewDelegate)
+        header.customInit(tableView: tableView, title: sections[section].genre, section: section, delegate: self as ExpandableHeaderViewDelegate)
         return header
     }
     
@@ -387,31 +407,51 @@ class BestellungVC: UIViewController, UITableViewDataSource, UITableViewDelegate
   
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = Bundle.main.loadNibNamed("BestellenCell", owner: self, options: nil)?.first as! BestellenCell
-        cell.delegate = self
-        if (sections[indexPath.section].expanded){
-            cell.itemNameLbl.text = "\(sections[indexPath.section].items[indexPath.row])"
-            cell.itemPreisLbl.text = "\(sections[indexPath.section].preise[indexPath.row]) €"
-        }
-        else {
-            cell.itemNameLbl.isHidden = true
-            cell.itemPreisLbl.isHidden = true
-            cell.itemAddBtn.isHidden = true
-        }
+        if tableView == bestellungTableView {
+            let cell = Bundle.main.loadNibNamed("BestellenCell", owner: self, options: nil)?.first as! BestellenCell
+            cell.delegate = self
+            
+            if (sections[indexPath.section].expanded){
+                cell.itemNameLbl.text = "\(sections[indexPath.section].items[indexPath.row])"
+                cell.itemPreisLbl.text = "\(sections[indexPath.section].preise[indexPath.row]) €"
+                return cell
+                
+            }
+            else {
+                cell.itemNameLbl.isHidden = true
+                cell.itemPreisLbl.isHidden = true
+                cell.itemAddBtn.isHidden = true
+                return cell
+                
+            }
+        } else {
+            
+            let cell = self.myBestellungTV.dequeueReusableCell(withIdentifier: "myBestellCell", for: indexPath)
+            cell.textLabel?.text = bestellung[indexPath.row]
    
         return cell
     }
+    }
     
     
-    func toggleSection(header: ExpandableHeaderView, section: Int) {
-        sections[section].expanded = !sections[section].expanded
-        
-        bestellungTableView.beginUpdates()
-        for i in 0..<sections[section].items.count{
-            bestellungTableView.reloadRows(at: [IndexPath(row: i, section: section)], with: .automatic)
+    func toggleSection(tableView: UITableView, header: ExpandableHeaderView, section: Int) {
+        if tableView == bestellungTableView {
+            sections[section].expanded = !sections[section].expanded
+            
+            bestellungTableView.beginUpdates()
+            for i in 0..<sections[section].items.count{
+                bestellungTableView.reloadRows(at: [IndexPath(row: i, section: section)], with: .automatic)
+            }
+            bestellungTableView.endUpdates()
         }
-        bestellungTableView.endUpdates()
-        
+        else {
+            sections[section].expanded = !sections[section].expanded
+            myBestellungTV.beginUpdates()
+            for i in 0..<bestellung.count{
+                myBestellungTV.reloadRows(at: [IndexPath(row: i, section: section)], with: .automatic)
+            }
+            myBestellungTV.endUpdates()
+        }
     }
 
     // OTHERS
@@ -419,11 +459,11 @@ class BestellungVC: UIViewController, UITableViewDataSource, UITableViewDelegate
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         let touch: UITouch? = touches.first
         
-        if touch?.view != addItemView {
+
+        if touch?.view != myBestellungView || touch?.view != addItemView  {
+            dismissMyBestellungView()
             animateOut()
             
-        } else if touch?.view != myBestellungView {
-            dismissMyBestellungView()
         }
     }
     
