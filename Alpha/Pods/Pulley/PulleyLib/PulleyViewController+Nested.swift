@@ -5,7 +5,7 @@
 //  Created by Ethan Gill on 8/1/17.
 //
 
-import UIKit
+import Foundation
 
 extension PulleyViewController: PulleyDrawerViewControllerDelegate {
     public func collapsedDrawerHeight(bottomSafeArea: CGFloat) -> CGFloat {
