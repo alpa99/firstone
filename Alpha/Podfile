@@ -12,9 +12,9 @@ pod 'FacebookCore'
 pod 'FacebookLogin'
 
 pod 'Firebase/Core'
-pod 'Firebase/Database‘
+pod 'Firebase/Database'
 pod 'Firebase'
-
+pod 'Firebase/Storage'
 
 
   target 'AlphaTests' do
