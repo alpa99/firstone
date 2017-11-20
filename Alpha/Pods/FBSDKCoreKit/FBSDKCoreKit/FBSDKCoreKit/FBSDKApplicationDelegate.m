@@ -135,10 +135,17 @@ static NSString *const FBSDKAppLinkInboundEvent = @"fb_al_inbound";
             openURL:(NSURL *)url
             options:(NSDictionary<UIApplicationOpenURLOptionsKey,id> *)options
 {
-  return [self application:application
-                   openURL:url
-         sourceApplication:options[UIApplicationOpenURLOptionsSourceApplicationKey]
-                annotation:options[UIApplicationOpenURLOptionsAnnotationKey]];
+    if (@available(iOS 9.0, *)) {
+        return [self application:application
+                         openURL:url
+               sourceApplication:options[UIApplicationOpenURLOptionsSourceApplicationKey]
+                      annotation:options[UIApplicationOpenURLOptionsAnnotationKey]];
+    } else {
+        return [self application:application
+                         openURL:url
+               sourceApplication:options[UIApplicationLaunchOptionsSourceApplicationKey]
+                      annotation:options[UIApplicationLaunchOptionsAnnotationKey]];
+    }
 }
 #endif
 
