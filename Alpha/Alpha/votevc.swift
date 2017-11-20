@@ -16,7 +16,7 @@ class votevc: UIViewController, PulleyDrawerViewControllerDelegate {
     var barname = ""
     var vote = [VoteInfos]()
     var quantity = Double ()
-    var quality: Double = 0.0
+    var quality = Double ()
     var finalgrade = Double()
     
     
@@ -68,7 +68,8 @@ class votevc: UIViewController, PulleyDrawerViewControllerDelegate {
     
     @IBAction func VoteNow(_ sender: UIButton) {
         handlevote()
-        votetofire()
+        
+   
     }
     
    //viewdidload
@@ -93,15 +94,16 @@ class votevc: UIViewController, PulleyDrawerViewControllerDelegate {
             ref.child("BarInfo").child("Barracuda").child("Votes").child("Blaubeere").observe(.value, with: { (snapshot) in
                 
                 if let dictionary = snapshot.value as? [String: AnyObject]{
-                    let vote = VoteInfos(dictionary: dictionary)
+                    let votes = VoteInfos(dictionary: dictionary)
                     
-                    self.quantity = vote.quantity! + 1.0
-                    self.quality = vote.quality! + Double(self.Note1.text!)!
+                    self.quantity = votes.quantity! + 1.0
+                    self.quality += votes.quality!
                     self.finalgrade = self.quality / self.quantity
                     
                     print(self.quantity, "quantity", self.quality, "quality", self.finalgrade, "finalgrade")
                     
                 }
+                print("raushier")
 
             }, withCancel: nil)
             
@@ -112,9 +114,10 @@ class votevc: UIViewController, PulleyDrawerViewControllerDelegate {
         
         
         
-    func votetofire (){
-        
+    func votetofire(){
+      
         let value = ["quality": self.quality, "quantity": self.quantity, "finalgrade": self.finalgrade]
+          print("jetztfire", value)
         var votref: DatabaseReference!
         votref = Database.database().reference().child("BarInfo").child("Barracuda").child("Votes").child("Blaubeere")
         votref.updateChildValues(value)
