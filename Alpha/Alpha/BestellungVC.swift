@@ -22,7 +22,6 @@ class BestellungVC: UIViewController, UITableViewDataSource, UITableViewDelegate
     private var selectedItems = [String]()
     var barname = ""
     
-    var bestellungsText = "noch keine Bestellung"
     
     var bars = [BarInfos]()
     var adresse = String ()
@@ -43,6 +42,7 @@ class BestellungVC: UIViewController, UITableViewDataSource, UITableViewDelegate
     
     var bestellung = [ExpandTVSection]()
 
+    var bestellungSections = ["Shishas","Getränke"]
     
     var effect: UIVisualEffect!
 
@@ -108,50 +108,38 @@ class BestellungVC: UIViewController, UITableViewDataSource, UITableViewDelegate
         }
         
         for (item, preis) in bestellteShishas {
- 
+            
             if x.contains(item) == false {
                 x.append(item)
                 y.append(preis)
                 print(x, "X")
-                if x.count == 1{
 
-                    setSectionsBestellung(genre: "Shishas", items: x, preise: y)
-                    bestellung[0].expanded = true
-
-                    print(x, "X2")
-
-                } else {
-                    bestellung[0].expanded = true
-                    
-                    self.bestellung.remove(at: 0)
-                    setSectionsBestellung(genre: "Shishas", items: x, preise: y)
-                    print(x, "X3")
-
-                    }
-            } else {
-                print("ist schon drinne")
             }
         }
-        for (item, preis) in bestellteGetränke {
         
-        if a.contains(item) == false {
-            a.append(item)
-            b.append(preis)
-            if a.count == 1{
-                setSectionsBestellung(genre: "Getränke", items: a, preise: b)
-                bestellung[1].expanded = true
-
-            } else {
-                bestellung[1].expanded = true
-
-                self.bestellung.remove(at: 1)
-                setSectionsBestellung(genre: "Getränke", items: a, preise: b)
-                
+        for (item, preis) in bestellteGetränke {
+            
+            if a.contains(item) == false {
+                a.append(item)
+                b.append(preis)
             }
-        } else {
-            print("ist schon drinne")
         }
+        
+        bestellung.removeAll()
+        if x.count == 0 {
+            setSectionsBestellung(genre: "Shishas", items: ["noch nix"], preise: y)
+
+        } else {
+        setSectionsBestellung(genre: "Shishas", items: x, preise: y)
     }
+        if a.count == 0 {
+            setSectionsBestellung(genre: "Getränke", items: ["noch nix"], preise: y)
+            
+        } else {
+            setSectionsBestellung(genre: "Getränke", items: x, preise: y)
+        }
+
+  
     }
     
     
@@ -160,8 +148,6 @@ class BestellungVC: UIViewController, UITableViewDataSource, UITableViewDelegate
         myBestellungView.isHidden = true
         bestellung = [ExpandTVSection]()
         print("touch")
-
-
     }
 
     
