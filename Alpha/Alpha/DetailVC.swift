@@ -15,7 +15,10 @@ class DetailVC: UIViewController, PulleyDrawerViewControllerDelegate {
     var barname = ""
     var bars = [BarInfos]()
     var adresse = String ()
+    var bild = String ()
+
     
+    @IBOutlet weak var image: UIImageView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -71,18 +74,43 @@ class DetailVC: UIViewController, PulleyDrawerViewControllerDelegate {
         var ref: DatabaseReference!
         self.Namelbl.text = self.barname
         ref = Database.database().reference()
-        ref.child("BarInfo").child("\(barname)").observe(.childAdded, with: { (snapshot) in
+        ref.child("BarInfo").child("\(barname)").observe(.value, with: { (snapshot) in
             
             if let dictionary = snapshot.value as? [String: AnyObject]{
                 let bar = BarInfos(dictionary: dictionary)
                 
                 self.bars.append(bar)
-                
-            }
-        } , withCancel: nil)
+                self.bild.append(bar.Bild!)
+                print(self.bild)
+                let storageRef = Storage.storage().reference(forURL: self.bild)
+                storageRef.getData(maxSize: 1 * 1024 * 1024) { (data, error) -> Void in
+                    // Create a UIImage, add it to the array
+                    let pic = UIImage(data: data!)
+                    self.image.image = pic
+                }
+               // self.loadimage()
+
+            
+            }} , withCancel: nil)
         
     }
     
+    
+//    func loadimage(){
+//        let url = URL(string: bild)
+//        URLSession.shared.dataTask(with: url!, completionHandler: {(data, response,error) in
+//
+//            if error != nil{
+//                print(error ?? "error")
+//                return
+//            }
+    
+//
+//                self.image.image = UIImage(data: data!)
+//
+//        }).resume()
+//
+//    }
     
         
     // Pulley

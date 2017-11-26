@@ -689,20 +689,24 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XT3-ss-KWX">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="883"/>
                                         <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tg4-Ds-Tgh">
-                                                <rect key="frame" x="115" y="8" width="144" height="30"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <state key="normal" title="Speisekarte ansehen"/>
-                                                <connections>
-                                                    <action selector="bestellung:" destination="RQu-h7-DDh" eventType="touchUpInside" id="TMX-TS-HZu"/>
-                                                </connections>
-                                            </button>
                                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mjt-E6-UaG">
-                                                <rect key="frame" x="136" y="46" width="102" height="40"/>
+                                                <rect key="frame" x="136" y="287" width="102" height="40"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <state key="normal" title="Bewerten"/>
                                                 <connections>
                                                     <action selector="votefortrump:" destination="RQu-h7-DDh" eventType="touchUpInside" id="fi1-i5-rWf"/>
+                                                </connections>
+                                            </button>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3pL-0a-6KG">
+                                                <rect key="frame" x="67" y="32" width="240" height="128"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            </imageView>
+                                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tg4-Ds-Tgh">
+                                                <rect key="frame" x="115" y="224" width="144" height="30"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <state key="normal" title="Speisekarte ansehen"/>
+                                                <connections>
+                                                    <action selector="bestellung:" destination="RQu-h7-DDh" eventType="touchUpInside" id="TMX-TS-HZu"/>
                                                 </connections>
                                             </button>
                                         </subviews>
@@ -755,6 +759,7 @@
                     <size key="freeformSize" width="375" height="900"/>
                     <connections>
                         <outlet property="Namelbl" destination="0gE-dk-9Yg" id="FJs-Xd-UyD"/>
+                        <outlet property="image" destination="3pL-0a-6KG" id="ref-9j-pZC"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9kH-5l-ukr" userLabel="First Responder" sceneMemberID="firstResponder"/>
