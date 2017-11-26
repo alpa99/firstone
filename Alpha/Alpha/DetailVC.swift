@@ -67,7 +67,7 @@ class DetailVC: UIViewController, PulleyDrawerViewControllerDelegate {
     
     func fetchData () {
         
-        print("vgv")
+        print("vgv", barname)
         var ref: DatabaseReference!
         self.Namelbl.text = self.barname
         ref = Database.database().reference()

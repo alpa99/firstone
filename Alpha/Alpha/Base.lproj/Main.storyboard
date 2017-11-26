@@ -220,7 +220,7 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
-                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="bad-AO-7LM"/>
+                        <segue destination="RD5-Hb-S63" kind="relationship" relationship="rootViewController" id="6FW-rH-X3z"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6XE-zR-NNw" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -299,12 +299,11 @@
                     <navigationItem key="navigationItem" id="J6B-KR-Obv"/>
                     <connections>
                         <outlet property="square" destination="oMC-KD-mEQ" id="NtD-AJ-hgO"/>
-                        <segue destination="RD5-Hb-S63" kind="show" identifier="codescan" id="iu8-vW-H79"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4097" y="74"/>
+            <point key="canvasLocation" x="4097" y="573"/>
         </scene>
         <!--Scan DetailVC-->
         <scene sceneID="bfF-gB-4Zv">
@@ -313,13 +312,28 @@
                     <view key="view" contentMode="scaleToFill" id="1Xn-jN-LJF">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" translatesAutoresizingMaskIntoConstraints="NO" id="O5K-4x-YgZ">
+                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                            </scrollView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="O5K-4x-YgZ" firstAttribute="top" secondItem="AqD-fQ-r6j" secondAttribute="top" id="Fpc-lS-miY"/>
+                            <constraint firstAttribute="bottom" secondItem="O5K-4x-YgZ" secondAttribute="bottom" id="IVs-Wh-QYo"/>
+                            <constraint firstAttribute="trailing" secondItem="O5K-4x-YgZ" secondAttribute="trailing" id="SHa-Gu-988"/>
+                            <constraint firstItem="O5K-4x-YgZ" firstAttribute="leading" secondItem="1Xn-jN-LJF" secondAttribute="leading" id="rVz-OZ-jic"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="AqD-fQ-r6j"/>
                     </view>
+                    <navigationItem key="navigationItem" id="ae7-J4-iXb"/>
+                    <connections>
+                        <outlet property="scrollView" destination="O5K-4x-YgZ" id="2Un-hW-AGc"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Yl1-hz-kaX" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5183" y="93"/>
+            <point key="canvasLocation" x="5181.6000000000004" y="92.203898050974516"/>
         </scene>
         <!--LocationVC-->
         <scene sceneID="JvY-Yy-6O4">
