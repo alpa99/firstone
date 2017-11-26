@@ -75,6 +75,10 @@ class BestellungVC: UIViewController, UITableViewDataSource, UITableViewDelegate
     // ACTIONS
     
     
+    @IBAction func myBestellungAbschicken(_ sender: Any) {
+        handleBestellung()
+    }
+    
     @IBAction func dismissPopUp(_ sender: Any) {
         animateOut()
         print("touch")
@@ -95,7 +99,9 @@ class BestellungVC: UIViewController, UITableViewDataSource, UITableViewDelegate
 
 
         UIView.animate(withDuration: 1) {
-            self.myBestellungView.center = self.view.center
+            self.myBestellungView.isHidden = false
+
+//            self.myBestellungView.center = self.view.center
             self.myBestellungView.transform = CGAffineTransform.init(scaleX: 1.3, y: 1.3)
             self.myBestellungView.alpha = 0
             self.visualEffectView.isHidden = false
@@ -124,10 +130,10 @@ class BestellungVC: UIViewController, UITableViewDataSource, UITableViewDelegate
                 a.append(item)
                 b.append(preis)
             }
-        
         }
         
         bestellung.removeAll()
+        
         if x.count == 0 {
             setSectionsBestellung(genre: "Shishas", items: ["noch nix"], preise: y)
 
@@ -138,27 +144,17 @@ class BestellungVC: UIViewController, UITableViewDataSource, UITableViewDelegate
             setSectionsBestellung(genre: "Getränke", items: ["noch nix"], preise: y)
             
         } else {
-            setSectionsBestellung(genre: "Getränke", items: x, preise: y)
+            setSectionsBestellung(genre: "Getränke", items: a, preise: b)
         }
     }
     
     
     @IBAction func dismissMyBestellungView(_ sender: Any) {
         dismissMyBestellungView()
-        myBestellungView.isHidden = true
         bestellung = [ExpandTVSection]()
         print("touch")
     }
 
-    
-//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//        if segue.identifier == "showBarDetail" {
-//            let KVC = segue.destination as! DetailVC
-//            KVC.barname = barname
-//
-//        }
-//    }
-//
     @IBAction func bardetail(_ sender: UIButton) {
         
         (parent as? PulleyViewController)?.setDrawerPosition(position: PulleyPosition(rawValue: 2)!)
@@ -166,7 +162,6 @@ class BestellungVC: UIViewController, UITableViewDataSource, UITableViewDelegate
         detvc.barname = barname
         
         (parent as? PulleyViewController)?.setDrawerContentViewController(controller: detvc, animated: true)
-        //segueToKellnerVC()
     }
     
     
@@ -214,7 +209,27 @@ class BestellungVC: UIViewController, UITableViewDataSource, UITableViewDelegate
         }, withCancel: nil)
     }
     
+        func handleBestellung(){
     
+            var ref: DatabaseReference!
+    
+            if bestellteShishas.count > 0 || bestellteGetränke.count > 0{
+                let timestamp = Double(NSDate().timeIntervalSince1970)
+                let values = ["shishas": bestellteShishas, "getränke": bestellteGetränke, "toKellnerID": "Kellner1", "tischnummer": "3", "fromUserID": FBSDKAccessToken.current().userID, "timeStamp": timestamp] as [String : Any]
+    
+                ref = Database.database().reference().child("Bestellungen")
+                let childRef = ref?.childByAutoId()
+                if bestellteGetränke.count != 0 || bestellteShishas.count != 0{
+                childRef?.updateChildValues(values)
+                    print(Date(timeIntervalSince1970: timestamp)) }
+                else {
+                    let alert = UIAlertController(title: "Deine Bestellung ist leer", message: nil, preferredStyle: UIAlertControllerStyle.alert)
+                    alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
+    
+                    self.present(alert, animated: true, completion: nil)
+                }
+            }
+        }
 //
 //    func cellItemBtnTapped(sender: BestellenCell) {
 //        let indexPath = self.bestellungTableView.indexPathForRow(at: sender.center)!
@@ -305,12 +320,17 @@ class BestellungVC: UIViewController, UITableViewDataSource, UITableViewDelegate
     func dismissMyBestellungView() {
         
         UIView.animate(withDuration: 0.5, animations: {
-            self.myBestellungView.transform = CGAffineTransform.init(scaleX: 1.3, y: 1.3)
-            self.myBestellungView.alpha = 0
+//            self.myBestellungView.transform = CGAffineTransform.init(scaleX: 1.3, y: 1.3)
+//            self.myBestellungView.alpha = 0
+            self.myBestellungView.isHidden = true
+
             self.visualEffectView.effect = nil
             
+            
         }){ (success:Bool) in
-            self.myBestellungView.removeFromSuperview()
+//            self.myBestellungView.removeFromSuperview()
+            self.myBestellungView.isHidden = true
+
             self.visualEffectView.isHidden = true
         }
         
@@ -412,10 +432,10 @@ class BestellungVC: UIViewController, UITableViewDataSource, UITableViewDelegate
         } else {
             let cell = self.myBestellungTV.dequeueReusableCell(withIdentifier: "myBestellCell", for: indexPath)
             cell.textLabel?.text = "\(bestellung[indexPath.section].items[indexPath.row])"
-            cell.detailTextLabel?.text = "\(bestellung[indexPath.section].preise[indexPath.row])"
             return cell
         }
     }
+    
     
     
     
@@ -457,6 +477,8 @@ class BestellungVC: UIViewController, UITableViewDataSource, UITableViewDelegate
         visualEffectView.effect = nil
         visualEffectView.isHidden = true
         addItemView.isHidden = true
+        myBestellungView.isHidden = true
+
 
         addItemView.layer.cornerRadius = 5
         
@@ -470,33 +492,3 @@ class BestellungVC: UIViewController, UITableViewDataSource, UITableViewDelegate
 
 
 }
-
-
-
-
-//    func handleBestellung(){
-//
-//        var ref: DatabaseReference!
-
-//        if bestellungTextfield.text != nil{
-//            let timestamp = Double(NSDate().timeIntervalSince1970)
-//            let values = ["shishas": bestellteShishas, "getränke": bestellteGetränke, "toKellnerID": "Kellner1", "tischnummer": "3", "fromUserID": FBSDKAccessToken.current().userID, "timeStamp": timestamp] as [String : Any]
-//
-//            ref = Database.database().reference().child("Users").child("\(FBSDKAccessToken.current().userID!)").child("Bestellungen")
-//            let childReff = ref?.childByAutoId()
-//            ref = Database.database().reference().child("Bestellungen")
-//            let childRef = ref?.childByAutoId()
-//            if bestellteGetränke.count != 0 || bestellteShishas.count != 0{
-//            childReff?.updateChildValues(values)
-//            childRef?.updateChildValues(values)
-//                print(Date(timeIntervalSince1970: timestamp)) }
-//            else {
-//                let alert = UIAlertController(title: "Deine Bestellung ist leer", message: nil, preferredStyle: UIAlertControllerStyle.alert)
-//                alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
-//
-//                self.present(alert, animated: true, completion: nil)
-//            }
-//        }
-//    }
-
-
