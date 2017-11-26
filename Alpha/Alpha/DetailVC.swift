@@ -83,6 +83,7 @@ class DetailVC: UIViewController, PulleyDrawerViewControllerDelegate {
                 self.bars.append(bar)
                 self.bild.append(bar.Bild!)
                 print(self.bild)
+<<<<<<< HEAD
                 let storageRef = Storage.storage().reference(forURL: "\(self.bild)")
                 
                 storageRef.downloadURL(completion: {(url, error) in
@@ -114,8 +115,9 @@ class DetailVC: UIViewController, PulleyDrawerViewControllerDelegate {
 //                    self.image.image = pic
 //                }
                // self.loadimage()
+=======
+>>>>>>> 808b9c425fd199c6573ebeb11a453f884143e677
 
-            
             }} , withCancel: nil)
         
     }

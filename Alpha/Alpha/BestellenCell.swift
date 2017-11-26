@@ -41,8 +41,6 @@ class BestellenCell: UITableViewCell {
     
 
     
-    
-    
     override func awakeFromNib() {
         super.awakeFromNib()
     

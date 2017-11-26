@@ -55,14 +55,12 @@ class ScanDetailVC: UIViewController {
         setupNavigationBar()
         print(scanbarname,"dfadffdjidf")
         let detVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "DetailVC") as! DetailVC
-        
         detVC.barname = scanbarname
         self.addChildViewController(detVC)
         self.scrollView.addSubview(detVC.view)
         detVC.didMove(toParentViewController: self)
         detVC.view.frame = scrollView.bounds
-        detVC.topbutton.isHidden = true
-        
+
         
         let speiseVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "SpeisekarteVC") as! SpeisekarteVC
         
@@ -83,8 +81,11 @@ class ScanDetailVC: UIViewController {
         self.scrollView.addSubview(bestellVC.view)
         bestellVC.didMove(toParentViewController: self)
         bestellVC.view.frame = scrollView.bounds
+<<<<<<< HEAD
       
         
+=======
+>>>>>>> 808b9c425fd199c6573ebeb11a453f884143e677
         var bestellFrame: CGRect = bestellVC.view.frame
         bestellFrame.origin.x = 2*self.view.frame.width
         bestellVC.view.frame = bestellFrame

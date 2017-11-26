@@ -32,15 +32,7 @@ class SpeisekarteVC: UIViewController, UITableViewDataSource, UITableViewDelegat
     
     // ACTIONS
     
-    @IBAction func toBestellungVC(_ sender: Any){
-        (parent as? PulleyViewController)?.setDrawerPosition(position: PulleyPosition(rawValue: 2)!)
-        let bestellungVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "BestellungVC") as! BestellungVC
-        bestellungVC.barname = barname
-        
-        
-        (parent as? PulleyViewController)?.setDrawerContentViewController(controller: bestellungVC, animated: true)
-        
-    }
+
     
     @IBAction func BackBtn(_ sender: Any) {
         (parent as? PulleyViewController)?.setDrawerPosition(position: PulleyPosition(rawValue: 2)!)
