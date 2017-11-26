@@ -81,11 +81,7 @@ class ScanDetailVC: UIViewController {
         self.scrollView.addSubview(bestellVC.view)
         bestellVC.didMove(toParentViewController: self)
         bestellVC.view.frame = scrollView.bounds
-<<<<<<< HEAD
-      
-        
-=======
->>>>>>> 808b9c425fd199c6573ebeb11a453f884143e677
+
         var bestellFrame: CGRect = bestellVC.view.frame
         bestellFrame.origin.x = 2*self.view.frame.width
         bestellVC.view.frame = bestellFrame
