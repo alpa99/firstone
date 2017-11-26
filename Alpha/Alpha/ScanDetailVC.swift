@@ -44,6 +44,7 @@ class ScanDetailVC: UIViewController {
     func setupNavigationBar (){
         let xbar = scanbarname
         self.navigationItem.title = xbar
+        navigationController?.navigationBar.isHidden = true
     }
     
     
@@ -51,6 +52,7 @@ class ScanDetailVC: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupNavigationBar()
         print(scanbarname,"dfadffdjidf")
         let detVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "DetailVC") as! DetailVC
         
@@ -59,6 +61,7 @@ class ScanDetailVC: UIViewController {
         self.scrollView.addSubview(detVC.view)
         detVC.didMove(toParentViewController: self)
         detVC.view.frame = scrollView.bounds
+        detVC.topbutton.isHidden = true
         
         
         let speiseVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "SpeisekarteVC") as! SpeisekarteVC
