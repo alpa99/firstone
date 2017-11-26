@@ -53,13 +53,12 @@ class ScanDetailVC: UIViewController {
         super.viewDidLoad()
         print(scanbarname,"dfadffdjidf")
         let detVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "DetailVC") as! DetailVC
-        
         detVC.barname = scanbarname
         self.addChildViewController(detVC)
         self.scrollView.addSubview(detVC.view)
         detVC.didMove(toParentViewController: self)
         detVC.view.frame = scrollView.bounds
-        
+
         
         let speiseVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "SpeisekarteVC") as! SpeisekarteVC
         
@@ -80,7 +79,6 @@ class ScanDetailVC: UIViewController {
         self.scrollView.addSubview(bestellVC.view)
         bestellVC.didMove(toParentViewController: self)
         bestellVC.view.frame = scrollView.bounds
-        
         var bestellFrame: CGRect = bestellVC.view.frame
         bestellFrame.origin.x = 2*self.view.frame.width
         bestellVC.view.frame = bestellFrame

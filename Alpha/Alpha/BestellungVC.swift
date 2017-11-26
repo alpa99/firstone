@@ -93,10 +93,11 @@ class BestellungVC: UIViewController, UITableViewDataSource, UITableViewDelegate
     
     @IBAction func sendToFirebase(_ sender: Any) {
 
-        myBestellungView.center = self.view.center
-        myBestellungView.transform = CGAffineTransform.init(scaleX: 1.3, y: 1.3)
-        myBestellungView.alpha = 0
+
         UIView.animate(withDuration: 1) {
+            self.myBestellungView.center = self.view.center
+            self.myBestellungView.transform = CGAffineTransform.init(scaleX: 1.3, y: 1.3)
+            self.myBestellungView.alpha = 0
             self.visualEffectView.isHidden = false
             self.view.addSubview(self.myBestellungView)
 
@@ -123,6 +124,7 @@ class BestellungVC: UIViewController, UITableViewDataSource, UITableViewDelegate
                 a.append(item)
                 b.append(preis)
             }
+        
         }
         
         bestellung.removeAll()
@@ -138,8 +140,6 @@ class BestellungVC: UIViewController, UITableViewDataSource, UITableViewDelegate
         } else {
             setSectionsBestellung(genre: "Getränke", items: x, preise: y)
         }
-
-  
     }
     
     
@@ -161,27 +161,13 @@ class BestellungVC: UIViewController, UITableViewDataSource, UITableViewDelegate
 //
     @IBAction func bardetail(_ sender: UIButton) {
         
-    
         (parent as? PulleyViewController)?.setDrawerPosition(position: PulleyPosition(rawValue: 2)!)
         let detvc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "DetailVC") as! DetailVC
         detvc.barname = barname
         
-        
-        
         (parent as? PulleyViewController)?.setDrawerContentViewController(controller: detvc, animated: true)
         //segueToKellnerVC()
     }
-    
-//    func segueToKellnerVC(){
-//        performSegue(withIdentifier: "showBarDetail", sender: self)
-//
-//    }
-    
-    
-//    @IBAction func swiperight(_ sender: UISwipeGestureRecognizer) {
-//        segueToKellnerVC()
-//
-//    }
     
     
 
@@ -225,18 +211,12 @@ class BestellungVC: UIViewController, UITableViewDataSource, UITableViewDelegate
                 }
                 
             }, withCancel: nil)
-            
-            
         }, withCancel: nil)
-        
-        
     }
     
     
 //
 //    func cellItemBtnTapped(sender: BestellenCell) {
-//
-//
 //        let indexPath = self.bestellungTableView.indexPathForRow(at: sender.center)!
 //        let selectedItems = "\(sections[indexPath.section].items[indexPath.row])"
 //        let cell = bestellungTableView.cellForRow(at: indexPath) as! BestellenCell
@@ -252,11 +232,7 @@ class BestellungVC: UIViewController, UITableViewDataSource, UITableViewDelegate
 //
 //            print("Bitte Stückzahl auswählen")
 //        }
-//        print(bestellteGetränke, "getränke")
-//        print(bestellteShishas, "shishas")
-//
-//        bestellungTextfield.text = bestellteShishas.description + bestellteGetränke.description
-//
+
 //    }
     
     func cellItemAddTapped(sender: BestellenCell){
@@ -281,42 +257,15 @@ class BestellungVC: UIViewController, UITableViewDataSource, UITableViewDelegate
 
     }
     
-    
-    
-    func handleBestellung(){
-        
-//        var ref: DatabaseReference!
-
-//        if bestellungTextfield.text != nil{
-//            let timestamp = Double(NSDate().timeIntervalSince1970)
-//            let values = ["shishas": bestellteShishas, "getränke": bestellteGetränke, "toKellnerID": "Kellner1", "tischnummer": "3", "fromUserID": FBSDKAccessToken.current().userID, "timeStamp": timestamp] as [String : Any]
-//
-//            ref = Database.database().reference().child("Users").child("\(FBSDKAccessToken.current().userID!)").child("Bestellungen")
-//            let childReff = ref?.childByAutoId()
-//            ref = Database.database().reference().child("Bestellungen")
-//            let childRef = ref?.childByAutoId()
-//            if bestellteGetränke.count != 0 || bestellteShishas.count != 0{
-//            childReff?.updateChildValues(values)
-//            childRef?.updateChildValues(values)
-//                print(Date(timeIntervalSince1970: timestamp)) }
-//            else {
-//                let alert = UIAlertController(title: "Deine Bestellung ist leer", message: nil, preferredStyle: UIAlertControllerStyle.alert)
-//                alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
-//
-//                self.present(alert, animated: true, completion: nil)
-//            }
-//        }
-    }
-    
     func animateIn(){
         itemNameLbl.text = "\(sections[cellIndexPathSection].items[cellIndexPathRow])"
-        self.view.addSubview(addItemView)
-        addItemView.center = self.view.center
+//        self.inputView?.addSubview(addItemView)
+//        addItemView.center = (self.inputView?.center)!
         addItemView.transform = CGAffineTransform.init(scaleX: 1.3, y: 1.3)
         addItemView.alpha = 0
         UIView.animate(withDuration: 1) {
             self.visualEffectView.isHidden = false
-
+            self.addItemView.isHidden = false
             self.visualEffectView.effect = self.effect
 
             self.addItemView.alpha = 1
@@ -332,9 +281,11 @@ class BestellungVC: UIViewController, UITableViewDataSource, UITableViewDelegate
             self.addItemView.alpha = 0
             self.visualEffectView.effect = nil
 
+
         }){ (success:Bool) in
-        self.addItemView.removeFromSuperview()
             self.visualEffectView.isHidden = true
+            self.addItemView.isHidden = false
+
 
         }
         
@@ -347,9 +298,7 @@ class BestellungVC: UIViewController, UITableViewDataSource, UITableViewDelegate
             bestellteShishas.removeValue(forKey: itemNameLbl.text!)
             
         }
-        //        bestellungTextfield.text = "\(bestellteShishas) \(bestellteGetränke)"
-        
-//        visualEffectView.isHidden = true
+
         
     }
     
@@ -369,7 +318,6 @@ class BestellungVC: UIViewController, UITableViewDataSource, UITableViewDelegate
 
     // PULLEY
     
-    
     func collapsedDrawerHeight(bottomSafeArea: CGFloat) -> CGFloat {
         return 102.0
     }
@@ -381,8 +329,6 @@ class BestellungVC: UIViewController, UITableViewDataSource, UITableViewDelegate
     func supportedDrawerPositions() -> [PulleyPosition] {
         return PulleyPosition.all
     }
-    
-    
 
 
     // TABLEVIEW FUNCTIONS
@@ -398,8 +344,6 @@ class BestellungVC: UIViewController, UITableViewDataSource, UITableViewDelegate
         
         
     }
-  
-
 
     func numberOfSections(in tableView: UITableView) -> Int {
         if tableView == bestellungTableView {
@@ -425,17 +369,13 @@ class BestellungVC: UIViewController, UITableViewDataSource, UITableViewDelegate
         return 44
     }
     
-
-    
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-
         if (sections[indexPath.section].expanded){
             return 71
         }
         else {
             return 0
         }
-
     }
     
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
@@ -472,6 +412,7 @@ class BestellungVC: UIViewController, UITableViewDataSource, UITableViewDelegate
         } else {
             let cell = self.myBestellungTV.dequeueReusableCell(withIdentifier: "myBestellCell", for: indexPath)
             cell.textLabel?.text = "\(bestellung[indexPath.section].items[indexPath.row])"
+            cell.detailTextLabel?.text = "\(bestellung[indexPath.section].preise[indexPath.row])"
             return cell
         }
     }
@@ -511,30 +452,51 @@ class BestellungVC: UIViewController, UITableViewDataSource, UITableViewDelegate
     
     override func viewDidLoad() {
         super.viewDidLoad()
-//        bestellung.append(ExpandTVSection(genre: "Shishas", items: ["noch keine Shishas ausgewählt"], preise: [0], expanded: false))
-//         bestellung.append(ExpandTVSection(genre: "Getränke", items: ["noch keine Getränke ausgewählt"], preise: [0], expanded: false))
+        
         effect = visualEffectView.effect
-//        visualEffectView.isHidden = true
         visualEffectView.effect = nil
         visualEffectView.isHidden = true
+        addItemView.isHidden = true
 
         addItemView.layer.cornerRadius = 5
         
         fetchSpeisekarte()
-//        bestellungTextfield.text = bestellungsText
-        
-
-        // Do any additional setup after loading the view.
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
 
 
 }
 
+
+
+
+//    func handleBestellung(){
+//
+//        var ref: DatabaseReference!
+
+//        if bestellungTextfield.text != nil{
+//            let timestamp = Double(NSDate().timeIntervalSince1970)
+//            let values = ["shishas": bestellteShishas, "getränke": bestellteGetränke, "toKellnerID": "Kellner1", "tischnummer": "3", "fromUserID": FBSDKAccessToken.current().userID, "timeStamp": timestamp] as [String : Any]
+//
+//            ref = Database.database().reference().child("Users").child("\(FBSDKAccessToken.current().userID!)").child("Bestellungen")
+//            let childReff = ref?.childByAutoId()
+//            ref = Database.database().reference().child("Bestellungen")
+//            let childRef = ref?.childByAutoId()
+//            if bestellteGetränke.count != 0 || bestellteShishas.count != 0{
+//            childReff?.updateChildValues(values)
+//            childRef?.updateChildValues(values)
+//                print(Date(timeIntervalSince1970: timestamp)) }
+//            else {
+//                let alert = UIAlertController(title: "Deine Bestellung ist leer", message: nil, preferredStyle: UIAlertControllerStyle.alert)
+//                alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
+//
+//                self.present(alert, animated: true, completion: nil)
+//            }
+//        }
+//    }
 
 
