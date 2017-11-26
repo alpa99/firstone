@@ -83,21 +83,7 @@ class DetailVC: UIViewController, PulleyDrawerViewControllerDelegate {
                 self.bars.append(bar)
                 self.bild.append(bar.Bild!)
                 print(self.bild)
-//                let storageRef = Storage.storage().reference(forURL: self.bild)
-//                storageRef.getData(maxSize: 1 * 1024 * 1024) { (data, error) -> Void in
-//                    // Create a UIImage, add it to the array
-//                    let pic = UIImage(data: data!)
-//                    self.image.image = pic
-//                }
-<<<<<<< HEAD
-//               // self.loadimage()
-//
-//
-=======
-               // self.loadimage()
 
-            
->>>>>>> 381df9b5bcc887f279541eb0dc93b929d43eef95
             }} , withCancel: nil)
         
     }

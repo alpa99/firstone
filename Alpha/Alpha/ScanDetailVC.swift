@@ -60,12 +60,7 @@ class ScanDetailVC: UIViewController {
         self.scrollView.addSubview(detVC.view)
         detVC.didMove(toParentViewController: self)
         detVC.view.frame = scrollView.bounds
-<<<<<<< HEAD
 
-=======
-        detVC.topbutton.isHidden = true
-        
->>>>>>> 381df9b5bcc887f279541eb0dc93b929d43eef95
         
         let speiseVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "SpeisekarteVC") as! SpeisekarteVC
         
