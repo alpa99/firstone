@@ -19,6 +19,7 @@ class DetailVC: UIViewController, PulleyDrawerViewControllerDelegate {
 
     
     @IBOutlet weak var image: UIImageView!
+    @IBOutlet weak var topbutton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -88,9 +89,15 @@ class DetailVC: UIViewController, PulleyDrawerViewControllerDelegate {
 //                    let pic = UIImage(data: data!)
 //                    self.image.image = pic
 //                }
+<<<<<<< HEAD
 //               // self.loadimage()
 //
 //
+=======
+               // self.loadimage()
+
+            
+>>>>>>> 381df9b5bcc887f279541eb0dc93b929d43eef95
             }} , withCancel: nil)
         
     }
