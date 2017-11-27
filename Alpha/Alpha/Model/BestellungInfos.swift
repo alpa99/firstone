@@ -11,8 +11,8 @@ class BestellungInfos: NSObject {
     var fromUserID: String?
     var toKellnerID: String?
     var timeStamp: NSNumber?
-    var shishas: String?
-    var getränke: String?
+    var shishas: Dictionary<String, Any>?
+    var getränke: Dictionary<String, Any>?
     var tischnummer: String?
     
     
@@ -20,8 +20,8 @@ class BestellungInfos: NSObject {
         self.fromUserID = dictionary["fromUserID"] as? String ?? ""
         self.toKellnerID = dictionary["toKellnerID"] as? String ?? ""
         self.timeStamp = dictionary["timeStamp"] as? NSNumber ?? 0
-        self.shishas = dictionary["shishas"] as? String ?? ""
-        self.getränke = dictionary["getränke"] as? String ?? ""
+        self.shishas = dictionary["shishas"] as? Dictionary ?? ["": ""]
+        self.getränke = dictionary["getränke"] as? Dictionary ?? ["": ""]
         self.tischnummer = dictionary["tischnummer"] as? String ?? "leer"
         
         

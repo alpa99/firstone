@@ -15,10 +15,12 @@ class KellnerVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     var KellnerID = String()
     
-    var bestellteShishas = [String]()
-    var bestellteGetränke = [String]()
+    var bestellteShishas = [Dictionary<String, Any>]()
+    var bestellteGetränke = [Dictionary<String, Any>]()
     var TimeStamps = [Double]()
     var tischnummer = [String]()
+    var items = [String]()
+
     
     var bestellungen = [BestellungInfos]()
     
@@ -53,6 +55,7 @@ class KellnerVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
                 self.bestellteGetränke.append(bestellungInfos.getränke!)
                 self.TimeStamps.append((bestellungInfos.timeStamp?.doubleValue)!)
                 self.tischnummer.append(bestellungInfos.tischnummer!)
+
                 }
                 
                 /*         self.Bestellungen.sort(by: { (time1, time2) -> Bool in
@@ -87,9 +90,15 @@ class KellnerVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "hh:mm a"
         cell.timeLbl.text = "\(dateFormatter.string(from: timeStampDate as Date))"
-        cell.bestellungsText.text = "shishas: \(bestellteShishas[indexPath.row])\n getränke: \(bestellteGetränke[indexPath.row])"
-        cell.tischnummer.text = "Tischnummer: \(tischnummer[indexPath.row])"
         
+        for (item, menge) in bestellteShishas[indexPath.row] {
+            items.append(item)
+            let items2 = items.joined(separator: ",")
+            print(items2)
+            cell.bestellungsText.text = items2
+        }
+//        cell.bestellungsText.text = "shishas: \(bestellteShishas[indexPath.row])\n getränke: \(bestellteGetränke[indexPath.row])"
+        cell.tischnummer.text = "Tischnummer: \(tischnummer[indexPath.row])"
             return cell
 
         
@@ -126,8 +135,8 @@ class KellnerVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     @objc private func refreshOptions(sender: UIRefreshControl) {
         loadBestellungen()
-        bestellteShishas = [String]()
-        bestellteGetränke = [String]()
+        bestellteShishas = [Dictionary<String, Any>]()
+        bestellteGetränke = [Dictionary<String, Any>]()
         TimeStamps = [Double]()
         tischnummer = [String]()
         

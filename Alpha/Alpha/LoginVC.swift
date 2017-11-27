@@ -12,6 +12,7 @@ import FacebookCore
 import FacebookLogin
 import FBSDKCoreKit
 import FBSDKLoginKit
+import FirebaseAuth
 
 class LoginVC: UIViewController {
     
@@ -45,6 +46,7 @@ class LoginVC: UIViewController {
                         self.userFbEmail = "\(email)"
                     }
                     self.addUserToFirebase()
+                    
                 }
             }
             
@@ -54,6 +56,8 @@ class LoginVC: UIViewController {
     // FUNCS
     
     func getUserInfo(completion: @escaping (_ : [String: Any]?, _ : Error?) -> Void) {
+        
+        
         let request = GraphRequest(graphPath: "me", parameters: ["fields": "id,name,email"])
         
         request.start{ response, result in
@@ -62,6 +66,20 @@ class LoginVC: UIViewController {
                 completion(nil, error)
             case .success(let graphResponse):
                 completion(graphResponse.dictionaryValue, nil)
+                let accessToken = FBSDKAccessToken.current()
+                guard let accessTokenString = accessToken?.tokenString else {
+                    return
+                }
+                
+                let credential = FacebookAuthProvider.credential(withAccessToken: accessTokenString)
+                Auth.auth().signIn(with: credential, completion: { (user, error) in
+                    if error != nil {
+                        print("something wrong", error ?? "default error")
+                        return
+                    }
+                    print("fb user:", user ?? "default user")
+                    
+                })
             }
         }
     }
