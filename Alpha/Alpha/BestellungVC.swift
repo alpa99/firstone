@@ -84,7 +84,7 @@ class BestellungVC: UIViewController, UITableViewDataSource, UITableViewDelegate
     
     
     @IBAction func myBestellungAbschicken(_ sender: Any) {
-        handleBestellung()
+//        handleBestellung()
     }
     
     @IBAction func dismissPopUp(_ sender: Any) {
@@ -478,15 +478,16 @@ class BestellungVC: UIViewController, UITableViewDataSource, UITableViewDelegate
         }
     }
     
-    @objc func normalTap(_ sender: UIGestureRecognizer){
-        print("Normal tap")
-
-    }
+//    @objc func normalTap(_ sender: UIGestureRecognizer){
+//        print("Normal tap")
+//
+//    }
 
     @objc func longTap(_ sender: UIGestureRecognizer){
         if sender.state == .ended && (timeHolded>timeToHold || timeHolded == timeToHold) {
             timer.invalidate()
             print("sds")
+            handleBestellung()
         } else if sender.state == .ended && timeHolded<timeToHold {
             timer.invalidate()
             print("sorry, du musst min \(timeToHold) Sekunden halten")
@@ -503,15 +504,6 @@ class BestellungVC: UIViewController, UITableViewDataSource, UITableViewDelegate
         print(timeHolded)
     }
     
-    //        else if sender.state != .ended {
-    //            timeHolded = timeHolded+1
-    //            print(timeHolded)
-    //            if timeHolded == timeToHold {
-    //                print("ok")
-    //
-    //            }
-    //
-    //        }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -527,9 +519,9 @@ class BestellungVC: UIViewController, UITableViewDataSource, UITableViewDelegate
         
         fetchSpeisekarte()
         
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(normalTap(_:)))
-        tapGesture.numberOfTapsRequired = 1
-        myBestellungAbschickenBtn.addGestureRecognizer(tapGesture)
+//        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(normalTap(_:)))
+//        tapGesture.numberOfTapsRequired = 1
+//        myBestellungAbschickenBtn.addGestureRecognizer(tapGesture)
 
         let longGesture = UILongPressGestureRecognizer(target: self, action: #selector(longTap(_:)))
         myBestellungAbschickenBtn.addGestureRecognizer(longGesture)
