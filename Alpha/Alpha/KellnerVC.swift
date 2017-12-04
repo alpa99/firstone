@@ -15,11 +15,12 @@ class KellnerVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     var KellnerID = String()
     
-    var bestellteShishas = [Dictionary<String, Any>]()
+    var bestellteShishas = [Dictionary<String, Int>]()
     var bestellteGetränke = [Dictionary<String, Any>]()
     var TimeStamps = [Double]()
     var tischnummer = [String]()
     var items = [String]()
+    var mengen = [Int]()
 
     
     var bestellungen = [BestellungInfos]()
@@ -58,14 +59,6 @@ class KellnerVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
                 }
                 
-                /*         self.Bestellungen.sort(by: { (time1, time2) -> Bool in
-                 
-                 return (time1.timestamps.timeStamp?.intValue)! > (time2.timestamps.timeStamp?.intValue)!
-                 })
-                 self.TimeStamps.sort(by: { (time1, time2) -> Bool in
-                 
-                 return time1.description > time2.description
-                 })*/
                 
                 DispatchQueue.main.async(execute: {
                     self.bestellungenTV.reloadData()
@@ -90,14 +83,10 @@ class KellnerVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "hh:mm a"
         cell.timeLbl.text = "\(dateFormatter.string(from: timeStampDate as Date))"
-        
-        for (item, menge) in bestellteShishas[indexPath.row] {
-            items.append(item)
-            let items2 = items.joined(separator: ",")
-            print(items2)
-            cell.bestellungsText.text = items2
-        }
-//        cell.bestellungsText.text = "shishas: \(bestellteShishas[indexPath.row])\n getränke: \(bestellteGetränke[indexPath.row])"
+ 
+ 
+        cell.bestellungsText.text = "Shishas: \(bestellteShishas[indexPath.row])\nGetränke: \(bestellteGetränke[indexPath.row]) "
+    
         cell.tischnummer.text = "Tischnummer: \(tischnummer[indexPath.row])"
             return cell
 
@@ -135,11 +124,12 @@ class KellnerVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     @objc private func refreshOptions(sender: UIRefreshControl) {
         loadBestellungen()
-        bestellteShishas = [Dictionary<String, Any>]()
-        bestellteGetränke = [Dictionary<String, Any>]()
+        bestellteShishas = [Dictionary<String, Int>]()
+        bestellteGetränke = [Dictionary<String, Int>]()
         TimeStamps = [Double]()
         tischnummer = [String]()
-        
+        items.removeAll()
+        mengen.removeAll()
         bestellungen = [BestellungInfos]()
         sender.endRefreshing()
     }

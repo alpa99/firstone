@@ -699,6 +699,7 @@
                         <outlet property="itemCountLbl" destination="B9n-Ig-zZi" id="qEa-WO-KUM"/>
                         <outlet property="itemNameLbl" destination="Ocp-2A-uzN" id="ygy-KY-1ha"/>
                         <outlet property="label" destination="CxV-wT-GD7" id="1MU-aU-Qxh"/>
+                        <outlet property="myBestellungAbschickenBtn" destination="2VP-bN-rJL" id="GGq-3j-IOU"/>
                         <outlet property="myBestellungTV" destination="PJD-sg-KTw" id="noz-Jw-aPf"/>
                         <outlet property="myBestellungView" destination="XLX-RF-Q49" id="Dfd-ek-3fT"/>
                         <outlet property="visualEffectView" destination="0cM-y6-yY0" id="nKo-w5-tIF"/>

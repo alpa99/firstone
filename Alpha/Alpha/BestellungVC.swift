@@ -18,6 +18,13 @@ class BestellungVC: UIViewController, UITableViewDataSource, UITableViewDelegate
     var y = [Int]()
     var a = [String]()
     var b = [Int]()
+    
+    var timeToHold = 5
+    var timer = Timer()
+    var timeHolded = Int()
+    
+    
+    
 
     private var selectedItems = [String]()
     var barname = ""
@@ -72,11 +79,12 @@ class BestellungVC: UIViewController, UITableViewDataSource, UITableViewDelegate
     
     @IBOutlet weak var dismissPopUp: UIButton!
     
+    @IBOutlet weak var myBestellungAbschickenBtn: UIButton!
     // ACTIONS
     
     
     @IBAction func myBestellungAbschicken(_ sender: Any) {
-        handleBestellung()
+//        handleBestellung()
     }
     
     @IBAction func dismissPopUp(_ sender: Any) {
@@ -460,7 +468,7 @@ class BestellungVC: UIViewController, UITableViewDataSource, UITableViewDelegate
 
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         let touch: UITouch? = touches.first
-        
+
 
         if touch?.view != myBestellungView && touch?.view != addItemView {
             dismissMyBestellungView()
@@ -469,6 +477,33 @@ class BestellungVC: UIViewController, UITableViewDataSource, UITableViewDelegate
 
         }
     }
+    
+//    @objc func normalTap(_ sender: UIGestureRecognizer){
+//        print("Normal tap")
+//
+//    }
+
+    @objc func longTap(_ sender: UIGestureRecognizer){
+        if sender.state == .ended && (timeHolded>timeToHold || timeHolded == timeToHold) {
+            timer.invalidate()
+            print("sds")
+            handleBestellung()
+        } else if sender.state == .ended && timeHolded<timeToHold {
+            timer.invalidate()
+            print("sorry, du musst min \(timeToHold) Sekunden halten")
+            
+        }
+            
+        else if sender.state == .began {
+            timeHolded = 0
+            timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(updateTime), userInfo: nil, repeats: true)
+        }
+    }
+    @objc func updateTime(){
+        timeHolded = timeHolded+1
+        print(timeHolded)
+    }
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -483,6 +518,13 @@ class BestellungVC: UIViewController, UITableViewDataSource, UITableViewDelegate
         addItemView.layer.cornerRadius = 5
         
         fetchSpeisekarte()
+        
+//        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(normalTap(_:)))
+//        tapGesture.numberOfTapsRequired = 1
+//        myBestellungAbschickenBtn.addGestureRecognizer(tapGesture)
+
+        let longGesture = UILongPressGestureRecognizer(target: self, action: #selector(longTap(_:)))
+        myBestellungAbschickenBtn.addGestureRecognizer(longGesture)
     }
     
     override func didReceiveMemoryWarning() {
