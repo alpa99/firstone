@@ -17,10 +17,12 @@ class PageViewController: UIPageViewController, UIPageViewControllerDelegate, UI
     
     // MARK: UIPageViewControllerDataSource
     
-    lazy var orderedViewControllers: [UIViewController] = {
-        return [self.newVc(viewController: "DetailVC"),
-                self.newVc(viewController: "SpeisekarteVC")]
-    }()
+//    lazy var orderedViewControllers: [UIViewController] = {
+//        return [self.newVc(viewController: "DetailVC"),
+//                self.newVc(viewController: "SpeisekarteVC")]
+//    }()
+    
+    var orderedViewControllers: [UIViewController] = []
     
     
     override func viewDidLoad() {
@@ -29,20 +31,24 @@ class PageViewController: UIPageViewController, UIPageViewControllerDelegate, UI
         self.dataSource = self
         self.delegate = self
         
+        let detailvc =  UIStoryboard(name: "Main", bundle: nil) .
+            instantiateViewController(withIdentifier: "DetailVC") as! DetailVC
+        let detvc = detailvc as PageObservation
+        detvc.getParentPageViewController(parentRef: self)
+        orderedViewControllers.append(detailvc)
+        
         let speisevc =  UIStoryboard(name: "Main", bundle: nil) .
-            instantiateViewController(withIdentifier: "SpeisekarteVC")
-        let speisvc = speisevc as! PageObservation
+            instantiateViewController(withIdentifier: "SpeisekarteVC") as! SpeisekarteVC
+        let speisvc = speisevc as PageObservation
         speisvc.getParentPageViewController(parentRef: self)
-
+        
+        orderedViewControllers.append(speisevc)
         
        // let speisevc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "SpeisekarteVC") as! SpeisekarteVC
         
       //  speisevc.barname = name
        
-        let detailvc =  UIStoryboard(name: "Main", bundle: nil) .
-            instantiateViewController(withIdentifier: "DetailVC")
-        let detvc = detailvc as! PageObservation
-        detvc.getParentPageViewController(parentRef: self)
+ 
         
 //        let detvc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "DetailVC") as! DetailVC
 //        detvc.barname = name
@@ -74,10 +80,10 @@ class PageViewController: UIPageViewController, UIPageViewControllerDelegate, UI
 //        self.view.addSubview(pageControl)
 //    }
 //
-    func newVc(viewController: String) -> UIViewController {
-        return UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: viewController)
-    }
-    
+//    func newVc(viewController: String) -> UIViewController {
+//        return UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: viewController)
+//    }
+//
     
     // MARK: Delegate methords
 //    func pageViewController(_ pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [UIViewController], transitionCompleted completed: Bool) {
