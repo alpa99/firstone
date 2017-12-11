@@ -10,7 +10,7 @@ import UIKit
 import Pulley
 import Firebase
 
-class SpeisekarteVC: UIViewController, UITableViewDataSource, UITableViewDelegate, PulleyDrawerViewControllerDelegate, ExpandableHeaderViewDelegate {
+class SpeisekarteVC: UIViewController, UITableViewDataSource, UITableViewDelegate, PulleyDrawerViewControllerDelegate, ExpandableHeaderViewDelegate, PageObservation {
 
 
     // VARS
@@ -27,6 +27,10 @@ class SpeisekarteVC: UIViewController, UITableViewDataSource, UITableViewDelegat
     
     var sections = [ExpandTVSection]()
     
+    var parentPageViewController: PageViewController!
+    func getParentPageViewController(parentRef: PageViewController) {
+        parentPageViewController = parentRef
+    }
     
     @IBOutlet weak var speisekarteTV: UITableView!
     
@@ -204,9 +208,9 @@ class SpeisekarteVC: UIViewController, UITableViewDataSource, UITableViewDelegat
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+         self.barname = parentPageViewController.name
         fetchSpeisekarte()
-        
+       
 
     }
 

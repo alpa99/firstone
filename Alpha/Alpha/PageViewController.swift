@@ -7,8 +7,9 @@
 //
 
 import UIKit
+import Pulley
 
-class PageViewController: UIPageViewController, UIPageViewControllerDelegate, UIPageViewControllerDataSource {
+class PageViewController: UIPageViewController, UIPageViewControllerDelegate, UIPageViewControllerDataSource, PulleyDrawerViewControllerDelegate {
     
     var name = ""
     
@@ -21,28 +22,39 @@ class PageViewController: UIPageViewController, UIPageViewControllerDelegate, UI
                 self.newVc(viewController: "SpeisekarteVC")]
     }()
     
+    
     override func viewDidLoad() {
         print(name, "hierpageview")
         super.viewDidLoad()
         self.dataSource = self
         self.delegate = self
         
+        let speisevc =  UIStoryboard(name: "Main", bundle: nil) .
+            instantiateViewController(withIdentifier: "SpeisekarteVC")
+        let speisvc = speisevc as! PageObservation
+        speisvc.getParentPageViewController(parentRef: self)
+
         
-        let votecv = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "votevc") as! votevc
+       // let speisevc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "SpeisekarteVC") as! SpeisekarteVC
         
-        votecv.barname = name
-        
+      //  speisevc.barname = name
        
+        let detailvc =  UIStoryboard(name: "Main", bundle: nil) .
+            instantiateViewController(withIdentifier: "DetailVC")
+        let detvc = detailvc as! PageObservation
+        detvc.getParentPageViewController(parentRef: self)
         
-        
+//        let detvc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "DetailVC") as! DetailVC
+//        detvc.barname = name
+//        print(detvc.barname, "dhdhfhdah")
+//
         // This sets up the first view that will show up on our page control
         if let firstViewController = orderedViewControllers.first {
             setViewControllers([firstViewController],
                                direction: .forward,
                                animated: true,
                                completion: nil)
-            let detvc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "DetailVC") as! DetailVC
-            detvc.barname = name
+        
             print(name, "hierpageviewwww2")
         }
         
@@ -119,5 +131,22 @@ class PageViewController: UIPageViewController, UIPageViewControllerDelegate, UI
         return orderedViewControllers[nextIndex]
     }
     
+    // PULLEY
     
+    func collapsedDrawerHeight(bottomSafeArea: CGFloat) -> CGFloat {
+        return 102.0
+    }
+    
+    func partialRevealDrawerHeight(bottomSafeArea: CGFloat) -> CGFloat {
+        return 340.0
+    }
+    
+    func supportedDrawerPositions() -> [PulleyPosition] {
+        return PulleyPosition.all
+    } 
+
+    
+}
+protocol PageObservation: class {
+    func getParentPageViewController(parentRef: PageViewController)
 }

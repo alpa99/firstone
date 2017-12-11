@@ -126,16 +126,17 @@ class DrawerVC: UIViewController, PulleyDrawerViewControllerDelegate, UITableVie
         
         
         (parent as? PulleyViewController)?.setDrawerPosition(position: PulleyPosition(rawValue: 2)!)
-        let detvc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "DetailVC") as! DetailVC
-        detvc.barname = selBarName
+       
         
         let pagevc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "PageVC") as! PageViewController
         pagevc.name = selBarName
         (parent as? PulleyViewController)?.setDrawerContentViewController(controller: pagevc, animated: true)
+        let detvc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "DetailVC") as! DetailVC
+        detvc.barname = selBarName
         
-        let votecv = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "votevc") as! votevc
+        let speisevc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "SpeisekarteVC") as! SpeisekarteVC
         
-        votecv.barname = selBarName
+        speisevc.barname = selBarName
         
         //  performSegue(withIdentifier: "bardetail", sender: self)
         

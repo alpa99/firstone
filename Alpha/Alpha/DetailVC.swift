@@ -10,21 +10,25 @@ import UIKit
 import Pulley
 import Firebase
 
-class DetailVC: UIViewController, PulleyDrawerViewControllerDelegate {
+class DetailVC: UIViewController, PulleyDrawerViewControllerDelegate, PageObservation {
  
     var barname = ""
     var bars = [BarInfos]()
     var adresse = String ()
     var bild = String ()
 
+    var parentPageViewController: PageViewController!
+    func getParentPageViewController(parentRef: PageViewController) {
+        parentPageViewController = parentRef
+    }
     
     @IBOutlet weak var image: UIImageView!
     @IBOutlet weak var topbutton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        
+        self.barname = parentPageViewController.name
+        print(barname, "dfjidfjdijfid")
         fetchData()
     }
 
