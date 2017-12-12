@@ -132,13 +132,14 @@ class LocationVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate
             let annotation = self.map.selectedAnnotations[0] as MKAnnotation!
             //Perform a segue here to navigate to another viewcontroller
             
-            let detvc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "DetailVC") as! DetailVC
-            detvc.barname = ((annotation?.title)!)!
+            let pagevc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "PageVC") as! PageViewController
+            pagevc.name = ((annotation?.title)!)!
+            (parent as? PulleyViewController)?.setDrawerContentViewController(controller: pagevc, animated: true)
+           
             
             (parent as? PulleyViewController)?.setDrawerPosition(position: PulleyPosition(rawValue: 2)!)
             
-            
-            (parent as? PulleyViewController)?.setDrawerContentViewController(controller: detvc, animated: true)
+           
             
         }
  }

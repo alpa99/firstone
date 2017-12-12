@@ -35,7 +35,7 @@ class PageViewController2: UIPageViewController, UIPageViewControllerDelegate, U
 //        let speisvc = speisevc as PageObservation
 //        speisvc.getParentPageViewController(parentRef: self)
 //
-        orderedViewControllers.append(speisevc)
+   //     orderedViewControllers.append(speisevc)
         
        
         if let firstViewController = orderedViewControllers.first {

@@ -120,21 +120,7 @@ class DetailVC: UIViewController, PulleyDrawerViewControllerDelegate, PageObserv
     }
     
     
-//    func loadimage(){
-//        let url = URL(string: bild)
-//        URLSession.shared.dataTask(with: url!, completionHandler: {(data, response,error) in
-//
-//            if error != nil{
-//                print(error ?? "error")
-//                return
-//            }
-    
-//
-//                self.image.image = UIImage(data: data!)
-//
-//        }).resume()
-//
-//    }
+
     
         
     // Pulley
