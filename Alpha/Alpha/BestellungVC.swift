@@ -17,6 +17,8 @@ class BestellungVC: UIViewController, UITableViewDataSource, UITableViewDelegate
     var y = [Int]()
     var a = [String]()
     var b = [Int]()
+    var keys = [String]()
+
     
     var timeToHold = 0
     var timer = Timer()
@@ -32,6 +34,8 @@ class BestellungVC: UIViewController, UITableViewDataSource, UITableViewDelegate
     
     var bars = [BarInfos]()
     var adresse = String ()
+    
+    var elements = [String]()
     
     var shishas = [String]()
     var shishasPreise = [Int]()
@@ -161,46 +165,102 @@ class BestellungVC: UIViewController, UITableViewDataSource, UITableViewDelegate
     
 
     // FUNCTIONS
+    
+    func getValue (){
+        var datref: DatabaseReference!
+        datref = Database.database().reference()
+        
+        
+        datref.child("Speisekarten").child("\(self.barname)").observe(.value, with: { (snapshotValue) in
+            
+            self.getKeys(value: Int(snapshotValue.childrenCount))
+        }, withCancel: nil)
+        
+    }
+
+    func getKeys(value: Int){
+        
+        var datref: DatabaseReference!
+        datref = Database.database().reference()
+        
+        
+        datref.child("Speisekarten").child("\(self.barname)").observe(.childAdded, with: { (snapshotKey) in
+            
+            self.keys.append(snapshotKey.key)
+
+            if self.keys.count == value {
+                self.fetchSpeisekarte()
+            
+            }
+
+        }, withCancel: nil)
+        
+    
+    }
+
+    
+    
     func fetchSpeisekarte(){
         var z = [String: Int]()
         var datref: DatabaseReference!
         datref = Database.database().reference()
         
         datref.child("Speisekarten").child("\(self.barname)").observe(.childAdded, with: { (snapshot) in
-            
             z.updateValue(Int(snapshot.childrenCount), forKey: snapshot.key)
-            print(z, "AFDSFSDF")
-            
-            
-            datref.child("Speisekarten").child("\(self.barname)").child("Shishas").observe(.childAdded, with: { (snapshot) in
+                datref.child("Speisekarten").child("\(self.barname)").child(self.keys[0]).observe(.childAdded, with: { (snapshot) in
                 self.label.text = self.barname
                 
                 if let dictionary = snapshot.value as? [String: AnyObject]{
                     let shisha = SpeisekarteInfos(dictionary: dictionary)
+                    
+                
                     self.shishas.append(shisha.Name!)
                     self.shishasPreise.append(shisha.Preis!)
+                        
                     
-                    
+
                 }
-                if self.shishas.count == z["Shishas"]{
-                    self.setSectionsSpeisekarte(genre: "Shishas", items: self.shishas, preise: self.shishasPreise)
-                }
+                    print(self.shishas, "shishas")
+                    print(self.shishas.count, "shishacount")
+                    print( z[self.keys[0]] ?? "", "zettt")
+                    if self.shishas.count == z[self.keys[0]]{
+                        self.setSectionsSpeisekarte(genre: self.keys[0], items: self.shishas, preise: self.shishasPreise)
+                        
+                    }
+
+
+ 
                 
             }, withCancel: nil)
-            
-            datref.child("Speisekarten").child("\(self.barname)").child("Getränke").observe(.childAdded, with: { (snapshot) in
-                
-                if let dictionary = snapshot.value as? [String: AnyObject]{
-                    let getränk = SpeisekarteInfos(dictionary: dictionary)
-                    self.getränke.append(getränk.Name!)
-                    self.getränkePreise.append(getränk.Preis!)
-                }
-                if self.getränke.count == z["Getränke"]{
-                    self.setSectionsSpeisekarte(genre: "Getränke", items: self.getränke, preise: self.getränkePreise)
-                }
-                
-            }, withCancel: nil)
-        }, withCancel: nil)
+//            datref.child("Speisekarten").child("\(self.barname)").child("Shishas").observe(.childAdded, with: { (snapshot) in
+//                self.label.text = self.barname
+//
+//                if let dictionary = snapshot.value as? [String: AnyObject]{
+//                    let shisha = SpeisekarteInfos(dictionary: dictionary)
+//                    self.shishas.append(shisha.Name!)
+//                    self.shishasPreise.append(shisha.Preis!)
+//
+//
+//                }
+//                if self.shishas.count == z["Shishas"]{
+//                    self.setSectionsSpeisekarte(genre: "Shishas", items: self.shishas, preise: self.shishasPreise)
+//                }
+//
+//            }, withCancel: nil)
+//
+//            datref.child("Speisekarten").child("\(self.barname)").child("Getränke").observe(.childAdded, with: { (snapshot) in
+//
+//                if let dictionary = snapshot.value as? [String: AnyObject]{
+//                    let getränk = SpeisekarteInfos(dictionary: dictionary)
+//                    self.getränke.append(getränk.Name!)
+//                    self.getränkePreise.append(getränk.Preis!)
+//                }
+//                if self.getränke.count == z["Getränke"]{
+//                    self.setSectionsSpeisekarte(genre: "Getränke", items: self.getränke, preise: self.getränkePreise)
+//                }
+//
+//            }, withCancel: nil)
+                }, withCancel: nil)
     }
     
         func handleBestellung(){
@@ -494,9 +554,10 @@ class BestellungVC: UIViewController, UITableViewDataSource, UITableViewDelegate
 
         
         addItemView.layer.cornerRadius = 5
-        
-        fetchSpeisekarte()
-        
+
+        //fetchSpeisekarte()
+        getValue()
+
 //        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(normalTap(_:)))
 //        tapGesture.numberOfTapsRequired = 1
 //        myBestellungAbschickenBtn.addGestureRecognizer(tapGesture)

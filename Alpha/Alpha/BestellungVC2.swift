@@ -472,7 +472,7 @@ class BestellungVC2: UIViewController, UITableViewDataSource, UITableViewDelegat
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.barname = parentPageViewController.name
+//        self.barname = parentPageViewController.name
         
         effect = visualEffectView.effect
         visualEffectView.effect = nil
