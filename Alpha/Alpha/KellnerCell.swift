@@ -8,7 +8,17 @@
 
 import UIKit
 
+
+protocol KellnerCellDelegate {
+    func annehmenBtnPressed(sender: KellnerCell)
+
+    
+}
+
+
 class KellnerCell: UITableViewCell {
+
+    var delegate: KellnerCellDelegate?
 
 
     @IBOutlet weak var tischnummer: UILabel!
@@ -17,7 +27,14 @@ class KellnerCell: UITableViewCell {
     
     @IBOutlet weak var timeLbl: UILabel!
     
+    @IBOutlet weak var annehmenBtn: UIButton!
+    
+    @IBAction func annehmenPressed(_ sender: Any) {
+        delegate?.annehmenBtnPressed(sender: self)
 
+    }
+    
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

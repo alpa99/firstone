@@ -19,7 +19,7 @@ class BestellungVC: UIViewController, UITableViewDataSource, UITableViewDelegate
     var a = [String]()
     var b = [Int]()
     
-    var timeToHold = 5
+    var timeToHold = 0
     var timer = Timer()
     var timeHolded = Int()
     
@@ -223,9 +223,9 @@ class BestellungVC: UIViewController, UITableViewDataSource, UITableViewDelegate
     
             if bestellteShishas.count > 0 || bestellteGetränke.count > 0{
                 let timestamp = Double(NSDate().timeIntervalSince1970)
-                let values = ["shishas": bestellteShishas, "getränke": bestellteGetränke, "toKellnerID": "Kellner1", "tischnummer": "3", "fromUserID": FBSDKAccessToken.current().userID, "timeStamp": timestamp] as [String : Any]
+                let values = ["shishas": bestellteShishas, "getränke": bestellteGetränke, "toKellnerID": "Kellner1", "tischnummer": "3", "fromUserID": FBSDKAccessToken.current().userID, "timeStamp": timestamp, "angenommen": false] as [String : Any]
     
-                ref = Database.database().reference().child("Bestellungen")
+                ref = Database.database().reference().child("Bestellungen").child(barname)
                 let childRef = ref?.childByAutoId()
                 if bestellteGetränke.count != 0 || bestellteShishas.count != 0{
                 childRef?.updateChildValues(values)

@@ -10,7 +10,7 @@ import UIKit
 import Pulley
 import Firebase
 
-class DetailVC: UIViewController, PulleyDrawerViewControllerDelegate, PageObservation {
+class DetailVC: UIViewController, PulleyDrawerViewControllerDelegate, PageObservation, PageObservation2 {
  
     var barname = ""
     var bars = [BarInfos]()
@@ -18,8 +18,13 @@ class DetailVC: UIViewController, PulleyDrawerViewControllerDelegate, PageObserv
     var bild = String ()
 
     var parentPageViewController: PageViewController!
+    var parentPageViewController2: PageViewController2!
+
     func getParentPageViewController(parentRef: PageViewController) {
         parentPageViewController = parentRef
+    }
+    func getParentPageViewController2(parentRef2: PageViewController2) {
+        parentPageViewController2 = parentRef2
     }
     
     @IBOutlet weak var image: UIImageView!
@@ -27,7 +32,15 @@ class DetailVC: UIViewController, PulleyDrawerViewControllerDelegate, PageObserv
     
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        if parentPageViewController.name != "" && parentPageViewController2.name == "" {
         self.barname = parentPageViewController.name
+        }
+        if parentPageViewController2.name != "" {
+            print("test")
+            self.barname = parentPageViewController2.name
+
+        }
         print(barname, "dfjidfjdijfid")
         fetchData()
     }
@@ -120,7 +133,21 @@ class DetailVC: UIViewController, PulleyDrawerViewControllerDelegate, PageObserv
     }
     
     
-
+//    func loadimage(){
+//        let url = URL(string: bild)
+//        URLSession.shared.dataTask(with: url!, completionHandler: {(data, response,error) in
+//
+//            if error != nil{
+//                print(error ?? "error")
+//                return
+//            }
+    
+//
+//                self.image.image = UIImage(data: data!)
+//
+//        }).resume()
+//
+//    }
     
         
     // Pulley

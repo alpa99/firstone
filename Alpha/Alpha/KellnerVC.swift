@@ -9,7 +9,25 @@
 import UIKit
 import Firebase
 
-class KellnerVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class KellnerVC: UIViewController, UITableViewDelegate, UITableViewDataSource, KellnerCellDelegate {
+    
+    
+    
+    
+    func annehmenBtnPressed(sender: KellnerCell) {
+        
+//        let indexPath = self.bestellungenTV.indexPathForRow(at: sender.center)!
+        let values = ["angenommen": true] as [String : Any]
+
+        let ref = Database.database().reference().child("Bestellungen").child("Barracuda").child("-L-Yli-38n_NLc0QCZ58")
+        ref.updateChildValues(values)
+
+            print("yes")
+        
+        
+    }
+    
+    
     
     // VARS
     
@@ -19,6 +37,8 @@ class KellnerVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     var bestellteGetränke = [Dictionary<String, Any>]()
     var TimeStamps = [Double]()
     var tischnummer = [String]()
+    var angenommen = [Bool]()
+
     var items = [String]()
     var mengen = [Int]()
 
@@ -45,7 +65,7 @@ class KellnerVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         
         var datref: DatabaseReference!
         datref = Database.database().reference()
-        datref.child("Bestellungen").observe(.childAdded, with: { (snapshot) in
+        datref.child("Bestellungen").child("Barracuda").observe(.childAdded, with: { (snapshot) in
             if let dictionary = snapshot.value as? [String: AnyObject]{
                 let bestellung = BestellungInfos(dictionary: dictionary)
                 self.bestellungen.append(bestellung)
@@ -56,7 +76,7 @@ class KellnerVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
                 self.bestellteGetränke.append(bestellungInfos.getränke!)
                 self.TimeStamps.append((bestellungInfos.timeStamp?.doubleValue)!)
                 self.tischnummer.append(bestellungInfos.tischnummer!)
-
+                self.angenommen.append(bestellungInfos.angenommen!)
                 }
                 
                 
@@ -64,8 +84,9 @@ class KellnerVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
                     self.bestellungenTV.reloadData()
                 } )
             }
-        
+            
         }, withCancel: nil)
+        
     }
     
     
@@ -79,16 +100,22 @@ class KellnerVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = Bundle.main.loadNibNamed("KellnerCell", owner: self, options: nil)?.first as! KellnerCell
+        cell.delegate = self
+        if angenommen[indexPath.row] == false {
+
         let timeStampDate = NSDate(timeIntervalSince1970: TimeStamps[indexPath.row])
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "hh:mm a"
         cell.timeLbl.text = "\(dateFormatter.string(from: timeStampDate as Date))"
  
- 
         cell.bestellungsText.text = "Shishas: \(bestellteShishas[indexPath.row])\nGetränke: \(bestellteGetränke[indexPath.row]) "
     
         cell.tischnummer.text = "Tischnummer: \(tischnummer[indexPath.row])"
-            return cell
+
+
+        }
+        
+        return cell
 
         
     }
@@ -98,6 +125,7 @@ class KellnerVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         
     }
     
+
     
     
     // OTHERS
@@ -111,7 +139,7 @@ class KellnerVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         super.viewDidLoad()
         loadBestellungen()
         print(KellnerID)
-        
+
         if #available(iOS 10.0, *) {
             let refreshControl = UIRefreshControl()
             let title = NSLocalizedString("aktualisiere", comment: "Pull to refresh")
@@ -138,5 +166,4 @@ class KellnerVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         super.didReceiveMemoryWarning()
     }
     
-
 }

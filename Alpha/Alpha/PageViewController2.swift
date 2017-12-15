@@ -10,7 +10,7 @@ import UIKit
 
 class PageViewController2: UIPageViewController, UIPageViewControllerDelegate, UIPageViewControllerDataSource {
     
-    var name = ""
+    var name = "Barracuda"
     
     var pageControl = UIPageControl()
     
@@ -24,18 +24,18 @@ class PageViewController2: UIPageViewController, UIPageViewControllerDelegate, U
         self.dataSource = self
         self.delegate = self
         
-//        let detailvc =  UIStoryboard(name: "Main", bundle: nil) .
-//            instantiateViewController(withIdentifier: "DetailVC") as! DetailVC
-//        let detvc = detailvc as PageObservation
-//        detvc.getParentPageViewController(parentRef: self)
-//        orderedViewControllers.append(detailvc)
-//
-//        let speisevc =  UIStoryboard(name: "Main", bundle: nil) .
-//            instantiateViewController(withIdentifier: "SpeisekarteVC") as! SpeisekarteVC
-//        let speisvc = speisevc as PageObservation
-//        speisvc.getParentPageViewController(parentRef: self)
-//
-   //     orderedViewControllers.append(speisevc)
+        let detailvc =  UIStoryboard(name: "Main", bundle: nil) .
+            instantiateViewController(withIdentifier: "DetailVC") as! DetailVC
+        let detvc = detailvc as PageObservation2
+        detvc.getParentPageViewController2(parentRef2: self)
+        orderedViewControllers.append(detailvc)
+
+        let speisevc =  UIStoryboard(name: "Main", bundle: nil) .
+            instantiateViewController(withIdentifier: "SpeisekarteVC") as! SpeisekarteVC
+        let speisvc = speisevc as PageObservation2
+        speisvc.getParentPageViewController2(parentRef2: self)
+
+        orderedViewControllers.append(speisevc)
         
        
         if let firstViewController = orderedViewControllers.first {
@@ -100,14 +100,8 @@ class PageViewController2: UIPageViewController, UIPageViewControllerDelegate, U
         
         return orderedViewControllers[nextIndex]
     }
-    /*
-    // MARK: - Navigation
+}
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
+protocol PageObservation2: class {
+    func getParentPageViewController2(parentRef2: PageViewController2)
 }
