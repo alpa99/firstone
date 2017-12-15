@@ -1,28 +1,51 @@
 //
+<<<<<<< HEAD
 //  BestellungVC2.swift
 //  Alpha
 //
 //  Created by Alper Maraz on 15.12.17.
+=======
+//  BestellungVC.swift
+//  Alpha
+//
+//  Created by Ibrahim Akcam on 22.10.17.
+>>>>>>> ae0e05e0ace61cf9bf71cfbe5e10b186bb82f1db
 //  Copyright © 2017 AM. All rights reserved.
 //
 
 import UIKit
 import Firebase
+<<<<<<< HEAD
 import Pulley
 import FBSDKLoginKit
 
 class BestellungVC2: UIViewController, UITableViewDataSource, UITableViewDelegate, ExpandableHeaderViewDelegate, BestellenCellDelegate, PageObservation, PulleyDrawerViewControllerDelegate {
+=======
+import FBSDKLoginKit
+import Pulley
+
+class BestellungVC2: UIViewController, UITableViewDataSource, UITableViewDelegate, ExpandableHeaderViewDelegate, PulleyDrawerViewControllerDelegate, BestellenCellDelegate, PageObservation {
+>>>>>>> ae0e05e0ace61cf9bf71cfbe5e10b186bb82f1db
     
     // VARS
     var x = [String]()
     var y = [Int]()
     var a = [String]()
     var b = [Int]()
+<<<<<<< HEAD
 
     
     var parentPageViewController: PageViewController!
     
     
+=======
+    var parentPageViewController: PageViewController!
+
+    
+    var timeToHold = 0
+    var timer = Timer()
+    var timeHolded = Int()
+>>>>>>> ae0e05e0ace61cf9bf71cfbe5e10b186bb82f1db
     
     private var selectedItems = [String]()
     var barname = ""
@@ -82,8 +105,12 @@ class BestellungVC2: UIViewController, UITableViewDataSource, UITableViewDelegat
     
     
     @IBAction func myBestellungAbschicken(_ sender: Any) {
+<<<<<<< HEAD
         print("get ready for qrcodes")
         
+=======
+            print("lets get ready for qrcodes")
+>>>>>>> ae0e05e0ace61cf9bf71cfbe5e10b186bb82f1db
     }
     
     @IBAction func dismissPopUp(_ sender: Any) {
@@ -93,7 +120,18 @@ class BestellungVC2: UIViewController, UITableViewDataSource, UITableViewDelegat
     }
     
     
+<<<<<<< HEAD
     
+=======
+    @IBAction func Back(_ sender: Any) {
+        (parent as? PulleyViewController)?.setDrawerPosition(position: PulleyPosition(rawValue: 2)!)
+        let drawervc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "DrawerVC") as! DrawerVC
+        
+        
+        
+        (parent as? PulleyViewController)?.setDrawerContentViewController(controller: drawervc, animated: true)
+    }
+>>>>>>> ae0e05e0ace61cf9bf71cfbe5e10b186bb82f1db
     
     @IBAction func sendToFirebase(_ sender: Any) {
         
@@ -155,7 +193,18 @@ class BestellungVC2: UIViewController, UITableViewDataSource, UITableViewDelegat
         print("touch")
     }
     
+<<<<<<< HEAD
     
+=======
+    @IBAction func bardetail(_ sender: UIButton) {
+        
+        (parent as? PulleyViewController)?.setDrawerPosition(position: PulleyPosition(rawValue: 2)!)
+        let detvc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "DetailVC") as! DetailVC
+        detvc.barname = barname
+        
+        (parent as? PulleyViewController)?.setDrawerContentViewController(controller: detvc, animated: true)
+    }
+>>>>>>> ae0e05e0ace61cf9bf71cfbe5e10b186bb82f1db
     
     
     
@@ -328,10 +377,30 @@ class BestellungVC2: UIViewController, UITableViewDataSource, UITableViewDelegat
         }
         
     }
+<<<<<<< HEAD
+=======
+    
+>>>>>>> ae0e05e0ace61cf9bf71cfbe5e10b186bb82f1db
     func getParentPageViewController(parentRef: PageViewController) {
         parentPageViewController = parentRef
     }
     
+<<<<<<< HEAD
+=======
+    // PULLEY
+    
+    func collapsedDrawerHeight(bottomSafeArea: CGFloat) -> CGFloat {
+        return 102.0
+    }
+    
+    func partialRevealDrawerHeight(bottomSafeArea: CGFloat) -> CGFloat {
+        return 340.0
+    }
+    
+    func supportedDrawerPositions() -> [PulleyPosition] {
+        return PulleyPosition.all
+    }
+>>>>>>> ae0e05e0ace61cf9bf71cfbe5e10b186bb82f1db
     
     
     // TABLEVIEW FUNCTIONS
@@ -438,6 +507,7 @@ class BestellungVC2: UIViewController, UITableViewDataSource, UITableViewDelegat
             myBestellungTV.endUpdates()
         }
     }
+<<<<<<< HEAD
     // Pulley
     
     
@@ -453,6 +523,8 @@ class BestellungVC2: UIViewController, UITableViewDataSource, UITableViewDelegat
         return PulleyPosition.all
     }
     
+=======
+>>>>>>> ae0e05e0ace61cf9bf71cfbe5e10b186bb82f1db
     
     // OTHERS
     
@@ -467,11 +539,23 @@ class BestellungVC2: UIViewController, UITableViewDataSource, UITableViewDelegat
             
         }
     }
+<<<<<<< HEAD
 
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+=======
+    
+    //    @objc func normalTap(_ sender: UIGestureRecognizer){
+    //        print("Normal tap")
+    //
+    //    }
+    
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+>>>>>>> ae0e05e0ace61cf9bf71cfbe5e10b186bb82f1db
         self.barname = parentPageViewController.name
         
         effect = visualEffectView.effect
@@ -482,8 +566,15 @@ class BestellungVC2: UIViewController, UITableViewDataSource, UITableViewDelegat
         
         
         addItemView.layer.cornerRadius = 5
+<<<<<<< HEAD
         
         fetchSpeisekarte()
+=======
+
+        fetchSpeisekarte()
+        
+
+>>>>>>> ae0e05e0ace61cf9bf71cfbe5e10b186bb82f1db
 
     }
     
