@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import Pulley
 import Firebase
 
 class SpeisekarteVC2: UIViewController, UITableViewDataSource, UITableViewDelegate, ExpandableHeaderViewDelegate, PageObservation2 {

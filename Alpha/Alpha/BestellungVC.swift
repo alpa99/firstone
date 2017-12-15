@@ -9,9 +9,8 @@
 import UIKit
 import Firebase
 import FBSDKLoginKit
-import Pulley
 
-class BestellungVC: UIViewController, UITableViewDataSource, UITableViewDelegate, ExpandableHeaderViewDelegate, PulleyDrawerViewControllerDelegate, BestellenCellDelegate {
+class BestellungVC: UIViewController, UITableViewDataSource, UITableViewDelegate, ExpandableHeaderViewDelegate, BestellenCellDelegate, PageObservation2 {
 
     // VARS
     var x = [String]()
@@ -23,6 +22,7 @@ class BestellungVC: UIViewController, UITableViewDataSource, UITableViewDelegate
     var timer = Timer()
     var timeHolded = Int()
     
+    var parentPageViewController2: PageViewController2!
     
     
 
@@ -94,14 +94,7 @@ class BestellungVC: UIViewController, UITableViewDataSource, UITableViewDelegate
     }
 
 
-    @IBAction func Back(_ sender: Any) {
-        (parent as? PulleyViewController)?.setDrawerPosition(position: PulleyPosition(rawValue: 2)!)
-        let drawervc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "DrawerVC") as! DrawerVC
-        
-        
-        
-        (parent as? PulleyViewController)?.setDrawerContentViewController(controller: drawervc, animated: true)
-    }
+    
     
     @IBAction func sendToFirebase(_ sender: Any) {
 
@@ -163,14 +156,7 @@ class BestellungVC: UIViewController, UITableViewDataSource, UITableViewDelegate
         print("touch")
     }
 
-    @IBAction func bardetail(_ sender: UIButton) {
-        
-        (parent as? PulleyViewController)?.setDrawerPosition(position: PulleyPosition(rawValue: 2)!)
-        let detvc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "DetailVC") as! DetailVC
-        detvc.barname = barname
-        
-        (parent as? PulleyViewController)?.setDrawerContentViewController(controller: detvc, animated: true)
-    }
+
     
     
 
@@ -343,21 +329,11 @@ class BestellungVC: UIViewController, UITableViewDataSource, UITableViewDelegate
         }
         
     }
-
-    // PULLEY
-    
-    func collapsedDrawerHeight(bottomSafeArea: CGFloat) -> CGFloat {
-        return 102.0
-    }
-    
-    func partialRevealDrawerHeight(bottomSafeArea: CGFloat) -> CGFloat {
-        return 340.0
-    }
-    
-    func supportedDrawerPositions() -> [PulleyPosition] {
-        return PulleyPosition.all
+    func getParentPageViewController2(parentRef2: PageViewController2) {
+        parentPageViewController2 = parentRef2
     }
 
+    
 
     // TABLEVIEW FUNCTIONS
     
@@ -508,13 +484,15 @@ class BestellungVC: UIViewController, UITableViewDataSource, UITableViewDelegate
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.barname = parentPageViewController2.name
+        
         effect = visualEffectView.effect
         visualEffectView.effect = nil
         visualEffectView.isHidden = true
         addItemView.isHidden = true
         myBestellungView.isHidden = true
 
-
+        
         addItemView.layer.cornerRadius = 5
         
         fetchSpeisekarte()
