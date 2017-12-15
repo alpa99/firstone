@@ -30,6 +30,8 @@
 		4E1664BC1FBC6D340038EFB5 /* DetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E1664BB1FBC6D340038EFB5 /* DetailVC.swift */; };
 		4E1664BE1FBF12020038EFB5 /* votevc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E1664BD1FBF12020038EFB5 /* votevc.swift */; };
 		4E1664C01FBF316D0038EFB5 /* VoteInfos.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E1664BF1FBF316D0038EFB5 /* VoteInfos.swift */; };
+		4E3728411FE3E34E000DAF97 /* DetailVC2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E3728401FE3E34E000DAF97 /* DetailVC2.swift */; };
+		4E3728431FE3EB43000DAF97 /* SpeisekarteVC2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E3728421FE3EB43000DAF97 /* SpeisekarteVC2.swift */; };
 		4E6020491F9E2F88001B2909 /* ScanDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E6020481F9E2F88001B2909 /* ScanDetailVC.swift */; };
 		4E66E16D1FD49CFA005E87E3 /* PageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E66E16C1FD49CFA005E87E3 /* PageViewController.swift */; };
 		4E78E53D1FABE03400B81EB2 /* pin.png in Resources */ = {isa = PBXBuildFile; fileRef = 4E78E53C1FABE03300B81EB2 /* pin.png */; };
@@ -93,6 +95,8 @@
 		4E1664BB1FBC6D340038EFB5 /* DetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailVC.swift; sourceTree = "<group>"; };
 		4E1664BD1FBF12020038EFB5 /* votevc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = votevc.swift; sourceTree = "<group>"; };
 		4E1664BF1FBF316D0038EFB5 /* VoteInfos.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoteInfos.swift; sourceTree = "<group>"; };
+		4E3728401FE3E34E000DAF97 /* DetailVC2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailVC2.swift; sourceTree = "<group>"; };
+		4E3728421FE3EB43000DAF97 /* SpeisekarteVC2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeisekarteVC2.swift; sourceTree = "<group>"; };
 		4E6020481F9E2F88001B2909 /* ScanDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanDetailVC.swift; sourceTree = "<group>"; };
 		4E66E16C1FD49CFA005E87E3 /* PageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageViewController.swift; sourceTree = "<group>"; };
 		4E78E53C1FABE03300B81EB2 /* pin.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pin.png; sourceTree = SOURCE_ROOT; };
@@ -215,6 +219,8 @@
 				4E1664BD1FBF12020038EFB5 /* votevc.swift */,
 				4E66E16C1FD49CFA005E87E3 /* PageViewController.swift */,
 				4EEB60821FDF2BAB0003BA0E /* PageViewController2.swift */,
+				4E3728401FE3E34E000DAF97 /* DetailVC2.swift */,
+				4E3728421FE3EB43000DAF97 /* SpeisekarteVC2.swift */,
 			);
 			path = Alpha;
 			sourceTree = "<group>";
@@ -582,8 +588,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4E3728411FE3E34E000DAF97 /* DetailVC2.swift in Sources */,
 				4EEB60831FDF2BAB0003BA0E /* PageViewController2.swift in Sources */,
 				4E1664C01FBF316D0038EFB5 /* VoteInfos.swift in Sources */,
+				4E3728431FE3EB43000DAF97 /* SpeisekarteVC2.swift in Sources */,
 				088728691FB7A50D00FF2448 /* KellnerVC.swift in Sources */,
 				4EC247FA1F98FE6A00910AA8 /* QRBereich.swift in Sources */,
 				08EF4C4E1F9D2AC000F01096 /* SpeisekarteInfos.swift in Sources */,
