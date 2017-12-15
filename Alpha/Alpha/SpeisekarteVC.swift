@@ -10,7 +10,7 @@ import UIKit
 import Pulley
 import Firebase
 
-class SpeisekarteVC: UIViewController, UITableViewDataSource, UITableViewDelegate, PulleyDrawerViewControllerDelegate, ExpandableHeaderViewDelegate, PageObservation, PageObservation2 {
+class SpeisekarteVC: UIViewController, UITableViewDataSource, UITableViewDelegate, PulleyDrawerViewControllerDelegate, ExpandableHeaderViewDelegate, PageObservation {
 
 
     // VARS
@@ -30,11 +30,6 @@ class SpeisekarteVC: UIViewController, UITableViewDataSource, UITableViewDelegat
     var parentPageViewController: PageViewController!
     func getParentPageViewController(parentRef: PageViewController) {
         parentPageViewController = parentRef
-    }
-    var parentPageViewController2: PageViewController2!
-
-    func getParentPageViewController2(parentRef2: PageViewController2) {
-        parentPageViewController2 = parentRef2
     }
 
     

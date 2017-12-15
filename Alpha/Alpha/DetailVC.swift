@@ -10,7 +10,7 @@ import UIKit
 import Pulley
 import Firebase
 
-class DetailVC: UIViewController, PulleyDrawerViewControllerDelegate, PageObservation, PageObservation2 {
+class DetailVC: UIViewController, PulleyDrawerViewControllerDelegate, PageObservation{
  
     var barname = ""
     var bars = [BarInfos]()
@@ -18,29 +18,19 @@ class DetailVC: UIViewController, PulleyDrawerViewControllerDelegate, PageObserv
     var bild = String ()
 
     var parentPageViewController: PageViewController!
-    var parentPageViewController2: PageViewController2!
 
     func getParentPageViewController(parentRef: PageViewController) {
         parentPageViewController = parentRef
     }
-    func getParentPageViewController2(parentRef2: PageViewController2) {
-        parentPageViewController2 = parentRef2
-    }
-    
+
     @IBOutlet weak var image: UIImageView!
     @IBOutlet weak var topbutton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        if parentPageViewController.name != "" && parentPageViewController2.name == "" {
         self.barname = parentPageViewController.name
-        }
-        if parentPageViewController2.name != "" {
-            print("test")
-            self.barname = parentPageViewController2.name
-
-        }
+    
         print(barname, "dfjidfjdijfid")
         fetchData()
     }
