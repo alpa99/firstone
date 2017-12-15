@@ -24,19 +24,19 @@ class PageViewController2: UIPageViewController, UIPageViewControllerDelegate, U
         self.dataSource = self
         self.delegate = self
         
-//        let detailvc =  UIStoryboard(name: "Main", bundle: nil) .
-//            instantiateViewController(withIdentifier: "DetailVC") as! DetailVC
-//        let detvc = detailvc as PageObservation2
-//        detvc.getParentPageViewController2(parentRef2: self)
-//        orderedViewControllers.append(detailvc)
-//
-//        let speisevc =  UIStoryboard(name: "Main", bundle: nil) .
-//            instantiateViewController(withIdentifier: "SpeisekarteVC") as! SpeisekarteVC
-//        let speisvc = speisevc as PageObservation2
-//        speisvc.getParentPageViewController2(parentRef2: self)
-//
-//        orderedViewControllers.append(speisevc)
-//
+        let detailvc =  UIStoryboard(name: "Main", bundle: nil) .
+            instantiateViewController(withIdentifier: "DetailVC2") as! DetailVC2
+        let detvc = detailvc as PageObservation2
+        detvc.getParentPageViewController2(parentRef2: self)
+        orderedViewControllers.append(detailvc)
+
+        let speisevc =  UIStoryboard(name: "Main", bundle: nil) .
+            instantiateViewController(withIdentifier: "SpeisekarteVC2") as! SpeisekarteVC2
+        let speisvc = speisevc as PageObservation2
+        speisvc.getParentPageViewController2(parentRef2: self)
+
+        orderedViewControllers.append(speisevc)
+
        
         if let firstViewController = orderedViewControllers.first {
             setViewControllers([firstViewController],
