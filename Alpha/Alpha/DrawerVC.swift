@@ -132,14 +132,8 @@ class DrawerVC: UIViewController, PulleyDrawerViewControllerDelegate, UITableVie
         pagevc.name = selBarName
 
         (parent as? PulleyViewController)?.setDrawerContentViewController(controller: pagevc, animated: true)
-//        let detvc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "DetailVC") as! DetailVC
-//        detvc.barname = selBarName
-//        
-//        let speisevc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "SpeisekarteVC") as! SpeisekarteVC
-//        
-//        speisevc.barname = selBarName
+
         
-        //  performSegue(withIdentifier: "bardetail", sender: self)
         
     }
     
