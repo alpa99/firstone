@@ -25,7 +25,7 @@ class BestellungVC2: UIViewController, UITableViewDataSource, UITableViewDelegat
     
     
     private var selectedItems = [String]()
-    var barname = ""
+    var barname = "Barracuda"
     
     
     var bars = [BarInfos]()

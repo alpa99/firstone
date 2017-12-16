@@ -11,7 +11,7 @@ import Pulley
 
 class PageViewController: UIPageViewController, UIPageViewControllerDelegate, UIPageViewControllerDataSource, PulleyDrawerViewControllerDelegate {
     
-    var name = ""
+    var name = "Barracuda"
     
     var pageControl = UIPageControl()
     

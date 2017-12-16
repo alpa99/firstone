@@ -17,7 +17,8 @@ class BestellungVC: UIViewController, UITableViewDataSource, UITableViewDelegate
     var y = [Int]()
     var a = [String]()
     var b = [Int]()
-    var keys = [String]()
+    var keys = [String: Int]()
+    var z = [String: Int]()
 
     
     var timeToHold = 0
@@ -29,7 +30,7 @@ class BestellungVC: UIViewController, UITableViewDataSource, UITableViewDelegate
     
 
     private var selectedItems = [String]()
-    var barname = ""
+    var barname = "Barracuda"
     
     
     var bars = [BarInfos]()
@@ -170,28 +171,33 @@ class BestellungVC: UIViewController, UITableViewDataSource, UITableViewDelegate
         var datref: DatabaseReference!
         datref = Database.database().reference()
         
-        
         datref.child("Speisekarten").child("\(self.barname)").observe(.value, with: { (snapshotValue) in
             
             self.getKeys(value: Int(snapshotValue.childrenCount))
+            
         }, withCancel: nil)
         
     }
 
     func getKeys(value: Int){
-        
+
+        print(value, "Value")
         var datref: DatabaseReference!
         datref = Database.database().reference()
         
         
         datref.child("Speisekarten").child("\(self.barname)").observe(.childAdded, with: { (snapshotKey) in
-            
-            self.keys.append(snapshotKey.key)
+            self.keys.updateValue(Int(snapshotKey.childrenCount), forKey: snapshotKey.key)
 
             if self.keys.count == value {
-                self.fetchSpeisekarte()
-            
+                for (key, value) in self.keys {
+                print(key, "vorher")
+
+                    self.fetchSpeisekarte(ii: key, z: value)
+                print(key, "nachher")
             }
+            }
+           
 
         }, withCancel: nil)
         
@@ -199,40 +205,37 @@ class BestellungVC: UIViewController, UITableViewDataSource, UITableViewDelegate
     }
 
     
-    
-    func fetchSpeisekarte(){
-        var z = [String: Int]()
+    func fetchSpeisekarte(ii: String, z: Int){
         var datref: DatabaseReference!
         datref = Database.database().reference()
         
-        datref.child("Speisekarten").child("\(self.barname)").observe(.childAdded, with: { (snapshot) in
-            z.updateValue(Int(snapshot.childrenCount), forKey: snapshot.key)
-                datref.child("Speisekarten").child("\(self.barname)").child(self.keys[0]).observe(.childAdded, with: { (snapshot) in
+       
+                datref.child("Speisekarten").child("\(self.barname)").child(ii).observe(.childAdded, with: { (snapshot) in
                 self.label.text = self.barname
-                
+
                 if let dictionary = snapshot.value as? [String: AnyObject]{
                     let shisha = SpeisekarteInfos(dictionary: dictionary)
                     
                 
                     self.shishas.append(shisha.Name!)
                     self.shishasPreise.append(shisha.Preis!)
-                        
+                    
+                    print(self.shishas, "shishas")
+                    print(self.shishas.count, "shishacount")
+                    print(ii, z, "zettt")
+                    if self.shishas.count == z{
+
+                        self.setSectionsSpeisekarte(genre: ii, items: self.shishas, preise: self.shishasPreise)
+                        self.shishas.removeAll()
+                        self.shishasPreise.removeAll()
+                    }
                     
 
                 }
-                    print(self.shishas, "shishas")
-                    print(self.shishas.count, "shishacount")
-                    print( z[self.keys[0]] ?? "", "zettt")
-                    if self.shishas.count == z[self.keys[0]]{
-                        self.setSectionsSpeisekarte(genre: self.keys[0], items: self.shishas, preise: self.shishasPreise)
-                        
-                    }
+                    
 
 
- 
-                
-            }, withCancel: nil)
-//            datref.child("Speisekarten").child("\(self.barname)").child("Shishas").observe(.childAdded, with: { (snapshot) in
+ //            datref.child("Speisekarten").child("\(self.barname)").child("Shishas").observe(.childAdded, with: { (snapshot) in
 //                self.label.text = self.barname
 //
 //                if let dictionary = snapshot.value as? [String: AnyObject]{
@@ -554,7 +557,6 @@ class BestellungVC: UIViewController, UITableViewDataSource, UITableViewDelegate
 
         
         addItemView.layer.cornerRadius = 5
-
         //fetchSpeisekarte()
         getValue()
 
