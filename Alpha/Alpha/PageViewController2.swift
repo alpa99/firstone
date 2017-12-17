@@ -38,7 +38,7 @@ class PageViewController2: UIPageViewController, UIPageViewControllerDelegate, U
         orderedViewControllers.append(speisevc)
 
         let bestellvc =  UIStoryboard(name: "Main", bundle: nil) .
-            instantiateViewController(withIdentifier: "BestellungVC") as! BestellungVC
+            instantiateViewController(withIdentifier: "BestellungVC2") as! BestellungVC2
         let bestvc = bestellvc as PageObservation2
         bestvc.getParentPageViewController2(parentRef2: self)
         orderedViewControllers.append(bestellvc)
