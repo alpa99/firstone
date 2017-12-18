@@ -10,45 +10,39 @@ import UIKit
 import Firebase
 import Pulley
 import FBSDKLoginKit
+import FirebaseAuth
+
 
 class BestellungVC: UIViewController, UITableViewDataSource, UITableViewDelegate, ExpandableHeaderViewDelegate, BestellenCellDelegate, PageObservation, PulleyDrawerViewControllerDelegate {
     
     // VARS
-    var x = [String]()
-    var y = [Int]()
-    var a = [String]()
-    var b = [Int]()
+
     var keys = [String: Int]()
+    var bestellteItemsDictionary = [String: [String: Int]]()
+    var yy = [String]()
+    var genres = [String]()
+    var itemss = [String]()
+    var values = [Int]()
 
     
     var parentPageViewController: PageViewController!
     
-    
-    
-    private var selectedItems = [String]()
     var barname = "Barracuda"
     
-    
-    var bars = [BarInfos]()
-    var adresse = String ()
-    
-    var shishas = [String]()
-    var shishasPreise = [Int]()
-    var getränke = [String]()
-    var getränkePreise = [Int]()
+    var items = [String]()
+    var itemsPreise = [Int]()
+
     var sections = [ExpandTVSection]()
     
-    var count = 0
     var cellIndexPathSection = 0
     var cellIndexPathRow = 0
     var i = Int()
+    
     
     var bestellteShishas  = [String: Int]()
     var bestellteGetränke  = [String: Int]()
     
     var bestellung = [ExpandTVSection]()
-    
-    var bestellungSections = ["Shishas","Getränke"]
     
     var effect: UIVisualEffect!
     
@@ -83,22 +77,61 @@ class BestellungVC: UIViewController, UITableViewDataSource, UITableViewDelegate
     
     
     @IBAction func myBestellungAbschicken(_ sender: Any) {
+        handleBestellung()
         print("get ready for qrcodes")
-        
     }
     
     @IBAction func dismissPopUp(_ sender: Any) {
         animateOut()
-        print("touch")
-        
     }
     
-    
-    
+//    func myBestellungPruefen(){
+//        setSectionsBestellung(genre: <#T##String#>, items: <#T##[String]#>, preise: <#T##[Int]#>)
+//    }
     
     @IBAction func sendToFirebase(_ sender: Any) {
+
+        print(bestellteItemsDictionary)
         
-        
+        for (genre, itemDictionary) in bestellteItemsDictionary {
+
+            if self.genres.contains(genre) == false {
+                self.genres.append(genre)
+
+                for (item, value) in itemDictionary {
+                    
+                    self.itemss.append(item)
+                    self.values.append(value)
+                    if itemss.count == itemDictionary.count{
+
+                    setSectionsBestellung(genre: genre, items: itemss, preise: values)
+                        print(self.genres, "GENRES")
+                        print(self.bestellung, "bestllungen")
+                        self.itemss.removeAll()
+                        self.values.removeAll()
+                    }
+                }
+            } else {
+                for (item, value) in itemDictionary {
+                    
+                    self.itemss.append(item)
+                    self.values.append(value)
+                    if itemss.count == itemDictionary.count{
+                        if let g = genres.index(of: genre) {
+                            print(self.genres[g], "genres g")
+                            print(self.bestellung[g], "bestelung g")
+                            self.bestellung[g].items = self.itemss
+                            self.bestellung[g].preise = self.values
+                            self.myBestellungTV.reloadData()
+
+                            print(self.bestellung, "BEST")
+                        }
+                        self.itemss.removeAll()
+                        self.values.removeAll()
+                    }
+                }
+            }
+        }
         UIView.animate(withDuration: 1) {
             self.myBestellungView.isHidden = false
             
@@ -107,53 +140,17 @@ class BestellungVC: UIViewController, UITableViewDataSource, UITableViewDelegate
             self.myBestellungView.alpha = 0
             self.visualEffectView.isHidden = false
             self.view.addSubview(self.myBestellungView)
-            
-            
             self.visualEffectView.effect = self.effect
-            
             self.myBestellungView.alpha = 1
             self.myBestellungView.transform = CGAffineTransform.identity
         }
         
-        for (item, preis) in bestellteShishas {
-            
-            if x.contains(item) == false {
-                x.append(item)
-                y.append(preis)
-                print(x, "X")
-                
-            }
-        }
-        
-        for (item, preis) in bestellteGetränke {
-            
-            if a.contains(item) == false {
-                a.append(item)
-                b.append(preis)
-            }
-        }
-        
-        bestellung.removeAll()
-        
-        if x.count == 0 {
-            setSectionsBestellung(genre: "Shishas", items: ["noch nix"], preise: y)
-            
-        } else {
-            setSectionsBestellung(genre: "Shishas", items: x, preise: y)
-        }
-        if a.count == 0 {
-            setSectionsBestellung(genre: "Getränke", items: ["noch nix"], preise: y)
-            
-        } else {
-            setSectionsBestellung(genre: "Getränke", items: a, preise: b)
-        }
     }
     
     
     @IBAction func dismissMyBestellungView(_ sender: Any) {
         dismissMyBestellungView()
         bestellung = [ExpandTVSection]()
-        print("touch")
     }
     
     
@@ -176,7 +173,6 @@ class BestellungVC: UIViewController, UITableViewDataSource, UITableViewDelegate
             
     func getKeys(value: Int){
         
-        print(value, "Value")
         var datref: DatabaseReference!
         datref = Database.database().reference()
         
@@ -186,10 +182,8 @@ class BestellungVC: UIViewController, UITableViewDataSource, UITableViewDelegate
             
             if self.keys.count == value {
                 for (key, value) in self.keys {
-                    print(key, "vorher")
                     
                     self.fetchSpeisekarte(ii: key, z: value)
-                    print(key, "nachher")
                 }
             }
             
@@ -201,8 +195,7 @@ class BestellungVC: UIViewController, UITableViewDataSource, UITableViewDelegate
             
 
     func fetchSpeisekarte(ii: String, z: Int){
-        self.shishas.removeAll()
-        self.shishasPreise.removeAll()
+
         var datref: DatabaseReference!
         datref = Database.database().reference()
         
@@ -214,17 +207,14 @@ class BestellungVC: UIViewController, UITableViewDataSource, UITableViewDelegate
                 let shisha = SpeisekarteInfos(dictionary: dictionary)
                 
                 
-                self.shishas.append(shisha.Name!)
-                self.shishasPreise.append(shisha.Preis!)
-                
-                print(self.shishas, "shishas")
-                print(self.shishas.count, "shishacount")
-                print(ii, z, "zettt")
-                if self.shishas.count == z{
+                self.items.append(shisha.Name!)
+                self.itemsPreise.append(shisha.Preis!)
+
+                if self.items.count == z{
                     
-                    self.setSectionsSpeisekarte(genre: ii, items: self.shishas, preise: self.shishasPreise)
-                    self.shishas.removeAll()
-                    self.shishasPreise.removeAll()
+                    self.setSectionsSpeisekarte(genre: ii, items: self.items, preise: self.itemsPreise)
+                    self.items.removeAll()
+                    self.itemsPreise.removeAll()
                 }
             }
         }, withCancel: nil)
@@ -237,10 +227,16 @@ class BestellungVC: UIViewController, UITableViewDataSource, UITableViewDelegate
         
         if bestellteShishas.count > 0 || bestellteGetränke.count > 0{
             let timestamp = Double(NSDate().timeIntervalSince1970)
-            let values = ["shishas": bestellteShishas, "getränke": bestellteGetränke, "toKellnerID": "Kellner1", "tischnummer": "3", "fromUserID": FBSDKAccessToken.current().userID, "timeStamp": timestamp, "angenommen": false] as [String : Any]
+            let fromUserID = Auth.auth().currentUser!.uid
+            let values = ["shishas": bestellteShishas, "getränke": bestellteGetränke, "toKellnerID": "Kellner1", "tischnummer": "3", "fromUserID": fromUserID , "timeStamp": timestamp, "angenommen": false] as [String : Any]
             
             ref = Database.database().reference().child("Bestellungen").child(barname)
             let childRef = ref?.childByAutoId()
+            
+            let userBestellungenRef = Database.database().reference().child("userBestellungen").child(fromUserID)
+            let bestellungID = childRef?.key
+            userBestellungenRef.updateChildValues([bestellungID!: 1])
+            
             if bestellteGetränke.count != 0 || bestellteShishas.count != 0{
                 childRef?.updateChildValues(values)
                 print(Date(timeIntervalSince1970: timestamp)) }
@@ -273,7 +269,6 @@ class BestellungVC: UIViewController, UITableViewDataSource, UITableViewDelegate
         if i > 0{
             i = i-1
             itemCountLbl.text = "\(i)" }
-        
     }
     
     func animateIn(){
@@ -292,7 +287,7 @@ class BestellungVC: UIViewController, UITableViewDataSource, UITableViewDelegate
         }
         
     }
-    
+
     func animateOut(){
         
         UIView.animate(withDuration: 0.5, animations: {
@@ -307,18 +302,16 @@ class BestellungVC: UIViewController, UITableViewDataSource, UITableViewDelegate
             
             
         }
-        
-        if i > 0 && cellIndexPathSection == 0 {
-            bestellteShishas.updateValue(i, forKey: itemNameLbl.text!)
-        } else if i > 0 && cellIndexPathSection == 1 {
-            bestellteGetränke.updateValue(i, forKey: itemNameLbl.text!)
-        } else if i == 0{
-            bestellteGetränke.removeValue(forKey: itemNameLbl.text!)
-            bestellteShishas.removeValue(forKey: itemNameLbl.text!)
-            
+        if i > 0 {
+            if bestellteItemsDictionary.index(forKey: sections[cellIndexPathSection].genre) != nil {
+                var dic = bestellteItemsDictionary[sections[cellIndexPathSection].genre]
+                dic?.updateValue(i, forKey: itemNameLbl.text!)
+                bestellteItemsDictionary.updateValue(dic!, forKey: sections[cellIndexPathSection].genre)
+            } else {
+            bestellteItemsDictionary.updateValue([itemNameLbl.text! : i], forKey: sections[cellIndexPathSection].genre)
+            }
         }
-        
-        
+
     }
     
     func dismissMyBestellungView() {
@@ -337,7 +330,6 @@ class BestellungVC: UIViewController, UITableViewDataSource, UITableViewDelegate
             
             self.visualEffectView.isHidden = true
         }
-        
     }
     func getParentPageViewController(parentRef: PageViewController) {
         parentPageViewController = parentRef
@@ -353,9 +345,8 @@ class BestellungVC: UIViewController, UITableViewDataSource, UITableViewDelegate
     }
     
     func setSectionsBestellung(genre: String, items: [String], preise: [Int]){
-        bestellung.append(ExpandTVSection(genre: genre, items: items, preise: preise, expanded: true))
+        self.bestellung.append(ExpandTVSection(genre: genre, items: items, preise: preise, expanded: true))
         self.myBestellungTV.reloadData()
-        
         
     }
     
@@ -384,7 +375,7 @@ class BestellungVC: UIViewController, UITableViewDataSource, UITableViewDelegate
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        if (sections[indexPath.section].expanded){
+        if (sections[indexPath.section].expanded) {
             return 71
         }
         else {
@@ -398,7 +389,15 @@ class BestellungVC: UIViewController, UITableViewDataSource, UITableViewDelegate
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let header = ExpandableHeaderView()
+        
+        if tableView == bestellungTableView {
+            
         header.customInit(tableView: tableView, title: sections[section].genre, section: section, delegate: self as ExpandableHeaderViewDelegate)
+        } else {
+            
+        header.customInit(tableView: tableView, title: bestellung[section].genre, section: section, delegate: self as ExpandableHeaderViewDelegate)
+        }
+        
         return header
     }
     
@@ -424,6 +423,7 @@ class BestellungVC: UIViewController, UITableViewDataSource, UITableViewDelegate
                 
             }
         } else {
+
             let cell = self.myBestellungTV.dequeueReusableCell(withIdentifier: "myBestellCell", for: indexPath)
             cell.textLabel?.text = "\(bestellung[indexPath.section].items[indexPath.row])"
             return cell
@@ -446,6 +446,9 @@ class BestellungVC: UIViewController, UITableViewDataSource, UITableViewDelegate
         else {
             sections[section].expanded = !sections[section].expanded
             myBestellungTV.beginUpdates()
+            for i in 0..<bestellung[section].items.count{
+                myBestellungTV.reloadRows(at: [IndexPath(row: i, section: section)], with: .automatic)
+            }
             myBestellungTV.endUpdates()
         }
     }
@@ -474,7 +477,6 @@ class BestellungVC: UIViewController, UITableViewDataSource, UITableViewDelegate
         if touch?.view != myBestellungView && touch?.view != addItemView {
             dismissMyBestellungView()
             animateOut()
-            print("touch")
             
         }
     }
@@ -482,10 +484,9 @@ class BestellungVC: UIViewController, UITableViewDataSource, UITableViewDelegate
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         getValue()
-        
 //        self.barname = parentPageViewController.name
-        
         effect = visualEffectView.effect
         visualEffectView.effect = nil
         visualEffectView.isHidden = true
@@ -495,14 +496,10 @@ class BestellungVC: UIViewController, UITableViewDataSource, UITableViewDelegate
         
         addItemView.layer.cornerRadius = 5
         
-
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
-    
-    
-    
 }
 
