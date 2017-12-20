@@ -2,34 +2,40 @@
 //  BestellungVC2.swift
 //  Alpha
 //
-//  Created by Alper Maraz on 15.12.17.
+//  Created by Ibrahim Akcam on 22.10.17.
 //  Copyright © 2017 AM. All rights reserved.
 //
 
 import UIKit
 import Firebase
-import Pulley
 import FBSDKLoginKit
 
-class BestellungVC2: UIViewController, UITableViewDataSource, UITableViewDelegate, ExpandableHeaderViewDelegate, BestellenCellDelegate, PageObservation, PulleyDrawerViewControllerDelegate {
-    
+class BestellungVC2: UIViewController, UITableViewDataSource, UITableViewDelegate, ExpandableHeaderViewDelegate, BestellenCellDelegate, PageObservation2 {
+
     // VARS
     var x = [String]()
     var y = [Int]()
     var a = [String]()
     var b = [Int]()
+    var keys = [String: Int]()
 
     
-    var parentPageViewController: PageViewController!
+    var timeToHold = 0
+    var timer = Timer()
+    var timeHolded = Int()
+    
+    var parentPageViewController2: PageViewController2!
     
     
-    
+
     private var selectedItems = [String]()
     var barname = "Barracuda"
     
     
     var bars = [BarInfos]()
     var adresse = String ()
+    
+    var elements = [String]()
     
     var shishas = [String]()
     var shishasPreise = [Int]()
@@ -46,14 +52,14 @@ class BestellungVC2: UIViewController, UITableViewDataSource, UITableViewDelegat
     var bestellteGetränke  = [String: Int]()
     
     var bestellung = [ExpandTVSection]()
-    
+
     var bestellungSections = ["Shishas","Getränke"]
     
     var effect: UIVisualEffect!
-    
+
     
     @IBOutlet weak var label: UILabel!
-    
+
     
     // OUTLETS
     
@@ -63,13 +69,13 @@ class BestellungVC2: UIViewController, UITableViewDataSource, UITableViewDelegat
     
     @IBOutlet var addItemView: UIView!
     @IBOutlet weak var itemNameLbl: UILabel!
-    
+
     @IBOutlet weak var itemCountLbl: UILabel!
     
     @IBOutlet weak var myBestellungTV: UITableView!
     
     @IBOutlet weak var bestellungTableView: UITableView!
-    
+
     @IBOutlet var myBestellungView: UIView!
     
     
@@ -82,31 +88,30 @@ class BestellungVC2: UIViewController, UITableViewDataSource, UITableViewDelegat
     
     
     @IBAction func myBestellungAbschicken(_ sender: Any) {
-        print("get ready for qrcodes")
-        
+//        handleBestellung()
     }
     
     @IBAction func dismissPopUp(_ sender: Any) {
         animateOut()
         print("touch")
-        
+
     }
-    
-    
+
+
     
     
     @IBAction func sendToFirebase(_ sender: Any) {
-        
-        
+
+
         UIView.animate(withDuration: 1) {
             self.myBestellungView.isHidden = false
-            
-            //            self.myBestellungView.center = self.view.center
+
+//            self.myBestellungView.center = self.view.center
             self.myBestellungView.transform = CGAffineTransform.init(scaleX: 1.3, y: 1.3)
             self.myBestellungView.alpha = 0
             self.visualEffectView.isHidden = false
             self.view.addSubview(self.myBestellungView)
-            
+
             
             self.visualEffectView.effect = self.effect
             
@@ -120,7 +125,7 @@ class BestellungVC2: UIViewController, UITableViewDataSource, UITableViewDelegat
                 x.append(item)
                 y.append(preis)
                 print(x, "X")
-                
+
             }
         }
         
@@ -136,10 +141,10 @@ class BestellungVC2: UIViewController, UITableViewDataSource, UITableViewDelegat
         
         if x.count == 0 {
             setSectionsBestellung(genre: "Shishas", items: ["noch nix"], preise: y)
-            
+
         } else {
-            setSectionsBestellung(genre: "Shishas", items: x, preise: y)
-        }
+        setSectionsBestellung(genre: "Shishas", items: x, preise: y)
+    }
         if a.count == 0 {
             setSectionsBestellung(genre: "Getränke", items: ["noch nix"], preise: y)
             
@@ -154,94 +159,152 @@ class BestellungVC2: UIViewController, UITableViewDataSource, UITableViewDelegat
         bestellung = [ExpandTVSection]()
         print("touch")
     }
+
+
     
     
-    
-    
-    
+
     // FUNCTIONS
-    func fetchSpeisekarte(){
-        var z = [String: Int]()
+    
+    func getValue (){
         var datref: DatabaseReference!
         datref = Database.database().reference()
         
-        datref.child("Speisekarten").child("\(self.barname)").observe(.childAdded, with: { (snapshot) in
+        datref.child("Speisekarten").child("\(self.barname)").observe(.value, with: { (snapshotValue) in
             
-            z.updateValue(Int(snapshot.childrenCount), forKey: snapshot.key)
-            print(z, "AFDSFSDF")
+            self.getKeys(value: Int(snapshotValue.childrenCount))
             
-            
-            datref.child("Speisekarten").child("\(self.barname)").child("Shishas").observe(.childAdded, with: { (snapshot) in
+        }, withCancel: nil)
+        
+    }
+
+    func getKeys(value: Int){
+
+        print(value, "Value")
+        var datref: DatabaseReference!
+        datref = Database.database().reference()
+        
+        
+        datref.child("Speisekarten").child("\(self.barname)").observe(.childAdded, with: { (snapshotKey) in
+            self.keys.updateValue(Int(snapshotKey.childrenCount), forKey: snapshotKey.key)
+
+            if self.keys.count == value {
+                for (key, value) in self.keys {
+                print(key, "vorher")
+
+                    self.fetchSpeisekarte(ii: key, z: value)
+                print(key, "nachher")
+            }
+            }
+           
+
+        }, withCancel: nil)
+        
+    
+    }
+
+    
+    func fetchSpeisekarte(ii: String, z: Int){
+        var datref: DatabaseReference!
+        datref = Database.database().reference()
+        
+       
+                datref.child("Speisekarten").child("\(self.barname)").child(ii).observe(.childAdded, with: { (snapshot) in
                 self.label.text = self.barname
-                
+
                 if let dictionary = snapshot.value as? [String: AnyObject]{
                     let shisha = SpeisekarteInfos(dictionary: dictionary)
+                    
+                
                     self.shishas.append(shisha.Name!)
                     self.shishasPreise.append(shisha.Preis!)
                     
+                    print(self.shishas, "shishas")
+                    print(self.shishas.count, "shishacount")
+                    print(ii, z, "zettt")
+                    if self.shishas.count == z{
+
+                        self.setSectionsSpeisekarte(genre: ii, items: self.shishas, preise: self.shishasPreise)
+                        self.shishas.removeAll()
+                        self.shishasPreise.removeAll()
+                    }
                     
+
                 }
-                if self.shishas.count == z["Shishas"]{
-                    self.setSectionsSpeisekarte(genre: "Shishas", items: self.shishas, preise: self.shishasPreise)
-                }
-                
-            }, withCancel: nil)
-            
-            datref.child("Speisekarten").child("\(self.barname)").child("Getränke").observe(.childAdded, with: { (snapshot) in
-                
-                if let dictionary = snapshot.value as? [String: AnyObject]{
-                    let getränk = SpeisekarteInfos(dictionary: dictionary)
-                    self.getränke.append(getränk.Name!)
-                    self.getränkePreise.append(getränk.Preis!)
-                }
-                if self.getränke.count == z["Getränke"]{
-                    self.setSectionsSpeisekarte(genre: "Getränke", items: self.getränke, preise: self.getränkePreise)
-                }
-                
-            }, withCancel: nil)
-        }, withCancel: nil)
+                    
+
+
+ //            datref.child("Speisekarten").child("\(self.barname)").child("Shishas").observe(.childAdded, with: { (snapshot) in
+//                self.label.text = self.barname
+//
+//                if let dictionary = snapshot.value as? [String: AnyObject]{
+//                    let shisha = SpeisekarteInfos(dictionary: dictionary)
+//                    self.shishas.append(shisha.Name!)
+//                    self.shishasPreise.append(shisha.Preis!)
+//
+//
+//                }
+//                if self.shishas.count == z["Shishas"]{
+//                    self.setSectionsSpeisekarte(genre: "Shishas", items: self.shishas, preise: self.shishasPreise)
+//                }
+//
+//            }, withCancel: nil)
+//
+//            datref.child("Speisekarten").child("\(self.barname)").child("Getränke").observe(.childAdded, with: { (snapshot) in
+//
+//                if let dictionary = snapshot.value as? [String: AnyObject]{
+//                    let getränk = SpeisekarteInfos(dictionary: dictionary)
+//                    self.getränke.append(getränk.Name!)
+//                    self.getränkePreise.append(getränk.Preis!)
+//                }
+//                if self.getränke.count == z["Getränke"]{
+//                    self.setSectionsSpeisekarte(genre: "Getränke", items: self.getränke, preise: self.getränkePreise)
+//                }
+//
+//            }, withCancel: nil)
+                }, withCancel: nil)
     }
     
-    func handleBestellung(){
-        
-        var ref: DatabaseReference!
-        
-        if bestellteShishas.count > 0 || bestellteGetränke.count > 0{
-            let timestamp = Double(NSDate().timeIntervalSince1970)
-            let values = ["shishas": bestellteShishas, "getränke": bestellteGetränke, "toKellnerID": "Kellner1", "tischnummer": "3", "fromUserID": FBSDKAccessToken.current().userID, "timeStamp": timestamp, "angenommen": false] as [String : Any]
-            
-            ref = Database.database().reference().child("Bestellungen").child(barname)
-            let childRef = ref?.childByAutoId()
-            if bestellteGetränke.count != 0 || bestellteShishas.count != 0{
+        func handleBestellung(){
+    
+            var ref: DatabaseReference!
+    
+            if bestellteShishas.count > 0 || bestellteGetränke.count > 0{
+                let timestamp = Double(NSDate().timeIntervalSince1970)
+                let values = ["shishas": bestellteShishas, "getränke": bestellteGetränke, "toKellnerID": "Kellner1", "tischnummer": "3", "fromUserID": FBSDKAccessToken.current().userID, "timeStamp": timestamp, "angenommen": false] as [String : Any]
+    
+                ref = Database.database().reference().child("Bestellungen").child(barname)
+                let childRef = ref?.childByAutoId()
+                if bestellteGetränke.count != 0 || bestellteShishas.count != 0{
                 childRef?.updateChildValues(values)
-                print(Date(timeIntervalSince1970: timestamp)) }
-            else {
-                let alert = UIAlertController(title: "Deine Bestellung ist leer", message: nil, preferredStyle: UIAlertControllerStyle.alert)
-                alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
-                
-                self.present(alert, animated: true, completion: nil)
+                    print(Date(timeIntervalSince1970: timestamp)) }
+                else {
+                    let alert = UIAlertController(title: "Deine Bestellung ist leer", message: nil, preferredStyle: UIAlertControllerStyle.alert)
+                    alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
+    
+                    self.present(alert, animated: true, completion: nil)
+                }
             }
         }
-    }
-    //
-    //    func cellItemBtnTapped(sender: BestellenCell) {
-    //        let indexPath = self.bestellungTableView.indexPathForRow(at: sender.center)!
-    //        let selectedItems = "\(sections[indexPath.section].items[indexPath.row])"
-    //        let cell = bestellungTableView.cellForRow(at: indexPath) as! BestellenCell
-    //        if count > 0 && cell.countLbl.text != "Count"{
-    //            if indexPath.section == 0{
-    //        bestellteShishas.updateValue(Int(cell.countLbl.text!)!, forKey: selectedItems)
-    //            } else {
-    //
-    //                bestellteGetränke.updateValue(Int(cell.countLbl.text!)!, forKey: selectedItems)
-    //
-    //            }
-    //        } else {
-    //
-    //            print("Bitte Stückzahl auswählen")
-    //        }
-    
-    //    }
+//
+//    func cellItemBtnTapped(sender: BestellenCell) {
+//        let indexPath = self.bestellungTableView.indexPathForRow(at: sender.center)!
+//        let selectedItems = "\(sections[indexPath.section].items[indexPath.row])"
+//        let cell = bestellungTableView.cellForRow(at: indexPath) as! BestellenCell
+//        if count > 0 && cell.countLbl.text != "Count"{
+//            if indexPath.section == 0{
+//        bestellteShishas.updateValue(Int(cell.countLbl.text!)!, forKey: selectedItems)
+//            } else {
+//
+//                bestellteGetränke.updateValue(Int(cell.countLbl.text!)!, forKey: selectedItems)
+//
+//            }
+//        } else {
+//
+//            print("Bitte Stückzahl auswählen")
+//        }
+
+//    }
     
     func cellItemAddTapped(sender: BestellenCell){
         i = 0
@@ -252,7 +315,7 @@ class BestellungVC2: UIViewController, UITableViewDataSource, UITableViewDelegat
         animateIn()
     }
     
-    
+
     @IBAction func funcItemPlusTapped(_ sender: Any) {
         i = i+1
         itemCountLbl.text = "\(i)"
@@ -260,22 +323,22 @@ class BestellungVC2: UIViewController, UITableViewDataSource, UITableViewDelegat
     
     @IBAction func funcItemMinusTapped(_ sender: Any) {
         if i > 0{
-            i = i-1
+        i = i-1
             itemCountLbl.text = "\(i)" }
-        
+
     }
     
     func animateIn(){
         itemNameLbl.text = "\(sections[cellIndexPathSection].items[cellIndexPathRow])"
-        //        self.inputView?.addSubview(addItemView)
-        //        addItemView.center = (self.inputView?.center)!
+//        self.inputView?.addSubview(addItemView)
+//        addItemView.center = (self.inputView?.center)!
         addItemView.transform = CGAffineTransform.init(scaleX: 1.3, y: 1.3)
         addItemView.alpha = 0
         UIView.animate(withDuration: 1) {
             self.visualEffectView.isHidden = false
             self.addItemView.isHidden = false
             self.visualEffectView.effect = self.effect
-            
+
             self.addItemView.alpha = 1
             self.addItemView.transform = CGAffineTransform.identity
         }
@@ -283,18 +346,18 @@ class BestellungVC2: UIViewController, UITableViewDataSource, UITableViewDelegat
     }
     
     func animateOut(){
-        
+    
         UIView.animate(withDuration: 0.5, animations: {
             self.addItemView.transform = CGAffineTransform.init(scaleX: 1.3, y: 1.3)
             self.addItemView.alpha = 0
             self.visualEffectView.effect = nil
-            
-            
+
+
         }){ (success:Bool) in
             self.visualEffectView.isHidden = true
             self.addItemView.isHidden = false
-            
-            
+
+
         }
         
         if i > 0 && cellIndexPathSection == 0 {
@@ -306,34 +369,34 @@ class BestellungVC2: UIViewController, UITableViewDataSource, UITableViewDelegat
             bestellteShishas.removeValue(forKey: itemNameLbl.text!)
             
         }
-        
+
         
     }
     
     func dismissMyBestellungView() {
         
         UIView.animate(withDuration: 0.5, animations: {
-            //            self.myBestellungView.transform = CGAffineTransform.init(scaleX: 1.3, y: 1.3)
-            //            self.myBestellungView.alpha = 0
+//            self.myBestellungView.transform = CGAffineTransform.init(scaleX: 1.3, y: 1.3)
+//            self.myBestellungView.alpha = 0
             self.myBestellungView.isHidden = true
-            
+
             self.visualEffectView.effect = nil
             
             
         }){ (success:Bool) in
-            //            self.myBestellungView.removeFromSuperview()
+//            self.myBestellungView.removeFromSuperview()
             self.myBestellungView.isHidden = true
-            
+
             self.visualEffectView.isHidden = true
         }
         
     }
-    func getParentPageViewController(parentRef: PageViewController) {
-        parentPageViewController = parentRef
+    func getParentPageViewController2(parentRef2: PageViewController2) {
+        parentPageViewController2 = parentRef2
     }
+
     
-    
-    
+
     // TABLEVIEW FUNCTIONS
     
     func setSectionsSpeisekarte(genre: String, items: [String], preise: [Int]){
@@ -347,7 +410,7 @@ class BestellungVC2: UIViewController, UITableViewDataSource, UITableViewDelegat
         
         
     }
-    
+
     func numberOfSections(in tableView: UITableView) -> Int {
         if tableView == bestellungTableView {
             return sections.count }
@@ -392,7 +455,7 @@ class BestellungVC2: UIViewController, UITableViewDataSource, UITableViewDelegat
     }
     
     
-    
+  
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         if tableView == bestellungTableView {
@@ -438,60 +501,75 @@ class BestellungVC2: UIViewController, UITableViewDataSource, UITableViewDelegat
             myBestellungTV.endUpdates()
         }
     }
-    // Pulley
-    
-    
-    func collapsedDrawerHeight(bottomSafeArea: CGFloat) -> CGFloat {
-        return 102.0
-    }
-    
-    func partialRevealDrawerHeight(bottomSafeArea: CGFloat) -> CGFloat {
-        return 340.0
-    }
-    
-    func supportedDrawerPositions() -> [PulleyPosition] {
-        return PulleyPosition.all
-    }
-    
-    
+
     // OTHERS
-    
+
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         let touch: UITouch? = touches.first
-        
-        
+
+
         if touch?.view != myBestellungView && touch?.view != addItemView {
             dismissMyBestellungView()
             animateOut()
             print("touch")
-            
+
         }
     }
+    
+//    @objc func normalTap(_ sender: UIGestureRecognizer){
+//        print("Normal tap")
+//
+//    }
 
+    @objc func longTap(_ sender: UIGestureRecognizer){
+        if sender.state == .ended && (timeHolded>timeToHold || timeHolded == timeToHold) {
+            timer.invalidate()
+            print("sds")
+            handleBestellung()
+        } else if sender.state == .ended && timeHolded<timeToHold {
+            timer.invalidate()
+            print("sorry, du musst min \(timeToHold) Sekunden halten")
+            
+        }
+            
+        else if sender.state == .began {
+            timeHolded = 0
+            timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(updateTime), userInfo: nil, repeats: true)
+        }
+    }
+    @objc func updateTime(){
+        timeHolded = timeHolded+1
+        print(timeHolded)
+    }
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-//        self.barname = parentPageViewController.name
+        self.barname = parentPageViewController2.name
         
         effect = visualEffectView.effect
         visualEffectView.effect = nil
         visualEffectView.isHidden = true
         addItemView.isHidden = true
         myBestellungView.isHidden = true
-        
+
         
         addItemView.layer.cornerRadius = 5
-        
-        fetchSpeisekarte()
+        getValue()
 
+//        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(normalTap(_:)))
+//        tapGesture.numberOfTapsRequired = 1
+//        myBestellungAbschickenBtn.addGestureRecognizer(tapGesture)
+
+        let longGesture = UILongPressGestureRecognizer(target: self, action: #selector(longTap(_:)))
+        myBestellungAbschickenBtn.addGestureRecognizer(longGesture)
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
     
-    
-    
-}
 
+
+}

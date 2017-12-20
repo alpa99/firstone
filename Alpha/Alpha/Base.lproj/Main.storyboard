@@ -135,6 +135,7 @@
                                 <rect key="frame" x="0.0" y="80" width="375" height="60"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.1065499122" green="0.41776933529999999" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <state key="normal" title="login with Facebook">
                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
@@ -151,7 +152,7 @@
                                 </connections>
                             </button>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <viewLayoutGuide key="safeArea" id="arV-5V-Blp"/>
                     </view>
                     <connections>
@@ -502,18 +503,8 @@
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="F2v-jd-cA2">
                                 <rect key="frame" x="16" y="465" width="343" height="107"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="249" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="myk-DP-MrH">
-                                        <rect key="frame" x="0.0" y="0.0" width="343" height="77"/>
-                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="19"/>
-                                        <state key="normal" title="bardetail">
-                                            <color key="titleColor" red="1" green="0.3098628437" blue="0.22524397730000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="bardetail:" destination="Yts-F3-2fU" eventType="touchUpInside" id="4d3-M5-3oC"/>
-                                        </connections>
-                                    </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jqS-Z5-0Ia">
-                                        <rect key="frame" x="0.0" y="77" width="343" height="30"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="343" height="107"/>
                                         <state key="normal" title="Bestellung überprüfen"/>
                                         <connections>
                                             <action selector="sendToFirebase:" destination="Yts-F3-2fU" eventType="touchUpInside" id="onF-sT-Zw2"/>
@@ -1135,18 +1126,8 @@
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="FZw-8C-3bk">
                                 <rect key="frame" x="16" y="465" width="343" height="107"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="249" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2cv-qw-D9z">
-                                        <rect key="frame" x="0.0" y="0.0" width="343" height="77"/>
-                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="19"/>
-                                        <state key="normal" title="bardetail">
-                                            <color key="titleColor" red="1" green="0.3098628437" blue="0.22524397730000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="bardetail:" destination="a24-pI-1G5" eventType="touchUpInside" id="QFd-eQ-mKR"/>
-                                        </connections>
-                                    </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yil-cP-g70">
-                                        <rect key="frame" x="0.0" y="77" width="343" height="30"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="343" height="107"/>
                                         <state key="normal" title="Bestellung überprüfen"/>
                                         <connections>
                                             <action selector="sendToFirebase:" destination="a24-pI-1G5" eventType="touchUpInside" id="I8F-t8-7AX"/>
