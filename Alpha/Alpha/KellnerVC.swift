@@ -62,7 +62,7 @@ class KellnerVC: UIViewController, UITableViewDelegate, UITableViewDataSource, K
     // FUNCS
     
     func loadBestellungen(){
-        
+        print("LOAD")
         var datref: DatabaseReference!
         datref = Database.database().reference()
         datref.child("Bestellungen").child("Barracuda").observe(.childAdded, with: { (snapshot) in
@@ -90,10 +90,78 @@ class KellnerVC: UIViewController, UITableViewDelegate, UITableViewDataSource, K
     }
     
     
+    func removeBestellung(){
+        
+        var datref: DatabaseReference!
+        datref = Database.database().reference()
+        datref.child("Bestellungen").child("Barracuda").child("-L-Yli-38n_NLc0QCZ58").observe(.value, with: { (snapshot) in
+            if let dictionary = snapshot.value as? [String: AnyObject]{
+                let bestellung = BestellungInfos(dictionary: dictionary)
+                self.bestellungen.append(bestellung)
+                
+                let bestellungInfos = BestellungInfos(dictionary: dictionary)
+                if case self.KellnerID? = bestellungInfos.toKellnerID {
+                    self.bestellteShishas.append(bestellungInfos.shishas!)
+                    self.bestellteGetränke.append(bestellungInfos.getränke!)
+                    self.TimeStamps.append((bestellungInfos.timeStamp?.doubleValue)!)
+                    self.tischnummer.append(bestellungInfos.tischnummer!)
+                    self.angenommen.append(bestellungInfos.angenommen!)
+                }
+                
+                
+                DispatchQueue.main.async(execute: {
+                    self.bestellungenTV.reloadData()
+                } )
+            }
+            
+        }, withCancel: nil)
+        
+    }
+    
+    // SWIPE ACTIONS
+    
+    @available(iOS 11.0, *)
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let delete = deleteAction(at: indexPath)
+        bestellungenTV.reloadData()
+
+        return UISwipeActionsConfiguration(actions: [delete])
+    }
+    
+    @available(iOS 11.0, *)
+    func deleteAction(at indexPath: IndexPath) -> UIContextualAction {
+        let action = UIContextualAction(style: .normal, title: "delete") { (action, view, completion) in
+            completion(true)
+            print(indexPath, "INDEXPATH")
+
+        }
+        return action
+    }
+    
+    @available(iOS 11.0, *)
+    func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let annehmen = annehmenAction(at: indexPath)
+        
+        bestellungenTV.reloadData()
+
+        return UISwipeActionsConfiguration(actions: [annehmen])
+    }
+    
+    @available(iOS 11.0, *)
+    func annehmenAction(at indexPath: IndexPath) -> UIContextualAction {
+        let action = UIContextualAction(style: .destructive, title: "annehmen") { (action, view, completion) in
+            completion(true)
+            self.bestellungen.remove(at: indexPath.row)
+        }
+        print(indexPath, "INDEXPATH2")
+        
+        return action
+    }
+    
     // TABLE
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return TimeStamps.count
+        return bestellteShishas.count
         
     }
     
@@ -148,10 +216,11 @@ class KellnerVC: UIViewController, UITableViewDelegate, UITableViewDataSource, K
             bestellungenTV.refreshControl = refreshControl
         }
 
+        
     }
     
     @objc private func refreshOptions(sender: UIRefreshControl) {
-        loadBestellungen()
+       loadBestellungen()
         bestellteShishas = [Dictionary<String, Int>]()
         bestellteGetränke = [Dictionary<String, Int>]()
         TimeStamps = [Double]()
