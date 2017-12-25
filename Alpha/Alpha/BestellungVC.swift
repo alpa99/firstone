@@ -242,9 +242,9 @@ class BestellungVC: UIViewController, UITableViewDataSource, UITableViewDelegate
                 childRef?.updateChildValues(values)
                 let userBestellungenRef = Database.database().reference().child("userBestellungen").child(fromUserID)
                 let bestellungID = childRef?.key
-                userBestellungenRef.updateChildValues([bestellungID!: 1])
+                userBestellungenRef.updateChildValues([bestellungID!: "false"])
                 let kellnerBestellungenRef = Database.database().reference().child("userBestellungen").child("Kellner1")
-                kellnerBestellungenRef.updateChildValues([bestellungID!: 1])
+                kellnerBestellungenRef.updateChildValues([bestellungID!: "false"])
                 print(Date(timeIntervalSince1970: timestamp)) }
             else {
                 let alert = UIAlertController(title: "Deine Bestellung ist leer", message: nil, preferredStyle: UIAlertControllerStyle.alert)

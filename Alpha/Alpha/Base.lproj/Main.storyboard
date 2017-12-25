@@ -4,7 +4,6 @@
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
@@ -16,7 +15,7 @@
         </array>
     </customFonts>
     <scenes>
-        <!--KellnerVC-->
+        <!--Item-->
         <scene sceneID="zrN-7X-edq">
             <objects>
                 <viewController storyboardIdentifier="KellnerVC" id="rCt-0z-cZc" customClass="KellnerVC" customModule="Alpha" customModuleProvider="target" sceneMemberID="viewController">
@@ -25,7 +24,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="h4S-g2-UB9">
-                                <rect key="frame" x="16" y="20" width="343" height="494"/>
+                                <rect key="frame" x="16" y="20" width="343" height="445"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="KellnerCell" id="PVE-x6-dfO">
@@ -43,7 +42,7 @@
                                 </connections>
                             </tableView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="x9E-Xh-huc">
-                                <rect key="frame" x="16" y="522" width="343" height="30"/>
+                                <rect key="frame" x="16" y="473" width="343" height="30"/>
                                 <state key="normal" title="Logout"/>
                                 <connections>
                                     <action selector="kellnerLogOutTapped:" destination="rCt-0z-cZc" eventType="touchUpInside" id="Gxt-4s-xiC"/>
@@ -63,13 +62,65 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="f39-Hh-r9l"/>
                     </view>
+                    <tabBarItem key="tabBarItem" title="Item" id="Kfo-qx-Zzn"/>
                     <connections>
                         <outlet property="bestellungenTV" destination="h4S-g2-UB9" id="4CK-RI-hXr"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="78V-nG-HDK" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1618.4000000000001" y="92.203898050974516"/>
+            <point key="canvasLocation" x="-1254" y="917"/>
+        </scene>
+        <!--Item 2-->
+        <scene sceneID="76s-2p-xiB">
+            <objects>
+                <viewController id="KXy-Gb-3rj" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="byf-g5-aMq">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                        <viewLayoutGuide key="safeArea" id="U56-UI-9rA"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Item 2" id="pYf-E9-NMJ"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Jk1-l5-R3j" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-3156" y="475"/>
+        </scene>
+        <!--Item 1-->
+        <scene sceneID="vNH-wx-p9o">
+            <objects>
+                <viewController id="Fkn-58-6Ax" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="RaM-Hn-Dxa">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                        <viewLayoutGuide key="safeArea" id="2Uc-Tj-lux"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Item 1" id="jmX-7j-OfZ"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dFY-qA-luh" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-3156" y="-293"/>
+        </scene>
+        <!--Kellner Tab Bar Controller-->
+        <scene sceneID="mkn-FV-N72">
+            <objects>
+                <tabBarController id="65o-US-rMb" customClass="KellnerTabBarController" customModule="Alpha" customModuleProvider="target" sceneMemberID="viewController">
+                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="vNc-u4-bU3">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="rCt-0z-cZc" kind="relationship" relationship="viewControllers" id="pZN-dQ-OlC"/>
+                        <segue destination="Fkn-58-6Ax" kind="relationship" relationship="viewControllers" id="EYW-xM-OKy"/>
+                        <segue destination="KXy-Gb-3rj" kind="relationship" relationship="viewControllers" id="mLv-HL-H06"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="7jZ-8g-QwN" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1905" y="92"/>
         </scene>
         <!--Login KellnerVC-->
         <scene sceneID="Eit-CD-Tuq">
@@ -116,7 +167,7 @@
                     <connections>
                         <outlet property="KellnerIdTextfield" destination="tSX-1s-9ec" id="mjm-25-w9c"/>
                         <outlet property="PasswortTextfield" destination="itf-V0-uhH" id="kRr-Po-bld"/>
-                        <segue destination="rCt-0z-cZc" kind="show" identifier="kellnerLoggedIn" id="qkz-D3-vUe"/>
+                        <segue destination="65o-US-rMb" kind="show" identifier="kellnerLoggedIn" id="Iqh-CW-2eh"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="i5f-qK-j4n" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -572,8 +623,8 @@
                                             <action selector="funcItemMinusTapped:" destination="Yts-F3-2fU" eventType="touchUpInside" id="TnL-NR-5Tp"/>
                                         </connections>
                                     </button>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ocp-2A-uzN">
-                                        <rect key="frame" x="99" y="20" width="42" height="21"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ocp-2A-uzN">
+                                        <rect key="frame" x="8" y="20" width="224" height="21"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
@@ -673,7 +724,7 @@
                     </connections>
                 </swipeGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="7970" y="1442"/>
+            <point key="canvasLocation" x="7968.8000000000002" y="1441.529235382309"/>
         </scene>
         <!--Page View Controller2-->
         <scene sceneID="5Gd-IF-R8k">
@@ -1303,7 +1354,8 @@
         <image name="square" width="623" height="621"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="LGn-E9-Y7b"/>
-        <segue reference="tKO-Qv-DSi"/>
+        <segue reference="pZN-dQ-OlC"/>
+        <segue reference="yYz-ya-YcO"/>
+        <segue reference="LaO-lI-cXB"/>
     </inferredMetricsTieBreakers>
 </document>
