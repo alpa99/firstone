@@ -169,15 +169,20 @@ class KellnerVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = Bundle.main.loadNibNamed("KellnerCell", owner: self, options: nil)?.first as! KellnerCell
+        
         self.itemssss = bestellung2[bestellungIDs[indexPath.row]]!
-        print(self.itemssss, "ITEMSSS")
+        for (genre, itemsDictionary) in itemssss {
+            for (items, menge) in itemsDictionary {
+                cell.bestellungsText.text = "\(genre): \(items) - \(menge) \n"
 
-        cell.bestellungsText.text = "\(itemssss)"
+            }
+        }
+
         let timeStampDate = NSDate(timeIntervalSince1970: TimeStamps[indexPath.row])
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "hh:mm a"
-        cell.timeLbl.text = "\(dateFormatter.string(from: timeStampDate as Date))"
-        cell.tischnummer.text = self.tischnummer[indexPath.row]
+        dateFormatter.dateFormat = "HH:mm"
+        cell.timeLbl.text = "\(dateFormatter.string(from: timeStampDate as Date)) Uhr"
+        cell.tischnummer.text = "Tischnummer: \(self.tischnummer[indexPath.row])"
         
         return cell
         
