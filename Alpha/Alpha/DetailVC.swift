@@ -24,7 +24,7 @@ class DetailVC: UIViewController, PulleyDrawerViewControllerDelegate, PageObserv
     }
 
     @IBOutlet weak var image: UIImageView!
-    @IBOutlet weak var topbutton: UIButton!
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -62,12 +62,7 @@ class DetailVC: UIViewController, PulleyDrawerViewControllerDelegate, PageObserv
     }
     
     @IBAction func Backbtn(_ sender: UIButton) {
-        (parent as? PulleyViewController)?.setDrawerPosition(position: PulleyPosition(rawValue: 2)!)
-        let drawervc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "DrawerVC") as! DrawerVC
-        
-        
-        
-        (parent as? PulleyViewController)?.setDrawerContentViewController(controller: drawervc, animated: true)
+       parentPageViewController.goback()
         
      // performSegue(withIdentifier: "drawervc", sender: self)
     }
