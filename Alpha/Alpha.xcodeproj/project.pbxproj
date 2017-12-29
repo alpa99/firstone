@@ -30,7 +30,6 @@
 		4E1664BC1FBC6D340038EFB5 /* DetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E1664BB1FBC6D340038EFB5 /* DetailVC.swift */; };
 		4E1664BE1FBF12020038EFB5 /* votevc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E1664BD1FBF12020038EFB5 /* votevc.swift */; };
 		4E1664C01FBF316D0038EFB5 /* VoteInfos.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E1664BF1FBF316D0038EFB5 /* VoteInfos.swift */; };
-		4E2FF0BD1FEDDC850084F0A7 /* GMVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E2FF0BC1FEDDC850084F0A7 /* GMVC.swift */; };
 		4E3728411FE3E34E000DAF97 /* DetailVC2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E3728401FE3E34E000DAF97 /* DetailVC2.swift */; };
 		4E3728431FE3EB43000DAF97 /* SpeisekarteVC2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E3728421FE3EB43000DAF97 /* SpeisekarteVC2.swift */; };
 		4E3728451FE3F19F000DAF97 /* BestellungVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E3728441FE3F19F000DAF97 /* BestellungVC.swift */; };
@@ -97,7 +96,6 @@
 		4E1664BB1FBC6D340038EFB5 /* DetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailVC.swift; sourceTree = "<group>"; };
 		4E1664BD1FBF12020038EFB5 /* votevc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = votevc.swift; sourceTree = "<group>"; };
 		4E1664BF1FBF316D0038EFB5 /* VoteInfos.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoteInfos.swift; sourceTree = "<group>"; };
-		4E2FF0BC1FEDDC850084F0A7 /* GMVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GMVC.swift; sourceTree = "<group>"; };
 		4E3728401FE3E34E000DAF97 /* DetailVC2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailVC2.swift; sourceTree = "<group>"; };
 		4E3728421FE3EB43000DAF97 /* SpeisekarteVC2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeisekarteVC2.swift; sourceTree = "<group>"; };
 		4E3728441FE3F19F000DAF97 /* BestellungVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BestellungVC.swift; sourceTree = "<group>"; };
@@ -225,11 +223,7 @@
 				4E1664BD1FBF12020038EFB5 /* votevc.swift */,
 				4E66E16C1FD49CFA005E87E3 /* PageViewController.swift */,
 				4EEB60821FDF2BAB0003BA0E /* PageViewController2.swift */,
-<<<<<<< HEAD
-				4E2FF0BC1FEDDC850084F0A7 /* GMVC.swift */,
-=======
 				081461091FF1C28900BD3FD6 /* KellnerTabBarController.swift */,
->>>>>>> 090a4dbe76551e3a7982db17890d52baeed00b04
 			);
 			path = Alpha;
 			sourceTree = "<group>";
@@ -431,13 +425,9 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-Alpha/Pods-Alpha-resources.sh",
-				"${PODS_ROOT}/GoogleMaps/Maps/Frameworks/GoogleMaps.framework/Resources/GoogleMaps.bundle",
-				"${PODS_ROOT}/GooglePlaces/Frameworks/GooglePlaces.framework/Resources/GooglePlaces.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -630,7 +620,6 @@
 				4EC248021F9950E700910AA8 /* LocationVC.swift in Sources */,
 				08210EE11FB7B09000EABA32 /* KellnerCell.swift in Sources */,
 				4E66E16D1FD49CFA005E87E3 /* PageViewController.swift in Sources */,
-				4E2FF0BD1FEDDC850084F0A7 /* GMVC.swift in Sources */,
 				4E1664BE1FBF12020038EFB5 /* votevc.swift in Sources */,
 				087134FE1FBDEE170016E181 /* SpeisekarteVC.swift in Sources */,
 			);
