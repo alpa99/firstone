@@ -95,9 +95,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="2xQ-e4-M7v">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="2xQ-e4-M7v">
                                 <rect key="frame" x="16" y="20" width="343" height="575"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="Vz3-jY-264">
@@ -116,6 +115,12 @@
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="xew-9a-grQ" firstAttribute="trailing" secondItem="2xQ-e4-M7v" secondAttribute="trailing" constant="16" id="2ss-6A-N2S"/>
+                            <constraint firstItem="2xQ-e4-M7v" firstAttribute="top" secondItem="xew-9a-grQ" secondAttribute="top" id="EK3-o2-0QD"/>
+                            <constraint firstItem="2xQ-e4-M7v" firstAttribute="leading" secondItem="xew-9a-grQ" secondAttribute="leading" constant="16" id="EMd-4S-LUI"/>
+                            <constraint firstItem="xew-9a-grQ" firstAttribute="bottom" secondItem="2xQ-e4-M7v" secondAttribute="bottom" constant="23" id="XzW-gn-aKf"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="xew-9a-grQ"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Item 1" id="hrD-lt-evy"/>
