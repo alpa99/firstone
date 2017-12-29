@@ -12,7 +12,7 @@ import FBSDKLoginKit
 import CoreLocation
 
 
-class BestellungVC2: UIViewController, UITableViewDataSource, UITableViewDelegate, ExpandableHeaderViewDelegate, BestellenCellDelegate, PageObservation2, CLLocationManagerDelegate, UIApplicationDelegate {
+class BestellungVC2: UIViewController, UITableViewDataSource, UITableViewDelegate, ExpandableHeaderViewDelegate, BestellenCellDelegate, PageObservation2, CLLocationManagerDelegate {
 
     // VARS
     var locationManager = CLLocationManager()
@@ -271,9 +271,6 @@ class BestellungVC2: UIViewController, UITableViewDataSource, UITableViewDelegat
                 }, withCancel: nil)
     }
     
-    func applicationDidBecomeActive(_ application: UIApplication) {
-        <#code#>
-    }
     
         func handleBestellung(){
     
