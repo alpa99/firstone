@@ -8,13 +8,29 @@
 import UIKit
 import Firebase
 import FBSDKLoginKit
+<<<<<<< HEAD
+import CoreLocation
+
+
+class BestellungVC2: UIViewController, UITableViewDataSource, UITableViewDelegate, ExpandableHeaderViewDelegate, BestellenCellDelegate, PageObservation2, CLLocationManagerDelegate, UIApplicationDelegate {
+=======
 import FirebaseAuth
 
+>>>>>>> 090a4dbe76551e3a7982db17890d52baeed00b04
 
 class BestellungVC2: UIViewController, UITableViewDataSource, UITableViewDelegate, ExpandableHeaderViewDelegate, BestellenCellDelegate, PageObservation2 {
     
     // VARS
+<<<<<<< HEAD
+    var locationManager = CLLocationManager()
     
+    var x = [String]()
+    var y = [Int]()
+    var a = [String]()
+    var b = [Int]()
+=======
+    
+>>>>>>> 090a4dbe76551e3a7982db17890d52baeed00b04
     var keys = [String: Int]()
     var bestellteItemsDictionary = [String: [String: Int]]()
     var yy = [String]()
@@ -211,10 +227,56 @@ class BestellungVC2: UIViewController, UITableViewDataSource, UITableViewDelegat
                     self.items.removeAll()
                     self.itemsPreise.removeAll()
                 }
+<<<<<<< HEAD
+                
+                    
+                    
+
+
+ //            datref.child("Speisekarten").child("\(self.barname)").child("Shishas").observe(.childAdded, with: { (snapshot) in
+//                self.label.text = self.barname
+//
+//                if let dictionary = snapshot.value as? [String: AnyObject]{
+//                    let shisha = SpeisekarteInfos(dictionary: dictionary)
+//                    self.shishas.append(shisha.Name!)
+//                    self.shishasPreise.append(shisha.Preis!)
+//
+//
+//                }
+//                if self.shishas.count == z["Shishas"]{
+//                    self.setSectionsSpeisekarte(genre: "Shishas", items: self.shishas, preise: self.shishasPreise)
+//                }
+//
+//            }, withCancel: nil)
+//
+//            datref.child("Speisekarten").child("\(self.barname)").child("Getränke").observe(.childAdded, with: { (snapshot) in
+//
+//                if let dictionary = snapshot.value as? [String: AnyObject]{
+//                    let getränk = SpeisekarteInfos(dictionary: dictionary)
+//                    self.getränke.append(getränk.Name!)
+//                    self.getränkePreise.append(getränk.Preis!)
+//                }
+//                if self.getränke.count == z["Getränke"]{
+//                    self.setSectionsSpeisekarte(genre: "Getränke", items: self.getränke, preise: self.getränkePreise)
+//                }
+//
+//            }, withCancel: nil)
+                }, withCancel: nil)
+    }
+    
+    func applicationDidBecomeActive(_ application: UIApplication) {
+        <#code#>
+    }
+    
+        func handleBestellung(){
+    
+            var ref: DatabaseReference!
+=======
             }
         }, withCancel: nil)
     }
     
+>>>>>>> 090a4dbe76551e3a7982db17890d52baeed00b04
     
     func handleBestellung(){
         
