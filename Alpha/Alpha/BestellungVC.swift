@@ -225,26 +225,20 @@ class BestellungVC: UIViewController, UITableViewDataSource, UITableViewDelegate
         
         var ref: DatabaseReference!
         
-        if self.bestellteItemsDictionary.count>0{
+        if bestellteShishas.count > 0 || bestellteGetränke.count > 0{
             let timestamp = Double(NSDate().timeIntervalSince1970)
             let fromUserID = Auth.auth().currentUser!.uid
-            var values = ["toKellnerID": "Kellner1", "tischnummer": "3", "fromUserID": fromUserID , "timeStamp": timestamp, "angenommen": false] as [String : Any]
+            let values = ["shishas": bestellteShishas, "getränke": bestellteGetränke, "toKellnerID": "Kellner1", "tischnummer": "3", "fromUserID": fromUserID , "timeStamp": timestamp, "angenommen": false] as [String : Any]
             
-            for (genre, itemDictionary) in bestellteItemsDictionary {
-                values.updateValue(itemDictionary, forKey: genre)
-            }
-            ref = Database.database().reference().child("Bestellungen").child(self.barname)
+            ref = Database.database().reference().child("Bestellungen").child(barname)
             let childRef = ref?.childByAutoId()
             
-            print(self.bestellteItemsDictionary, "NO")
+            let userBestellungenRef = Database.database().reference().child("userBestellungen").child(fromUserID)
+            let bestellungID = childRef?.key
+            userBestellungenRef.updateChildValues([bestellungID!: 1])
             
-                print("yes")
+            if bestellteGetränke.count != 0 || bestellteShishas.count != 0{
                 childRef?.updateChildValues(values)
-                let userBestellungenRef = Database.database().reference().child("userBestellungen").child(fromUserID)
-                let bestellungID = childRef?.key
-                userBestellungenRef.updateChildValues([bestellungID!: "false"])
-                let kellnerBestellungenRef = Database.database().reference().child("userBestellungen").child("Kellner1")
-                kellnerBestellungenRef.updateChildValues([bestellungID!: "false"])
                 print(Date(timeIntervalSince1970: timestamp)) }
             else {
                 let alert = UIAlertController(title: "Deine Bestellung ist leer", message: nil, preferredStyle: UIAlertControllerStyle.alert)
@@ -253,7 +247,7 @@ class BestellungVC: UIViewController, UITableViewDataSource, UITableViewDelegate
                 self.present(alert, animated: true, completion: nil)
             }
         }
-    
+    }
 
     
     func cellItemAddTapped(sender: BestellenCell){
@@ -432,7 +426,6 @@ class BestellungVC: UIViewController, UITableViewDataSource, UITableViewDelegate
 
             let cell = self.myBestellungTV.dequeueReusableCell(withIdentifier: "myBestellCell", for: indexPath)
             cell.textLabel?.text = "\(bestellung[indexPath.section].items[indexPath.row])"
-            cell.detailTextLabel?.text = "\(bestellung[indexPath.section].preise[indexPath.row])"
             return cell
         }
     }
