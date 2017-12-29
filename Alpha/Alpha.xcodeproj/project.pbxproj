@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		081143C91FB793FA00CA2522 /* KellnerInfos.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081143C81FB793FA00CA2522 /* KellnerInfos.swift */; };
+		0814610A1FF1C28900BD3FD6 /* KellnerTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081461091FF1C28900BD3FD6 /* KellnerTabBarController.swift */; };
 		081461F41F9927FA00121943 /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081461F31F9927FA00121943 /* LoginVC.swift */; };
 		08210EE11FB7B09000EABA32 /* KellnerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08210EDF1FB7B09000EABA32 /* KellnerCell.swift */; };
 		08210EE21FB7B09000EABA32 /* KellnerCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08210EE01FB7B09000EABA32 /* KellnerCell.xib */; };
@@ -72,6 +73,7 @@
 
 /* Begin PBXFileReference section */
 		081143C81FB793FA00CA2522 /* KellnerInfos.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KellnerInfos.swift; sourceTree = "<group>"; };
+		081461091FF1C28900BD3FD6 /* KellnerTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KellnerTabBarController.swift; sourceTree = "<group>"; };
 		081461F31F9927FA00121943 /* LoginVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; };
 		08210EDF1FB7B09000EABA32 /* KellnerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KellnerCell.swift; sourceTree = "<group>"; };
 		08210EE01FB7B09000EABA32 /* KellnerCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = KellnerCell.xib; sourceTree = "<group>"; };
@@ -223,7 +225,11 @@
 				4E1664BD1FBF12020038EFB5 /* votevc.swift */,
 				4E66E16C1FD49CFA005E87E3 /* PageViewController.swift */,
 				4EEB60821FDF2BAB0003BA0E /* PageViewController2.swift */,
+<<<<<<< HEAD
 				4E2FF0BC1FEDDC850084F0A7 /* GMVC.swift */,
+=======
+				081461091FF1C28900BD3FD6 /* KellnerTabBarController.swift */,
+>>>>>>> 090a4dbe76551e3a7982db17890d52baeed00b04
 			);
 			path = Alpha;
 			sourceTree = "<group>";
@@ -250,9 +256,9 @@
 			isa = PBXGroup;
 			children = (
 				4EC247F91F98FE6A00910AA8 /* QRBereich.swift */,
-				08C881661F9962EB00AD8F20 /* BarInfos.swift */,
 				08C881681F9963F100AD8F20 /* BarAnnotation.swift */,
 				08EF4C3F1F9CF0FE00F01096 /* BestellungInfos.swift */,
+				08C881661F9962EB00AD8F20 /* BarInfos.swift */,
 				08EF4C491F9CFFA500F01096 /* ExpandTVSection.swift */,
 				08EF4C4B1F9D006700F01096 /* ExpandableHeaderView.swift */,
 				08EF4C4D1F9D2AC000F01096 /* SpeisekarteInfos.swift */,
@@ -605,6 +611,7 @@
 				08EF4C4C1F9D006700F01096 /* ExpandableHeaderView.swift in Sources */,
 				4EC248001F9950CE00910AA8 /* DrawerVC.swift in Sources */,
 				08210EE51FB83AE300EABA32 /* BestellenCell.swift in Sources */,
+				0814610A1FF1C28900BD3FD6 /* KellnerTabBarController.swift in Sources */,
 				4EC247CD1F98F90500910AA8 /* QRScanner.swift in Sources */,
 				08C881671F9962EB00AD8F20 /* BarInfos.swift in Sources */,
 				4EC247CB1F98F90500910AA8 /* AppDelegate.swift in Sources */,
@@ -793,11 +800,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 84R3VSG74G;
+				DEVELOPMENT_TEAM = 8G282R5UXU;
 				INFOPLIST_FILE = Alpha/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = AM.Alpha1;
+				PRODUCT_BUNDLE_IDENTIFIER = AM.Alpha;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -810,11 +817,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 84R3VSG74G;
+				DEVELOPMENT_TEAM = 8G282R5UXU;
 				INFOPLIST_FILE = Alpha/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = AM.Alpha1;
+				PRODUCT_BUNDLE_IDENTIFIER = AM.Alpha;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
