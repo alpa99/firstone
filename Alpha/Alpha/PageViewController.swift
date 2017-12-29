@@ -144,6 +144,17 @@ class PageViewController: UIPageViewController, UIPageViewControllerDelegate, UI
         return orderedViewControllers[nextIndex]
     }
     
+    //Back
+    
+    func goback(){
+        (parent as? PulleyViewController)?.setDrawerPosition(position: PulleyPosition(rawValue: 2)!)
+        let drawervc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "DrawerVC") as! DrawerVC
+        
+        
+        
+        (parent as? PulleyViewController)?.setDrawerContentViewController(controller: drawervc, animated: true)
+    }
+    
     // PULLEY
     
     func collapsedDrawerHeight(bottomSafeArea: CGFloat) -> CGFloat {

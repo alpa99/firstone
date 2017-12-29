@@ -9,10 +9,14 @@
 import UIKit
 import Firebase
 import FBSDKLoginKit
+import CoreLocation
 
-class BestellungVC2: UIViewController, UITableViewDataSource, UITableViewDelegate, ExpandableHeaderViewDelegate, BestellenCellDelegate, PageObservation2 {
+
+class BestellungVC2: UIViewController, UITableViewDataSource, UITableViewDelegate, ExpandableHeaderViewDelegate, BestellenCellDelegate, PageObservation2, CLLocationManagerDelegate, UIApplicationDelegate {
 
     // VARS
+    var locationManager = CLLocationManager()
+    
     var x = [String]()
     var y = [Int]()
     var a = [String]()
@@ -231,6 +235,8 @@ class BestellungVC2: UIViewController, UITableViewDataSource, UITableViewDelegat
                     
 
                 }
+                
+                    
                     
 
 
@@ -263,6 +269,10 @@ class BestellungVC2: UIViewController, UITableViewDataSource, UITableViewDelegat
 //
 //            }, withCancel: nil)
                 }, withCancel: nil)
+    }
+    
+    func applicationDidBecomeActive(_ application: UIApplication) {
+        <#code#>
     }
     
         func handleBestellung(){
