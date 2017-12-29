@@ -25,7 +25,7 @@ class BestellungVC2: UIViewController, UITableViewDataSource, UITableViewDelegat
     
     var parentPageViewController2: PageViewController2!
     
-    var barname = "Barracuda"
+    var barname = "Huqa"
     
     var items = [String]()
     var itemsPreise = [Int]()
