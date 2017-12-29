@@ -13,6 +13,8 @@
 		08210EE21FB7B09000EABA32 /* KellnerCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08210EE01FB7B09000EABA32 /* KellnerCell.xib */; };
 		08210EE51FB83AE300EABA32 /* BestellenCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08210EE31FB83AE300EABA32 /* BestellenCell.swift */; };
 		08210EE61FB83AE300EABA32 /* BestellenCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08210EE41FB83AE300EABA32 /* BestellenCell.xib */; };
+		082BD2DB1FF702F5004106A8 /* KellnerTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 082BD2DA1FF702F5004106A8 /* KellnerTabBarController.swift */; };
+		082BD2DD1FF705DE004106A8 /* KellnerAngenommenVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 082BD2DC1FF705DE004106A8 /* KellnerAngenommenVC.swift */; };
 		087134FE1FBDEE170016E181 /* SpeisekarteVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087134FD1FBDEE170016E181 /* SpeisekarteVC.swift */; };
 		08779BA51FB7898400B99D19 /* LoginKellnerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08779BA41FB7898400B99D19 /* LoginKellnerVC.swift */; };
 		088728691FB7A50D00FF2448 /* KellnerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088728671FB7A50D00FF2448 /* KellnerVC.swift */; };
@@ -77,6 +79,8 @@
 		08210EE01FB7B09000EABA32 /* KellnerCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = KellnerCell.xib; sourceTree = "<group>"; };
 		08210EE31FB83AE300EABA32 /* BestellenCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BestellenCell.swift; sourceTree = "<group>"; };
 		08210EE41FB83AE300EABA32 /* BestellenCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BestellenCell.xib; sourceTree = "<group>"; };
+		082BD2DA1FF702F5004106A8 /* KellnerTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KellnerTabBarController.swift; sourceTree = "<group>"; };
+		082BD2DC1FF705DE004106A8 /* KellnerAngenommenVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KellnerAngenommenVC.swift; sourceTree = "<group>"; };
 		087134FD1FBDEE170016E181 /* SpeisekarteVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeisekarteVC.swift; sourceTree = "<group>"; };
 		08779BA41FB7898400B99D19 /* LoginKellnerVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginKellnerVC.swift; sourceTree = "<group>"; };
 		088728671FB7A50D00FF2448 /* KellnerVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KellnerVC.swift; sourceTree = "<group>"; };
@@ -210,7 +214,9 @@
 				4E6020481F9E2F88001B2909 /* ScanDetailVC.swift */,
 				08210EE31FB83AE300EABA32 /* BestellenCell.swift */,
 				08210EE41FB83AE300EABA32 /* BestellenCell.xib */,
+				082BD2DA1FF702F5004106A8 /* KellnerTabBarController.swift */,
 				088728671FB7A50D00FF2448 /* KellnerVC.swift */,
+				082BD2DC1FF705DE004106A8 /* KellnerAngenommenVC.swift */,
 				08210EDF1FB7B09000EABA32 /* KellnerCell.swift */,
 				08210EE01FB7B09000EABA32 /* KellnerCell.xib */,
 				4E78E53C1FABE03300B81EB2 /* pin.png */,
@@ -599,6 +605,7 @@
 				4EEB60831FDF2BAB0003BA0E /* PageViewController2.swift in Sources */,
 				4E1664C01FBF316D0038EFB5 /* VoteInfos.swift in Sources */,
 				4E3728431FE3EB43000DAF97 /* SpeisekarteVC2.swift in Sources */,
+				082BD2DD1FF705DE004106A8 /* KellnerAngenommenVC.swift in Sources */,
 				088728691FB7A50D00FF2448 /* KellnerVC.swift in Sources */,
 				4EC247FA1F98FE6A00910AA8 /* QRBereich.swift in Sources */,
 				08EF4C4E1F9D2AC000F01096 /* SpeisekarteInfos.swift in Sources */,
@@ -616,6 +623,7 @@
 				08C881691F9963F100AD8F20 /* BarAnnotation.swift in Sources */,
 				08EF4C401F9CF0FE00F01096 /* BestellungInfos.swift in Sources */,
 				08EF4C4A1F9CFFA500F01096 /* ExpandTVSection.swift in Sources */,
+				082BD2DB1FF702F5004106A8 /* KellnerTabBarController.swift in Sources */,
 				0895B3631F9B5F28007D97DE /* UserVC.swift in Sources */,
 				4E6020491F9E2F88001B2909 /* ScanDetailVC.swift in Sources */,
 				08779BA51FB7898400B99D19 /* LoginKellnerVC.swift in Sources */,
@@ -793,11 +801,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 84R3VSG74G;
+				DEVELOPMENT_TEAM = 8G282R5UXU;
 				INFOPLIST_FILE = Alpha/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = AM.Alpha1;
+				PRODUCT_BUNDLE_IDENTIFIER = AM.Alpha;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -810,11 +818,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 84R3VSG74G;
+				DEVELOPMENT_TEAM = 8G282R5UXU;
 				INFOPLIST_FILE = Alpha/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = AM.Alpha1;
+				PRODUCT_BUNDLE_IDENTIFIER = AM.Alpha;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
