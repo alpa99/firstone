@@ -42,6 +42,14 @@
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                     </textView>
+                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jLi-gm-jf0">
+                        <rect key="frame" x="16" y="133" width="111" height="30"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <state key="normal" title="Annehmen"/>
+                        <connections>
+                            <action selector="annehmenPressed:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="pGr-XX-WSM"/>
+                        </connections>
+                    </button>
                 </subviews>
                 <constraints>
                     <constraint firstItem="p3i-0l-QC5" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="89S-2y-87v"/>
@@ -58,6 +66,7 @@
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
+                <outlet property="annehmenBtn" destination="jLi-gm-jf0" id="GC9-SB-U26"/>
                 <outlet property="bestellungsText" destination="cgp-Gf-s8M" id="PwG-yG-twy"/>
                 <outlet property="timeLbl" destination="ihN-XX-7c8" id="kKm-9X-ldf"/>
                 <outlet property="tischnummer" destination="p3i-0l-QC5" id="6Jb-Pb-PUg"/>
