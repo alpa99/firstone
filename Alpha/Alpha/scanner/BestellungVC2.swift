@@ -9,10 +9,11 @@ import UIKit
 import Firebase
 import FBSDKLoginKit
 import FirebaseAuth
+import CoreLocation
 
 
 
-class BestellungVC2: UIViewController, UITableViewDataSource, UITableViewDelegate, ExpandableHeaderViewDelegate, BestellenCellDelegate, PageObservation2 {
+class BestellungVC2: UIViewController, UITableViewDataSource, UITableViewDelegate, ExpandableHeaderViewDelegate, BestellenCellDelegate, PageObservation2, CLLocationManagerDelegate {
     
     // VARS#
     
@@ -23,10 +24,12 @@ class BestellungVC2: UIViewController, UITableViewDataSource, UITableViewDelegat
     var itemss = [String]()
     var values = [Int]()
     
+    var locationManager = CLLocationManager()
     
     var parentPageViewController2: PageViewController2!
     
-    var barname = "Huqa"
+    var barname = " "
+    var baradresse = " "
     
     var items = [String]()
     var itemsPreise = [Int]()
@@ -76,8 +79,33 @@ class BestellungVC2: UIViewController, UITableViewDataSource, UITableViewDelegat
     
     
     @IBAction func myBestellungAbschicken(_ sender: Any) {
-        handleBestellung()
-        print("get ready for qrcodes")
+      
+        CLGeocoder().geocodeAddressString(baradresse, completionHandler: { (placemarks, error) -> Void in
+
+            if let placemark = placemarks?[0] {
+
+                let locat = placemark.location
+            //                    let placemarks = placemarks,
+            //                        let locationone = placemarks.first?.location
+
+
+                let distancebar = self.locationManager.location?.distance(from: locat!)
+                print (distancebar!, " entfernung")
+                let distanceint = Int(distancebar!)
+                if distanceint < 50 {
+                self.handleBestellung()
+                    print("distance ist ok")
+                }else{
+                    print ("distance ist nicht ok ")
+                    let alert = UIAlertController(title: "Du befindest dich nicht mehr in der Nähe der Bar", message: nil, preferredStyle: UIAlertControllerStyle.alert)
+                    alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
+                    
+                    self.present(alert, animated: true, completion: nil)
+                }
+            }
+            
+        })
+        
     }
     
     @IBAction func dismissPopUp(_ sender: Any) {
@@ -218,6 +246,7 @@ class BestellungVC2: UIViewController, UITableViewDataSource, UITableViewDelegat
     
     
     func handleBestellung(){
+       
         
         var ref: DatabaseReference!
         
@@ -473,8 +502,10 @@ class BestellungVC2: UIViewController, UITableViewDataSource, UITableViewDelegat
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        getValue()
-        //        self.barname = parentPageViewController.name
+        
+        self.barname = parentPageViewController2.name
+        self.baradresse = parentPageViewController2.adresse
+
         effect = visualEffectView.effect
         visualEffectView.effect = nil
         visualEffectView.isHidden = true
@@ -484,6 +515,11 @@ class BestellungVC2: UIViewController, UITableViewDataSource, UITableViewDelegat
         
         addItemView.layer.cornerRadius = 5
         
+        locationManager.requestWhenInUseAuthorization()
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        locationManager.delegate = self
+        
+        getValue()
     }
     
     override func didReceiveMemoryWarning() {

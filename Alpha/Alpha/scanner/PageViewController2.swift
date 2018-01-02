@@ -11,6 +11,7 @@ import UIKit
 class PageViewController2: UIPageViewController, UIPageViewControllerDelegate, UIPageViewControllerDataSource {
     
     var name = "Huqa"
+    var adresse = "Georgstraße 7 30159 Hannover"
     
     var pageControl = UIPageControl()
     
