@@ -44,12 +44,12 @@ class PageViewController: UIPageViewController, UIPageViewControllerDelegate, UI
         
         orderedViewControllers.append(speisevc)
         
-        let bestellungVC2 =  UIStoryboard(name: "Main", bundle: nil) .
-            instantiateViewController(withIdentifier: "BestellungVC") as! BestellungVC
-        let bestellVC2 = bestellungVC2 as PageObservation
-        bestellVC2.getParentPageViewController(parentRef: self)
-        
-        orderedViewControllers.append(bestellungVC2)
+//        let bestellungVC2 =  UIStoryboard(name: "Main", bundle: nil) .
+//            instantiateViewController(withIdentifier: "BestellungVC") as! BestellungVC
+//        let bestellVC2 = bestellungVC2 as PageObservation
+//        bestellVC2.getParentPageViewController(parentRef: self)
+//
+//        orderedViewControllers.append(bestellungVC2)
         
        // let speisevc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "SpeisekarteVC") as! SpeisekarteVC
         

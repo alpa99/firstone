@@ -65,9 +65,11 @@ class LoginKellnerVC: UIViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "kellnerLoggedIn" {
-           let KVC = segue.destination as! KellnerVC
-            KVC.KellnerID = KellnerIdTextfield.text!
-
+            let KTBC = segue.destination as! KellnerTabBarController
+            let KCV = KTBC.viewControllers![0] as! KellnerVC
+            KCV.KellnerID = KellnerIdTextfield.text!
+            let KACV = KTBC.viewControllers![1] as! KellnerAngenommenVC
+            KACV.KellnerID = KellnerIdTextfield.text!
         }
     }
     
