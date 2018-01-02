@@ -40,12 +40,8 @@ class SpeisekarteVC: UIViewController, UITableViewDataSource, UITableViewDelegat
 
     
     @IBAction func BackBtn(_ sender: Any) {
-        (parent as? PulleyViewController)?.setDrawerPosition(position: PulleyPosition(rawValue: 2)!)
-        let drawervc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "DrawerVC") as! DrawerVC
-        
-        
-        
-        (parent as? PulleyViewController)?.setDrawerContentViewController(controller: drawervc, animated: true)
+        parentPageViewController.goback()
+
     }
     @IBAction func toDetailVC(_ sender: Any) {
         (parent as? PulleyViewController)?.setDrawerPosition(position: PulleyPosition(rawValue: 2)!)
