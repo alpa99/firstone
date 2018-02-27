@@ -11,11 +11,13 @@ import FBSDKLoginKit
 import FirebaseAuth
 import CoreLocation
 
-
-
-class BestellungVC2: UIViewController, UITableViewDataSource, UITableViewDelegate, ExpandableHeaderViewDelegate, BestellenCellDelegate, PageObservation2, CLLocationManagerDelegate {
+class BestellungVC2: UIViewController, UITableViewDataSource, UITableViewDelegate, ExpandableHeaderViewDelegate, BestellenCellDelegate, MyBestellungCellDelegate, PageObservation2, CLLocationManagerDelegate {
+ 
     
+    
+
     // VARS#
+
     
     var keys = [String: Int]()
     var bestellteItemsDictionary = [String: [String: Int]]()
@@ -39,11 +41,7 @@ class BestellungVC2: UIViewController, UITableViewDataSource, UITableViewDelegat
     var cellIndexPathSection = 0
     var cellIndexPathRow = 0
     var i = Int()
-    
-    
-    var bestellteShishas  = [String: Int]()
-    var bestellteGetränke  = [String: Int]()
-    
+
     var bestellung = [ExpandTVSection]()
     
     var effect: UIVisualEffect!
@@ -78,6 +76,48 @@ class BestellungVC2: UIViewController, UITableViewDataSource, UITableViewDelegat
     // ACTIONS
     
     
+    func cellMyItemMengePlusAction(sender: MyBestellungCell) {
+        print("1")
+    }
+    
+    func cellmyItemMengeMinusAction(sender: MyBestellungCell) {
+        print("2")
+    }
+    
+    func cellMyItemEntfernen(sender: MyBestellungCell) {
+
+        let indexPath = self.myBestellungTV.indexPathForRow(at: sender.center)!
+        print(indexPath, "indexPath")
+        print(bestellteItemsDictionary, "1234512")
+        var newDic = bestellteItemsDictionary[sections[indexPath.section].genre]!
+        print(newDic, "newDic1")
+        var newArray = [String]()
+        var newArray2 = [String]()
+        for (section, genre) in bestellteItemsDictionary {
+            newArray2.append(section)
+            print(genre)
+        }
+        for (a, b) in newDic {
+            newArray.append(a)
+            print(b)
+        }
+        print(newArray, "newArray")
+        newDic.removeValue(forKey: newArray[indexPath.row])
+        
+        print(bestellteItemsDictionary[sections[indexPath.section].genre] as Any, "this is genre1")
+        bestellteItemsDictionary.updateValue(newDic, forKey: newArray2[indexPath.section])
+        print(bestellteItemsDictionary[sections[indexPath.section].genre] as Any, "this is genre2")
+        
+        DispatchQueue.main.async(execute: {
+            self.myBestellungTV.reloadData()
+        } )
+//        myBestellungTV.deleteRows(at: [indexPath], with: .automatic)
+
+
+    }
+    
+    
+    
     @IBAction func myBestellungAbschicken(_ sender: Any) {
       
         CLGeocoder().geocodeAddressString(baradresse, completionHandler: { (placemarks, error) -> Void in
@@ -110,12 +150,13 @@ class BestellungVC2: UIViewController, UITableViewDataSource, UITableViewDelegat
     
     @IBAction func dismissPopUp(_ sender: Any) {
         animateOut()
+        bestellungaktualisieren()
     }
     
     
     @IBAction func sendToFirebase(_ sender: Any) {
-        
-        print(bestellteItemsDictionary)
+        myBestellungTV.reloadData()
+        print(bestellteItemsDictionary, "sgsdgsd")
         
         for (genre, itemDictionary) in bestellteItemsDictionary {
             
@@ -129,8 +170,7 @@ class BestellungVC2: UIViewController, UITableViewDataSource, UITableViewDelegat
                     if itemss.count == itemDictionary.count{
                         
                         setSectionsBestellung(genre: genre, items: itemss, preise: values)
-                        print(self.genres, "GENRES")
-                        print(self.bestellung, "bestllungen")
+                        
                         self.itemss.removeAll()
                         self.values.removeAll()
                     }
@@ -142,28 +182,27 @@ class BestellungVC2: UIViewController, UITableViewDataSource, UITableViewDelegat
                     self.values.append(value)
                     if itemss.count == itemDictionary.count{
                         if let g = genres.index(of: genre) {
-                            print(self.genres[g], "genres g")
-                            print(self.bestellung[g], "bestelung g")
+                           
                             self.bestellung[g].items = self.itemss
                             self.bestellung[g].preise = self.values
                             self.myBestellungTV.reloadData()
                             
-                            print(self.bestellung, "BEST")
                         }
                         self.itemss.removeAll()
                         self.values.removeAll()
+
                     }
                 }
             }
         }
+        self.bestellungVCView.addSubview(visualEffectView)
+        visualEffectView.center = self.bestellungVCView.center
+        self.bestellungVCView.addSubview(self.myBestellungView)
+        self.myBestellungView.center = self.bestellungVCView.center
+        self.myBestellungView.transform = CGAffineTransform.init(scaleX: 1.3, y: 1.3)
+        self.myBestellungView.alpha = 0
         UIView.animate(withDuration: 1) {
-            self.myBestellungView.isHidden = false
-            
-            //            self.myBestellungView.center = self.view.center
-            self.myBestellungView.transform = CGAffineTransform.init(scaleX: 1.3, y: 1.3)
-            self.myBestellungView.alpha = 0
-            self.visualEffectView.isHidden = false
-            self.view.addSubview(self.myBestellungView)
+
             self.visualEffectView.effect = self.effect
             self.myBestellungView.alpha = 1
             self.myBestellungView.transform = CGAffineTransform.identity
@@ -174,13 +213,9 @@ class BestellungVC2: UIViewController, UITableViewDataSource, UITableViewDelegat
     
     @IBAction func dismissMyBestellungView(_ sender: Any) {
         dismissMyBestellungView()
-        bestellung = [ExpandTVSection]()
     }
     
-    
-    
-    
-    
+
     // FUNCTIONS
     
     func getValue (){
@@ -193,6 +228,9 @@ class BestellungVC2: UIViewController, UITableViewDataSource, UITableViewDelegat
             
         }, withCancel: nil)
         
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     }
     
     func getKeys(value: Int){
@@ -246,10 +284,7 @@ class BestellungVC2: UIViewController, UITableViewDataSource, UITableViewDelegat
     
     
     func handleBestellung(){
-       
-        
         var ref: DatabaseReference!
-        
         if self.bestellteItemsDictionary.count>0{
             let timestamp = Double(NSDate().timeIntervalSince1970)
             let fromUserID = Auth.auth().currentUser!.uid
@@ -263,7 +298,6 @@ class BestellungVC2: UIViewController, UITableViewDataSource, UITableViewDelegat
             
             print(self.bestellteItemsDictionary, "NO")
             
-            print("yes")
             childRef?.updateChildValues(values)
             let userBestellungenRef = Database.database().reference().child("userBestellungen").child(fromUserID)
             let bestellungID = childRef?.key
@@ -289,7 +323,7 @@ class BestellungVC2: UIViewController, UITableViewDataSource, UITableViewDelegat
         cellIndexPathSection = indexPath.section
         animateIn()
     }
-    
+
     
     @IBAction func funcItemPlusTapped(_ sender: Any) {
         i = i+1
@@ -303,16 +337,17 @@ class BestellungVC2: UIViewController, UITableViewDataSource, UITableViewDelegat
     }
     
     func animateIn(){
+        self.bestellungVCView.addSubview(visualEffectView)
+        visualEffectView.center = self.bestellungVCView.center
+        self.bestellungVCView.addSubview(addItemView)
+        addItemView.center = self.bestellungVCView.center
         itemNameLbl.text = "\(sections[cellIndexPathSection].items[cellIndexPathRow])"
         //        self.inputView?.addSubview(addItemView)
         //        addItemView.center = (self.inputView?.center)!
         addItemView.transform = CGAffineTransform.init(scaleX: 1.3, y: 1.3)
         addItemView.alpha = 0
         UIView.animate(withDuration: 1) {
-            self.visualEffectView.isHidden = false
-            self.addItemView.isHidden = false
             self.visualEffectView.effect = self.effect
-            
             self.addItemView.alpha = 1
             self.addItemView.transform = CGAffineTransform.identity
         }
@@ -328,38 +363,41 @@ class BestellungVC2: UIViewController, UITableViewDataSource, UITableViewDelegat
             
             
         }){ (success:Bool) in
-            self.visualEffectView.isHidden = true
-            self.addItemView.isHidden = false
+            self.addItemView.removeFromSuperview()
+            self.visualEffectView.removeFromSuperview()
             
             
         }
+
+    }
+    
+    func bestellungaktualisieren(){
         if i > 0 {
+            print(bestellteItemsDictionary, "XX")
             if bestellteItemsDictionary.index(forKey: sections[cellIndexPathSection].genre) != nil {
                 var dic = bestellteItemsDictionary[sections[cellIndexPathSection].genre]
                 dic?.updateValue(i, forKey: itemNameLbl.text!)
+                
                 bestellteItemsDictionary.updateValue(dic!, forKey: sections[cellIndexPathSection].genre)
+                print(bestellteItemsDictionary, "YY")
+                
             } else {
                 bestellteItemsDictionary.updateValue([itemNameLbl.text! : i], forKey: sections[cellIndexPathSection].genre)
             }
         }
-        
     }
     
     func dismissMyBestellungView() {
         
         UIView.animate(withDuration: 0.5, animations: {
-            //            self.myBestellungView.transform = CGAffineTransform.init(scaleX: 1.3, y: 1.3)
-            //            self.myBestellungView.alpha = 0
-            self.myBestellungView.isHidden = true
-            
+            self.myBestellungView.transform = CGAffineTransform.init(scaleX: 1.3, y: 1.3)
+            self.myBestellungView.alpha = 0
             self.visualEffectView.effect = nil
             
             
         }){ (success:Bool) in
-            //            self.myBestellungView.removeFromSuperview()
-            self.myBestellungView.isHidden = true
-            
-            self.visualEffectView.isHidden = true
+            self.myBestellungView.removeFromSuperview()
+            self.visualEffectView.removeFromSuperview()
         }
     }
     func getParentPageViewController2(parentRef2: PageViewController2) {
@@ -407,8 +445,13 @@ class BestellungVC2: UIViewController, UITableViewDataSource, UITableViewDelegat
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if (sections[indexPath.section].expanded) {
+            if tableView == bestellungTableView {
             return 71
+            } else {
+                return 90
+            }
         }
+            
         else {
             return 0
         }
@@ -435,7 +478,7 @@ class BestellungVC2: UIViewController, UITableViewDataSource, UITableViewDelegat
     
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
+
         if tableView == bestellungTableView {
             let cell = Bundle.main.loadNibNamed("BestellenCell", owner: self, options: nil)?.first as! BestellenCell
             cell.delegate = self
@@ -454,17 +497,34 @@ class BestellungVC2: UIViewController, UITableViewDataSource, UITableViewDelegat
                 
             }
         } else {
+            let cell = Bundle.main.loadNibNamed("MyBestellungCell", owner: self, options: nil)?.first as! MyBestellungCell
+    
+            cell.delegate = self
             
-            let cell = self.myBestellungTV.dequeueReusableCell(withIdentifier: "myBestellCell", for: indexPath)
-            cell.textLabel?.text = "\(bestellung[indexPath.section].items[indexPath.row])"
-            cell.detailTextLabel?.text = "\(bestellung[indexPath.section].preise[indexPath.row])"
+            if (sections[indexPath.section].expanded){
+    
+            cell.myItemName.text = "\(bestellung[indexPath.section].items[indexPath.row])"
+                cell.myItemMenge.text = "\(bestellung[indexPath.section].preise[indexPath.row])"
+            cell.myItemDescription.text = "3"
+
+                self.myBestellungTV.register(UINib.init(nibName: "MyBestellungCell", bundle: nil), forCellReuseIdentifier: "MyBestellungCell")
             return cell
+            }
+            
+            else {
+                cell.myItemMengePlus.isHidden = true
+                cell.myItemMengeMinus.isHidden = true
+                cell.myItemMenge.isHidden = true
+                cell.myItemName.isHidden = true
+                cell.myItemDescription.isHidden = true
+                cell.myEntfernenButton.isHidden = true
+                return cell
+            }
+            
         }
     }
     
-    
-    
-    
+
     func toggleSection(tableView: UITableView, header: ExpandableHeaderView, section: Int) {
         if tableView == bestellungTableView {
             sections[section].expanded = !sections[section].expanded
@@ -489,9 +549,8 @@ class BestellungVC2: UIViewController, UITableViewDataSource, UITableViewDelegat
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         let touch: UITouch? = touches.first
-        
-        
-        if touch?.view != myBestellungView && touch?.view != addItemView {
+    
+        if touch?.view != addItemView || touch?.view != myBestellungView  {
             dismissMyBestellungView()
             animateOut()
             
@@ -508,10 +567,8 @@ class BestellungVC2: UIViewController, UITableViewDataSource, UITableViewDelegat
 
         effect = visualEffectView.effect
         visualEffectView.effect = nil
-        visualEffectView.isHidden = true
-        addItemView.isHidden = true
-        myBestellungView.isHidden = true
-        
+        visualEffectView.bounds = self.bestellungVCView.bounds
+
         
         addItemView.layer.cornerRadius = 5
         
@@ -520,6 +577,7 @@ class BestellungVC2: UIViewController, UITableViewDataSource, UITableViewDelegat
         locationManager.delegate = self
         
         getValue()
+        
     }
     
     override func didReceiveMemoryWarning() {
