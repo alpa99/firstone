@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="1rU-Ub-WRG">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="1rU-Ub-WRG">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -301,7 +301,7 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
-                        <segue destination="NjJ-Kt-uHO" kind="relationship" relationship="rootViewController" id="75W-Yf-mcF"/>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="Bqi-R7-rk5"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6XE-zR-NNw" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -380,11 +380,12 @@
                     <navigationItem key="navigationItem" id="J6B-KR-Obv"/>
                     <connections>
                         <outlet property="square" destination="oMC-KD-mEQ" id="NtD-AJ-hgO"/>
+                        <segue destination="NjJ-Kt-uHO" kind="show" identifier="scansegue" id="zm7-G4-hnD"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2556" y="1445"/>
+            <point key="canvasLocation" x="2556" y="1421"/>
         </scene>
         <!--Scan DetailVC-->
         <scene sceneID="bfF-gB-4Zv">
@@ -494,14 +495,6 @@
                                     <action selector="BackBtn:" destination="M2X-w1-nQL" eventType="touchUpInside" id="KEj-H2-QyA"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EZ2-Pq-KfM">
-                                <rect key="frame" x="313" y="20" width="46" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="DetailVC"/>
-                                <connections>
-                                    <action selector="toDetailVC:" destination="M2X-w1-nQL" eventType="touchUpInside" id="Ywb-dG-V05"/>
-                                </connections>
-                            </button>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="oeO-bl-oRl">
                                 <rect key="frame" x="16" y="121" width="343" height="287"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -585,16 +578,6 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iYb-iD-LEP">
-                                <rect key="frame" x="16" y="37" width="34" height="21"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="21" id="oPb-XI-bgC"/>
-                                </constraints>
-                                <state key="normal" title="Back"/>
-                                <connections>
-                                    <action selector="Back:" destination="Yts-F3-2fU" eventType="touchUpInside" id="7Vo-RO-gk8"/>
-                                </connections>
-                            </button>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="F2v-jd-cA2">
                                 <rect key="frame" x="16" y="542" width="343" height="30"/>
                                 <subviews>
@@ -612,14 +595,10 @@
                         <constraints>
                             <constraint firstItem="LGv-5b-phS" firstAttribute="top" secondItem="CxV-wT-GD7" secondAttribute="bottom" constant="8" symbolic="YES" id="27c-Ak-Izs"/>
                             <constraint firstItem="yw1-aG-qeX" firstAttribute="trailing" secondItem="CxV-wT-GD7" secondAttribute="trailing" constant="66" id="7Y2-8a-g1w"/>
-                            <constraint firstItem="CxV-wT-GD7" firstAttribute="leading" secondItem="iYb-iD-LEP" secondAttribute="trailing" constant="16" id="FMz-Sv-zl8"/>
                             <constraint firstItem="F2v-jd-cA2" firstAttribute="leading" secondItem="yw1-aG-qeX" secondAttribute="leading" constant="16" id="Oc3-dj-hc1"/>
                             <constraint firstItem="CxV-wT-GD7" firstAttribute="centerX" secondItem="LGv-5b-phS" secondAttribute="centerX" id="VSE-Vi-4NJ"/>
-                            <constraint firstItem="LGv-5b-phS" firstAttribute="top" secondItem="iYb-iD-LEP" secondAttribute="bottom" constant="8" id="XbL-bQ-fPX"/>
-                            <constraint firstItem="iYb-iD-LEP" firstAttribute="top" secondItem="yw1-aG-qeX" secondAttribute="top" constant="17" id="c99-Oz-MjK"/>
                             <constraint firstItem="CxV-wT-GD7" firstAttribute="top" secondItem="yw1-aG-qeX" secondAttribute="top" constant="17" id="kId-KZ-ul5"/>
                             <constraint firstItem="yw1-aG-qeX" firstAttribute="trailing" secondItem="F2v-jd-cA2" secondAttribute="trailing" constant="16" id="lXB-dR-CqV"/>
-                            <constraint firstItem="iYb-iD-LEP" firstAttribute="leading" secondItem="yw1-aG-qeX" secondAttribute="leading" constant="16" id="mad-mt-E5V"/>
                             <constraint firstItem="LGv-5b-phS" firstAttribute="leading" secondItem="yw1-aG-qeX" secondAttribute="leading" constant="16" id="pd4-nR-SfY"/>
                             <constraint firstItem="yw1-aG-qeX" firstAttribute="trailing" secondItem="LGv-5b-phS" secondAttribute="trailing" constant="16" id="rRp-k6-DqY"/>
                             <constraint firstItem="F2v-jd-cA2" firstAttribute="top" secondItem="LGv-5b-phS" secondAttribute="bottom" constant="8" id="vHF-Te-FG4"/>
@@ -1103,22 +1082,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lFj-Tw-rNO">
-                                <rect key="frame" x="16" y="20" width="46" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Back"/>
-                                <connections>
-                                    <action selector="BackBtn:" destination="7r4-IW-mnK" eventType="touchUpInside" id="6YO-pq-uqA"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mco-3A-kR0">
-                                <rect key="frame" x="313" y="20" width="46" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="DetailVC"/>
-                                <connections>
-                                    <action selector="toDetailVC:" destination="7r4-IW-mnK" eventType="touchUpInside" id="HTq-KT-cdh"/>
-                                </connections>
-                            </button>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Y7k-8N-x1u">
                                 <rect key="frame" x="16" y="121" width="343" height="287"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
