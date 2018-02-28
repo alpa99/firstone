@@ -24,7 +24,7 @@ class QRScanner: UIViewController, AVCaptureMetadataOutputObjectsDelegate, CLLoc
     var video = AVCaptureVideoPreviewLayer()
     let session = AVCaptureSession()
     var locationManager = CLLocationManager()
-    
+    var distancebar = 0.0
     
     // OUTLETS
     @IBOutlet weak var square: UIImageView!
@@ -37,21 +37,26 @@ class QRScanner: UIViewController, AVCaptureMetadataOutputObjectsDelegate, CLLoc
             
             if let object = metadataObjects[0] as? AVMetadataMachineReadableCodeObject{
                 
-                if object.type == AVMetadataObject.ObjectType.qr {
+                if object.type == AVMetadataObject.ObjectType.qr{
                     self.session.stopRunning()
-                    ergebnis = Int(object.stringValue!)!
-                    
-                    barnummer = ergebnis/1000*1000
-                    
-                    qrbar = [QRBereich]()
-                    qrbarname = ""
-                    
-                    fetchData()
-                    
+                    if let string = object.stringValue {
+                        if let ergebnis = Int(string) {
+                            barnummer = ergebnis/1000*1000
+                            qrbar = [QRBereich]()
+                            qrbarname = ""
+                            fetchData()
+                        }else {
+                            let alert = UIAlertController(title: "Fehler", message: "Dies ist kein Smolo-Code", preferredStyle: .alert)
+                            alert.addAction(UIAlertAction(title: "Abbrechen", style: .default, handler:{ (action) in self.session.startRunning()}))
+                            
+                            self.present(alert, animated: true, completion: nil)
+                            self.session.startRunning()
+                            return}
+                        
+                    }
                 }
             }
         }
-        
     }
     
     func fetchData() {
@@ -71,14 +76,8 @@ class QRScanner: UIViewController, AVCaptureMetadataOutputObjectsDelegate, CLLoc
                 CLGeocoder().geocodeAddressString(qrBarAdresse, completionHandler: { (placemarks, error) -> Void in
                     
                     if let placemark = placemarks?[0] {
-                        
                         let location = placemark.location
                         self.distanceCondition(locat: location!)}
-                    //                    let placemarks = placemarks,
-                    //                        let locationone = placemarks.first?.location
-                    
-                    //                    self.distanceCondition(locat: locationone)
-                    
                 })
             }else {
                     let alert = UIAlertController(title: "Fehler", message: "Dies ist kein Smolo-Code", preferredStyle: .alert)
@@ -104,7 +103,7 @@ class QRScanner: UIViewController, AVCaptureMetadataOutputObjectsDelegate, CLLoc
         if distanceint < 50 {
             
             let alert = UIAlertController(title: "Erfolgreich", message: "Du bist bei \(self.qrbarname)!", preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "Weiter", style: .default, handler:{ (action) in self.performSegue(withIdentifier: "codescan", sender: self)}))
+            alert.addAction(UIAlertAction(title: "Weiter", style: .default, handler:{ (action) in self.performSegue(withIdentifier: "scansegue", sender: self)}))
             
             self.present(alert, animated: true, completion: nil)
         }else{
@@ -121,9 +120,10 @@ class QRScanner: UIViewController, AVCaptureMetadataOutputObjectsDelegate, CLLoc
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "codescan"{
-            let vc = segue.destination as! ScanDetailVC
-            vc.scannummer = barnummer
+        if segue.identifier == "scansegue"{
+            let vc = segue.destination as! PageViewController2
+            vc.name = qrbarname
+            vc.adresse = qrbaradresse
         }
     }
     // OTHERS
