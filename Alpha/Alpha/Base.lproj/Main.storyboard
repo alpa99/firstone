@@ -1051,14 +1051,6 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Of0-NH-5P1">
-                                        <rect key="frame" x="136" y="570" width="102" height="40"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <state key="normal" title="Bewerten"/>
-                                        <connections>
-                                            <action selector="votefortrump:" destination="aXf-f9-fxa" eventType="touchUpInside" id="zgb-Iy-MHk"/>
-                                        </connections>
-                                    </button>
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="zNr-4I-TOE" firstAttribute="top" secondItem="04Y-2u-gjz" secondAttribute="top" id="BFo-oU-bVN"/>
@@ -1393,6 +1385,6 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="yYz-ya-YcO"/>
-        <segue reference="LaO-lI-cXB"/>
+        <segue reference="tKO-Qv-DSi"/>
     </inferredMetricsTieBreakers>
 </document>

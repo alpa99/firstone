@@ -77,11 +77,67 @@ class BestellungVC2: UIViewController, UITableViewDataSource, UITableViewDelegat
     
     
     func cellMyItemMengePlusAction(sender: MyBestellungCell) {
-        print("1")
+        let indexPath = self.myBestellungTV.indexPathForRow(at: sender.center)!
+        var newArray = [String]()
+        var newArray11 = [Int]()
+        var newArray2 = [String]()
+        for (section, genre) in bestellteItemsDictionary {
+            newArray2.append(section)
+            print(genre, "dssdfsdfsdfseww32")
+        }
+        var newDic = bestellteItemsDictionary[newArray2[indexPath.section]]!
+        print(newDic, "newDic1 plus")
+        for (a, b) in newDic {
+            newArray.append(a)
+            newArray11.append(b)
+        }
+        print(newArray11, "b")
+        var valueItem = newArray11[indexPath.row]
+        valueItem = valueItem+1
+        newArray11[indexPath.row] = valueItem
+        print(newArray11, "bb")
+        newDic.updateValue(valueItem, forKey: newArray[indexPath.section])
+        bestellteItemsDictionary.updateValue(newDic, forKey: newArray2[indexPath.section])
+        
+        bestellung[indexPath.section].preise = newArray11
+
+        
+        self.myBestellungTV.reloadRows(at: [indexPath], with: .automatic)
+        
     }
     
     func cellmyItemMengeMinusAction(sender: MyBestellungCell) {
-        print("2")
+        
+        
+        let indexPath = self.myBestellungTV.indexPathForRow(at: sender.center)!
+        var newArray = [String]()
+        var newArray11 = [Int]()
+        var newArray2 = [String]()
+        for (section, genre) in bestellteItemsDictionary {
+            newArray2.append(section)
+            print(genre, "dssdfsdfsdfseww32")
+        }
+        var newDic = bestellteItemsDictionary[newArray2[indexPath.section]]!
+        print(newDic, "newDic1 plus")
+        for (a, b) in newDic {
+            newArray.append(a)
+            newArray11.append(b)
+        }
+        print(newArray11, "b")
+        var valueItem = newArray11[indexPath.row]
+        if valueItem > 1 {
+            valueItem = valueItem-1}
+
+        newArray11[indexPath.row] = valueItem
+        print(newArray11, "bb")
+        newDic.updateValue(valueItem, forKey: newArray[indexPath.section])
+        bestellteItemsDictionary.updateValue(newDic, forKey: newArray2[indexPath.section])
+        
+        bestellung[indexPath.section].preise = newArray11
+        
+        
+        self.myBestellungTV.reloadRows(at: [indexPath], with: .automatic)
+        
     }
     
     func cellMyItemEntfernen(sender: MyBestellungCell) {
@@ -89,28 +145,51 @@ class BestellungVC2: UIViewController, UITableViewDataSource, UITableViewDelegat
         let indexPath = self.myBestellungTV.indexPathForRow(at: sender.center)!
         print(indexPath, "indexPath")
         print(bestellteItemsDictionary, "1234512")
-        var newDic = bestellteItemsDictionary[sections[indexPath.section].genre]!
-        print(newDic, "newDic1")
+        print(sections, "sections")
         var newArray = [String]()
+        var newArray11 = [Int]()
         var newArray2 = [String]()
         for (section, genre) in bestellteItemsDictionary {
             newArray2.append(section)
-            print(genre)
+            print(genre, "dssdfsdfsdfseww32")
         }
+        var newDic = bestellteItemsDictionary[newArray2[indexPath.section]]!
+        print(newDic, "newDic1")
+
         for (a, b) in newDic {
             newArray.append(a)
-            print(b)
+            newArray11.append(b)
         }
         print(newArray, "newArray")
         newDic.removeValue(forKey: newArray[indexPath.row])
+        newArray.remove(at: indexPath.row)
+        newArray11.remove(at: indexPath.row)
         
         print(bestellteItemsDictionary[sections[indexPath.section].genre] as Any, "this is genre1")
         bestellteItemsDictionary.updateValue(newDic, forKey: newArray2[indexPath.section])
         print(bestellteItemsDictionary[sections[indexPath.section].genre] as Any, "this is genre2")
         
-        DispatchQueue.main.async(execute: {
+        bestellung[indexPath.section].items = newArray
+        bestellung[indexPath.section].preise = newArray11
+        self.myBestellungTV.deleteRows(at: [indexPath], with: .right)
+        
+        print(newArray, "2NEW ARRAY")
+        
+        if newArray.count == 0 {
+            bestellung.remove(at: indexPath.section)
+            print(genres,"12212")
+            bestellteItemsDictionary.removeValue(forKey: genres[indexPath.section])
+            genres.remove(at: indexPath.section)
+            print(genres, "212121")
             self.myBestellungTV.reloadData()
-        } )
+        }
+       
+
+        print(bestellung, "bestellung")
+        
+//        DispatchQueue.main.async(execute: {
+//            self.myBestellungTV.deleteRows(at: [indexPath], with: .right)
+//        } )
 //        myBestellungTV.deleteRows(at: [indexPath], with: .automatic)
 
 
@@ -159,8 +238,9 @@ class BestellungVC2: UIViewController, UITableViewDataSource, UITableViewDelegat
         print(bestellteItemsDictionary, "sgsdgsd")
         
         for (genre, itemDictionary) in bestellteItemsDictionary {
-            
+            print(genres)
             if self.genres.contains(genre) == false {
+                print("notelse")
                 self.genres.append(genre)
                 
                 for (item, value) in itemDictionary {
@@ -176,13 +256,16 @@ class BestellungVC2: UIViewController, UITableViewDataSource, UITableViewDelegat
                     }
                 }
             } else {
+                print("else")
                 for (item, value) in itemDictionary {
                     
                     self.itemss.append(item)
                     self.values.append(value)
                     if itemss.count == itemDictionary.count{
                         if let g = genres.index(of: genre) {
-                           
+                        
+//                            setSectionsBestellung(genre: genre, items: self.itemss, preise: self.values)
+                            print(g, "G")
                             self.bestellung[g].items = self.itemss
                             self.bestellung[g].preise = self.values
                             self.myBestellungTV.reloadData()
@@ -230,9 +313,6 @@ class BestellungVC2: UIViewController, UITableViewDataSource, UITableViewDelegat
         
     }
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-    }
-    
     func getKeys(value: Int){
         
         var datref: DatabaseReference!
@@ -248,13 +328,9 @@ class BestellungVC2: UIViewController, UITableViewDataSource, UITableViewDelegat
                     self.fetchSpeisekarte(ii: key, z: value)
                 }
             }
-            
-            
         }, withCancel: nil)
         
-        
     }
-    
     
     func fetchSpeisekarte(ii: String, z: Int){
         
@@ -374,6 +450,11 @@ class BestellungVC2: UIViewController, UITableViewDataSource, UITableViewDelegat
     func bestellungaktualisieren(){
         if i > 0 {
             print(bestellteItemsDictionary, "XX")
+            print(cellIndexPathSection, "path")
+            print(sections, "sections")
+            print(bestellung, "bestellung")
+            
+            
             if bestellteItemsDictionary.index(forKey: sections[cellIndexPathSection].genre) != nil {
                 var dic = bestellteItemsDictionary[sections[cellIndexPathSection].genre]
                 dic?.updateValue(i, forKey: itemNameLbl.text!)
@@ -383,6 +464,7 @@ class BestellungVC2: UIViewController, UITableViewDataSource, UITableViewDelegat
                 
             } else {
                 bestellteItemsDictionary.updateValue([itemNameLbl.text! : i], forKey: sections[cellIndexPathSection].genre)
+                print("blahla")
             }
         }
     }
@@ -500,7 +582,7 @@ class BestellungVC2: UIViewController, UITableViewDataSource, UITableViewDelegat
             let cell = Bundle.main.loadNibNamed("MyBestellungCell", owner: self, options: nil)?.first as! MyBestellungCell
     
             cell.delegate = self
-            
+            print(sections, "dfsdfsdfsd")
             if (sections[indexPath.section].expanded){
     
             cell.myItemName.text = "\(bestellung[indexPath.section].items[indexPath.row])"

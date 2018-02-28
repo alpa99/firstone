@@ -83,6 +83,7 @@
 		08210EE41FB83AE300EABA32 /* BestellenCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BestellenCell.xib; sourceTree = "<group>"; };
 		082BD2DA1FF702F5004106A8 /* KellnerTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KellnerTabBarController.swift; sourceTree = "<group>"; };
 		082BD2DC1FF705DE004106A8 /* KellnerAngenommenVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KellnerAngenommenVC.swift; sourceTree = "<group>"; };
+		08302E8F2046EB0B00FCB996 /* hintergrund.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = hintergrund.png; sourceTree = "<group>"; };
 		084D9D40203B1C7D008601B6 /* MyBestellungCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyBestellungCell.swift; sourceTree = "<group>"; };
 		084D9D41203B1C7D008601B6 /* MyBestellungCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MyBestellungCell.xib; sourceTree = "<group>"; };
 		087134FD1FBDEE170016E181 /* SpeisekarteVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeisekarteVC.swift; sourceTree = "<group>"; };
@@ -109,7 +110,7 @@
 		4E3728441FE3F19F000DAF97 /* BestellungVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BestellungVC.swift; sourceTree = "<group>"; };
 		4E6020481F9E2F88001B2909 /* ScanDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanDetailVC.swift; sourceTree = "<group>"; };
 		4E66E16C1FD49CFA005E87E3 /* PageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageViewController.swift; sourceTree = "<group>"; };
-		4E78E53C1FABE03300B81EB2 /* pin.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pin.png; sourceTree = SOURCE_ROOT; };
+		4E78E53C1FABE03300B81EB2 /* pin.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = pin.png; path = Alpha/Bilder/pin.png; sourceTree = SOURCE_ROOT; };
 		4EC247C71F98F90500910AA8 /* Alpha.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Alpha.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4EC247CA1F98F90500910AA8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4EC247CC1F98F90500910AA8 /* QRScanner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRScanner.swift; sourceTree = "<group>"; };
@@ -165,6 +166,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		08302E8E2046EAFB00FCB996 /* Bilder */ = {
+			isa = PBXGroup;
+			children = (
+				08302E8F2046EB0B00FCB996 /* hintergrund.png */,
+				4E78E53C1FABE03300B81EB2 /* pin.png */,
+			);
+			path = Bilder;
+			sourceTree = "<group>";
+		};
 		08B85365203CE6EB008DA787 /* Cells */ = {
 			isa = PBXGroup;
 			children = (
@@ -231,7 +241,7 @@
 				0895B3621F9B5F28007D97DE /* UserVC.swift */,
 				08B85365203CE6EB008DA787 /* Cells */,
 				4E6020481F9E2F88001B2909 /* ScanDetailVC.swift */,
-				4E78E53C1FABE03300B81EB2 /* pin.png */,
+				08302E8E2046EAFB00FCB996 /* Bilder */,
 				4E1664BD1FBF12020038EFB5 /* votevc.swift */,
 				4E2FF0BC1FEDDC850084F0A7 /* GMVC.swift */,
 			);
