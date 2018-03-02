@@ -21,6 +21,7 @@ class PageViewController2: UIPageViewController, UIPageViewControllerDelegate, U
     
     override func viewDidLoad() {
         print(name, "hierpageview")
+          print(adresse, "pageveiw!!!!!!!!")
         super.viewDidLoad()
         self.dataSource = self
         self.delegate = self
