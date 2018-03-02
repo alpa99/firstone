@@ -96,7 +96,7 @@ class BestellungVC2: UIViewController, UITableViewDataSource, UITableViewDelegat
         valueItem = valueItem+1
         newArray11[indexPath.row] = valueItem
         print(newArray11, "bb")
-        newDic.updateValue(valueItem, forKey: newArray[indexPath.section])
+        newDic.updateValue(valueItem, forKey: newArray[indexPath.row])
         bestellteItemsDictionary.updateValue(newDic, forKey: newArray2[indexPath.section])
         
         bestellung[indexPath.section].preise = newArray11
@@ -130,7 +130,7 @@ class BestellungVC2: UIViewController, UITableViewDataSource, UITableViewDelegat
 
         newArray11[indexPath.row] = valueItem
         print(newArray11, "bb")
-        newDic.updateValue(valueItem, forKey: newArray[indexPath.section])
+        newDic.updateValue(valueItem, forKey: newArray[indexPath.row])
         bestellteItemsDictionary.updateValue(newDic, forKey: newArray2[indexPath.section])
         
         bestellung[indexPath.section].preise = newArray11
@@ -198,6 +198,8 @@ class BestellungVC2: UIViewController, UITableViewDataSource, UITableViewDelegat
     
     
     @IBAction func myBestellungAbschicken(_ sender: Any) {
+        
+        print("omed stinkt")
       
         CLGeocoder().geocodeAddressString(baradresse, completionHandler: { (placemarks, error) -> Void in
 
@@ -211,7 +213,7 @@ class BestellungVC2: UIViewController, UITableViewDataSource, UITableViewDelegat
                 let distancebar = self.locationManager.location?.distance(from: locat!)
                 print (distancebar!, " entfernung")
                 let distanceint = Int(distancebar!)
-                if distanceint < 50 {
+                if distanceint < 80 {
                 self.handleBestellung()
                     print("distance ist ok")
                 }else{
@@ -221,6 +223,9 @@ class BestellungVC2: UIViewController, UITableViewDataSource, UITableViewDelegat
                     
                     self.present(alert, animated: true, completion: nil)
                 }
+            } else {
+                
+                print("jhsdjsd")
             }
             
         })
