@@ -198,15 +198,11 @@ class BestellungVC2: UIViewController, UITableViewDataSource, UITableViewDelegat
     
     
     @IBAction func myBestellungAbschicken(_ sender: Any) {
-<<<<<<< HEAD
         
         print("omed stinkt")
       
-=======
-      print(baradresse, "baradresse")
->>>>>>> 740183344d1b012c02dae32f06e1cbf1834175b8
         CLGeocoder().geocodeAddressString(baradresse, completionHandler: { (placemarks, error) -> Void in
-            print(self.baradresse,"bar3")
+
             if let placemark = placemarks?[0] {
 
                 let locat = placemark.location
@@ -217,15 +213,9 @@ class BestellungVC2: UIViewController, UITableViewDataSource, UITableViewDelegat
                 let distancebar = self.locationManager.location?.distance(from: locat!)
                 print (distancebar!, " entfernung")
                 let distanceint = Int(distancebar!)
-<<<<<<< HEAD
                 if distanceint < 80 {
                 self.handleBestellung()
                     print("distance ist ok")
-=======
-                if distanceint < 50 {
-                print("distance ist ok")
-                    self.handleBestellung()
->>>>>>> 740183344d1b012c02dae32f06e1cbf1834175b8
                 }else{
                     print ("distance ist nicht ok ")
                     let alert = UIAlertController(title: "Du befindest dich nicht mehr in der Nähe der Bar", message: nil, preferredStyle: UIAlertControllerStyle.alert)
@@ -661,7 +651,7 @@ class BestellungVC2: UIViewController, UITableViewDataSource, UITableViewDelegat
         
         self.barname = parentPageViewController2.name
         self.baradresse = parentPageViewController2.adresse
-        print(self.baradresse, "viewload")
+
         effect = visualEffectView.effect
         visualEffectView.effect = nil
         visualEffectView.bounds = self.bestellungVCView.bounds

@@ -115,7 +115,7 @@ class LocationVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate
         
       //  pinView!.image = UIImage(named: "pin.png")
         let pinImage = UIImage(named: "pin.png")
-        let size = CGSize(width: 35, height: 70)
+        let size = CGSize(width: 35, height: 50)
         UIGraphicsBeginImageContext(size)
         pinImage!.draw(in: CGRect(x:0, y:-5, width:size.width, height:size.height))
         let resizedImage = UIGraphicsGetImageFromCurrentImageContext()
