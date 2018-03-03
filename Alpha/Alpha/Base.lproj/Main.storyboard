@@ -595,7 +595,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                             </imageView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="LGv-5b-phS">
-                                <rect key="frame" x="16" y="66" width="343" height="466"/>
+                                <rect key="frame" x="16" y="65.5" width="343" height="466.5"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="separatorColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <prototypes>
@@ -624,15 +624,6 @@
                                     <outlet property="delegate" destination="Yts-F3-2fU" id="hwg-Go-swQ"/>
                                 </connections>
                             </tableView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CxV-wT-GD7">
-                                <rect key="frame" x="66" y="37" width="243" height="21"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="21" id="pR5-4I-pgQ"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="F2v-jd-cA2">
                                 <rect key="frame" x="16" y="540" width="343" height="32"/>
                                 <subviews>
@@ -647,17 +638,23 @@
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </stackView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="x8w-m3-Mg3">
+                                <rect key="frame" x="127" y="37" width="122" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="hJS-mq-vZI" firstAttribute="trailing" secondItem="yw1-aG-qeX" secondAttribute="trailing" id="1ZQ-9p-PQB"/>
-                            <constraint firstItem="LGv-5b-phS" firstAttribute="top" secondItem="CxV-wT-GD7" secondAttribute="bottom" constant="8" symbolic="YES" id="27c-Ak-Izs"/>
                             <constraint firstItem="hJS-mq-vZI" firstAttribute="bottom" secondItem="yw1-aG-qeX" secondAttribute="bottom" id="34Q-4f-xPN"/>
-                            <constraint firstItem="yw1-aG-qeX" firstAttribute="trailing" secondItem="CxV-wT-GD7" secondAttribute="trailing" constant="66" id="7Y2-8a-g1w"/>
+                            <constraint firstItem="LGv-5b-phS" firstAttribute="top" secondItem="x8w-m3-Mg3" secondAttribute="bottom" constant="8" symbolic="YES" id="7ji-5L-nUw"/>
+                            <constraint firstItem="x8w-m3-Mg3" firstAttribute="centerX" secondItem="LGv-5b-phS" secondAttribute="centerX" id="B1n-Lw-sE9"/>
                             <constraint firstItem="F2v-jd-cA2" firstAttribute="leading" secondItem="yw1-aG-qeX" secondAttribute="leading" constant="16" id="Oc3-dj-hc1"/>
-                            <constraint firstItem="CxV-wT-GD7" firstAttribute="centerX" secondItem="LGv-5b-phS" secondAttribute="centerX" id="VSE-Vi-4NJ"/>
+                            <constraint firstItem="x8w-m3-Mg3" firstAttribute="top" secondItem="yw1-aG-qeX" secondAttribute="top" constant="17" id="TgT-mK-xbV"/>
+                            <constraint firstItem="x8w-m3-Mg3" firstAttribute="leading" secondItem="yw1-aG-qeX" secondAttribute="leading" constant="127" id="Xrn-1R-EHE"/>
                             <constraint firstItem="hJS-mq-vZI" firstAttribute="leading" secondItem="yw1-aG-qeX" secondAttribute="leading" id="d9n-sA-bBa"/>
-                            <constraint firstItem="CxV-wT-GD7" firstAttribute="top" secondItem="yw1-aG-qeX" secondAttribute="top" constant="17" id="kId-KZ-ul5"/>
                             <constraint firstItem="yw1-aG-qeX" firstAttribute="trailing" secondItem="F2v-jd-cA2" secondAttribute="trailing" constant="16" id="lXB-dR-CqV"/>
                             <constraint firstItem="LGv-5b-phS" firstAttribute="leading" secondItem="yw1-aG-qeX" secondAttribute="leading" constant="16" id="pd4-nR-SfY"/>
                             <constraint firstItem="hJS-mq-vZI" firstAttribute="top" secondItem="tt5-ed-sm5" secondAttribute="top" id="q4a-ua-27U"/>
@@ -674,7 +671,7 @@
                         <outlet property="dismissPopUp" destination="MgL-ck-P5m" id="kGr-dd-iQ3"/>
                         <outlet property="itemCountLbl" destination="B9n-Ig-zZi" id="qEa-WO-KUM"/>
                         <outlet property="itemNameLbl" destination="Ocp-2A-uzN" id="ygy-KY-1ha"/>
-                        <outlet property="label" destination="CxV-wT-GD7" id="1MU-aU-Qxh"/>
+                        <outlet property="label" destination="x8w-m3-Mg3" id="aoz-HB-M7d"/>
                         <outlet property="myBestellungAbschickenBtn" destination="2VP-bN-rJL" id="GGq-3j-IOU"/>
                         <outlet property="myBestellungTV" destination="PJD-sg-KTw" id="noz-Jw-aPf"/>
                         <outlet property="myBestellungView" destination="XLX-RF-Q49" id="Dfd-ek-3fT"/>
