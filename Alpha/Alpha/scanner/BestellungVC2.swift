@@ -46,7 +46,6 @@ class BestellungVC2: UIViewController, UITableViewDataSource, UITableViewDelegat
     var effect: UIVisualEffect!
     
     
-    @IBOutlet weak var label: UILabel!
     
     
     // OUTLETS
@@ -340,14 +339,14 @@ performSegue(withIdentifier: "wirdabgeschickt", sender: self)
     }
     
     func fetchSpeisekarte(ii: String, z: Int){
-        
+    print("1")
         var datref: DatabaseReference!
         datref = Database.database().reference()
         
         
         datref.child("Speisekarten").child("\(self.barname)").child(ii).observe(.childAdded, with: { (snapshot) in
-            self.label.text = self.barname
-            
+            print("2")
+
             if let dictionary = snapshot.value as? [String: AnyObject]{
                 let shisha = SpeisekarteInfos(dictionary: dictionary)
                 
@@ -363,6 +362,8 @@ performSegue(withIdentifier: "wirdabgeschickt", sender: self)
                 }
             }
         }, withCancel: nil)
+        print("3")
+
     }
     
     
@@ -576,8 +577,10 @@ performSegue(withIdentifier: "wirdabgeschickt", sender: self)
     
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        print("hiiiiiiiiiiidweqe23iii")
 
         if tableView == bestellungTableView {
+            print("hiiiiiiiiiiiiii")
             let cell = Bundle.main.loadNibNamed("BestellenCell", owner: self, options: nil)?.first as! BestellenCell
             cell.delegate = self
             cell.backgroundColor = UIColor.clear
@@ -666,7 +669,7 @@ performSegue(withIdentifier: "wirdabgeschickt", sender: self)
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
+        bestellungTableView.reloadData()
         self.barname = parentPageViewController2.name
         self.baradresse = parentPageViewController2.adresse
         print(self.baradresse, "viewload")
