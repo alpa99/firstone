@@ -53,7 +53,7 @@ class KellnerVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
             if self.genres.contains(snapshot.key) == false {
                 self.genres.append(snapshot.key)
             }
-            
+            print(self.genres, "Genres")
             
         }, withCancel: nil)
         
@@ -68,8 +68,8 @@ class KellnerVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
                 let bestellungInfos = BestellungInfos(dictionary: dictionary)
                 if bestellungInfos.angenommen == false {
                     self.loadBestellung(BestellungID: snapshot.key)
+                    print(snapshot.key, "snapshot.key")
                     self.bestellungIDs.append(snapshot.key)
-                    
                 }
             }
             
@@ -171,12 +171,17 @@ class KellnerVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         let cell = Bundle.main.loadNibNamed("KellnerCell", owner: self, options: nil)?.first as! KellnerCell
         
         self.itemssss = bestellung2[bestellungIDs[indexPath.row]]!
+        
+        
 //        for (genre, itemsDictionary) in itemssss {
 //            for (items, menge) in itemsDictionary {
 //                cell.bestellungsText.text = "\(itemsDictionary) \n"
 //
 //            }
 //        }
+        
+        print(itemssss, "itemsss")
+        print(bestellung2, "bestellung2")
         cell.bestellungsText.text = "\(itemssss)"
 
         let timeStampDate = NSDate(timeIntervalSince1970: TimeStamps[indexPath.row])

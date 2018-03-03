@@ -106,9 +106,10 @@ class LoginVC: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         if FBSDKAccessToken.current() != nil {
-            
             segueToTabBar()
-        } else{
+            print(FBSDKAccessToken.current(), "holaaa")
+        } else {
+            print("holaaaaaaaaa")
             print(FBSDKAccessToken.current(), "access")
         }
     }
