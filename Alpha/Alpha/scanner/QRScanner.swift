@@ -68,12 +68,12 @@ class QRScanner: UIViewController, AVCaptureMetadataOutputObjectsDelegate, CLLoc
             if let dict = snapshot.value as? [String: AnyObject]{
                 let qrbar = QRBereich(dictionary: dict)
                 self.qrbarname.append(qrbar.Name!)
-                let qrBarAdresse = qrbar.Adresse!
-                //                self.qrbaradresse.append(qrbar.Adresse!)
+        
+                self.qrbaradresse.append(qrbar.Adresse!)
                 
                 print(self.qrbarname)
-              
-                CLGeocoder().geocodeAddressString(qrBarAdresse, completionHandler: { (placemarks, error) -> Void in
+                print(self.qrbaradresse, "ADrESs!!")
+                CLGeocoder().geocodeAddressString(self.qrbaradresse, completionHandler: { (placemarks, error) -> Void in
                     
                     if let placemark = placemarks?[0] {
                         let location = placemark.location
@@ -100,7 +100,7 @@ class QRScanner: UIViewController, AVCaptureMetadataOutputObjectsDelegate, CLLoc
         print (distancebar!, " entfernung")
         let distanceint = Int(distancebar!)
         
-        if distanceint < 80 {
+        if distanceint < 50 {
             
             let alert = UIAlertController(title: "Erfolgreich", message: "Du bist bei \(self.qrbarname)!", preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "Weiter", style: .default, handler:{ (action) in self.performSegue(withIdentifier: "scansegue", sender: self)}))
@@ -123,6 +123,7 @@ class QRScanner: UIViewController, AVCaptureMetadataOutputObjectsDelegate, CLLoc
         if segue.identifier == "scansegue"{
             let vc = segue.destination as! PageViewController2
             vc.name = qrbarname
+            print(qrbaradresse, "scanner!!!!!!!!")
             vc.adresse = qrbaradresse
         }
     }

@@ -121,8 +121,13 @@ class votevc: UIViewController, PulleyDrawerViewControllerDelegate {
     
     }
    
+    
+    
+    
+    
     // Pulley
-
+    
+    
     func collapsedDrawerHeight(bottomSafeArea: CGFloat) -> CGFloat {
         return 102.0
     }
@@ -134,5 +139,7 @@ class votevc: UIViewController, PulleyDrawerViewControllerDelegate {
     func supportedDrawerPositions() -> [PulleyPosition] {
         return PulleyPosition.all
     }
+    
+    
 
 }
