@@ -15,6 +15,7 @@ protocol ExpandableHeaderViewDelegate {
 
 class ExpandableHeaderView: UITableViewHeaderFooterView {
     
+    
     var delegate: ExpandableHeaderViewDelegate?
     var section: Int!
     var tableView = UITableView()
@@ -45,7 +46,9 @@ class ExpandableHeaderView: UITableViewHeaderFooterView {
     override func layoutSubviews() {
         super.layoutSubviews()
         self.textLabel?.textColor = UIColor.white
-        self.contentView.backgroundColor = UIColor.darkGray
+        self.textLabel?.font = UIFont.boldSystemFont(ofSize: 32.0)
+        self.textLabel?.textAlignment = .center
+        self.contentView.backgroundColor = UIColor(red: 185.0/255.0, green: 170.0/255.0, blue: 140.0/255.0, alpha: 1.0)
   
     }
     
