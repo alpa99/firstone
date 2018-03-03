@@ -550,7 +550,6 @@ performSegue(withIdentifier: "wirdabgeschickt", sender: self)
         
         return 15
         
-<<<<<<< HEAD
     }
     
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
@@ -559,27 +558,10 @@ performSegue(withIdentifier: "wirdabgeschickt", sender: self)
         return view
     }
     
-=======
-    }
-    
-    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-        let view = UIView()
-        view.backgroundColor = UIColor.clear
-        return view
-    }
-    
->>>>>>> 26338e48afdae35a9ce8fd594b7559095aa7f79b
     
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let header = ExpandableHeaderView()
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-    
-=======
->>>>>>> ef9a2772a54e525640dbb56322e806fa1d89e825
->>>>>>> 26338e48afdae35a9ce8fd594b7559095aa7f79b
         if tableView == bestellungTableView {
             
             header.customInit(tableView: tableView, title: sections[section].genre, section: section, delegate: self as ExpandableHeaderViewDelegate)
