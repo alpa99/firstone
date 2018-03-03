@@ -11,8 +11,7 @@ import Firebase
 import AVFoundation
 import CoreLocation
 
-var ergebnis = 0
-var barnummer = 0
+
 
 class QRScanner: UIViewController, AVCaptureMetadataOutputObjectsDelegate, CLLocationManagerDelegate {
     
@@ -24,7 +23,9 @@ class QRScanner: UIViewController, AVCaptureMetadataOutputObjectsDelegate, CLLoc
     var video = AVCaptureVideoPreviewLayer()
     let session = AVCaptureSession()
     var locationManager = CLLocationManager()
-    var distancebar = 0.0
+    var ergebnis = 0
+    var barnummer = 0
+    
     var light = 0
     
     // OUTLETS
@@ -69,7 +70,26 @@ class QRScanner: UIViewController, AVCaptureMetadataOutputObjectsDelegate, CLLoc
     
     // FUNC
     func metadataOutput(_ output: AVCaptureMetadataOutput, didOutput metadataObjects: [AVMetadataObject], from connection: AVCaptureConnection){
-        
+        print("lego")
+        if CLLocationManager.authorizationStatus() != .authorizedWhenInUse{
+            let alert = UIAlertController(title: "Fehler", message: "Wir benötigen zuerst deinen        Standort", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Einstellungen", style: UIAlertActionStyle.default, handler: { (alert: UIAlertAction!) in
+                print("")
+                if let url = URL(string:UIApplicationOpenSettingsURLString) {
+                    if UIApplication.shared.canOpenURL(url) {
+                        UIApplication.shared.open(url, options: [:], completionHandler: nil
+                        )}
+                }
+            }))
+            alert.addAction(UIAlertAction(title: "Abbrechen", style: .default, handler:{ (action) in self.session.startRunning()}))
+            
+            
+            self.present(alert, animated: true, completion: nil)
+            self.session.startRunning()
+        }
+        else{
+            ergebnis = 0
+            barnummer = 0
         
         if metadataObjects.count != 0 {
             
@@ -94,7 +114,7 @@ class QRScanner: UIViewController, AVCaptureMetadataOutputObjectsDelegate, CLLoc
                     }
                 }
             }
-        }
+            }}
     }
     
     func fetchData() {
@@ -133,6 +153,8 @@ class QRScanner: UIViewController, AVCaptureMetadataOutputObjectsDelegate, CLLoc
     
     func distanceCondition (locat: CLLocation){
         
+        
+    
         print(locat, "LOCAT")
         let distancebar = self.locationManager.location?.distance(from: locat)
         print (distancebar!, " entfernung")
@@ -154,7 +176,7 @@ class QRScanner: UIViewController, AVCaptureMetadataOutputObjectsDelegate, CLLoc
             
             
             
-        }
+            }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -163,12 +185,15 @@ class QRScanner: UIViewController, AVCaptureMetadataOutputObjectsDelegate, CLLoc
             vc.name = qrbarname
             print(qrbaradresse, "scanner!!!!!!!!")
             vc.adresse = qrbaradresse
+            
         }
     }
     // OTHERS
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+       
         
         locationManager.requestWhenInUseAuthorization()
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
@@ -202,6 +227,10 @@ class QRScanner: UIViewController, AVCaptureMetadataOutputObjectsDelegate, CLLoc
     
     override func viewWillAppear(_ animated: Bool) {
         session.startRunning()
+        qrbarname = ""
+        qrbaradresse = ""
+        ergebnis = 0
+        barnummer = 0
     }
     
     override func didReceiveMemoryWarning() {
