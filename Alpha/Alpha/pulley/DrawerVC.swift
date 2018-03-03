@@ -91,7 +91,7 @@ class DrawerVC: UIViewController, PulleyDrawerViewControllerDelegate, UITableVie
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellID, for: indexPath)
-        
+        cell.backgroundColor = UIColor.clear
       //  let bar = bars[indexPath.row]
         
         let bar : BarInfos

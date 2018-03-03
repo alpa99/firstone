@@ -108,6 +108,8 @@ class SpeisekarteVC: UIViewController, UITableViewDataSource, UITableViewDelegat
     
     // TABLE
     
+     
+    
     func numberOfSections(in tableView: UITableView) -> Int {
         return sections.count
     }

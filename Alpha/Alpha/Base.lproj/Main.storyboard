@@ -271,6 +271,9 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="hintergrund" translatesAutoresizingMaskIntoConstraints="NO" id="T39-0X-yu7">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                            </imageView>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="slC-gR-7pe">
                                 <rect key="frame" x="163" y="517" width="48" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -281,6 +284,12 @@
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="T39-0X-yu7" secondAttribute="bottom" id="Rlv-Iw-pQX"/>
+                            <constraint firstItem="T39-0X-yu7" firstAttribute="top" secondItem="Qlj-eL-8BC" secondAttribute="top" id="S4x-ps-viW"/>
+                            <constraint firstItem="T39-0X-yu7" firstAttribute="trailing" secondItem="ZWr-P5-F8h" secondAttribute="trailing" id="hrn-RH-mPA"/>
+                            <constraint firstItem="T39-0X-yu7" firstAttribute="leading" secondItem="ZWr-P5-F8h" secondAttribute="leading" id="zl4-wJ-m9M"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="ZWr-P5-F8h"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="" image="Tabrechts" landscapeImage="Tabrechts" selectedImage="Tabrechts" id="Lcv-Np-x9d">
@@ -292,7 +301,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FfX-KQ-cr5" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-282" y="1446"/>
+            <point key="canvasLocation" x="-282.39999999999998" y="1445.1274362818592"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="bCW-ss-99Y">
@@ -301,9 +310,10 @@
                     <tabBarItem key="tabBarItem" image="Tabmitte" selectedImage="Tabmitte" id="Urc-vF-JHi">
                         <inset key="imageInsets" minX="0.0" minY="0.0" maxX="0.0" maxY="-10"/>
                     </tabBarItem>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="qUq-yz-iwN">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" barStyle="black" id="qUq-yz-iwN">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="barTintColor" red="0.3529411764705882" green="0.3529411764705882" blue="0.3529411764705882" alpha="0.0" colorSpace="calibratedRGB"/>
                     </navigationBar>
                     <connections>
                         <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="Bqi-R7-rk5"/>
@@ -376,7 +386,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" restorationIdentifier="square" image="square" translatesAutoresizingMaskIntoConstraints="NO" id="oMC-KD-mEQ">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" restorationIdentifier="square" image="scanner_55inch_gold" translatesAutoresizingMaskIntoConstraints="NO" id="oMC-KD-mEQ">
                                 <rect key="frame" x="67" y="213" width="240" height="240"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
@@ -505,7 +515,7 @@
                                     <action selector="BackBtn:" destination="M2X-w1-nQL" eventType="touchUpInside" id="KEj-H2-QyA"/>
                                 </connections>
                             </button>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="oeO-bl-oRl">
+                            <tableView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="oeO-bl-oRl">
                                 <rect key="frame" x="16" y="121" width="343" height="287"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -518,7 +528,6 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </tableViewCellContentView>
-                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="itemCell" id="kgp-30-Tqh">
                                         <rect key="frame" x="0.0" y="72" width="343" height="44"/>
@@ -1409,7 +1418,7 @@
         <image name="Tabmitte" width="40" height="40"/>
         <image name="Tabrechts" width="40" height="40"/>
         <image name="hintergrund" width="375" height="667"/>
-        <image name="square" width="623" height="621"/>
+        <image name="scanner_55inch_gold" width="397" height="397"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="LGn-E9-Y7b"/>

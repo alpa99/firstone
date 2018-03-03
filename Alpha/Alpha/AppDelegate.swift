@@ -20,6 +20,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         FirebaseApp.configure()
          SDKApplicationDelegate.shared.application(application, didFinishLaunchingWithOptions: launchOptions)
+        let myColor = UIColor(red: 90.0/255.0, green: 90.0/255.0, blue: 90.0/255.0, alpha: 1.0)
+        UINavigationBar.appearance().tintColor = myColor
         return true
     }
     

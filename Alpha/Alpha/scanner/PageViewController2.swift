@@ -22,6 +22,7 @@ class PageViewController2: UIPageViewController, UIPageViewControllerDelegate, U
     override func viewDidLoad() {
         print(name, "hierpageview")
           print(adresse, "pageveiw!!!!!!!!")
+        self.navigationItem.title = name
         super.viewDidLoad()
         self.dataSource = self
         self.delegate = self

@@ -564,6 +564,7 @@ class BestellungVC2: UIViewController, UITableViewDataSource, UITableViewDelegat
         if tableView == bestellungTableView {
             let cell = Bundle.main.loadNibNamed("BestellenCell", owner: self, options: nil)?.first as! BestellenCell
             cell.delegate = self
+            cell.backgroundColor = UIColor.clear
             
             if (sections[indexPath.section].expanded){
                 cell.itemNameLbl.text = "\(sections[indexPath.section].items[indexPath.row])"
