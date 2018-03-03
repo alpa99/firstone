@@ -535,7 +535,7 @@ performSegue(withIdentifier: "wirdabgeschickt", sender: self)
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if (sections[indexPath.section].expanded) {
             if tableView == bestellungTableView {
-            return 71
+            return 43
             } else {
                 return 90
             }
@@ -593,6 +593,10 @@ performSegue(withIdentifier: "wirdabgeschickt", sender: self)
                 cell.itemNameLbl.isHidden = true
                 cell.itemPreisLbl.isHidden = true
                 cell.itemAddBtn.isHidden = true
+                cell.backgroudn2.isHidden = true
+                cell.strich.isHidden = true
+                cell.liter.isHidden = true
+        
                 return cell
                 
             }
@@ -618,6 +622,7 @@ performSegue(withIdentifier: "wirdabgeschickt", sender: self)
                 cell.myItemName.isHidden = true
                 cell.myItemDescription.isHidden = true
                 cell.myEntfernenButton.isHidden = true
+                
                 return cell
             }
             
@@ -649,8 +654,8 @@ performSegue(withIdentifier: "wirdabgeschickt", sender: self)
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         let touch: UITouch? = touches.first
-    
-        if touch?.view != addItemView || touch?.view != myBestellungView  {
+        
+        if touch?.view != addItemView {
             dismissMyBestellungView()
             animateOut()
             

@@ -32,8 +32,11 @@ class BestellenCell: UITableViewCell {
     
     @IBOutlet weak var itemAddBtn: UIButton!
     
+    @IBOutlet weak var backgroudn2: UIView!
     
+    @IBOutlet weak var strich: UIView!
     
+    @IBOutlet weak var liter: UILabel!
     // ACTIONS
     
 
@@ -45,6 +48,8 @@ class BestellenCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        backgroudn2.layer.cornerRadius = 4
+        strich.layer.cornerRadius = 4
     
     }
 
