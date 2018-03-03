@@ -19,6 +19,12 @@ class UserVC: UIViewController {
         performSegue(withIdentifier: "logout", sender: self)
     }
     
+    @IBAction func meineBestellung(_ sender: UIButton) {
+        performSegue(withIdentifier: "orderprofile", sender: self)
+        
+    }
+    
+    
     // OTHERS
     override func viewDidLoad() {
         super.viewDidLoad()

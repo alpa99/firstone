@@ -53,6 +53,7 @@
 		4EEB60831FDF2BAB0003BA0E /* PageViewController2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EEB60821FDF2BAB0003BA0E /* PageViewController2.swift */; };
 		CC7293123DD294CC7591DAA2 /* Pods_AlphaUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AC56C89A3508D2D118AE9C1D /* Pods_AlphaUITests.framework */; };
 		FCBCA28E5975849AF85ED466 /* Pods_AlphaTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D92BA6E8AA26233EE5256989 /* Pods_AlphaTests.framework */; };
+		FD0DDBFA204AFB3A00E40E81 /* ProfileVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD0DDBF9204AFB3A00E40E81 /* ProfileVC.swift */; };
 		FDE3FCFB2049AD6F00A231BA /* pin.png in Resources */ = {isa = PBXBuildFile; fileRef = FDE3FCFA2049AD6F00A231BA /* pin.png */; };
 		FF80403D46CB28555C94CA04 /* Pods_Alpha.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A57EBBF91158C1B719B66FE6 /* Pods_Alpha.framework */; };
 /* End PBXBuildFile section */
@@ -135,6 +136,7 @@
 		AC56C89A3508D2D118AE9C1D /* Pods_AlphaUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AlphaUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D92BA6E8AA26233EE5256989 /* Pods_AlphaTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AlphaTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		EA15B0E38B10A65CA61D6CB7 /* Pods-AlphaUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AlphaUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-AlphaUITests/Pods-AlphaUITests.release.xcconfig"; sourceTree = "<group>"; };
+		FD0DDBF9204AFB3A00E40E81 /* ProfileVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileVC.swift; sourceTree = "<group>"; };
 		FDE3FCFA2049AD6F00A231BA /* pin.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = pin.png; path = "../../../../../Downloads/OneDrive-2018-03-02-3/pin.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -244,6 +246,7 @@
 				08302E8E2046EAFB00FCB996 /* Bilder */,
 				4E1664BD1FBF12020038EFB5 /* votevc.swift */,
 				4E2FF0BC1FEDDC850084F0A7 /* GMVC.swift */,
+				FD0DDBF9204AFB3A00E40E81 /* ProfileVC.swift */,
 			);
 			path = Alpha;
 			sourceTree = "<group>";
@@ -680,6 +683,7 @@
 				4EC248021F9950E700910AA8 /* LocationVC.swift in Sources */,
 				084D9D42203B1C7D008601B6 /* MyBestellungCell.swift in Sources */,
 				08210EE11FB7B09000EABA32 /* KellnerCell.swift in Sources */,
+				FD0DDBFA204AFB3A00E40E81 /* ProfileVC.swift in Sources */,
 				4E66E16D1FD49CFA005E87E3 /* PageViewController.swift in Sources */,
 				4E2FF0BD1FEDDC850084F0A7 /* GMVC.swift in Sources */,
 				4E1664BE1FBF12020038EFB5 /* votevc.swift in Sources */,
