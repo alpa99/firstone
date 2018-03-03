@@ -21,7 +21,11 @@ class LoginVC: UIViewController {
     var userFbName = ""
     var userFbEmail = ""
     
-
+    
+    // OUTLETS
+    @IBOutlet weak var loginBtn: UIButton!
+    
+    
     // ACTIONS
     @IBAction func loginTapped(_ sender: UIButton) {
         
@@ -115,6 +119,9 @@ class LoginVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        loginBtn.layer.cornerRadius = 4
+
 
         // Do any additional setup after loading the view.
     }

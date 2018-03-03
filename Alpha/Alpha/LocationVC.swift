@@ -115,12 +115,12 @@ class LocationVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate
         
       //  pinView!.image = UIImage(named: "pin.png")
         let pinImage = UIImage(named: "pin.png")
-        let size = CGSize(width: 35, height: 70)
+        let size = CGSize(width: 35, height: 72)
         UIGraphicsBeginImageContext(size)
-        pinImage!.draw(in: CGRect(x:0, y:-5, width:size.width, height:size.height))
+        pinImage!.draw(in: CGRect(x:0, y:0, width:size.width, height:size.height))
         let resizedImage = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
-        pinView!.layer.anchorPoint = CGPoint(x: 0.6, y: 0.8)
+        pinView!.layer.anchorPoint = CGPoint(x: 0.6, y: 1.0)
         pinView!.image = resizedImage
         
         return pinView
