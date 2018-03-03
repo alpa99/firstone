@@ -106,7 +106,10 @@ class QRScanner: UIViewController, AVCaptureMetadataOutputObjectsDelegate, CLLoc
                         }else {
                             let alert = UIAlertController(title: "Fehler", message: "Dies ist kein Smolo-Code", preferredStyle: .alert)
                             alert.addAction(UIAlertAction(title: "Abbrechen", style: .default, handler:{ (action) in self.session.startRunning()}))
-                            
+                            qrbarname = ""
+                            qrbaradresse = ""
+                            ergebnis = 0
+                            barnummer = 0
                             self.present(alert, animated: true, completion: nil)
                             self.session.startRunning()
                             return}
@@ -126,7 +129,7 @@ class QRScanner: UIViewController, AVCaptureMetadataOutputObjectsDelegate, CLLoc
             if let dict = snapshot.value as? [String: AnyObject]{
                 let qrbar = QRBereich(dictionary: dict)
                 self.qrbarname.append(qrbar.Name!)
-        
+                
                 self.qrbaradresse.append(qrbar.Adresse!)
                 
                 print(self.qrbarname)
@@ -138,14 +141,17 @@ class QRScanner: UIViewController, AVCaptureMetadataOutputObjectsDelegate, CLLoc
                         self.distanceCondition(locat: location!)}
                 })
             }else {
-                    let alert = UIAlertController(title: "Fehler", message: "Dies ist kein Smolo-Code", preferredStyle: .alert)
-                    alert.addAction(UIAlertAction(title: "Abbrechen", style: .default, handler:{ (action) in self.session.startRunning()}))
-                    
-                    self.present(alert, animated: true, completion: nil)
-                    self.session.startRunning()
-                    return}
-            }
-        
+                let alert = UIAlertController(title: "Fehler", message: "Dies ist kein Smolo-Code", preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "Abbrechen", style: .default, handler:{ (action) in self.session.startRunning()}))
+                self.qrbarname = ""
+                self.qrbaradresse = ""
+                self.ergebnis = 0
+                self.barnummer = 0
+                self.present(alert, animated: true, completion: nil)
+                self.session.startRunning()
+                return}
+        }
+            
             
             , withCancel: nil)
         
@@ -171,6 +177,10 @@ class QRScanner: UIViewController, AVCaptureMetadataOutputObjectsDelegate, CLLoc
             let alert = UIAlertController(title: "Fehler", message: "Du bist nicht in der Nähe von \(self.qrbarname)!", preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "Abbrechen", style: .default, handler:{ (action) in self.session.startRunning()}))
             
+            qrbarname = ""
+            qrbaradresse = ""
+            ergebnis = 0
+            barnummer = 0
             self.present(alert, animated: true, completion: nil)
             
             
