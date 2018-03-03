@@ -25,9 +25,44 @@ class QRScanner: UIViewController, AVCaptureMetadataOutputObjectsDelegate, CLLoc
     let session = AVCaptureSession()
     var locationManager = CLLocationManager()
     var distancebar = 0.0
-    
+    var flash = 0
     // OUTLETS
     @IBOutlet weak var square: UIImageView!
+    @IBOutlet weak var flashlight: UIButton!
+    
+    @IBAction func flashlight(_ sender: UIButton) { if  flash == 0 {
+        flash += 1
+        toggleTorch(on: true)
+    }else {
+        flash += -1
+        toggleTorch(on: false)
+        }
+        
+        
+    }
+    //Taschenlampe
+    func toggleTorch(on: Bool) {
+        guard let device = AVCaptureDevice.default(for: AVMediaType.video)
+            else {return}
+        
+        if device.hasTorch {
+            do {
+                try device.lockForConfiguration()
+                
+                if on == true {
+                    device.torchMode = .on
+                } else {
+                    device.torchMode = .off
+                }
+                
+                device.unlockForConfiguration()
+            } catch {
+                print("Torch could not be used")
+            }
+        } else {
+            print("Torch is not available")
+        }
+    }
     
     // FUNC
     func metadataOutput(_ output: AVCaptureMetadataOutput, didOutput metadataObjects: [AVMetadataObject], from connection: AVCaptureConnection){
@@ -156,7 +191,7 @@ class QRScanner: UIViewController, AVCaptureMetadataOutputObjectsDelegate, CLLoc
         video.frame = view.layer.bounds
         view.layer.addSublayer(video)
         self.view.bringSubview(toFront: square)
-        
+        self.view.bringSubview(toFront: flashlight)
         session.startRunning()
         
         
