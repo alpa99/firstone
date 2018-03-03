@@ -10,7 +10,7 @@ import UIKit
 import Pulley
 import Firebase
 
-class DrawerVC: UIViewController, PulleyDrawerViewControllerDelegate, UITableViewDataSource, UITableViewDelegate, UISearchResultsUpdating, UISearchBarDelegate {
+class DrawerVC: UIViewController, PulleyDrawerViewControllerDelegate, UITableViewDataSource, UITableViewDelegate, UISearchResultsUpdating, UISearchBarDelegate, PulleyCellDelegate {
     
     // VARS
     var bars = [BarInfos]()
@@ -90,7 +90,13 @@ class DrawerVC: UIViewController, PulleyDrawerViewControllerDelegate, UITableVie
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: cellID, for: indexPath)
+        
+        let cell = Bundle.main.loadNibNamed("PulleyCell", owner: self, options: nil)?.first as! PulleyCell
+        
+        cell.delegate = self
+        
+ 
+//        let cell = tableView.dequeueReusableCell(withIdentifier: cellID, for: indexPath)
         cell.backgroundColor = UIColor.clear
       //  let bar = bars[indexPath.row]
         
@@ -102,10 +108,14 @@ class DrawerVC: UIViewController, PulleyDrawerViewControllerDelegate, UITableVie
             bar = bars[indexPath.row]
         }
             
-        
-        cell.textLabel?.text = bar.Name
+        cell.barName.text = bar.Name
         
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+ 
+        return 112.0
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -172,8 +182,7 @@ class DrawerVC: UIViewController, PulleyDrawerViewControllerDelegate, UITableVie
         definesPresentationContext = true
         //BarTV.tableHeaderView = searchController.searchBar
         searchController.searchBar.delegate = self
-        
-        // Add the search bar as a subview of the UIView you added above the table view
+            // Add the search bar as a subview of the UIView you added above the table view
         self.topView.addSubview(self.searchController.searchBar)
         // Call sizeToFit() on the search bar so it fits nicely in the UIView
         self.searchController.searchBar.sizeToFit()

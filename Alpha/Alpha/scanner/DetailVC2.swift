@@ -49,7 +49,7 @@ class DetailVC2: UIViewController, PageObservation2{
         
         print("vgv2", barname)
         var ref: DatabaseReference!
-        self.NameLbl.text = self.barname
+//        self.NameLbl.text = self.barname
         ref = Database.database().reference()
         ref.child("BarInfo").child("\(barname)").observe(.value, with: { (snapshot) in
             

@@ -48,6 +48,12 @@ class BestellenCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        
+        itemNameLbl.textColor = UIColor.white
+        itemAddBtn.tintColor = UIColor.white
+        itemPreisLbl.textColor = UIColor.white
+        liter.textColor = UIColor.white
+
         backgroudn2.layer.cornerRadius = 4
         strich.layer.cornerRadius = 4
     
