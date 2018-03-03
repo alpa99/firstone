@@ -23,6 +23,7 @@
 		0895B3631F9B5F28007D97DE /* UserVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0895B3621F9B5F28007D97DE /* UserVC.swift */; };
 		08C881671F9962EB00AD8F20 /* BarInfos.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C881661F9962EB00AD8F20 /* BarInfos.swift */; };
 		08C881691F9963F100AD8F20 /* BarAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C881681F9963F100AD8F20 /* BarAnnotation.swift */; };
+		08C8CC1A204AC7CC00E2D001 /* pin.png in Resources */ = {isa = PBXBuildFile; fileRef = 08C8CC19204AC7CC00E2D001 /* pin.png */; };
 		08EF4C401F9CF0FE00F01096 /* BestellungInfos.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EF4C3F1F9CF0FE00F01096 /* BestellungInfos.swift */; };
 		08EF4C481F9CFE9800F01096 /* BestellungVC2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EF4C471F9CFE9800F01096 /* BestellungVC2.swift */; };
 		08EF4C4A1F9CFFA500F01096 /* ExpandTVSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EF4C491F9CFFA500F01096 /* ExpandTVSection.swift */; };
@@ -53,7 +54,6 @@
 		4EEB60831FDF2BAB0003BA0E /* PageViewController2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EEB60821FDF2BAB0003BA0E /* PageViewController2.swift */; };
 		CC7293123DD294CC7591DAA2 /* Pods_AlphaUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AC56C89A3508D2D118AE9C1D /* Pods_AlphaUITests.framework */; };
 		FCBCA28E5975849AF85ED466 /* Pods_AlphaTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D92BA6E8AA26233EE5256989 /* Pods_AlphaTests.framework */; };
-		FDE3FCFB2049AD6F00A231BA /* pin.png in Resources */ = {isa = PBXBuildFile; fileRef = FDE3FCFA2049AD6F00A231BA /* pin.png */; };
 		FF80403D46CB28555C94CA04 /* Pods_Alpha.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A57EBBF91158C1B719B66FE6 /* Pods_Alpha.framework */; };
 /* End PBXBuildFile section */
 
@@ -92,6 +92,7 @@
 		0895B3621F9B5F28007D97DE /* UserVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserVC.swift; sourceTree = "<group>"; };
 		08C881661F9962EB00AD8F20 /* BarInfos.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarInfos.swift; sourceTree = "<group>"; };
 		08C881681F9963F100AD8F20 /* BarAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarAnnotation.swift; sourceTree = "<group>"; };
+		08C8CC19204AC7CC00E2D001 /* pin.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = pin.png; path = ../../../../../../Downloads/pin.png; sourceTree = "<group>"; };
 		08EF4C3F1F9CF0FE00F01096 /* BestellungInfos.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BestellungInfos.swift; sourceTree = "<group>"; };
 		08EF4C471F9CFE9800F01096 /* BestellungVC2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BestellungVC2.swift; sourceTree = "<group>"; };
 		08EF4C491F9CFFA500F01096 /* ExpandTVSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpandTVSection.swift; sourceTree = "<group>"; };
@@ -135,7 +136,6 @@
 		AC56C89A3508D2D118AE9C1D /* Pods_AlphaUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AlphaUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D92BA6E8AA26233EE5256989 /* Pods_AlphaTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AlphaTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		EA15B0E38B10A65CA61D6CB7 /* Pods-AlphaUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AlphaUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-AlphaUITests/Pods-AlphaUITests.release.xcconfig"; sourceTree = "<group>"; };
-		FDE3FCFA2049AD6F00A231BA /* pin.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = pin.png; path = "../../../../../Downloads/OneDrive-2018-03-02-3/pin.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -169,7 +169,7 @@
 		08302E8E2046EAFB00FCB996 /* Bilder */ = {
 			isa = PBXGroup;
 			children = (
-				FDE3FCFA2049AD6F00A231BA /* pin.png */,
+				08C8CC19204AC7CC00E2D001 /* pin.png */,
 				08302E8F2046EB0B00FCB996 /* hintergrund.png */,
 			);
 			path = Bilder;
@@ -448,10 +448,10 @@
 				4EC247D51F98F90500910AA8 /* LaunchScreen.storyboard in Resources */,
 				4EC247FE1F99377100910AA8 /* GoogleService-Info.plist in Resources */,
 				4EC247D21F98F90500910AA8 /* Assets.xcassets in Resources */,
-				FDE3FCFB2049AD6F00A231BA /* pin.png in Resources */,
 				084D9D43203B1C7D008601B6 /* MyBestellungCell.xib in Resources */,
 				08F050E81FBE487F0097C954 /* SpeisekarteCell.xib in Resources */,
 				4EC247D01F98F90500910AA8 /* Main.storyboard in Resources */,
+				08C8CC1A204AC7CC00E2D001 /* pin.png in Resources */,
 				08210EE61FB83AE300EABA32 /* BestellenCell.xib in Resources */,
 				08210EE21FB7B09000EABA32 /* KellnerCell.xib in Resources */,
 			);
@@ -851,11 +851,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 84R3VSG74G;
+				DEVELOPMENT_TEAM = NR8A659GLT;
 				INFOPLIST_FILE = Alpha/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = AM.Alpha1;
+				PRODUCT_BUNDLE_IDENTIFIER = AM.Alpha122;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -868,11 +868,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 84R3VSG74G;
+				DEVELOPMENT_TEAM = NR8A659GLT;
 				INFOPLIST_FILE = Alpha/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = AM.Alpha1;
+				PRODUCT_BUNDLE_IDENTIFIER = AM.Alpha122;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

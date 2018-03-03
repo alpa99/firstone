@@ -20,7 +20,9 @@ class KellnerVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     var bestellunggenres = [String: [String: Int]]()
     var bestellung2 = [String: [String: [String: Int]]]()
     var itemssss = [String: [String: Int]]()
-    
+    var cellGenres = [String]()
+    var cellItems = [String]()
+    var cellMengen = [Int]()
     
     var items = [String]()
     var mengen = [Int]()
@@ -54,6 +56,7 @@ class KellnerVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
                 self.genres.append(snapshot.key)
             }
             
+            print(self.genres, "genres")
             
         }, withCancel: nil)
         
@@ -171,12 +174,29 @@ class KellnerVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         let cell = Bundle.main.loadNibNamed("KellnerCell", owner: self, options: nil)?.first as! KellnerCell
         
         self.itemssss = bestellung2[bestellungIDs[indexPath.row]]!
-//        for (genre, itemsDictionary) in itemssss {
-//            for (items, menge) in itemsDictionary {
-//                cell.bestellungsText.text = "\(itemsDictionary) \n"
-//
-//            }
-//        }
+        
+        
+        for (genre, bestellteitems) in itemssss {
+            
+            cellGenres.append(genre)
+            
+            for (item, menge) in bestellteitems {
+                
+                cellItems.append(item)
+                cellMengen.append(menge)
+                
+            }
+            
+        }
+        
+        print(cellGenres, "cellgenres")
+        print(cellItems, "cellitems")
+        print(cellMengen, "cellmengen")
+        
+        cellGenres.removeAll()
+        cellItems.removeAll()
+        cellMengen.removeAll()
+        
         cell.bestellungsText.text = "\(itemssss)"
 
         let timeStampDate = NSDate(timeIntervalSince1970: TimeStamps[indexPath.row])
