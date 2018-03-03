@@ -18,7 +18,6 @@ class BestellungVC2: UIViewController, UITableViewDataSource, UITableViewDelegat
 
     // VARS#
 
-    
     var keys = [String: Int]()
     var bestellteItemsDictionary = [String: [String: Int]]()
     var yy = [String]()
@@ -213,6 +212,7 @@ class BestellungVC2: UIViewController, UITableViewDataSource, UITableViewDelegat
                 let distanceint = Int(distancebar!)
                 if distanceint < 50 {
                 print("distance ist ok")
+                    self.seugueAbschicken()
                     self.handleBestellung()
                 }else{
                     print ("distance ist nicht ok ")
@@ -226,6 +226,7 @@ class BestellungVC2: UIViewController, UITableViewDataSource, UITableViewDelegat
         })
         
     }
+
     
     @IBAction func dismissPopUp(_ sender: Any) {
         animateOut()
@@ -300,6 +301,12 @@ class BestellungVC2: UIViewController, UITableViewDataSource, UITableViewDelegat
     
 
     // FUNCTIONS
+    
+    
+    func seugueAbschicken(){
+    
+performSegue(withIdentifier: "wirdabgeschickt", sender: self)
+    }
     
     func getValue (){
         var datref: DatabaseReference!
@@ -522,7 +529,7 @@ class BestellungVC2: UIViewController, UITableViewDataSource, UITableViewDelegat
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 44
+        return 59
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -540,12 +547,21 @@ class BestellungVC2: UIViewController, UITableViewDataSource, UITableViewDelegat
     }
     
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        return 2
+        
+        return 15
+        
     }
+    
+    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        let view = UIView()
+        view.backgroundColor = UIColor.clear
+        return view
+    }
+    
+    
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let header = ExpandableHeaderView()
-        
         if tableView == bestellungTableView {
             
             header.customInit(tableView: tableView, title: sections[section].genre, section: section, delegate: self as ExpandableHeaderViewDelegate)
@@ -565,6 +581,7 @@ class BestellungVC2: UIViewController, UITableViewDataSource, UITableViewDelegat
             let cell = Bundle.main.loadNibNamed("BestellenCell", owner: self, options: nil)?.first as! BestellenCell
             cell.delegate = self
             cell.backgroundColor = UIColor.clear
+            
             
             if (sections[indexPath.section].expanded){
                 cell.itemNameLbl.text = "\(sections[indexPath.section].items[indexPath.row])"
