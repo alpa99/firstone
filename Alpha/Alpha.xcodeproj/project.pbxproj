@@ -242,7 +242,6 @@
 				4EC247D31F98F90500910AA8 /* LaunchScreen.storyboard */,
 				4EC247D61F98F90500910AA8 /* Info.plist */,
 				081461F31F9927FA00121943 /* LoginVC.swift */,
-				08779BA41FB7898400B99D19 /* LoginKellnerVC.swift */,
 				4EC248011F9950E700910AA8 /* LocationVC.swift */,
 				0895B3621F9B5F28007D97DE /* UserVC.swift */,
 				08B85365203CE6EB008DA787 /* Cells */,
@@ -291,6 +290,7 @@
 		4EC5C4B91FFC0A39008CE449 /* kellner */ = {
 			isa = PBXGroup;
 			children = (
+				08779BA41FB7898400B99D19 /* LoginKellnerVC.swift */,
 				082BD2DA1FF702F5004106A8 /* KellnerTabBarController.swift */,
 				088728671FB7A50D00FF2448 /* KellnerVC.swift */,
 				082BD2DC1FF705DE004106A8 /* KellnerAngenommenVC.swift */,

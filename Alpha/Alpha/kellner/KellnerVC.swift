@@ -42,8 +42,16 @@ class KellnerVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     @IBAction func kellnerLogOutTapped(_ sender: Any) {
         
-        performSegue(withIdentifier: "kellnerLoggedOut", sender: self)
-    }
+            if Auth.auth().currentUser != nil {
+                do {
+                    try Auth.auth().signOut()
+                    performSegue(withIdentifier: "kellnerLoggedOut", sender: self)
+                    
+                } catch let error as NSError {
+                    print(error.localizedDescription)
+                }
+            }
+        }
     
     // FUNCS
     
@@ -72,6 +80,7 @@ class KellnerVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
                 if bestellungInfos.angenommen == false {
                     self.loadBestellung(BestellungID: snapshot.key)
                     self.bestellungIDs.append(snapshot.key)
+                    print(self.bestellungIDs, "das ist bestellungIDS")
                     
                 }
             }
@@ -99,12 +108,14 @@ class KellnerVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
                     self.bestellungenTV.reloadData()
                 } )
             }
-            
+            print(self.genres, "das sind die genres")
             for genre in self.genres {
                 if snapshot.hasChild(genre) == true {
                     self.bestellunggenres.updateValue(snapshot.childSnapshot(forPath: genre).value as! [String : Int], forKey: genre)
                     self.bestellung2.updateValue(self.bestellunggenres, forKey: BestellungID)
-                    
+                    print(self.bestellung2, "das ist bestellung2")
+                    print(self.bestellunggenres, "das ist bestellunggenres")
+
                 }
                 self.bestellungenTV.reloadData()
             }

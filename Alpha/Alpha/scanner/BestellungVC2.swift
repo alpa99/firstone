@@ -31,6 +31,8 @@ class BestellungVC2: UIViewController, UITableViewDataSource, UITableViewDelegat
     
     var barname = " "
     var baradresse = " "
+    var tischnummer = 0
+    var KellnerID = ""
     
     var items = [String]()
     var itemsPreise = [Int]()
@@ -209,7 +211,7 @@ class BestellungVC2: UIViewController, UITableViewDataSource, UITableViewDelegat
                 let distancebar = self.locationManager.location?.distance(from: locat!)
                 print (distancebar!, " entfernung")
                 let distanceint = Int(distancebar!)
-                if distanceint < 50 {
+                if distanceint < 80 {
                 print("distance ist ok")
                     self.seugueAbschicken()
                     self.handleBestellung()
@@ -339,13 +341,11 @@ performSegue(withIdentifier: "wirdabgeschickt", sender: self)
     }
     
     func fetchSpeisekarte(ii: String, z: Int){
-    print("1")
         var datref: DatabaseReference!
         datref = Database.database().reference()
         
         
         datref.child("Speisekarten").child("\(self.barname)").child(ii).observe(.childAdded, with: { (snapshot) in
-            print("2")
 
             if let dictionary = snapshot.value as? [String: AnyObject]{
                 let shisha = SpeisekarteInfos(dictionary: dictionary)
@@ -362,7 +362,6 @@ performSegue(withIdentifier: "wirdabgeschickt", sender: self)
                 }
             }
         }, withCancel: nil)
-        print("3")
 
     }
     
@@ -372,8 +371,8 @@ performSegue(withIdentifier: "wirdabgeschickt", sender: self)
         if self.bestellteItemsDictionary.count>0{
             let timestamp = Double(NSDate().timeIntervalSince1970)
             let fromUserID = Auth.auth().currentUser!.uid
-            var values = ["toKellnerID": "Kellner1", "tischnummer": "3", "fromUserID": fromUserID , "timeStamp": timestamp, "angenommen": false] as [String : Any]
-            
+            var values = ["toKellnerID": KellnerID, "tischnummer": tischnummer, "fromUserID": fromUserID , "timeStamp": timestamp, "angenommen": false] as [String : Any]
+            print(values, "values")
             for (genre, itemDictionary) in bestellteItemsDictionary {
                 values.updateValue(itemDictionary, forKey: genre)
             }
@@ -386,7 +385,7 @@ performSegue(withIdentifier: "wirdabgeschickt", sender: self)
             let userBestellungenRef = Database.database().reference().child("userBestellungen").child(fromUserID)
             let bestellungID = childRef?.key
             userBestellungenRef.updateChildValues([bestellungID!: false])
-            let kellnerBestellungenRef = Database.database().reference().child("userBestellungen").child("Kellner1")
+            let kellnerBestellungenRef = Database.database().reference().child("userBestellungen").child(KellnerID)
             kellnerBestellungenRef.child(bestellungID!).updateChildValues(["angenommen": false])
             print(Date(timeIntervalSince1970: timestamp)) }
         else {
@@ -577,10 +576,8 @@ performSegue(withIdentifier: "wirdabgeschickt", sender: self)
     
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        print("hiiiiiiiiiiidweqe23iii")
 
         if tableView == bestellungTableView {
-            print("hiiiiiiiiiiiiii")
             let cell = Bundle.main.loadNibNamed("BestellenCell", owner: self, options: nil)?.first as! BestellenCell
             cell.delegate = self
             cell.backgroundColor = UIColor.clear
@@ -672,6 +669,9 @@ performSegue(withIdentifier: "wirdabgeschickt", sender: self)
         bestellungTableView.reloadData()
         self.barname = parentPageViewController2.name
         self.baradresse = parentPageViewController2.adresse
+        self.tischnummer = parentPageViewController2.tischnummer
+        self.KellnerID = parentPageViewController2.KellnerID
+        print(self.tischnummer, "TISCHNUMMER")
         print(self.baradresse, "viewload")
         effect = visualEffectView.effect
         visualEffectView.effect = nil

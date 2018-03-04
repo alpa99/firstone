@@ -12,6 +12,8 @@ class PageViewController2: UIPageViewController, UIPageViewControllerDelegate, U
     
     var name = " "
     var adresse = " "
+    var tischnummer = 0
+    var KellnerID = ""
     
     var pageControl = UIPageControl()
     
