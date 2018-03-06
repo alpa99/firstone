@@ -36,8 +36,8 @@ class DetailVC: UIViewController, PulleyDrawerViewControllerDelegate, PageObserv
 
         self.barname = parentPageViewController.name
 //        fetchPicsCount2()
-//        fetchPicsCount()
-        fetchpics()
+        fetchPicsCount()
+//        fetchpics()
         fetchData()
         slideshow.backgroundColor = UIColor.white
         slideshow.slideshowInterval = 0.0
@@ -95,48 +95,32 @@ class DetailVC: UIViewController, PulleyDrawerViewControllerDelegate, PageObserv
     func fetchPicsCount(){
         var refd: DatabaseReference!
         refd = Database.database().reference()
-        refd.child("BarInfo").child("\(barname)").child("Bilder").observe(.childAdded, with: { (snapshot) in
-            print(snapshot, "snapshotZZZZZZZ")
-            if let dictionary = snapshot.value as? [String: AnyObject]{
-                let counter = Bilder(dictionary: dictionary)
-                print(snapshot.value as Any, "snapshotXXXXXXXX")
-//                print(bild, "bild")
-//                self.bilder.append(bild.link!)
-
-                
-            }} , withCancel: nil)
+        refd.child("BarInfo").child("\(barname)").child("Bilder").observe(.value, with: { (snapshot) in
+            self.fetchpics(bilderCount: snapshot.childrenCount)
+        } , withCancel: nil)
     }
         
-    func fetchpics () {
-        print("SDSD")
+    func fetchpics (bilderCount: UInt) {
         var refd: DatabaseReference!
         refd = Database.database().reference()
         refd.child("BarInfo").child("\(barname)").child("Bilder").observe(.childAdded, with: { (snapshot) in
             
             if let dictionary = snapshot.value as? [String: AnyObject]{
                 let bild = Bilder(dictionary: dictionary)
-                print(snapshot.value as Any, "snapshot")
-                print(bild, "bild")
+
+                if self.bilder.contains(bild.link!) == false {
                 self.bilder.append(bild.link!)
+                }
                 
-                
-                print(self.bilder, "dfasdf")
+                if self.bilder.count == bilderCount{
 
                 for links in self.bilder{
 
                     self.sdWebImageSource2.append(SDWebImageSource(urlString: links)!)
-                    print(self.sdWebImageSource2, "sdWEB")
-                    print(self.sdWebImageSource2.count, "self.sdWebImageSource2.count")
-                    print(self.sdWebImageSource2, "source222222")
-
-                    print(self.bilder.count, "bilder.count")
-                    print("test")
-                if  self.bilder.count == snapshot.childrenCount{
 
                     self.slideshow.setImageInputs(self.sdWebImageSource2 as [InputSource])
-                    print(self.sdWebImageSource2, "WEBBBBBB")
+                    
                     }
-
                 }
                 
             }} , withCancel: nil)
