@@ -9,65 +9,137 @@
 import UIKit
 import Pulley
 import Firebase
+import ImageSlideshow
 
 class DetailVC: UIViewController, PulleyDrawerViewControllerDelegate, PageObservation{
  
     var barname = ""
     var bars = [BarInfos]()
-    var adresse = String ()
-    var bild = String ()
+    var bilder = [String]()
+    
+    var counterlink = [String]()
 
+    var adresse = String ()
+    var picture = String ()
     var parentPageViewController: PageViewController!
+    var sdWebImageSource2 = [SDWebImageSource(urlString: "")]
+    let sdWebImageSource = [SDWebImageSource(urlString: "https://images.unsplash.com/photo-1432679963831-2dab49187847?w=1080")!, SDWebImageSource(urlString: "https://images.unsplash.com/photo-1447746249824-4be4e1b76d66?w=1080")!, SDWebImageSource(urlString: "https://images.unsplash.com/photo-1463595373836-6e0b0a8ee322?w=1080")!]
 
     func getParentPageViewController(parentRef: PageViewController) {
         parentPageViewController = parentRef
     }
 
-    @IBOutlet weak var image: UIImageView!
-
-    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         self.barname = parentPageViewController.name
-    
-        print(barname, "dfjidfjdijfid")
+//        fetchPicsCount2()
+//        fetchPicsCount()
+        fetchpics()
         fetchData()
+        slideshow.backgroundColor = UIColor.white
+        slideshow.slideshowInterval = 0.0
+        slideshow.pageControlPosition = PageControlPosition.insideScrollView
+        slideshow.pageControl.currentPageIndicatorTintColor = UIColor.lightGray
+        slideshow.pageControl.pageIndicatorTintColor = UIColor.black
+        slideshow.contentScaleMode = UIViewContentMode.scaleAspectFill
+        
+       
+        print(sdWebImageSource, "source111")
+        let recognizer = UITapGestureRecognizer(target: self, action: #selector(DetailVC.didTap))
+        slideshow.addGestureRecognizer(recognizer)
     }
-
     
+    @objc func didTap() {
+        let fullScreenController = slideshow.presentFullScreenController(from: self)
+        // set the activity indicator for full screen controller (skipping the line will show no activity indicator)
+        fullScreenController.slideshow.activityIndicator = DefaultActivityIndicator(style: .white, color: nil)
+    }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
     
     @IBOutlet weak var Namelbl: UILabel!
     
-    @IBAction func bestellung(_ sender: UIButton) {(parent as? PulleyViewController)?.setDrawerPosition(position: PulleyPosition(rawValue: 2)!)
-        let speisekartevc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "SpeisekarteVC") as! SpeisekarteVC
-        
-        speisekartevc.barname = barname
-        
-        (parent as? PulleyViewController)?.setDrawerContentViewController(controller: speisekartevc, animated: true)
-        
-        
-    }
-    
-    @IBAction func votefortrump(_ sender: UIButton) {
-        (parent as? PulleyViewController)?.setDrawerPosition(position: PulleyPosition(rawValue: 2)!)
-        let votecv = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "votevc") as! votevc
-        
-        votecv.barname = barname
-        
-        (parent as? PulleyViewController)?.setDrawerContentViewController(controller: votecv, animated: true)
-    }
+    @IBOutlet weak var slideshow: ImageSlideshow!
     
     @IBAction func Backbtn(_ sender: UIButton) {
        parentPageViewController.goback()
         
      // performSegue(withIdentifier: "drawervc", sender: self)
     }
+    
+//    func fetchPicsCount2(){
+//        var refd: DatabaseReference!
+//        refd = Database.database().reference()
+//        refd.child("BarInfo").child("\(barname)").child("Bilder").observe(.value, with: { (snapshot) in
+//            print(snapshot.childrenCount, "SNAPZZZZ")
+////            if let dictionary = snapshot.value as? [String: AnyObject]{
+////                let counter = Bilder(dictionary: dictionary)
+////                    self.counterlink.append(counter.link!)
+////
+////                print(self.counterlink.count, "COUNTERLINK")
+////                //                print(bild, "bild")
+////                //                self.bilder.append(bild.link!)
+////
+////
+////            }
+//
+//        } , withCancel: nil)
+//    }
+    
+    
+    
+    func fetchPicsCount(){
+        var refd: DatabaseReference!
+        refd = Database.database().reference()
+        refd.child("BarInfo").child("\(barname)").child("Bilder").observe(.childAdded, with: { (snapshot) in
+            print(snapshot, "snapshotZZZZZZZ")
+            if let dictionary = snapshot.value as? [String: AnyObject]{
+                let counter = Bilder(dictionary: dictionary)
+                print(snapshot.value as Any, "snapshotXXXXXXXX")
+//                print(bild, "bild")
+//                self.bilder.append(bild.link!)
+
+                
+            }} , withCancel: nil)
+    }
         
-  
+    func fetchpics () {
+        print("SDSD")
+        var refd: DatabaseReference!
+        refd = Database.database().reference()
+        refd.child("BarInfo").child("\(barname)").child("Bilder").observe(.childAdded, with: { (snapshot) in
+            
+            if let dictionary = snapshot.value as? [String: AnyObject]{
+                let bild = Bilder(dictionary: dictionary)
+                print(snapshot.value as Any, "snapshot")
+                print(bild, "bild")
+                self.bilder.append(bild.link!)
+                
+                
+                print(self.bilder, "dfasdf")
+
+                for links in self.bilder{
+
+                    self.sdWebImageSource2.append(SDWebImageSource(urlString: links)!)
+                    print(self.sdWebImageSource2, "sdWEB")
+                    print(self.sdWebImageSource2.count, "self.sdWebImageSource2.count")
+                    print(self.sdWebImageSource2, "source222222")
+
+                    print(self.bilder.count, "bilder.count")
+                    print("test")
+                if snapshot.childrenCount == self.bilder.count{
+                    self.slideshow.setImageInputs(<#T##inputs: [InputSource]##[InputSource]#>)
+                    self.slideshow.setImageInputs(self.sdWebImageSource2 as! [InputSource])
+                    }
+
+                }
+                
+            }} , withCancel: nil)
+        
+        
+    }
         
     
     
@@ -83,33 +155,33 @@ class DetailVC: UIViewController, PulleyDrawerViewControllerDelegate, PageObserv
                 let bar = BarInfos(dictionary: dictionary)
                 
                 self.bars.append(bar)
-                self.bild.append(bar.Bild!)
-                print(self.bild)
+                self.picture.append(bar.Bild!)
+                print(self.picture)
 
-                let storageRef = Storage.storage().reference(forURL: "\(self.bild)")
+                let storageRef = Storage.storage().reference(forURL: "\(self.picture)")
                 
-                storageRef.downloadURL(completion: {(url, error) in
-                    
-                    if error != nil {
-                        print(error?.localizedDescription ?? "error")
-                        return
-                    }
-                    
-                    URLSession.shared.dataTask(with: url!, completionHandler: { (data, response, error) in
-                        
-                        if error != nil {
-                            print(error ?? "error")
-                            return
-                        }
-                        
-                        guard let imageData = UIImage(data: data!) else { return }
-                        
-                        DispatchQueue.main.async {
-                            self.image.image = imageData
-                        }
-                        
-                }).resume()
-                })
+//                storageRef.downloadURL(completion: {(url, error) in
+//
+//                    if error != nil {
+//                        print(error?.localizedDescription ?? "error")
+//                        return
+//                    }
+//
+//                    URLSession.shared.dataTask(with: url!, completionHandler: { (data, response, error) in
+//
+//                        if error != nil {
+//                            print(error ?? "error")
+//                            return
+//                        }
+//
+//                        guard let imageData = UIImage(data: data!) else { return }
+//
+//                        DispatchQueue.main.async {
+//                            self.image.image = imageData
+//                        }
+//
+//                }).resume()
+//                })
                 
 
 
@@ -117,23 +189,7 @@ class DetailVC: UIViewController, PulleyDrawerViewControllerDelegate, PageObserv
         
     }
     
-    
-//    func loadimage(){
-//        let url = URL(string: bild)
-//        URLSession.shared.dataTask(with: url!, completionHandler: {(data, response,error) in
-//
-//            if error != nil{
-//                print(error ?? "error")
-//                return
-//            }
-    
-//
-//                self.image.image = UIImage(data: data!)
-//
-//        }).resume()
-//
-//    }
-    
+
         
     // Pulley
         

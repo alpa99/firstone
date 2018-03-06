@@ -36,7 +36,7 @@ class DrawerVC: UIViewController, PulleyDrawerViewControllerDelegate, UITableVie
                 let bar = BarInfos(dictionary: dictionary)
                 
                 self.bars.append(bar)
-                
+                print(self.bars, "hierdiebars")
                 DispatchQueue.main.async(execute: {
                     self.BarTV.reloadData()
                 } )
@@ -56,10 +56,10 @@ class DrawerVC: UIViewController, PulleyDrawerViewControllerDelegate, UITableVie
     }
     
     func searchBarShouldBeginEditing(_ searchBar: UISearchBar) -> Bool {
-        return (((parent as? PulleyViewController)?.setDrawerPosition(position: PulleyPosition(rawValue: 2)!)) != nil)
+        return (((parent as? PulleyViewController)?.setDrawerPosition(position: PulleyPosition(rawValue: 2)!, animated: true)) != nil)
     }
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        (parent as? PulleyViewController)?.setDrawerPosition(position: PulleyPosition(rawValue: 2)!)
+          (parent as? PulleyViewController)?.setDrawerPosition(position: PulleyPosition(rawValue: 2)!, animated: true)
     }
     
     func filteredContent (searchText: String, scope: String = "All"){
@@ -135,7 +135,7 @@ class DrawerVC: UIViewController, PulleyDrawerViewControllerDelegate, UITableVie
         print(selBarName)
         
         
-        (parent as? PulleyViewController)?.setDrawerPosition(position: PulleyPosition(rawValue: 2)!)
+         (parent as? PulleyViewController)?.setDrawerPosition(position: PulleyPosition(rawValue: 2)!, animated: true)
        
         
         let pagevc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "PageVC") as! PageViewController
