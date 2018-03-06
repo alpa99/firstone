@@ -22,11 +22,13 @@ class DetailVC: UIViewController, PulleyDrawerViewControllerDelegate, PageObserv
     var adresse = String ()
     var picture = String ()
     var parentPageViewController: PageViewController!
-    var sdWebImageSource2 = [SDWebImageSource(urlString: "")]
-    let sdWebImageSource = [SDWebImageSource(urlString: "https://images.unsplash.com/photo-1432679963831-2dab49187847?w=1080")!, SDWebImageSource(urlString: "https://images.unsplash.com/photo-1447746249824-4be4e1b76d66?w=1080")!, SDWebImageSource(urlString: "https://images.unsplash.com/photo-1463595373836-6e0b0a8ee322?w=1080")!]
+    var sdWebImageSource2 = [SDWebImageSource]()
+
+    let sdWebImageSource = [SDWebImageSource(urlString: "https://images.unsplash.com/photo-1432679963831-2dab49187847?w=1080"), SDWebImageSource(urlString: "https://images.unsplash.com/photo-1447746249824-4be4e1b76d66?w=1080"), SDWebImageSource(urlString: "https://images.unsplash.com/photo-1463595373836-6e0b0a8ee322?w=1080")]
 
     func getParentPageViewController(parentRef: PageViewController) {
         parentPageViewController = parentRef
+        
     }
 
     override func viewDidLoad() {
@@ -129,9 +131,10 @@ class DetailVC: UIViewController, PulleyDrawerViewControllerDelegate, PageObserv
 
                     print(self.bilder.count, "bilder.count")
                     print("test")
-                if snapshot.childrenCount == self.bilder.count{
-                    self.slideshow.setImageInputs(<#T##inputs: [InputSource]##[InputSource]#>)
-                    self.slideshow.setImageInputs(self.sdWebImageSource2 as! [InputSource])
+                if  self.bilder.count == snapshot.childrenCount{
+
+                    self.slideshow.setImageInputs(self.sdWebImageSource2 as [InputSource])
+                    print(self.sdWebImageSource2, "WEBBBBBB")
                     }
 
                 }
