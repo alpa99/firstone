@@ -869,13 +869,13 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                             </imageView>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vPZ-U3-fKa">
-                                <rect key="frame" x="0.0" y="69" width="375" height="598"/>
+                                <rect key="frame" x="0.0" y="99" width="375" height="568"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XT3-ss-KWX">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="800"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hYz-vo-25U" customClass="ImageSlideshow" customModule="ImageSlideshow">
-                                                <rect key="frame" x="8" y="8" width="359" height="180"/>
+                                                <rect key="frame" x="27" y="26" width="325" height="162"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             </view>
@@ -895,19 +895,21 @@
                                 <constraints>
                                     <constraint firstItem="XT3-ss-KWX" firstAttribute="leading" secondItem="vPZ-U3-fKa" secondAttribute="leading" id="MEq-Io-tZD"/>
                                     <constraint firstItem="XT3-ss-KWX" firstAttribute="top" secondItem="vPZ-U3-fKa" secondAttribute="top" id="Srs-Qq-XdC"/>
-                                    <constraint firstAttribute="bottom" secondItem="XT3-ss-KWX" secondAttribute="bottom" constant="-202" id="eXs-O4-cLS"/>
+                                    <constraint firstAttribute="bottom" secondItem="XT3-ss-KWX" secondAttribute="bottom" constant="1" id="eXs-O4-cLS"/>
                                     <constraint firstItem="XT3-ss-KWX" firstAttribute="centerX" secondItem="vPZ-U3-fKa" secondAttribute="centerX" id="ieS-5L-fwm"/>
                                     <constraint firstAttribute="trailing" secondItem="XT3-ss-KWX" secondAttribute="trailing" id="pEi-GH-b9Y"/>
                                 </constraints>
                             </scrollView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="NameLbl" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0gE-dk-9Yg">
-                                <rect key="frame" x="120" y="20" width="135" height="30"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="NameLbl" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0gE-dk-9Yg">
+                                <rect key="frame" x="153" y="20" width="68.5" height="20.5"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BRG-Zr-MTn">
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BRG-Zr-MTn">
                                 <rect key="frame" x="32" y="20" width="46" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button"/>
                                 <connections>
                                     <action selector="Backbtn:" destination="RQu-h7-DDh" eventType="touchUpInside" id="eJR-BV-2sh"/>
@@ -916,21 +918,14 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="BRG-Zr-MTn" firstAttribute="leading" secondItem="Am9-3T-zZa" secondAttribute="leading" constant="32" id="12p-w9-U2D"/>
                             <constraint firstItem="2y5-22-9kt" firstAttribute="top" secondItem="573-kd-1JM" secondAttribute="top" id="5Dq-YK-mL9"/>
                             <constraint firstItem="vPZ-U3-fKa" firstAttribute="bottom" secondItem="Am9-3T-zZa" secondAttribute="bottom" id="5Ia-rD-2XZ"/>
                             <constraint firstItem="2y5-22-9kt" firstAttribute="leading" secondItem="Am9-3T-zZa" secondAttribute="leading" id="6Wk-rZ-JtR"/>
-                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="BRG-Zr-MTn" secondAttribute="trailing" constant="20" symbolic="YES" id="CVS-BU-O9w"/>
-                            <constraint firstItem="0gE-dk-9Yg" firstAttribute="top" secondItem="BRG-Zr-MTn" secondAttribute="top" id="CW6-qx-RY8"/>
                             <constraint firstItem="vPZ-U3-fKa" firstAttribute="leading" secondItem="Am9-3T-zZa" secondAttribute="leading" id="Se1-jJ-CK0"/>
                             <constraint firstItem="2y5-22-9kt" firstAttribute="bottom" secondItem="Am9-3T-zZa" secondAttribute="bottom" id="UYF-J8-FtI"/>
-                            <constraint firstItem="0gE-dk-9Yg" firstAttribute="top" secondItem="Am9-3T-zZa" secondAttribute="top" id="bpF-e3-fy5"/>
-                            <constraint firstItem="0gE-dk-9Yg" firstAttribute="centerX" secondItem="vPZ-U3-fKa" secondAttribute="centerX" id="fRg-JG-2fD"/>
-                            <constraint firstItem="Am9-3T-zZa" firstAttribute="trailing" secondItem="0gE-dk-9Yg" secondAttribute="trailing" constant="120" id="gzQ-Pu-2d6"/>
                             <constraint firstItem="vPZ-U3-fKa" firstAttribute="trailing" secondItem="Am9-3T-zZa" secondAttribute="trailing" id="hLh-8c-RHv"/>
-                            <constraint firstItem="vPZ-U3-fKa" firstAttribute="top" secondItem="0gE-dk-9Yg" secondAttribute="bottom" constant="19" id="kjl-Ii-KyV"/>
+                            <constraint firstItem="vPZ-U3-fKa" firstAttribute="top" secondItem="573-kd-1JM" secondAttribute="top" constant="99" id="n2J-MX-g4W"/>
                             <constraint firstItem="2y5-22-9kt" firstAttribute="trailing" secondItem="Am9-3T-zZa" secondAttribute="trailing" id="wcJ-QL-CSS"/>
-                            <constraint firstItem="0gE-dk-9Yg" firstAttribute="bottom" secondItem="BRG-Zr-MTn" secondAttribute="bottom" id="yLN-G5-eGE"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Am9-3T-zZa"/>
                     </view>
