@@ -211,7 +211,7 @@ class BestellungVC2: UIViewController, UITableViewDataSource, UITableViewDelegat
                 let distancebar = self.locationManager.location?.distance(from: locat!)
                 print (distancebar!, " entfernung")
                 let distanceint = Int(distancebar!)
-                if distanceint < 80 {
+                if distanceint < 150{
                 print("distance ist ok")
                     self.seugueAbschicken()
                     self.handleBestellung()
@@ -371,7 +371,7 @@ performSegue(withIdentifier: "wirdabgeschickt", sender: self)
         if self.bestellteItemsDictionary.count>0{
             let timestamp = Double(NSDate().timeIntervalSince1970)
             let fromUserID = Auth.auth().currentUser!.uid
-            var values = ["toKellnerID": KellnerID, "tischnummer": tischnummer, "fromUserID": fromUserID , "timeStamp": timestamp, "angenommen": false] as [String : Any]
+            var values = ["toKellnerID": KellnerID, "tischnummer": String(tischnummer), "fromUserID": fromUserID , "timeStamp": timestamp, "angenommen": false] as [String : Any]
             print(values, "values")
             for (genre, itemDictionary) in bestellteItemsDictionary {
                 values.updateValue(itemDictionary, forKey: genre)
@@ -384,9 +384,9 @@ performSegue(withIdentifier: "wirdabgeschickt", sender: self)
             childRef?.updateChildValues(values)
             let userBestellungenRef = Database.database().reference().child("userBestellungen").child(fromUserID)
             let bestellungID = childRef?.key
-            userBestellungenRef.updateChildValues([bestellungID!: false])
+            userBestellungenRef.updateChildValues(["BestellungsID": bestellungID!, "abgeschlossen": false])
             let kellnerBestellungenRef = Database.database().reference().child("userBestellungen").child(KellnerID)
-            kellnerBestellungenRef.child(bestellungID!).updateChildValues(["angenommen": false])
+            kellnerBestellungenRef.child(bestellungID!).updateChildValues(["angenommen": false, "fromUserID": fromUserID] )
             print(Date(timeIntervalSince1970: timestamp)) }
         else {
             let alert = UIAlertController(title: "Deine Bestellung ist leer", message: nil, preferredStyle: UIAlertControllerStyle.alert)

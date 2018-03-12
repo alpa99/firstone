@@ -41,7 +41,7 @@ class LoginVC: UIViewController {
             case .success(_,_,_):
                 self.getUserInfo {userInfo, error in
                     if let error = error {
-                        print(error.localizedDescription)
+                        print(error.localizedDescription, "ERRRRRRRRROR")
                     }
                     
                     if let userInfo = userInfo, let id = userInfo["id"], let name = userInfo["name"], let email = userInfo["email"]{
@@ -77,6 +77,7 @@ class LoginVC: UIViewController {
                 
                 let credential = FacebookAuthProvider.credential(withAccessToken: accessTokenString)
                 Auth.auth().signIn(with: credential, completion: { (user, error) in
+                    print(Auth.auth().currentUser?.uid ?? "keine uid", "UID")
                     if error != nil {
                         print("something wrong", error ?? "default error")
                         return
@@ -93,27 +94,39 @@ class LoginVC: UIViewController {
         var ref: DatabaseReference?
 
         ref = Database.database().reference()
-        ref?.child("Users").child("\(self.userFbID)").child("Name").setValue(self.userFbName)
-        ref?.child("Users").child("\(self.userFbID)").child("Email").setValue(self.userFbEmail)
-        print(self.userFbID)
+        
+        if let uid = Auth.auth().currentUser?.uid {
+        ref?.child("Users").child("\(uid)").child("Name").setValue(self.userFbName)
+        ref?.child("Users").child("\(uid)").child("Email").setValue(self.userFbEmail)
         segueToTabBar()
+        }
     }
     
     func segueToTabBar(){
+        let accessToken = FBSDKAccessToken.current()
+        guard let accessTokenString = accessToken?.tokenString else {
+            return
+        }
         
-        
-        performSegue(withIdentifier: "login", sender: self)
-        
+        let credential = FacebookAuthProvider.credential(withAccessToken: accessTokenString)
+        Auth.auth().currentUser?.reauthenticate(with: credential, completion: { error in
+            if error != nil {
+                print("errrorororor")
+                
+            } else if Auth.auth().currentUser?.uid != nil{
+                self.performSegue(withIdentifier: "login", sender: self.loginBtn)
+            }
+                
+        })
     }
     
     // OTHERS
     
     override func viewDidAppear(_ animated: Bool) {
-        if FBSDKAccessToken.current() != nil {
-            
+
+        if Auth.auth().currentUser?.uid != nil {
+            print(Auth.auth().currentUser?.uid, "IDDDD")
             segueToTabBar()
-        } else{
-            print(FBSDKAccessToken.current(), "access")
         }
     }
     

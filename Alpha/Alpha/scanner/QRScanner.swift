@@ -173,7 +173,7 @@ class QRScanner: UIViewController, AVCaptureMetadataOutputObjectsDelegate, CLLoc
         print (distancebar!, " entfernung")
         let distanceint = Int(distancebar!)
         
-        if distanceint < 80 {
+        if distanceint < 150 {
             
             let alert = UIAlertController(title: "Erfolgreich", message: "Du bist bei \(self.qrbarname)!", preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "Weiter", style: .default, handler:{ (action) in self.performSegue(withIdentifier: "scansegue", sender: self)}))
