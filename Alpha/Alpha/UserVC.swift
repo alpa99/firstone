@@ -13,6 +13,9 @@ class UserVC: UIViewController {
 
     // ACTIONS
     
+    @IBAction func meinebestellungen(_ sender: UIButton) {
+        performSegue(withIdentifier: "meinebestellungen", sender: self)
+    }
     @IBAction func logOutTapped(_ sender: Any){
     let loginManager = LoginManager()
         loginManager.logOut()

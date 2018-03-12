@@ -147,7 +147,7 @@ class PageViewController: UIPageViewController, UIPageViewControllerDelegate, UI
     //Back
     
     func goback(){
-        (parent as? PulleyViewController)?.setDrawerPosition(position: PulleyPosition(rawValue: 2)!)
+        (parent as? PulleyViewController)?.setDrawerPosition(position: PulleyPosition(rawValue: 2)!, animated: true)
         let drawervc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "DrawerVC") as! DrawerVC
         
         

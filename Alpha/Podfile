@@ -16,8 +16,11 @@ pod 'Firebase/Database'
 pod 'Firebase'
 pod 'Firebase/Storage'
 pod 'Firebase/Auth'
+pod 'Firebase/Messaging'
+
 pod 'GoogleMaps'
 pod 'GooglePlaces'
+pod 'ImageSlideshow/SDWebImage'
 
   target 'AlphaTests' do
     inherit! :search_paths

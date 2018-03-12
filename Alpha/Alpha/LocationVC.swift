@@ -135,7 +135,7 @@ class LocationVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate
             let detvc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "PageVC") as! PageViewController
             detvc.name = ((annotation?.title)!)!
             
-            (parent as? PulleyViewController)?.setDrawerPosition(position: PulleyPosition(rawValue: 2)!)
+            (parent as? PulleyViewController)?.setDrawerPosition(position: PulleyPosition(rawValue: 2)!, animated: true)
             
             
             (parent as? PulleyViewController)?.setDrawerContentViewController(controller: detvc, animated: true)

@@ -146,7 +146,7 @@ class SpeisekarteVC2: UIViewController, UITableViewDataSource, UITableViewDelega
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = Bundle.main.loadNibNamed("SpeisekarteCell", owner: self, options: nil)?.first as! SpeisekarteCell
+        let cell = Bundle.main.loadNibNamed("SpeisekarteCell", owner: self, options: nil)?.first as! SpeiseCell
         if (sections[indexPath.section].expanded){
             cell.itemNameLbl.text = "\(sections[indexPath.section].items[indexPath.row])"
             cell.itemPreisLbl.text = "\(sections[indexPath.section].preise[indexPath.row]) €"

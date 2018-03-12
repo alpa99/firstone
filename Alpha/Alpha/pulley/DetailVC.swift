@@ -9,65 +9,106 @@
 import UIKit
 import Pulley
 import Firebase
+import ImageSlideshow
 
 class DetailVC: UIViewController, PulleyDrawerViewControllerDelegate, PageObservation{
  
     var barname = ""
     var bars = [BarInfos]()
-    var adresse = String ()
-    var bild = String ()
+    var bilder = [String]()
+    
+    var counterlink = [String]()
 
+    var adresse = String ()
+    var picture = String ()
     var parentPageViewController: PageViewController!
+    var sdWebImageSource = [SDWebImageSource]()
+
+    
 
     func getParentPageViewController(parentRef: PageViewController) {
         parentPageViewController = parentRef
+        
     }
 
-    @IBOutlet weak var image: UIImageView!
-
-    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         self.barname = parentPageViewController.name
-    
-        print(barname, "dfjidfjdijfid")
+        fetchPicsCount()
         fetchData()
+        slideshow.backgroundColor = UIColor.white
+ 
+        slideshow.slideshowInterval = 0.0
+        slideshow.pageControlPosition = PageControlPosition.insideScrollView
+        slideshow.pageControl.currentPageIndicatorTintColor = UIColor(red: 185.0/255.0, green: 170.0/255.0, blue: 140.0/255.0, alpha: 1.0)
+        slideshow.pageControl.pageIndicatorTintColor = UIColor(red: 90.0/255.0, green: 90.0/255.0, blue: 90.0/255.0, alpha: 1.0)
+   
+        
+        slideshow.contentScaleMode = UIViewContentMode.scaleAspectFill
+        
+       
+        print(sdWebImageSource, "source111")
+        let recognizer = UITapGestureRecognizer(target: self, action: #selector(DetailVC.didTap))
+        slideshow.addGestureRecognizer(recognizer)
     }
-
     
+    @objc func didTap() {
+        let fullScreenController = slideshow.presentFullScreenController(from: self)
+        // set the activity indicator for full screen controller (skipping the line will show no activity indicator)
+        fullScreenController.slideshow.activityIndicator = DefaultActivityIndicator(style: .white, color: nil)
+    }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
     
     @IBOutlet weak var Namelbl: UILabel!
     
-    @IBAction func bestellung(_ sender: UIButton) {(parent as? PulleyViewController)?.setDrawerPosition(position: PulleyPosition(rawValue: 2)!)
-        let speisekartevc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "SpeisekarteVC") as! SpeisekarteVC
-        
-        speisekartevc.barname = barname
-        
-        (parent as? PulleyViewController)?.setDrawerContentViewController(controller: speisekartevc, animated: true)
-        
-        
-    }
-    
-    @IBAction func votefortrump(_ sender: UIButton) {
-        (parent as? PulleyViewController)?.setDrawerPosition(position: PulleyPosition(rawValue: 2)!)
-        let votecv = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "votevc") as! votevc
-        
-        votecv.barname = barname
-        
-        (parent as? PulleyViewController)?.setDrawerContentViewController(controller: votecv, animated: true)
-    }
+    @IBOutlet weak var slideshow: ImageSlideshow!
     
     @IBAction func Backbtn(_ sender: UIButton) {
        parentPageViewController.goback()
         
-     // performSegue(withIdentifier: "drawervc", sender: self)
+    }
+    
+
+    
+    
+    func fetchPicsCount(){
+        var refd: DatabaseReference!
+        refd = Database.database().reference()
+        refd.child("BarInfo").child("\(barname)").child("Bilder").observe(.value, with: { (snapshot) in
+            self.fetchpics(bilderCount: snapshot.childrenCount)
+        } , withCancel: nil)
     }
         
-  
+    func fetchpics (bilderCount: UInt) {
+        var refd: DatabaseReference!
+        refd = Database.database().reference()
+        refd.child("BarInfo").child("\(barname)").child("Bilder").observe(.childAdded, with: { (snapshot) in
+            
+            if let dictionary = snapshot.value as? [String: AnyObject]{
+                let bild = Bilder(dictionary: dictionary)
+
+                if self.bilder.contains(bild.link!) == false {
+                self.bilder.append(bild.link!)
+                }
+                
+                if self.bilder.count == bilderCount{
+
+                for links in self.bilder{
+
+                    self.sdWebImageSource.append(SDWebImageSource(urlString: links)!)
+
+                    self.slideshow.setImageInputs(self.sdWebImageSource as [InputSource])
+                    
+                    }
+                }
+                
+            }} , withCancel: nil)
+        
+        
+    }
         
     
     
@@ -83,57 +124,14 @@ class DetailVC: UIViewController, PulleyDrawerViewControllerDelegate, PageObserv
                 let bar = BarInfos(dictionary: dictionary)
                 
                 self.bars.append(bar)
-                self.bild.append(bar.Bild!)
-                print(self.bild)
-
-                let storageRef = Storage.storage().reference(forURL: "\(self.bild)")
-                
-                storageRef.downloadURL(completion: {(url, error) in
-                    
-                    if error != nil {
-                        print(error?.localizedDescription ?? "error")
-                        return
-                    }
-                    
-                    URLSession.shared.dataTask(with: url!, completionHandler: { (data, response, error) in
-                        
-                        if error != nil {
-                            print(error ?? "error")
-                            return
-                        }
-                        
-                        guard let imageData = UIImage(data: data!) else { return }
-                        
-                        DispatchQueue.main.async {
-                            self.image.image = imageData
-                        }
-                        
-                }).resume()
-                })
-                
-
+                self.picture.append(bar.Bild!)
+                print(self.picture)
 
             }} , withCancel: nil)
         
     }
     
-    
-//    func loadimage(){
-//        let url = URL(string: bild)
-//        URLSession.shared.dataTask(with: url!, completionHandler: {(data, response,error) in
-//
-//            if error != nil{
-//                print(error ?? "error")
-//                return
-//            }
-    
-//
-//                self.image.image = UIImage(data: data!)
-//
-//        }).resume()
-//
-//    }
-    
+
         
     // Pulley
         

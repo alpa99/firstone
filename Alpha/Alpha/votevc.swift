@@ -32,7 +32,7 @@ class votevc: UIViewController, PulleyDrawerViewControllerDelegate {
     
     
     @IBAction func backbtn(_ sender: UIButton) {
-        (parent as? PulleyViewController)?.setDrawerPosition(position: PulleyPosition(rawValue: 2)!)
+          (parent as? PulleyViewController)?.setDrawerPosition(position: PulleyPosition(rawValue: 2)!, animated: true)
         let detvc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "DetailVC") as! DetailVC
         
         detvc.barname = barname
