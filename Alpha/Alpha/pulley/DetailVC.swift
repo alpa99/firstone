@@ -22,9 +22,9 @@ class DetailVC: UIViewController, PulleyDrawerViewControllerDelegate, PageObserv
     var adresse = String ()
     var picture = String ()
     var parentPageViewController: PageViewController!
-    var sdWebImageSource2 = [SDWebImageSource]()
+    var sdWebImageSource = [SDWebImageSource]()
 
-    let sdWebImageSource = [SDWebImageSource(urlString: "https://images.unsplash.com/photo-1432679963831-2dab49187847?w=1080"), SDWebImageSource(urlString: "https://images.unsplash.com/photo-1447746249824-4be4e1b76d66?w=1080"), SDWebImageSource(urlString: "https://images.unsplash.com/photo-1463595373836-6e0b0a8ee322?w=1080")]
+    
 
     func getParentPageViewController(parentRef: PageViewController) {
         parentPageViewController = parentRef
@@ -35,16 +35,14 @@ class DetailVC: UIViewController, PulleyDrawerViewControllerDelegate, PageObserv
         super.viewDidLoad()
 
         self.barname = parentPageViewController.name
-//        fetchPicsCount2()
         fetchPicsCount()
-//        fetchpics()
         fetchData()
         slideshow.backgroundColor = UIColor.white
  
         slideshow.slideshowInterval = 0.0
         slideshow.pageControlPosition = PageControlPosition.insideScrollView
-        slideshow.pageControl.currentPageIndicatorTintColor = UIColor(red: 255.0/255.0, green: 255.0/255.0, blue: 255.0/255.0, alpha: 1.0)
-        slideshow.pageControl.pageIndicatorTintColor = UIColor(red: 185.0/255.0, green: 170.0/255.0, blue: 140.0/255.0, alpha: 1.0)
+        slideshow.pageControl.currentPageIndicatorTintColor = UIColor(red: 185.0/255.0, green: 170.0/255.0, blue: 140.0/255.0, alpha: 1.0)
+        slideshow.pageControl.pageIndicatorTintColor = UIColor(red: 90.0/255.0, green: 90.0/255.0, blue: 90.0/255.0, alpha: 1.0)
    
         
         slideshow.contentScaleMode = UIViewContentMode.scaleAspectFill
@@ -71,28 +69,9 @@ class DetailVC: UIViewController, PulleyDrawerViewControllerDelegate, PageObserv
     @IBAction func Backbtn(_ sender: UIButton) {
        parentPageViewController.goback()
         
-     // performSegue(withIdentifier: "drawervc", sender: self)
     }
     
-//    func fetchPicsCount2(){
-//        var refd: DatabaseReference!
-//        refd = Database.database().reference()
-//        refd.child("BarInfo").child("\(barname)").child("Bilder").observe(.value, with: { (snapshot) in
-//            print(snapshot.childrenCount, "SNAPZZZZ")
-////            if let dictionary = snapshot.value as? [String: AnyObject]{
-////                let counter = Bilder(dictionary: dictionary)
-////                    self.counterlink.append(counter.link!)
-////
-////                print(self.counterlink.count, "COUNTERLINK")
-////                //                print(bild, "bild")
-////                //                self.bilder.append(bild.link!)
-////
-////
-////            }
-//
-//        } , withCancel: nil)
-//    }
-    
+
     
     
     func fetchPicsCount(){
@@ -119,9 +98,9 @@ class DetailVC: UIViewController, PulleyDrawerViewControllerDelegate, PageObserv
 
                 for links in self.bilder{
 
-                    self.sdWebImageSource2.append(SDWebImageSource(urlString: links)!)
+                    self.sdWebImageSource.append(SDWebImageSource(urlString: links)!)
 
-                    self.slideshow.setImageInputs(self.sdWebImageSource2 as [InputSource])
+                    self.slideshow.setImageInputs(self.sdWebImageSource as [InputSource])
                     
                     }
                 }
@@ -147,33 +126,6 @@ class DetailVC: UIViewController, PulleyDrawerViewControllerDelegate, PageObserv
                 self.bars.append(bar)
                 self.picture.append(bar.Bild!)
                 print(self.picture)
-
-                let storageRef = Storage.storage().reference(forURL: "\(self.picture)")
-                
-//                storageRef.downloadURL(completion: {(url, error) in
-//
-//                    if error != nil {
-//                        print(error?.localizedDescription ?? "error")
-//                        return
-//                    }
-//
-//                    URLSession.shared.dataTask(with: url!, completionHandler: { (data, response, error) in
-//
-//                        if error != nil {
-//                            print(error ?? "error")
-//                            return
-//                        }
-//
-//                        guard let imageData = UIImage(data: data!) else { return }
-//
-//                        DispatchQueue.main.async {
-//                            self.image.image = imageData
-//                        }
-//
-//                }).resume()
-//                })
-                
-
 
             }} , withCancel: nil)
         
