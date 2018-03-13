@@ -9,6 +9,9 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
+        <array key="Helvetica.ttc">
+            <string>Helvetica-Bold</string>
+        </array>
         <array key="HelveticaNeue.ttc">
             <string>HelveticaNeue</string>
         </array>
@@ -105,7 +108,7 @@
         <!--Item 1-->
         <scene sceneID="alm-2b-EGX">
             <objects>
-                <viewController id="G14-lO-UVy" customClass="KellnerAngenommenVC" customModule="Alpha" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="KellnerAngenommenVC" id="G14-lO-UVy" customClass="KellnerAngenommenVC" customModule="Alpha" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="xxN-9a-7yc">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -113,8 +116,8 @@
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="hintergrund" translatesAutoresizingMaskIntoConstraints="NO" id="Lfz-Qa-rpI">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                             </imageView>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="2xQ-e4-M7v">
-                                <rect key="frame" x="16" y="20" width="343" height="575"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="2xQ-e4-M7v">
+                                <rect key="frame" x="16" y="74.5" width="343" height="520.5"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <connections>
@@ -122,17 +125,26 @@
                                     <outlet property="delegate" destination="G14-lO-UVy" id="9YG-cE-FMa"/>
                                 </connections>
                             </tableView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="HUQA" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="39R-BR-cd4">
+                                <rect key="frame" x="16" y="20" width="343" height="34.5"/>
+                                <fontDescription key="fontDescription" name="Helvetica-Bold" family="Helvetica" pointSize="30"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="xew-9a-grQ" firstAttribute="trailing" secondItem="2xQ-e4-M7v" secondAttribute="trailing" constant="16" id="2ss-6A-N2S"/>
-                            <constraint firstItem="Lfz-Qa-rpI" firstAttribute="trailing" secondItem="xew-9a-grQ" secondAttribute="trailing" id="CM1-cT-aNL"/>
-                            <constraint firstItem="2xQ-e4-M7v" firstAttribute="top" secondItem="xew-9a-grQ" secondAttribute="top" id="EK3-o2-0QD"/>
-                            <constraint firstItem="2xQ-e4-M7v" firstAttribute="leading" secondItem="xew-9a-grQ" secondAttribute="leading" constant="16" id="EMd-4S-LUI"/>
-                            <constraint firstItem="xew-9a-grQ" firstAttribute="bottom" secondItem="2xQ-e4-M7v" secondAttribute="bottom" constant="23" id="XzW-gn-aKf"/>
-                            <constraint firstAttribute="bottom" secondItem="Lfz-Qa-rpI" secondAttribute="bottom" id="dDL-gR-wOh"/>
-                            <constraint firstItem="Lfz-Qa-rpI" firstAttribute="leading" secondItem="xew-9a-grQ" secondAttribute="leading" id="frH-3B-YYo"/>
-                            <constraint firstItem="Lfz-Qa-rpI" firstAttribute="top" secondItem="xxN-9a-7yc" secondAttribute="top" id="m3n-2a-pl2"/>
+                            <constraint firstItem="xew-9a-grQ" firstAttribute="trailing" secondItem="2xQ-e4-M7v" secondAttribute="trailing" constant="16" id="2BV-yQ-1N7"/>
+                            <constraint firstItem="Lfz-Qa-rpI" firstAttribute="top" secondItem="xxN-9a-7yc" secondAttribute="top" id="4bJ-9q-NHw"/>
+                            <constraint firstItem="xew-9a-grQ" firstAttribute="trailing" secondItem="39R-BR-cd4" secondAttribute="trailing" constant="16" id="FmW-rb-Cca"/>
+                            <constraint firstItem="39R-BR-cd4" firstAttribute="leading" secondItem="xew-9a-grQ" secondAttribute="leading" constant="16" id="Hkx-9b-wQB"/>
+                            <constraint firstAttribute="bottom" secondItem="Lfz-Qa-rpI" secondAttribute="bottom" id="IXf-Pi-h8h"/>
+                            <constraint firstItem="39R-BR-cd4" firstAttribute="top" secondItem="xew-9a-grQ" secondAttribute="top" id="JbK-6i-H62"/>
+                            <constraint firstItem="2xQ-e4-M7v" firstAttribute="leading" secondItem="xew-9a-grQ" secondAttribute="leading" constant="16" id="Smi-VO-pgp"/>
+                            <constraint firstItem="Lfz-Qa-rpI" firstAttribute="trailing" secondItem="xew-9a-grQ" secondAttribute="trailing" id="YFa-uP-Oq7"/>
+                            <constraint firstItem="Lfz-Qa-rpI" firstAttribute="leading" secondItem="xew-9a-grQ" secondAttribute="leading" id="ZWI-ll-AIb"/>
+                            <constraint firstItem="xew-9a-grQ" firstAttribute="bottom" secondItem="2xQ-e4-M7v" secondAttribute="bottom" constant="23" id="g4T-di-1nN"/>
+                            <constraint firstItem="2xQ-e4-M7v" firstAttribute="top" secondItem="39R-BR-cd4" secondAttribute="bottom" constant="20" id="nRS-Di-XsL"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="xew-9a-grQ"/>
                     </view>

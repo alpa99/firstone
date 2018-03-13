@@ -16,11 +16,12 @@ class bezahlenCell2: UITableViewCell {
     
     @IBOutlet weak var testlbl: UILabel!
     
-    var delegate: bestellenCell2Delegate?
+//    var delegate: bestellenCell2Delegate?
     
     override func awakeFromNib() {
         super.awakeFromNib()
         testlbl.text = "sdfsdsdsdfsdsre3"
+        
         // Initialization code
     }
 

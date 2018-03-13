@@ -9,7 +9,7 @@
     import UIKit
     import Firebase
     
-class KellnerAngenommenVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class KellnerAngenommenVC: UIViewController, UITableViewDelegate, UITableViewDataSource, ExpandableHeaderViewDelegate {
 
     
         
@@ -116,32 +116,34 @@ class KellnerAngenommenVC: UIViewController, UITableViewDelegate, UITableViewDat
                 print(self.bestellung2, "DAS hier")
                 print(self.bestellung2, "bestellungasasda2")
                 
-//                if self.bestellung2.count == self.bestellungIDs.count {
-//                    for (a, b) in self.bestellung2 {
-//
-//                        print(a, "a")
-//                        print(b, "b")
-//
-//                        for (c, d) in b {
-//                            print(c, "c")
-//                            print(d, "d")
-//
-//                            for (e,f) in d {
-//                                print(e, "e")
-//                                print(f, "f")
-//                                self.itemsangenommen.append(e)
-//                                self.mengenangenommen.append(f)
-//                                if self.itemsangenommen.count == d.count {
-//                                    self.self.setSections(genre: c, items: self.itemsangenommen, preise: self.mengenangenommen)
-//                                    self.itemsangenommen.removeAll()
-//                                    self.mengenangenommen.removeAll()
-//                                    print(self.sections, "sections")
-//                                }
-//                            }
-//                        }
-//                    }
-//                    self.angenommenBestellungenTV.reloadData()
-//                }
+                if self.bestellung2.count == self.bestellungIDs.count {
+                    for (a, b) in self.bestellung2 {
+
+                        print(a, "a")
+                        print(b, "b")
+
+                        for (c, d) in b {
+                            print(c, "c")
+                            print(d, "d")
+
+                            for (e,f) in d {
+                                print(e, "e")
+                                print(f, "f")
+                                self.itemsangenommen.append(e)
+                                self.mengenangenommen.append(f)
+                                print(d, "DDDD")
+                                print(self.itemsangenommen, "itemsangenommen")
+                                if self.itemsangenommen.count == b.count {
+                                    self.setSections(genre: c, items: self.itemsangenommen, preise: self.mengenangenommen)
+                                    self.itemsangenommen.removeAll()
+                                    self.mengenangenommen.removeAll()
+                                    print(self.sections, "sections")
+                                }
+                            }
+                        }
+                    }
+                    self.angenommenBestellungenTV.reloadData()
+                }
             }, withCancel: nil)
 
         }
@@ -155,66 +157,83 @@ class KellnerAngenommenVC: UIViewController, UITableViewDelegate, UITableViewDat
 
         // TABLE
     
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return sections.count
+    }
+    
     
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return bestellung2.count
+        return 1
         }
     
     
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 59
+    }
     
+
 
         
         func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
             
-            let cell = Bundle.main.loadNibNamed("angenommenCell", owner: self, options: nil)?.first as! angenommenCell
-            
-    
-//
-//
-//            let cell2 =  Bundle.main.loadNibNamed("bezahlenCell2", owner: self, options: nil)?.first as! bezahlenCell2
-            
-        
-//            cell2.testlbl.text = "dsfsd"
-//
-//            cell.testcell.text = "hiii"
-//
-//            cell.testTabelle.cellForRow(at: indexPath)...
-
-            
-//                    for (genre, itemsDictionary) in itemssss {
-//                        for (items, menge) in itemsDictionary {
-//                            cell.bestellungsText.text = "\(itemsDictionary) \n"
-//
-//                        }
-////                    }
+            let cell = Bundle.main.loadNibNamed("bezahlenCell", owner: self, options: nil)?.first as! bezahlenCell
             
             self.itemssss = bestellung2[bestellungIDs[indexPath.row]]!
+            
             print(bestellungIDs, "IIIIDDIDIDID")
             print(bestellung2, "bestellugn2")
             print(self.itemssss, "itemssss")
-            cell.bestellungsText.text = "\(itemssss)"
-            
-
-
+                        
             let timeStampDate = NSDate(timeIntervalSince1970: TimeStamps[indexPath.row])
             let dateFormatter = DateFormatter()
             dateFormatter.dateFormat = "HH:mm"
-            cell.timeLbl.text = "\(dateFormatter.string(from: timeStampDate as Date)) Uhr"
-            cell.tischnummer.text = "Tischnummer: \(self.tischnummer[indexPath.row])"
-
             
-        
+            cell.timeLbl.text = "\(dateFormatter.string(from: timeStampDate as Date)) Uhr"
+            
             return cell
             
         }
         
         func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-            return 150
-            
+            if (sections[indexPath.section].expanded) {
+                return 400
+            } else {
+                return 0
+            }
+
         }
     
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return 15
+    }
     
+    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        let view = UIView()
+        view.backgroundColor = UIColor.clear
+        return view
+    }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        print(sections, "SECTIONS")
+        print(tischnummer, "tischnummern")
+        let header = ExpandableHeaderView()
+        
+        header.customInit(tableView: tableView, title: "Tisch \(tischnummer[section])", section: section, delegate: self as ExpandableHeaderViewDelegate)
+
+        
+        return header
+    }
+    
+    func toggleSection(tableView: UITableView, header: ExpandableHeaderView, section: Int) {
+        print(section, "SECtionINT")
+        sections[section].expanded = !sections[section].expanded
+        angenommenBestellungenTV.beginUpdates()
+        angenommenBestellungenTV.reloadSections([section], with: .automatic)
+        angenommenBestellungenTV.endUpdates()
+    }
+    
+
     
     
     
