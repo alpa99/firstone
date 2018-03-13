@@ -170,9 +170,9 @@ class KellnerAngenommenVC: UIViewController, UITableViewDelegate, UITableViewDat
             let cell = Bundle.main.loadNibNamed("angenommenCell", owner: self, options: nil)?.first as! angenommenCell
             
     
-            
-            
-            let cell2 =  Bundle.main.loadNibNamed("bezahlenCell2", owner: self, options: nil)?.first as! bezahlenCell2
+//
+//
+//            let cell2 =  Bundle.main.loadNibNamed("bezahlenCell2", owner: self, options: nil)?.first as! bezahlenCell2
             
         
 //            cell2.testlbl.text = "dsfsd"
@@ -181,16 +181,18 @@ class KellnerAngenommenVC: UIViewController, UITableViewDelegate, UITableViewDat
 //
 //            cell.testTabelle.cellForRow(at: indexPath)...
 
-            self.itemssss = bestellung2[bestellungIDs[indexPath.row]]!
-            print(bestellungIDs, "IIIIDDIDIDID")
-            print(bestellung2, "bestellugn2")
-            print(self.itemssss, "itemssss")
+            
 //                    for (genre, itemsDictionary) in itemssss {
 //                        for (items, menge) in itemsDictionary {
 //                            cell.bestellungsText.text = "\(itemsDictionary) \n"
 //
 //                        }
 ////                    }
+            
+            self.itemssss = bestellung2[bestellungIDs[indexPath.row]]!
+            print(bestellungIDs, "IIIIDDIDIDID")
+            print(bestellung2, "bestellugn2")
+            print(self.itemssss, "itemssss")
             cell.bestellungsText.text = "\(itemssss)"
             
 
@@ -208,7 +210,7 @@ class KellnerAngenommenVC: UIViewController, UITableViewDelegate, UITableViewDat
         }
         
         func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-            return 400
+            return 150
             
         }
     
@@ -219,7 +221,7 @@ class KellnerAngenommenVC: UIViewController, UITableViewDelegate, UITableViewDat
         // OTHERS
         
         override func viewWillAppear(_ animated: Bool) {
-            angenommenBestellungenTV.estimatedRowHeight = 100
+            angenommenBestellungenTV.estimatedRowHeight = 50
             angenommenBestellungenTV.rowHeight = UITableViewAutomaticDimension
         }
         

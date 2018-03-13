@@ -26,6 +26,10 @@ class KellnerCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        
+        tischnummer.textColor = UIColor.white
+        bestellungsText.textColor = UIColor.white
+        timeLbl.textColor = UIColor.white
         // Initialization code
     }
 

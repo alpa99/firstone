@@ -33,7 +33,7 @@
                     </label>
                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="cgp-Gf-s8M">
                         <rect key="frame" x="16" y="40" width="288" height="90"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <accessibility key="accessibilityConfiguration">
                             <accessibilityTraits key="traits" notEnabled="YES"/>
                         </accessibility>
@@ -42,6 +42,7 @@
                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                     </textView>
                 </subviews>
+                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                 <constraints>
                     <constraint firstItem="p3i-0l-QC5" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="89S-2y-87v"/>
                     <constraint firstItem="cgp-Gf-s8M" firstAttribute="top" secondItem="p3i-0l-QC5" secondAttribute="bottom" constant="8" id="Dv7-yo-ecG"/>
@@ -55,6 +56,7 @@
                     <constraint firstItem="cgp-Gf-s8M" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="s9j-k2-iYz"/>
                 </constraints>
             </tableViewCellContentView>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
                 <outlet property="bestellungsText" destination="cgp-Gf-s8M" id="PwG-yG-twy"/>

@@ -74,17 +74,6 @@ class ScanDetailVC: UIViewController {
         speiseFrame.origin.x = self.view.frame.width
         speiseVC.view.frame = speiseFrame
       
-        let bestellVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "BestellungVC") as! BestellungVC
-        
-        bestellVC.barname = scanbarname
-        self.addChildViewController(bestellVC)
-        self.scrollView.addSubview(bestellVC.view)
-        bestellVC.didMove(toParentViewController: self)
-        bestellVC.view.frame = scrollView.bounds
-
-        var bestellFrame: CGRect = bestellVC.view.frame
-        bestellFrame.origin.x = 2*self.view.frame.width
-        bestellVC.view.frame = bestellFrame
         
 
         self.scrollView.contentSize = CGSize(width: self.view.frame.width*3, height: self.view.frame.height)

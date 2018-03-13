@@ -125,7 +125,6 @@ class LoginVC: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
 
         if Auth.auth().currentUser?.uid != nil {
-            print(Auth.auth().currentUser?.uid, "IDDDD")
             segueToTabBar()
         }
     }
