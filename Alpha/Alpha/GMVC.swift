@@ -72,7 +72,7 @@ class GMVC: UIViewController, CLLocationManagerDelegate {
     func getPlaceMarkFromAdress (adress: String, Titlex: String, Subtitlex: String){
         CLGeocoder().geocodeAddressString(adress){ (placemarks: [CLPlacemark]?,error: Error?) -> Void in
             if let marks = placemarks, marks.count > 0 {
-                if let loc = marks[0].location {
+                if marks[0].location != nil {
                     }
                 
             }

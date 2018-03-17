@@ -109,14 +109,21 @@ class KellnerVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
                 } )
             }
             print(self.genres, "das sind die genres")
+            print(snapshot, "snapshot")
             for genre in self.genres {
+                if self.bestellunggenres[genre] != nil  {
+                    self.bestellunggenres.removeValue(forKey: genre)
+                }
                 if snapshot.hasChild(genre) == true {
+                    
                     self.bestellunggenres.updateValue(snapshot.childSnapshot(forPath: genre).value as! [String : Int], forKey: genre)
-                    self.bestellung2.updateValue(self.bestellunggenres, forKey: BestellungID)
                     print(self.bestellung2, "das ist bestellung2")
                     print(self.bestellunggenres, "das ist bestellunggenres")
-
+                    
                 }
+                
+                self.bestellung2.updateValue(self.bestellunggenres, forKey: BestellungID)
+
                 self.bestellungenTV.reloadData()
             }
         }, withCancel: nil)
@@ -234,6 +241,7 @@ class KellnerVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     override func viewDidLoad() {
         
         super.viewDidLoad()
+    
         loadGenres()
         loadBestellungsID(KellnerID: self.KellnerID)
         

@@ -1,36 +1,27 @@
 //
-//  KellnerCell.swift
+//  angenommenCell.swift
 //  Alpha
 //
-//  Created by Ibrahim Akcam on 11.11.17.
-//  Copyright © 2017 AM. All rights reserved.
+//  Created by Ibrahim Akcam on 11.03.18.
+//  Copyright © 2018 AM. All rights reserved.
 //
 
 import UIKit
 
 
+class angenommenCell: UITableViewCell {
 
-
-class KellnerCell: UITableViewCell {
-
-
-
-    @IBOutlet weak var tischnummer: UILabel!
     
     @IBOutlet weak var bestellungsText: UITextView!
-    
     @IBOutlet weak var timeLbl: UILabel!
-    
-
+    @IBOutlet weak var tischnummer: UILabel!
     
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        
-        tischnummer.textColor = UIColor.white
-        bestellungsText.textColor = UIColor.white
-        timeLbl.textColor = UIColor.white
+       
         // Initialization code
+        
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

@@ -17,6 +17,12 @@
 		082BD2DD1FF705DE004106A8 /* KellnerAngenommenVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 082BD2DC1FF705DE004106A8 /* KellnerAngenommenVC.swift */; };
 		084D9D42203B1C7D008601B6 /* MyBestellungCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084D9D40203B1C7D008601B6 /* MyBestellungCell.swift */; };
 		084D9D43203B1C7D008601B6 /* MyBestellungCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 084D9D41203B1C7D008601B6 /* MyBestellungCell.xib */; };
+		085B23D82053113F00D50FE3 /* bezahlenCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085B23D62053113F00D50FE3 /* bezahlenCell.swift */; };
+		085B23D92053113F00D50FE3 /* bezahlenCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 085B23D72053113F00D50FE3 /* bezahlenCell.xib */; };
+		085B23DC205349DB00D50FE3 /* bezahlenCell2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085B23DA205349DB00D50FE3 /* bezahlenCell2.swift */; };
+		085B23DD205349DB00D50FE3 /* bezahlenCell2.xib in Resources */ = {isa = PBXBuildFile; fileRef = 085B23DB205349DB00D50FE3 /* bezahlenCell2.xib */; };
+		085B23E42055BC6100D50FE3 /* angenommenCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085B23E22055BC6100D50FE3 /* angenommenCell.swift */; };
+		085B23E52055BC6100D50FE3 /* angenommenCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 085B23E32055BC6100D50FE3 /* angenommenCell.xib */; };
 		087134FE1FBDEE170016E181 /* SpeisekarteVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087134FD1FBDEE170016E181 /* SpeisekarteVC.swift */; };
 		087796DE204AFA410066D6F5 /* BestellungAbschickenVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087796DD204AFA410066D6F5 /* BestellungAbschickenVC.swift */; };
 		08779BA51FB7898400B99D19 /* LoginKellnerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08779BA41FB7898400B99D19 /* LoginKellnerVC.swift */; };
@@ -39,7 +45,6 @@
 		4E2FF0BD1FEDDC850084F0A7 /* GMVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E2FF0BC1FEDDC850084F0A7 /* GMVC.swift */; };
 		4E3728411FE3E34E000DAF97 /* DetailVC2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E3728401FE3E34E000DAF97 /* DetailVC2.swift */; };
 		4E3728431FE3EB43000DAF97 /* SpeisekarteVC2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E3728421FE3EB43000DAF97 /* SpeisekarteVC2.swift */; };
-		4E3728451FE3F19F000DAF97 /* BestellungVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E3728441FE3F19F000DAF97 /* BestellungVC.swift */; };
 		4E6020491F9E2F88001B2909 /* ScanDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E6020481F9E2F88001B2909 /* ScanDetailVC.swift */; };
 		4E66E16D1FD49CFA005E87E3 /* PageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E66E16C1FD49CFA005E87E3 /* PageViewController.swift */; };
 		4EC247CB1F98F90500910AA8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EC247CA1F98F90500910AA8 /* AppDelegate.swift */; };
@@ -90,6 +95,12 @@
 		082BD2DC1FF705DE004106A8 /* KellnerAngenommenVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KellnerAngenommenVC.swift; sourceTree = "<group>"; };
 		084D9D40203B1C7D008601B6 /* MyBestellungCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyBestellungCell.swift; sourceTree = "<group>"; };
 		084D9D41203B1C7D008601B6 /* MyBestellungCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MyBestellungCell.xib; sourceTree = "<group>"; };
+		085B23D62053113F00D50FE3 /* bezahlenCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = bezahlenCell.swift; sourceTree = "<group>"; };
+		085B23D72053113F00D50FE3 /* bezahlenCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = bezahlenCell.xib; sourceTree = "<group>"; };
+		085B23DA205349DB00D50FE3 /* bezahlenCell2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = bezahlenCell2.swift; sourceTree = "<group>"; };
+		085B23DB205349DB00D50FE3 /* bezahlenCell2.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = bezahlenCell2.xib; sourceTree = "<group>"; };
+		085B23E22055BC6100D50FE3 /* angenommenCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = angenommenCell.swift; sourceTree = "<group>"; };
+		085B23E32055BC6100D50FE3 /* angenommenCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = angenommenCell.xib; sourceTree = "<group>"; };
 		087134FD1FBDEE170016E181 /* SpeisekarteVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeisekarteVC.swift; sourceTree = "<group>"; };
 		087796DD204AFA410066D6F5 /* BestellungAbschickenVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BestellungAbschickenVC.swift; sourceTree = "<group>"; };
 		08779BA41FB7898400B99D19 /* LoginKellnerVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginKellnerVC.swift; sourceTree = "<group>"; };
@@ -114,7 +125,6 @@
 		4E2FF0BC1FEDDC850084F0A7 /* GMVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GMVC.swift; sourceTree = "<group>"; };
 		4E3728401FE3E34E000DAF97 /* DetailVC2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailVC2.swift; sourceTree = "<group>"; };
 		4E3728421FE3EB43000DAF97 /* SpeisekarteVC2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeisekarteVC2.swift; sourceTree = "<group>"; };
-		4E3728441FE3F19F000DAF97 /* BestellungVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BestellungVC.swift; sourceTree = "<group>"; };
 		4E6020481F9E2F88001B2909 /* ScanDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanDetailVC.swift; sourceTree = "<group>"; };
 		4E66E16C1FD49CFA005E87E3 /* PageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageViewController.swift; sourceTree = "<group>"; };
 		4EC247C71F98F90500910AA8 /* Alpha.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Alpha.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -186,6 +196,8 @@
 		08B85365203CE6EB008DA787 /* Cells */ = {
 			isa = PBXGroup;
 			children = (
+				085B23E22055BC6100D50FE3 /* angenommenCell.swift */,
+				085B23E32055BC6100D50FE3 /* angenommenCell.xib */,
 				08F050E51FBE487F0097C954 /* SpeisekarteCell.swift */,
 				08F050E61FBE487F0097C954 /* SpeisekarteCell.xib */,
 				08210EDF1FB7B09000EABA32 /* KellnerCell.swift */,
@@ -196,6 +208,10 @@
 				08210EE41FB83AE300EABA32 /* BestellenCell.xib */,
 				089C74CD204B3478001B3C22 /* PulleyCell.swift */,
 				089C74CE204B3478001B3C22 /* PulleyCell.xib */,
+				085B23D62053113F00D50FE3 /* bezahlenCell.swift */,
+				085B23D72053113F00D50FE3 /* bezahlenCell.xib */,
+				085B23DA205349DB00D50FE3 /* bezahlenCell2.swift */,
+				085B23DB205349DB00D50FE3 /* bezahlenCell2.xib */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -308,7 +324,6 @@
 			isa = PBXGroup;
 			children = (
 				4EC247FF1F9950CE00910AA8 /* DrawerVC.swift */,
-				4E3728441FE3F19F000DAF97 /* BestellungVC.swift */,
 				4E1664BB1FBC6D340038EFB5 /* DetailVC.swift */,
 				087134FD1FBDEE170016E181 /* SpeisekarteVC.swift */,
 				4E66E16C1FD49CFA005E87E3 /* PageViewController.swift */,
@@ -459,10 +474,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				4EC247D51F98F90500910AA8 /* LaunchScreen.storyboard in Resources */,
+				085B23DD205349DB00D50FE3 /* bezahlenCell2.xib in Resources */,
 				4EC247FE1F99377100910AA8 /* GoogleService-Info.plist in Resources */,
 				4EC247D21F98F90500910AA8 /* Assets.xcassets in Resources */,
 				FD0DDBFC204B1CD200E40E81 /* pin.png in Resources */,
 				089C74D0204B3478001B3C22 /* PulleyCell.xib in Resources */,
+				085B23E52055BC6100D50FE3 /* angenommenCell.xib in Resources */,
+				085B23D92053113F00D50FE3 /* bezahlenCell.xib in Resources */,
 				084D9D43203B1C7D008601B6 /* MyBestellungCell.xib in Resources */,
 				08F050E81FBE487F0097C954 /* SpeisekarteCell.xib in Resources */,
 				4EC247D01F98F90500910AA8 /* Main.storyboard in Resources */,
@@ -678,6 +696,7 @@
 				082BD2DD1FF705DE004106A8 /* KellnerAngenommenVC.swift in Sources */,
 				088728691FB7A50D00FF2448 /* KellnerVC.swift in Sources */,
 				4EC247FA1F98FE6A00910AA8 /* QRBereich.swift in Sources */,
+				085B23DC205349DB00D50FE3 /* bezahlenCell2.swift in Sources */,
 				08EF4C4E1F9D2AC000F01096 /* SpeisekarteInfos.swift in Sources */,
 				08EF4C4C1F9D006700F01096 /* ExpandableHeaderView.swift in Sources */,
 				4EC248001F9950CE00910AA8 /* DrawerVC.swift in Sources */,
@@ -700,7 +719,7 @@
 				0895B3631F9B5F28007D97DE /* UserVC.swift in Sources */,
 				4E6020491F9E2F88001B2909 /* ScanDetailVC.swift in Sources */,
 				08779BA51FB7898400B99D19 /* LoginKellnerVC.swift in Sources */,
-				4E3728451FE3F19F000DAF97 /* BestellungVC.swift in Sources */,
+				085B23D82053113F00D50FE3 /* bezahlenCell.swift in Sources */,
 				4EC248021F9950E700910AA8 /* LocationVC.swift in Sources */,
 				084D9D42203B1C7D008601B6 /* MyBestellungCell.swift in Sources */,
 				089C74CF204B3478001B3C22 /* PulleyCell.swift in Sources */,
@@ -708,6 +727,7 @@
 				4E66E16D1FD49CFA005E87E3 /* PageViewController.swift in Sources */,
 				4E2FF0BD1FEDDC850084F0A7 /* GMVC.swift in Sources */,
 				4E1664BE1FBF12020038EFB5 /* votevc.swift in Sources */,
+				085B23E42055BC6100D50FE3 /* angenommenCell.swift in Sources */,
 				087134FE1FBDEE170016E181 /* SpeisekarteVC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
