@@ -36,7 +36,6 @@ class DrawerVC: UIViewController, PulleyDrawerViewControllerDelegate, UITableVie
                 let bar = BarInfos(dictionary: dictionary)
                 
                 self.bars.append(bar)
-                print(self.bars, "hierdiebars")
                 DispatchQueue.main.async(execute: {
                     self.BarTV.reloadData()
                 } )
@@ -177,6 +176,16 @@ class DrawerVC: UIViewController, PulleyDrawerViewControllerDelegate, UITableVie
         bars = [BarInfos]()
         fetchBars()
         
+        searchController.searchBar.placeholder = "Suche nach dem Namen deiner Bar"
+        searchController.searchBar.barTintColor = UIColor(red: 90.0/255.0, green: 90.0/255.0, blue: 90.0/255.0, alpha: 1.0)
+        searchController.searchBar.searchBarStyle = .prominent
+        searchController.searchBar.tintColor = .white
+
+        if let txfSearchField = searchController.searchBar.value(forKey: "_searchField") as? UITextField {
+            txfSearchField.textColor = .white
+            txfSearchField.borderStyle = .roundedRect
+            txfSearchField.backgroundColor = UIColor(red: 90.0/255.0, green: 90.0/255.0, blue: 90.0/255.0, alpha: 1.0)
+        }
         searchController.searchResultsUpdater = self
         searchController.dimsBackgroundDuringPresentation  = false
         definesPresentationContext = true
