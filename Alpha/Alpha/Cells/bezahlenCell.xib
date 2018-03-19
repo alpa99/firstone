@@ -9,43 +9,49 @@
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <array key="Helvetica.ttc">
+            <string>Helvetica-Bold</string>
+        </array>
+    </customFonts>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="361" id="KGk-i7-Jjw" customClass="bezahlenCell" customModule="Alpha" customModuleProvider="target">
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="361" id="KGk-i7-Jjw" customClass="bezahlenCell" customModule="Alpha" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="320" height="361"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
                 <rect key="frame" x="0.0" y="0.0" width="320" height="360.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="TFh-Nf-J0H">
-                        <rect key="frame" x="16" y="11" width="296" height="215"/>
+                    <tableView clipsSubviews="YES" tag="2" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="TFh-Nf-J0H">
+                        <rect key="frame" x="0.0" y="11" width="320" height="211"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </tableView>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VoA-UT-diV">
-                        <rect key="frame" x="16" y="320" width="296" height="30"/>
-                        <color key="backgroundColor" red="0.2091338449" green="1" blue="0.6473246856" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <rect key="frame" x="16" y="316" width="296" height="34"/>
+                        <color key="backgroundColor" red="0.0" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <fontDescription key="fontDescription" name="Helvetica-Bold" family="Helvetica" pointSize="19"/>
                         <state key="normal" title="Bezahlen">
                             <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         </state>
                     </button>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Gesamt" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yN7-7f-UpL">
-                        <rect key="frame" x="16" y="234" width="59.5" height="21"/>
+                        <rect key="frame" x="16" y="230" width="59.5" height="21"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                        <nil key="textColor"/>
+                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kDE-0i-Xe1">
-                        <rect key="frame" x="270" y="279" width="42" height="21"/>
+                        <rect key="frame" x="270" y="275" width="42" height="21"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                        <nil key="textColor"/>
+                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nzL-zt-5UF">
-                        <rect key="frame" x="270" y="233" width="42" height="21"/>
+                        <rect key="frame" x="270" y="229" width="42" height="21"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                        <nil key="textColor"/>
+                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
@@ -57,18 +63,21 @@
                     <constraint firstItem="yN7-7f-UpL" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="IcE-4j-jWe"/>
                     <constraint firstItem="nzL-zt-5UF" firstAttribute="leading" secondItem="yN7-7f-UpL" secondAttribute="trailing" constant="194.5" id="Q5J-Dn-JxZ"/>
                     <constraint firstAttribute="trailing" secondItem="VoA-UT-diV" secondAttribute="trailing" constant="8" id="R6x-SZ-xGz"/>
-                    <constraint firstAttribute="bottom" secondItem="VoA-UT-diV" secondAttribute="bottom" constant="10.5" id="VHB-RA-B75"/>
+                    <constraint firstAttribute="bottom" secondItem="VoA-UT-diV" secondAttribute="bottom" constant="10" id="VHB-RA-B75"/>
                     <constraint firstAttribute="trailing" secondItem="kDE-0i-Xe1" secondAttribute="trailing" constant="8" id="aHA-Co-XkG"/>
-                    <constraint firstAttribute="trailing" secondItem="TFh-Nf-J0H" secondAttribute="trailing" constant="8" id="eDm-ai-jOB"/>
+                    <constraint firstAttribute="trailing" secondItem="TFh-Nf-J0H" secondAttribute="trailing" id="eDm-ai-jOB"/>
                     <constraint firstItem="VoA-UT-diV" firstAttribute="top" secondItem="yN7-7f-UpL" secondAttribute="bottom" constant="65" id="fUa-A2-Bfi"/>
                     <constraint firstItem="VoA-UT-diV" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="hfd-s5-GxQ"/>
-                    <constraint firstItem="TFh-Nf-J0H" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="sS3-NR-hnt"/>
+                    <constraint firstItem="TFh-Nf-J0H" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="sS3-NR-hnt"/>
                     <constraint firstItem="VoA-UT-diV" firstAttribute="top" secondItem="kDE-0i-Xe1" secondAttribute="bottom" constant="20" id="vNm-9s-9g6"/>
                 </constraints>
             </tableViewCellContentView>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
+                <outlet property="bezahlenBtn" destination="VoA-UT-diV" id="Vn5-5Q-cd9"/>
+                <outlet property="gesamtLbl" destination="yN7-7f-UpL" id="QJl-VA-1hJ"/>
+                <outlet property="gesamtPreisLbl" destination="nzL-zt-5UF" id="WOa-lg-h01"/>
                 <outlet property="testTabelle" destination="TFh-Nf-J0H" id="Qzp-P0-cSG"/>
                 <outlet property="timeLbl" destination="kDE-0i-Xe1" id="3Ho-0k-A7m"/>
             </connections>

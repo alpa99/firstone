@@ -134,7 +134,7 @@ class SpeisekarteVC2: UIViewController, UITableViewDataSource, UITableViewDelega
     }
     
     func tableView(_ tableView: UITableView, heightForFooterInSection: Int) -> CGFloat {
-        return 2
+        return 15
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
@@ -146,7 +146,7 @@ class SpeisekarteVC2: UIViewController, UITableViewDataSource, UITableViewDelega
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = Bundle.main.loadNibNamed("SpeisekarteCell", owner: self, options: nil)?.first as! SpeiseCell
+        let cell = Bundle.main.loadNibNamed("SpeisekarteCell", owner: self, options: nil)?.first as! SpeisekarteCell
         if (sections[indexPath.section].expanded){
             cell.itemNameLbl.text = "\(sections[indexPath.section].items[indexPath.row])"
             cell.itemPreisLbl.text = "\(sections[indexPath.section].preise[indexPath.row]) €"
@@ -154,7 +154,7 @@ class SpeisekarteVC2: UIViewController, UITableViewDataSource, UITableViewDelega
         else {
             cell.itemNameLbl.isHidden = true
             cell.itemPreisLbl.isHidden = true
-            
+
         }
         
         return cell
@@ -162,7 +162,7 @@ class SpeisekarteVC2: UIViewController, UITableViewDataSource, UITableViewDelega
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 44
+        return 59
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -176,6 +176,12 @@ class SpeisekarteVC2: UIViewController, UITableViewDataSource, UITableViewDelega
     }
     
     
+    
+    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        let view = UIView()
+        view.backgroundColor = UIColor.clear
+        return view
+    }
     
     
     func toggleSection(tableView: UITableView, header: ExpandableHeaderView, section: Int) {

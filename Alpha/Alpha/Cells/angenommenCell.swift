@@ -9,9 +9,9 @@
 import UIKit
 
 
+
 class angenommenCell: UITableViewCell {
 
-    
     @IBOutlet weak var bestellungsText: UITextView!
     @IBOutlet weak var timeLbl: UILabel!
     @IBOutlet weak var tischnummer: UILabel!

@@ -384,7 +384,9 @@ performSegue(withIdentifier: "wirdabgeschickt", sender: self)
             childRef?.updateChildValues(values)
             let userBestellungenRef = Database.database().reference().child("userBestellungen").child(fromUserID)
             let bestellungID = childRef?.key
-            userBestellungenRef.updateChildValues(["BestellungsID": bestellungID!, "abgeschlossen": false])
+            userBestellungenRef.child(bestellungID!).updateChildValues(["BestellungsID": bestellungID!, "abgeschlossen": false])
+            userBestellungenRef.child(bestellungID!).updateChildValues(values)
+            
             let kellnerBestellungenRef = Database.database().reference().child("userBestellungen").child(KellnerID)
             kellnerBestellungenRef.child(bestellungID!).updateChildValues(["angenommen": false, "fromUserID": fromUserID] )
             print(Date(timeIntervalSince1970: timestamp)) }

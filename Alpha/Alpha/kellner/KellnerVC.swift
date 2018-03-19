@@ -35,6 +35,7 @@ class KellnerVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     @IBOutlet weak var bestellungenTV: UITableView!
     
     
+    @IBOutlet weak var logoutBtn: UIButton!
     
     
     
@@ -64,7 +65,6 @@ class KellnerVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
                 self.genres.append(snapshot.key)
             }
             
-            print(self.genres, "genres")
             
         }, withCancel: nil)
         
@@ -80,7 +80,6 @@ class KellnerVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
                 if bestellungInfos.angenommen == false {
                     self.loadBestellung(BestellungID: snapshot.key)
                     self.bestellungIDs.append(snapshot.key)
-                    print(self.bestellungIDs, "das ist bestellungIDS")
                     
                 }
             }
@@ -108,8 +107,7 @@ class KellnerVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
                     self.bestellungenTV.reloadData()
                 } )
             }
-            print(self.genres, "das sind die genres")
-            print(snapshot, "snapshot")
+
             for genre in self.genres {
                 if self.bestellunggenres[genre] != nil  {
                     self.bestellunggenres.removeValue(forKey: genre)
@@ -117,8 +115,6 @@ class KellnerVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
                 if snapshot.hasChild(genre) == true {
                     
                     self.bestellunggenres.updateValue(snapshot.childSnapshot(forPath: genre).value as! [String : Int], forKey: genre)
-                    print(self.bestellung2, "das ist bestellung2")
-                    print(self.bestellunggenres, "das ist bestellunggenres")
                     
                 }
                 
@@ -164,7 +160,8 @@ class KellnerVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         let action = UIContextualAction(style: .destructive, title: "annehmen") { (action, view, completion) in
             completion(true)
             
-            self.removeBestellung(KellnerID: self.KellnerID, BestellungID: self.bestellungIDs[indexPath.row])
+            self.removeBestellung(KellnerID: self.KellnerID, BestellungID:
+                self.bestellungIDs[indexPath.row])
             self.bestellungIDs.removeAll()
             self.itemssss.removeAll()
             self.bestellunggenres.removeAll()
@@ -174,6 +171,7 @@ class KellnerVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
             self.tischnummer.removeAll()
             self.loadGenres()
             self.loadBestellungsID(KellnerID: self.KellnerID)
+            self.bestellungenTV.reloadData()
             
         }
         
@@ -206,11 +204,7 @@ class KellnerVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
             }
             
         }
-        
-        print(cellGenres, "cellgenres")
-        print(cellItems, "cellitems")
-        print(cellMengen, "cellmengen")
-        
+
         cellGenres.removeAll()
         cellItems.removeAll()
         cellMengen.removeAll()
@@ -242,6 +236,8 @@ class KellnerVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         
         super.viewDidLoad()
     
+        logoutBtn.layer.cornerRadius = 4
+        
         loadGenres()
         loadBestellungsID(KellnerID: self.KellnerID)
         
@@ -255,7 +251,6 @@ class KellnerVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     }
     
     @objc private func refreshOptions(sender: UIRefreshControl) {
-        print(KellnerID)
         bestellungIDs.removeAll()
         itemssss.removeAll()
         bestellunggenres.removeAll()

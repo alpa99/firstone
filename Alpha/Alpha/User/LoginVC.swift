@@ -25,6 +25,7 @@ class LoginVC: UIViewController {
     // OUTLETS
     @IBOutlet weak var loginBtn: UIButton!
     
+    @IBOutlet weak var kellnerLogin: UIButton!
     
     // ACTIONS
     @IBAction func loginTapped(_ sender: UIButton) {
@@ -133,7 +134,7 @@ class LoginVC: UIViewController {
         super.viewDidLoad()
         
         loginBtn.layer.cornerRadius = 4
-
+        kellnerLogin.layer.cornerRadius = 4
 
         // Do any additional setup after loading the view.
     }

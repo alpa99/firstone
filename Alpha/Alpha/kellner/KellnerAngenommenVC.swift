@@ -21,6 +21,8 @@ class KellnerAngenommenVC: UIViewController, UITableViewDelegate, UITableViewDat
         var genres = [String]()
         var bestellunggenres = [String: [String: Int]]()
         var bestellung2 = [String: [String: [String: Int]]]()
+        var bestellung3 = [String: [String: [String: Int]]]()
+
         var itemssss = [String: [String: Int]]()
     
         var itemsangenommen = [String]()
@@ -105,42 +107,32 @@ class KellnerAngenommenVC: UIViewController, UITableViewDelegate, UITableViewDat
                     if snapshot.hasChild(genre) == true {
                         self.bestellunggenres.updateValue(snapshot.childSnapshot(forPath: genre).value as! [String : Int], forKey: genre)
                         
-                            print("hier")
                         }
 
                     self.bestellung2.updateValue(self.bestellunggenres, forKey: BestellungID)
                     self.angenommenBestellungenTV.reloadData()
 
                     }
-                print(self.bestellunggenres, "bestellunggenres")
-                print(self.bestellung2, "DAS hier")
-                print(self.bestellung2, "bestellungasasda2")
+
+
                 
                 if self.bestellung2.count == self.bestellungIDs.count {
                     for (a, b) in self.bestellung2 {
 
-                        print(a, "a")
-                        print(b, "b")
 
-                        for (c, d) in b {
-                            print(c, "c")
-                            print(d, "d")
+                        for d in b.values {
 
                             for (e,f) in d {
-                                print(e, "e")
-                                print(f, "f")
+
                                 self.itemsangenommen.append(e)
                                 self.mengenangenommen.append(f)
-                                print(d, "DDDD")
-                                print(self.itemsangenommen, "itemsangenommen")
-                                if self.itemsangenommen.count == b.count {
-                                    self.setSections(genre: c, items: self.itemsangenommen, preise: self.mengenangenommen)
-                                    self.itemsangenommen.removeAll()
-                                    self.mengenangenommen.removeAll()
-                                    print(self.sections, "sections")
-                                }
+
+
                             }
                         }
+                        self.setSections(genre: a, items: self.itemsangenommen, preise: self.mengenangenommen)
+                        self.itemsangenommen.removeAll()
+                        self.mengenangenommen.removeAll()
                     }
                     self.angenommenBestellungenTV.reloadData()
                 }
@@ -158,7 +150,8 @@ class KellnerAngenommenVC: UIViewController, UITableViewDelegate, UITableViewDat
         // TABLE
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return sections.count
+            return sections.count
+        
     }
     
     
@@ -176,28 +169,42 @@ class KellnerAngenommenVC: UIViewController, UITableViewDelegate, UITableViewDat
 
         
         func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-            
             let cell = Bundle.main.loadNibNamed("bezahlenCell", owner: self, options: nil)?.first as! bezahlenCell
-            
-            self.itemssss = bestellung2[bestellungIDs[indexPath.row]]!
-            
-            print(bestellungIDs, "IIIIDDIDIDID")
-            print(bestellung2, "bestellugn2")
-            print(self.itemssss, "itemssss")
-                        
+            if (sections[indexPath.section].expanded){
+
+            cell.bestellteItems = bestellung2
+            cell.section = indexPath.section
+
             let timeStampDate = NSDate(timeIntervalSince1970: TimeStamps[indexPath.row])
             let dateFormatter = DateFormatter()
             dateFormatter.dateFormat = "HH:mm"
-            
+                cell.loadBestellung(id: bestellungIDs[indexPath.section])
+            print(indexPath, bestellungIDs, bestellung2)
             cell.timeLbl.text = "\(dateFormatter.string(from: timeStampDate as Date)) Uhr"
+                return cell
+                
+            }
+            else {
+                cell.timeLbl.isHidden = true
+                cell.testTabelle.isHidden = true
+                cell.gesamtLbl.isHidden = true
+                cell.gesamtPreisLbl.isHidden = true
+                cell.bezahlenBtn.isHidden = true
+                return cell
+                
+            }
             
-            return cell
+        
+            
             
         }
-        
+    
         func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
             if (sections[indexPath.section].expanded) {
+//                print(sections[indexPath.section].items)
+//                let height = 361 - 215 + sections[indexPath.section].items.count*44
                 return 400
+
             } else {
                 return 0
             }
@@ -215,8 +222,7 @@ class KellnerAngenommenVC: UIViewController, UITableViewDelegate, UITableViewDat
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        print(sections, "SECTIONS")
-        print(tischnummer, "tischnummern")
+
         let header = ExpandableHeaderView()
         
         header.customInit(tableView: tableView, title: "Tisch \(tischnummer[section])", section: section, delegate: self as ExpandableHeaderViewDelegate)
@@ -226,11 +232,16 @@ class KellnerAngenommenVC: UIViewController, UITableViewDelegate, UITableViewDat
     }
     
     func toggleSection(tableView: UITableView, header: ExpandableHeaderView, section: Int) {
-        print(section, "SECtionINT")
         sections[section].expanded = !sections[section].expanded
         angenommenBestellungenTV.beginUpdates()
+        DispatchQueue.main.async(execute: {
+            self.angenommenBestellungenTV.reloadData()
+        } )
         angenommenBestellungenTV.reloadSections([section], with: .automatic)
         angenommenBestellungenTV.endUpdates()
+
+
+        
     }
     
 
@@ -242,7 +253,10 @@ class KellnerAngenommenVC: UIViewController, UITableViewDelegate, UITableViewDat
         override func viewWillAppear(_ animated: Bool) {
             angenommenBestellungenTV.estimatedRowHeight = 50
             angenommenBestellungenTV.rowHeight = UITableViewAutomaticDimension
+//            loadBestellungsID(KellnerID: self.KellnerID)
         }
+
+    
         
         override func viewDidLoad() {
             
@@ -250,7 +264,7 @@ class KellnerAngenommenVC: UIViewController, UITableViewDelegate, UITableViewDat
             angenommenBestellungenTV.reloadData()
             loadGenres()
             loadBestellungsID(KellnerID: self.KellnerID)
-            
+
             let refreshControl = UIRefreshControl()
             let title = NSLocalizedString("aktualisiere", comment: "Pull to refresh")
             refreshControl.attributedTitle = NSAttributedString(string: title)
@@ -261,17 +275,21 @@ class KellnerAngenommenVC: UIViewController, UITableViewDelegate, UITableViewDat
         }
         
         @objc private func refreshOptions(sender: UIRefreshControl) {
-            print(KellnerID)
             bestellungIDs.removeAll()
             itemssss.removeAll()
             bestellunggenres.removeAll()
             genres.removeAll()
             bestellung2.removeAll()
-            loadGenres()
-            loadBestellungsID(KellnerID: self.KellnerID)
             sections.removeAll()
             TimeStamps = [Double]()
             tischnummer = [String]()
+            itemsangenommen.removeAll()
+            mengenangenommen.removeAll()
+            items.removeAll()
+            loadGenres()
+            loadBestellungsID(KellnerID: self.KellnerID)
+
+
             
             sender.endRefreshing()
         }
@@ -331,5 +349,8 @@ class KellnerAngenommenVC: UIViewController, UITableViewDelegate, UITableViewDat
 //            return action
 //        }
 
+//[3, 0] ["-L6vpnOnctGKW4dxVrK6", "-L6xj8lKdC4EzwvaftzR", "-L70YMCeCC6IpDxXDP7t", "-L7Vs_pD4Wo_NbIm2x4q", "-L7sYhutqJrUHmoVPThM"] ["-L7sYhutqJrUHmoVPThM": ["Shishas": ["Lemon Fresh": 70, "Water Melon Chill": 90, "Vanille": 90], "Getränke": ["Moloko": 90, "Schwarze Dose": 90]], "-L6vpnOnctGKW4dxVrK6": ["Getränke": ["Moloko": 2]], "-L6xj8lKdC4EzwvaftzR": ["Shishas": ["Lemon Fresh": 3, "Water Melon Chill": 2], "Getränke": ["Moloko": 4]], "-L70YMCeCC6IpDxXDP7t": ["Getränke": ["Schwarze Dose": 8]], "-L7Vs_pD4Wo_NbIm2x4q": ["Getränke": ["Moloko": 3]]]
+
+//[0, 0] ["-L6vpnOnctGKW4dxVrK6", "-L6xj8lKdC4EzwvaftzR", "-L70YMCeCC6IpDxXDP7t", "-L7Vs_pD4Wo_NbIm2x4q", "-L7sYhutqJrUHmoVPThM"] ["-L7sYhutqJrUHmoVPThM": ["Shishas": ["Lemon Fresh": 70, "Water Melon Chill": 90, "Vanille": 90], "Getränke": ["Moloko": 90, "Schwarze Dose": 90]], "-L6vpnOnctGKW4dxVrK6": ["Getränke": ["Moloko": 2]], "-L6xj8lKdC4EzwvaftzR": ["Shishas": ["Lemon Fresh": 3, "Water Melon Chill": 2], "Getränke": ["Moloko": 4]], "-L70YMCeCC6IpDxXDP7t": ["Getränke": ["Schwarze Dose": 8]], "-L7Vs_pD4Wo_NbIm2x4q": ["Getränke": ["Moloko": 3]]]
 
 

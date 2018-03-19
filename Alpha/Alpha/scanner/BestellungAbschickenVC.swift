@@ -10,6 +10,11 @@ import UIKit
 
 class BestellungAbschickenVC: UIViewController {
 
+    
+    @IBAction func zuMeinenBestellungenSegue(_ sender: Any) {
+        performSegue(withIdentifier: "zuMeinenBestellungen", sender: self)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 

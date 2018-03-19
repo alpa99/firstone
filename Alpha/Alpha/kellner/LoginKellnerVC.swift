@@ -13,16 +13,17 @@ class LoginKellnerVC: UIViewController {
 
     // VARS
     
-//    var passwort = String()
-    
+    var kellnerID = String()
+
     // OUTLETS
     
     @IBOutlet weak var KellnerIdTextfield: UITextField!
     
     @IBOutlet weak var PasswortTextfield: UITextField!
 
-    var kellnerID = String()
+    @IBOutlet weak var loginBtn: UIButton!
     
+    @IBOutlet weak var GastLogin: UIButton!
     
     // Actions
     
@@ -122,6 +123,9 @@ class LoginKellnerVC: UIViewController {
         super.viewDidLoad()
         KellnerIdTextfield.text = "i.akcam@hotmail.de"
         PasswortTextfield.text = "123456"
+        
+        loginBtn.layer.cornerRadius = 4
+        GastLogin.layer.cornerRadius = 4
     }
 
     override func didReceiveMemoryWarning() {

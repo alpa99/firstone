@@ -14,13 +14,15 @@ protocol bestellenCell2Delegate {
 class bezahlenCell2: UITableViewCell {
 
     
-    @IBOutlet weak var testlbl: UILabel!
+    @IBOutlet weak var genreLbl: UILabel!
     
-//    var delegate: bestellenCell2Delegate?
+    @IBOutlet weak var ItemLbl: UILabel!
+    @IBOutlet weak var PreisLbl: UILabel!
+    @IBOutlet weak var MengeLbl: UILabel!
+    //    var delegate: bestellenCell2Delegate?
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        testlbl.text = "sdfsdsdsdfsdsre3"
         
         // Initialization code
     }

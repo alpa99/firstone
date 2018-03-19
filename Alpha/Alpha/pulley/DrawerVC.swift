@@ -156,7 +156,7 @@ class DrawerVC: UIViewController, PulleyDrawerViewControllerDelegate, UITableVie
     }
     
     func partialRevealDrawerHeight(bottomSafeArea: CGFloat) -> CGFloat {
-        return 340.0
+        return 240
     }
     
     func supportedDrawerPositions() -> [PulleyPosition] {
