@@ -9,8 +9,9 @@
 import UIKit
 import Pulley
 import Firebase
+import CoreLocation
 
-class DrawerVC: UIViewController, PulleyDrawerViewControllerDelegate, UITableViewDataSource, UITableViewDelegate, UISearchResultsUpdating, UISearchBarDelegate, PulleyCellDelegate {
+class DrawerVC: UIViewController, PulleyDrawerViewControllerDelegate, UITableViewDataSource, UITableViewDelegate, UISearchResultsUpdating, UISearchBarDelegate, PulleyCellDelegate, CLLocationManagerDelegate {
     
     // VARS
     var bars = [BarInfos]()
@@ -18,7 +19,10 @@ class DrawerVC: UIViewController, PulleyDrawerViewControllerDelegate, UITableVie
     var barIndex = 0
     let cellID = "cellID"
     let searchController = UISearchController(searchResultsController: nil)
-    
+    var locationManager = CLLocationManager()
+    var entf = [Double]()
+
+
     
     // OUTLETS
     @IBOutlet weak var BarTV: UITableView!
@@ -36,6 +40,9 @@ class DrawerVC: UIViewController, PulleyDrawerViewControllerDelegate, UITableVie
                 let bar = BarInfos(dictionary: dictionary)
                 
                 self.bars.append(bar)
+                
+                
+                
                 DispatchQueue.main.async(execute: {
                     self.BarTV.reloadData()
                 } )
@@ -43,6 +50,9 @@ class DrawerVC: UIViewController, PulleyDrawerViewControllerDelegate, UITableVie
         }, withCancel: nil)
 
     }
+    
+
+              
     
     // SEARCHBAR FUNCS
     
@@ -94,19 +104,42 @@ class DrawerVC: UIViewController, PulleyDrawerViewControllerDelegate, UITableVie
         
         cell.delegate = self
         
- 
-//        let cell = tableView.dequeueReusableCell(withIdentifier: cellID, for: indexPath)
         cell.backgroundColor = UIColor.clear
-      //  let bar = bars[indexPath.row]
         
         let bar : BarInfos
         
         if searchController.isActive == true && searchController.searchBar.text != ""{
             bar = filteredbars[indexPath.row]
+//            CLGeocoder().geocodeAddressString(bar.Adresse!, completionHandler: { (placemarks, error) -> Void in
+//
+//                if let placemark = placemarks?[0] {
+//                    let location = placemark.location
+//                    let distancebar = self.locationManager.location?.distance(from: location!)
+//                    let strecke = Double(distancebar!)/1000.0
+//
+//                }
+//            })
+            
         } else {
             bar = bars[indexPath.row]
+//            CLGeocoder().geocodeAddressString(bar.Adresse!, completionHandler: { (placemarks, error) -> Void in
+//
+//                if let placemark = placemarks?[0] {
+//                    let location = placemark.location
+//                    let distancebar = self.locationManager.location?.distance(from: location!)
+//                    let strecke = Double(distancebar!)/1000.0
+//                }})
         }
+        CLGeocoder().geocodeAddressString(bar.Adresse!, completionHandler: { (placemarks, error) -> Void in
             
+            if let placemark = placemarks?[0] {
+                let location = placemark.location
+                let distancebar = self.locationManager.location?.distance(from: location!)
+                let strecke = Double(distancebar!)/1000.0
+                cell.distanzName.text = String(format: "%.2f", strecke)+" km"
+
+            }})
+
         cell.barName.text = bar.Name
         
         return cell
@@ -199,6 +232,10 @@ class DrawerVC: UIViewController, PulleyDrawerViewControllerDelegate, UITableVie
         self.searchController.searchBar.frame.size.width = self.view.frame.size.width
         
         
+        locationManager.requestWhenInUseAuthorization()
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        locationManager.delegate = self
+        
     }
     
     override func didReceiveMemoryWarning() {
@@ -206,7 +243,9 @@ class DrawerVC: UIViewController, PulleyDrawerViewControllerDelegate, UITableVie
         // Dispose of any resources that can be recreated.
     }
     
-    
+    override func viewDidAppear(_ animated: Bool) {
+        self.BarTV.reloadData()
+    }
 
 }
 
