@@ -10,13 +10,21 @@ import Foundation
 
 struct ExpandTVSection2 {
     
-    var genre: String!
-    var items: [String : [String : Int]]!
+    var Kategorie: String!
+    var Unterkategorie: [String]!
+    var items: [[String]]!
+    var preis: [[Int]]!
+    var liter: [[String]]!
+    var expanded2: [Bool]!
     var expanded: Bool!
     
-    init(genre: String, items: [String : [String : Int]], expanded: Bool) {
-        self.genre = genre
+    init(Kategorie: String, Unterkategorie: [String], items: [[String]], preis: [[Int]], liter: [[String]], expanded2: [Bool], expanded: Bool) {
+        self.Kategorie = Kategorie
+        self.Unterkategorie = Unterkategorie
         self.items = items
+        self.preis = preis
+        self.liter = liter
+        self.expanded2 = expanded2
         self.expanded = expanded
     }
     

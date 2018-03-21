@@ -12,41 +12,43 @@ import Firebase
 import FirebaseAuth
 import CoreLocation
 
-class SpeisekarteVC: UIViewController, UITableViewDataSource, UITableViewDelegate, PulleyDrawerViewControllerDelegate, ExpandableHeaderViewDelegate, PageObservation, BestellenCellDelegate {
+class SpeisekarteVC: UIViewController, UITableViewDataSource, UITableViewDelegate, PulleyDrawerViewControllerDelegate, ExpandableHeaderViewDelegate, PageObservation {
+
+    
    
     
-
-
-        
-        var keys = [String: Int]()
-        var bestellteItemsDictionary = [String: [String: Int]]()
-        var yy = [String]()
-        var genres = [String]()
-        var itemss = [String]()
-        var values = [Int]()
         
     
         var parentPageViewController: PageViewController!
-        
+    
         var barname = " "
         var baradresse = " "
-        
-        
-        var items = [String]()
-        var itemsPreise = [Int]()
-        
-        var sections = [ExpandTVSection]()
-        
-        var cellIndexPathSection = 0
-        var cellIndexPathRow = 0
-        var i = Int()
-        
-        var bestellung = [ExpandTVSection]()
-        
-        
-        
-        
-        
+    
+        // TABLEVIEW
+        var sections = [ExpandTVSection2]()
+    
+//        var Kategorien = [String]()
+        var KategorienInt = [String: Int]()
+    
+    
+        var unterKategorien = [String]()
+        var unterKategorienInt = [String: Int]()
+        var unterKategorieArray = [String]()
+        var expanded2Array = [Bool]()
+    
+        var itemsunterkategorie = [String]()
+        var preisunterkategorie = [Int]()
+        var literunterkategorie = [String]()
+    
+    
+        var itemsUnterkategorie = [[String]]()
+        var preisUnterkategorie = [[Int]]()
+        var literUnterkategorie = [[String]]()
+
+
+    
+    
+    
         // OUTLETS
         
         @IBOutlet var SpeiseVCView: UIView!
@@ -54,111 +56,158 @@ class SpeisekarteVC: UIViewController, UITableViewDataSource, UITableViewDelegat
    
         @IBOutlet weak var SpeisekarteTableView: UITableView!
         
-    @IBAction func Backbtn(_ sender: UIButton) {
+        @IBAction func Backbtn(_ sender: UIButton) {
         parentPageViewController.goback()
-        
-        // performSegue(withIdentifier: "drawervc", sender: self)
-    }
+            }
     
     
         // FUNCTIONS
-        
-        func cellItemAddTapped(sender: BestellenCell) {
-            
-        }
-        
-        func getValue (){
+    func getParentPageViewController(parentRef: PageViewController) {
+        parentPageViewController = parentRef
+    }
+    
+
+    func getKategorien (){
             var datref: DatabaseReference!
             datref = Database.database().reference()
+
+            datref.child("Speisekarten").child("\(self.barname)").observe(.childAdded, with: { (snapshotKategorie) in
+                
+                // Anzahl Kategorien: Shishas, Getränke
+                self.KategorienInt.updateValue(Int(snapshotKategorie.childrenCount), forKey: snapshotKategorie.key)
+                print(self.KategorienInt, "KATEGROIEINT")
+                
+                self.getUnterKategorienItems(Kategorie: snapshotKategorie.key, KategorieChildrenCount: Int(snapshotKategorie.childrenCount))
+
+
+            }, withCancel: nil)
+//        print("XXXX")
+//        for (Kategorie, Int) in self.KategorienInt{
+//
+//            self.getUnterKategorienItems(Kategorie: Kategorie, KategorieChildrenCount: Int)
+//        }
+
+        }
+
+        // Softdrinks, Classics
+    func getUnterkategorien(){
             
-            datref.child("Speisekarten").child("\(self.barname)").observe(.value, with: { (snapshotValue) in
-                
-                self.getKeys(value: Int(snapshotValue.childrenCount))
-                
+            var datref: DatabaseReference!
+            datref = Database.database().reference()
+            datref.child("Speisekarten").child("\(self.barname)").observe(.childAdded, with: { (snapshotUnterkategorie) in
+                print(1)
+
+    
+//                print(snapshotUnterkategorie, "snapshotUnterkategorie")
+//                print(snapshotUnterkategorie.key, "snapshotKategorie.key")
+//                print(snapshotUnterkategorie.childrenCount, "snapshotUnterkategorie.childrencount")
+
             }, withCancel: nil)
             
         }
-        
-        func getKeys(value: Int){
-            
-            var datref: DatabaseReference!
-            datref = Database.database().reference()
-            
-            
-            datref.child("Speisekarten").child("\(self.barname)").observe(.childAdded, with: { (snapshotKey) in
-                self.keys.updateValue(Int(snapshotKey.childrenCount), forKey: snapshotKey.key)
-                
-                if self.keys.count == value {
-                    for (key, value) in self.keys {
-                        
-                        self.fetchSpeisekarte(ii: key, z: value)
-                    }
+    
+    func getUnterKategorienItems(Kategorie: String, KategorieChildrenCount: Int){
+        var datref: DatabaseReference!
+        datref = Database.database().reference()
+        datref.child("Speisekarten").child("\(self.barname)").child(Kategorie).observe(.childAdded, with: { (snapshotUnterkategorieItem) in
+            print(Kategorie, "KATEGORIE")
+
+            self.unterKategorien.append(snapshotUnterkategorieItem.key)
+            self.unterKategorienInt.updateValue(Int(snapshotUnterkategorieItem.childrenCount), forKey: snapshotUnterkategorieItem.key)
+            self.unterKategorieArray.append(snapshotUnterkategorieItem.key)
+            self.expanded2Array.append(false)
+
+            print(self.unterKategorienInt, "INNNT")
+
+            if self.unterKategorienInt.count == KategorieChildrenCount {
+                for (Unterkategorie, Int) in self.unterKategorienInt {
+                    print(self.unterKategorienInt, "1")
+                    print(Kategorie, Unterkategorie, Int, "2")
+
+                    self.fetchSpeisekarte(Kategorie: Kategorie, Unterkategorie: Unterkategorie, UnterkategorieArray: self.unterKategorieArray, expandedArray: self.expanded2Array, UnterKategorieChildrenCount: Int)
                 }
-            }, withCancel: nil)
-            
-        }
-        
-        func fetchSpeisekarte(ii: String, z: Int){
+                self.unterKategorienInt.removeAll()
+                self.unterKategorieArray.removeAll()
+                self.expanded2Array.removeAll()
+
+            }
+
+
+        }, withCancel: nil)
+    
+    
+    }
+
+    
+    
+    func fetchSpeisekarte(Kategorie: String, Unterkategorie: String, UnterkategorieArray: [String], expandedArray: [Bool], UnterKategorieChildrenCount: Int){
             var datref: DatabaseReference!
             datref = Database.database().reference()
-            
-            
-            datref.child("Speisekarten").child("\(self.barname)").child(ii).observe(.childAdded, with: { (snapshot) in
+        print(UnterKategorieChildrenCount, "UnterKategorieChildrenCount")
+            datref.child("Speisekarten").child("\(self.barname)").child(Kategorie).child(Unterkategorie).observe(.childAdded, with: { (snapshot) in
+                                if let dictionary = snapshot.value as? [String: AnyObject]{
+                                    let item = SpeisekarteInformation(dictionary: dictionary)
+                                    self.itemsunterkategorie.append(item.Name!)
+                                    self.preisunterkategorie.append(item.Preis!)
+                                    if item.Liter != "keine Literangabe möglich" {
+                                        self.literunterkategorie.append(item.Liter!)
+                                    } else {
+                                        self.literunterkategorie.append("0,0l")
+                                    }
+
+                                    
+
+                                    if self.itemsunterkategorie.count == UnterKategorieChildrenCount {
+
+                                        self.itemsUnterkategorie.append(self.itemsunterkategorie)
+                                        self.preisUnterkategorie.append(self.preisunterkategorie)
+                                        self.literUnterkategorie.append(self.literunterkategorie)
+
+                                        self.itemsunterkategorie.removeAll()
+                                        self.preisunterkategorie.removeAll()
+                                        self.literunterkategorie.removeAll()
+                                    }
+
+                                    if self.itemsUnterkategorie.count == snapshot.childrenCount {
+
+                                        self.setSectionsSpeisekarte(Kategorie: Kategorie, Unterkategorie: UnterkategorieArray, items: self.itemsUnterkategorie, preis: self.preisUnterkategorie, liter: self.literUnterkategorie, expanded2: expandedArray)
+                                        self.itemsUnterkategorie.removeAll()
+                                        self.preisUnterkategorie.removeAll()
+                                        self.literUnterkategorie.removeAll()
+
+
+                                    }
+
+                                }
                 
-                if let dictionary = snapshot.value as? [String: AnyObject]{
-                    let shisha = SpeisekarteInfos(dictionary: dictionary)
-                    
-                    
-                    self.items.append(shisha.Name!)
-                    self.itemsPreise.append(shisha.Preis!)
-                    
-                    if self.items.count == z{
-                        
-                        self.setSectionsSpeisekarte(genre: ii, items: self.items, preise: self.itemsPreise)
-                        self.items.removeAll()
-                        self.itemsPreise.removeAll()
-                    }
-                }
-            }, withCancel: nil)
-            
+
+                
+                }, withCancel: nil)
+        
+        
+        
         }
     
     
     
-        func getParentPageViewController(parentRef: PageViewController) {
-            parentPageViewController = parentRef
-        }
-        
-        
-        
+
         // TABLEVIEW FUNCTIONS
         
-        func setSectionsSpeisekarte(genre: String, items: [String], preise: [Int]){
-            self.sections.append(ExpandTVSection(genre: genre, items: items, preise: preise, expanded: false))
+    func setSectionsSpeisekarte(Kategorie: String, Unterkategorie: [String], items: [[String]], preis: [[Int]], liter: [[String]], expanded2: [Bool]){
+            self.sections.append(ExpandTVSection2(Kategorie: Kategorie, Unterkategorie: Unterkategorie, items: items, preis: preis, liter: liter, expanded2: expanded2, expanded: false))
+            print(self.sections)
             self.SpeisekarteTableView.reloadData()
         }
-        
-        func setSectionsBestellung(genre: String, items: [String], preise: [Int]){
-            self.bestellung.append(ExpandTVSection(genre: genre, items: items, preise: preise, expanded: true))
-        }
+
         
         func numberOfSections(in tableView: UITableView) -> Int {
-            if tableView == SpeisekarteTableView {
-                return sections.count }
-            else {
-                
-                return bestellung.count
-            }
+            return sections.count
+
         }
         func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
             
-            if tableView == SpeisekarteTableView {
-                return sections[section].items.count }
-            else {
-                
-                return bestellung[section].items.count
-                
-            }
+//            return sections[section].Unterkategorie.count
+return 1
             
         }
         
@@ -168,20 +217,15 @@ class SpeisekarteVC: UIViewController, UITableViewDataSource, UITableViewDelegat
         
         func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
             if (sections[indexPath.section].expanded) {
-                if tableView == SpeisekarteTableView {
-                    return 43
-                } else {
-                    return 90
-                }
+                return CGFloat(sections[indexPath.section].items.count * 44 + sections[indexPath.section].Unterkategorie.count*50)
             }
-                
             else {
                 return 0
             }
+            
         }
         
         func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-            
             return 15
             
         }
@@ -191,48 +235,53 @@ class SpeisekarteVC: UIViewController, UITableViewDataSource, UITableViewDelegat
             view.backgroundColor = UIColor.clear
             return view
         }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let header = ExpandableHeaderView()
+        
+            header.customInit(tableView: tableView, title: sections[section].Kategorie, section: section, delegate: self as ExpandableHeaderViewDelegate)
         
         
+        return header
+    }
+    
         
-        func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-            let header = ExpandableHeaderView()
-            if tableView == SpeisekarteTableView {
-                
-                header.customInit(tableView: tableView, title: sections[section].genre, section: section, delegate: self as ExpandableHeaderViewDelegate)
-            } else {
-                
-                header.customInit(tableView: tableView, title: bestellung[section].genre, section: section, delegate: self as ExpandableHeaderViewDelegate)
-            }
-            
-            return header
-        }
-        
-        
+    
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-            let cell = Bundle.main.loadNibNamed("BestellenCell", owner: self, options: nil)?.first as! BestellenCell
-            cell.delegate = self
-            cell.backgroundColor = UIColor.clear
-            
-            
-            if (sections[indexPath.section].expanded){
-                cell.itemNameLbl.text = "\(sections[indexPath.section].items[indexPath.row])"
-                cell.itemPreisLbl.text = "\(sections[indexPath.section].preise[indexPath.row]) €"
-                return cell
-                
-            }
-            else {
-                cell.itemNameLbl.isHidden = true
-                cell.itemPreisLbl.isHidden = true
-                cell.itemAddBtn.isHidden = true
-                cell.backgroudn2.isHidden = true
-                cell.strich.isHidden = true
-                cell.liter.isHidden = true
-                
-                return cell
-                
-            }
+        let cell = Bundle.main.loadNibNamed("SpeisekarteCelle", owner: self, options: nil)?.first as! SpeisekarteCelle
+        cell.backgroundColor = UIColor.clear
+        
+        cell.unterkategorien.append(sections[indexPath.section])
+        cell.items = sections[indexPath.section].items
+        cell.preise = sections[indexPath.section].preis
+        cell.liters = sections[indexPath.section].liter
+        cell.section = indexPath.section
+        return cell
+        
+        
+//            cell.delegate = self
+//            cell.backgroundColor = UIColor.clear
+//
+//
+//            if (sections[indexPath.section].expanded){
+//                cell.itemNameLbl.text = "\(sections[indexPath.section].items[indexPath.row])"
+//                cell.itemPreisLbl.text = "\(sections[indexPath.section].preise[indexPath.row]) €"
+//                return cell
+//
+//            }
+//            else {
+//                cell.itemNameLbl.isHidden = true
+//                cell.itemPreisLbl.isHidden = true
+//                cell.itemAddBtn.isHidden = true
+//                cell.backgroudn2.isHidden = true
+//                cell.strich.isHidden = true
+//                cell.liter.isHidden = true
+//
+//                return cell
+//
+//            }
        
         
     }
@@ -240,21 +289,20 @@ class SpeisekarteVC: UIViewController, UITableViewDataSource, UITableViewDelegat
         
         
         func toggleSection(tableView: UITableView, header: ExpandableHeaderView, section: Int) {
-            if tableView == SpeisekarteTableView {
                 sections[section].expanded = !sections[section].expanded
                 
                 SpeisekarteTableView.beginUpdates()
-                for i in 0..<sections[section].items.count{
-                    SpeisekarteTableView.reloadRows(at: [IndexPath(row: i, section: section)], with: .automatic)
-                }
-                SpeisekarteTableView.endUpdates()
-            }
-            else {
-                sections[section].expanded = !sections[section].expanded
+
+                    SpeisekarteTableView.reloadRows(at: [IndexPath(row: 0, section: section)], with: .automatic)
                 
-            }
+                SpeisekarteTableView.endUpdates()
+
         }
-        
+    
+    
+    
+    
+    
    
     // PULLEY
     
@@ -281,8 +329,8 @@ class SpeisekarteVC: UIViewController, UITableViewDataSource, UITableViewDelegat
       
         print(self.baradresse, "viewload")
        
-       
-        getValue()
+       getKategorien()
+//    getUnterkategorien()
        
 
     }
