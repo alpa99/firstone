@@ -43,7 +43,16 @@ class LocationVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate
                 self.BarAdressen.append(bars.Adresse!)
                 self.BarNamen.append(bars.Name!)
                 for BarIndex in 0 ..< self.BarAdressen.count {
-                    self.getPlaceMarkFromAdress(adress: self.BarAdressen[BarIndex], Titlex: self.BarNamen[BarIndex], Subtitlex: "irgendwas" )
+                    CLGeocoder().geocodeAddressString(self.BarAdressen[BarIndex], completionHandler: { (placemarks, error) -> Void in
+                        
+                        if let placemark = placemarks?[0] {
+                            let location = placemark.location
+                            let distancebar = self.locationManager.location?.distance(from: location!)
+                            let strecke = Double(distancebar!)/1000.0
+                            let dist = String(format: "%.2f", strecke)
+                            self.getPlaceMarkFromAdress(adress: self.BarAdressen[BarIndex], Titlex: self.BarNamen[BarIndex], Subtitlex: "\(dist)" )
+                        }})
+                    
 
                 }
             }
