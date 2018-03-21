@@ -23,9 +23,8 @@ class SpeisekarteCelle: UITableViewCell, UITableViewDataSource, UITableViewDeleg
     
     // OUTLETS
     
-    @IBOutlet weak var unterkategorieTV: UITableView!
     
-    @IBOutlet weak var SpeisekarteTV2: UITableView!
+    @IBOutlet weak var SpeisekarteTV: UITableView!
     
     
     
@@ -111,14 +110,14 @@ class SpeisekarteCelle: UITableViewCell, UITableViewDataSource, UITableViewDeleg
     
     func toggleSection(tableView: UITableView, header: ExpandableHeaderView2, section: Int) {
         unterkategorien[0].expanded2[section] = !unterkategorien[0].expanded2[section]
-        SpeisekarteTV2.beginUpdates()
+        SpeisekarteTV.beginUpdates()
         print(unterkategorien[0].expanded2)
         for i in 0..<unterkategorien[0].items[section].count {
-            SpeisekarteTV2.reloadRows(at: [IndexPath(row: i, section: section)], with: .automatic)
+            SpeisekarteTV.reloadRows(at: [IndexPath(row: i, section: section)], with: .automatic)
 //            SpeisekarteTV2.reloadSections(IndexSet(i), with: .automatic)
             print([IndexPath(row: section, section: i)], "345443")
         }
-        SpeisekarteTV2.endUpdates()
+        SpeisekarteTV.endUpdates()
         
     }
     
@@ -127,8 +126,8 @@ class SpeisekarteCelle: UITableViewCell, UITableViewDataSource, UITableViewDeleg
     override func layoutSubviews()
     {
         super.layoutSubviews()
-        unterkategorieTV.delegate = self
-        unterkategorieTV.dataSource = self
+        SpeisekarteTV.delegate = self
+        SpeisekarteTV.dataSource = self
     }
     
     override func awakeFromNib() {

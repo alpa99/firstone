@@ -69,11 +69,7 @@ class SpeisekarteVC2: UIViewController, UITableViewDataSource, UITableViewDelega
             
             
         }, withCancel: nil)
-        //        print("XXXX")
-        //        for (Kategorie, Int) in self.KategorienInt{
-        //
-        //            self.getUnterKategorienItems(Kategorie: Kategorie, KategorieChildrenCount: Int)
-        //        }
+
         
     }
     
@@ -86,10 +82,7 @@ class SpeisekarteVC2: UIViewController, UITableViewDataSource, UITableViewDelega
             print(1)
             
             
-            //                print(snapshotUnterkategorie, "snapshotUnterkategorie")
-            //                print(snapshotUnterkategorie.key, "snapshotKategorie.key")
-            //                print(snapshotUnterkategorie.childrenCount, "snapshotUnterkategorie.childrencount")
-            
+
         }, withCancel: nil)
         
     }
@@ -208,6 +201,8 @@ class SpeisekarteVC2: UIViewController, UITableViewDataSource, UITableViewDelega
             return CGFloat(sections[indexPath.section].items.count * 44 + sections[indexPath.section].Unterkategorie.count*50)
         }
         else {
+            
+            
             return 0
         }
         
@@ -240,7 +235,7 @@ class SpeisekarteVC2: UIViewController, UITableViewDataSource, UITableViewDelega
         
         let cell = Bundle.main.loadNibNamed("SpeisekarteCelle", owner: self, options: nil)?.first as! SpeisekarteCelle
         cell.backgroundColor = UIColor.clear
-        
+    
         cell.unterkategorien.append(sections[indexPath.section])
         cell.items = sections[indexPath.section].items
         cell.preise = sections[indexPath.section].preis

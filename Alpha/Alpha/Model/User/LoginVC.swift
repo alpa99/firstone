@@ -32,7 +32,7 @@ class LoginVC: UIViewController {
         
         let loginManager = LoginManager()
         loginManager.logOut()
-        loginManager.logIn(readPermissions: [.publicProfile, .email], viewController: self) { result in
+        loginManager.logIn(readPermissions: [.publicProfile, .email, .userBirthday], viewController: self) { result in
             
             switch result {
             case .failed(let error):
@@ -97,8 +97,10 @@ class LoginVC: UIViewController {
         ref = Database.database().reference()
         
         if let uid = Auth.auth().currentUser?.uid {
+            
         ref?.child("Users").child("\(uid)").child("Name").setValue(self.userFbName)
         ref?.child("Users").child("\(uid)").child("Email").setValue(self.userFbEmail)
+            
         segueToTabBar()
         }
     }
