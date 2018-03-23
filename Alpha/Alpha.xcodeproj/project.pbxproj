@@ -298,6 +298,7 @@
 				4EC247D61F98F90500910AA8 /* Info.plist */,
 				4EC247FD1F99377100910AA8 /* GoogleService-Info.plist */,
 				4EC247F81F98FE5700910AA8 /* Model */,
+				08E0F44D205FD4C4002435DE /* User */,
 				4EC5C4B91FFC0A39008CE449 /* kellner */,
 				4EC5C4BA1FFC0A85008CE449 /* pulley */,
 				4EC5C4BB1FFC0ACA008CE449 /* scanner */,
@@ -345,7 +346,6 @@
 				08462FFC205F1F0700AECA59 /* ExpandTVSection2.swift */,
 				08DB09362061D95C007848E4 /* ExpandleHeaderView2.swift */,
 				08EAEA69206079920095F75F /* SpeisekarteInformation.swift */,
-				08E0F44D205FD4C4002435DE /* User */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -948,11 +948,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 84R3VSG74G;
+				DEVELOPMENT_TEAM = 8G282R5UXU;
 				INFOPLIST_FILE = Alpha/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = AM.Alpha1;
+				PRODUCT_BUNDLE_IDENTIFIER = AM.Alpha13;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -965,11 +965,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 84R3VSG74G;
+				DEVELOPMENT_TEAM = 8G282R5UXU;
 				INFOPLIST_FILE = Alpha/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = AM.Alpha1;
+				PRODUCT_BUNDLE_IDENTIFIER = AM.Alpha13;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
