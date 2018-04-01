@@ -48,15 +48,13 @@ class LocationVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate
                         if let placemark = placemarks?[0] {
                             let location = placemark.location
                             let distancebar = self.locationManager.location?.distance(from: location!)
-                            var strecke = Double()
-                            if distancebar == nil { // OOOODER gleich 0
-                                strecke = 0.01
-                            } else {
-                               strecke = Double(distancebar!)/1000.0
+                            if distancebar == nil {
+                                self.getPlaceMarkFromAdress(adress: self.BarAdressen[BarIndex], Titlex: self.BarNamen[BarIndex], Subtitlex: "no GPS" )                            } else {
+                                let strecke = Double(distancebar!)/1000.0
+                                let dist = String(format: "%.2f", strecke)
+                                self.getPlaceMarkFromAdress(adress: self.BarAdressen[BarIndex], Titlex: self.BarNamen[BarIndex], Subtitlex: "\(dist)" )
                             }
-                            let dist = String(format: "%.2f", strecke)
-                            strecke = 0.0
-                            self.getPlaceMarkFromAdress(adress: self.BarAdressen[BarIndex], Titlex: self.BarNamen[BarIndex], Subtitlex: "\(dist)" )
+                           
                         }})
                     
 
