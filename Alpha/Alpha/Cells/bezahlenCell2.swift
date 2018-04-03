@@ -7,9 +7,7 @@
 //
 import UIKit
 
-protocol bestellenCell2Delegate {
-    
-}
+
 
 class bezahlenCell2: UITableViewCell {
 

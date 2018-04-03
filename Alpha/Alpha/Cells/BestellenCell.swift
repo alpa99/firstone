@@ -9,27 +9,40 @@
 import UIKit
 
 protocol BestellenCellDelegate {
-    func cellItemAddTapped(sender: BestellenCell)
+    func pass(sender: BestellenCell)
 //    func cellItemBtnTapped(sender: BestellenCell)
 //    func cellMinusBtnTapped(sender: BestellenCell)
-//    func cellPlusBtnTapped(sender: BestellenCell)
+//    func cellPlusBtnTapped(sender: BestellenCell), section: Int, row: Int
     
 }
 
-class BestellenCell: UITableViewCell, UITableViewDelegate, UITableViewDataSource, ExpandableHeaderViewDelegate2 {
+
+
+class BestellenCell: UITableViewCell, UITableViewDelegate, UITableViewDataSource, bestellenCell2Delegate, ExpandableHeaderViewDelegate2 {
 
     // VARS
+
+    func addBtnTapped(sender: BestellenCell2) {
+        section2 = sender.section2
+        row2 = sender.row2
+        delegate?.pass(sender: self)
+    }
+    
+
+    
     
     var delegate: BestellenCellDelegate?
-    
+//
     var unterkategorien = [ExpandTVSection2]()
     var items = [[String]]()
     var preise = [[Int]]()
     var liters = [[String]]()
     var section = Int()
-    var section2 = 0
-    var row = 0
-    var i = 0
+    var row = Int()
+    
+    var section2 = Int()
+    var row2 = Int()
+
     
     // OUTLETS
 
@@ -39,9 +52,7 @@ class BestellenCell: UITableViewCell, UITableViewDelegate, UITableViewDataSource
     // ACTIONS
     
 
-    @IBAction func itemAddTapped(_ sender: Any) {
-        delegate?.cellItemAddTapped(sender: self)
-    }
+
     
 
     // Tabelle
@@ -62,7 +73,9 @@ class BestellenCell: UITableViewCell, UITableViewDelegate, UITableViewDataSource
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if unterkategorien[0].expanded2[indexPath.section] != false {
-            return CGFloat(unterkategorien[0].items[section].count*44 + 50)}
+            return CGFloat(unterkategorien[0].items[section].count*46)
+            
+        }
         else {
             return 0
             
@@ -70,9 +83,11 @@ class BestellenCell: UITableViewCell, UITableViewDelegate, UITableViewDataSource
     }
     
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        return 5
+        
+        return 15
         
     }
+
     
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         let view = UIView()
@@ -83,7 +98,7 @@ class BestellenCell: UITableViewCell, UITableViewDelegate, UITableViewDataSource
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let header = ExpandableHeaderView2()
         
-        header.customInit(tableView: tableView, title:  unterkategorien[section2].Unterkategorie[section], section: section, delegate: self as ExpandableHeaderViewDelegate2)
+        header.customInit(tableView: tableView, title:  unterkategorien[row].Unterkategorie[section], section: section, delegate: self as ExpandableHeaderViewDelegate2)
         return header
         
         
@@ -94,24 +109,29 @@ class BestellenCell: UITableViewCell, UITableViewDelegate, UITableViewDataSource
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = Bundle.main.loadNibNamed("BestellenCell2", owner: self, options: nil)?.first as! BestellenCell2
-        
+        cell.delegate = self
+        cell.backgroundColor = UIColor.clear
         //        cell.itemLbl.text = "cell.itemLbl.text"
         if unterkategorien[0].expanded2[indexPath.section] != false {
             
             var item = unterkategorien[0].items[indexPath.section]
             var preis = unterkategorien[0].preis[indexPath.section]
             var liter = unterkategorien[0].liter[indexPath.section]
+            section2 = indexPath.section
+            row2 = indexPath.row
+            cell.section2 = indexPath.section
+                cell.row2 = indexPath.row
             cell.ItemLbl.text = item[indexPath.row]
-            cell.PreisLbl.text = "\(preis[self.row])€"
-            if liter[indexPath.row] != "0,0l"{
-                cell.LiterLbl.text = (liter[self.row])
-                
+            cell.PreisLbl.text = "\(preis[indexPath.row])€"
+            if liter[indexPath.row] != "0.0l"{
+                cell.LiterLbl.text = (liter[indexPath.row])
+
             }
                 
             else {
                 cell.LiterLbl.isHidden = true
             }
-            
+           
             
             return cell
             
@@ -119,20 +139,37 @@ class BestellenCell: UITableViewCell, UITableViewDelegate, UITableViewDataSource
             cell.ItemLbl.isHidden = true
             cell.PreisLbl.isHidden = true
             cell.LiterLbl.isHidden = true
+            cell.addBtn.isHidden = true
+            cell.strich.isHidden = true
+            cell.viewAdd.isHidden = true
+            
             return cell
         }
     }
     
     
     func toggleSection(tableView: UITableView, header: ExpandableHeaderView2, section: Int) {
-        unterkategorien[0].expanded2[section] = !unterkategorien[0].expanded2[section]
+
+        for i in 0..<unterkategorien[0].Unterkategorie.count{
+            if i == section {
+                unterkategorien[0].expanded2[i] = !unterkategorien[0].expanded2[i]
+            } else {
+                unterkategorien[0].expanded2[i] = false
+                
+            }
+        }
+        
         BestellenTV.beginUpdates()
-        print(unterkategorien[0].expanded2)
+        let indexSet = NSMutableIndexSet()
         for i in 0..<unterkategorien[0].items[section].count {
             BestellenTV.reloadRows(at: [IndexPath(row: i, section: section)], with: .automatic)
-            //            SpeisekarteTV2.reloadSections(IndexSet(i), with: .automatic)
-            print([IndexPath(row: section, section: i)], "345443")
         }
+        for i in 0..<unterkategorien[0].Unterkategorie.count{
+            if i != section{
+                indexSet.add(i)}
+        }
+        BestellenTV.reloadSections(indexSet as IndexSet, with: .automatic)
+        
         BestellenTV.endUpdates()
         
     }

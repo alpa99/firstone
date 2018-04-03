@@ -18,16 +18,16 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="229.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="yFK-ts-V6W">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="229.5"/>
+                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="yFK-ts-V6W">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="230"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </tableView>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="yFK-ts-V6W" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="73x-dC-Fub"/>
-                    <constraint firstAttribute="trailing" secondItem="yFK-ts-V6W" secondAttribute="trailing" id="PDF-QM-3oE"/>
-                    <constraint firstAttribute="bottom" secondItem="yFK-ts-V6W" secondAttribute="bottom" id="Q2j-rC-zlU"/>
-                    <constraint firstItem="yFK-ts-V6W" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="mxf-xw-yIG"/>
+                    <constraint firstAttribute="trailing" secondItem="yFK-ts-V6W" secondAttribute="trailing" id="7Ab-nj-XHH"/>
+                    <constraint firstItem="yFK-ts-V6W" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="J8B-b5-M9K"/>
+                    <constraint firstItem="yFK-ts-V6W" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="TWe-CB-dWw"/>
+                    <constraint firstAttribute="bottom" secondItem="yFK-ts-V6W" secondAttribute="bottom" constant="-0.5" id="isK-iT-mcf"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>

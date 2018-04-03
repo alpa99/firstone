@@ -65,8 +65,8 @@ class BestellungVC2: UIViewController, UITableViewDataSource, UITableViewDelegat
     
     var parentPageViewController2: PageViewController2!
     
-    var barname = "NewBar"
-    var baradresse = " "
+    var barname = ""
+    var baradresse = ""
     var tischnummer = 0
     var KellnerID = ""
     
@@ -127,33 +127,33 @@ class BestellungVC2: UIViewController, UITableViewDataSource, UITableViewDelegat
     // ACTIONS
     
     @IBAction func myBestellungAbschicken(_ sender: Any) {
-//      print(baradresse, "baradresse")
-//        CLGeocoder().geocodeAddressString(baradresse, completionHandler: { (placemarks, error) -> Void in
-//            print(self.baradresse,"bar3")
-//            if let placemark = placemarks?[0] {
-//
-//                let locat = placemark.location
-//            //                    let placemarks = placemarks,
-//            //                        let locationone = placemarks.first?.location
-//
-//
-//                let distancebar = self.locationManager.location?.distance(from: locat!)
-//                print (distancebar!, " entfernung")
-//                let distanceint = Int(distancebar!)
-//                if distanceint < 150{
-//                print("distance ist ok")
-//                    self.seugueAbschicken()
+      print(baradresse, "baradresse")
+        CLGeocoder().geocodeAddressString(baradresse, completionHandler: { (placemarks, error) -> Void in
+            print(self.baradresse,"bar3")
+            if let placemark = placemarks?[0] {
+
+                let locat = placemark.location
+            //                    let placemarks = placemarks,
+            //                        let locationone = placemarks.first?.location
+
+
+                let distancebar = self.locationManager.location?.distance(from: locat!)
+                print (distancebar!, " entfernung")
+                let distanceint = Int(distancebar!)
+                if distanceint < 150{
+                print("distance ist ok")
+                    self.seugueAbschicken()
                     self.handleBestellung()
-//                }else{
-//                    print ("distance ist nicht ok ")
-//                    let alert = UIAlertController(title: "Du befindest dich nicht mehr in der Nähe der Bar", message: nil, preferredStyle: UIAlertControllerStyle.alert)
-//                    alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
-//
-//                    self.present(alert, animated: true, completion: nil)
-//                }
-//            }
-//
-//        })
+                }else{
+                    print ("distance ist nicht ok ")
+                    let alert = UIAlertController(title: "Du befindest dich nicht mehr in der Nähe der Bar", message: nil, preferredStyle: UIAlertControllerStyle.alert)
+                    alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
+
+                    self.present(alert, animated: true, completion: nil)
+                }
+            }
+
+        })
 
     }
 
@@ -342,11 +342,11 @@ class BestellungVC2: UIViewController, UITableViewDataSource, UITableViewDelegat
     
     
     
-//
-//    func seugueAbschicken(){
-//
-//performSegue(withIdentifier: "wirdabgeschickt", sender: self)
-//    }
+
+    func seugueAbschicken(){
+
+performSegue(withIdentifier: "wirdabgeschickt", sender: self)
+    }
     
   
     
@@ -362,12 +362,7 @@ class BestellungVC2: UIViewController, UITableViewDataSource, UITableViewDelegat
             let fromUserID = "Authauth()currentUseruid"
             var values = ["toKellnerID": "KellnerID", "tischnummer": "Stringtischnummer", "fromUserID": fromUserID , "timeStamp": timestamp, "angenommen": false] as [String : Any]
         
-        
 
-            print(values, "values")
-//            for (genre, itemDictionary) in bestellteItemsDictionary {
-//                values.updateValue(itemDictionary, forKey: genre)
-//            }
             ref = Database.database().reference().child("Bestellungen").child("Huqa")
             let childRef = ref?.childByAutoId()
 
@@ -432,9 +427,6 @@ class BestellungVC2: UIViewController, UITableViewDataSource, UITableViewDelegat
         self.bestellungVCView.addSubview(addItemView)
         addItemView.center = self.bestellungVCView.center
 
-    
-        //        self.inputView?.addSubview(addItemView)
-        //        addItemView.center = (self.inputView?.center)!
         addItemView.transform = CGAffineTransform.init(scaleX: 1.3, y: 1.3)
         addItemView.alpha = 0
         UIView.animate(withDuration: 0.2) {
@@ -476,7 +468,6 @@ class BestellungVC2: UIViewController, UITableViewDataSource, UITableViewDelegat
             
         }
         bestellteItemsDictionary.removeAll()
-//        [Alpha.bestellungTVSection(Kategorie: Shishas, Unterkategorie: ["Classics"], items: [["Doppelapfel", "Zitrone"]], preis: [[8, 9]], liter: [["0.0l", "0.0l"]], menge: [[3, 4]], expanded2: [[true, true]], expanded: false), Alpha.bestellungTVSection(Kategorie: Getränke, Unterkategorie: ["Flaschen", "Softdrinks"], items: [["Rotwein"], ["Fanta Exotic"]], preis: [[12], [2]], liter: [["0,7l"], ["0.33l"]], menge: [[4], [5]], expanded2: [[true], [true]], expanded: false)] 1 fsvreced34ew
 
         
     }
@@ -913,10 +904,10 @@ class BestellungVC2: UIViewController, UITableViewDataSource, UITableViewDelegat
         super.viewDidLoad()
         
         bestellungTableView.reloadData()
-//        self.barname = parentPageViewController2.name
-//        self.baradresse = parentPageViewController2.adresse
-//        self.tischnummer = parentPageViewController2.tischnummer
-//        self.KellnerID = parentPageViewController2.KellnerID
+        self.barname = parentPageViewController2.name
+        self.baradresse = parentPageViewController2.adresse
+        self.tischnummer = parentPageViewController2.tischnummer
+        self.KellnerID = parentPageViewController2.KellnerID
         print(self.tischnummer, "TISCHNUMMER")
         print(self.baradresse, "viewload")
         effect = visualEffectView.effect
@@ -925,10 +916,10 @@ class BestellungVC2: UIViewController, UITableViewDataSource, UITableViewDelegat
 
 
         addItemView.layer.cornerRadius = 5
-//
-//        locationManager.requestWhenInUseAuthorization()
-//        locationManager.desiredAccuracy = kCLLocationAccuracyBest
-//        locationManager.delegate = self
+
+        locationManager.requestWhenInUseAuthorization()
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        locationManager.delegate = self
         
         getKategorien()
 

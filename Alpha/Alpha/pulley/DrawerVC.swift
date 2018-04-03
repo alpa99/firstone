@@ -48,7 +48,6 @@ class DrawerVC: UIViewController, PulleyDrawerViewControllerDelegate, UITableVie
                 } )
             }
         }, withCancel: nil)
-        print(1)
 
     }
     
@@ -75,13 +74,11 @@ class DrawerVC: UIViewController, PulleyDrawerViewControllerDelegate, UITableVie
     func filteredContent (searchText: String, scope: String = "All"){
         
         filteredbars = bars.filter { bar in
-            print(2)
 
             return (bar.Name?.lowercased().contains(searchText.lowercased()))!
             
         }
         BarTV.reloadData()
-        print(3)
 
     }
 
@@ -98,12 +95,10 @@ class DrawerVC: UIViewController, PulleyDrawerViewControllerDelegate, UITableVie
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         if searchController.isActive == true && searchController.searchBar.text != ""{
-            print(5)
 
             return filteredbars.count
             
         }
-        print(6)
 
         
        return bars.count
@@ -130,7 +125,6 @@ class DrawerVC: UIViewController, PulleyDrawerViewControllerDelegate, UITableVie
 //
 //                }
 //            })
-            print(7)
 
             
         } else {
@@ -142,11 +136,10 @@ class DrawerVC: UIViewController, PulleyDrawerViewControllerDelegate, UITableVie
 //                    let distancebar = self.locationManager.location?.distance(from: location!)
 //                    let strecke = Double(distancebar!)/1000.0
 //                }})
-            print(8)
 
         }
+        print(bar, "BARS")
         CLGeocoder().geocodeAddressString(bar.Adresse!, completionHandler: { (placemarks, error) -> Void in
-            print(9)
 
             if let placemark = placemarks?[0] {
                 let location = placemark.location
@@ -158,7 +151,6 @@ class DrawerVC: UIViewController, PulleyDrawerViewControllerDelegate, UITableVie
                     strecke = Double(distancebar!)/1000.0
                 }
                 let dist = String(format: "%.2f", strecke)
-                print(10)
 
                 cell.distanzName.text = "\(dist) km"
                 strecke = 0.0

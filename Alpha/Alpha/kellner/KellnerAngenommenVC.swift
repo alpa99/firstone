@@ -93,7 +93,7 @@ class KellnerAngenommenVC: UIViewController, UITableViewDelegate, UITableViewDat
                     
                     let bestellungInfos = BestellungInfos(dictionary: dictionary)
                     
-                    self.TimeStamps.append((bestellungInfos.timeStamp?.doubleValue)!)
+                    self.TimeStamps.append(bestellungInfos.timeStamp!)
                     self.tischnummer.append(bestellungInfos.tischnummer!)
                     DispatchQueue.main.async(execute: {
                         self.angenommenBestellungenTV.reloadData()

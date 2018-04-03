@@ -9,14 +9,38 @@
 
 import UIKit
 
+protocol bestellenCell2Delegate {
+    func addBtnTapped(sender: BestellenCell2)
+}
+
 class BestellenCell2: UITableViewCell {
 
     @IBOutlet weak var ItemLbl: UILabel!
     @IBOutlet weak var LiterLbl: UILabel!
     @IBOutlet weak var PreisLbl: UILabel!
     
+    @IBOutlet weak var addBtn: UIButton!
+    
+    @IBOutlet weak var viewAdd: UIView!
+    @IBOutlet weak var strich: UIView!
+    
+    var section2 = Int()
+    var row2 = Int()
+    var delegate: bestellenCell2Delegate?
+    
+    
+    @IBAction func addBtnTapped(_ sender: Any) {
+        print("XY")
+        delegate?.addBtnTapped(sender: self)
+    }
+    
+    
+    
+    
     override func awakeFromNib() {
         super.awakeFromNib()
+        viewAdd.layer.cornerRadius = 4
+        strich.layer.cornerRadius = 4
         // Initialization code
     }
 
