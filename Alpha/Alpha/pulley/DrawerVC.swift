@@ -116,6 +116,7 @@ class DrawerVC: UIViewController, PulleyDrawerViewControllerDelegate, UITableVie
         
         if searchController.isActive == true && searchController.searchBar.text != ""{
             bar = filteredbars[indexPath.row]
+<<<<<<< HEAD
 //            CLGeocoder().geocodeAddressString(bar.Adresse!, completionHandler: { (placemarks, error) -> Void in
 //
 //                if let placemark = placemarks?[0] {
@@ -125,10 +126,13 @@ class DrawerVC: UIViewController, PulleyDrawerViewControllerDelegate, UITableVie
 //
 //                }
 //            })
+=======
+>>>>>>> 45ca2879f8d0388d16efac3b82b1ddf9ab92d4c7
 
             
         } else {
             bar = bars[indexPath.row]
+<<<<<<< HEAD
 //            CLGeocoder().geocodeAddressString(bar.Adresse!, completionHandler: { (placemarks, error) -> Void in
 //
 //                if let placemark = placemarks?[0] {
@@ -137,6 +141,8 @@ class DrawerVC: UIViewController, PulleyDrawerViewControllerDelegate, UITableVie
 //                    let strecke = Double(distancebar!)/1000.0
 //                }})
 
+=======
+>>>>>>> 45ca2879f8d0388d16efac3b82b1ddf9ab92d4c7
         }
         print(bar, "BARS")
         CLGeocoder().geocodeAddressString(bar.Adresse!, completionHandler: { (placemarks, error) -> Void in
@@ -144,17 +150,24 @@ class DrawerVC: UIViewController, PulleyDrawerViewControllerDelegate, UITableVie
             if let placemark = placemarks?[0] {
                 let location = placemark.location
                 let distancebar = self.locationManager.location?.distance(from: location!)
-                var strecke = Double()
+                
                 if distancebar == nil {
-                    strecke = 0.01
+                    cell.distanzName.text = ""
                 } else {
-                    strecke = Double(distancebar!)/1000.0
+                    let strecke = Double(distancebar!)/1000.0
+                    let dist = String(format: "%.2f", strecke)
+                    
+                    cell.distanzName.text = "\(dist) km"
                 }
+<<<<<<< HEAD
                 let dist = String(format: "%.2f", strecke)
 
                 cell.distanzName.text = "\(dist) km"
                 strecke = 0.0
 
+=======
+        
+>>>>>>> 45ca2879f8d0388d16efac3b82b1ddf9ab92d4c7
             }})
 
         cell.barName.text = bar.Name
