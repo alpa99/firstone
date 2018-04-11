@@ -1,26 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="1rU-Ub-WRG">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="1rU-Ub-WRG">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
-    <customFonts key="customFonts">
-        <array key="Helvetica.ttc">
-            <string>Helvetica</string>
-            <string>Helvetica-Bold</string>
-        </array>
-        <array key="HelveticaNeue.ttc">
-            <string>HelveticaNeue</string>
-        </array>
-        <array key="Verdana.ttf">
-            <string>Verdana</string>
-        </array>
-    </customFonts>
     <scenes>
         <!--Item-->
         <scene sceneID="zrN-7X-edq">
@@ -34,7 +22,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                             </imageView>
                             <tableView clipsSubviews="YES" tag="1" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="h4S-g2-UB9">
-                                <rect key="frame" x="16" y="20" width="343" height="520"/>
+                                <rect key="frame" x="16" y="59" width="343" height="481"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <color key="separatorColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -62,7 +50,7 @@
                             <constraint firstItem="f39-Hh-r9l" firstAttribute="bottom" secondItem="x9E-Xh-huc" secondAttribute="bottom" constant="12" id="6gQ-Bm-g0S"/>
                             <constraint firstItem="h4S-g2-UB9" firstAttribute="leading" secondItem="f39-Hh-r9l" secondAttribute="leading" constant="16" id="BCc-Dy-Srq"/>
                             <constraint firstItem="f39-Hh-r9l" firstAttribute="trailing" secondItem="h4S-g2-UB9" secondAttribute="trailing" constant="16" id="CNH-VO-SX3"/>
-                            <constraint firstItem="h4S-g2-UB9" firstAttribute="top" secondItem="f39-Hh-r9l" secondAttribute="top" id="Gx5-er-MHf"/>
+                            <constraint firstItem="h4S-g2-UB9" firstAttribute="top" secondItem="f39-Hh-r9l" secondAttribute="top" constant="39" id="Gx5-er-MHf"/>
                             <constraint firstItem="vxT-q6-VU1" firstAttribute="leading" secondItem="f39-Hh-r9l" secondAttribute="leading" id="Jn1-8S-eL4"/>
                             <constraint firstItem="vxT-q6-VU1" firstAttribute="top" secondItem="3fy-sg-cZ6" secondAttribute="top" id="MUD-ow-fyY"/>
                             <constraint firstItem="f39-Hh-r9l" firstAttribute="trailing" secondItem="x9E-Xh-huc" secondAttribute="trailing" constant="16" id="Q0X-y1-uAv"/>
@@ -439,7 +427,7 @@
                         <inset key="imageInsets" minX="0.0" minY="0.0" maxX="0.0" maxY="-10"/>
                     </tabBarItem>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" barStyle="black" id="qUq-yz-iwN">
-                        <rect key="frame" x="0.0" y="20" width="375" height="48"/>
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="barTintColor" red="0.3529411764705882" green="0.3529411764705882" blue="0.3529411764705882" alpha="0.0" colorSpace="calibratedRGB"/>
                     </navigationBar>
@@ -459,7 +447,7 @@
                         <inset key="imageInsets" minX="0.0" minY="0.0" maxX="0.0" maxY="-10"/>
                     </tabBarItem>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="GOu-Rz-d3Q">
-                        <rect key="frame" x="0.0" y="20" width="375" height="48"/>
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
@@ -879,7 +867,6 @@
                             <rect key="frame" x="16" y="20" width="74" height="21"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                            <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Unterkategorie" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OSJ-Lh-YYJ" customClass="LabelWhite" customModule="Alpha" customModuleProvider="target">
@@ -1312,6 +1299,6 @@
     <inferredMetricsTieBreakers>
         <segue reference="qkJ-6d-CaZ"/>
         <segue reference="5gR-xy-0iu"/>
-        <segue reference="tKO-Qv-DSi"/>
+        <segue reference="LaO-lI-cXB"/>
     </inferredMetricsTieBreakers>
 </document>
