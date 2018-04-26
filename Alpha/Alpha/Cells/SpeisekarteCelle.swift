@@ -14,7 +14,7 @@ class SpeisekarteCelle: UITableViewCell, UITableViewDataSource, UITableViewDeleg
     // VARS
     var unterkategorien = [ExpandTVSection2]()
     var items = [[String]]()
-    var preise = [[Int]]()
+    var preise = [[Double]]()
     var liters = [[String]]()
     var section = Int()
     var section2 = 0
@@ -30,7 +30,6 @@ class SpeisekarteCelle: UITableViewCell, UITableViewDataSource, UITableViewDeleg
     
     // Tabelle
     func numberOfSections(in tableView: UITableView) -> Int {
-        print(unterkategorien, "dfdsgsdf")
         return unterkategorien[0].Unterkategorie.count
         
     }
@@ -86,9 +85,11 @@ class SpeisekarteCelle: UITableViewCell, UITableViewDataSource, UITableViewDeleg
         var preis = unterkategorien[0].preis[indexPath.section]
         var liter = unterkategorien[0].liter[indexPath.section]
         cell.itemLbl.text = item[indexPath.row]
-        cell.PreisLbl.text = "\(preis[self.row])€"
-                if liter[indexPath.row] != "0,0l"{
-                    cell.LiterLbl.text = (liter[self.row])
+        cell.PreisLbl.text = "\(preis[indexPath.row])€"
+            print(liter)
+            print(indexPath.row, self.row)
+                if liter[indexPath.row] != "0.0l"{
+                    cell.LiterLbl.text = (liter[indexPath.row])
             
                         }
                     
@@ -111,11 +112,9 @@ class SpeisekarteCelle: UITableViewCell, UITableViewDataSource, UITableViewDeleg
     func toggleSection(tableView: UITableView, header: ExpandableHeaderView2, section: Int) {
         unterkategorien[0].expanded2[section] = !unterkategorien[0].expanded2[section]
         SpeisekarteTV.beginUpdates()
-        print(unterkategorien[0].expanded2)
         for i in 0..<unterkategorien[0].items[section].count {
             SpeisekarteTV.reloadRows(at: [IndexPath(row: i, section: section)], with: .automatic)
 //            SpeisekarteTV2.reloadSections(IndexSet(i), with: .automatic)
-            print([IndexPath(row: section, section: i)], "345443")
         }
         SpeisekarteTV.endUpdates()
         

@@ -14,6 +14,7 @@ class LoginKellnerVC: UIViewController {
     // VARS
     
     var kellnerID = String()
+    var barname = String()
 
     // OUTLETS
     
@@ -49,10 +50,10 @@ class LoginKellnerVC: UIViewController {
                     
                     //Print into the console if successfully logged in
                     print("You have successfully logged in")
-                    
-                    //Go to the KellnerVC if the login is sucessful
-                    self.segueToKellnerVC()
                     self.kellnerID = (Auth.auth().currentUser?.uid)!
+
+                    self.segueToKellnerVC(KellnerID: self.kellnerID)
+                    
                     print(self.kellnerID, "KELLNERID")
                 } else {
                     
@@ -100,9 +101,23 @@ class LoginKellnerVC: UIViewController {
     }
     
     // FUNC
+
     
-    func segueToKellnerVC(){
-        performSegue(withIdentifier: "kellnerLoggedIn", sender: self)
+    func segueToKellnerVC(KellnerID: String){
+        var datref: DatabaseReference!
+        datref = Database.database().reference()
+        datref.child("Kellner").child(KellnerID).observe(.value, with: { (snapshot) in
+
+            if let dictionary = snapshot.value as? [String: AnyObject]{
+                print(2)
+                let KellnerInfo = KellnerInfos(dictionary: dictionary)
+                self.barname = KellnerInfo.Barname!
+                self.performSegue(withIdentifier: "kellnerLoggedIn", sender: self)
+
+                
+            }
+            
+        }, withCancel: nil)
         
     }
     
@@ -110,9 +125,11 @@ class LoginKellnerVC: UIViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "kellnerLoggedIn" {
+            
             let KTBC = segue.destination as! KellnerTabBarController
             let KCV = KTBC.viewControllers![0] as! KellnerVC
             KCV.KellnerID = (Auth.auth().currentUser?.uid)!
+            KCV.Barname = barname
             let KACV = KTBC.viewControllers![1] as! KellnerAngenommenVC
             KACV.KellnerID = (Auth.auth().currentUser?.uid)!
         }

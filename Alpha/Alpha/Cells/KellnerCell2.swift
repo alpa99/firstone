@@ -35,7 +35,7 @@ class KellnerCell2: UITableViewCell, UITableViewDelegate, UITableViewDataSource,
         
     }
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 50
+        return 30
     }
     
     
@@ -44,9 +44,6 @@ class KellnerCell2: UITableViewCell, UITableViewDelegate, UITableViewDataSource,
         
         var expanded2 = Bestellungen[Cell1Section].expanded2[Cell2Section]
         if expanded2[indexPath.section] != false {
-//            var itemsinSection = Bestellungen[Cell1Section].items[Cell2Section]
-//            var itemsinRow = itemsinSection[indexPath.section]
-//            var height = itemsinRow.count*46
             
             return 46
             
@@ -59,7 +56,7 @@ class KellnerCell2: UITableViewCell, UITableViewDelegate, UITableViewDataSource,
     
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         
-        return 15
+        return 0
         
     }
     

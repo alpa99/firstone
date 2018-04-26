@@ -12,13 +12,13 @@ struct bestellungTVSection {
     var Kategorie: String!
     var Unterkategorie: [String]!
     var items: [[String]]!
-    var preis: [[Int]]!
+    var preis: [[Double]]!
     var liter: [[String]]!
     var menge: [[Int]]!
     var expanded2: [Bool]!
     var expanded: Bool!
     
-    init(Kategorie: String, Unterkategorie: [String], items: [[String]], preis: [[Int]], liter: [[String]], menge: [[Int]], expanded2: [Bool], expanded: Bool) {
+    init(Kategorie: String, Unterkategorie: [String], items: [[String]], preis: [[Double]], liter: [[String]], menge: [[Int]], expanded2: [Bool], expanded: Bool) {
         self.Kategorie = Kategorie
         self.Unterkategorie = Unterkategorie
         self.items = items

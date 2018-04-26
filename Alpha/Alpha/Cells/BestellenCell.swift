@@ -35,7 +35,7 @@ class BestellenCell: UITableViewCell, UITableViewDelegate, UITableViewDataSource
 //
     var unterkategorien = [ExpandTVSection2]()
     var items = [[String]]()
-    var preise = [[Int]]()
+    var preise = [[Double]]()
     var liters = [[String]]()
     var section = Int()
     var row = Int()
@@ -73,7 +73,9 @@ class BestellenCell: UITableViewCell, UITableViewDelegate, UITableViewDataSource
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if unterkategorien[0].expanded2[indexPath.section] != false {
-            return CGFloat(unterkategorien[0].items[section].count*46)
+//            return CGFloat(unterkategorien[0].items[section].count*46)
+            return CGFloat(46)
+
             
         }
         else {

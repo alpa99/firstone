@@ -44,8 +44,8 @@ class KellnerCell: UITableViewCell, UITableViewDelegate, UITableViewDataSource, 
 
         if Bestellungen[Cell1Section].expanded != false {
             
-            var items = Bestellungen[Cell1Section].items[indexPath.section]
-            var newitems = items[indexPath.row]
+            let items = Bestellungen[Cell1Section].items[indexPath.section]
+            let newitems = items[indexPath.row]
             return CGFloat(newitems.count*46+50)
             
         }
@@ -57,7 +57,7 @@ class KellnerCell: UITableViewCell, UITableViewDelegate, UITableViewDataSource, 
     
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         
-        return 15
+        return 0
         
     }
     

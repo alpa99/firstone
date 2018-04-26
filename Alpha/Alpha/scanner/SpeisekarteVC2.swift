@@ -21,24 +21,12 @@ class SpeisekarteVC2: UIViewController, UITableViewDataSource, UITableViewDelega
     // TABLEVIEW
     var sections = [ExpandTVSection2]()
     
-    var KategorienInt = [String: Int]()
-    
-    
-    var unterKategorien = [String]()
-    var unterKategorienInt = [String: Int]()
-    var unterKategorieArray = [String]()
-    var expanded2Array = [Bool]()
-    
-    var itemsunterkategorie = [String]()
-    var preisunterkategorie = [Int]()
-    var literunterkategorie = [String]()
-    
-    
-    var itemsUnterkategorie = [[String]]()
-    var preisUnterkategorie = [[Int]]()
-    var literUnterkategorie = [[String]]()
-    
-    
+    var Kategorien = [String]()
+    var Unterkategorien = [String: [String]]()
+    var Items = [String: [[String]]]()
+    var Preis = [String: [[Double]]]()
+    var Liter = [String: [[String]]]()
+    var Expanded = [String: [Bool]]()
     
     
     
@@ -55,128 +43,135 @@ class SpeisekarteVC2: UIViewController, UITableViewDataSource, UITableViewDelega
     }
     
     
+    
+    
     func getKategorien (){
         var datref: DatabaseReference!
         datref = Database.database().reference()
         
-        datref.child("Speisekarten").child("\(self.barname)").observe(.childAdded, with: { (snapshotKategorie) in
-            
-            // Anzahl Kategorien: Shishas, Getränke
-            self.KategorienInt.updateValue(Int(snapshotKategorie.childrenCount), forKey: snapshotKategorie.key)
-            print(self.KategorienInt, "KATEGROIEINT")
-            
-            self.getUnterKategorienItems(Kategorie: snapshotKategorie.key, KategorieChildrenCount: Int(snapshotKategorie.childrenCount))
-            
-            
-        }, withCancel: nil)
-
-        
-    }
-    
-    // Softdrinks, Classics
-    func getUnterkategorien(){
-        
-        var datref: DatabaseReference!
-        datref = Database.database().reference()
-        datref.child("Speisekarten").child("\(self.barname)").observe(.childAdded, with: { (snapshotUnterkategorie) in
-            print(1)
-            
-            
-
-        }, withCancel: nil)
-        
-    }
-    
-    func getUnterKategorienItems(Kategorie: String, KategorieChildrenCount: Int){
-        var datref: DatabaseReference!
-        datref = Database.database().reference()
-        datref.child("Speisekarten").child("\(self.barname)").child(Kategorie).observe(.childAdded, with: { (snapshotUnterkategorieItem) in
-            print(Kategorie, "KATEGORIE")
-            
-            self.unterKategorien.append(snapshotUnterkategorieItem.key)
-            self.unterKategorienInt.updateValue(Int(snapshotUnterkategorieItem.childrenCount), forKey: snapshotUnterkategorieItem.key)
-            self.unterKategorieArray.append(snapshotUnterkategorieItem.key)
-            self.expanded2Array.append(false)
-            
-            print(self.unterKategorienInt, "INNNT")
-            
-            if self.unterKategorienInt.count == KategorieChildrenCount {
-                for (Unterkategorie, Int) in self.unterKategorienInt {
-                    print(self.unterKategorienInt, "1")
-                    print(Kategorie, Unterkategorie, Int, "2")
-                    
-                    self.fetchSpeisekarte(Kategorie: Kategorie, Unterkategorie: Unterkategorie, UnterkategorieArray: self.unterKategorieArray, expandedArray: self.expanded2Array, UnterKategorieChildrenCount: Int)
-                }
-                self.unterKategorienInt.removeAll()
-                self.unterKategorieArray.removeAll()
-                self.expanded2Array.removeAll()
+        datref.child("Speisekarten").child("\(self.barname)").observeSingleEvent(of: .value, with: { (snapshotKategorie) in
+            for key in (snapshotKategorie.children.allObjects as? [DataSnapshot])! {
                 
+                if !self.Kategorien.contains(key.key) {
+                    self.Kategorien.append(key.key)
+                    self.getUnterKategorienItems(Kategorie: key.key)
+                }
             }
             
-            
         }, withCancel: nil)
         
         
     }
     
     
-    
-    func fetchSpeisekarte(Kategorie: String, Unterkategorie: String, UnterkategorieArray: [String], expandedArray: [Bool], UnterKategorieChildrenCount: Int){
+    func getUnterKategorienItems(Kategorie: String){
         var datref: DatabaseReference!
         datref = Database.database().reference()
-        print(UnterKategorieChildrenCount, "UnterKategorieChildrenCount")
-        datref.child("Speisekarten").child("\(self.barname)").child(Kategorie).child(Unterkategorie).observe(.childAdded, with: { (snapshot) in
-            if let dictionary = snapshot.value as? [String: AnyObject]{
-                let item = SpeisekarteInformation(dictionary: dictionary)
-                self.itemsunterkategorie.append(item.Name!)
-                self.preisunterkategorie.append(item.Preis!)
-                if item.Liter != "keine Literangabe möglich" {
-                    self.literunterkategorie.append(item.Liter!)
+        datref.child("Speisekarten").child("\(self.barname)").child(Kategorie).observeSingleEvent(of: .value, with: { (snapshotUnterkategorieItem) in
+            
+            for key in (snapshotUnterkategorieItem.children.allObjects as? [DataSnapshot])! {
+                let snapshotItem = snapshotUnterkategorieItem.childSnapshot(forPath: key.key)
+                
+                if self.Unterkategorien[Kategorie] != nil {
+                    self.Unterkategorien[Kategorie]?.append(key.key)
+                    self.Expanded[Kategorie]?.append(false)
+                    for items in (snapshotItem.children.allObjects as? [DataSnapshot])!{
+                        if let dictionary = items.value as? [String: AnyObject]{
+                            let item = SpeisekarteInformation(dictionary: dictionary)
+                            var newitems = self.Items[Kategorie]
+                            var newpreis = self.Preis[Kategorie]
+                            var newliter = self.Liter[Kategorie]
+                            
+                            
+                            if (self.Items[Kategorie]?.count)! < (self.Unterkategorien[Kategorie]?.count)! {
+                                newitems?.append([item.Name!])
+                                newpreis?.append([item.Preis!])
+                                newliter?.append([item.Liter!])
+                                
+                                
+                                self.Items[Kategorie] = newitems
+                                self.Preis[Kategorie] = newpreis
+                                self.Liter[Kategorie] = newliter
+                                
+                                
+                                
+                            }
+                            else {
+                                newitems![(self.Unterkategorien[Kategorie]?.index(of: key.key))!].append(item.Name!)
+                                self.Items[Kategorie] = newitems
+                                newpreis![(self.Unterkategorien[Kategorie]?.index(of: key.key))!].append(item.Preis!)
+                                self.Preis[Kategorie] = newpreis
+                                newliter![(self.Unterkategorien[Kategorie]?.index(of: key.key))!].append(item.Liter!)
+                                self.Liter[Kategorie] = newliter
+                                
+                            }
+                            
+                            
+                        }
+                        
+                    }
+                    
                 } else {
-                    self.literunterkategorie.append("0,0l")
+                    
+                    self.Unterkategorien.updateValue([key.key], forKey: Kategorie)
+                    self.Expanded.updateValue([false], forKey: Kategorie)
+                    
+                    for items in (snapshotItem.children.allObjects as? [DataSnapshot])!{
+                        if let dictionary = items.value as? [String: AnyObject]{
+                            let item = SpeisekarteInformation(dictionary: dictionary)
+                            
+                            if self.Items[Kategorie] != nil{
+                                var newItems = self.Items[Kategorie]
+                                newItems![(self.Unterkategorien[Kategorie]?.index(of: key.key))!].append(item.Name!)
+                                self.Items[Kategorie] = newItems
+                                
+                                var newPreis = self.Preis[Kategorie]
+                                newPreis![(self.Unterkategorien[Kategorie]?.index(of: key.key))!].append(item.Preis!)
+                                self.Preis[Kategorie] = newPreis
+                                
+                                var newLiter = self.Liter[Kategorie]
+                                newLiter![(self.Unterkategorien[Kategorie]?.index(of: key.key))!].append(item.Liter!)
+                                self.Liter[Kategorie] = newLiter
+                                
+                                
+                            } else {
+                                self.Items.updateValue([[item.Name!]], forKey: Kategorie)
+                                self.Preis.updateValue([[item.Preis!]], forKey: Kategorie)
+                                self.Liter.updateValue([[item.Liter!]], forKey: Kategorie)
+                                
+                                
+                                
+                            }
+                            
+                        }
+                        
+                    }
                 }
-                
-                
-                
-                if self.itemsunterkategorie.count == UnterKategorieChildrenCount {
-                    
-                    self.itemsUnterkategorie.append(self.itemsunterkategorie)
-                    self.preisUnterkategorie.append(self.preisunterkategorie)
-                    self.literUnterkategorie.append(self.literunterkategorie)
-                    
-                    self.itemsunterkategorie.removeAll()
-                    self.preisunterkategorie.removeAll()
-                    self.literunterkategorie.removeAll()
-                }
-                
-                if self.itemsUnterkategorie.count == snapshot.childrenCount {
-                    
-                    self.setSectionsSpeisekarte(Kategorie: Kategorie, Unterkategorie: UnterkategorieArray, items: self.itemsUnterkategorie, preis: self.preisUnterkategorie, liter: self.literUnterkategorie, expanded2: expandedArray)
-                    self.itemsUnterkategorie.removeAll()
-                    self.preisUnterkategorie.removeAll()
-                    self.literUnterkategorie.removeAll()
-                    
-                    
-                }
-                
             }
             
+            if self.Unterkategorien.count == self.Kategorien.count {
+                print(self.Kategorien)
+                print(self.Unterkategorien)
+                print(self.Items)
+                
+                for kategorie in self.Kategorien {
+                    self.setSectionsSpeisekarte(Kategorie: kategorie, Unterkategorie: self.Unterkategorien[kategorie]!, items: self.Items[kategorie]!, preis: self.Preis[kategorie]!, liter: self.Liter[kategorie]!, expanded2: self.Expanded[kategorie]!)
+                }
+            }
             
             
         }, withCancel: nil)
         
         
-        
     }
     
-    
+
     
     
     // TABLEVIEW FUNCTIONS
     
-    func setSectionsSpeisekarte(Kategorie: String, Unterkategorie: [String], items: [[String]], preis: [[Int]], liter: [[String]], expanded2: [Bool]){
+    func setSectionsSpeisekarte(Kategorie: String, Unterkategorie: [String], items: [[String]], preis: [[Double]], liter: [[String]], expanded2: [Bool]){
         self.sections.append(ExpandTVSection2(Kategorie: Kategorie, Unterkategorie: Unterkategorie, items: items, preis: preis, liter: liter, expanded2: expanded2, expanded: false))
-        print(self.sections)
         self.SpeisekarteTableView.reloadData()
     }
     
@@ -187,7 +182,6 @@ class SpeisekarteVC2: UIViewController, UITableViewDataSource, UITableViewDelega
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        //            return sections[section].Unterkategorie.count
         return 1
         
     }
@@ -292,7 +286,7 @@ class SpeisekarteVC2: UIViewController, UITableViewDataSource, UITableViewDelega
         SpeisekarteTableView.reloadData()
         self.barname = parentPageViewController2.name
         
-        print(self.baradresse, "viewload")
+
         
         getKategorien()
         //    getUnterkategorien()

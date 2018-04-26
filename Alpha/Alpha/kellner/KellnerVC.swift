@@ -28,7 +28,7 @@ class KellnerVC: UIViewController, UITableViewDelegate, UITableViewDataSource, E
     var FromUserID = [String: String]()
     var TimeStamp = [String: Double]()
     
-    
+    var Barname = String()
     
     var KellnerID = String()
     var bestellungIDs = [String]()
@@ -77,7 +77,7 @@ class KellnerVC: UIViewController, UITableViewDelegate, UITableViewDataSource, E
     func loadBestellungenKeys(){
         var datref: DatabaseReference!
         datref = Database.database().reference()
-        datref.child("userBestellungen").child("KellnerID").observe(.childAdded, with: { (snapshot) in
+        datref.child("userBestellungen").child(KellnerID).observe(.childAdded, with: { (snapshot) in
             self.loadBestellungen(BestellungID: snapshot.key)
             
         }, withCancel: nil)
@@ -85,13 +85,14 @@ class KellnerVC: UIViewController, UITableViewDelegate, UITableViewDataSource, E
     }
     
     func loadBestellungen(BestellungID: String){
+        print(Barname, "kvc")
         self.bestellungIDs.append(BestellungID)
         
         var datref: DatabaseReference!
         datref = Database.database().reference()
         
         
-        datref.child("Bestellungen").child("Huqa").child(BestellungID).observeSingleEvent(of: .value) { (snapshot) in
+        datref.child("Bestellungen").child(Barname).child(BestellungID).observeSingleEvent(of: .value) { (snapshot) in
             
             for key in (snapshot.children.allObjects as? [DataSnapshot])! {
                 if key.key == "Information" {
@@ -115,8 +116,6 @@ class KellnerVC: UIViewController, UITableViewDelegate, UITableViewDataSource, E
                             
                             var x = self.BestellungUnterkategorien[BestellungID]
                             var expandend2 = self.BestellungExpanded2[BestellungID]
-                            print(x!)
-                            print(self.BestellungKategorien[BestellungID])
                             if x!.count < (self.BestellungKategorien[BestellungID]?.count)!{
                                 print(1)
                                 x!.append([children.key])
@@ -200,7 +199,6 @@ class KellnerVC: UIViewController, UITableViewDelegate, UITableViewDataSource, E
                                                 
                                             }
                                             else {
-                                                print(iteminfodic.itemName, "itemname2")
 
                                                 newnewItem[newx.index(of: children.key)!].append(iteminfodic.itemName!)
                                                 newnewPreise[newx.index(of: children.key)!].append(iteminfodic.itemPreis!)
@@ -445,7 +443,7 @@ class KellnerVC: UIViewController, UITableViewDelegate, UITableViewDataSource, E
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         var heightForHeaderInSection: Int?
         
-        heightForHeaderInSection = 30
+        heightForHeaderInSection = 50
         return CGFloat(heightForHeaderInSection!)
         
     }
@@ -453,20 +451,31 @@ class KellnerVC: UIViewController, UITableViewDelegate, UITableViewDataSource, E
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         
-        var heightForRowAt: Int?
         
         
         if (Bestellungen[indexPath.section].expanded) {
-            var kategorieCount = Bestellungen[indexPath.section].Kategorie.count
-            var UnterkategorieCount = Bestellungen[indexPath.section].Unterkategorie.count
-            
-            heightForRowAt = 500
+            let kategorieCount = Bestellungen[indexPath.section].Kategorie.count
+            var UnterkategorieCount = 0
+            var itemsCount = 0
+            for items in  Bestellungen[indexPath.section].items {
+                for item in items {
+                    itemsCount = itemsCount + item.count
+                }
+            }
+            for unterkategorie in Bestellungen[indexPath.section].Unterkategorie {
+                    UnterkategorieCount = UnterkategorieCount + unterkategorie.count
+                
+            }
+            print(itemsCount, "itemscount")
+            print(kategorieCount, "kategorieCount")
+            print(UnterkategorieCount, "UnterkategorieCount")
+            return CGFloat(kategorieCount*50 + UnterkategorieCount*50 + itemsCount*46)
+
             
         }
         else {
-            heightForRowAt = 0
+            return 0
         }
-        return CGFloat(heightForRowAt!)
         
     }
     

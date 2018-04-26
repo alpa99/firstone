@@ -9,14 +9,14 @@
 import Foundation
 class SpeisekarteInformation: NSObject {
     var Name: String?
-    var Preis: Int?
+    var Preis: Double?
     var Liter: String?
     
     
     init(dictionary: [String: Any]) {
         self.Name = dictionary["Name"] as? String ?? "Fehler: Name"
-        self.Preis = dictionary["Preis"] as? Int ?? 0
-        self.Liter = dictionary["Liter"] as? String ?? "keine Literangabe möglich"
+        self.Preis = dictionary["Preis"] as? Double ?? 0.00
+        self.Liter = dictionary["Liter"] as? String ?? "0.0l"
 
         
         

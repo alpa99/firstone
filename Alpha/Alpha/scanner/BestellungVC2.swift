@@ -18,7 +18,7 @@ class BestellungVC2: UIViewController, UITableViewDataSource, UITableViewDelegat
     var BestellungKategorien = [String]()
     var BestellungUnterkategorien = [[String]]()
     var BestellungItemsNamen = [[[String]]]()
-    var BestellungItemsPreise = [[[Int]]]()
+    var BestellungItemsPreise = [[[Double]]]()
     var BestellungItemsLiter = [[[String]]]()
     var BestellungItemsMengen = [[[Int]]]()
     var BestellungItemsExpanded2 = [[Bool]]()
@@ -26,7 +26,7 @@ class BestellungVC2: UIViewController, UITableViewDataSource, UITableViewDelegat
     
 
     var itemNamen = [String]()
-    var itemPreise = [Int]()
+    var itemPreise = [Double]()
     var itemLiter = [String]()
     
  
@@ -34,22 +34,12 @@ class BestellungVC2: UIViewController, UITableViewDataSource, UITableViewDelegat
     // VARS
     var sections = [ExpandTVSection2]()
     
-    var KategorienInt = [String: Int]()
-    
-    
-    var unterKategorien = [String]()
-    var unterKategorienInt = [String: Int]()
-    var unterKategorieArray = [String]()
-    var expanded2Array = [Bool]()
-    
-    var itemsunterkategorie = [String]()
-    var preisunterkategorie = [Int]()
-    var literunterkategorie = [String]()
-    
-    
-    var itemsUnterkategorie = [[String]]()
-    var preisUnterkategorie = [[Int]]()
-    var literUnterkategorie = [[String]]()
+    var Kategorien = [String]()
+    var Unterkategorien = [String: [String]]()
+    var Items = [String: [[String]]]()
+    var Preis = [String: [[Double]]]()
+    var Liter = [String: [[String]]]()
+    var Expanded = [String: [Bool]]()
     
     
     
@@ -229,112 +219,118 @@ class BestellungVC2: UIViewController, UITableViewDataSource, UITableViewDelegat
         var datref: DatabaseReference!
         datref = Database.database().reference()
         
-        datref.child("Speisekarten").child("\(self.barname)").observe(.childAdded, with: { (snapshotKategorie) in
-            
-            // Anzahl Kategorien: Shishas, Getränke
-            self.KategorienInt.updateValue(Int(snapshotKategorie.childrenCount), forKey: snapshotKategorie.key)
-            print(self.KategorienInt, "KATEGROIEINT")
-            
-            self.getUnterKategorienItems(Kategorie: snapshotKategorie.key, KategorieChildrenCount: Int(snapshotKategorie.childrenCount))
-            
-            
-        }, withCancel: nil)
-        
-        
-    }
-    
-    // Softdrinks, Classics
-    func getUnterkategorien(){
-        
-        var datref: DatabaseReference!
-        datref = Database.database().reference()
-        datref.child("Speisekarten").child("\(self.barname)").observe(.childAdded, with: { (snapshotUnterkategorie) in
-            print(1)
-            
-        }, withCancel: nil)
-        
-    }
-    
-    func getUnterKategorienItems(Kategorie: String, KategorieChildrenCount: Int){
-        var datref: DatabaseReference!
-        datref = Database.database().reference()
-        datref.child("Speisekarten").child("\(self.barname)").child(Kategorie).observe(.childAdded, with: { (snapshotUnterkategorieItem) in
-            print(Kategorie, "KATEGORIE")
-            
-            self.unterKategorien.append(snapshotUnterkategorieItem.key)
-            self.unterKategorienInt.updateValue(Int(snapshotUnterkategorieItem.childrenCount), forKey: snapshotUnterkategorieItem.key)
-            self.unterKategorieArray.append(snapshotUnterkategorieItem.key)
-            self.expanded2Array.append(true)
-            
-            print(self.unterKategorienInt, "INNNT")
-            
-            if self.unterKategorienInt.count == KategorieChildrenCount {
-                for (Unterkategorie, Int) in self.unterKategorienInt {
-                    print(self.unterKategorienInt, "1")
-                    print(Kategorie, Unterkategorie, Int, "2")
-                    
-                    self.fetchSpeisekarte(Kategorie: Kategorie, Unterkategorie: Unterkategorie, UnterkategorieArray: self.unterKategorieArray, expandedArray: self.expanded2Array, UnterKategorieChildrenCount: Int)
-                }
-                self.unterKategorienInt.removeAll()
-                self.unterKategorieArray.removeAll()
-                self.expanded2Array.removeAll()
+        datref.child("Speisekarten").child("\(self.barname)").observeSingleEvent(of: .value, with: { (snapshotKategorie) in
+            for key in (snapshotKategorie.children.allObjects as? [DataSnapshot])! {
                 
+                if !self.Kategorien.contains(key.key) {
+                    self.Kategorien.append(key.key)
+                    self.getUnterKategorienItems(Kategorie: key.key)
+                }
             }
             
-            
         }, withCancel: nil)
         
         
     }
     
     
-    
-    func fetchSpeisekarte(Kategorie: String, Unterkategorie: String, UnterkategorieArray: [String], expandedArray: [Bool], UnterKategorieChildrenCount: Int){
+    func getUnterKategorienItems(Kategorie: String){
         var datref: DatabaseReference!
         datref = Database.database().reference()
-        print(UnterKategorieChildrenCount, "UnterKategorieChildrenCount")
-        datref.child("Speisekarten").child("\(self.barname)").child(Kategorie).child(Unterkategorie).observe(.childAdded, with: { (snapshot) in
-            print(snapshot, "wrgvdaskjwasd")
-            if let dictionary = snapshot.value as? [String: AnyObject]{
-                let item = SpeisekarteInformation(dictionary: dictionary)
-                print(item, "Itemwefdsaegrafwadscx")
-                self.itemsunterkategorie.append(item.Name!)
-                self.preisunterkategorie.append(item.Preis!)
-                if item.Liter != "keine Literangabe möglich" {
-                    self.literunterkategorie.append(item.Liter!)
+        datref.child("Speisekarten").child("\(self.barname)").child(Kategorie).observeSingleEvent(of: .value, with: { (snapshotUnterkategorieItem) in
+            
+            for key in (snapshotUnterkategorieItem.children.allObjects as? [DataSnapshot])! {
+                let snapshotItem = snapshotUnterkategorieItem.childSnapshot(forPath: key.key)
+                
+                if self.Unterkategorien[Kategorie] != nil {
+                    self.Unterkategorien[Kategorie]?.append(key.key)
+                    self.Expanded[Kategorie]?.append(false)
+                    for items in (snapshotItem.children.allObjects as? [DataSnapshot])!{
+                        if let dictionary = items.value as? [String: AnyObject]{
+                            let item = SpeisekarteInformation(dictionary: dictionary)
+                            var newitems = self.Items[Kategorie]
+                            var newpreis = self.Preis[Kategorie]
+                            var newliter = self.Liter[Kategorie]
+                            
+                            
+                            if (self.Items[Kategorie]?.count)! < (self.Unterkategorien[Kategorie]?.count)! {
+                                newitems?.append([item.Name!])
+                                newpreis?.append([item.Preis!])
+                                newliter?.append([item.Liter!])
+                                
+                                
+                                self.Items[Kategorie] = newitems
+                                self.Preis[Kategorie] = newpreis
+                                self.Liter[Kategorie] = newliter
+                                
+                                
+                                
+                            }
+                            else {
+                                newitems![(self.Unterkategorien[Kategorie]?.index(of: key.key))!].append(item.Name!)
+                                self.Items[Kategorie] = newitems
+                                newpreis![(self.Unterkategorien[Kategorie]?.index(of: key.key))!].append(item.Preis!)
+                                self.Preis[Kategorie] = newpreis
+                                newliter![(self.Unterkategorien[Kategorie]?.index(of: key.key))!].append(item.Liter!)
+                                self.Liter[Kategorie] = newliter
+                                
+                            }
+                            
+                            
+                        }
+                        
+                    }
+                    
                 } else {
-                    self.literunterkategorie.append("0.0l")
+                    
+                    self.Unterkategorien.updateValue([key.key], forKey: Kategorie)
+                    self.Expanded.updateValue([false], forKey: Kategorie)
+                    
+                    for items in (snapshotItem.children.allObjects as? [DataSnapshot])!{
+                        if let dictionary = items.value as? [String: AnyObject]{
+                            let item = SpeisekarteInformation(dictionary: dictionary)
+                            
+                            if self.Items[Kategorie] != nil{
+                                var newItems = self.Items[Kategorie]
+                                newItems![(self.Unterkategorien[Kategorie]?.index(of: key.key))!].append(item.Name!)
+                                self.Items[Kategorie] = newItems
+                                
+                                var newPreis = self.Preis[Kategorie]
+                                newPreis![(self.Unterkategorien[Kategorie]?.index(of: key.key))!].append(item.Preis!)
+                                self.Preis[Kategorie] = newPreis
+                                
+                                var newLiter = self.Liter[Kategorie]
+                                newLiter![(self.Unterkategorien[Kategorie]?.index(of: key.key))!].append(item.Liter!)
+                                self.Liter[Kategorie] = newLiter
+                                
+                                
+                            } else {
+                                self.Items.updateValue([[item.Name!]], forKey: Kategorie)
+                                self.Preis.updateValue([[item.Preis!]], forKey: Kategorie)
+                                self.Liter.updateValue([[item.Liter!]], forKey: Kategorie)
+                                
+                                
+                                
+                            }
+                            
+                        }
+                        
+                    }
                 }
+            }
+            
+            if self.Unterkategorien.count == self.Kategorien.count {
+                print(self.Kategorien)
+                print(self.Unterkategorien)
+                print(self.Items)
                 
-                
-                
-                if self.itemsunterkategorie.count == UnterKategorieChildrenCount {
-                    
-                    self.itemsUnterkategorie.append(self.itemsunterkategorie)
-                    self.preisUnterkategorie.append(self.preisunterkategorie)
-                    self.literUnterkategorie.append(self.literunterkategorie)
-                    
-                    self.itemsunterkategorie.removeAll()
-                    self.preisunterkategorie.removeAll()
-                    self.literunterkategorie.removeAll()
+                for kategorie in self.Kategorien {
+                    self.setSectionsSpeisekarte(Kategorie: kategorie, Unterkategorie: self.Unterkategorien[kategorie]!, items: self.Items[kategorie]!, preis: self.Preis[kategorie]!, liter: self.Liter[kategorie]!, expanded2: self.Expanded[kategorie]!)
                 }
-                
-                if self.itemsUnterkategorie.count == snapshot.childrenCount {
-                    
-                    self.setSectionsSpeisekarte(Kategorie: Kategorie, Unterkategorie: UnterkategorieArray, items: self.itemsUnterkategorie, preis: self.preisUnterkategorie, liter: self.literUnterkategorie, expanded2: expandedArray)
-                    self.itemsUnterkategorie.removeAll()
-                    self.preisUnterkategorie.removeAll()
-                    self.literUnterkategorie.removeAll()
-                    
-                    
-                }
-                
             }
             
             
-            
         }, withCancel: nil)
-        
         
         
     }
@@ -359,16 +355,19 @@ class BestellungVC2: UIViewController, UITableViewDataSource, UITableViewDelegat
         let DayOne = formatter.date(from: "2018/04/01 12:00")
         let timestamp = Double(NSDate().timeIntervalSince(DayOne!))
         
-            let fromUserID = "Authauth()currentUseruid"
-            var values = ["toKellnerID": "KellnerID", "tischnummer": "Stringtischnummer", "fromUserID": fromUserID , "timeStamp": timestamp, "angenommen": false] as [String : Any]
-        
-        
+        //
+        //
+        //
+        // muss bearbeitet werden! andere uids auch
+        let fromUserID = Auth.auth().currentUser?.uid
+        let values = ["toKellnerID": KellnerID, "tischnummer": "\(tischnummer)", "fromUserID": fromUserID! , "timeStamp": timestamp, "angenommen": false] as [String : Any]
 
-            print(values, "values")
-//            for (genre, itemDictionary) in bestellteItemsDictionary {
-//                values.updateValue(itemDictionary, forKey: genre)
-//            }
-            ref = Database.database().reference().child("Bestellungen").child("Huqa")
+        
+        //
+        //
+        //
+        // muss bearbeitet werden!
+            ref = Database.database().reference().child("Bestellungen").child(barname)
             let childRef = ref?.childByAutoId()
 
             print(self.bestellteItemsDictionary[0], "NO")
@@ -401,13 +400,13 @@ class BestellungVC2: UIViewController, UITableViewDataSource, UITableViewDelegat
         }
         
             childRef?.child("Information").updateChildValues(values)
-            let userBestellungenRef = Database.database().reference().child("userBestellungen").child(fromUserID)
+        let userBestellungenRef = Database.database().reference().child("userBestellungen").child(fromUserID!)
             let bestellungID = childRef?.key
             userBestellungenRef.child(bestellungID!).updateChildValues(["BestellungsID": bestellungID!, "abgeschlossen": false])
             userBestellungenRef.child(bestellungID!).updateChildValues(values)
 
-            let kellnerBestellungenRef = Database.database().reference().child("userBestellungen").child("KellnerID")
-            kellnerBestellungenRef.child(bestellungID!).updateChildValues(["Status": "versendet", "fromUserID": fromUserID] )
+            let kellnerBestellungenRef = Database.database().reference().child("userBestellungen").child(KellnerID)
+        kellnerBestellungenRef.child(bestellungID!).updateChildValues(["Status": "versendet", "fromUserID": fromUserID!] )
             print(Date(timeIntervalSince1970: timestamp))
 
     }
@@ -488,13 +487,13 @@ class BestellungVC2: UIViewController, UITableViewDataSource, UITableViewDelegat
     
     // TABLEVIEW FUNCTIONS
     
-    func setSectionsSpeisekarte(Kategorie: String, Unterkategorie: [String], items: [[String]], preis: [[Int]], liter: [[String]], expanded2: [Bool]){
+    func setSectionsSpeisekarte(Kategorie: String, Unterkategorie: [String], items: [[String]], preis: [[Double]], liter: [[String]], expanded2: [Bool]){
         self.sections.append(ExpandTVSection2(Kategorie: Kategorie, Unterkategorie: Unterkategorie, items: items, preis: preis, liter: liter, expanded2: expanded2, expanded: false))
         print(self.sections)
         self.bestellungTableView.reloadData()
     }
     
-    func setSectionsBestellung(Kategorie: String, Unterkategorie: [String], items: [[String]], preis: [[Int]], liter: [[String]], menge: [[Int]], expanded2: [Bool]){
+    func setSectionsBestellung(Kategorie: String, Unterkategorie: [String], items: [[String]], preis: [[Double]], liter: [[String]], menge: [[Int]], expanded2: [Bool]){
         self.bestellteItemsDictionary
             .append(bestellungTVSection(Kategorie: Kategorie, Unterkategorie: Unterkategorie, items: items, preis: preis, liter: liter, menge: menge, expanded2: expanded2, expanded: false))
         print(self.bestellteItemsDictionary)
@@ -577,10 +576,10 @@ class BestellungVC2: UIViewController, UITableViewDataSource, UITableViewDelegat
         
         
         let header = ExpandableHeaderView()
-        header.contentView.layer.cornerRadius = 10
+        header.contentView.layer.cornerRadius = 5
         header.contentView.layer.backgroundColor = UIColor.clear.cgColor
 
-        header.layer.cornerRadius = 10
+        header.layer.cornerRadius = 5
         header.layer.backgroundColor = UIColor.clear.cgColor
         
         
@@ -701,7 +700,7 @@ class BestellungVC2: UIViewController, UITableViewDataSource, UITableViewDelegat
                 BestellungKategorien.append(KategorieLbl.text!)
                 BestellungUnterkategorien.append([UnterkategorieLbl.text!])
                 BestellungItemsNamen.append([[itemNameLbl.text!]])
-                BestellungItemsPreise.append([[Int(itemPreisLbl.text!)!]])
+                BestellungItemsPreise.append([[Double(Int(itemPreisLbl.text!)!)]])
                 BestellungItemsLiter.append([[itemLiterLbl.text!]])
                 BestellungItemsMengen.append([[Int(itemCountLbl.text!)!]])
                 BestellungItemsExpanded2.append([true])
@@ -715,7 +714,7 @@ class BestellungVC2: UIViewController, UITableViewDataSource, UITableViewDelegat
                     BestellungUnterkategorien[BestellungKategorien.index(of: KategorieLbl.text!)!].append(UnterkategorieLbl.text!)
                     
                     BestellungItemsNamen[BestellungKategorien.index(of: KategorieLbl.text!)!].append([itemNameLbl.text!])
-                    BestellungItemsPreise[BestellungKategorien.index(of: KategorieLbl.text!)!].append([Int(itemPreisLbl.text!)!])
+                    BestellungItemsPreise[BestellungKategorien.index(of: KategorieLbl.text!)!].append([Double(Int(itemPreisLbl.text!)!)])
                     BestellungItemsLiter[BestellungKategorien.index(of: KategorieLbl.text!)!].append([itemLiterLbl.text!])
                     BestellungItemsMengen[BestellungKategorien.index(of: KategorieLbl.text!)!].append([Int(itemCountLbl.text!)!])
                     BestellungItemsExpanded2[BestellungKategorien.index(of: KategorieLbl.text!)!].append(true)
@@ -736,7 +735,7 @@ class BestellungVC2: UIViewController, UITableViewDataSource, UITableViewDelegat
                         itemsNamenInSection[unterkategorie.index(of: UnterkategorieLbl.text!)!].append(itemNameLbl.text!)
                         BestellungItemsNamen[BestellungKategorien.index(of: KategorieLbl.text!)!] = itemsNamenInSection
                         
-                        itemsPreiseInSection[unterkategorie.index(of: UnterkategorieLbl.text!)!].append(Int(itemPreisLbl.text!)!)
+                        itemsPreiseInSection[unterkategorie.index(of: UnterkategorieLbl.text!)!].append(Double(Int(itemPreisLbl.text!)!))
                         BestellungItemsPreise[BestellungKategorien.index(of: KategorieLbl.text!)!] = itemsPreiseInSection
                         
                         itemsLiterInSection[unterkategorie.index(of: UnterkategorieLbl.text!)!].append(itemLiterLbl.text!)
@@ -913,12 +912,11 @@ class BestellungVC2: UIViewController, UITableViewDataSource, UITableViewDelegat
         super.viewDidLoad()
         
         bestellungTableView.reloadData()
-//        self.barname = parentPageViewController2.name
-//        self.baradresse = parentPageViewController2.adresse
-//        self.tischnummer = parentPageViewController2.tischnummer
-//        self.KellnerID = parentPageViewController2.KellnerID
-        print(self.tischnummer, "TISCHNUMMER")
-        print(self.baradresse, "viewload")
+        self.barname = parentPageViewController2.name
+        self.baradresse = parentPageViewController2.adresse
+        self.tischnummer = parentPageViewController2.tischnummer
+        self.KellnerID = parentPageViewController2.KellnerID
+
         effect = visualEffectView.effect
         visualEffectView.effect = nil
         visualEffectView.bounds = self.bestellungVCView.bounds
