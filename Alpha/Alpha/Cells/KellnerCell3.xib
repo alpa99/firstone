@@ -19,29 +19,38 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Preis" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0N3-kD-bYj" customClass="LabelWhiteS16" customModule="Alpha" customModuleProvider="target">
-                        <rect key="frame" x="210" y="0.0" width="48" height="44"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Preis" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0N3-kD-bYj" customClass="LabelWhiteS16" customModule="Alpha" customModuleProvider="target">
+                        <rect key="frame" x="210" y="0.0" width="38" height="44"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Menge" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pLI-RR-PW3" customClass="LabelWhiteS16" customModule="Alpha" customModuleProvider="target">
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Menge" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pLI-RR-PW3" customClass="LabelWhiteS16" customModule="Alpha" customModuleProvider="target">
                         <rect key="frame" x="267" y="0.0" width="53" height="44"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="ItemName" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mho-V3-Apv" customClass="LabelWhiteS16" customModule="Alpha" customModuleProvider="target">
-                        <rect key="frame" x="8" y="0.0" width="202" height="44"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ItemName" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mho-V3-Apv" customClass="LabelWhiteS16" customModule="Alpha" customModuleProvider="target">
+                        <rect key="frame" x="16" y="0.0" width="78.5" height="44"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                <constraints>
+                    <constraint firstItem="0N3-kD-bYj" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="BFg-0M-xPA"/>
+                    <constraint firstAttribute="bottom" secondItem="0N3-kD-bYj" secondAttribute="bottom" id="IVr-xc-BZz"/>
+                    <constraint firstItem="Mho-V3-Apv" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="Jgh-EV-trI"/>
+                    <constraint firstAttribute="bottom" secondItem="Mho-V3-Apv" secondAttribute="bottom" id="M7O-RR-4Qf"/>
+                    <constraint firstItem="pLI-RR-PW3" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="QmH-sj-3GK"/>
+                    <constraint firstItem="pLI-RR-PW3" firstAttribute="leading" secondItem="0N3-kD-bYj" secondAttribute="trailing" constant="19" id="Zw2-6S-nVc"/>
+                    <constraint firstAttribute="bottom" secondItem="pLI-RR-PW3" secondAttribute="bottom" id="aJA-XH-krV"/>
+                    <constraint firstItem="0N3-kD-bYj" firstAttribute="leading" secondItem="Mho-V3-Apv" secondAttribute="trailing" constant="115.5" id="bZB-Gn-Khi"/>
+                    <constraint firstItem="Mho-V3-Apv" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="ggM-EV-2pW"/>
+                    <constraint firstAttribute="trailing" secondItem="pLI-RR-PW3" secondAttribute="trailing" id="n9g-8U-zE3"/>
+                </constraints>
             </tableViewCellContentView>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>

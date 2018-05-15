@@ -76,7 +76,7 @@ class MyBestellungCell: UITableViewCell, UITableViewDelegate, UITableViewDataSou
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if bestellteItemsDictionary[sections].expanded2[indexPath.section] != false {
-            return CGFloat(bestellteItemsDictionary[sections].items[indexPath.section].count*46 + 200)
+            return CGFloat(bestellteItemsDictionary[sections].items[indexPath.section].count*46)
             
         }
         else {
@@ -161,27 +161,27 @@ class MyBestellungCell: UITableViewCell, UITableViewDelegate, UITableViewDataSou
     
     func toggleSection(tableView: UITableView, header: ExpandableHeaderView2, section: Int) {
         print("jw98weiujked")
-        for i in 0..<bestellteItemsDictionary[sections].Unterkategorie.count{
-            if i == section {
-                bestellteItemsDictionary[sections].expanded2[i] = !bestellteItemsDictionary[sections].expanded2[i]
-            } else {
-                bestellteItemsDictionary[sections].expanded2[i] = false
-                
-            }
-        }
-        
-        myBestellungTV.beginUpdates()
-        let indexSet = NSMutableIndexSet()
-        for i in 0..<bestellteItemsDictionary[sections].items[section].count {
-            myBestellungTV.reloadRows(at: [IndexPath(row: i, section: section)], with: .automatic)
-        }
-        for i in 0..<bestellteItemsDictionary[sections].Unterkategorie.count{
-            if i != section{
-                indexSet.add(i)}
-        }
-        myBestellungTV.reloadSections(indexSet as IndexSet, with: .automatic)
-        
-        myBestellungTV.endUpdates()
+//        for i in 0..<bestellteItemsDictionary[sections].Unterkategorie.count{
+//            if i == section {
+//                bestellteItemsDictionary[sections].expanded2[i] = !bestellteItemsDictionary[sections].expanded2[i]
+//            } else {
+//                bestellteItemsDictionary[sections].expanded2[i] = false
+//                
+//            }
+//        }
+//        
+//        myBestellungTV.beginUpdates()
+//        let indexSet = NSMutableIndexSet()
+//        for i in 0..<bestellteItemsDictionary[sections].items[section].count {
+//            myBestellungTV.reloadRows(at: [IndexPath(row: i, section: section)], with: .automatic)
+//        }
+//        for i in 0..<bestellteItemsDictionary[sections].Unterkategorie.count{
+//            if i != section{
+//                indexSet.add(i)}
+//        }
+//        myBestellungTV.reloadSections(indexSet as IndexSet, with: .automatic)
+//        
+//        myBestellungTV.endUpdates()
         
     }
     
