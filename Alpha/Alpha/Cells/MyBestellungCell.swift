@@ -21,7 +21,7 @@ class MyBestellungCell: UITableViewCell, UITableViewDelegate, UITableViewDataSou
     //
     var bestellteItemsDictionary = [bestellungTVSection]()
     var items = [[String]]()
-    var preise = [[Int]]()
+    var preise = [[Double]]()
     var liters = [[String]]()
     var sections = Int()
     var rows = Int()
@@ -126,8 +126,11 @@ class MyBestellungCell: UITableViewCell, UITableViewDelegate, UITableViewDataSou
                     cell.sections2 = indexPath.section
                     cell.rows2 = indexPath.row
                     cell.myItemName.text = item[indexPath.row]
-                    cell.myItemPreis.text = "\(preis[indexPath.row]) €"
+                    let preisFormat = String(format: "%.2f", arguments: [preis[indexPath.row]])
+
+                    cell.myItemPreis.text = "\(preisFormat) €"
                     cell.myItemMenge.text = String(menge[indexPath.row])
+                    
                     cell.myItemLiter.text = liter[indexPath.row]
                     if liter[indexPath.row] != "0.0l"{
                         cell.myItemLiter.text = liter[indexPath.row]

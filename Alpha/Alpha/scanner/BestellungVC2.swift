@@ -11,10 +11,14 @@ import FBSDKLoginKit
 import FirebaseAuth
 import CoreLocation
 
+protocol BestellungVC2Delegate {
+    func reloaddas(sender: Any)
+  
+}
 class BestellungVC2: UIViewController, UITableViewDataSource, UITableViewDelegate, ExpandableHeaderViewDelegate, BestellenCellDelegate, MyBestellungCellDelegate, PageObservation2, CLLocationManagerDelegate {
-
+ 
     
-
+    
     var BestellungKategorien = [String]()
     var BestellungUnterkategorien = [[String]]()
     var BestellungItemsNamen = [[[String]]]()
@@ -23,8 +27,8 @@ class BestellungVC2: UIViewController, UITableViewDataSource, UITableViewDelegat
     var BestellungItemsMengen = [[[Int]]]()
     var BestellungItemsExpanded2 = [[Bool]]()
     
+    var delegate: bestellenCell2Delegate?
     
-
     var itemNamen = [String]()
     var itemPreise = [Double]()
     var itemLiter = [String]()
@@ -192,17 +196,17 @@ class BestellungVC2: UIViewController, UITableViewDataSource, UITableViewDelegat
         
         myBestellungTV.reloadData()
         
-        
+
                 self.bestellungVCView.addSubview(visualEffectView)
                 visualEffectView.center = self.bestellungVCView.center
                 self.bestellungVCView.addSubview(self.myBestellungView)
                 self.myBestellungView.center = self.bestellungVCView.center
                 self.myBestellungView.transform = CGAffineTransform.init(scaleX: 1.3, y: 1.3)
                 self.myBestellungView.alpha = 0
-                UIView.animate(withDuration: 1) {
+                UIView.animate(withDuration: 0.2) {
         
                     self.visualEffectView.effect = self.effect
-                    self.myBestellungView.alpha = 1
+                    self.myBestellungView.alpha = 1.0
                     self.myBestellungView.transform = CGAffineTransform.identity
                     print(self.bestellteItemsDictionary)
                 }
@@ -375,7 +379,7 @@ class BestellungVC2: UIViewController, UITableViewDataSource, UITableViewDelegat
             let Unterkategorien = Bestellung.Unterkategorie
 
             for Unterkategorie in Bestellung.Unterkategorie {
-                let UnterkategorieSection = Unterkategorien?.index(of: Unterkategorie)
+                let UnterkategorieSection = Unterkategorien.index(of: Unterkategorie)
                 var items = Bestellung.items[UnterkategorieSection!]
                 var mengen = Bestellung.menge[UnterkategorieSection!]
                 var preise = Bestellung.preis[UnterkategorieSection!]
@@ -385,9 +389,9 @@ class BestellungVC2: UIViewController, UITableViewDataSource, UITableViewDelegat
                     let bestellungName = ["Name": items[i]]
                     let bestellungMenge = ["Menge": mengen[i]]
                     let bestellungPreis = ["Preis": preise[i]]
-                    childRef?.child(Bestellung.Kategorie!).child(Unterkategorie).child(items[i]).updateChildValues(bestellungName)
-                    childRef?.child(Bestellung.Kategorie!).child(Unterkategorie).child(items[i]).updateChildValues(bestellungMenge)
-                    childRef?.child(Bestellung.Kategorie!).child(Unterkategorie).child(items[i]).updateChildValues(bestellungPreis)
+                    childRef?.child(Bestellung.Kategorie).child(Unterkategorie).child(items[i]).updateChildValues(bestellungName)
+                    childRef?.child(Bestellung.Kategorie).child(Unterkategorie).child(items[i]).updateChildValues(bestellungMenge)
+                    childRef?.child(Bestellung.Kategorie).child(Unterkategorie).child(items[i]).updateChildValues(bestellungPreis)
 
 
                 }
@@ -519,9 +523,9 @@ class BestellungVC2: UIViewController, UITableViewDataSource, UITableViewDelegat
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         var heightForHeaderInSection: Int?
         if tableView == bestellungTableView{
-            heightForHeaderInSection = 59        }
+            heightForHeaderInSection = 36        }
         if tableView == myBestellungTV{
-            heightForHeaderInSection = 30        }
+            heightForHeaderInSection = 36        }
         return CGFloat(heightForHeaderInSection!)
         
     }
@@ -532,7 +536,13 @@ class BestellungVC2: UIViewController, UITableViewDataSource, UITableViewDelegat
         if tableView == bestellungTableView{
             if (sections[indexPath.section].expanded) {
                 
-                heightForRowAt = (sections[indexPath.section].Kategorie.count*50)
+                heightForRowAt = (sections[indexPath.section].Unterkategorie.count*50)
+                print(sections[indexPath.section].expanded2, "Esdgsdgsdgsd")
+                for expandend in sections[indexPath.section].expanded2 {
+                    if expandend == true {
+                        heightForRowAt = heightForRowAt! + sections[indexPath.section].items[indexPath.row].count*50
+                    }
+                }
                 
             }
             else {
@@ -606,11 +616,12 @@ class BestellungVC2: UIViewController, UITableViewDataSource, UITableViewDelegat
             
             cell.backgroundColor = UIColor.clear
             
-            cell.unterkategorien.append(sections[indexPath.section])
+            cell.unterkategorien = sections
             cell.items = sections[indexPath.section].items
             cell.preise = sections[indexPath.section].preis
             cell.liters = sections[indexPath.section].liter
-            
+            cell.cellIndexPathSection = indexPath.section
+
             cell.delegate = self
             cellIndexPathRow = indexPath.row
             cellIndexPathSection = indexPath.section
@@ -672,13 +683,24 @@ class BestellungVC2: UIViewController, UITableViewDataSource, UITableViewDelegat
     
     // OTHERS
     
+    func reloadUnterkategorie(sender: BestellenCell) {
+        sections = sender.unterkategorien
+        bestellungTableView.beginUpdates()
+        bestellungTableView.reloadRows(at: [IndexPath(row: 0, section: sender.cellIndexPathSection)], with: .automatic)
+        
+        bestellungTableView.endUpdates()
+//        self.bestellungTableView.reloadData()
+        
+    }
+    
     func pass(sender: BestellenCell) {
         itemNamen = sections[cellIndexPathSection].items[sender.section2]
         itemPreise = sections[cellIndexPathSection].preis[sender.section2]
         itemLiter = sections[cellIndexPathSection].liter[sender.section2]
         KategorieLbl.text = sections[cellIndexPathSection].Kategorie
         UnterkategorieLbl.text = sections[cellIndexPathSection].Unterkategorie[sender.section2]
-        itemPreisLbl.text = "\(itemPreise[sender.row2])"
+        let preisFormat = String(format: "%.2f", arguments: [itemPreise[sender.row2]])
+        itemPreisLbl.text = preisFormat
         itemNameLbl.text = itemNamen[sender.row2]
         if itemLiter[sender.row2] != "0.0l" {
             itemLiterLbl.isHidden = false
@@ -699,8 +721,9 @@ class BestellungVC2: UIViewController, UITableViewDataSource, UITableViewDelegat
                 print(BestellungKategorien,KategorieLbl,UnterkategorieLbl, itemNameLbl,itemLiterLbl,itemCountLbl, "xxy")
                 BestellungKategorien.append(KategorieLbl.text!)
                 BestellungUnterkategorien.append([UnterkategorieLbl.text!])
+                
                 BestellungItemsNamen.append([[itemNameLbl.text!]])
-                BestellungItemsPreise.append([[Double(Int(itemPreisLbl.text!)!)]])
+                BestellungItemsPreise.append([[Double(itemPreisLbl.text!)!]])
                 BestellungItemsLiter.append([[itemLiterLbl.text!]])
                 BestellungItemsMengen.append([[Int(itemCountLbl.text!)!]])
                 BestellungItemsExpanded2.append([true])
@@ -714,7 +737,8 @@ class BestellungVC2: UIViewController, UITableViewDataSource, UITableViewDelegat
                     BestellungUnterkategorien[BestellungKategorien.index(of: KategorieLbl.text!)!].append(UnterkategorieLbl.text!)
                     
                     BestellungItemsNamen[BestellungKategorien.index(of: KategorieLbl.text!)!].append([itemNameLbl.text!])
-                    BestellungItemsPreise[BestellungKategorien.index(of: KategorieLbl.text!)!].append([Double(Int(itemPreisLbl.text!)!)])
+                    
+                    BestellungItemsPreise[BestellungKategorien.index(of: KategorieLbl.text!)!].append([Double(itemPreisLbl.text!)!])
                     BestellungItemsLiter[BestellungKategorien.index(of: KategorieLbl.text!)!].append([itemLiterLbl.text!])
                     BestellungItemsMengen[BestellungKategorien.index(of: KategorieLbl.text!)!].append([Int(itemCountLbl.text!)!])
                     BestellungItemsExpanded2[BestellungKategorien.index(of: KategorieLbl.text!)!].append(true)
@@ -735,7 +759,7 @@ class BestellungVC2: UIViewController, UITableViewDataSource, UITableViewDelegat
                         itemsNamenInSection[unterkategorie.index(of: UnterkategorieLbl.text!)!].append(itemNameLbl.text!)
                         BestellungItemsNamen[BestellungKategorien.index(of: KategorieLbl.text!)!] = itemsNamenInSection
                         
-                        itemsPreiseInSection[unterkategorie.index(of: UnterkategorieLbl.text!)!].append(Double(Int(itemPreisLbl.text!)!))
+                        itemsPreiseInSection[unterkategorie.index(of: UnterkategorieLbl.text!)!].append(Double(itemPreisLbl.text!)!)
                         BestellungItemsPreise[BestellungKategorien.index(of: KategorieLbl.text!)!] = itemsPreiseInSection
                         
                         itemsLiterInSection[unterkategorie.index(of: UnterkategorieLbl.text!)!].append(itemLiterLbl.text!)
@@ -776,15 +800,15 @@ class BestellungVC2: UIViewController, UITableViewDataSource, UITableViewDelegat
         
         var mengeInSection = bestellteItemsDictionary[sender.sections].menge
         
-        var newmengeInSection = mengeInSection![sender.sections2]
+        var newmengeInSection = mengeInSection[sender.sections2]
         let i = 1
         
         newmengeInSection[sender.rows2] = newmengeInSection[sender.rows2] + i
         
         print(newmengeInSection[sender.rows2], "rgsdcxy")
         
-        mengeInSection![sender.sections2] = newmengeInSection
-        BestellungItemsMengen[sender.sections] = mengeInSection!
+        mengeInSection[sender.sections2] = newmengeInSection
+        BestellungItemsMengen[sender.sections] = mengeInSection
         bestellteItemsDictionary[sender.sections].menge = mengeInSection
         myBestellungTV.reloadData()
         
@@ -793,15 +817,15 @@ class BestellungVC2: UIViewController, UITableViewDataSource, UITableViewDelegat
     func passItemMinus(sender: MyBestellungCell) {
         var mengeInSection = bestellteItemsDictionary[sender.sections].menge
         
-        var newmengeInSection = mengeInSection![sender.sections2]
+        var newmengeInSection = mengeInSection[sender.sections2]
         let i = 1
         if newmengeInSection[sender.rows2] > 1{
             newmengeInSection[sender.rows2] = newmengeInSection[sender.rows2] - i
             
             print(newmengeInSection[sender.rows2], "rgsdcxy")
             
-            mengeInSection![sender.sections2] = newmengeInSection
-            BestellungItemsMengen[sender.sections] = mengeInSection!
+            mengeInSection[sender.sections2] = newmengeInSection
+            BestellungItemsMengen[sender.sections] = mengeInSection
             bestellteItemsDictionary[sender.sections].menge = mengeInSection
             myBestellungTV.reloadData()
         }
@@ -818,10 +842,10 @@ class BestellungVC2: UIViewController, UITableViewDataSource, UITableViewDelegat
         var preisInSection = bestellteItemsDictionary[sender.sections].preis
         var literInSection = bestellteItemsDictionary[sender.sections].liter
         var mengeInSection = bestellteItemsDictionary[sender.sections].menge
-        var newitemsInSection = itemsInSection![sender.sections2]
-        var newpreisInSection = preisInSection![sender.sections2]
-        var newliterInSection = literInSection![sender.sections2]
-        var newmengeInSection = mengeInSection![sender.sections2]
+        var newitemsInSection = itemsInSection[sender.sections2]
+        var newpreisInSection = preisInSection[sender.sections2]
+        var newliterInSection = literInSection[sender.sections2]
+        var newmengeInSection = mengeInSection[sender.sections2]
         
         newitemsInSection.remove(at: sender.rows2)
         newliterInSection.remove(at: sender.rows2)
@@ -830,14 +854,14 @@ class BestellungVC2: UIViewController, UITableViewDataSource, UITableViewDelegat
         
         if newitemsInSection.count != 0{
             
-            itemsInSection![sender.sections2] = newitemsInSection
-            preisInSection![sender.sections2] = newpreisInSection
-            literInSection![sender.sections2] = newliterInSection
-            mengeInSection![sender.sections2] = newmengeInSection
-            BestellungItemsNamen[sender.sections] = itemsInSection!
-            BestellungItemsPreise[sender.sections] = preisInSection!
-            BestellungItemsLiter[sender.sections] = literInSection!
-            BestellungItemsMengen[sender.sections] = mengeInSection!
+            itemsInSection[sender.sections2] = newitemsInSection
+            preisInSection[sender.sections2] = newpreisInSection
+            literInSection[sender.sections2] = newliterInSection
+            mengeInSection[sender.sections2] = newmengeInSection
+            BestellungItemsNamen[sender.sections] = itemsInSection
+            BestellungItemsPreise[sender.sections] = preisInSection
+            BestellungItemsLiter[sender.sections] = literInSection
+            BestellungItemsMengen[sender.sections] = mengeInSection
             
             bestellteItemsDictionary[sender.sections].items = itemsInSection
             bestellteItemsDictionary[sender.sections].preis = preisInSection

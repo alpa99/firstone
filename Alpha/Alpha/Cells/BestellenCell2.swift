@@ -39,6 +39,7 @@ class BestellenCell2: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        ItemLbl.font = UIFont(name: "Verdana", size: 15.0)
         viewAdd.layer.cornerRadius = 4
         strich.layer.cornerRadius = 4
         // Initialization code

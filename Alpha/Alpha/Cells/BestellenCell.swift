@@ -10,6 +10,8 @@ import UIKit
 
 protocol BestellenCellDelegate {
     func pass(sender: BestellenCell)
+    func reloadUnterkategorie(sender: BestellenCell)
+    
 //    func cellItemBtnTapped(sender: BestellenCell)
 //    func cellMinusBtnTapped(sender: BestellenCell)
 //    func cellPlusBtnTapped(sender: BestellenCell), section: Int, row: Int
@@ -21,16 +23,15 @@ protocol BestellenCellDelegate {
 class BestellenCell: UITableViewCell, UITableViewDelegate, UITableViewDataSource, bestellenCell2Delegate, ExpandableHeaderViewDelegate2 {
 
     // VARS
+    
+    var cellIndexPathSection: Int!
 
     func addBtnTapped(sender: BestellenCell2) {
         section2 = sender.section2
         row2 = sender.row2
         delegate?.pass(sender: self)
     }
-    
-
-    
-    
+   
     var delegate: BestellenCellDelegate?
 //
     var unterkategorien = [ExpandTVSection2]()
@@ -58,13 +59,13 @@ class BestellenCell: UITableViewCell, UITableViewDelegate, UITableViewDataSource
     // Tabelle
     func numberOfSections(in tableView: UITableView) -> Int {
         print(unterkategorien, "dfdsgsdf")
-        return unterkategorien[0].Unterkategorie.count
+        return unterkategorien[cellIndexPathSection].Unterkategorie.count
         
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        return unterkategorien[0].items[section].count
+        return unterkategorien[cellIndexPathSection].items[section].count
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
@@ -72,7 +73,7 @@ class BestellenCell: UITableViewCell, UITableViewDelegate, UITableViewDataSource
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        if unterkategorien[0].expanded2[indexPath.section] != false {
+        if unterkategorien[cellIndexPathSection].expanded2[indexPath.section] != false {
 //            return CGFloat(unterkategorien[0].items[section].count*46)
             return CGFloat(46)
 
@@ -100,7 +101,7 @@ class BestellenCell: UITableViewCell, UITableViewDelegate, UITableViewDataSource
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let header = ExpandableHeaderView2()
         
-        header.customInit(tableView: tableView, title:  unterkategorien[row].Unterkategorie[section], section: section, delegate: self as ExpandableHeaderViewDelegate2)
+        header.customInit(tableView: tableView, title:  unterkategorien[cellIndexPathSection].Unterkategorie[section], section: section, delegate: self as ExpandableHeaderViewDelegate2)
         return header
         
         
@@ -114,17 +115,19 @@ class BestellenCell: UITableViewCell, UITableViewDelegate, UITableViewDataSource
         cell.delegate = self
         cell.backgroundColor = UIColor.clear
         //        cell.itemLbl.text = "cell.itemLbl.text"
-        if unterkategorien[0].expanded2[indexPath.section] != false {
+        if unterkategorien[cellIndexPathSection].expanded2[indexPath.section] != false {
             
-            var item = unterkategorien[0].items[indexPath.section]
-            var preis = unterkategorien[0].preis[indexPath.section]
-            var liter = unterkategorien[0].liter[indexPath.section]
+            var item = unterkategorien[cellIndexPathSection].items[indexPath.section]
+            var preis = unterkategorien[cellIndexPathSection].preis[indexPath.section]
+            var liter = unterkategorien[cellIndexPathSection].liter[indexPath.section]
             section2 = indexPath.section
             row2 = indexPath.row
             cell.section2 = indexPath.section
                 cell.row2 = indexPath.row
             cell.ItemLbl.text = item[indexPath.row]
-            cell.PreisLbl.text = "\(preis[indexPath.row])€"
+            let preisFormat = String(format: "%.2f", arguments: [preis[indexPath.row]])
+
+            cell.PreisLbl.text = "\(preisFormat)€"
             if liter[indexPath.row] != "0.0l"{
                 cell.LiterLbl.text = (liter[indexPath.row])
 
@@ -152,25 +155,26 @@ class BestellenCell: UITableViewCell, UITableViewDelegate, UITableViewDataSource
     
     func toggleSection(tableView: UITableView, header: ExpandableHeaderView2, section: Int) {
 
-        for i in 0..<unterkategorien[0].Unterkategorie.count{
+        for i in 0..<unterkategorien[cellIndexPathSection].Unterkategorie.count{
             if i == section {
-                unterkategorien[0].expanded2[i] = !unterkategorien[0].expanded2[i]
+                unterkategorien[cellIndexPathSection].expanded2[i] = !unterkategorien[cellIndexPathSection].expanded2[i]
             } else {
-                unterkategorien[0].expanded2[i] = false
+                unterkategorien[cellIndexPathSection].expanded2[i] = false
                 
             }
         }
         
         BestellenTV.beginUpdates()
         let indexSet = NSMutableIndexSet()
-        for i in 0..<unterkategorien[0].items[section].count {
+        for i in 0..<unterkategorien[cellIndexPathSection].items[section].count {
             BestellenTV.reloadRows(at: [IndexPath(row: i, section: section)], with: .automatic)
         }
-        for i in 0..<unterkategorien[0].Unterkategorie.count{
+        for i in 0..<unterkategorien[cellIndexPathSection].Unterkategorie.count{
             if i != section{
                 indexSet.add(i)}
         }
         BestellenTV.reloadSections(indexSet as IndexSet, with: .automatic)
+        delegate?.reloadUnterkategorie(sender: self)
         
         BestellenTV.endUpdates()
         
