@@ -85,6 +85,7 @@
 		FCBCA28E5975849AF85ED466 /* Pods_AlphaTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D92BA6E8AA26233EE5256989 /* Pods_AlphaTests.framework */; };
 		FD0DDBFC204B1CD200E40E81 /* pin.png in Resources */ = {isa = PBXBuildFile; fileRef = FD0DDBFB204B1CD200E40E81 /* pin.png */; };
 		FD0DDC00204E0F6E00E40E81 /* Bilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD0DDBFF204E0F6E00E40E81 /* Bilder.swift */; };
+		FD9A43CF20AB4FFB00FFD947 /* BarItems.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD9A43CE20AB4FFB00FFD947 /* BarItems.swift */; };
 		FDF6E3C820517A1800CDF509 /* myBestellung.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDF6E3C720517A1800CDF509 /* myBestellung.swift */; };
 		FF80403D46CB28555C94CA04 /* Pods_Alpha.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A57EBBF91158C1B719B66FE6 /* Pods_Alpha.framework */; };
 /* End PBXBuildFile section */
@@ -198,6 +199,7 @@
 		EA15B0E38B10A65CA61D6CB7 /* Pods-AlphaUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AlphaUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-AlphaUITests/Pods-AlphaUITests.release.xcconfig"; sourceTree = "<group>"; };
 		FD0DDBFB204B1CD200E40E81 /* pin.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pin.png; sourceTree = SOURCE_ROOT; };
 		FD0DDBFF204E0F6E00E40E81 /* Bilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bilder.swift; sourceTree = "<group>"; };
+		FD9A43CE20AB4FFB00FFD947 /* BarItems.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarItems.swift; sourceTree = "<group>"; };
 		FDF6E3C720517A1800CDF509 /* myBestellung.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = myBestellung.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -322,8 +324,8 @@
 				4EC247CA1F98F90500910AA8 /* AppDelegate.swift */,
 				4EC247CE1F98F90500910AA8 /* Main.storyboard */,
 				4EC247D31F98F90500910AA8 /* LaunchScreen.storyboard */,
-				4EC247D11F98F90500910AA8 /* Assets.xcassets */,
 				4EC247D61F98F90500910AA8 /* Info.plist */,
+				4EC247D11F98F90500910AA8 /* Assets.xcassets */,
 				4EC247FD1F99377100910AA8 /* GoogleService-Info.plist */,
 				4EC247F81F98FE5700910AA8 /* Model */,
 				08E0F44D205FD4C4002435DE /* User */,
@@ -379,6 +381,7 @@
 				08DB09362061D95C007848E4 /* ExpandleHeaderView2.swift */,
 				9417B595207CFEC9008817FC /* ExpandleHeaderView3.swift */,
 				08EAEA69206079920095F75F /* SpeisekarteInformation.swift */,
+				FD9A43CE20AB4FFB00FFD947 /* BarItems.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -814,6 +817,7 @@
 				08462FFA205E6C8100AECA59 /* SpeisekarteCell.swift in Sources */,
 				085B23D82053113F00D50FE3 /* bezahlenCell.swift in Sources */,
 				4EC248021F9950E700910AA8 /* LocationVC.swift in Sources */,
+				FD9A43CF20AB4FFB00FFD947 /* BarItems.swift in Sources */,
 				084D9D42203B1C7D008601B6 /* MyBestellungCell2.swift in Sources */,
 				089C74CF204B3478001B3C22 /* PulleyCell.swift in Sources */,
 				08210EE11FB7B09000EABA32 /* KellnerCell.swift in Sources */,
@@ -996,7 +1000,7 @@
 				INFOPLIST_FILE = Alpha/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = AM.Alpha132;
+				PRODUCT_BUNDLE_IDENTIFIER = AM.Alpha1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1013,7 +1017,7 @@
 				INFOPLIST_FILE = Alpha/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = AM.Alpha132;
+				PRODUCT_BUNDLE_IDENTIFIER = AM.Alpha1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

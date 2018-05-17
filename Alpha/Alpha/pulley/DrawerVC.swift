@@ -238,7 +238,7 @@ class DrawerVC: UIViewController, PulleyDrawerViewControllerDelegate, UITableVie
         BarTV.register(barCell.self, forCellReuseIdentifier: cellID)
         bars = [BarInfos]()
         
-        searchController.searchBar.placeholder = "Suche nach dem Namen deiner Bar"
+        searchController.searchBar.placeholder = "Finde deine SMOLO"
         searchController.searchBar.barTintColor = UIColor(red: 90.0/255.0, green: 90.0/255.0, blue: 90.0/255.0, alpha: 1.0)
         searchController.searchBar.searchBarStyle = .prominent
         searchController.searchBar.tintColor = .white

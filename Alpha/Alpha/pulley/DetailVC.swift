@@ -16,8 +16,20 @@ class DetailVC: UIViewController, PulleyDrawerViewControllerDelegate, PageObserv
     var barname = ""
     var bars = [BarInfos]()
     var bilder = [String]()
-    
+    var items = [BarItems]()
     var counterlink = [String]()
+    var maintext = String ()
+    
+    var it1 = String ()
+    var it2 = String ()
+    var it3 = String ()
+    var it4 = String ()
+    var it5 = String ()
+    var it6 = String ()
+    var it7 = String ()
+    var it8 = String ()
+    var it9 = String ()
+    var it10 = String ()
 
     var adresse = String ()
     var picture = String ()
@@ -37,6 +49,8 @@ class DetailVC: UIViewController, PulleyDrawerViewControllerDelegate, PageObserv
         self.barname = parentPageViewController.name
         fetchPicsCount()
         fetchData()
+        fetchInfos()
+        fetchText()
         slideshow.backgroundColor = UIColor.white
  
         slideshow.slideshowInterval = 0.0
@@ -71,8 +85,32 @@ class DetailVC: UIViewController, PulleyDrawerViewControllerDelegate, PageObserv
         
     }
     
-
+    @IBOutlet weak var icon1: UIImageView!
+    @IBOutlet weak var icon2: UIImageView!
+    @IBOutlet weak var icon3: UIImageView!
+    @IBOutlet weak var icon4: UIImageView!
+    @IBOutlet weak var icon5: UIImageView!
+    @IBOutlet weak var icon6: UIImageView!
+    @IBOutlet weak var icon7: UIImageView!
+    @IBOutlet weak var icon8: UIImageView!
+    @IBOutlet weak var icon9: UIImageView!
+    @IBOutlet weak var icon10: UIImageView!
     
+    @IBOutlet weak var maintxt: UILabel!
+    
+    func fetchText () {
+        print("fetchtext")
+        var ref: DatabaseReference!
+        ref = Database.database().reference()
+        ref.child("BarInfo").child("\(barname)").observe(.value, with: { (snapshot) in
+
+            if let dictionary = snapshot.value as? [String: AnyObject]{
+                let bar = BarInfos(dictionary: dictionary)
+                self.maintext.append(bar.Text!)
+                self.maintxt.text = self.maintext
+            }} , withCancel: nil)
+        
+    }
     
     func fetchPicsCount(){
         var refd: DatabaseReference!
@@ -131,7 +169,90 @@ class DetailVC: UIViewController, PulleyDrawerViewControllerDelegate, PageObserv
         
     }
     
-
+    func fetchInfos () {
+        
+        print("INFOS", barname)
+        var ref: DatabaseReference!
+        
+        ref = Database.database().reference()
+        ref.child("BarInfo").child("\(barname)").child("Items").observe(.value, with: {  (snapshot) in
+            
+        if let dictionary = snapshot.value as? [String: AnyObject]{
+            let it = BarItems(dictionary: dictionary)
+            
+            self.it1.append(it.item1!)
+            if self.it1 == "t" {
+                self.icon1.image = #imageLiteral(resourceName: "Tabrechts")
+            }
+            if self.it1 == "f" {
+                self.icon1.image = #imageLiteral(resourceName: "Tablinks")
+            }
+            self.it2.append(it.item2!)
+            if self.it2 == "t" {
+                self.icon2.image = #imageLiteral(resourceName: "Tabrechts")
+            }
+            if self.it2 == "f" {
+                self.icon2.image = #imageLiteral(resourceName: "Tablinks")
+            }
+            self.it3.append(it.item3!)
+            if self.it3 == "t" {
+                self.icon3.image = #imageLiteral(resourceName: "Tabrechts")
+            }
+            if self.it3 == "f" {
+                self.icon3.image = #imageLiteral(resourceName: "Tablinks")
+            }
+            self.it4.append(it.item4!)
+            if self.it4 == "t" {
+                self.icon4.image = #imageLiteral(resourceName: "Tabrechts")
+            }
+            if self.it4 == "f" {
+                self.icon4.image = #imageLiteral(resourceName: "Tablinks")
+            }
+            self.it5.append(it.item5!)
+            if self.it5 == "t" {
+                self.icon5.image = #imageLiteral(resourceName: "Tabrechts")
+            }
+            if self.it5 == "f" {
+                self.icon5.image = #imageLiteral(resourceName: "Tablinks")
+            }
+            self.it6.append(it.item6!)
+            if self.it6 == "t" {
+                self.icon6.image = #imageLiteral(resourceName: "Tabrechts")
+            }
+            if self.it6 == "f" {
+                self.icon6.image = #imageLiteral(resourceName: "Tablinks")
+            }
+            self.it7.append(it.item7!)
+            if self.it7 == "t" {
+                self.icon7.image = #imageLiteral(resourceName: "Tabrechts")
+            }
+            if self.it7 == "f" {
+                self.icon7.image = #imageLiteral(resourceName: "Tablinks")
+            }
+            self.it8.append(it.item8!)
+            if self.it8 == "t" {
+                self.icon8.image = #imageLiteral(resourceName: "Tabrechts")
+            }
+            if self.it8 == "f" {
+                self.icon8.image = #imageLiteral(resourceName: "Tablinks")
+            }
+            self.it9.append(it.item9!)
+            if self.it9 == "t" {
+                self.icon9.image = #imageLiteral(resourceName: "Tabrechts")
+            }
+            if self.it9 == "f" {
+                self.icon9.image = #imageLiteral(resourceName: "Tablinks")
+            }
+            self.it10.append(it.item10!)
+            if self.it10 == "t" {
+                self.icon10.image = #imageLiteral(resourceName: "Tabrechts")
+            }
+            if self.it10 == "f" {
+                self.icon10.image = #imageLiteral(resourceName: "Tablinks")
+            }
+            
+        }}, withCancel: nil)
+    }
         
     // Pulley
         
