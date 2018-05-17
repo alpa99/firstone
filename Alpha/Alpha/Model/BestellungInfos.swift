@@ -11,7 +11,7 @@ import Foundation
 class BestellungInfos: NSObject {
     
     var itemName: String?
-    var itemPreis: Int?
+    var itemPreis: Double?
     var itemMenge: Int?
     var fromUserID: String?
     var toKellnerID: String?
@@ -23,7 +23,7 @@ class BestellungInfos: NSObject {
     init(dictionary: [String: Any]) {
         self.itemName = dictionary["Name"] as? String ?? ""
         self.itemMenge = dictionary["Menge"] as? Int ?? 0
-        self.itemPreis = dictionary["Preis"] as? Int ?? 0
+        self.itemPreis = dictionary["Preis"] as? Double ?? 0.0
         self.fromUserID = dictionary["fromUserID"] as? String ?? ""
         self.toKellnerID = dictionary["toKellnerID"] as? String ?? ""
         self.timeStamp = dictionary["timeStamp"] as? Double ?? 0.0

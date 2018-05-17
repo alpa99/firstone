@@ -21,7 +21,7 @@ class KellnerVC: UIViewController, UITableViewDelegate, UITableViewDataSource, E
     var BestellungExpanded2 = [String: [[Bool]]]()
     
     var BestellungItemsNamen = [String: [[[String]]]]()
-    var BestellungItemsPreise = [String: [[[Int]]]]()
+    var BestellungItemsPreise = [String: [[[Double]]]]()
     var BestellungItemsMengen = [String: [[[Int]]]]()
     var Tischnummer = [String: String]()
     var Angenommen = [String: Bool]()
@@ -59,18 +59,18 @@ class KellnerVC: UIViewController, UITableViewDelegate, UITableViewDataSource, E
     
     // ACTIONS
     
-    //    @IBAction func kellnerLogOutTapped(_ sender: Any) {
-    //
-    //            if Auth.auth().currentUser != nil {
-    //                do {
-    //                    try Auth.auth().signOut()
-    //                    performSegue(withIdentifier: "kellnerLoggedOut", sender: self)
-    //
-    //                } catch let error as NSError {
-    //                    print(error.localizedDescription)
-    //                }
-    //            }
-    //        }
+        @IBAction func kellnerLogOutTapped(_ sender: Any) {
+    
+                if Auth.auth().currentUser != nil {
+                    do {
+                        try Auth.auth().signOut()
+                        performSegue(withIdentifier: "kellnerLoggedOut", sender: self)
+    
+                    } catch let error as NSError {
+                        print(error.localizedDescription)
+                    }
+                }
+            }
     
     // FUNCS
     
@@ -135,7 +135,7 @@ class KellnerVC: UIViewController, UITableViewDelegate, UITableViewDataSource, E
 
                                             if (newItems?.count)! < (self.BestellungKategorien[BestellungID]?.count)! {
                                                 newItems?.append([[iteminfodic.itemName!]])
-                                                newPreise?.append([[Int(iteminfodic.itemPreis!)]])
+                                                newPreise?.append([[Double(iteminfodic.itemPreis!)]])
                                                 newMengen?.append([[Int(iteminfodic.itemMenge!)]])
                                                 self.BestellungItemsNamen[BestellungID] = newItems
                                                 self.BestellungItemsPreise[BestellungID] = newPreise
@@ -147,7 +147,7 @@ class KellnerVC: UIViewController, UITableViewDelegate, UITableViewDataSource, E
                                                 let newx = x![(self.BestellungKategorien[BestellungID]?.index(of: key.key))!]
                                                 
                                                 newnewItem[newx.index(of: children.key)!].append(iteminfodic.itemName!)
-                                                newnewPreise[newx.index(of: children.key)!].append(iteminfodic.itemPreis!)
+                                                newnewPreise[newx.index(of: children.key)!].append(Double(iteminfodic.itemPreis!))
                                                 newnewMengen[newx.index(of: children.key)!].append(iteminfodic.itemMenge!)
                                                 
                                                 newItems![(self.BestellungKategorien[BestellungID]?.index(of: key.key))!] = newnewItem
@@ -173,7 +173,6 @@ class KellnerVC: UIViewController, UITableViewDelegate, UITableViewDataSource, E
                                         
                                         if let itemDic = Item.value as? [String: AnyObject]{
                                             let iteminfodic = BestellungInfos(dictionary: itemDic)
-                                            print(iteminfodic.itemName, "itemname")
                                             var newItems = self.BestellungItemsNamen[BestellungID]
                                             var newPreise = self.BestellungItemsPreise[BestellungID]
                                             var newMengen = self.BestellungItemsMengen[BestellungID]
@@ -186,7 +185,7 @@ class KellnerVC: UIViewController, UITableViewDelegate, UITableViewDataSource, E
                                             
                                             if newnewItem.count < newx.count {
                                                 newnewItem.append([iteminfodic.itemName!])
-                                                newnewPreise.append([iteminfodic.itemPreis!])
+                                                newnewPreise.append([Double(iteminfodic.itemPreis!)])
                                                 newnewMengen.append([iteminfodic.itemMenge!])
                                                 
                                                 newItems![(self.BestellungKategorien[BestellungID]?.index(of: key.key))!] = newnewItem
@@ -201,7 +200,7 @@ class KellnerVC: UIViewController, UITableViewDelegate, UITableViewDataSource, E
                                             else {
 
                                                 newnewItem[newx.index(of: children.key)!].append(iteminfodic.itemName!)
-                                                newnewPreise[newx.index(of: children.key)!].append(iteminfodic.itemPreis!)
+                                                newnewPreise[newx.index(of: children.key)!].append(Double(iteminfodic.itemPreis!))
                                                 newnewMengen[newx.index(of: children.key)!].append(iteminfodic.itemMenge!)
 
                                                 newItems![(self.BestellungKategorien[BestellungID]?.index(of: key.key))!] = newnewItem
@@ -266,7 +265,7 @@ class KellnerVC: UIViewController, UITableViewDelegate, UITableViewDataSource, E
                                                 if newnewItems.count < newx.count {
                                                     
                                                     newnewItems.append([iteminfodic.itemName!])
-                                                    newnewPreise.append([iteminfodic.itemPreis!])
+                                                    newnewPreise.append([Double(iteminfodic.itemPreis!)])
                                                     newnewMengen.append([iteminfodic.itemMenge!])
                                                     
                                                     newItems![(self.BestellungKategorien[BestellungID]?.index(of: key.key))!] = newnewItems
@@ -280,7 +279,7 @@ class KellnerVC: UIViewController, UITableViewDelegate, UITableViewDataSource, E
                                                     
                                                 } else {
                                                     newnewItems[newx.index(of: children.key)!].append(iteminfodic.itemName!)
-                                                    newnewPreise[newx.index(of: children.key)!].append(iteminfodic.itemPreis!)
+                                                    newnewPreise[newx.index(of: children.key)!].append(Double(iteminfodic.itemPreis!))
                                                     newnewMengen[newx.index(of: children.key)!].append(iteminfodic.itemMenge!)
                                                     
                                                     newItems![(self.BestellungKategorien[BestellungID]?.index(of: key.key))!] = newnewItems
@@ -321,7 +320,7 @@ class KellnerVC: UIViewController, UITableViewDelegate, UITableViewDataSource, E
                                                 var newnewMengen = newMengen![(self.BestellungKategorien[BestellungID]?.index(of: key.key))!]
                                                 
                                                 newnewItems[(self.BestellungUnterkategorien[BestellungID]?.index(of: [children.key]))!].append(iteminfodic.itemName!)
-                                                newnewPreise[(self.BestellungUnterkategorien[BestellungID]?.index(of: [children.key]))!].append(iteminfodic.itemPreis!)
+                                                newnewPreise[(self.BestellungUnterkategorien[BestellungID]?.index(of: [children.key]))!].append(Double(iteminfodic.itemPreis!))
                                                 newnewMengen[(self.BestellungUnterkategorien[BestellungID]?.index(of: [children.key]))!].append(iteminfodic.itemMenge!)
                                                 
                                                 newItems![(self.BestellungKategorien[BestellungID]?.index(of: key.key))!] = newnewItems
@@ -336,7 +335,7 @@ class KellnerVC: UIViewController, UITableViewDelegate, UITableViewDataSource, E
                                             } else {
                                                 
                                                 self.BestellungItemsNamen.updateValue([[[iteminfodic.itemName!]]], forKey: BestellungID)
-                                                self.BestellungItemsPreise.updateValue([[[iteminfodic.itemPreis!]]], forKey: BestellungID)
+                                                self.BestellungItemsPreise.updateValue([[[Double(iteminfodic.itemPreis!)]]], forKey: BestellungID)
                                                 self.BestellungItemsMengen.updateValue([[[iteminfodic.itemMenge!]]], forKey: BestellungID)
                                                 
                                             }
@@ -356,8 +355,12 @@ class KellnerVC: UIViewController, UITableViewDelegate, UITableViewDataSource, E
                     
                 }
             }
+            print(self.bestellungIDs, "self.bestellungIDs")
+            print(self.BestellungKategorien, "self.BestellungKategorien")
+
             
             if self.bestellungIDs.count == self.BestellungKategorien.count {
+                
                 for i in 0..<self.bestellungIDs.count {
                     self.setSectionsKellnerBestellung(BestellungID: self.bestellungIDs[i], tischnummer: self.Tischnummer[self.bestellungIDs[i]]!, TimeStamp: self.TimeStamp[self.bestellungIDs[i]]!, Kategorie: self.BestellungKategorien[self.bestellungIDs[i]]!, Unterkategorie: self.BestellungUnterkategorien[self.bestellungIDs[i]]!, items: self.BestellungItemsNamen[self.bestellungIDs[i]]!, preis: self.BestellungItemsPreise[self.bestellungIDs[i]]!, liter: [[["String"]]], menge: self.BestellungItemsMengen[self.bestellungIDs[i]]!, expanded2: self.BestellungExpanded2[self.bestellungIDs[i]]!, expanded: false)
                     if self.Bestellungen.count == self.bestellungIDs.count{
@@ -372,7 +375,7 @@ class KellnerVC: UIViewController, UITableViewDelegate, UITableViewDataSource, E
     }
     
     
-    func setSectionsKellnerBestellung(BestellungID: String, tischnummer: String, TimeStamp: Double, Kategorie: [String], Unterkategorie: [[String]], items: [[[String]]], preis: [[[Int]]], liter: [[[String]]], menge: [[[Int]]], expanded2: [[Bool]], expanded: Bool){
+    func setSectionsKellnerBestellung(BestellungID: String, tischnummer: String, TimeStamp: Double, Kategorie: [String], Unterkategorie: [[String]], items: [[[String]]], preis: [[[Double]]], liter: [[[String]]], menge: [[[Int]]], expanded2: [[Bool]], expanded: Bool){
         self.Bestellungen.append(KellnerTVSection(BestellungID: BestellungID, tischnummer: tischnummer, timeStamp: TimeStamp, Kategorie: Kategorie, Unterkategorie: Unterkategorie, items: items, preis: preis, liter: liter, menge: menge, expanded2: expanded2, expanded: expanded))
         print(Bestellungen)
         
@@ -435,6 +438,7 @@ class KellnerVC: UIViewController, UITableViewDelegate, UITableViewDataSource, E
     // TABLE
     
     func numberOfSections(in tableView: UITableView) -> Int {
+        print(self.Bestellungen, "bestellungen")
         return self.Bestellungen.count
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

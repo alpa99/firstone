@@ -27,6 +27,7 @@ class QRScanner: UIViewController, AVCaptureMetadataOutputObjectsDelegate, CLLoc
     var ergebnis = 0
     var barnummer = 0
     var tischnummer = 0
+    var AnzahlQRCodes = 0
     
     var light = 0
     
@@ -119,6 +120,8 @@ class QRScanner: UIViewController, AVCaptureMetadataOutputObjectsDelegate, CLLoc
                             self.session.startRunning()
                             return}
                         
+                    } else {
+                        print("ok")
                     }
                 }
             }
@@ -136,15 +139,25 @@ class QRScanner: UIViewController, AVCaptureMetadataOutputObjectsDelegate, CLLoc
                 self.qrbarname.append(qrbar.Name!)
                 self.qrbaradresse.append(qrbar.Adresse!)
                 self.KellnerID = qrbar.KellnerID!
+                print(qrbar.AnzahlQRCodes!, "anzal qrcodes")
+                print(self.barnummer, "barnummer")
+
+                if self.tischnummer <= qrbar.AnzahlQRCodes! {
                 
-                print(self.qrbarname)
-                print(self.qrbaradresse, "ADrESs!!")
                 CLGeocoder().geocodeAddressString(self.qrbaradresse, completionHandler: { (placemarks, error) -> Void in
                     
                     if let placemark = placemarks?[0] {
                         let location = placemark.location
                         self.distanceCondition(locat: location!)}
                 })
+                } else {
+                    let alert = UIAlertController(title: "Fehler", message: "Dies ist kein Smolo-Code", preferredStyle: .alert)
+                    alert.addAction(UIAlertAction(title: "Abbrechen", style: .default, handler:{ (action) in
+                   self.session.startRunning()}))
+                    self.present(alert, animated: true, completion: nil)
+
+                    return
+                }
             }else {
                 let alert = UIAlertController(title: "Fehler", message: "Dies ist kein Smolo-Code", preferredStyle: .alert)
                 alert.addAction(UIAlertAction(title: "Abbrechen", style: .default, handler:{ (action) in self.session.startRunning()}))

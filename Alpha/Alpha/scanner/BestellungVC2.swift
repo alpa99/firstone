@@ -136,7 +136,7 @@ class BestellungVC2: UIViewController, UITableViewDataSource, UITableViewDelegat
 //                let distanceint = Int(distancebar!)
 //                if distanceint < 150{
 //                print("distance ist ok")
-//                    self.seugueAbschicken()
+                    self.seugueAbschicken()
                     self.handleBestellung()
 //                }else{
 //                    print ("distance ist nicht ok ")
@@ -342,11 +342,11 @@ class BestellungVC2: UIViewController, UITableViewDataSource, UITableViewDelegat
     
     
     
-//
-//    func seugueAbschicken(){
-//
-//performSegue(withIdentifier: "wirdabgeschickt", sender: self)
-//    }
+
+    func seugueAbschicken(){
+
+performSegue(withIdentifier: "wirdabgeschickt", sender: self)
+    }
     
   
     
@@ -356,7 +356,7 @@ class BestellungVC2: UIViewController, UITableViewDataSource, UITableViewDelegat
 
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy/MM/dd HH:mm"
-        let DayOne = formatter.date(from: "2018/04/01 12:00")
+        let DayOne = formatter.date(from: "2018/05/15 12:00")
         let timestamp = Double(NSDate().timeIntervalSince(DayOne!))
         
         //
@@ -434,6 +434,7 @@ class BestellungVC2: UIViewController, UITableViewDataSource, UITableViewDelegat
         visualEffectView.center = self.bestellungVCView.center
         self.bestellungVCView.addSubview(addItemView)
         addItemView.center = self.bestellungVCView.center
+        itemCountLbl.text = "1"
 
     
         //        self.inputView?.addSubview(addItemView)
@@ -479,7 +480,6 @@ class BestellungVC2: UIViewController, UITableViewDataSource, UITableViewDelegat
             
         }
         bestellteItemsDictionary.removeAll()
-//        [Alpha.bestellungTVSection(Kategorie: Shishas, Unterkategorie: ["Classics"], items: [["Doppelapfel", "Zitrone"]], preis: [[8, 9]], liter: [["0.0l", "0.0l"]], menge: [[3, 4]], expanded2: [[true, true]], expanded: false), Alpha.bestellungTVSection(Kategorie: Getränke, Unterkategorie: ["Flaschen", "Softdrinks"], items: [["Rotwein"], ["Fanta Exotic"]], preis: [[12], [2]], liter: [["0,7l"], ["0.33l"]], menge: [[4], [5]], expanded2: [[true], [true]], expanded: false)] 1 fsvreced34ew
 
         
     }
@@ -499,7 +499,7 @@ class BestellungVC2: UIViewController, UITableViewDataSource, UITableViewDelegat
     
     func setSectionsBestellung(Kategorie: String, Unterkategorie: [String], items: [[String]], preis: [[Double]], liter: [[String]], menge: [[Int]], expanded2: [Bool]){
         self.bestellteItemsDictionary
-            .append(bestellungTVSection(Kategorie: Kategorie, Unterkategorie: Unterkategorie, items: items, preis: preis, liter: liter, menge: menge, expanded2: expanded2, expanded: false))
+            .append(bestellungTVSection(Kategorie: Kategorie, Unterkategorie: Unterkategorie, items: items, preis: preis, liter: liter, menge: menge, expanded2: expanded2, expanded: true))
         print(self.bestellteItemsDictionary)
     }
 
@@ -554,7 +554,8 @@ class BestellungVC2: UIViewController, UITableViewDataSource, UITableViewDelegat
         if tableView == myBestellungTV{
             if (bestellteItemsDictionary[indexPath.section].expanded) {
                 
-                heightForRowAt = (bestellteItemsDictionary[indexPath.section].Kategorie.count*50)
+                heightForRowAt = (bestellteItemsDictionary[indexPath.section].Unterkategorie.count*50) + sections[indexPath.section].items[indexPath.row].count*50
+                    
                 
             }
             else {
@@ -662,22 +663,22 @@ class BestellungVC2: UIViewController, UITableViewDataSource, UITableViewDelegat
             bestellungTableView.endUpdates()
         }
         
-        if tableView == myBestellungTV {
-            
-            for i in 0..<bestellteItemsDictionary.count{
-                if i == section {
-                    bestellteItemsDictionary[section].expanded = !bestellteItemsDictionary[section].expanded
-                } else {
-                    bestellteItemsDictionary[i].expanded = false
-                    
-                }
-            }
-            
-            myBestellungTV.beginUpdates()
-            myBestellungTV.reloadRows(at: [IndexPath(row: 0, section: section)], with: .automatic)
-            
-            myBestellungTV.endUpdates()
-        }
+//        if tableView == myBestellungTV {
+//
+//            for i in 0..<bestellteItemsDictionary.count{
+//                if i == section {
+//                    bestellteItemsDictionary[section].expanded = !bestellteItemsDictionary[section].expanded
+//                } else {
+//                    bestellteItemsDictionary[i].expanded = false
+//
+//                }
+//            }
+//
+//            myBestellungTV.beginUpdates()
+//            myBestellungTV.reloadRows(at: [IndexPath(row: 0, section: section)], with: .automatic)
+//
+//            myBestellungTV.endUpdates()
+//        }
 
     }
     

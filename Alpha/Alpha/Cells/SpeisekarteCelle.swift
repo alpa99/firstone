@@ -45,7 +45,7 @@ class SpeisekarteCelle: UITableViewCell, UITableViewDataSource, UITableViewDeleg
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if unterkategorien[0].expanded2[indexPath.section] != false {
-            return CGFloat(unterkategorien[0].items[section].count*44 + 50)}
+            return CGFloat(unterkategorien[0].items[indexPath.section].count*44 + 50)}
         else {
             return 0
             

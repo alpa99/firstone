@@ -780,9 +780,8 @@
                     <rect key="frame" x="0.0" y="0.0" width="290" height="347"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <subviews>
-                        <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="PJD-sg-KTw">
-                            <rect key="frame" x="0.0" y="20" width="290" height="269"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="PJD-sg-KTw">
+                            <rect key="frame" x="16" y="20" width="258" height="269"/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <color key="separatorColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -791,17 +790,15 @@
                                 <outlet property="delegate" destination="Yts-F3-2fU" id="SYD-fj-xDr"/>
                             </connections>
                         </tableView>
-                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6iR-sZ-xmH">
-                            <rect key="frame" x="16" y="303" width="54" height="30"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <state key="normal" title="Dismiss"/>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6iR-sZ-xmH">
+                            <rect key="frame" x="16" y="303" width="76" height="30"/>
+                            <state key="normal" title="Abbrechen"/>
                             <connections>
                                 <action selector="dismissMyBestellungView:" destination="Yts-F3-2fU" eventType="touchUpInside" id="ddd-as-9gz"/>
                             </connections>
                         </button>
-                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2VP-bN-rJL">
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2VP-bN-rJL">
                             <rect key="frame" x="194" y="303" width="80" height="30"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <state key="normal" title="Abschicken"/>
                             <connections>
                                 <action selector="myBestellungAbschicken:" destination="Yts-F3-2fU" eventType="touchUpInside" id="F5E-8U-i4q"/>
@@ -809,6 +806,18 @@
                         </button>
                     </subviews>
                     <color key="backgroundColor" red="0.72549019607843135" green="0.66666666666666663" blue="0.5490196078431373" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstItem="2VP-bN-rJL" firstAttribute="top" secondItem="PJD-sg-KTw" secondAttribute="bottom" constant="14" id="67L-UA-3U0"/>
+                        <constraint firstItem="PJD-sg-KTw" firstAttribute="leading" secondItem="FFq-KP-pwn" secondAttribute="leading" constant="16" id="BTo-qH-k5M"/>
+                        <constraint firstItem="FFq-KP-pwn" firstAttribute="bottom" secondItem="6iR-sZ-xmH" secondAttribute="bottom" constant="14" id="Efz-Jq-5CG"/>
+                        <constraint firstItem="FFq-KP-pwn" firstAttribute="trailing" secondItem="PJD-sg-KTw" secondAttribute="trailing" constant="16" id="Y1u-tl-MfZ"/>
+                        <constraint firstItem="FFq-KP-pwn" firstAttribute="trailing" secondItem="2VP-bN-rJL" secondAttribute="trailing" constant="16" id="dAa-N1-swj"/>
+                        <constraint firstItem="6iR-sZ-xmH" firstAttribute="leading" secondItem="FFq-KP-pwn" secondAttribute="leading" constant="16" id="f0M-a5-Vur"/>
+                        <constraint firstItem="2VP-bN-rJL" firstAttribute="leading" secondItem="6iR-sZ-xmH" secondAttribute="trailing" constant="102" id="kLM-Sd-tOK"/>
+                        <constraint firstItem="6iR-sZ-xmH" firstAttribute="top" secondItem="PJD-sg-KTw" secondAttribute="bottom" constant="14" id="wBy-A8-Mx2"/>
+                        <constraint firstItem="PJD-sg-KTw" firstAttribute="top" secondItem="FFq-KP-pwn" secondAttribute="top" constant="20" id="wPE-lS-x9N"/>
+                        <constraint firstItem="FFq-KP-pwn" firstAttribute="bottom" secondItem="2VP-bN-rJL" secondAttribute="bottom" constant="14" id="yHF-Im-luW"/>
+                    </constraints>
                     <viewLayoutGuide key="safeArea" id="FFq-KP-pwn"/>
                 </view>
                 <view contentMode="scaleToFill" id="Z91-jV-uAB">
