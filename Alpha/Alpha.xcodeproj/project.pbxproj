@@ -60,7 +60,6 @@
 		4E1664C01FBF316D0038EFB5 /* VoteInfos.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E1664BF1FBF316D0038EFB5 /* VoteInfos.swift */; };
 		4E2FF0BD1FEDDC850084F0A7 /* GMVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E2FF0BC1FEDDC850084F0A7 /* GMVC.swift */; };
 		4E3728411FE3E34E000DAF97 /* DetailVC2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E3728401FE3E34E000DAF97 /* DetailVC2.swift */; };
-		4E3728431FE3EB43000DAF97 /* SpeisekarteVC2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E3728421FE3EB43000DAF97 /* SpeisekarteVC2.swift */; };
 		4E6020491F9E2F88001B2909 /* ScanDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E6020481F9E2F88001B2909 /* ScanDetailVC.swift */; };
 		4E66E16D1FD49CFA005E87E3 /* PageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E66E16C1FD49CFA005E87E3 /* PageViewController.swift */; };
 		4EC247CB1F98F90500910AA8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EC247CA1F98F90500910AA8 /* AppDelegate.swift */; };
@@ -80,6 +79,9 @@
 		9417B593207CFDEB008817FC /* KellnerCell3.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9417B591207CFDEB008817FC /* KellnerCell3.swift */; };
 		9417B594207CFDEB008817FC /* KellnerCell3.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9417B592207CFDEB008817FC /* KellnerCell3.xib */; };
 		9417B596207CFEC9008817FC /* ExpandleHeaderView3.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9417B595207CFEC9008817FC /* ExpandleHeaderView3.swift */; };
+		949AB0B320AB82B6005F85C7 /* LabelWhiteS30.swift in Sources */ = {isa = PBXBuildFile; fileRef = 949AB0B220AB82B6005F85C7 /* LabelWhiteS30.swift */; };
+		949AB0B520AB84F5005F85C7 /* KellnerAlleBestellungenVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 949AB0B420AB84F5005F85C7 /* KellnerAlleBestellungenVC.swift */; };
+		94BDC36820B00DEF000BFB10 /* UserInfos.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94BDC36720B00DEF000BFB10 /* UserInfos.swift */; };
 		94F5EA91208F4F530086A014 /* LabelWhiteS16.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94F5EA90208F4F530086A014 /* LabelWhiteS16.swift */; };
 		CC7293123DD294CC7591DAA2 /* Pods_AlphaUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AC56C89A3508D2D118AE9C1D /* Pods_AlphaUITests.framework */; };
 		FCBCA28E5975849AF85ED466 /* Pods_AlphaTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D92BA6E8AA26233EE5256989 /* Pods_AlphaTests.framework */; };
@@ -162,7 +164,6 @@
 		4E1664BF1FBF316D0038EFB5 /* VoteInfos.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoteInfos.swift; sourceTree = "<group>"; };
 		4E2FF0BC1FEDDC850084F0A7 /* GMVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GMVC.swift; sourceTree = "<group>"; };
 		4E3728401FE3E34E000DAF97 /* DetailVC2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailVC2.swift; sourceTree = "<group>"; };
-		4E3728421FE3EB43000DAF97 /* SpeisekarteVC2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeisekarteVC2.swift; sourceTree = "<group>"; };
 		4E6020481F9E2F88001B2909 /* ScanDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanDetailVC.swift; sourceTree = "<group>"; };
 		4E66E16C1FD49CFA005E87E3 /* PageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageViewController.swift; sourceTree = "<group>"; };
 		4EC247C71F98F90500910AA8 /* Alpha.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Alpha.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -191,6 +192,9 @@
 		9417B591207CFDEB008817FC /* KellnerCell3.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KellnerCell3.swift; sourceTree = "<group>"; };
 		9417B592207CFDEB008817FC /* KellnerCell3.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = KellnerCell3.xib; sourceTree = "<group>"; };
 		9417B595207CFEC9008817FC /* ExpandleHeaderView3.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpandleHeaderView3.swift; sourceTree = "<group>"; };
+		949AB0B220AB82B6005F85C7 /* LabelWhiteS30.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelWhiteS30.swift; sourceTree = "<group>"; };
+		949AB0B420AB84F5005F85C7 /* KellnerAlleBestellungenVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KellnerAlleBestellungenVC.swift; sourceTree = "<group>"; };
+		94BDC36720B00DEF000BFB10 /* UserInfos.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfos.swift; sourceTree = "<group>"; };
 		94F5EA90208F4F530086A014 /* LabelWhiteS16.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelWhiteS16.swift; sourceTree = "<group>"; };
 		A57EBBF91158C1B719B66FE6 /* Pods_Alpha.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Alpha.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		AC56C89A3508D2D118AE9C1D /* Pods_AlphaUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AlphaUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -363,6 +367,7 @@
 				4EC247F91F98FE6A00910AA8 /* QRBereich.swift */,
 				08C881661F9962EB00AD8F20 /* BarInfos.swift */,
 				08C881681F9963F100AD8F20 /* BarAnnotation.swift */,
+				94BDC36720B00DEF000BFB10 /* UserInfos.swift */,
 				08EF4C3F1F9CF0FE00F01096 /* BestellungInfos.swift */,
 				08EF4C491F9CFFA500F01096 /* ExpandTVSection.swift */,
 				08EF4C4B1F9D006700F01096 /* ExpandableHeaderView.swift */,
@@ -373,6 +378,7 @@
 				08E0F450205FD625002435DE /* Button.swift */,
 				0832EB9E2067CC0E000B6319 /* LabelWhite.swift */,
 				94F5EA90208F4F530086A014 /* LabelWhiteS16.swift */,
+				949AB0B220AB82B6005F85C7 /* LabelWhiteS30.swift */,
 				08462FFC205F1F0700AECA59 /* ExpandTVSection2.swift */,
 				08BBB4EF2067EDDD00E1785C /* bestellungTVSection.swift */,
 				08010460207191E40077A060 /* KellnerTVSection.swift */,
@@ -387,8 +393,9 @@
 			isa = PBXGroup;
 			children = (
 				08779BA41FB7898400B99D19 /* LoginKellnerVC.swift */,
-				082BD2DA1FF702F5004106A8 /* KellnerTabBarController.swift */,
 				088728671FB7A50D00FF2448 /* KellnerVC.swift */,
+				082BD2DA1FF702F5004106A8 /* KellnerTabBarController.swift */,
+				949AB0B420AB84F5005F85C7 /* KellnerAlleBestellungenVC.swift */,
 				082BD2DC1FF705DE004106A8 /* KellnerAngenommenVC.swift */,
 			);
 			path = kellner;
@@ -411,7 +418,6 @@
 				4EC247CC1F98F90500910AA8 /* QRScanner.swift */,
 				4E3728401FE3E34E000DAF97 /* DetailVC2.swift */,
 				08EF4C471F9CFE9800F01096 /* BestellungVC2.swift */,
-				4E3728421FE3EB43000DAF97 /* SpeisekarteVC2.swift */,
 				4EEB60821FDF2BAB0003BA0E /* PageViewController2.swift */,
 				087796DD204AFA410066D6F5 /* BestellungAbschickenVC.swift */,
 			);
@@ -773,7 +779,6 @@
 				4E3728411FE3E34E000DAF97 /* DetailVC2.swift in Sources */,
 				4EEB60831FDF2BAB0003BA0E /* PageViewController2.swift in Sources */,
 				4E1664C01FBF316D0038EFB5 /* VoteInfos.swift in Sources */,
-				4E3728431FE3EB43000DAF97 /* SpeisekarteVC2.swift in Sources */,
 				082BD2DD1FF705DE004106A8 /* KellnerAngenommenVC.swift in Sources */,
 				08E0F455205FDABC002435DE /* MeineBestellungVC.swift in Sources */,
 				088728691FB7A50D00FF2448 /* KellnerVC.swift in Sources */,
@@ -781,7 +786,9 @@
 				08E0F451205FD625002435DE /* Button.swift in Sources */,
 				085B23DC205349DB00D50FE3 /* bezahlenCell2.swift in Sources */,
 				08EF4C4E1F9D2AC000F01096 /* SpeisekarteInfos.swift in Sources */,
+				949AB0B520AB84F5005F85C7 /* KellnerAlleBestellungenVC.swift in Sources */,
 				08EF4C4C1F9D006700F01096 /* ExpandableHeaderView.swift in Sources */,
+				949AB0B320AB82B6005F85C7 /* LabelWhiteS30.swift in Sources */,
 				4EC248001F9950CE00910AA8 /* DrawerVC.swift in Sources */,
 				08210EE51FB83AE300EABA32 /* BestellenCell.swift in Sources */,
 				4EC247CD1F98F90500910AA8 /* QRScanner.swift in Sources */,
@@ -804,6 +811,7 @@
 				08DB09372061D95C007848E4 /* ExpandleHeaderView2.swift in Sources */,
 				08DB092A2061415B007848E4 /* SpeisekarteCelle.swift in Sources */,
 				08EF4C4A1F9CFFA500F01096 /* ExpandTVSection.swift in Sources */,
+				94BDC36820B00DEF000BFB10 /* UserInfos.swift in Sources */,
 				082BD2DB1FF702F5004106A8 /* KellnerTabBarController.swift in Sources */,
 				08DB093A2062E4D1007848E4 /* BestellenCell2.swift in Sources */,
 				0895B3631F9B5F28007D97DE /* UserVC.swift in Sources */,

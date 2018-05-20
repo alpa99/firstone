@@ -13,6 +13,7 @@ import FacebookLogin
 import FBSDKCoreKit
 import FBSDKLoginKit
 import FirebaseAuth
+import SafariServices
 
 class LoginVC: UIViewController {
     
@@ -28,6 +29,12 @@ class LoginVC: UIViewController {
     @IBOutlet weak var kellnerLogin: UIButton!
     
     // ACTIONS
+    
+    @IBAction func openAGBs(_ sender: Any) {
+        let agbsLink = SFSafariViewController(url: URL(string: "http://www.madapp.de/books/agbs.html")!)
+        self.present(agbsLink, animated: true, completion: nil)
+    }
+    
     @IBAction func loginTapped(_ sender: UIButton) {
         
         let loginManager = LoginManager()

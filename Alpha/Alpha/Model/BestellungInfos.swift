@@ -17,7 +17,7 @@ class BestellungInfos: NSObject {
     var toKellnerID: String?
     var timeStamp: Double?
     var tischnummer: String?
-    var angenommen: Bool?
+    var Status: String?
     
     
     init(dictionary: [String: Any]) {
@@ -28,7 +28,7 @@ class BestellungInfos: NSObject {
         self.toKellnerID = dictionary["toKellnerID"] as? String ?? ""
         self.timeStamp = dictionary["timeStamp"] as? Double ?? 0.0
         self.tischnummer = dictionary["tischnummer"] as? String ?? "leer"
-        self.angenommen = dictionary["angenommen"] as? Bool ?? false
+        self.Status = dictionary["Status"] as? String ?? "Fehler"
         }
 
 }

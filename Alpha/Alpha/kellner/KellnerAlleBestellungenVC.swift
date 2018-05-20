@@ -1,28 +1,19 @@
 //
-//  MeineBestellungVC.swift
+//  KellnerAlleBestellungenVC.swift
 //  Alpha
 //
-//  Created by Ibrahim Akcam on 19.03.18.
+//  Created by Ibrahim Akcam on 15.05.18.
 //  Copyright © 2018 AM. All rights reserved.
 //
 
 import UIKit
 import Firebase
 
-
-class MeineBestellungVC: UIViewController, UITableViewDataSource, UITableViewDelegate, ExpandableHeaderViewDelegate {
-    func toggleSection(tableView: UITableView, header: ExpandableHeaderView, section: Int) {
-        
-    }
+class KellnerAlleBestellungenVC: UIViewController, UITableViewDelegate, UITableViewDataSource, ExpandableHeaderViewDelegate {
+    
     
     
     // VARS
-    var aktuelleBar = String()
-    var aktuellerTisch = String()
-    var letzteBestellungZeit = Double()
-
-
-    
     var Bestellungen = [KellnerTVSection]()
     var BestellungenID = [String]()
     var BestellungKategorien = [String: [String]]()
@@ -37,10 +28,13 @@ class MeineBestellungVC: UIViewController, UITableViewDataSource, UITableViewDel
     var FromUserID = [String: String]()
     var TimeStamp = [String: Double]()
     
+    var Barname = String()
+    
     var KellnerID = String()
     var bestellungIDs = [String]()
     var TimeStamps = [Double]()
     var tischnummer = [String]()
+    var tischnummern = [String: [String]]()
     var genres = [String]()
     var bestellunggenres = [String: [String: Int]]()
     var bestellung2 = [String: [String: [String: Int]]]()
@@ -51,67 +45,53 @@ class MeineBestellungVC: UIViewController, UITableViewDataSource, UITableViewDel
     
     var items = [String]()
     var mengen = [Int]()
-
+    
+    
+    var bestellungen = [String: [String: [String: Int]]]()
+    
     // OUTLETS
+    @IBOutlet weak var barnamelbl: LabelWhiteS30!
     
-    @IBOutlet weak var meineBestellungTV: UITableView!
+    @IBOutlet weak var alleTV: UITableView!
+    // FUNCS
     
-    
-    // ACTIONS
-    
-    
-    @IBAction func BackBtn(_ sender: Any) {
-        performSegue(withIdentifier: "profilIdentifier", sender: self)
-    }
-    
-    func loadAktuelleBar(){
-        let userUid = Auth.auth().currentUser?.uid
+    func loadBestellungenKeys(){
         var datref: DatabaseReference!
         datref = Database.database().reference()
-        datref.child("Users").child(userUid!).observeSingleEvent(of: .value, with: { (snapshotAktuell) in
-            if let dictionary = snapshotAktuell.value as? [String: AnyObject]{
-                let userinfos = UserInfos(dictionary: dictionary)
-                print(self.aktuelleBar)
-                print(userinfos.aktuelleBar!)
-                print("jetzt")
-                self.aktuelleBar = userinfos.aktuelleBar!
-                print(self.aktuelleBar)
-                print(userinfos.aktuelleBar!)
-                self.aktuellerTisch = userinfos.aktuellerTisch!
-                self.letzteBestellungZeit = userinfos.letzteBestellungZeit!
-                self.loadBestellungenKeys(userUid: userUid!)
-
-            }
-        }, withCancel: nil)
-    }
-    
-    
-    func loadBestellungenKeys(userUid: String){
-        var datref: DatabaseReference!
-        datref = Database.database().reference()
-        datref.child("userBestellungen").child(userUid).observe(.childAdded, with: { (snapshot) in
+        datref.child("userBestellungen").child(KellnerID).observe(.childAdded, with: { (snapshot) in
             
             if let dictionary = snapshot.value as? [String: AnyObject]{
                 let bestellungInfos = BestellungInfos(dictionary: dictionary)
-                    self.loadBestellungen(BestellungID: snapshot.key)
-                
+                    self.loadBestellungen(BestellungID: snapshot.key, tischnummer: bestellungInfos.tischnummer!)
             }
             
         }, withCancel: nil)
         
     }
     
-    
-    func loadBestellungen(BestellungID: String){
+    func loadBestellungen(BestellungID: String, tischnummer: String){
+        print(Barname, "kvc")
         self.bestellungIDs.append(BestellungID)
+        if tischnummern[tischnummer] != nil {
+            tischnummern[tischnummer]?.append(BestellungID)
+        } else {
+            tischnummern.updateValue([BestellungID], forKey: tischnummer)
+        }
         
         var datref: DatabaseReference!
         datref = Database.database().reference()
         
-        print(aktuelleBar)
-        print(BestellungID)
-        datref.child("Bestellungen").child(aktuelleBar).child(BestellungID).observeSingleEvent(of: .value) { (snapshot) in
+        for (tischnummer, ids) in tischnummern
+        {
+            for id in ids {
+                print(tischnummer, id, "tischnummer, id")
+            }
+        }
+        datref.child("Bestellungen").child(Barname).child(BestellungID).observeSingleEvent(of: .value) { (snapshot) in
+            
             for key in (snapshot.children.allObjects as? [DataSnapshot])! {
+                print(self.tischnummern, "djdsjfjds")
+
                 if key.key == "Information" {
                     if let dictionary = key.value as? [String: AnyObject]{
                         
@@ -122,9 +102,13 @@ class MeineBestellungVC: UIViewController, UITableViewDataSource, UITableViewDel
                         self.TimeStamp.updateValue(bestellungInfos.timeStamp!, forKey: BestellungID)
                         
                     }
-                    
+
                 } else {
+                    
                     let childsnapshotUnterkategorie = snapshot.childSnapshot(forPath: key.key)
+
+                   
+                    
                     if self.BestellungKategorien[BestellungID] != nil {
                         self.BestellungKategorien[BestellungID]?.append(key.key)
                         for children in (childsnapshotUnterkategorie.children.allObjects as? [DataSnapshot])! {
@@ -364,14 +348,15 @@ class MeineBestellungVC: UIViewController, UITableViewDataSource, UITableViewDel
                                 }
                                 
                             }
-                            
+                            // h
                             
                         }
                     }
                     
-                    
                 }
-            }
+                }
+            
+            
             print(self.bestellungIDs, "self.bestellungIDs")
             print(self.BestellungKategorien, "self.BestellungKategorien")
             
@@ -379,9 +364,9 @@ class MeineBestellungVC: UIViewController, UITableViewDataSource, UITableViewDel
             if self.bestellungIDs.count == self.BestellungKategorien.count {
                 
                 for i in 0..<self.bestellungIDs.count {
-                    self.setSectionsMeineBestellung(BestellungID: self.bestellungIDs[i], tischnummer: self.Tischnummer[self.bestellungIDs[i]]!, TimeStamp: self.TimeStamp[self.bestellungIDs[i]]!, Kategorie: self.BestellungKategorien[self.bestellungIDs[i]]!, Unterkategorie: self.BestellungUnterkategorien[self.bestellungIDs[i]]!, items: self.BestellungItemsNamen[self.bestellungIDs[i]]!, preis: self.BestellungItemsPreise[self.bestellungIDs[i]]!, liter: [[["String"]]], menge: self.BestellungItemsMengen[self.bestellungIDs[i]]!, expanded2: self.BestellungExpanded2[self.bestellungIDs[i]]!, expanded: true)
+                    self.setSectionsKellnerBestellung(BestellungID: self.bestellungIDs[i], tischnummer: self.Tischnummer[self.bestellungIDs[i]]!, TimeStamp: self.TimeStamp[self.bestellungIDs[i]]!, Kategorie: self.BestellungKategorien[self.bestellungIDs[i]]!, Unterkategorie: self.BestellungUnterkategorien[self.bestellungIDs[i]]!, items: self.BestellungItemsNamen[self.bestellungIDs[i]]!, preis: self.BestellungItemsPreise[self.bestellungIDs[i]]!, liter: [[["String"]]], menge: self.BestellungItemsMengen[self.bestellungIDs[i]]!, expanded2: self.BestellungExpanded2[self.bestellungIDs[i]]!, expanded: false)
                     if self.Bestellungen.count == self.bestellungIDs.count{
-                        self.meineBestellungTV.reloadData()
+                        self.alleTV.reloadData()
                     }
                     
                 }
@@ -391,23 +376,75 @@ class MeineBestellungVC: UIViewController, UITableViewDataSource, UITableViewDel
         
     }
     
-    
-    func setSectionsMeineBestellung(BestellungID: String, tischnummer: String, TimeStamp: Double, Kategorie: [String], Unterkategorie: [[String]], items: [[[String]]], preis: [[[Double]]], liter: [[[String]]], menge: [[[Int]]], expanded2: [[Bool]], expanded: Bool){
+
+    func setSectionsKellnerBestellung(BestellungID: String, tischnummer: String, TimeStamp: Double, Kategorie: [String], Unterkategorie: [[String]], items: [[[String]]], preis: [[[Double]]], liter: [[[String]]], menge: [[[Int]]], expanded2: [[Bool]], expanded: Bool){
         self.Bestellungen.append(KellnerTVSection(BestellungID: BestellungID, tischnummer: tischnummer, timeStamp: TimeStamp, Kategorie: Kategorie, Unterkategorie: Unterkategorie, items: items, preis: preis, liter: liter, menge: menge, expanded2: expanded2, expanded: expanded))
-        print(Bestellungen)
         
         
     }
     
+    //    func removeBestellung(KellnerID: String, BestellungID: String){
+    //        var datref: DatabaseReference!
+    //        datref = Database.database().reference()
+    //        datref.child("userBestellungen").child(KellnerID).child(BestellungID).updateChildValues(["angenommen": true])
+    //    }
+    
+    // SWIPE ACTIONS
+    
+    //    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+    //        let delete = deleteAction(at: indexPath)
+    //
+    //        return UISwipeActionsConfiguration(actions: [delete])
+    //    }
+    //
+    //    func deleteAction(at indexPath: IndexPath) -> UIContextualAction {
+    //        let action = UIContextualAction(style: .normal, title: "delete") { (action, view, completion) in
+    //            completion(true)
+    //
+    //
+    //        }
+    //        return action
+    //    }
+    
+    //    func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+    //        let annehmen = annehmenAction(at: indexPath)
+    //        annehmen.backgroundColor = UIColor.green
+    //
+    //
+    //        return UISwipeActionsConfiguration(actions: [annehmen])
+    //    }
+    //
+    //    func annehmenAction(at indexPath: IndexPath) -> UIContextualAction {
+    //        let action = UIContextualAction(style: .destructive, title: "annehmen") { (action, view, completion) in
+    //            completion(true)
+    //
+    //            self.removeBestellung(KellnerID: self.KellnerID, BestellungID:
+    //                self.bestellungIDs[indexPath.row])
+    //            self.bestellungIDs.removeAll()
+    //            self.itemssss.removeAll()
+    //            self.bestellunggenres.removeAll()
+    //            self.genres.removeAll()
+    //            self.bestellung2.removeAll()
+    //            self.TimeStamps.removeAll()
+    //            self.tischnummer.removeAll()
+    //            self.loadGenres()
+    //            self.loadBestellungsID(KellnerID: self.KellnerID)
+    //            self.bestellungenTV.reloadData()
+    //
+    //        }
+    //
+    //        return action
+    //    }
     
     // TABLE
+    
     func numberOfSections(in tableView: UITableView) -> Int {
+        print(self.Bestellungen, "bestellungen")
         return self.Bestellungen.count
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 1
     }
-    
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         var heightForHeaderInSection: Int?
         
@@ -415,6 +452,7 @@ class MeineBestellungVC: UIViewController, UITableViewDataSource, UITableViewDel
         return CGFloat(heightForHeaderInSection!)
         
     }
+    
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         
@@ -471,46 +509,134 @@ class MeineBestellungVC: UIViewController, UITableViewDataSource, UITableViewDel
         return header
     }
     
+    
+    //    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    //
+    //print(self.Bestellungen)
+    //
+    //        return self.Bestellungen.count
+    //
+    //    }
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        //
         let cell = Bundle.main.loadNibNamed("KellnerCell", owner: self, options: nil)?.first as! KellnerCell
         
         cell.Bestellungen = Bestellungen
         cell.Cell1Section = indexPath.section
         cell.bestellungID = Bestellungen[indexPath.section].BestellungID
-        cell.annehmen.setTitle("Status: TEST", for: .normal)
         
-        let formatter = DateFormatter()
-        formatter.dateFormat = "yyyy/MM/dd HH:mm"
-        let DayOne = formatter.date(from: "2018/05/15 12:00")
-        let timeStampDate = NSDate(timeInterval: self.Bestellungen[indexPath.section].TimeStamp, since: DayOne!)
+        
+        let timeStampDate = NSDate(timeIntervalSince1970: self.Bestellungen[indexPath.section].TimeStamp)
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "HH:mm"
         
         cell.timeLbl.text = "\(dateFormatter.string(from: timeStampDate as Date)) Uhr"
+        
+        //
+        
+        //        self.itemssss = bestellung2[bestellungIDs[indexPath.row]]!
+        //
+        //
+        //        for (genre, bestellteitems) in itemssss {
+        //
+        //            cellGenres.append(genre)
+        //
+        //            for (item, menge) in bestellteitems {
+        //
+        //                cellItems.append(item)
+        //                cellMengen.append(menge)
+        //
+        //            }
+        //
+        //        }
+        //
+        //        cellGenres.removeAll()
+        //        cellItems.removeAll()
+        //        cellMengen.removeAll()
+        //
+        //        cell.bestellungsText.text = "\(itemssss)"
+        //
+        //        let timeStampDate = NSDate(timeIntervalSince1970: TimeStamps[indexPath.row])
+        //        let dateFormatter = DateFormatter()
+        //        dateFormatter.dateFormat = "HH:mm"
+        //        cell.timeLbl.text = "\(dateFormatter.string(from: timeStampDate as Date)) Uhr"
+        //        cell.tischnummer.text = "Tischnummer: \(self.tischnummer[indexPath.row])"
+        //
         return cell
+        
     }
+    
+    
+    func toggleSection(tableView: UITableView, header: ExpandableHeaderView, section: Int) {
+        
+        for i in 0..<Bestellungen.count{
+            if i == section {
+                Bestellungen[section].expanded = !Bestellungen[section].expanded
+            } else {
+                Bestellungen[i].expanded = false
+                
+            }
+        }
+        
+        
+        alleTV.beginUpdates()
+        alleTV.reloadRows(at: [IndexPath(row: 0, section: section)], with: .automatic)
+        
+        alleTV.endUpdates()
+    }
+    
+    
+    
+    // OTHERS
+    
+    //    override func viewWillAppear(_ animated: Bool) {
+    //        bestellungenTV.estimatedRowHeight = 100
+    //        bestellungenTV.rowHeight = UITableViewAutomaticDimension
+    //    }
+    
+    
+    
+    
     
     override func viewDidLoad() {
+        
         super.viewDidLoad()
-
-        loadAktuelleBar()
-        // Do any additional setup after loading the view.
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+        barnamelbl.text = Barname
+        
+        loadBestellungenKeys()
+        
+        //        logoutBtn.layer.cornerRadius = 4
+        //
+        //        loadGenres()
+        //        loadBestellungsID(KellnerID: self.KellnerID)
+        //
+        //        let refreshControl = UIRefreshControl()
+        //        let title = NSLocalizedString("aktualisiere", comment: "Pull to refresh")
+        //        refreshControl.attributedTitle = NSAttributedString(string: title)
+        //        refreshControl.addTarget(self, action: #selector(refreshOptions(sender:)), for: .valueChanged)
+        //        bestellungenTV.refreshControl = refreshControl
+        //
+        //
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    @objc private func refreshOptions(sender: UIRefreshControl) {
+        //        bestellungIDs.removeAll()
+        //        itemssss.removeAll()
+        //        bestellunggenres.removeAll()
+        //        genres.removeAll()
+        //        bestellung2.removeAll()
+        //        loadGenres()
+        //        loadBestellungsID(KellnerID: self.KellnerID)
+        //
+        //        TimeStamps = [Double]()
+        //        tischnummer = [String]()
+        //
+        //        sender.endRefreshing()
     }
-    */
-
+    
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+    }
+    
 }

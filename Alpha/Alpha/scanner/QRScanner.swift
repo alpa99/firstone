@@ -139,19 +139,22 @@ class QRScanner: UIViewController, AVCaptureMetadataOutputObjectsDelegate, CLLoc
                 self.qrbarname.append(qrbar.Name!)
                 self.qrbaradresse.append(qrbar.Adresse!)
                 self.KellnerID = qrbar.KellnerID!
-                print(qrbar.AnzahlQRCodes!, "anzal qrcodes")
-                print(self.barnummer, "barnummer")
-
-                if self.tischnummer <= qrbar.AnzahlQRCodes! {
                 
-                CLGeocoder().geocodeAddressString(self.qrbaradresse, completionHandler: { (placemarks, error) -> Void in
+                
+                
+                if self.tischnummer <= qrbar.AnzahlQRCodes! {
+                let locationBar = CLLocation(latitude: qrbar.Latitude!, longitude: qrbar.Longitude!)
                     
-                    if let placemark = placemarks?[0] {
-                        let location = placemark.location
-                        self.distanceCondition(locat: location!)}
-                })
+                self.distanceCondition(locat: locationBar)
+//                CLGeocoder().geocodeAddressString(self.qrbaradresse, completionHandler: { (placemarks, error) -> Void in
+//
+//                    if let placemark = placemarks?[0] {
+//                        let location = placemark.location
+//
+//                        self.distanceCondition(locat: location!)}
+//                })
                 } else {
-                    let alert = UIAlertController(title: "Fehler", message: "Dies ist kein Smolo-Code", preferredStyle: .alert)
+                    let alert = UIAlertController(title: "Fehler", message: "Dies ist kein gültiger Smolo-Code", preferredStyle: .alert)
                     alert.addAction(UIAlertAction(title: "Abbrechen", style: .default, handler:{ (action) in
                    self.session.startRunning()}))
                     self.present(alert, animated: true, completion: nil)

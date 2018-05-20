@@ -19,7 +19,7 @@ class Button: UIButton {
     
         self.titleLabel?.font = UIFont(name: "Helvetica", size: 20)
         
-        if self.titleLabel?.text == "Back"  {
+        if self.titleLabel?.text == "zurück"  {
             self.layer.backgroundColor = UIColor.clear.cgColor
 
         } else {

@@ -10,148 +10,377 @@
     import Firebase
     
 class KellnerAngenommenVC: UIViewController, UITableViewDelegate, UITableViewDataSource, ExpandableHeaderViewDelegate {
-
     
-        
-        // VARS
-        var KellnerID = String()
-        var bestellungIDs = [String]()
-        var TimeStamps = [Double]()
-        var tischnummer = [String]()
-        var genres = [String]()
-        var bestellunggenres = [String: [String: Int]]()
-        var bestellung2 = [String: [String: [String: Int]]]()
-        var bestellung3 = [String: [String: [String: Int]]]()
-
-        var itemssss = [String: [String: Int]]()
+    // VARS
+    var Bestellungen = [KellnerTVSection]()
+    var BestellungenID = [String]()
+    var BestellungKategorien = [String: [String]]()
+    var BestellungUnterkategorien = [String: [[String]]]()
+    var BestellungExpanded2 = [String: [[Bool]]]()
     
-        var itemsangenommen = [String]()
-        var mengenangenommen = [Int]()
+    var BestellungItemsNamen = [String: [[[String]]]]()
+    var BestellungItemsPreise = [String: [[[Double]]]]()
+    var BestellungItemsMengen = [String: [[[Int]]]]()
+    var Tischnummer = [String: String]()
+    var Angenommen = [String: String]()
+    var FromUserID = [String: String]()
+    var TimeStamp = [String: Double]()
     
-        var sections = [ExpandTVSection]()
-        
-        var items = [String]()
-        var mengen = [Int]()
-        
-        
-        var bestellungen = [String: [String: [String: Int]]]()
+    var Barname = String()
+    
+    var KellnerID = String()
+    var bestellungIDs = [String]()
+    var TimeStamps = [Double]()
+    var tischnummer = [String]()
+    var genres = [String]()
+    var bestellunggenres = [String: [String: Int]]()
+    var bestellung2 = [String: [String: [String: Int]]]()
+    var itemssss = [String: [String: Int]]()
+    var cellGenres = [String]()
+    var cellItems = [String]()
+    var cellMengen = [Int]()
+    
+    var items = [String]()
+    var mengen = [Int]()
+    
         
         // OUTLETS
         
         @IBOutlet weak var angenommenBestellungenTV: UITableView!
-        
-
-        // FUNCS
+    @IBOutlet weak var barnamelbl: LabelWhiteS16!
     
-    func setSections(genre: String, items: [String], preise: [Int]) {
-        self.sections.append(ExpandTVSection(genre: genre, items: items, preise: preise, expanded: false))
+
+    // FUNCS
+
+    
+    func loadBestellungenKeys(){
+        var datref: DatabaseReference!
+        datref = Database.database().reference()
+        datref.child("userBestellungen").child(KellnerID).observe(.childAdded, with: { (snapshot) in
+            
+            if let dictionary = snapshot.value as? [String: AnyObject]{
+                let bestellungInfos = BestellungInfos(dictionary: dictionary)
+                if bestellungInfos.Status == "angenommen" {
+                    self.loadBestellungen(BestellungID: snapshot.key)
+                    
+                }
+            }
+            
+        }, withCancel: nil)
         
     }
+    func loadBestellungen(BestellungID: String){
+        print(Barname, "kvc")
+        self.bestellungIDs.append(BestellungID)
         
-        func loadGenres(){
-            var datref: DatabaseReference!
-            datref = Database.database().reference()
-            datref.child("Speisekarten").child("Huqa").observe(.childAdded, with: { (snapshot) in
-                
-                if self.genres.contains(snapshot.key) == false {
-                    self.genres.append(snapshot.key)
+        var datref: DatabaseReference!
+        datref = Database.database().reference()
+        
+        
+        datref.child("Bestellungen").child(Barname).child(BestellungID).observeSingleEvent(of: .value) { (snapshot) in
+            
+            for key in (snapshot.children.allObjects as? [DataSnapshot])! {
+                if key.key == "Information" {
+                    if let dictionary = key.value as? [String: AnyObject]{
+                        
+                        let bestellungInfos = BestellungInfos(dictionary: dictionary)
+                        self.Tischnummer.updateValue(bestellungInfos.tischnummer!, forKey: BestellungID)
+                        self.Angenommen.updateValue(bestellungInfos.Status!, forKey: BestellungID)
+                        self.FromUserID.updateValue(bestellungInfos.fromUserID!, forKey: BestellungID)
+                        self.TimeStamp.updateValue(bestellungInfos.timeStamp!, forKey: BestellungID)
+                        
+                    }
+                    
+                } else {
+                    let childsnapshotUnterkategorie = snapshot.childSnapshot(forPath: key.key)
+                    if self.BestellungKategorien[BestellungID] != nil {
+                        self.BestellungKategorien[BestellungID]?.append(key.key)
+                        for children in (childsnapshotUnterkategorie.children.allObjects as? [DataSnapshot])! {
+                            
+                            let childsnapshotItem = childsnapshotUnterkategorie.childSnapshot(forPath: children.key)
+                            
+                            var x = self.BestellungUnterkategorien[BestellungID]
+                            var expandend2 = self.BestellungExpanded2[BestellungID]
+                            if x!.count < (self.BestellungKategorien[BestellungID]?.count)!{
+                                print(1)
+                                x!.append([children.key])
+                                expandend2!.append([true])
+                                self.BestellungUnterkategorien.updateValue(x!, forKey: BestellungID)
+                                self.BestellungExpanded2.updateValue(expandend2!, forKey: BestellungID)
+                                
+                                if let dictionary = childsnapshotItem.value as? [String: AnyObject]{
+                                    
+                                    for Item in dictionary {
+                                        
+                                        if let itemDic = Item.value as? [String: AnyObject]{
+                                            let iteminfodic = BestellungInfos(dictionary: itemDic)
+                                            var newItems = self.BestellungItemsNamen[BestellungID]
+                                            var newPreise = self.BestellungItemsPreise[BestellungID]
+                                            var newMengen = self.BestellungItemsMengen[BestellungID]
+                                            
+                                            if (newItems?.count)! < (self.BestellungKategorien[BestellungID]?.count)! {
+                                                newItems?.append([[iteminfodic.itemName!]])
+                                                newPreise?.append([[Double(iteminfodic.itemPreis!)]])
+                                                newMengen?.append([[Int(iteminfodic.itemMenge!)]])
+                                                self.BestellungItemsNamen[BestellungID] = newItems
+                                                self.BestellungItemsPreise[BestellungID] = newPreise
+                                                self.BestellungItemsMengen[BestellungID] = newMengen
+                                            } else {
+                                                var newnewItem = newItems![(self.BestellungKategorien[BestellungID]?.index(of: key.key))!]
+                                                var newnewPreise = newPreise![(self.BestellungKategorien[BestellungID]?.index(of: key.key))!]
+                                                var newnewMengen = newMengen![(self.BestellungKategorien[BestellungID]?.index(of: key.key))!]
+                                                let newx = x![(self.BestellungKategorien[BestellungID]?.index(of: key.key))!]
+                                                
+                                                newnewItem[newx.index(of: children.key)!].append(iteminfodic.itemName!)
+                                                newnewPreise[newx.index(of: children.key)!].append(Double(iteminfodic.itemPreis!))
+                                                newnewMengen[newx.index(of: children.key)!].append(iteminfodic.itemMenge!)
+                                                
+                                                newItems![(self.BestellungKategorien[BestellungID]?.index(of: key.key))!] = newnewItem
+                                                newPreise![(self.BestellungKategorien[BestellungID]?.index(of: key.key))!] = newnewPreise
+                                                newMengen![(self.BestellungKategorien[BestellungID]?.index(of: key.key))!] = newnewMengen
+                                                
+                                                
+                                                self.BestellungItemsNamen[BestellungID] = newItems
+                                                self.BestellungItemsPreise[BestellungID] = newPreise
+                                                self.BestellungItemsMengen[BestellungID] = newMengen
+                                                
+                                                
+                                            }      }  }     } }
+                            else {
+                                x![(self.BestellungKategorien[BestellungID]?.index(of: key.key))!].append(children.key)
+                                expandend2![(self.BestellungKategorien[BestellungID]?.index(of: key.key))!].append(true)
+                                self.BestellungUnterkategorien.updateValue(x!, forKey: BestellungID)
+                                self.BestellungExpanded2.updateValue(expandend2!, forKey: BestellungID)
+                                
+                                if let dictionary = childsnapshotItem.value as? [String: AnyObject]{
+                                    
+                                    for Item in dictionary {
+                                        
+                                        if let itemDic = Item.value as? [String: AnyObject]{
+                                            let iteminfodic = BestellungInfos(dictionary: itemDic)
+                                            var newItems = self.BestellungItemsNamen[BestellungID]
+                                            var newPreise = self.BestellungItemsPreise[BestellungID]
+                                            var newMengen = self.BestellungItemsMengen[BestellungID]
+                                            
+                                            var newnewItem = newItems![(self.BestellungKategorien[BestellungID]?.index(of: key.key))!]
+                                            var newnewPreise = newPreise![(self.BestellungKategorien[BestellungID]?.index(of: key.key))!]
+                                            var newnewMengen = newMengen![(self.BestellungKategorien[BestellungID]?.index(of: key.key))!]
+                                            
+                                            let newx = x![(self.BestellungKategorien[BestellungID]?.index(of: key.key))!]
+                                            
+                                            if newnewItem.count < newx.count {
+                                                newnewItem.append([iteminfodic.itemName!])
+                                                newnewPreise.append([Double(iteminfodic.itemPreis!)])
+                                                newnewMengen.append([iteminfodic.itemMenge!])
+                                                
+                                                newItems![(self.BestellungKategorien[BestellungID]?.index(of: key.key))!] = newnewItem
+                                                newPreise![(self.BestellungKategorien[BestellungID]?.index(of: key.key))!] = newnewPreise
+                                                newMengen![(self.BestellungKategorien[BestellungID]?.index(of: key.key))!] = newnewMengen
+                                                
+                                                self.BestellungItemsNamen[BestellungID] = newItems
+                                                self.BestellungItemsPreise[BestellungID] = newPreise
+                                                self.BestellungItemsMengen[BestellungID] = newMengen
+                                                
+                                            }
+                                            else {
+                                                
+                                                newnewItem[newx.index(of: children.key)!].append(iteminfodic.itemName!)
+                                                newnewPreise[newx.index(of: children.key)!].append(Double(iteminfodic.itemPreis!))
+                                                newnewMengen[newx.index(of: children.key)!].append(iteminfodic.itemMenge!)
+                                                
+                                                newItems![(self.BestellungKategorien[BestellungID]?.index(of: key.key))!] = newnewItem
+                                                newPreise![(self.BestellungKategorien[BestellungID]?.index(of: key.key))!] = newnewPreise
+                                                newMengen![(self.BestellungKategorien[BestellungID]?.index(of: key.key))!] = newnewMengen
+                                                
+                                                self.BestellungItemsNamen[BestellungID] = newItems
+                                                self.BestellungItemsPreise[BestellungID] = newPreise
+                                                self.BestellungItemsMengen[BestellungID] = newMengen
+                                            }
+                                            
+                                            //                                            newItems![(self.BestellungKategorien[BestellungID]?.index(of: key.key))!] = newnewItem
+                                            //                                            newPreise![(self.BestellungKategorien[BestellungID]?.index(of: key.key))!] = newnewPreise
+                                            //                                            newMengen![(self.BestellungKategorien[BestellungID]?.index(of: key.key))!] = newnewMengen
+                                            //
+                                            //                                            self.BestellungItemsNamen[BestellungID] = newItems
+                                            //                                            self.BestellungItemsPreise[BestellungID] = newPreise
+                                            //                                            self.BestellungItemsMengen[BestellungID] = newMengen
+                                        }      }       }
+                                
+                                
+                                
+                                
+                            }  }} else {
+                        
+                        self.BestellungKategorien.updateValue([key.key], forKey: BestellungID)
+                        
+                        for children in (childsnapshotUnterkategorie.children.allObjects as? [DataSnapshot])! {
+                            
+                            let childsnapshotItem = childsnapshotUnterkategorie.childSnapshot(forPath: children.key)
+                            
+                            if self.BestellungUnterkategorien[BestellungID] != nil {
+                                
+                                var x = self.BestellungUnterkategorien[BestellungID]
+                                var expanded2 = self.BestellungExpanded2[BestellungID]
+                                
+                                
+                                x![(self.BestellungKategorien[BestellungID]?.index(of: key.key))!].append(children.key)
+                                expanded2![(self.BestellungKategorien[BestellungID]?.index(of: key.key))!].append(true)
+                                
+                                self.BestellungUnterkategorien.updateValue(x!, forKey: BestellungID)
+                                self.BestellungExpanded2.updateValue(expanded2!, forKey: BestellungID)
+                                
+                                
+                                if let dictionary = childsnapshotItem.value as? [String: AnyObject]{
+                                    
+                                    for Item in dictionary {
+                                        
+                                        if let itemDic = Item.value as? [String: AnyObject]{
+                                            let iteminfodic = BestellungInfos(dictionary: itemDic)
+                                            if self.BestellungItemsNamen[BestellungID] != nil {
+                                                var newItems = self.BestellungItemsNamen[BestellungID]
+                                                var newPreise = self.BestellungItemsPreise[BestellungID]
+                                                var newMengen = self.BestellungItemsMengen[BestellungID]
+                                                
+                                                var newnewItems = newItems![(self.BestellungKategorien[BestellungID]?.index(of: key.key))!]
+                                                var newnewPreise = newPreise![(self.BestellungKategorien[BestellungID]?.index(of: key.key))!]
+                                                var newnewMengen = newMengen![(self.BestellungKategorien[BestellungID]?.index(of: key.key))!]
+                                                
+                                                let newx = x![(self.BestellungKategorien[BestellungID]?.index(of: key.key))!]
+                                                
+                                                if newnewItems.count < newx.count {
+                                                    
+                                                    newnewItems.append([iteminfodic.itemName!])
+                                                    newnewPreise.append([Double(iteminfodic.itemPreis!)])
+                                                    newnewMengen.append([iteminfodic.itemMenge!])
+                                                    
+                                                    newItems![(self.BestellungKategorien[BestellungID]?.index(of: key.key))!] = newnewItems
+                                                    newPreise![(self.BestellungKategorien[BestellungID]?.index(of: key.key))!] = newnewPreise
+                                                    newMengen![(self.BestellungKategorien[BestellungID]?.index(of: key.key))!] = newnewMengen
+                                                    
+                                                    self.BestellungItemsNamen[BestellungID] = newItems
+                                                    self.BestellungItemsPreise[BestellungID] = newPreise
+                                                    self.BestellungItemsMengen[BestellungID] = newMengen
+                                                    
+                                                    
+                                                } else {
+                                                    newnewItems[newx.index(of: children.key)!].append(iteminfodic.itemName!)
+                                                    newnewPreise[newx.index(of: children.key)!].append(Double(iteminfodic.itemPreis!))
+                                                    newnewMengen[newx.index(of: children.key)!].append(iteminfodic.itemMenge!)
+                                                    
+                                                    newItems![(self.BestellungKategorien[BestellungID]?.index(of: key.key))!] = newnewItems
+                                                    newPreise![(self.BestellungKategorien[BestellungID]?.index(of: key.key))!] = newnewPreise
+                                                    newMengen![(self.BestellungKategorien[BestellungID]?.index(of: key.key))!] = newnewMengen
+                                                    
+                                                    self.BestellungItemsNamen[BestellungID] = newItems
+                                                    self.BestellungItemsPreise[BestellungID] = newPreise
+                                                    self.BestellungItemsMengen[BestellungID] = newMengen
+                                                    
+                                                }
+                                            }
+                                            
+                                        }
+                                    }
+                                }
+                            }
+                                
+                                
+                                
+                            else {
+                                self.BestellungUnterkategorien.updateValue([[children.key]], forKey: BestellungID)
+                                self.BestellungExpanded2.updateValue([[true]], forKey: BestellungID)
+                                
+                                if let dictionary = childsnapshotItem.value as? [String: AnyObject]{
+                                    
+                                    for Item in dictionary {
+                                        if let itemDic = Item.value as? [String: AnyObject]{
+                                            let iteminfodic = BestellungInfos(dictionary: itemDic)
+                                            if self.BestellungItemsNamen[BestellungID] != nil {
+                                                
+                                                var newItems = self.BestellungItemsNamen[BestellungID]
+                                                var newPreise = self.BestellungItemsPreise[BestellungID]
+                                                var newMengen = self.BestellungItemsMengen[BestellungID]
+                                                
+                                                var newnewItems = newItems![(self.BestellungKategorien[BestellungID]?.index(of: key.key))!]
+                                                var newnewPreise = newPreise![(self.BestellungKategorien[BestellungID]?.index(of: key.key))!]
+                                                var newnewMengen = newMengen![(self.BestellungKategorien[BestellungID]?.index(of: key.key))!]
+                                                
+                                                newnewItems[(self.BestellungUnterkategorien[BestellungID]?.index(of: [children.key]))!].append(iteminfodic.itemName!)
+                                                newnewPreise[(self.BestellungUnterkategorien[BestellungID]?.index(of: [children.key]))!].append(Double(iteminfodic.itemPreis!))
+                                                newnewMengen[(self.BestellungUnterkategorien[BestellungID]?.index(of: [children.key]))!].append(iteminfodic.itemMenge!)
+                                                
+                                                newItems![(self.BestellungKategorien[BestellungID]?.index(of: key.key))!] = newnewItems
+                                                newPreise![(self.BestellungKategorien[BestellungID]?.index(of: key.key))!] = newnewPreise
+                                                newMengen![(self.BestellungKategorien[BestellungID]?.index(of: key.key))!] = newnewMengen
+                                                
+                                                self.BestellungItemsNamen[BestellungID] = newItems
+                                                self.BestellungItemsPreise[BestellungID] = newPreise
+                                                self.BestellungItemsMengen[BestellungID] = newMengen
+                                                
+                                                
+                                            } else {
+                                                
+                                                self.BestellungItemsNamen.updateValue([[[iteminfodic.itemName!]]], forKey: BestellungID)
+                                                self.BestellungItemsPreise.updateValue([[[Double(iteminfodic.itemPreis!)]]], forKey: BestellungID)
+                                                self.BestellungItemsMengen.updateValue([[[iteminfodic.itemMenge!]]], forKey: BestellungID)
+                                                
+                                            }
+                                            
+                                        }
+                                        
+                                    }
+                                    
+                                }
+                                
+                            }
+                            
+                            
+                        }
+                    }
+                    
+                    
                 }
+            }
+            print(self.bestellungIDs, "self.bestellungIDs")
+            print(self.BestellungKategorien, "self.BestellungKategorien")
+            
+            
+            if self.bestellungIDs.count == self.BestellungKategorien.count {
                 
-                
-            }, withCancel: nil)
+                for i in 0..<self.bestellungIDs.count {
+                    self.setSectionsKellnerBestellung(BestellungID: self.bestellungIDs[i], tischnummer: self.Tischnummer[self.bestellungIDs[i]]!, TimeStamp: self.TimeStamp[self.bestellungIDs[i]]!, Kategorie: self.BestellungKategorien[self.bestellungIDs[i]]!, Unterkategorie: self.BestellungUnterkategorien[self.bestellungIDs[i]]!, items: self.BestellungItemsNamen[self.bestellungIDs[i]]!, preis: self.BestellungItemsPreise[self.bestellungIDs[i]]!, liter: [[["String"]]], menge: self.BestellungItemsMengen[self.bestellungIDs[i]]!, expanded2: self.BestellungExpanded2[self.bestellungIDs[i]]!, expanded: false)
+                    if self.Bestellungen.count == self.bestellungIDs.count{
+                        self.angenommenBestellungenTV.reloadData()
+                    }
+                    
+                }
+            }
             
         }
         
-        func loadBestellungsID(KellnerID: String){
-            var datref: DatabaseReference!
-            datref = Database.database().reference()
-            datref.child("userBestellungen").child(KellnerID).observe(.childAdded, with: { (snapshot) in
-                
-                if let dictionary = snapshot.value as? [String: AnyObject]{
-                    let bestellungInfos = BestellungInfos(dictionary: dictionary)
-                    if bestellungInfos.angenommen == true {
-                        self.loadBestellung(BestellungID: snapshot.key)
-                        self.bestellungIDs.append(snapshot.key)
-                        
-                    }
-                }
-                
-                DispatchQueue.main.async(execute: {
-                    self.angenommenBestellungenTV.reloadData()
-                } )
-                
-                
-            }, withCancel: nil)
-        }
+    }
+    
+    
+    func setSectionsKellnerBestellung(BestellungID: String, tischnummer: String, TimeStamp: Double, Kategorie: [String], Unterkategorie: [[String]], items: [[[String]]], preis: [[[Double]]], liter: [[[String]]], menge: [[[Int]]], expanded2: [[Bool]], expanded: Bool){
+        self.Bestellungen.append(KellnerTVSection(BestellungID: BestellungID, tischnummer: tischnummer, timeStamp: TimeStamp, Kategorie: Kategorie, Unterkategorie: Unterkategorie, items: items, preis: preis, liter: liter, menge: menge, expanded2: expanded2, expanded: expanded))
+        print(Bestellungen)
         
-        func loadBestellung(BestellungID: String){
-            var datref: DatabaseReference!
-            datref = Database.database().reference()
-            datref.child("Bestellungen").child("Huqa").child(BestellungID).observe(.value, with: { (snapshot) in
-                
-                if let dictionary = snapshot.value as? [String: AnyObject]{
-                    
-                    let bestellungInfos = BestellungInfos(dictionary: dictionary)
-                    
-                    self.TimeStamps.append(bestellungInfos.timeStamp!)
-                    self.tischnummer.append(bestellungInfos.tischnummer!)
-                    DispatchQueue.main.async(execute: {
-                        self.angenommenBestellungenTV.reloadData()
-                    } )
-                }
-                
-                for genre in self.genres {
-                    if self.bestellunggenres[genre] != nil  {
-                        self.bestellunggenres.removeValue(forKey: genre)
-                    }
-                    if snapshot.hasChild(genre) == true {
-                        self.bestellunggenres.updateValue(snapshot.childSnapshot(forPath: genre).value as! [String : Int], forKey: genre)
-                        
-                        }
-
-                    self.bestellung2.updateValue(self.bestellunggenres, forKey: BestellungID)
-                    self.angenommenBestellungenTV.reloadData()
-
-                    }
-
-
-                
-                if self.bestellung2.count == self.bestellungIDs.count {
-                    for (a, b) in self.bestellung2 {
-
-
-                        for d in b.values {
-
-                            for (e,f) in d {
-
-                                self.itemsangenommen.append(e)
-                                self.mengenangenommen.append(f)
-
-
-                            }
-                        }
-                        self.setSections(genre: a, items: self.itemsangenommen, preise: self.mengenangenommen)
-                        self.itemsangenommen.removeAll()
-                        self.mengenangenommen.removeAll()
-                    }
-                    self.angenommenBestellungenTV.reloadData()
-                }
-            }, withCancel: nil)
-
-        }
         
-        func removeBestellung(KellnerID: String, BestellungID: String){
-            var datref: DatabaseReference!
-            datref = Database.database().reference()
-            datref.child("userBestellungen").child(KellnerID).child(BestellungID).updateChildValues(["angenommen": true])
-        }
-        
+    }
+    
+//
+//        func removeBestellung(KellnerID: String, BestellungID: String){
+//            var datref: DatabaseReference!
+//            datref = Database.database().reference()
+//            datref.child("userBestellungen").child(KellnerID).child(BestellungID).updateChildValues(["angenommen": true])
+//        }
+//
 
         // TABLE
     
     func numberOfSections(in tableView: UITableView) -> Int {
-            return sections.count
-        
+        print(self.Bestellungen, "bestellungen")
+        return self.Bestellungen.count
+
     }
     
     
@@ -162,57 +391,45 @@ class KellnerAngenommenVC: UIViewController, UITableViewDelegate, UITableViewDat
     
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 59
+        var heightForHeaderInSection: Int?
+        
+        heightForHeaderInSection = 50
+        return CGFloat(heightForHeaderInSection!)
     }
     
 
-
-        
-        func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-            let cell = Bundle.main.loadNibNamed("bezahlenCell", owner: self, options: nil)?.first as! bezahlenCell
-            if (sections[indexPath.section].expanded){
-
-            cell.bestellteItems = bestellung2
-            cell.section = indexPath.section
-
-            let timeStampDate = NSDate(timeIntervalSince1970: TimeStamps[indexPath.row])
-            let dateFormatter = DateFormatter()
-            dateFormatter.dateFormat = "HH:mm"
-                cell.loadBestellung(id: bestellungIDs[indexPath.section])
-            print(indexPath, bestellungIDs, bestellung2)
-            cell.timeLbl.text = "\(dateFormatter.string(from: timeStampDate as Date)) Uhr"
-                return cell
-                
-            }
-            else {
-                cell.timeLbl.isHidden = true
-                cell.testTabelle.isHidden = true
-                cell.gesamtLbl.isHidden = true
-                cell.gesamtPreisLbl.isHidden = true
-                cell.bezahlenBtn.isHidden = true
-                return cell
-                
-            }
-            
-        
-            
-            
-        }
     
-        func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-            if (sections[indexPath.section].expanded) {
-//                print(sections[indexPath.section].items)
-//                let height = 361 - 215 + sections[indexPath.section].items.count*44
-                return 400
-
-            } else {
-                return 0
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        if (Bestellungen[indexPath.section].expanded) {
+            let kategorieCount = Bestellungen[indexPath.section].Kategorie.count
+            var UnterkategorieCount = 0
+            var itemsCount = 0
+            for items in  Bestellungen[indexPath.section].items {
+                for item in items {
+                    itemsCount = itemsCount + item.count
+                }
             }
-
+            for unterkategorie in Bestellungen[indexPath.section].Unterkategorie {
+                UnterkategorieCount = UnterkategorieCount + unterkategorie.count
+                
+            }
+            print(itemsCount, "itemscount")
+            print(kategorieCount, "kategorieCount")
+            print(UnterkategorieCount, "UnterkategorieCount")
+            return CGFloat(kategorieCount*50 + UnterkategorieCount*50 + itemsCount*46)
+            
+            
         }
+        else {
+            return 0
+        }
+
+    }
     
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        
         return 15
+        
     }
     
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
@@ -222,76 +439,99 @@ class KellnerAngenommenVC: UIViewController, UITableViewDelegate, UITableViewDat
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-
+        
+        
         let header = ExpandableHeaderView()
+        header.contentView.layer.cornerRadius = 10
+        header.contentView.layer.backgroundColor = UIColor.clear.cgColor
+        header.layer.cornerRadius = 10
+        header.layer.backgroundColor = UIColor.clear.cgColor
         
-        header.customInit(tableView: tableView, title: "Tisch \(tischnummer[section])", section: section, delegate: self as ExpandableHeaderViewDelegate)
-
-        
+        header.customInit(tableView: tableView, title: Bestellungen[section].Tischnummer, section: section, delegate: self as ExpandableHeaderViewDelegate)
         return header
     }
     
-    func toggleSection(tableView: UITableView, header: ExpandableHeaderView, section: Int) {
-        sections[section].expanded = !sections[section].expanded
-        angenommenBestellungenTV.beginUpdates()
-        DispatchQueue.main.async(execute: {
-            self.angenommenBestellungenTV.reloadData()
-        } )
-        angenommenBestellungenTV.reloadSections([section], with: .automatic)
-        angenommenBestellungenTV.endUpdates()
-
-
         
-    }
-    
-
-    
-    
-    
-        // OTHERS
-        
-        override func viewWillAppear(_ animated: Bool) {
-            angenommenBestellungenTV.estimatedRowHeight = 50
-            angenommenBestellungenTV.rowHeight = UITableViewAutomaticDimension
-//            loadBestellungsID(KellnerID: self.KellnerID)
+        func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+            let cell = Bundle.main.loadNibNamed("KellnerCell", owner: self, options: nil)?.first as! KellnerCell
+            cell.Bestellungen = Bestellungen
+            cell.Cell1Section = indexPath.section
+            cell.bestellungID = Bestellungen[indexPath.section].BestellungID
+            
+            
+            let formatter = DateFormatter()
+            formatter.dateFormat = "yyyy/MM/dd HH:mm"
+            let DayOne = formatter.date(from: "2018/05/15 12:00")
+            let timeStampDate = NSDate(timeInterval: self.Bestellungen[indexPath.section].TimeStamp, since: DayOne!)
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "HH:mm"
+            
+            cell.timeLbl.text = "\(dateFormatter.string(from: timeStampDate as Date)) Uhr"
+            
+            return cell
         }
+    
+    
 
+    
+    func toggleSection(tableView: UITableView, header: ExpandableHeaderView, section: Int) {
+        for i in 0..<Bestellungen.count{
+            if i == section {
+                Bestellungen[section].expanded = !Bestellungen[section].expanded
+            } else {
+                Bestellungen[i].expanded = false
+                
+            }
+        }
+        
+        angenommenBestellungenTV.beginUpdates()
+        angenommenBestellungenTV.reloadRows(at: [IndexPath(row: 0, section: section)], with: .automatic)
+        
+        angenommenBestellungenTV.endUpdates()
+    
+    }
+
+        // OTHERS
     
         
         override func viewDidLoad() {
             
             super.viewDidLoad()
-            angenommenBestellungenTV.reloadData()
-            loadGenres()
-            loadBestellungsID(KellnerID: self.KellnerID)
+            barnamelbl.text = Barname
+            
+            loadBestellungenKeys()
 
-            let refreshControl = UIRefreshControl()
-            let title = NSLocalizedString("aktualisiere", comment: "Pull to refresh")
-            refreshControl.attributedTitle = NSAttributedString(string: title)
-            refreshControl.addTarget(self, action: #selector(refreshOptions(sender:)), for: .valueChanged)
-            angenommenBestellungenTV.refreshControl = refreshControl
+//            angenommenBestellungenTV.reloadData()
+//            loadGenres()
+//            loadBestellungsID(KellnerID: self.KellnerID)
+//
+//            let refreshControl = UIRefreshControl()
+//            let title = NSLocalizedString("aktualisiere", comment: "Pull to refresh")
+//            refreshControl.attributedTitle = NSAttributedString(string: title)
+//            refreshControl.addTarget(self, action: #selector(refreshOptions(sender:)), for: .valueChanged)
+//            angenommenBestellungenTV.refreshControl = refreshControl
             
             
         }
         
         @objc private func refreshOptions(sender: UIRefreshControl) {
-            bestellungIDs.removeAll()
-            itemssss.removeAll()
-            bestellunggenres.removeAll()
-            genres.removeAll()
-            bestellung2.removeAll()
-            sections.removeAll()
-            TimeStamps = [Double]()
-            tischnummer = [String]()
-            itemsangenommen.removeAll()
-            mengenangenommen.removeAll()
-            items.removeAll()
-            loadGenres()
-            loadBestellungsID(KellnerID: self.KellnerID)
-
-
-            
-            sender.endRefreshing()
+//            bestellungIDs.removeAll()
+//            itemssss.removeAll()
+//            bestellunggenres.removeAll()
+//            genres.removeAll()
+//            bestellung2.removeAll()
+//            sections.removeAll()
+//            TimeStamps = [Double]()
+//            tischnummer = [String]()
+//            itemsangenommen.removeAll()
+//            mengenangenommen.removeAll()
+//            items.removeAll()
+//            loadGenres()
+//            loadBestellungsID(KellnerID: self.KellnerID)
+//
+//
+//            
+//            sender.endRefreshing()
         }
         
         override func didReceiveMemoryWarning() {
