@@ -8,11 +8,14 @@
 
 import UIKit
 import Pulley
+import CoreLocation
+import MapKit
 
-class PageViewController: UIPageViewController, UIPageViewControllerDelegate, UIPageViewControllerDataSource, PulleyDrawerViewControllerDelegate {
+class PageViewController: UIPageViewController, UIPageViewControllerDelegate, UIPageViewControllerDataSource, PulleyDrawerViewControllerDelegate, CLLocationManagerDelegate, MKMapViewDelegate {
     
-    var name = "Barracuda"
-    
+    var name = ""
+    var adresse = ""
+    let regionRadius: CLLocationDistance = 800
     var pageControl = UIPageControl()
     
     // MARK: UIPageViewControllerDataSource
@@ -144,8 +147,30 @@ class PageViewController: UIPageViewController, UIPageViewControllerDelegate, UI
         return orderedViewControllers[nextIndex]
     }
     
-    //Back
+    //movePulley
+    func pos1 (){
+        (parent as? PulleyViewController)?.setDrawerPosition(position: PulleyPosition(rawValue: 1)!, animated: true)
+    }
     
+    //adressfunction
+    func adressfunc(){
+        let mapvc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "LocationVC") as! LocationVC
+        
+                CLGeocoder().geocodeAddressString(self.adresse, completionHandler: { (placemarks, error) -> Void in
+        
+                    if let placemark = placemarks?[0] {
+                        let location = placemark.location!
+                        print("location", location)
+                        //mapvc.centerMapOnPin(selectedPin: location)
+                        let newregion = MKCoordinateRegionMakeWithDistance(location.coordinate, self.regionRadius, self.regionRadius)
+                        mapvc.loadViewIfNeeded()
+                        mapvc.mapViewDidFinishLoadingMap(mapView: mapvc.map, selectedPin: location)
+                        mapvc.map.setRegion(newregion, animated: true)
+                     }})
+        
+    }
+    
+    //Back
     func goback(){
         (parent as? PulleyViewController)?.setDrawerPosition(position: PulleyPosition(rawValue: 2)!, animated: true)
         let drawervc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "DrawerVC") as! DrawerVC

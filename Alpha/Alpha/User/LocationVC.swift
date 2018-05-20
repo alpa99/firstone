@@ -13,7 +13,7 @@ import Pulley
 import CoreLocation // BRAUCHEN WIR DAS
 import AddressBookUI // BRAUCHEN WIR DAS
 
-class LocationVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
+class LocationVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate, PulleyPrimaryContentControllerDelegate {
 
 
     // VARS
@@ -28,8 +28,8 @@ class LocationVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate
     
     // OUTLETS
     
-    @IBOutlet weak var map: MKMapView!
-
+    @IBOutlet var map: MKMapView!
+    
     // FUNTIONS FIREBASE
 
     func fetchAdress() {
@@ -73,7 +73,20 @@ class LocationVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate
             locationManager.requestWhenInUseAuthorization()
         }
     }
+    func centerMapOnPin (selectedPin: CLLocation){
+        loadViewIfNeeded()
+     
+        let newregion = MKCoordinateRegionMakeWithDistance(selectedPin.coordinate, regionRadius, regionRadius)
+        print(selectedPin, "pinsel")
+        print( newregion)
+        print(map)
+        map.setRegion(newregion, animated: false)
+    }
     
+    func mapViewDidFinishLoadingMap (mapView: MKMapView, selectedPin: CLLocation) {
+        let newregion = MKCoordinateRegionMakeWithDistance(selectedPin.coordinate, regionRadius, regionRadius)
+        map.setRegion(newregion, animated: true)
+    }
 
     func centerMapOnLocation(){
         
@@ -165,13 +178,13 @@ class LocationVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         map.delegate = self
         locationManager.requestWhenInUseAuthorization()
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
         locationManager.delegate = self
         
-        let pagevc2 = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "PageVC2") as! PageViewController2
-        pagevc2.name = "Barracuda"
+        
         
         fetchAdress()
         centerMapOnLocation()
@@ -179,6 +192,8 @@ class LocationVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate
     
     override func viewDidAppear(_ animated: Bool){
         locationAuthStatus()
+        print("Hierdiemap", map)
+
     }
     
     

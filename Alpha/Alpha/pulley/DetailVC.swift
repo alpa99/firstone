@@ -10,9 +10,11 @@ import UIKit
 import Pulley
 import Firebase
 import ImageSlideshow
+import CoreLocation
 
-class DetailVC: UIViewController, PulleyDrawerViewControllerDelegate, PageObservation{
- 
+class DetailVC: UIViewController, PulleyDrawerViewControllerDelegate, PageObservation, CLLocationManagerDelegate{
+    
+    
     var barname = ""
     var bars = [BarInfos]()
     var bilder = [String]()
@@ -45,6 +47,7 @@ class DetailVC: UIViewController, PulleyDrawerViewControllerDelegate, PageObserv
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.adressebtn.setTitle(adresse, for: .normal)
 
         self.barname = parentPageViewController.name
         fetchPicsCount()
@@ -52,7 +55,7 @@ class DetailVC: UIViewController, PulleyDrawerViewControllerDelegate, PageObserv
         fetchInfos()
         fetchText()
         slideshow.backgroundColor = UIColor.white
- 
+
         slideshow.slideshowInterval = 0.0
         slideshow.pageControlPosition = PageControlPosition.insideScrollView
         slideshow.pageControl.currentPageIndicatorTintColor = UIColor(red: 185.0/255.0, green: 170.0/255.0, blue: 140.0/255.0, alpha: 1.0)
@@ -85,6 +88,16 @@ class DetailVC: UIViewController, PulleyDrawerViewControllerDelegate, PageObserv
         
     }
     
+    @IBAction func adresseclick(_ sender: UIButton) {
+        
+//        parentPageViewController.pos1()
+//
+//       parentPageViewController.adresse = self.adresse
+//        parentPageViewController.adressfunc()
+        
+        
+    }
+    
     @IBOutlet weak var icon1: UIImageView!
     @IBOutlet weak var icon2: UIImageView!
     @IBOutlet weak var icon3: UIImageView!
@@ -97,6 +110,8 @@ class DetailVC: UIViewController, PulleyDrawerViewControllerDelegate, PageObserv
     @IBOutlet weak var icon10: UIImageView!
     
     @IBOutlet weak var maintxt: UILabel!
+    
+    @IBOutlet weak var adressebtn: UIButton!
     
     func fetchText () {
         print("fetchtext")
@@ -164,7 +179,10 @@ class DetailVC: UIViewController, PulleyDrawerViewControllerDelegate, PageObserv
                 self.bars.append(bar)
                 self.picture.append(bar.Bild!)
                 print(self.picture)
+                print("Adresse", bar.Adresse ?? "")
+                self.adressebtn.setTitle(bar.Adresse, for: .normal)
 
+                self.adresse = bar.Adresse!
             }} , withCancel: nil)
         
     }
@@ -182,73 +200,73 @@ class DetailVC: UIViewController, PulleyDrawerViewControllerDelegate, PageObserv
             
             self.it1.append(it.item1!)
             if self.it1 == "t" {
-                self.icon1.image = #imageLiteral(resourceName: "Tabrechts")
+                self.icon1.image = #imageLiteral(resourceName: "alkohol")
             }
             if self.it1 == "f" {
-                self.icon1.image = #imageLiteral(resourceName: "Tablinks")
+                self.icon1.image = #imageLiteral(resourceName: "alkohol-i")
             }
             self.it2.append(it.item2!)
             if self.it2 == "t" {
-                self.icon2.image = #imageLiteral(resourceName: "Tabrechts")
+                self.icon2.image = #imageLiteral(resourceName: "essen")
             }
             if self.it2 == "f" {
-                self.icon2.image = #imageLiteral(resourceName: "Tablinks")
+                self.icon2.image = #imageLiteral(resourceName: "essen-i")
             }
             self.it3.append(it.item3!)
             if self.it3 == "t" {
-                self.icon3.image = #imageLiteral(resourceName: "Tabrechts")
+                self.icon3.image = #imageLiteral(resourceName: "wlan")
             }
             if self.it3 == "f" {
-                self.icon3.image = #imageLiteral(resourceName: "Tablinks")
+                self.icon3.image = #imageLiteral(resourceName: "wlan-i")
             }
             self.it4.append(it.item4!)
             if self.it4 == "t" {
-                self.icon4.image = #imageLiteral(resourceName: "Tabrechts")
+                self.icon4.image = #imageLiteral(resourceName: "parken")
             }
             if self.it4 == "f" {
-                self.icon4.image = #imageLiteral(resourceName: "Tablinks")
+                self.icon4.image = #imageLiteral(resourceName: "parken-i")
             }
             self.it5.append(it.item5!)
             if self.it5 == "t" {
-                self.icon5.image = #imageLiteral(resourceName: "Tabrechts")
+                self.icon5.image = #imageLiteral(resourceName: "kartenzahlung")
             }
             if self.it5 == "f" {
-                self.icon5.image = #imageLiteral(resourceName: "Tablinks")
+                self.icon5.image = #imageLiteral(resourceName: "kartenzahlung-i")
             }
             self.it6.append(it.item6!)
             if self.it6 == "t" {
-                self.icon6.image = #imageLiteral(resourceName: "Tabrechts")
+                self.icon6.image = #imageLiteral(resourceName: "spiele")
             }
             if self.it6 == "f" {
-                self.icon6.image = #imageLiteral(resourceName: "Tablinks")
+                self.icon6.image = #imageLiteral(resourceName: "spiele-i")
             }
             self.it7.append(it.item7!)
             if self.it7 == "t" {
-                self.icon7.image = #imageLiteral(resourceName: "Tabrechts")
+                self.icon7.image = #imageLiteral(resourceName: "sporttv")
             }
             if self.it7 == "f" {
-                self.icon7.image = #imageLiteral(resourceName: "Tablinks")
+                self.icon7.image = #imageLiteral(resourceName: "sporttv-i")
             }
             self.it8.append(it.item8!)
             if self.it8 == "t" {
-                self.icon8.image = #imageLiteral(resourceName: "Tabrechts")
+                self.icon8.image = #imageLiteral(resourceName: "shisha")
             }
             if self.it8 == "f" {
-                self.icon8.image = #imageLiteral(resourceName: "Tablinks")
+                self.icon8.image = #imageLiteral(resourceName: "shisha-i")
             }
             self.it9.append(it.item9!)
             if self.it9 == "t" {
-                self.icon9.image = #imageLiteral(resourceName: "Tabrechts")
+                self.icon9.image = #imageLiteral(resourceName: "rauchen")
             }
             if self.it9 == "f" {
-                self.icon9.image = #imageLiteral(resourceName: "Tablinks")
+                self.icon9.image = #imageLiteral(resourceName: "rauchen-i")
             }
             self.it10.append(it.item10!)
             if self.it10 == "t" {
-                self.icon10.image = #imageLiteral(resourceName: "Tabrechts")
+                self.icon10.image = #imageLiteral(resourceName: "terasse")
             }
             if self.it10 == "f" {
-                self.icon10.image = #imageLiteral(resourceName: "Tablinks")
+                self.icon10.image = #imageLiteral(resourceName: "terasse-i")
             }
             
         }}, withCancel: nil)

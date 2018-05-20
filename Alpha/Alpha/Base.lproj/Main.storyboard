@@ -569,7 +569,7 @@
         <!--LocationVC-->
         <scene sceneID="JvY-Yy-6O4">
             <objects>
-                <viewController id="cNZ-G9-UFF" customClass="LocationVC" customModule="Alpha" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="LocationVC" id="cNZ-G9-UFF" customClass="LocationVC" customModule="Alpha" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="CU6-fQ-J7Q">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -605,7 +605,7 @@
                         <viewLayoutGuide key="safeArea" id="5sc-C6-4dM"/>
                     </view>
                     <connections>
-                        <outlet property="map" destination="6O3-8I-x3v" id="Prq-bX-4dn"/>
+                        <outlet property="map" destination="6O3-8I-x3v" id="vgd-Nz-vL9"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yO8-K2-STf" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1052,6 +1052,16 @@
                                                 </attributedString>
                                                 <nil key="highlightedColor"/>
                                             </label>
+                                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="jYJ-BU-GDc">
+                                                <rect key="frame" x="94" y="572" width="263" height="54"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="14"/>
+                                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <state key="normal" title="adresse"/>
+                                                <connections>
+                                                    <action selector="adresseclick:" destination="RQu-h7-DDh" eventType="touchUpInside" id="tkq-1t-9c5"/>
+                                                </connections>
+                                            </button>
                                         </subviews>
                                         <constraints>
                                             <constraint firstItem="hYz-vo-25U" firstAttribute="top" secondItem="XT3-ss-KWX" secondAttribute="topMargin" id="12f-SB-1wS"/>
@@ -1120,6 +1130,7 @@
                     <size key="freeformSize" width="375" height="910"/>
                     <connections>
                         <outlet property="Namelbl" destination="0gE-dk-9Yg" id="FJs-Xd-UyD"/>
+                        <outlet property="adressebtn" destination="jYJ-BU-GDc" id="BRO-Es-CKl"/>
                         <outlet property="icon1" destination="uZe-em-ItW" id="OSE-z2-5nc"/>
                         <outlet property="icon10" destination="eJR-id-vNC" id="xte-gA-cFV"/>
                         <outlet property="icon2" destination="IzW-lU-t1x" id="gsh-cE-Db3"/>
@@ -1396,7 +1407,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="Tablinks" width="29" height="29"/>
+        <image name="Tablinks" width="40" height="40"/>
         <image name="Tabmitte" width="40" height="40"/>
         <image name="Tabrechts" width="40" height="40"/>
         <image name="hintergrund" width="375" height="667"/>
