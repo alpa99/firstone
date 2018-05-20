@@ -23,17 +23,7 @@ protocol BestellenCellDelegate {
 class BestellenCell: UITableViewCell, UITableViewDelegate, UITableViewDataSource, bestellenCell2Delegate, ExpandableHeaderViewDelegate2 {
 
     // VARS
-    
-    var cellIndexPathSection: Int!
-
-    func addBtnTapped(sender: BestellenCell2) {
-        section2 = sender.section2
-        row2 = sender.row2
-        delegate?.pass(sender: self)
-    }
-   
     var delegate: BestellenCellDelegate?
-//
     var unterkategorien = [ExpandTVSection2]()
     var items = [[String]]()
     var preise = [[Double]]()
@@ -44,21 +34,23 @@ class BestellenCell: UITableViewCell, UITableViewDelegate, UITableViewDataSource
     var section2 = Int()
     var row2 = Int()
 
+    var cellIndexPathSection: Int!
+
+    func addBtnTapped(sender: BestellenCell2) {
+        section2 = sender.section2
+        row2 = sender.row2
+        delegate?.pass(sender: self)
+    }
+   
+
     
     // OUTLETS
 
     @IBOutlet weak var BestellenTV: UITableView!
     
-    
-    // ACTIONS
-    
-
-
-    
 
     // Tabelle
     func numberOfSections(in tableView: UITableView) -> Int {
-        print(unterkategorien, "dfdsgsdf")
         return unterkategorien[cellIndexPathSection].Unterkategorie.count
         
     }
@@ -77,7 +69,6 @@ class BestellenCell: UITableViewCell, UITableViewDelegate, UITableViewDataSource
 //            return CGFloat(unterkategorien[0].items[section].count*46)
             return CGFloat(46)
 
-            
         }
         else {
             return 0

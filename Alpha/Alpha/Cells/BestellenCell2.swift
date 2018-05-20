@@ -30,7 +30,6 @@ class BestellenCell2: UITableViewCell {
     
     
     @IBAction func addBtnTapped(_ sender: Any) {
-        print("XY")
         delegate?.addBtnTapped(sender: self)
     }
     

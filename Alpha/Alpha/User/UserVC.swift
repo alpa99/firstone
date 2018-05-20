@@ -16,11 +16,13 @@ class UserVC: UIViewController {
     @IBAction func meinebestellungen(_ sender: UIButton) {
         performSegue(withIdentifier: "meinebestellungen", sender: self)
     }
+    
     @IBAction func logOutTapped(_ sender: Any){
     let loginManager = LoginManager()
         loginManager.logOut()
         performSegue(withIdentifier: "logout", sender: self)
     }
+    
     
     // OTHERS
     override func viewDidLoad() {

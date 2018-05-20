@@ -45,7 +45,7 @@ class SpeisekarteCelle: UITableViewCell, UITableViewDataSource, UITableViewDeleg
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if unterkategorien[0].expanded2[indexPath.section] != false {
-            return CGFloat(unterkategorien[0].items[indexPath.section].count*44 + 50)}
+            return CGFloat(46)}
         else {
             return 0
             
@@ -53,7 +53,7 @@ class SpeisekarteCelle: UITableViewCell, UITableViewDataSource, UITableViewDeleg
     }
     
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        return 5
+        return 15
         
     }
     
@@ -85,7 +85,9 @@ class SpeisekarteCelle: UITableViewCell, UITableViewDataSource, UITableViewDeleg
         var preis = unterkategorien[0].preis[indexPath.section]
         var liter = unterkategorien[0].liter[indexPath.section]
         cell.itemLbl.text = item[indexPath.row]
-        cell.PreisLbl.text = "\(preis[indexPath.row])€"
+        let preisFormat = String(format: "%.2f", arguments: [preis[indexPath.row]])
+
+        cell.PreisLbl.text = "\(preisFormat) €"
             print(liter)
             print(indexPath.row, self.row)
                 if liter[indexPath.row] != "0.0l"{

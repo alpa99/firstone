@@ -16,8 +16,13 @@ protocol BestellungVC2Delegate {
   
 }
 class BestellungVC2: UIViewController, UITableViewDataSource, UITableViewDelegate, ExpandableHeaderViewDelegate, BestellenCellDelegate, MyBestellungCellDelegate, PageObservation2, CLLocationManagerDelegate {
- 
-    
+   
+    // VARS
+
+    var barname = "NewBar"
+    var baradresse = " "
+    var tischnummer = 0
+    var KellnerID = ""
     
     var BestellungKategorien = [String]()
     var BestellungUnterkategorien = [[String]]()
@@ -34,39 +39,18 @@ class BestellungVC2: UIViewController, UITableViewDataSource, UITableViewDelegat
     var itemLiter = [String]()
     
  
-    
-    // VARS
     var sections = [ExpandTVSection2]()
-    
     var Kategorien = [String]()
     var Unterkategorien = [String: [String]]()
     var Items = [String: [[String]]]()
     var Preis = [String: [[Double]]]()
     var Liter = [String: [[String]]]()
     var Expanded = [String: [Bool]]()
-    
-    
-    
 
-    var keys = [String: Int]()
     var bestellteItemsDictionary = [bestellungTVSection]()
-    var yy = [String]()
-    var genres = [String]()
-    var itemss = [String]()
-    var values = [Int]()
-    
     var locationManager = CLLocationManager()
-    
     var parentPageViewController2: PageViewController2!
     
-    var barname = "NewBar"
-    var baradresse = " "
-    var tischnummer = 0
-    var KellnerID = ""
-    
-    var items = [String]()
-    var itemsPreise = [Int]()
-
     //bestellungTV
     var cellIndexPathSection = 0
     var cellIndexPathRow = 0
@@ -75,45 +59,25 @@ class BestellungVC2: UIViewController, UITableViewDataSource, UITableViewDelegat
     var cellIndexPathSection2 = 0
     var cellIndexPathRow2 = 0
     var i = 1
-
-    var bestellung = [ExpandTVSection]()
     
     var effect: UIVisualEffect!
-    
-    
-    
     
     // OUTLETS
     
     @IBOutlet var bestellungVCView: UIView!
-    
-    
-    
     @IBOutlet var addItemView: UIView!
     @IBOutlet weak var KategorieLbl: UILabel!
     @IBOutlet weak var UnterkategorieLbl: UILabel!
     @IBOutlet weak var itemNameLbl: UILabel!
     @IBOutlet weak var itemPreisLbl: UILabel!
-    
     @IBOutlet weak var itemLiterLbl: UILabel!
     @IBOutlet weak var itemCountLbl: UILabel!
-    
-    
-    
-    
     @IBOutlet weak var myBestellungTV: UITableView!
-    
     @IBOutlet weak var bestellungTableView: UITableView!
-    
     @IBOutlet var myBestellungView: UIView!
-    
-    
     @IBOutlet weak var visualEffectView: UIVisualEffectView!
-    
     @IBOutlet weak var dismissPopUp: UIButton!
-    
     @IBOutlet weak var aktualisierungAbbrechen: UIButton!
-    
     @IBOutlet weak var myBestellungAbschickenBtn: UIButton!
     
     
@@ -121,9 +85,7 @@ class BestellungVC2: UIViewController, UITableViewDataSource, UITableViewDelegat
     // ACTIONS
     
     @IBAction func myBestellungAbschicken(_ sender: Any) {
-//      print(baradresse, "baradresse")
 //        CLGeocoder().geocodeAddressString(baradresse, completionHandler: { (placemarks, error) -> Void in
-//            print(self.baradresse,"bar3")
 //            if let placemark = placemarks?[0] {
 //
 //                let locat = placemark.location
@@ -171,32 +133,15 @@ class BestellungVC2: UIViewController, UITableViewDataSource, UITableViewDelegat
     // FUNCTIONS
     
     @IBAction func bestellungPrüfen(_ sender: Any) {
-        print(BestellungKategorien, "katsss")
         if BestellungKategorien.count != 0{
-            print(BestellungKategorien, "333333")
 
         for Kategorie in BestellungKategorien {
-            print(bestellteItemsDictionary, "fweqsdcxy")
-
             let section = BestellungKategorien.index(of: Kategorie)
-            print(BestellungUnterkategorien, "BestellungUnterkategorien")
-
-            print(BestellungItemsNamen, "BestellungItemsNamen")
-            print(BestellungItemsPreise, "BestellungItemsPreise")
-            print(BestellungItemsLiter, "BestellungItemsLiter")
-            print(BestellungItemsMengen, "BestellungItemsMengen")
-
-            print(BestellungItemsExpanded2, "BestellungItemsExpanded2")
-
             setSectionsBestellung(Kategorie: Kategorie, Unterkategorie: BestellungUnterkategorien[section!], items: BestellungItemsNamen[section!], preis: BestellungItemsPreise[section!], liter: BestellungItemsLiter[section!], menge: BestellungItemsMengen[section!], expanded2: BestellungItemsExpanded2[section!])
-            
+    
         }
-        print(bestellteItemsDictionary, "fwdeew")
-
-        
         myBestellungTV.reloadData()
-        
-
+            
                 self.bestellungVCView.addSubview(visualEffectView)
                 visualEffectView.center = self.bestellungVCView.center
                 self.bestellungVCView.addSubview(self.myBestellungView)
@@ -208,8 +153,8 @@ class BestellungVC2: UIViewController, UITableViewDataSource, UITableViewDelegat
                     self.visualEffectView.effect = self.effect
                     self.myBestellungView.alpha = 1.0
                     self.myBestellungView.transform = CGAffineTransform.identity
-                    print(self.bestellteItemsDictionary)
-                }
+
+            }
         } else {
             let alertKeineBestellung = UIAlertController(title: "Bestellung überprüfen", message: "Deine Bestellung ist leer", preferredStyle: .alert)
             alertKeineBestellung.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
@@ -324,10 +269,7 @@ class BestellungVC2: UIViewController, UITableViewDataSource, UITableViewDelegat
             }
             
             if self.Unterkategorien.count == self.Kategorien.count {
-                print(self.Kategorien)
-                print(self.Unterkategorien)
-                print(self.Items)
-                
+
                 for kategorie in self.Kategorien {
                     self.setSectionsSpeisekarte(Kategorie: kategorie, Unterkategorie: self.Unterkategorien[kategorie]!, items: self.Items[kategorie]!, preis: self.Preis[kategorie]!, liter: self.Liter[kategorie]!, expanded2: self.Expanded[kategorie]!)
                 }
@@ -340,15 +282,13 @@ class BestellungVC2: UIViewController, UITableViewDataSource, UITableViewDelegat
     }
     
     
-    
-    
+
 
     func seugueAbschicken(){
 
-performSegue(withIdentifier: "wirdabgeschickt", sender: self)
+        performSegue(withIdentifier: "wirdabgeschickt", sender: self)
     }
     
-  
     
 
     func handleBestellung(){
@@ -358,23 +298,16 @@ performSegue(withIdentifier: "wirdabgeschickt", sender: self)
         formatter.dateFormat = "yyyy/MM/dd HH:mm"
         let DayOne = formatter.date(from: "2018/05/15 12:00")
         let timestamp = Double(NSDate().timeIntervalSince(DayOne!))
-        
-        //
-        //
-        //
-        // muss bearbeitet werden! andere uids auch
-        let fromUserID = Auth.auth().currentUser?.uid
-        let values = ["toKellnerID": KellnerID, "tischnummer": "\(tischnummer)", "fromUserID": fromUserID! , "timeStamp": timestamp, "angenommen": false] as [String : Any]
 
-        
-        //
-        //
-        //
-        // muss bearbeitet werden!
+        let fromUserID = Auth.auth().currentUser?.uid
+        let values = ["Barname": barname ,"toKellnerID": KellnerID, "tischnummer": "\(tischnummer)", "fromUserID": fromUserID! , "timeStamp": timestamp, "Status": "versendet"] as [String : Any]
+        let userRef = Database.database().reference().child("Users").child(fromUserID!)
+        userRef.updateChildValues(["akutelleBar" : barname, "letzteBestellungZeit": timestamp])
+
             ref = Database.database().reference().child("Bestellungen").child(barname)
+        
             let childRef = ref?.childByAutoId()
 
-            print(self.bestellteItemsDictionary[0], "NO")
         for Bestellung in self.bestellteItemsDictionary {
             let Unterkategorien = Bestellung.Unterkategorie
 
@@ -396,22 +329,22 @@ performSegue(withIdentifier: "wirdabgeschickt", sender: self)
 
                 }
 
-        }
-            print(Bestellung.Unterkategorie)
-            print(Bestellung.items)
-
+            }
 
         }
         
             childRef?.child("Information").updateChildValues(values)
         let userBestellungenRef = Database.database().reference().child("userBestellungen").child(fromUserID!)
-            let bestellungID = childRef?.key
+        let userProfil = Database.database().reference().child("Users").child(fromUserID!)
+        let bestellungID = childRef?.key
+        
             userBestellungenRef.child(bestellungID!).updateChildValues(["BestellungsID": bestellungID!, "abgeschlossen": false])
             userBestellungenRef.child(bestellungID!).updateChildValues(values)
+        userProfil.updateChildValues(["aktuelleBar" : barname, "aktuellerTisch": tischnummer, "letzteBestellungZeit": timestamp])
+    
 
             let kellnerBestellungenRef = Database.database().reference().child("userBestellungen").child(KellnerID)
-        kellnerBestellungenRef.child(bestellungID!).updateChildValues(["Status": "versendet", "fromUserID": fromUserID!] )
-            print(Date(timeIntervalSince1970: timestamp))
+        kellnerBestellungenRef.child(bestellungID!).updateChildValues(["Status": "versendet", "fromUserID": fromUserID!, "tischnummer": "\(tischnummer)"] )
 
     }
 
@@ -493,14 +426,12 @@ performSegue(withIdentifier: "wirdabgeschickt", sender: self)
     
     func setSectionsSpeisekarte(Kategorie: String, Unterkategorie: [String], items: [[String]], preis: [[Double]], liter: [[String]], expanded2: [Bool]){
         self.sections.append(ExpandTVSection2(Kategorie: Kategorie, Unterkategorie: Unterkategorie, items: items, preis: preis, liter: liter, expanded2: expanded2, expanded: false))
-        print(self.sections)
         self.bestellungTableView.reloadData()
     }
     
     func setSectionsBestellung(Kategorie: String, Unterkategorie: [String], items: [[String]], preis: [[Double]], liter: [[String]], menge: [[Int]], expanded2: [Bool]){
         self.bestellteItemsDictionary
             .append(bestellungTVSection(Kategorie: Kategorie, Unterkategorie: Unterkategorie, items: items, preis: preis, liter: liter, menge: menge, expanded2: expanded2, expanded: true))
-        print(self.bestellteItemsDictionary)
     }
 
 
@@ -531,48 +462,54 @@ performSegue(withIdentifier: "wirdabgeschickt", sender: self)
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        
+
         var heightForRowAt: Int?
         if tableView == bestellungTableView{
             if (sections[indexPath.section].expanded) {
-                
+
                 heightForRowAt = (sections[indexPath.section].Unterkategorie.count*50)
-                print(sections[indexPath.section].expanded2, "Esdgsdgsdgsd")
                 for expandend in sections[indexPath.section].expanded2 {
                     if expandend == true {
                         heightForRowAt = heightForRowAt! + sections[indexPath.section].items[indexPath.row].count*50
                     }
                 }
-                
+
             }
             else {
                 heightForRowAt = 0
             }
-            
+
         }
-        
+
         if tableView == myBestellungTV{
             if (bestellteItemsDictionary[indexPath.section].expanded) {
-                
-                heightForRowAt = (bestellteItemsDictionary[indexPath.section].Unterkategorie.count*50) + sections[indexPath.section].items[indexPath.row].count*50
-                    
-                
+
+                heightForRowAt = (bestellteItemsDictionary[indexPath.section].Unterkategorie.count*36) + bestellteItemsDictionary[indexPath.section].items[indexPath.row].count*55
             }
             else {
                 heightForRowAt = 0
             }
-            
+
         }
-        
-        
+
+
         return CGFloat(heightForRowAt!)
-        
+
     }
     
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         
-        return 15
+        var heightForFooterInSection: Int?
+        if tableView == bestellungTableView{
         
+            heightForFooterInSection = 15
+        }
+        
+        if tableView == myBestellungTV{
+            heightForFooterInSection = 15
+        }
+        
+        return CGFloat(heightForFooterInSection!)
     }
     
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
@@ -633,7 +570,6 @@ performSegue(withIdentifier: "wirdabgeschickt", sender: self)
         else {
              let cell = Bundle.main.loadNibNamed("MyBestellungCell", owner: self, options: nil)?.first as! MyBestellungCell
             cell.delegate = self
-            print(bestellteItemsDictionary, indexPath.section, "fsvreced34ew")
             cell.bestellteItemsDictionary = bestellteItemsDictionary
             cell.sections = indexPath.section
             
@@ -719,7 +655,6 @@ performSegue(withIdentifier: "wirdabgeschickt", sender: self)
             
             // kategorie gibt es nicht
             if !BestellungKategorien.contains(KategorieLbl.text!){
-                print(BestellungKategorien,KategorieLbl,UnterkategorieLbl, itemNameLbl,itemLiterLbl,itemCountLbl, "xxy")
                 BestellungKategorien.append(KategorieLbl.text!)
                 BestellungUnterkategorien.append([UnterkategorieLbl.text!])
                 
@@ -729,11 +664,10 @@ performSegue(withIdentifier: "wirdabgeschickt", sender: self)
                 BestellungItemsMengen.append([[Int(itemCountLbl.text!)!]])
                 BestellungItemsExpanded2.append([true])
                 
-                print("kat, ukat, i gibt es nicht")
+                //"kat, ukat, i gibt es nicht"
                 // kategorie gibt es
             } else {
                 // unterkategorie gibt es nicht
-                print(BestellungUnterkategorien[BestellungKategorien.index(of: KategorieLbl.text!)!], BestellungUnterkategorien, "34fewdsx")
                 if !BestellungUnterkategorien[BestellungKategorien.index(of: KategorieLbl.text!)!].contains(UnterkategorieLbl.text!) {
                     BestellungUnterkategorien[BestellungKategorien.index(of: KategorieLbl.text!)!].append(UnterkategorieLbl.text!)
                     
@@ -744,7 +678,7 @@ performSegue(withIdentifier: "wirdabgeschickt", sender: self)
                     BestellungItemsMengen[BestellungKategorien.index(of: KategorieLbl.text!)!].append([Int(itemCountLbl.text!)!])
                     BestellungItemsExpanded2[BestellungKategorien.index(of: KategorieLbl.text!)!].append(true)
                     
-                    print("ukat, i gibt es nicht")
+                    // ukat, i gibt es nicht"
                     
                 } else {
                     // item gibt es nicht
@@ -770,8 +704,6 @@ performSegue(withIdentifier: "wirdabgeschickt", sender: self)
                         BestellungItemsMengen[BestellungKategorien.index(of: KategorieLbl.text!)!] = itemsMengenInSection
                         
                         
-                        print("i gibt es nicht")
-                        
                     } else {
                         let ItemNameInRow = itemsNamenInSection[unterkategorie.index(of: UnterkategorieLbl.text!)!].index(of: itemNameLbl.text!)
                         var ItemMengeInRow = itemsMengenInSection[unterkategorie.index(of: UnterkategorieLbl.text!)!]
@@ -779,15 +711,12 @@ performSegue(withIdentifier: "wirdabgeschickt", sender: self)
                         itemsMengenInSection[unterkategorie.index(of: UnterkategorieLbl.text!)!] = ItemMengeInRow
                         BestellungItemsMengen[BestellungKategorien.index(of: KategorieLbl.text!)!] = itemsMengenInSection
                         
-                        print("i gibt es")
+                        // item gibt es
                         
                     }
                 }
             }
-            print(BestellungKategorien, "Kats")
-            print(BestellungUnterkategorien, "Unterkats")
-            print(BestellungItemsNamen, "Namen")
-            
+
             itemNamen.removeAll()
             itemPreise.removeAll()
             itemLiter.removeAll()
@@ -799,15 +728,10 @@ performSegue(withIdentifier: "wirdabgeschickt", sender: self)
     
     func passItemPlus(sender: MyBestellungCell) {
         
-        var mengeInSection = bestellteItemsDictionary[sender.sections].menge
-        
-        var newmengeInSection = mengeInSection[sender.sections2]
         let i = 1
-        
+        var mengeInSection = bestellteItemsDictionary[sender.sections].menge
+        var newmengeInSection = mengeInSection[sender.sections2]
         newmengeInSection[sender.rows2] = newmengeInSection[sender.rows2] + i
-        
-        print(newmengeInSection[sender.rows2], "rgsdcxy")
-        
         mengeInSection[sender.sections2] = newmengeInSection
         BestellungItemsMengen[sender.sections] = mengeInSection
         bestellteItemsDictionary[sender.sections].menge = mengeInSection
@@ -822,9 +746,6 @@ performSegue(withIdentifier: "wirdabgeschickt", sender: self)
         let i = 1
         if newmengeInSection[sender.rows2] > 1{
             newmengeInSection[sender.rows2] = newmengeInSection[sender.rows2] - i
-            
-            print(newmengeInSection[sender.rows2], "rgsdcxy")
-            
             mengeInSection[sender.sections2] = newmengeInSection
             BestellungItemsMengen[sender.sections] = mengeInSection
             bestellteItemsDictionary[sender.sections].menge = mengeInSection
@@ -868,8 +789,6 @@ performSegue(withIdentifier: "wirdabgeschickt", sender: self)
             bestellteItemsDictionary[sender.sections].preis = preisInSection
             bestellteItemsDictionary[sender.sections].liter = literInSection
             bestellteItemsDictionary[sender.sections].menge = mengeInSection
-            
-            
             
         }  else {
             
@@ -915,10 +834,8 @@ performSegue(withIdentifier: "wirdabgeschickt", sender: self)
         
         
         sender.bestellteItemsDictionary = bestellteItemsDictionary
-        
-        
-        
         myBestellungTV.reloadData()
+        
     }
 
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {

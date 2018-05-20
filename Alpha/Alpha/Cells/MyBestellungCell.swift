@@ -71,12 +71,12 @@ class MyBestellungCell: UITableViewCell, UITableViewDelegate, UITableViewDataSou
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 50
+        return 36
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if bestellteItemsDictionary[sections].expanded2[indexPath.section] != false {
-            return CGFloat(bestellteItemsDictionary[sections].items[indexPath.section].count*46)
+            return CGFloat(bestellteItemsDictionary[sections].items[indexPath.section].count*55)
             
         }
         else {
@@ -87,7 +87,7 @@ class MyBestellungCell: UITableViewCell, UITableViewDelegate, UITableViewDataSou
     
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         
-        return 15
+        return 5
         
     }
     

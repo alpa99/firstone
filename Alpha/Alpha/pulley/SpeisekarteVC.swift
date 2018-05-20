@@ -14,14 +14,15 @@ import CoreLocation
 
 class SpeisekarteVC: UIViewController, UITableViewDataSource, UITableViewDelegate, PulleyDrawerViewControllerDelegate, ExpandableHeaderViewDelegate, PageObservation {
     
+    
         var parentPageViewController: PageViewController!
     
         var barname = " "
         var baradresse = " "
     
-        // TABLEVIEW
+    @IBOutlet weak var barnameLbl: UILabel!
+    // TABLEVIEW
         var sections = [ExpandTVSection2]()
-    
         var Kategorien = [String]()
         var Unterkategorien = [String: [String]]()
         var Items = [String: [[String]]]()
@@ -32,10 +33,7 @@ class SpeisekarteVC: UIViewController, UITableViewDataSource, UITableViewDelegat
         // OUTLETS
         
         @IBOutlet var SpeiseVCView: UIView!
-        
-   
         @IBOutlet weak var SpeisekarteTableView: UITableView!
-        
         @IBAction func Backbtn(_ sender: UIButton) {
         parentPageViewController.goback()
             }
@@ -161,17 +159,8 @@ class SpeisekarteVC: UIViewController, UITableViewDataSource, UITableViewDelegat
                     self.setSectionsSpeisekarte(Kategorie: kategorie, Unterkategorie: self.Unterkategorien[kategorie]!, items: self.Items[kategorie]!, preis: self.Preis[kategorie]!, liter: self.Liter[kategorie]!, expanded2: self.Expanded[kategorie]!)
                 }
             }
-
-
         }, withCancel: nil)
-
-        
     }
-
-
-    
-    
-    
 
         // TABLEVIEW FUNCTIONS
         
@@ -192,7 +181,7 @@ class SpeisekarteVC: UIViewController, UITableViewDataSource, UITableViewDelegat
         }
         
         func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-            return 59
+            return 36
         }
         
         func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -218,7 +207,11 @@ class SpeisekarteVC: UIViewController, UITableViewDataSource, UITableViewDelegat
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let header = ExpandableHeaderView()
+        header.contentView.layer.cornerRadius = 5
+        header.contentView.layer.backgroundColor = UIColor.clear.cgColor
         
+        header.layer.cornerRadius = 5
+        header.layer.backgroundColor = UIColor.clear.cgColor
             header.customInit(tableView: tableView, title: sections[section].Kategorie, section: section, delegate: self as ExpandableHeaderViewDelegate)
         
         
@@ -239,29 +232,7 @@ class SpeisekarteVC: UIViewController, UITableViewDataSource, UITableViewDelegat
         cell.liters = sections[indexPath.section].liter
         cell.section = indexPath.section
         return cell
-        
-        
-//            cell.delegate = self
-//            cell.backgroundColor = UIColor.clear
-//
-//
-//            if (sections[indexPath.section].expanded){
-//                cell.itemNameLbl.text = "\(sections[indexPath.section].items[indexPath.row])"
-//                cell.itemPreisLbl.text = "\(sections[indexPath.section].preise[indexPath.row]) €"
-//                return cell
-//
-//            }
-//            else {
-//                cell.itemNameLbl.isHidden = true
-//                cell.itemPreisLbl.isHidden = true
-//                cell.itemAddBtn.isHidden = true
-//                cell.backgroudn2.isHidden = true
-//                cell.strich.isHidden = true
-//                cell.liter.isHidden = true
-//
-//                return cell
-//
-//            }
+    
        
         
     }
@@ -305,10 +276,9 @@ class SpeisekarteVC: UIViewController, UITableViewDataSource, UITableViewDelegat
     
     override func viewDidLoad() {
         super.viewDidLoad()
-       
         SpeisekarteTableView.reloadData()
         self.barname = parentPageViewController.name
-      
+      barnameLbl.text = barname
        
        getKategorien()
 

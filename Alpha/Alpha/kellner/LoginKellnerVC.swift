@@ -132,13 +132,17 @@ class LoginKellnerVC: UIViewController {
             KCV.Barname = barname
             let KACV = KTBC.viewControllers![1] as! KellnerAngenommenVC
             KACV.KellnerID = (Auth.auth().currentUser?.uid)!
+            KACV.Barname = barname
+            let KABCV = KTBC.viewControllers![2] as! KellnerAlleBestellungenVC
+            KABCV.KellnerID = (Auth.auth().currentUser?.uid)!
+            KABCV.Barname = barname
         }
     }
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        KellnerIdTextfield.text = "i.akcam@hotmail.de"
+        KellnerIdTextfield.text = "i.akcam@gmx.de"
         PasswortTextfield.text = "123456"
         
         loginBtn.layer.cornerRadius = 4

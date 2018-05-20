@@ -8,7 +8,9 @@
 
 import UIKit
 
-
+protocol kellnerCellDelegate {
+    func annehmen(sender: KellnerCell)
+}
 
 
 class KellnerCell: UITableViewCell, UITableViewDelegate, UITableViewDataSource, ExpandableHeaderViewDelegate2 {
@@ -17,10 +19,17 @@ class KellnerCell: UITableViewCell, UITableViewDelegate, UITableViewDataSource, 
     var Bestellungen = [KellnerTVSection]()
     var Cell1Section = Int()
     var bestellungID = String()
+    var delegate: kellnerCellDelegate?
     
     @IBOutlet weak var timeLbl: UILabel!
     
     @IBOutlet weak var KellnerCelleTV: UITableView!
+    
+    @IBOutlet weak var annehmen: UIButton!
+    
+    @IBAction func annehmenTapped(_ sender: Any) {
+        delegate?.annehmen(sender: self)
+    }
     
     
     func numberOfSections(in tableView: UITableView) -> Int {

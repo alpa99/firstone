@@ -103,10 +103,11 @@ class PageViewController: UIPageViewController, UIPageViewControllerDelegate, UI
     
     // MARK: Data source functions.
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
+        print("hallo1")
+
         guard let viewControllerIndex = orderedViewControllers.index(of: viewController) else {
             return nil
         }
-        
         let previousIndex = viewControllerIndex - 1
         
         // User is on the first view controller and swiped left to loop to
@@ -114,17 +115,19 @@ class PageViewController: UIPageViewController, UIPageViewControllerDelegate, UI
         guard previousIndex >= 0 else {
            // return orderedViewControllers.last
             // Uncommment the line below, remove the line above if you don't want the page control to loop.
+            
              return nil
         }
         
         guard orderedViewControllers.count > previousIndex else {
             return nil
         }
-        
         return orderedViewControllers[previousIndex]
     }
     
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
+        print("hallo2")
+
         guard let viewControllerIndex = orderedViewControllers.index(of: viewController) else {
             return nil
         }
