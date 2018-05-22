@@ -90,11 +90,18 @@ class DetailVC: UIViewController, PulleyDrawerViewControllerDelegate, PageObserv
     
     @IBAction func adresseclick(_ sender: UIButton) {
         
-//        parentPageViewController.pos1()
-//
-//       parentPageViewController.adresse = self.adresse
-//        parentPageViewController.adressfunc()
+        parentPageViewController.pos1()
         
+    
+        CLGeocoder().geocodeAddressString(self.adresse, completionHandler: { (placemarks, error) -> Void in
+            
+            if let placemark = placemarks?[0] {
+                let location = placemark.location!
+                print("location", location)
+                ((self.parent?.parent as? PulleyViewController)?.primaryContentViewController as? LocationVC)?.centerMapOnPin(selectedPin: location)
+            }})
+
+
         
     }
     
@@ -280,7 +287,7 @@ class DetailVC: UIViewController, PulleyDrawerViewControllerDelegate, PageObserv
         }
         
         func partialRevealDrawerHeight(bottomSafeArea: CGFloat) -> CGFloat {
-            return 340.0
+            return 240.0
         }
         
         func supportedDrawerPositions() -> [PulleyPosition] {

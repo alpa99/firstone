@@ -10,8 +10,8 @@ import UIKit
 import Firebase
 import MapKit
 import Pulley
-import CoreLocation // BRAUCHEN WIR DAS
-import AddressBookUI // BRAUCHEN WIR DAS
+import CoreLocation // BRAUCHEN WIR DAS - Ja !
+import AddressBookUI // BRAUCHEN WIR DAS - Kp!
 
 class LocationVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate, PulleyPrimaryContentControllerDelegate {
 
@@ -29,6 +29,8 @@ class LocationVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate
     // OUTLETS
     
     @IBOutlet var map: MKMapView!
+    
+    
     
     // FUNTIONS FIREBASE
 
@@ -74,13 +76,10 @@ class LocationVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate
         }
     }
     func centerMapOnPin (selectedPin: CLLocation){
-        loadViewIfNeeded()
-     
-        let newregion = MKCoordinateRegionMakeWithDistance(selectedPin.coordinate, regionRadius, regionRadius)
-        print(selectedPin, "pinsel")
-        print( newregion)
-        print(map)
-        map.setRegion(newregion, animated: false)
+        print("HIERBIN ich II")
+        let newregion = MKCoordinateRegionMakeWithDistance(selectedPin.coordinate, 0.5*regionRadius, 0.5*regionRadius)
+       
+        map.setRegion(newregion, animated: true)
     }
     
     func mapViewDidFinishLoadingMap (mapView: MKMapView, selectedPin: CLLocation) {

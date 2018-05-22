@@ -282,7 +282,6 @@
 			isa = PBXGroup;
 			children = (
 				081461F31F9927FA00121943 /* LoginVC.swift */,
-				4EC248011F9950E700910AA8 /* LocationVC.swift */,
 				0895B3621F9B5F28007D97DE /* UserVC.swift */,
 				08E0F454205FDABC002435DE /* MeineBestellungVC.swift */,
 			);
@@ -407,6 +406,7 @@
 		4EC5C4BA1FFC0A85008CE449 /* pulley */ = {
 			isa = PBXGroup;
 			children = (
+				4EC248011F9950E700910AA8 /* LocationVC.swift */,
 				4EC247FF1F9950CE00910AA8 /* DrawerVC.swift */,
 				4E1664BB1FBC6D340038EFB5 /* DetailVC.swift */,
 				087134FD1FBDEE170016E181 /* SpeisekarteVC.swift */,
@@ -1008,7 +1008,7 @@
 				INFOPLIST_FILE = Alpha/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = AM.Alpha132;
+				PRODUCT_BUNDLE_IDENTIFIER = AM.Alpha1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1025,7 +1025,7 @@
 				INFOPLIST_FILE = Alpha/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = AM.Alpha132;
+				PRODUCT_BUNDLE_IDENTIFIER = AM.Alpha1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

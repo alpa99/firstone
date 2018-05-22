@@ -262,7 +262,7 @@ class SpeisekarteVC: UIViewController, UITableViewDataSource, UITableViewDelegat
     }
     
     func partialRevealDrawerHeight(bottomSafeArea: CGFloat) -> CGFloat {
-        return 340.0
+        return 240.0
     }
     
     func supportedDrawerPositions() -> [PulleyPosition] {
