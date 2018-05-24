@@ -496,6 +496,9 @@ class MeineBestellungVC: UIViewController, UITableViewDataSource, UITableViewDel
         loadAktuelleBar()
         // Do any additional setup after loading the view.
     }
+    override func viewDidAppear(_ animated: Bool) {
+        self.tabBarController?.tabBar.isHidden = false 
+    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
