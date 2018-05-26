@@ -53,6 +53,7 @@ class LoginVC: UIViewController {
                     }
                     
                     if let userInfo = userInfo, let id = userInfo["id"], let name = userInfo["name"], let email = userInfo["email"]{
+                        print("successful")
                         self.userFbID = "\(id)"
                         self.userFbName = "\(name)"
                         self.userFbEmail = "\(email)"
@@ -91,7 +92,7 @@ class LoginVC: UIViewController {
                         return
                     }
                     print("fb user:", user ?? "default user")
-                    
+
                 })
             }
         }
@@ -102,9 +103,12 @@ class LoginVC: UIViewController {
         var ref: DatabaseReference?
 
         ref = Database.database().reference()
-        
+        print("23432232")
+        print(Auth.auth().currentUser?.uid, "addtofirebase")
+
         if let uid = Auth.auth().currentUser?.uid {
-            
+            print("wef213f4grwes")
+
         ref?.child("Users").child("\(uid)").child("Name").setValue(self.userFbName)
         ref?.child("Users").child("\(uid)").child("Email").setValue(self.userFbEmail)
             
@@ -124,6 +128,7 @@ class LoginVC: UIViewController {
                 print("errrorororor")
                 
             } else if Auth.auth().currentUser?.uid != nil{
+                print(Auth.auth().currentUser?.uid, "segueToTabBar")
                 self.performSegue(withIdentifier: "login", sender: self.loginBtn)
             }
                 
@@ -131,20 +136,16 @@ class LoginVC: UIViewController {
     }
     
     // OTHERS
-    
-    override func viewDidAppear(_ animated: Bool) {
 
-        if Auth.auth().currentUser?.uid != nil {
-            segueToTabBar()
-        }
-    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         loginBtn.layer.cornerRadius = 4
         kellnerLogin.layer.cornerRadius = 4
-
+        if Auth.auth().currentUser?.uid != nil {
+            segueToTabBar()
+        }
         // Do any additional setup after loading the view.
     }
 

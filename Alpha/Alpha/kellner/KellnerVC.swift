@@ -447,7 +447,7 @@ class KellnerVC: UIViewController, UITableViewDelegate, UITableViewDataSource, E
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         var heightForHeaderInSection: Int?
         
-        heightForHeaderInSection = 50
+        heightForHeaderInSection = 36
         return CGFloat(heightForHeaderInSection!)
         
     }
@@ -455,8 +455,7 @@ class KellnerVC: UIViewController, UITableViewDelegate, UITableViewDataSource, E
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         
-        
-        
+
         if (Bestellungen[indexPath.section].expanded) {
             let kategorieCount = Bestellungen[indexPath.section].Kategorie.count
             var UnterkategorieCount = 0
@@ -473,7 +472,7 @@ class KellnerVC: UIViewController, UITableViewDelegate, UITableViewDataSource, E
             print(itemsCount, "itemscount")
             print(kategorieCount, "kategorieCount")
             print(UnterkategorieCount, "UnterkategorieCount")
-            return CGFloat(kategorieCount*50 + UnterkategorieCount*50 + itemsCount*46)
+            return CGFloat(kategorieCount*40 + UnterkategorieCount*50 + itemsCount*46+50)
 
             
         }
@@ -535,6 +534,12 @@ class KellnerVC: UIViewController, UITableViewDelegate, UITableViewDataSource, E
 
         cell.timeLbl.text = "\(dateFormatter.string(from: timeStampDate as Date)) Uhr"
         
+        if Bestellungen[indexPath.section].expanded == false {
+            cell.timeLbl.isHidden = true
+        } else {
+            cell.timeLbl.isHidden = false
+        }
+        
         //
         
         //        self.itemssss = bestellung2[bestellungIDs[indexPath.row]]!
@@ -571,10 +576,12 @@ class KellnerVC: UIViewController, UITableViewDelegate, UITableViewDataSource, E
     
     
     func toggleSection(tableView: UITableView, header: ExpandableHeaderView, section: Int) {
-        
+        bestellungenTV.beginUpdates()
+
         for i in 0..<Bestellungen.count{
             if i == section {
                 Bestellungen[section].expanded = !Bestellungen[section].expanded
+                
             } else {
                 Bestellungen[i].expanded = false
                 
@@ -582,7 +589,6 @@ class KellnerVC: UIViewController, UITableViewDelegate, UITableViewDataSource, E
         }
         
         
-        bestellungenTV.beginUpdates()
         bestellungenTV.reloadRows(at: [IndexPath(row: 0, section: section)], with: .automatic)
         
         bestellungenTV.endUpdates()

@@ -393,7 +393,7 @@ class KellnerAngenommenVC: UIViewController, UITableViewDelegate, UITableViewDat
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         var heightForHeaderInSection: Int?
         
-        heightForHeaderInSection = 50
+        heightForHeaderInSection = 36
         return CGFloat(heightForHeaderInSection!)
     }
     
@@ -416,7 +416,7 @@ class KellnerAngenommenVC: UIViewController, UITableViewDelegate, UITableViewDat
             print(itemsCount, "itemscount")
             print(kategorieCount, "kategorieCount")
             print(UnterkategorieCount, "UnterkategorieCount")
-            return CGFloat(kategorieCount*50 + UnterkategorieCount*50 + itemsCount*46)
+            return CGFloat(kategorieCount*40 + UnterkategorieCount*50 + itemsCount*46+50)
             
             
         }
@@ -467,6 +467,12 @@ class KellnerAngenommenVC: UIViewController, UITableViewDelegate, UITableViewDat
             dateFormatter.dateFormat = "HH:mm"
             
             cell.timeLbl.text = "\(dateFormatter.string(from: timeStampDate as Date)) Uhr"
+            
+            if Bestellungen[indexPath.section].expanded == false {
+                cell.timeLbl.isHidden = true
+            } else {
+                cell.timeLbl.isHidden = false
+            }
             
             return cell
         }

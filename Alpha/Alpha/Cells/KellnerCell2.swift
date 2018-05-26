@@ -97,7 +97,9 @@ class KellnerCell2: UITableViewCell, UITableViewDelegate, UITableViewDataSource,
         print(newItems, "newItems")
         print(newPreise, "newPreise")
         print(indexPath, "ipath")
-        cell.itemPreis.text = "\(newPreise[indexPath.row]) €"
+        let preisFormat = String(format: "%.2f", arguments: [newPreise[indexPath.row]])
+
+        cell.itemPreis.text = "\(preisFormat) €"
         cell.itemMenge.text = String(newMengen[indexPath.row])
         
         return cell

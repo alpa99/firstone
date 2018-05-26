@@ -28,6 +28,7 @@ class MeineBestellungVC: UIViewController, UITableViewDataSource, UITableViewDel
     var BestellungKategorien = [String: [String]]()
     var BestellungUnterkategorien = [String: [[String]]]()
     var BestellungExpanded2 = [String: [[Bool]]]()
+    var Status = [String: String]()
     
     var BestellungItemsNamen = [String: [[[String]]]]()
     var BestellungItemsPreise = [String: [[[Double]]]]()
@@ -120,6 +121,7 @@ class MeineBestellungVC: UIViewController, UITableViewDataSource, UITableViewDel
                         self.Angenommen.updateValue(bestellungInfos.Status!, forKey: BestellungID)
                         self.FromUserID.updateValue(bestellungInfos.fromUserID!, forKey: BestellungID)
                         self.TimeStamp.updateValue(bestellungInfos.timeStamp!, forKey: BestellungID)
+                        self.Status.updateValue(bestellungInfos.Status!, forKey: BestellungID)
                         
                     }
                     
@@ -411,7 +413,7 @@ class MeineBestellungVC: UIViewController, UITableViewDataSource, UITableViewDel
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         var heightForHeaderInSection: Int?
         
-        heightForHeaderInSection = 50
+        heightForHeaderInSection = 36
         return CGFloat(heightForHeaderInSection!)
         
     }
@@ -436,7 +438,7 @@ class MeineBestellungVC: UIViewController, UITableViewDataSource, UITableViewDel
             print(itemsCount, "itemscount")
             print(kategorieCount, "kategorieCount")
             print(UnterkategorieCount, "UnterkategorieCount")
-            return CGFloat(kategorieCount*50 + UnterkategorieCount*50 + itemsCount*46)
+            return CGFloat(kategorieCount*40 + UnterkategorieCount*50 + itemsCount*46+50)
             
             
         }
@@ -477,7 +479,14 @@ class MeineBestellungVC: UIViewController, UITableViewDataSource, UITableViewDel
         cell.Bestellungen = Bestellungen
         cell.Cell1Section = indexPath.section
         cell.bestellungID = Bestellungen[indexPath.section].BestellungID
-        cell.annehmen.setTitle("Status: TEST", for: .normal)
+        cell.annehmen.setTitle("Status: \(Status[Bestellungen[indexPath.section].BestellungID]!)", for: .normal)
+        
+        if Status[Bestellungen[indexPath.section].BestellungID] != "versendet" {
+            cell.annehmen.backgroundColor = UIColor.green
+        } else {
+            cell.annehmen.backgroundColor = UIColor.gray
+
+        }
         
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy/MM/dd HH:mm"

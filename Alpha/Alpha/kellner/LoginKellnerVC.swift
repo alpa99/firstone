@@ -142,7 +142,7 @@ class LoginKellnerVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        KellnerIdTextfield.text = "i.akcam@gmx.de"
+        KellnerIdTextfield.text = "i.akcam@hotmail.de"
         PasswortTextfield.text = "123456"
         
         loginBtn.layer.cornerRadius = 4
