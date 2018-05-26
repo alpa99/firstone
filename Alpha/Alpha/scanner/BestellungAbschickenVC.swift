@@ -9,15 +9,18 @@
 import UIKit
 
 class BestellungAbschickenVC: UIViewController {
+    
+    
 
     
     @IBAction func zuMeinenBestellungenSegue(_ sender: Any) {
-        performSegue(withIdentifier: "zuMeinenBestellungen", sender: self)
+        performSegue(withIdentifier: "meinebestellunk", sender: self)
+
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        self.navigationController?.setNavigationBarHidden(true, animated: true)
         // Do any additional setup after loading the view.
     }
 
@@ -25,7 +28,10 @@ class BestellungAbschickenVC: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
+    override func viewWillDisappear(_ animated: Bool) {
+        self.tabBarController?.tabBar.isHidden = false
+        self.tabBarController?.selectedIndex = 2
+    }
 
     /*
     // MARK: - Navigation
