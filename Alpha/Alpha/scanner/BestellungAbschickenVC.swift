@@ -14,8 +14,7 @@ class BestellungAbschickenVC: UIViewController {
 
     
     @IBAction func zuMeinenBestellungenSegue(_ sender: Any) {
-        performSegue(withIdentifier: "meinebestellunk", sender: self)
-
+        self.tabBarController?.selectedIndex = 2
     }
     
     override func viewDidLoad() {
@@ -31,6 +30,8 @@ class BestellungAbschickenVC: UIViewController {
     override func viewWillDisappear(_ animated: Bool) {
         self.tabBarController?.tabBar.isHidden = false
         self.tabBarController?.selectedIndex = 2
+        self.navigationController?.popToRootViewController(animated: true)
+
     }
 
     /*
