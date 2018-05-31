@@ -18,7 +18,7 @@ class BestellenCell2: UITableViewCell {
     @IBOutlet weak var ItemLbl: UILabel!
     @IBOutlet weak var LiterLbl: UILabel!
     @IBOutlet weak var PreisLbl: UILabel!
-    
+    @IBOutlet weak var beschreibungLbl: UILabel!
     @IBOutlet weak var addBtn: UIButton!
     
     @IBOutlet weak var viewAdd: UIView!
@@ -33,11 +33,11 @@ class BestellenCell2: UITableViewCell {
         delegate?.addBtnTapped(sender: self)
     }
     
-    
-    
-    
+
     override func awakeFromNib() {
         super.awakeFromNib()
+        beschreibungLbl.textColor = UIColor.white
+
         ItemLbl.font = UIFont(name: "Verdana", size: 15.0)
         viewAdd.layer.cornerRadius = 4
         strich.layer.cornerRadius = 4

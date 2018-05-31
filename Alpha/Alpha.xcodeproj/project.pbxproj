@@ -79,9 +79,15 @@
 		9417B593207CFDEB008817FC /* KellnerCell3.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9417B591207CFDEB008817FC /* KellnerCell3.swift */; };
 		9417B594207CFDEB008817FC /* KellnerCell3.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9417B592207CFDEB008817FC /* KellnerCell3.xib */; };
 		9417B596207CFEC9008817FC /* ExpandleHeaderView3.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9417B595207CFEC9008817FC /* ExpandleHeaderView3.swift */; };
+		946228DC20BB073E005EB059 /* ProdukteVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 946228DB20BB073E005EB059 /* ProdukteVC.swift */; };
+		946228DF20BB2FAC005EB059 /* produktCell2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 946228DD20BB2FAC005EB059 /* produktCell2.swift */; };
+		946228E020BB2FAC005EB059 /* produktCell2.xib in Resources */ = {isa = PBXBuildFile; fileRef = 946228DE20BB2FAC005EB059 /* produktCell2.xib */; };
+		946228E320BB31E5005EB059 /* produktCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 946228E120BB31E5005EB059 /* produktCell.swift */; };
+		946228E420BB31E5005EB059 /* produktCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 946228E220BB31E5005EB059 /* produktCell.xib */; };
 		949AB0B320AB82B6005F85C7 /* LabelWhiteS30.swift in Sources */ = {isa = PBXBuildFile; fileRef = 949AB0B220AB82B6005F85C7 /* LabelWhiteS30.swift */; };
 		949AB0B520AB84F5005F85C7 /* KellnerAlleBestellungenVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 949AB0B420AB84F5005F85C7 /* KellnerAlleBestellungenVC.swift */; };
 		94BDC36820B00DEF000BFB10 /* UserInfos.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94BDC36720B00DEF000BFB10 /* UserInfos.swift */; };
+		94CA7F4E20BF04AF00C3D1F4 /* RegistrierungVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94CA7F4D20BF04AF00C3D1F4 /* RegistrierungVC.swift */; };
 		94F5EA91208F4F530086A014 /* LabelWhiteS16.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94F5EA90208F4F530086A014 /* LabelWhiteS16.swift */; };
 		CC7293123DD294CC7591DAA2 /* Pods_AlphaUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AC56C89A3508D2D118AE9C1D /* Pods_AlphaUITests.framework */; };
 		FCBCA28E5975849AF85ED466 /* Pods_AlphaTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D92BA6E8AA26233EE5256989 /* Pods_AlphaTests.framework */; };
@@ -193,9 +199,15 @@
 		9417B591207CFDEB008817FC /* KellnerCell3.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KellnerCell3.swift; sourceTree = "<group>"; };
 		9417B592207CFDEB008817FC /* KellnerCell3.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = KellnerCell3.xib; sourceTree = "<group>"; };
 		9417B595207CFEC9008817FC /* ExpandleHeaderView3.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpandleHeaderView3.swift; sourceTree = "<group>"; };
+		946228DB20BB073E005EB059 /* ProdukteVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProdukteVC.swift; sourceTree = "<group>"; };
+		946228DD20BB2FAC005EB059 /* produktCell2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = produktCell2.swift; sourceTree = "<group>"; };
+		946228DE20BB2FAC005EB059 /* produktCell2.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = produktCell2.xib; sourceTree = "<group>"; };
+		946228E120BB31E5005EB059 /* produktCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = produktCell.swift; sourceTree = "<group>"; };
+		946228E220BB31E5005EB059 /* produktCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = produktCell.xib; sourceTree = "<group>"; };
 		949AB0B220AB82B6005F85C7 /* LabelWhiteS30.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelWhiteS30.swift; sourceTree = "<group>"; };
 		949AB0B420AB84F5005F85C7 /* KellnerAlleBestellungenVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KellnerAlleBestellungenVC.swift; sourceTree = "<group>"; };
 		94BDC36720B00DEF000BFB10 /* UserInfos.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfos.swift; sourceTree = "<group>"; };
+		94CA7F4D20BF04AF00C3D1F4 /* RegistrierungVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrierungVC.swift; sourceTree = "<group>"; };
 		94F5EA90208F4F530086A014 /* LabelWhiteS16.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelWhiteS16.swift; sourceTree = "<group>"; };
 		A57EBBF91158C1B719B66FE6 /* Pods_Alpha.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Alpha.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		AC56C89A3508D2D118AE9C1D /* Pods_AlphaUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AlphaUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -262,6 +274,10 @@
 				08DB09392062E4D1007848E4 /* BestellenCell.xib */,
 				08DB09382062E4D1007848E4 /* BestellenCell2.swift */,
 				08210EE41FB83AE300EABA32 /* BestellenCell2.xib */,
+				946228E120BB31E5005EB059 /* produktCell.swift */,
+				946228E220BB31E5005EB059 /* produktCell.xib */,
+				946228DD20BB2FAC005EB059 /* produktCell2.swift */,
+				946228DE20BB2FAC005EB059 /* produktCell2.xib */,
 				089C74CD204B3478001B3C22 /* PulleyCell.swift */,
 				089C74CE204B3478001B3C22 /* PulleyCell.xib */,
 				085B23D62053113F00D50FE3 /* bezahlenCell.swift */,
@@ -281,6 +297,7 @@
 		08E0F44D205FD4C4002435DE /* User */ = {
 			isa = PBXGroup;
 			children = (
+				94CA7F4D20BF04AF00C3D1F4 /* RegistrierungVC.swift */,
 				081461F31F9927FA00121943 /* LoginVC.swift */,
 				0895B3621F9B5F28007D97DE /* UserVC.swift */,
 				08E0F454205FDABC002435DE /* MeineBestellungVC.swift */,
@@ -399,6 +416,7 @@
 				082BD2DA1FF702F5004106A8 /* KellnerTabBarController.swift */,
 				949AB0B420AB84F5005F85C7 /* KellnerAlleBestellungenVC.swift */,
 				082BD2DC1FF705DE004106A8 /* KellnerAngenommenVC.swift */,
+				946228DB20BB073E005EB059 /* ProdukteVC.swift */,
 			);
 			path = kellner;
 			sourceTree = "<group>";
@@ -512,7 +530,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0900;
-				LastUpgradeCheck = 0900;
+				LastUpgradeCheck = 0930;
 				ORGANIZATIONNAME = AM;
 				TargetAttributes = {
 					4EC247C61F98F90500910AA8 = {
@@ -567,9 +585,11 @@
 				FD0DDBFC204B1CD200E40E81 /* pin.png in Resources */,
 				08462FFB205E6C8100AECA59 /* SpeisekarteCell.xib in Resources */,
 				089C74D0204B3478001B3C22 /* PulleyCell.xib in Resources */,
+				946228E020BB2FAC005EB059 /* produktCell2.xib in Resources */,
 				085B23E52055BC6100D50FE3 /* angenommenCell.xib in Resources */,
 				085B23D92053113F00D50FE3 /* bezahlenCell.xib in Resources */,
 				084D9D43203B1C7D008601B6 /* MyBestellungCell2.xib in Resources */,
+				946228E420BB31E5005EB059 /* produktCell.xib in Resources */,
 				082A6F13206D642700B8C43D /* MyBestellungCell.xib in Resources */,
 				4EC247D01F98F90500910AA8 /* Main.storyboard in Resources */,
 				08210EE61FB83AE300EABA32 /* BestellenCell2.xib in Resources */,
@@ -795,6 +815,7 @@
 				4EC248001F9950CE00910AA8 /* DrawerVC.swift in Sources */,
 				08210EE51FB83AE300EABA32 /* BestellenCell.swift in Sources */,
 				4EC247CD1F98F90500910AA8 /* QRScanner.swift in Sources */,
+				946228E320BB31E5005EB059 /* produktCell.swift in Sources */,
 				08C881671F9962EB00AD8F20 /* BarInfos.swift in Sources */,
 				4EC247CB1F98F90500910AA8 /* AppDelegate.swift in Sources */,
 				081461F41F9927FA00121943 /* LoginVC.swift in Sources */,
@@ -811,6 +832,7 @@
 				08EF4C401F9CF0FE00F01096 /* BestellungInfos.swift in Sources */,
 				08EAEA6A206079920095F75F /* SpeisekarteInformation.swift in Sources */,
 				087796DE204AFA410066D6F5 /* BestellungAbschickenVC.swift in Sources */,
+				946228DF20BB2FAC005EB059 /* produktCell2.swift in Sources */,
 				08DB09372061D95C007848E4 /* ExpandleHeaderView2.swift in Sources */,
 				08DB092A2061415B007848E4 /* SpeisekarteCelle.swift in Sources */,
 				08EF4C4A1F9CFFA500F01096 /* ExpandTVSection.swift in Sources */,
@@ -820,6 +842,7 @@
 				0895B3631F9B5F28007D97DE /* UserVC.swift in Sources */,
 				4E6020491F9E2F88001B2909 /* ScanDetailVC.swift in Sources */,
 				08462FFD205F1F0700AECA59 /* ExpandTVSection2.swift in Sources */,
+				946228DC20BB073E005EB059 /* ProdukteVC.swift in Sources */,
 				08010461207191E40077A060 /* KellnerTVSection.swift in Sources */,
 				08779BA51FB7898400B99D19 /* LoginKellnerVC.swift in Sources */,
 				08462FFA205E6C8100AECA59 /* SpeisekarteCell.swift in Sources */,
@@ -832,6 +855,7 @@
 				0832EB9F2067CC0E000B6319 /* LabelWhite.swift in Sources */,
 				4E66E16D1FD49CFA005E87E3 /* PageViewController.swift in Sources */,
 				4E2FF0BD1FEDDC850084F0A7 /* GMVC.swift in Sources */,
+				94CA7F4E20BF04AF00C3D1F4 /* RegistrierungVC.swift in Sources */,
 				4E1664BE1FBF12020038EFB5 /* votevc.swift in Sources */,
 				085B23E42055BC6100D50FE3 /* angenommenCell.swift in Sources */,
 				087134FE1FBDEE170016E181 /* SpeisekarteVC.swift in Sources */,
@@ -905,6 +929,7 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -912,6 +937,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
@@ -962,6 +988,7 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -969,6 +996,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
@@ -1008,7 +1036,7 @@
 				INFOPLIST_FILE = Alpha/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = AM.Alpha1;
+				PRODUCT_BUNDLE_IDENTIFIER = AM.Alpha132;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1025,7 +1053,7 @@
 				INFOPLIST_FILE = Alpha/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = AM.Alpha1;
+				PRODUCT_BUNDLE_IDENTIFIER = AM.Alpha132;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

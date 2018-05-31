@@ -16,6 +16,7 @@ class SpeisekarteCelle: UITableViewCell, UITableViewDataSource, UITableViewDeleg
     var items = [[String]]()
     var preise = [[Double]]()
     var liters = [[String]]()
+    var beschreibungen = [[String]]()
     var section = Int()
     var section2 = 0
     var row = 0
@@ -84,9 +85,9 @@ class SpeisekarteCelle: UITableViewCell, UITableViewDataSource, UITableViewDeleg
         var item = unterkategorien[0].items[indexPath.section]
         var preis = unterkategorien[0].preis[indexPath.section]
         var liter = unterkategorien[0].liter[indexPath.section]
+        var beschreibung = unterkategorien[0].beschreibung[indexPath.section]
         cell.itemLbl.text = item[indexPath.row]
         let preisFormat = String(format: "%.2f", arguments: [preis[indexPath.row]])
-
         cell.PreisLbl.text = "\(preisFormat) €"
             print(liter)
             print(indexPath.row, self.row)
@@ -98,7 +99,7 @@ class SpeisekarteCelle: UITableViewCell, UITableViewDataSource, UITableViewDeleg
                 else {
                     cell.LiterLbl.isHidden = true
                         }
-
+        cell.beschreibungLbl.text = beschreibung[indexPath.row]
 
             return cell
             

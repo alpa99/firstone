@@ -28,6 +28,7 @@ class SpeisekarteVC: UIViewController, UITableViewDataSource, UITableViewDelegat
         var Items = [String: [[String]]]()
         var Preis = [String: [[Double]]]()
         var Liter = [String: [[String]]]()
+        var Beschreibung = [String: [[String]]]()
         var Expanded = [String: [Bool]]()
 
         // OUTLETS
@@ -81,18 +82,18 @@ class SpeisekarteVC: UIViewController, UITableViewDataSource, UITableViewDelegat
                             var newitems = self.Items[Kategorie]
                             var newpreis = self.Preis[Kategorie]
                             var newliter = self.Liter[Kategorie]
-
+                            var newbeschreibung = self.Beschreibung[Kategorie]
 
                             if (self.Items[Kategorie]?.count)! < (self.Unterkategorien[Kategorie]?.count)! {
                                 newitems?.append([item.Name!])
-                                
                                 newpreis?.append([item.Preis!])
                                 newliter?.append([item.Liter!])
-                                
+                                newbeschreibung?.append([item.Beschreibung!])
 
                                 self.Items[Kategorie] = newitems
                                 self.Preis[Kategorie] = newpreis
                                 self.Liter[Kategorie] = newliter
+                                self.Beschreibung[Kategorie] = newbeschreibung
 
 
                                 
@@ -104,6 +105,9 @@ class SpeisekarteVC: UIViewController, UITableViewDataSource, UITableViewDelegat
                                 self.Preis[Kategorie] = newpreis
                                 newliter![(self.Unterkategorien[Kategorie]?.index(of: key.key))!].append(item.Liter!)
                                 self.Liter[Kategorie] = newliter
+                                newbeschreibung![(self.Unterkategorien[Kategorie]?.index(of: key.key))!].append(item.Beschreibung!)
+                                self.Beschreibung[Kategorie] = newbeschreibung
+                                
 
                             }
                             
@@ -133,12 +137,17 @@ class SpeisekarteVC: UIViewController, UITableViewDataSource, UITableViewDelegat
                                 var newLiter = self.Liter[Kategorie]
                                 newLiter![(self.Unterkategorien[Kategorie]?.index(of: key.key))!].append(item.Liter!)
                                 self.Liter[Kategorie] = newLiter
-                               
+                                
+                                var newBeschreibung = self.Beschreibung[Kategorie]
+                                newBeschreibung![(self.Unterkategorien[Kategorie]?.index(of: key.key))!].append(item.Beschreibung!)
+                                self.Beschreibung[Kategorie] = newBeschreibung
                                 
                             } else {
                                 self.Items.updateValue([[item.Name!]], forKey: Kategorie)
                                 self.Preis.updateValue([[item.Preis!]], forKey: Kategorie)
                                 self.Liter.updateValue([[item.Liter!]], forKey: Kategorie)
+                                self.Beschreibung.updateValue([[item.Beschreibung!]], forKey: Kategorie)
+
 
 
 
@@ -151,12 +160,8 @@ class SpeisekarteVC: UIViewController, UITableViewDataSource, UITableViewDelegat
             }
 
             if self.Unterkategorien.count == self.Kategorien.count {
-                print(self.Kategorien)
-                print(self.Unterkategorien)
-                print(self.Items)
-
                 for kategorie in self.Kategorien {
-                    self.setSectionsSpeisekarte(Kategorie: kategorie, Unterkategorie: self.Unterkategorien[kategorie]!, items: self.Items[kategorie]!, preis: self.Preis[kategorie]!, liter: self.Liter[kategorie]!, expanded2: self.Expanded[kategorie]!)
+                    self.setSectionsSpeisekarte(Kategorie: kategorie, Unterkategorie: self.Unterkategorien[kategorie]!, items: self.Items[kategorie]!, preis: self.Preis[kategorie]!, liter: self.Liter[kategorie]!, beschreibung: self.Beschreibung[kategorie]!, verfuegbarkeit: [self.Expanded[kategorie]!], expanded2: self.Expanded[kategorie]!)
                 }
             }
         }, withCancel: nil)
@@ -164,8 +169,8 @@ class SpeisekarteVC: UIViewController, UITableViewDataSource, UITableViewDelegat
 
         // TABLEVIEW FUNCTIONS
         
-    func setSectionsSpeisekarte(Kategorie: String, Unterkategorie: [String], items: [[String]], preis: [[Double]], liter: [[String]], expanded2: [Bool]){
-            self.sections.append(ExpandTVSection2(Kategorie: Kategorie, Unterkategorie: Unterkategorie, items: items, preis: preis, liter: liter, expanded2: expanded2, expanded: false))
+    func setSectionsSpeisekarte(Kategorie: String, Unterkategorie: [String], items: [[String]], preis: [[Double]], liter: [[String]], beschreibung: [[String]], verfuegbarkeit: [[Bool]], expanded2: [Bool]){
+        self.sections.append(ExpandTVSection2(Kategorie: Kategorie, Unterkategorie: Unterkategorie, items: items, preis: preis, liter: liter, beschreibung: beschreibung, verfuegbarkeit: verfuegbarkeit, expanded2: expanded2, expanded: false))
             self.SpeisekarteTableView.reloadData()
         }
 
@@ -186,7 +191,7 @@ class SpeisekarteVC: UIViewController, UITableViewDataSource, UITableViewDelegat
         
         func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
             if (sections[indexPath.section].expanded) {
-                return CGFloat(sections[indexPath.section].items.count * 44 + sections[indexPath.section].Unterkategorie.count*50)
+                return CGFloat(sections[indexPath.section].items.count * 44 + sections[indexPath.section].Unterkategorie.count*70)
             }
             else {
                 return 0
@@ -230,6 +235,7 @@ class SpeisekarteVC: UIViewController, UITableViewDataSource, UITableViewDelegat
         cell.items = sections[indexPath.section].items
         cell.preise = sections[indexPath.section].preis
         cell.liters = sections[indexPath.section].liter
+        cell.beschreibungen = sections[indexPath.section].beschreibung
         cell.section = indexPath.section
         return cell
     

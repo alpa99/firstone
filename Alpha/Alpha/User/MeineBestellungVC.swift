@@ -20,6 +20,7 @@ class MeineBestellungVC: UIViewController, UITableViewDataSource, UITableViewDel
     var aktuelleBar = String()
     var aktuellerTisch = String()
     var letzteBestellungZeit = Double()
+    let userUid = Auth.auth().currentUser?.uid
 
 
     
@@ -66,7 +67,6 @@ class MeineBestellungVC: UIViewController, UITableViewDataSource, UITableViewDel
     }
     
     func loadAktuelleBar(){
-        let userUid = Auth.auth().currentUser?.uid
         var datref: DatabaseReference!
         datref = Database.database().reference()
         datref.child("Users").child(userUid!).observeSingleEvent(of: .value, with: { (snapshotAktuell) in
@@ -80,7 +80,7 @@ class MeineBestellungVC: UIViewController, UITableViewDataSource, UITableViewDel
                 print(userinfos.aktuelleBar!)
                 self.aktuellerTisch = userinfos.aktuellerTisch!
                 self.letzteBestellungZeit = userinfos.letzteBestellungZeit!
-                self.loadBestellungenKeys(userUid: userUid!)
+                self.loadBestellungenKeys(userUid: self.userUid!)
 
             }
         }, withCancel: nil)
@@ -91,12 +91,10 @@ class MeineBestellungVC: UIViewController, UITableViewDataSource, UITableViewDel
         var datref: DatabaseReference!
         datref = Database.database().reference()
         datref.child("userBestellungen").child(userUid).observe(.childAdded, with: { (snapshot) in
-            
-            if let dictionary = snapshot.value as? [String: AnyObject]{
-                let bestellungInfos = BestellungInfos(dictionary: dictionary)
+
                     self.loadBestellungen(BestellungID: snapshot.key)
                 
-            }
+            
             
         }, withCancel: nil)
         
@@ -485,7 +483,6 @@ class MeineBestellungVC: UIViewController, UITableViewDataSource, UITableViewDel
             cell.annehmen.backgroundColor = UIColor.green
         } else {
             cell.annehmen.backgroundColor = UIColor.gray
-
         }
         
         let formatter = DateFormatter()
@@ -503,7 +500,8 @@ class MeineBestellungVC: UIViewController, UITableViewDataSource, UITableViewDel
         super.viewDidLoad()
 
         loadAktuelleBar()
-        // Do any additional setup after loading the view.
+
+
     }
     override func viewDidAppear(_ animated: Bool) {
         self.tabBarController?.tabBar.isHidden = false 

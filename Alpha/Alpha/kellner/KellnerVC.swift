@@ -30,8 +30,8 @@ class KellnerVC: UIViewController, UITableViewDelegate, UITableViewDataSource, E
     var TimeStamp = [String: Double]()
     
     var Barname = String()
-    
     var KellnerID = String()
+    var viewBestellungID = String()
     
     // OUTLETS
     
@@ -41,7 +41,15 @@ class KellnerVC: UIViewController, UITableViewDelegate, UITableViewDataSource, E
     
     @IBOutlet weak var logoutBtn: UIButton!
     
+    @IBOutlet var viewProblem: UIView!
     
+    @IBOutlet var viewTischumbuchen: UIView!
+    
+    @IBOutlet var visualeffekt: UIVisualEffectView!
+    
+    @IBOutlet weak var problemTextView: UITextView!
+    
+    @IBOutlet weak var umbuchenTextfield: UITextField!
     
     // ACTIONS
     
@@ -291,8 +299,6 @@ class KellnerVC: UIViewController, UITableViewDelegate, UITableViewDataSource, E
                                 }
                             }
                                 
-                                
-                                
                             else {
                                 self.BestellungUnterkategorien.updateValue([[children.key]], forKey: BestellungID)
                                 self.BestellungExpanded2.updateValue([[true]], forKey: BestellungID)
@@ -370,7 +376,6 @@ class KellnerVC: UIViewController, UITableViewDelegate, UITableViewDataSource, E
     
     func setSectionsKellnerBestellung(BestellungID: String, tischnummer: String, TimeStamp: Double, Kategorie: [String], Unterkategorie: [[String]], items: [[[String]]], preis: [[[Double]]], liter: [[[String]]], menge: [[[Int]]], expanded2: [[Bool]], expanded: Bool){
         self.Bestellungen.append(KellnerTVSection(BestellungID: BestellungID, tischnummer: tischnummer, timeStamp: TimeStamp, Kategorie: Kategorie, Unterkategorie: Unterkategorie, items: items, preis: preis, liter: liter, menge: menge, expanded2: expanded2, expanded: expanded))
-        print(Bestellungen)
         
         
     }
@@ -387,6 +392,7 @@ class KellnerVC: UIViewController, UITableViewDelegate, UITableViewDataSource, E
     
 //     SWIPE ACTIONS
     
+    
         func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
             let delete = deleteAction(at: indexPath)
     
@@ -396,19 +402,116 @@ class KellnerVC: UIViewController, UITableViewDelegate, UITableViewDataSource, E
         func deleteAction(at indexPath: IndexPath) -> UIContextualAction {
             let action = UIContextualAction(style: .normal, title: "Problem") { (action, view, completion) in
                 completion(true)
-                
-                
-                
-        
+                print(self.Bestellungen[indexPath.section].BestellungID)
+                self.viewBestellungID = self.Bestellungen[indexPath.section].BestellungID
+                self.animateInProblem()
+
             }
             return action
         }
     
     
     
+    @IBAction func viewProblemAbbrechen(_ sender: Any) {
+        animateOutProblem()
+    }
+    @IBAction func viewProblemAbschicken(_ sender: Any) {
+        animateOutProblem()
+    }
+ 
+    
+    @IBAction func viewTischumbuchenAbbrechen(_ sender: Any) {
+        animateOutTisch()
+    }
+    
+    @IBAction func viewTischumbuchen(_ sender: Any) {
+        if umbuchenTextfield.text != "" {
+        var datref: DatabaseReference!
+        datref = Database.database().reference()
+            print(Barname, viewBestellungID, "hi")
+            datref.child("Bestellungen").child(Barname).child(viewBestellungID).child("Information").updateChildValues(["tischnummer" : umbuchenTextfield.text!])
+            animateOutTisch()
+
+//            reload()
+        }
+        else {
+            let alertKeineBestellung = UIAlertController(title: "Tisch umbuchen", message: "Gib eine neue Tischnummer an", preferredStyle: .alert)
+            alertKeineBestellung.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+            self.present(alertKeineBestellung, animated: true, completion: nil)        }
+    }
+    
+    
+    func animateInProblem(){
+        
+        self.view.addSubview(visualeffekt)
+        visualeffekt.center = self.view.center
+        visualeffekt.bounds.size = self.view.bounds.size
+        self.view.addSubview(viewProblem)
+        viewProblem.translatesAutoresizingMaskIntoConstraints = false
+        self.view.addConstraints([
+            NSLayoutConstraint(item: viewProblem, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .width, multiplier: 1.0, constant: 400),
+            NSLayoutConstraint(item: viewProblem, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .height, multiplier: 1.0, constant: 200),
+            NSLayoutConstraint(item: viewProblem, attribute: .centerX, relatedBy: .equal, toItem: self.view, attribute: .centerX, multiplier: 1.0, constant: 0),
+            NSLayoutConstraint(item: viewProblem, attribute: .centerY, relatedBy: .equal, toItem: self.view, attribute: .centerY, multiplier: 1.0, constant: 0),
+            ])
+        
+
+//        viewProblem.center = self.view.center
+        viewProblem.transform = CGAffineTransform.init(scaleX: 1.3, y: 1.3)
+        viewProblem.alpha = 0
+        problemTextView.becomeFirstResponder()
+
+        UIView.animate(withDuration: 0.2) {
+            self.viewProblem.alpha = 1
+            self.viewProblem.transform = CGAffineTransform.identity
+        }
+    }
+    
+    @objc func animateOutProblem(){
+        UIView.animate(withDuration: 0.1, animations: {
+            self.problemTextView.resignFirstResponder()
+
+            self.viewProblem.transform = CGAffineTransform.init(scaleX: 1.3, y: 1.3)
+            self.viewProblem.alpha = 0
+        }) { (sucess:Bool) in
+            self.viewProblem.removeFromSuperview()
+            self.visualeffekt.removeFromSuperview()
+        }
+    }
+    
+    func animateInTisch(){
+        self.view.addSubview(visualeffekt)
+        visualeffekt.center = self.view.center
+        visualeffekt.bounds.size = self.view.bounds.size
+        self.view.addSubview(viewTischumbuchen)
+        viewTischumbuchen.center = self.view.center
+        viewTischumbuchen.transform = CGAffineTransform.init(scaleX: 1.3, y: 1.3)
+        viewTischumbuchen.alpha = 0
+        umbuchenTextfield.keyboardType = UIKeyboardType.numberPad
+        umbuchenTextfield.becomeFirstResponder()
+
+        
+        UIView.animate(withDuration: 0.2) {
+            self.viewTischumbuchen.alpha = 1
+            self.viewTischumbuchen.transform = CGAffineTransform.identity
+        }
+    }
+    
+    @objc func animateOutTisch(){
+        UIView.animate(withDuration: 0.1, animations: {
+            self.problemTextView.resignFirstResponder()
+
+            self.viewTischumbuchen.transform = CGAffineTransform.init(scaleX: 1.3, y: 1.3)
+            self.viewTischumbuchen.alpha = 0
+            
+        }) { (sucess:Bool) in
+            self.viewTischumbuchen.removeFromSuperview()
+            self.visualeffekt.removeFromSuperview()
+        }
+    }
     
         func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-            let annehmen = annehmenAction(at: indexPath)
+            let annehmen = tischumbuchen(at: indexPath)
             annehmen.backgroundColor = UIColor.green
     
     
@@ -418,17 +521,14 @@ class KellnerVC: UIViewController, UITableViewDelegate, UITableViewDataSource, E
     func annehmen(sender: KellnerCell) {
         self.removeBestellung(KellnerID: self.KellnerID, BestellungID:
             self.Bestellungen[sender.Cell1Section].BestellungID)
-        print("wjqwlqfwweqd")
         self.reload()
     }
     
-        func annehmenAction(at indexPath: IndexPath) -> UIContextualAction {
+        func tischumbuchen(at indexPath: IndexPath) -> UIContextualAction {
             let action = UIContextualAction(style: .destructive, title: "annehmen") { (action, view, completion) in
                 completion(true)
     
-                self.removeBestellung(KellnerID: self.KellnerID, BestellungID:
-                self.Bestellungen[indexPath.section].BestellungID)
-                self.reload()
+            self.animateInTisch()
     
             }
     
@@ -508,16 +608,7 @@ class KellnerVC: UIViewController, UITableViewDelegate, UITableViewDataSource, E
     }
     
     
-    //    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    //
-    //print(self.Bestellungen)
-    //
-    //        return self.Bestellungen.count
-    //
-    //    }
-    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        //
         let cell = Bundle.main.loadNibNamed("KellnerCell", owner: self, options: nil)?.first as! KellnerCell
         
         cell.Bestellungen = Bestellungen
@@ -540,36 +631,6 @@ class KellnerVC: UIViewController, UITableViewDelegate, UITableViewDataSource, E
             cell.timeLbl.isHidden = false
         }
         
-        //
-        
-        //        self.itemssss = bestellung2[bestellungIDs[indexPath.row]]!
-        //
-        //
-        //        for (genre, bestellteitems) in itemssss {
-        //
-        //            cellGenres.append(genre)
-        //
-        //            for (item, menge) in bestellteitems {
-        //
-        //                cellItems.append(item)
-        //                cellMengen.append(menge)
-        //
-        //            }
-        //
-        //        }
-        //
-        //        cellGenres.removeAll()
-        //        cellItems.removeAll()
-        //        cellMengen.removeAll()
-        //
-        //        cell.bestellungsText.text = "\(itemssss)"
-        //
-        //        let timeStampDate = NSDate(timeIntervalSince1970: TimeStamps[indexPath.row])
-        //        let dateFormatter = DateFormatter()
-        //        dateFormatter.dateFormat = "HH:mm"
-        //        cell.timeLbl.text = "\(dateFormatter.string(from: timeStampDate as Date)) Uhr"
-        //        cell.tischnummer.text = "Tischnummer: \(self.tischnummer[indexPath.row])"
-        //
         return cell
         
     }
@@ -594,15 +655,7 @@ class KellnerVC: UIViewController, UITableViewDelegate, UITableViewDataSource, E
         bestellungenTV.endUpdates()
     }
     
-    
-    
-    // OTHERS
-    
-    //    override func viewWillAppear(_ animated: Bool) {
-    //        bestellungenTV.estimatedRowHeight = 100
-    //        bestellungenTV.rowHeight = UITableViewAutomaticDimension
-    //    }
-    
+    // Others
     
     func reload(){
          Bestellungen.removeAll()
@@ -627,6 +680,27 @@ class KellnerVC: UIViewController, UITableViewDelegate, UITableViewDataSource, E
     override func viewDidLoad() {
         
         super.viewDidLoad()
+
+        problemTextView.alpha = 0.5
+        viewProblem.backgroundColor = UIColor(patternImage: UIImage(named: "hintergrund")!)
+        viewTischumbuchen.backgroundColor = UIColor(patternImage: UIImage(named: "hintergrund")!)
+        //init toolbar
+        let toolbarProblem:UIToolbar = UIToolbar(frame: CGRect(x: 0, y: 0,  width: self.view.frame.size.width, height: 30))
+        let toolbarTisch:UIToolbar = UIToolbar(frame: CGRect(x: 0, y: 0,  width: self.view.frame.size.width, height: 30))
+
+        //create left side empty space so that done button set on right side
+        let flexSpace = UIBarButtonItem(barButtonSystemItem:    .flexibleSpace, target: nil, action: nil)
+        let doneBtnProblem: UIBarButtonItem = UIBarButtonItem(title: "Fertig", style: .done, target: self, action: #selector(animateOutProblem))
+        let doneBtnTisch: UIBarButtonItem = UIBarButtonItem(title: "Fertig", style: .done, target: self, action: #selector(animateOutTisch))
+
+        toolbarProblem.setItems([flexSpace, doneBtnProblem], animated: false)
+        toolbarProblem.sizeToFit()
+        toolbarTisch.setItems([flexSpace, doneBtnTisch], animated: false)
+        toolbarTisch.sizeToFit()
+        //setting toolbar as inputAccessoryView
+        self.problemTextView.inputAccessoryView = toolbarProblem
+        self.umbuchenTextfield.inputAccessoryView = toolbarTisch
+        
         barnameLbl.text = Barname
         
         loadBestellungenKeys()
@@ -640,6 +714,8 @@ class KellnerVC: UIViewController, UITableViewDelegate, UITableViewDataSource, E
         
         
     }
+
+
     
     @objc private func refreshOptions(sender: UIRefreshControl) {
             reload()

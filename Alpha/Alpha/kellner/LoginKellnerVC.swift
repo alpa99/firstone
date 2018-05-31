@@ -136,6 +136,9 @@ class LoginKellnerVC: UIViewController {
             let KABCV = KTBC.viewControllers![2] as! KellnerAlleBestellungenVC
             KABCV.KellnerID = (Auth.auth().currentUser?.uid)!
             KABCV.Barname = barname
+            let PVVC = KTBC.viewControllers![3] as! ProdukteVC
+            PVVC.KellnerID = (Auth.auth().currentUser?.uid)!
+            PVVC.Barname = barname
         }
     }
     

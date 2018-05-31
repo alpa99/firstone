@@ -15,7 +15,7 @@ protocol BestellungVC2Delegate {
     func reloaddas(sender: Any)
   
 }
-class BestellungVC2: UIViewController, UITableViewDataSource, UITableViewDelegate, ExpandableHeaderViewDelegate, BestellenCellDelegate, MyBestellungCellDelegate, PageObservation2, CLLocationManagerDelegate {
+class BestellungVC2: UIViewController, UITableViewDataSource, UITableViewDelegate, ExpandableHeaderViewDelegate, BestellenCellDelegate, MyBestellungCellDelegate, PageObservation2, CLLocationManagerDelegate, UITextViewDelegate {
    
     // VARS
 
@@ -23,6 +23,8 @@ class BestellungVC2: UIViewController, UITableViewDataSource, UITableViewDelegat
     var baradresse = " "
     var tischnummer = 0
     var KellnerID = ""
+    var placeholder = "Hier haben Sie Platz für besondere Wünsche. Bitte äußern Sie nur Wünsche bezüglich der Zutaten."
+    var kommentar = String()
     
     var BestellungKategorien = [String]()
     var BestellungUnterkategorien = [[String]]()
@@ -37,6 +39,7 @@ class BestellungVC2: UIViewController, UITableViewDataSource, UITableViewDelegat
     var itemNamen = [String]()
     var itemPreise = [Double]()
     var itemLiter = [String]()
+    var verfuegbarkeit = [Bool]()
     
  
     var sections = [ExpandTVSection2]()
@@ -45,6 +48,8 @@ class BestellungVC2: UIViewController, UITableViewDataSource, UITableViewDelegat
     var Items = [String: [[String]]]()
     var Preis = [String: [[Double]]]()
     var Liter = [String: [[String]]]()
+    var Beschreibung = [String: [[String]]]()
+    var Verfuegbarkeit = [String: [[Bool]]]()
     var Expanded = [String: [Bool]]()
 
     var bestellteItemsDictionary = [bestellungTVSection]()
@@ -79,6 +84,8 @@ class BestellungVC2: UIViewController, UITableViewDataSource, UITableViewDelegat
     @IBOutlet weak var dismissPopUp: UIButton!
     @IBOutlet weak var aktualisierungAbbrechen: UIButton!
     @IBOutlet weak var myBestellungAbschickenBtn: UIButton!
+    
+    @IBOutlet weak var kommentarTextView: UITextView!
     
     
     
@@ -176,17 +183,14 @@ class BestellungVC2: UIViewController, UITableViewDataSource, UITableViewDelegat
                     self.getUnterKategorienItems(Kategorie: key.key)
                 }
             }
-            
         }, withCancel: nil)
-        
-        
     }
     
     
     func getUnterKategorienItems(Kategorie: String){
         var datref: DatabaseReference!
         datref = Database.database().reference()
-        datref.child("Speisekarten").child("\(self.barname)").child(Kategorie).observeSingleEvent(of: .value, with: { (snapshotUnterkategorieItem) in
+        datref.child("Speisekarten").child(self.barname).child(Kategorie).observeSingleEvent(of: .value, with: { (snapshotUnterkategorieItem) in
             
             for key in (snapshotUnterkategorieItem.children.allObjects as? [DataSnapshot])! {
                 let snapshotItem = snapshotUnterkategorieItem.childSnapshot(forPath: key.key)
@@ -200,18 +204,25 @@ class BestellungVC2: UIViewController, UITableViewDataSource, UITableViewDelegat
                             var newitems = self.Items[Kategorie]
                             var newpreis = self.Preis[Kategorie]
                             var newliter = self.Liter[Kategorie]
-                            
+                            var newbeschreibung = self.Beschreibung[Kategorie]
+                            var newverfuegbarkeit = self.Verfuegbarkeit[Kategorie]
+
                             
                             if (self.Items[Kategorie]?.count)! < (self.Unterkategorien[Kategorie]?.count)! {
                                 newitems?.append([item.Name!])
                                 newpreis?.append([item.Preis!])
                                 newliter?.append([item.Liter!])
-                                
+                                newbeschreibung?.append([item.Beschreibung!])
+                                newverfuegbarkeit?.append([item.Verfuegbarkeit!])
+
+
                                 
                                 self.Items[Kategorie] = newitems
                                 self.Preis[Kategorie] = newpreis
                                 self.Liter[Kategorie] = newliter
-                                
+                                self.Beschreibung[Kategorie] = newbeschreibung
+                                self.Verfuegbarkeit[Kategorie] = newverfuegbarkeit
+
                                 
                                 
                             }
@@ -222,6 +233,10 @@ class BestellungVC2: UIViewController, UITableViewDataSource, UITableViewDelegat
                                 self.Preis[Kategorie] = newpreis
                                 newliter![(self.Unterkategorien[Kategorie]?.index(of: key.key))!].append(item.Liter!)
                                 self.Liter[Kategorie] = newliter
+                                newbeschreibung![(self.Unterkategorien[Kategorie]?.index(of: key.key))!].append(item.Beschreibung!)
+                                self.Beschreibung[Kategorie] = newbeschreibung
+                                newverfuegbarkeit![(self.Unterkategorien[Kategorie]?.index(of: key.key))!].append(item.Verfuegbarkeit!)
+                                self.Verfuegbarkeit[Kategorie] = newverfuegbarkeit
                                 
                             }
                             
@@ -251,13 +266,20 @@ class BestellungVC2: UIViewController, UITableViewDataSource, UITableViewDelegat
                                 var newLiter = self.Liter[Kategorie]
                                 newLiter![(self.Unterkategorien[Kategorie]?.index(of: key.key))!].append(item.Liter!)
                                 self.Liter[Kategorie] = newLiter
-                                
+                                var newBeschreibung = self.Beschreibung[Kategorie]
+                                newBeschreibung![(self.Unterkategorien[Kategorie]?.index(of: key.key))!].append(item.Beschreibung!)
+                                self.Beschreibung[Kategorie] = newBeschreibung
+                                var newVerfuegbarkeit = self.Verfuegbarkeit[Kategorie]
+                                newVerfuegbarkeit![(self.Unterkategorien[Kategorie]?.index(of: key.key))!].append(item.Verfuegbarkeit!)
+                                self.Verfuegbarkeit[Kategorie] = newVerfuegbarkeit
                                 
                             } else {
                                 self.Items.updateValue([[item.Name!]], forKey: Kategorie)
                                 self.Preis.updateValue([[item.Preis!]], forKey: Kategorie)
                                 self.Liter.updateValue([[item.Liter!]], forKey: Kategorie)
-                                
+                                self.Beschreibung.updateValue([[item.Beschreibung!]], forKey: Kategorie)
+                                self.Verfuegbarkeit.updateValue([[item.Verfuegbarkeit!]], forKey: Kategorie)
+
                                 
                                 
                             }
@@ -271,8 +293,9 @@ class BestellungVC2: UIViewController, UITableViewDataSource, UITableViewDelegat
             if self.Unterkategorien.count == self.Kategorien.count {
 
                 for kategorie in self.Kategorien {
-                    self.setSectionsSpeisekarte(Kategorie: kategorie, Unterkategorie: self.Unterkategorien[kategorie]!, items: self.Items[kategorie]!, preis: self.Preis[kategorie]!, liter: self.Liter[kategorie]!, expanded2: self.Expanded[kategorie]!)
+                    self.setSectionsSpeisekarte(Kategorie: kategorie, Unterkategorie: self.Unterkategorien[kategorie]!, items: self.Items[kategorie]!, preis: self.Preis[kategorie]!, liter: self.Liter[kategorie]!, beschreibung: self.Beschreibung[kategorie]!, verfuegbarkeit:  self.Verfuegbarkeit[kategorie]!, expanded2: self.Expanded[kategorie]!)
                 }
+                print(self.sections, "sections")
             }
             
             
@@ -363,15 +386,21 @@ class BestellungVC2: UIViewController, UITableViewDataSource, UITableViewDelegat
     }
 
     func animateIn(){
+        
+        if(kommentar == "") {
+            self.kommentarTextView.text = placeholder
+            self.kommentarTextView.textColor = .lightGray
+        } else {
+            self.kommentarTextView.text = kommentar
+            self.kommentarTextView.textColor = .black
+        }
         self.bestellungVCView.addSubview(visualEffectView)
         visualEffectView.center = self.bestellungVCView.center
         self.bestellungVCView.addSubview(addItemView)
         addItemView.center = self.bestellungVCView.center
         itemCountLbl.text = "1"
+        
 
-    
-        //        self.inputView?.addSubview(addItemView)
-        //        addItemView.center = (self.inputView?.center)!
         addItemView.transform = CGAffineTransform.init(scaleX: 1.3, y: 1.3)
         addItemView.alpha = 0
         UIView.animate(withDuration: 0.2) {
@@ -424,8 +453,8 @@ class BestellungVC2: UIViewController, UITableViewDataSource, UITableViewDelegat
     
     // TABLEVIEW FUNCTIONS
     
-    func setSectionsSpeisekarte(Kategorie: String, Unterkategorie: [String], items: [[String]], preis: [[Double]], liter: [[String]], expanded2: [Bool]){
-        self.sections.append(ExpandTVSection2(Kategorie: Kategorie, Unterkategorie: Unterkategorie, items: items, preis: preis, liter: liter, expanded2: expanded2, expanded: false))
+    func setSectionsSpeisekarte(Kategorie: String, Unterkategorie: [String], items: [[String]], preis: [[Double]], liter: [[String]], beschreibung: [[String]], verfuegbarkeit: [[Bool]],  expanded2: [Bool]){
+        self.sections.append(ExpandTVSection2(Kategorie: Kategorie, Unterkategorie: Unterkategorie, items: items, preis: preis, liter: liter, beschreibung: beschreibung, verfuegbarkeit:  verfuegbarkeit, expanded2: expanded2, expanded: false))
         self.bestellungTableView.reloadData()
     }
     
@@ -558,6 +587,7 @@ class BestellungVC2: UIViewController, UITableViewDataSource, UITableViewDelegat
             cell.items = sections[indexPath.section].items
             cell.preise = sections[indexPath.section].preis
             cell.liters = sections[indexPath.section].liter
+            
             cell.cellIndexPathSection = indexPath.section
 
             cell.delegate = self
@@ -634,8 +664,14 @@ class BestellungVC2: UIViewController, UITableViewDataSource, UITableViewDelegat
         itemNamen = sections[cellIndexPathSection].items[sender.section2]
         itemPreise = sections[cellIndexPathSection].preis[sender.section2]
         itemLiter = sections[cellIndexPathSection].liter[sender.section2]
+        verfuegbarkeit = sections[cellIndexPathSection].verfuegbarkeit[sender.section2]
         KategorieLbl.text = sections[cellIndexPathSection].Kategorie
         UnterkategorieLbl.text = sections[cellIndexPathSection].Unterkategorie[sender.section2]
+        
+        if verfuegbarkeit[sender.row2] {
+        if itemNamen[sender.row2] == "Tabakmix" {
+            print(itemNamen[sender.row2], "MISCHEN")
+        } else {
         let preisFormat = String(format: "%.2f", arguments: [itemPreise[sender.row2]])
         itemPreisLbl.text = preisFormat
         itemNameLbl.text = itemNamen[sender.row2]
@@ -647,6 +683,13 @@ class BestellungVC2: UIViewController, UITableViewDataSource, UITableViewDelegat
             itemLiterLbl.isHidden = true
         }
         animateIn()
+            }
+        } else {
+            let alertKeineBestellung = UIAlertController(title: "nicht Verfügbar", message: "Es tut uns Leid. Dieses Produkt ist derzeit nicht Verfügbar.", preferredStyle: .alert)
+            alertKeineBestellung.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+            self.present(alertKeineBestellung, animated: true, completion: nil)
+
+        }
     }
     
     
@@ -657,7 +700,6 @@ class BestellungVC2: UIViewController, UITableViewDataSource, UITableViewDelegat
             if !BestellungKategorien.contains(KategorieLbl.text!){
                 BestellungKategorien.append(KategorieLbl.text!)
                 BestellungUnterkategorien.append([UnterkategorieLbl.text!])
-                
                 BestellungItemsNamen.append([[itemNameLbl.text!]])
                 BestellungItemsPreise.append([[Double(itemPreisLbl.text!)!]])
                 BestellungItemsLiter.append([[itemLiterLbl.text!]])
@@ -849,11 +891,29 @@ class BestellungVC2: UIViewController, UITableViewDataSource, UITableViewDelegat
         }
     }
     
+    func textViewShouldBeginEditing(_ textView: UITextView) -> Bool {
+        self.kommentarTextView.textColor = .black
+        if(self.kommentarTextView.text == placeholder) {
+            self.kommentarTextView.text = ""
+        }
+        
+        return true
+    }
+    func textViewDidEndEditing(_ textView: UITextView) {
+        kommentar = kommentarTextView.text
+        if(kommentarTextView.text == "") {
+            self.kommentarTextView.text = placeholder
+            self.kommentarTextView.textColor = .lightGray
+        }
+    }
+    
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        kommentarTextView.delegate = self
         bestellungTableView.reloadData()
+        addItemView.backgroundColor = UIColor(patternImage: UIImage(named: "hintergrund")!)
         self.barname = parentPageViewController2.name
         self.baradresse = parentPageViewController2.adresse
         self.tischnummer = parentPageViewController2.tischnummer

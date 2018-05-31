@@ -154,7 +154,7 @@ class LocationVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate
     
     func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
         if control == view.rightCalloutAccessoryView{
-            let annotation = self.map.selectedAnnotations[0] as MKAnnotation!
+            let annotation = self.map.selectedAnnotations[0] as MKAnnotation?
             //Perform a segue here to navigate to another viewcontroller
             
             let detvc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "PageVC") as! PageViewController

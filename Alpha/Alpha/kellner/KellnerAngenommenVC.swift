@@ -12,12 +12,13 @@
 class KellnerAngenommenVC: UIViewController, UITableViewDelegate, UITableViewDataSource, ExpandableHeaderViewDelegate {
     
     // VARS
+    var Barname = String()
+    var KellnerID = String()
+    
     var Bestellungen = [KellnerTVSection]()
-    var BestellungenID = [String]()
     var BestellungKategorien = [String: [String]]()
     var BestellungUnterkategorien = [String: [[String]]]()
     var BestellungExpanded2 = [String: [[Bool]]]()
-    
     var BestellungItemsNamen = [String: [[[String]]]]()
     var BestellungItemsPreise = [String: [[[Double]]]]()
     var BestellungItemsMengen = [String: [[[Int]]]]()
@@ -25,24 +26,7 @@ class KellnerAngenommenVC: UIViewController, UITableViewDelegate, UITableViewDat
     var Angenommen = [String: String]()
     var FromUserID = [String: String]()
     var TimeStamp = [String: Double]()
-    
-    var Barname = String()
-    
-    var KellnerID = String()
     var bestellungIDs = [String]()
-    var TimeStamps = [Double]()
-    var tischnummer = [String]()
-    var genres = [String]()
-    var bestellunggenres = [String: [String: Int]]()
-    var bestellung2 = [String: [String: [String: Int]]]()
-    var itemssss = [String: [String: Int]]()
-    var cellGenres = [String]()
-    var cellItems = [String]()
-    var cellMengen = [Int]()
-    
-    var items = [String]()
-    var mengen = [Int]()
-    
         
         // OUTLETS
         
@@ -70,7 +54,6 @@ class KellnerAngenommenVC: UIViewController, UITableViewDelegate, UITableViewDat
         
     }
     func loadBestellungen(BestellungID: String){
-        print(Barname, "kvc")
         self.bestellungIDs.append(BestellungID)
         
         var datref: DatabaseReference!
@@ -363,8 +346,7 @@ class KellnerAngenommenVC: UIViewController, UITableViewDelegate, UITableViewDat
     func setSectionsKellnerBestellung(BestellungID: String, tischnummer: String, TimeStamp: Double, Kategorie: [String], Unterkategorie: [[String]], items: [[[String]]], preis: [[[Double]]], liter: [[[String]]], menge: [[[Int]]], expanded2: [[Bool]], expanded: Bool){
         self.Bestellungen.append(KellnerTVSection(BestellungID: BestellungID, tischnummer: tischnummer, timeStamp: TimeStamp, Kategorie: Kategorie, Unterkategorie: Unterkategorie, items: items, preis: preis, liter: liter, menge: menge, expanded2: expanded2, expanded: expanded))
         print(Bestellungen)
-        
-        
+    
     }
     
 //
@@ -507,37 +489,33 @@ class KellnerAngenommenVC: UIViewController, UITableViewDelegate, UITableViewDat
             
             loadBestellungenKeys()
 
-//            angenommenBestellungenTV.reloadData()
-//            loadGenres()
-//            loadBestellungsID(KellnerID: self.KellnerID)
-//
-//            let refreshControl = UIRefreshControl()
-//            let title = NSLocalizedString("aktualisiere", comment: "Pull to refresh")
-//            refreshControl.attributedTitle = NSAttributedString(string: title)
-//            refreshControl.addTarget(self, action: #selector(refreshOptions(sender:)), for: .valueChanged)
-//            angenommenBestellungenTV.refreshControl = refreshControl
+            let refreshControl = UIRefreshControl()
+            let title = NSLocalizedString("aktualisiere", comment: "Pull to refresh")
+            refreshControl.attributedTitle = NSAttributedString(string: title)
+            refreshControl.addTarget(self, action: #selector(refreshOptions(sender:)), for: .valueChanged)
+            angenommenBestellungenTV.refreshControl = refreshControl
             
             
         }
         
         @objc private func refreshOptions(sender: UIRefreshControl) {
-//            bestellungIDs.removeAll()
-//            itemssss.removeAll()
-//            bestellunggenres.removeAll()
-//            genres.removeAll()
-//            bestellung2.removeAll()
-//            sections.removeAll()
-//            TimeStamps = [Double]()
-//            tischnummer = [String]()
-//            itemsangenommen.removeAll()
-//            mengenangenommen.removeAll()
-//            items.removeAll()
-//            loadGenres()
-//            loadBestellungsID(KellnerID: self.KellnerID)
-//
-//
-//            
-//            sender.endRefreshing()
+            
+            self.Bestellungen.removeAll()
+            self.BestellungKategorien.removeAll()
+            self.BestellungUnterkategorien.removeAll()
+            self.BestellungExpanded2.removeAll()
+            self.BestellungItemsNamen.removeAll()
+            self.BestellungItemsPreise.removeAll()
+            self.BestellungItemsMengen.removeAll()
+            self.Tischnummer.removeAll()
+            self.Angenommen.removeAll()
+            self.FromUserID.removeAll()
+            self.TimeStamp.removeAll()
+            self.bestellungIDs.removeAll()
+
+            loadBestellungenKeys()
+            
+            sender.endRefreshing()
         }
         
         override func didReceiveMemoryWarning() {

@@ -13,13 +13,16 @@ class SpeisekarteCelle2: UITableViewCell {
     @IBOutlet weak var itemLbl: UILabel!
     @IBOutlet weak var LiterLbl: UILabel!
     @IBOutlet weak var PreisLbl: UILabel!
+    @IBOutlet weak var beschreibungLbl: UILabel!
+    
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        
+    
         itemLbl.textColor = UIColor.white
         LiterLbl.textColor = UIColor.white
         PreisLbl.textColor = UIColor.white
+        beschreibungLbl.textColor = UIColor.white
         // Initialization code
     }
 
