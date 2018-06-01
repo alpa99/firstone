@@ -20,7 +20,7 @@ class UserVC: UIViewController {
     @IBAction func logOutTapped(_ sender: Any){
     let loginManager = LoginManager()
         loginManager.logOut()
-        performSegue(withIdentifier: "logout", sender: self)
+        //performSegue(withIdentifier: "logout", sender: self)
     }
     
     

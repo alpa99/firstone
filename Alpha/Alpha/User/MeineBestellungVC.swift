@@ -62,9 +62,7 @@ class MeineBestellungVC: UIViewController, UITableViewDataSource, UITableViewDel
     // ACTIONS
     
     
-    @IBAction func BackBtn(_ sender: Any) {
-        performSegue(withIdentifier: "profilIdentifier", sender: self)
-    }
+   
     
     func loadAktuelleBar(){
         var datref: DatabaseReference!

@@ -30,6 +30,10 @@ class LoginVC: UIViewController {
     
     // ACTIONS
     
+    @IBAction func unwindSegue(_ sender: UIStoryboardSegue){
+        
+    }
+    
     @IBAction func registrierenSegue(_ sender: Any) {
         segueToRegistrieren()
     }

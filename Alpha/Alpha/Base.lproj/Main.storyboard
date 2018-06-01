@@ -427,11 +427,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="hintergrund" translatesAutoresizingMaskIntoConstraints="NO" id="oiq-wf-qNI">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="618"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                             </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gIV-Bf-XBJ">
-                                <rect key="frame" x="51" y="101" width="272" height="35"/>
-
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gIV-Bf-XBJ">
+                                <rect key="frame" x="51" y="82" width="272" height="35"/>
                                 <color key="backgroundColor" red="0.72549019607843135" green="0.66666666666666663" blue="0.5490196078431373" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" name="Helvetica-Bold" family="Helvetica" pointSize="20"/>
                                 <state key="normal" title="Login mit Facebook">
@@ -454,7 +453,6 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="249" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="MRh-bF-FBt">
-
                                 <rect key="frame" x="16" y="590" width="343" height="57"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                 <state key="normal" title="Allgemeine Geschäftsbedingungen und Datenschutz">
@@ -733,6 +731,7 @@
                                 <state key="normal" title="Logout"/>
                                 <connections>
                                     <action selector="logOutTapped:" destination="NVL-oJ-osr" eventType="touchUpInside" id="pvv-Fe-8dd"/>
+                                    <segue destination="cCZ-Ll-ckR" kind="unwind" unwindAction="unwindSegue:" id="r4H-UP-fyc"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xmH-Mu-JVH" customClass="Button" customModule="Alpha" customModuleProvider="target">
@@ -761,11 +760,11 @@
                     </tabBarItem>
                     <navigationItem key="navigationItem" id="Mbg-Os-Zf2"/>
                     <connections>
-                        <segue destination="1rU-Ub-WRG" kind="show" identifier="logout" id="LGn-E9-Y7b"/>
                         <segue destination="JcB-IK-hdl" kind="show" identifier="meinebestellungen" id="bq2-aa-Yyw"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FfX-KQ-cr5" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="cCZ-Ll-ckR" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="-244" y="1556"/>
         </scene>
@@ -1998,12 +1997,9 @@
         <image name="tabrechts_leer" width="40" height="40"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="lCL-4T-GHF"/>
-        <segue reference="bq2-aa-Yyw"/>
+        <segue reference="vDI-KG-Zle"/>
         <segue reference="Ofz-12-wQ9"/>
         <segue reference="4wf-Pf-njL"/>
-        <segue reference="vDI-KG-Zle"/>
-        <segue reference="LGn-E9-Y7b"/>
         <segue reference="tKO-Qv-DSi"/>
     </inferredMetricsTieBreakers>
 </document>
