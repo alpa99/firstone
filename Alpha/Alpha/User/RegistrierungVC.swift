@@ -16,7 +16,7 @@ import FirebaseAuth
 import SafariServices
 
 
-class RegistrierungVC: UIViewController {
+class RegistrierungVC: UIViewController, UITextFieldDelegate {
     // Vars
     
     var userFbID = ""
@@ -27,11 +27,65 @@ class RegistrierungVC: UIViewController {
     @IBOutlet weak var FacebookLoginBtn: UIButton!
     @IBOutlet weak var AlterBtn: UIButton!
     @IBOutlet weak var agbsAkzeptiert: UIButton!
+    @IBOutlet weak var datenschutzAkzeptiert: UIButton!
+    @IBOutlet weak var emailTextField: UITextField!
+    @IBOutlet weak var passwordTextField: UITextField!
+    @IBOutlet weak var benutzerName: UITextField!
+    
     
     // Actions
     
+    @IBAction func createEmailAcc(_ sender: Any) {
+        if AlterBtn.isSelected == true &&  agbsAkzeptiert.isSelected == true && datenschutzAkzeptiert.isSelected == true{
+
+        if emailTextField.text == "" || passwordTextField.text == "" || benutzerName.text == "" {
+            let alertController = UIAlertController(title: "Fehler", message: "Bitte Email, Passwort und Benutzernamen angeben", preferredStyle: .alert)
+            let defaultAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
+            alertController.addAction(defaultAction)
+            
+            present(alertController, animated: true, completion: nil)
+            
+        } else {
+            Auth.auth().createUser(withEmail: emailTextField.text!, password: passwordTextField.text!) { (user, error) in
+                
+                if error == nil {
+
+                    self.addUserToFirebase(name: self.benutzerName.text!, email: self.emailTextField.text!)
+                    Auth.auth().currentUser?.sendEmailVerification(completion: nil)
+                    let firebaseAuth = Auth.auth()
+                    do {
+                        try firebaseAuth.signOut()
+                    } catch let signOutError as NSError {
+                        print ("Error signing out: %@", signOutError)
+                    }
+                    let alertController = UIAlertController(title: "Registriert", message: "Wir haben dir eine Bestätigungs Email geschickt.", preferredStyle: .alert)
+                    let defaultAction = UIAlertAction(title: "zum Login", style: .cancel, handler: { (action) in
+                       
+                        self.segueToLoginVC()
+                    })
+                    alertController.addAction(defaultAction)
+                    self.present(alertController, animated: true, completion: nil)
+                } else {
+                    let alertController = UIAlertController(title: "Error", message: error?.localizedDescription, preferredStyle: .alert)
+                    
+                    let defaultAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
+                    alertController.addAction(defaultAction)
+                    
+                    self.present(alertController, animated: true, completion: nil)
+                }
+            }
+        }
+        } else {
+            let alertNichtRegistriert = UIAlertController(title: "Registrierung fehlgeschlagen", message: "Du musst die Allgemeinen Geschäftbedingungen und Datenschutzrechtlienen akzeptieren, bevor du dich registrieren kannst.", preferredStyle: .alert)
+            alertNichtRegistriert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+            self.present(alertNichtRegistriert, animated: true, completion: nil)
+        }
+    }
+    
+    
+    
     @IBAction func facebookLoginTapped(_ sender: Any) {
-        if AlterBtn.isSelected == true &&  agbsAkzeptiert.isSelected == true {
+        if AlterBtn.isSelected == true &&  agbsAkzeptiert.isSelected == true && datenschutzAkzeptiert.isSelected == true{
         let loginManager = LoginManager()
         loginManager.logOut()
             if Auth.auth().currentUser?.uid != nil {
@@ -80,6 +134,9 @@ class RegistrierungVC: UIViewController {
         AlterBtn.isSelected = !AlterBtn.isSelected
     }
     
+    @IBAction func datenschutzAkzeptiert(_ sender: Any) {
+        datenschutzAkzeptiert.isSelected = !datenschutzAkzeptiert.isSelected
+    }
     
     
     
@@ -89,6 +146,17 @@ class RegistrierungVC: UIViewController {
     }
     
     // Other
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        if textField == emailTextField {
+            textField.keyboardType = UIKeyboardType.emailAddress }
+        else {
+            textField.keyboardType = UIKeyboardType.default
+        }
+        textField.becomeFirstResponder()
+    }
+    
+    
     
     func getUserInfo(completion: @escaping (_ : [String: Any]?, _ : Error?) -> Void) {
         
@@ -110,14 +178,31 @@ class RegistrierungVC: UIViewController {
                 Auth.auth().signIn(with: credential, completion: { (user, error) in
                     print(Auth.auth().currentUser?.uid ?? "keine uid", "UID")
                     if error != nil {
-                        let alertNichtRegistriert = UIAlertController(title: "Registrierung fehlgeschlagen", message: "Bitte informiere info@madapp.de", preferredStyle: .alert)
+                        let alertNichtRegistriert = UIAlertController(title: "Registrierung fehlgeschlagen", message: "Diese Email wird eventuell bereits von einem Account benutzt. Bitte informiere info@madapp.de für genauere Informationen", preferredStyle: .alert)
                         alertNichtRegistriert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
                         self.present(alertNichtRegistriert, animated: true, completion: nil)
                         return
                     } else {
-                        self.addUserToFirebase()
-                        self.AddFacebookUser()
-
+                        
+                        var ref: DatabaseReference?
+                        ref = Database.database().reference()
+                        ref?.child("FacebookUsers").observeSingleEvent(of: .value, with: { (snapshot) in
+                        
+                                
+                            if snapshot.hasChild(FBSDKAccessToken.current().userID) {
+                                let alertSchonRegistriert = UIAlertController(title: "Registrierung fehlgeschlagen", message: "Du bist bereits registriert.", preferredStyle: .alert)
+                                alertSchonRegistriert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+                                alertSchonRegistriert.addAction(UIAlertAction(title: "zum Login", style: .default, handler: { (action) in
+                                    self.segueToLoginVC()
+                                }))
+                                self.present(alertSchonRegistriert, animated: true, completion: nil)
+                            } else {
+                                self.addUserToFirebase(name: self.userFbID, email: self.userFbEmail)
+                                self.AddFacebookUser(name: self.userFbID, email: self.userFbEmail)
+                            }
+                                
+                            
+                        }, withCancel: nil)
 
                     }
                     print("fb user:", user ?? "default user")
@@ -127,25 +212,28 @@ class RegistrierungVC: UIViewController {
         }
     }
     
-    func addUserToFirebase(){
+    func addUserToFirebase(name: String, email: String){
         var ref: DatabaseReference?
         ref = Database.database().reference()
         
         if let uid = Auth.auth().currentUser?.uid {
-            ref?.child("Users").child("\(uid)").child("Name").setValue(self.userFbName)
-            ref?.child("Users").child("\(uid)").child("Email").setValue(self.userFbEmail)
+            ref?.child("Users").child("\(uid)").child("Name").setValue(name)
+            ref?.child("Users").child("\(uid)").child("Email").setValue(email)
+            ref?.child("Users").child("\(uid)").child("über18Jahre").setValue(true)
             ref?.child("Users").child("\(uid)").child("AGBSAkzeptiert").setValue(true)
             ref?.child("Users").child("\(uid)").child("DatenschutzAkzeptiert").setValue(true)
-            
-            segueToTabBar()
-        }
+                    }
     }
     
-    func AddFacebookUser(){
+    func AddFacebookUser(name: String, email: String){
         var ref: DatabaseReference?
         ref = Database.database().reference()
-        ref?.child("FacebookUsers").child(FBSDKAccessToken.current().userID).child("Name").setValue(self.userFbName)
-        ref?.child("FacebookUsers").child(FBSDKAccessToken.current().userID).child("Email").setValue(self.userFbEmail)
+        ref?.child("FacebookUsers").child(FBSDKAccessToken.current().userID).child("FacebookID").setValue(FBSDKAccessToken.current().userID)
+        ref?.child("FacebookUsers").child(FBSDKAccessToken.current().userID).child("FirebaseUid").setValue(Auth.auth().currentUser?.uid)
+        ref?.child("FacebookUsers").child(FBSDKAccessToken.current().userID).child("Name").setValue(name)
+        ref?.child("FacebookUsers").child(FBSDKAccessToken.current().userID).child("Email").setValue(email)
+        segueToTabBar()
+
         }
     
     func segueToTabBar(){
@@ -157,28 +245,39 @@ class RegistrierungVC: UIViewController {
                         self.performSegue(withIdentifier: "registriert", sender: self.FacebookLoginBtn)
 
 
+    }
 
-        
-//        let credential = FacebookAuthProvider.credential(withAccessToken: accessTokenString)
-//        Auth.auth().currentUser?.reauthenticate(with: credential, completion: { error in
-//            if error != nil {
-//                self.performSegue(withIdentifier: "registriert", sender: self.FacebookLoginBtn)
-//            } else {
-//                let alertNichtRegistriert = UIAlertController(title: "Registrierung fehlgeschlagen", message: "Bitte informiere info@madapp.de", preferredStyle: .alert)
-//                alertNichtRegistriert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-//                self.present(alertNichtRegistriert, animated: true, completion: nil)
-//            }
-//
-//        })
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true)
+    }
+
+    
+    @IBAction func backToLoginVC(_ sender: Any) {
+        segueToLoginVC()
     }
     
+    func segueToLoginVC() {
+       performSegue(withIdentifier: "loginVC", sender: self)
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
+        Auth.auth().languageCode = "de"
+        benutzerName.delegate = self
+        emailTextField.delegate = self
+        passwordTextField.delegate = self
         agbsAkzeptiert.setImage(UIImage(named: "essen"), for: .selected)
         agbsAkzeptiert.setImage(UIImage(named: "essen-i"), for: .normal)
         AlterBtn.setImage(UIImage(named: "alkohol"), for: .selected)
         AlterBtn.setImage(UIImage(named: "alkohol-i"), for: .normal)
+        datenschutzAkzeptiert.setImage(UIImage(named: "parken"), for: .selected)
+        datenschutzAkzeptiert.setImage(UIImage(named: "parken-i"), for: .normal)
         self.view.backgroundColor = UIColor(patternImage: UIImage(named: "hintergrund")!)
+
 
     }
 
