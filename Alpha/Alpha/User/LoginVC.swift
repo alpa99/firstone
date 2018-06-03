@@ -37,7 +37,6 @@ class LoginVC: UIViewController, UITextFieldDelegate {
     
     // ACTIONS
     
-
     @IBAction func EmailLoginTapped(_ sender: Any) {
         
         if self.emailTextfield.text == "" || self.passwortTextfield.text == "" {
@@ -88,12 +87,10 @@ class LoginVC: UIViewController, UITextFieldDelegate {
         }
     }
     
-    
-    
-//    @IBAction func unwindSegue(_ sender: UIStoryboardSegue){
-//
-//    }
-//
+
+    @IBAction func unwindSegue(_ sender: UIStoryboardSegue){
+        
+    }
     @IBAction func registrierenSegue(_ sender: Any) {
         segueToRegistrieren()
     }

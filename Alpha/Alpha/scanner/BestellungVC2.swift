@@ -512,8 +512,10 @@ class BestellungVC2: UIViewController, UITableViewDataSource, UITableViewDelegat
 
         if tableView == myBestellungTV{
             if (bestellteItemsDictionary[indexPath.section].expanded) {
+                heightForRowAt = 190
 
-                heightForRowAt = (bestellteItemsDictionary[indexPath.section].Unterkategorie.count*36) + bestellteItemsDictionary[indexPath.section].items[indexPath.row].count*55
+//
+//                heightForRowAt = (bestellteItemsDictionary[indexPath.section].Unterkategorie.count*36) + bestellteItemsDictionary[indexPath.section].items[indexPath.row].count*70
             }
             else {
                 heightForRowAt = 0

@@ -29,7 +29,6 @@ class UserVC: UIViewController {
             catch let error as NSError
             { print(error.localizedDescription) }
         }
-        performSegue(withIdentifier: "logout", sender: self)
 
     }
     
