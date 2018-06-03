@@ -874,9 +874,10 @@
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" restorationIdentifier="square" image="scanner_55inch_gold" translatesAutoresizingMaskIntoConstraints="NO" id="oMC-KD-mEQ">
                                 <rect key="frame" x="57" y="203" width="260" height="261"/>
                             </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4xM-ZE-Q9t">
-                                <rect key="frame" x="153.5" y="548" width="67" height="30"/>
-                                <state key="normal" title="Flashlight"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4xM-ZE-Q9t">
+                                <rect key="frame" x="157.5" y="518" width="60" height="60"/>
+                                <state key="normal" image="Blitz_inaktiv"/>
+                                <state key="selected" image="Blitz_aktiv"/>
                                 <connections>
                                     <action selector="flash:" destination="BYZ-38-t0r" eventType="touchUpInside" id="DUn-sK-tyj"/>
                                 </connections>
@@ -1983,6 +1984,8 @@
         </scene>
     </scenes>
     <resources>
+        <image name="Blitz_aktiv" width="60" height="60"/>
+        <image name="Blitz_inaktiv" width="60" height="60"/>
         <image name="Tablinks" width="40" height="40"/>
         <image name="Tabmitte" width="40" height="40"/>
         <image name="Tabrechts" width="40" height="40"/>

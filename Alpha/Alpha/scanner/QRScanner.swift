@@ -35,6 +35,8 @@ class QRScanner: UIViewController, AVCaptureMetadataOutputObjectsDelegate, CLLoc
     @IBOutlet weak var square: UIImageView!
     @IBOutlet weak var flashlight: UIButton!
     @IBAction func flash(_ sender: UIButton) {
+        myButtonTapped()
+        
         if light == 0 {
             light += 1
             toggleTorch(on: true)
@@ -44,6 +46,17 @@ class QRScanner: UIViewController, AVCaptureMetadataOutputObjectsDelegate, CLLoc
         }
         
     }
+    
+    func myButtonTapped(){
+        if flashlight.isSelected == true {
+            flashlight.isSelected = false
+            flashlight.setImage(#imageLiteral(resourceName: "Blitz_inaktiv"), for: UIControlState.normal)
+        }else {
+            flashlight.isSelected = true
+            flashlight.setImage(#imageLiteral(resourceName: "Blitz_aktiv"), for: UIControlState.normal)
+        }
+    }
+    
     
     //Taschenlampe
     
