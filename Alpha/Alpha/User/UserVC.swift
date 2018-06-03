@@ -8,6 +8,7 @@
 
 import UIKit
 import FacebookLogin
+import Firebase
 
 class UserVC: UIViewController {
 
@@ -18,9 +19,25 @@ class UserVC: UIViewController {
     }
     
     @IBAction func logOutTapped(_ sender: Any){
-    let loginManager = LoginManager()
-        loginManager.logOut()
+//        let loginManager = LoginManager()
+//        loginManager.logOut()
+        if Auth.auth().currentUser?.uid != nil {
+            do
+            { try Auth.auth().signOut()
+
+            }
+            catch let error as NSError
+            { print(error.localizedDescription) }
+        }
         performSegue(withIdentifier: "logout", sender: self)
+    }
+    
+    
+    @IBAction func accloeschenTapped(_ sender: Any) {
+        
+    }
+    
+    @IBAction func passwortaenddern(_ sender: Any) {
     }
     
     
