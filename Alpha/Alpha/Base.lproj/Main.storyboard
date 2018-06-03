@@ -429,13 +429,9 @@
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="hintergrund" translatesAutoresizingMaskIntoConstraints="NO" id="oiq-wf-qNI">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                             </imageView>
-<<<<<<< HEAD
-                            <button opaque="NO" contentMode="scaleToFill" verticalCompressionResistancePriority="751" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gIV-Bf-XBJ">
-                                <rect key="frame" x="51" y="126" width="272" height="29"/>
-=======
+
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gIV-Bf-XBJ">
                                 <rect key="frame" x="51" y="82" width="272" height="35"/>
->>>>>>> 27227be7567457e88b903bcc60c2f03dd874284b
                                 <color key="backgroundColor" red="0.72549019607843135" green="0.66666666666666663" blue="0.5490196078431373" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" name="Helvetica-Bold" family="Helvetica" pointSize="20"/>
                                 <state key="normal" title="Login mit Facebook">
@@ -457,13 +453,9 @@
                                 <fontDescription key="fontDescription" name="Helvetica-Bold" family="Helvetica" pointSize="20"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-<<<<<<< HEAD
-                            <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="249" verticalCompressionResistancePriority="752" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="MRh-bF-FBt">
-                                <rect key="frame" x="16" y="568" width="343" height="30"/>
-=======
+
                             <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="249" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="MRh-bF-FBt">
                                 <rect key="frame" x="16" y="590" width="343" height="57"/>
->>>>>>> 27227be7567457e88b903bcc60c2f03dd874284b
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                 <state key="normal" title="Allgemeine Geschäftsbedingungen und Datenschutz">
                                     <color key="titleColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -2132,17 +2124,10 @@
         <image name="tabrechts_leer" width="40" height="40"/>
     </resources>
     <inferredMetricsTieBreakers>
-<<<<<<< HEAD
         <segue reference="6Zb-6h-umX"/>
         <segue reference="vDI-KG-Zle"/>
         <segue reference="Ofz-12-wQ9"/>
         <segue reference="LGn-E9-Y7b"/>
         <segue reference="LaO-lI-cXB"/>
-=======
-        <segue reference="vDI-KG-Zle"/>
-        <segue reference="Ofz-12-wQ9"/>
-        <segue reference="4wf-Pf-njL"/>
-        <segue reference="tKO-Qv-DSi"/>
->>>>>>> 27227be7567457e88b903bcc60c2f03dd874284b
-    </inferredMetricsTieBreakers>
+ </inferredMetricsTieBreakers>
 </document>
