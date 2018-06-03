@@ -19,6 +19,7 @@ class UserVC: UIViewController {
     }
     
     @IBAction func logOutTapped(_ sender: Any){
+<<<<<<< HEAD
 //        let loginManager = LoginManager()
 //        loginManager.logOut()
         if Auth.auth().currentUser?.uid != nil {
@@ -30,6 +31,11 @@ class UserVC: UIViewController {
             { print(error.localizedDescription) }
         }
         performSegue(withIdentifier: "logout", sender: self)
+=======
+    let loginManager = LoginManager()
+        loginManager.logOut()
+        //performSegue(withIdentifier: "logout", sender: self)
+>>>>>>> 27227be7567457e88b903bcc60c2f03dd874284b
     }
     
     
