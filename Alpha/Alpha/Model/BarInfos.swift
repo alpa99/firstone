@@ -13,12 +13,15 @@ class BarInfos: NSObject {
     var Bild: String?
     var Bilder: String?
     var Text: String?
+    var telnum: String?
     init(dictionary: [String: Any]) {
         self.Name = dictionary["Name"] as? String ?? ""
         self.Adresse = dictionary["Adresse"] as? String ?? ""
         self.Bild = dictionary["Bild"] as? String ?? ""
         self.Bilder = dictionary["Bilder"] as? String ?? ""
         self.Text = dictionary["maintxt"] as? String ?? ""
+        self.telnum = dictionary["Telefonnummer"] as? String ?? ""
+
 
     }
 }

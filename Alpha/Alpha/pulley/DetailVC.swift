@@ -37,7 +37,7 @@ class DetailVC: UIViewController, PulleyDrawerViewControllerDelegate, PageObserv
     var picture = String ()
     var parentPageViewController: PageViewController!
     var sdWebImageSource = [SDWebImageSource]()
-
+    var telnummer = String()
     
 
     func getParentPageViewController(parentRef: PageViewController) {
@@ -47,6 +47,11 @@ class DetailVC: UIViewController, PulleyDrawerViewControllerDelegate, PageObserv
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.topstack.spacing = (self.view.frame.width - CGFloat(236.0))/CGFloat(4.0)
+        self.bottomstack.spacing = (self.view.frame.width - CGFloat(236.0))/CGFloat(4.0)
+
+        
         self.adressebtn.setTitle(adresse, for: .normal)
 
         self.barname = parentPageViewController.name
@@ -120,6 +125,18 @@ class DetailVC: UIViewController, PulleyDrawerViewControllerDelegate, PageObserv
     
     @IBOutlet weak var adressebtn: UIButton!
     
+    @IBOutlet weak var tel: UIButton!
+    
+    @IBOutlet weak var topstack: UIStackView!
+    
+    @IBOutlet weak var bottomstack: UIStackView!
+    
+   
+    @IBAction func telcall(_ sender: Any) {
+
+        telnummer.makeAColl()
+    }
+    
     func fetchText () {
         print("fetchtext")
         var ref: DatabaseReference!
@@ -188,8 +205,9 @@ class DetailVC: UIViewController, PulleyDrawerViewControllerDelegate, PageObserv
                 print(self.picture)
                 print("Adresse", bar.Adresse ?? "")
                 self.adressebtn.setTitle(bar.Adresse, for: .normal)
-
+                self.tel.setTitle(bar.telnum, for: .normal)
                 self.adresse = bar.Adresse!
+                self.telnummer = bar.telnum!
             }} , withCancel: nil)
         
     }
@@ -297,4 +315,36 @@ class DetailVC: UIViewController, PulleyDrawerViewControllerDelegate, PageObserv
     
     
     
+}
+extension String {
+    
+    enum RegularExpressions: String {
+        case phone = "^\\s*(?:\\+?(\\d{1,3}))?([-. (]*(\\d{3})[-. )]*)?((\\d{3})[-. ]*(\\d{2,4})(?:[-.x ]*(\\d+))?)\\s*$"
+    }
+    
+    func isValid(regex: RegularExpressions) -> Bool {
+        return isValid(regex: regex.rawValue)
+    }
+    
+    func isValid(regex: String) -> Bool {
+        let matches = range(of: regex, options: .regularExpression)
+        return matches != nil
+    }
+    
+    func onlyDigits() -> String {
+        let filtredUnicodeScalars = unicodeScalars.filter{CharacterSet.decimalDigits.contains($0)}
+        return String(String.UnicodeScalarView(filtredUnicodeScalars))
+    }
+    
+    func makeAColl() {
+        if isValid(regex: .phone) {
+            if let url = URL(string: "tel://\(self.onlyDigits())"), UIApplication.shared.canOpenURL(url) {
+                if #available(iOS 10, *) {
+                    UIApplication.shared.open(url)
+                } else {
+                    UIApplication.shared.openURL(url)
+                }
+            }
+        }
+    }
 }
