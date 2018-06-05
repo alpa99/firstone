@@ -12,10 +12,13 @@ protocol MyBestellungCellDelegate {
     func passItemEntfernen(sender: MyBestellungCell)
     func passItemPlus(sender: MyBestellungCell)
     func passItemMinus(sender: MyBestellungCell)
+    func passKommentarAendern(sender: MyBestellungCell)
     
 }
 
 class MyBestellungCell: UITableViewCell, UITableViewDelegate, UITableViewDataSource, ExpandableHeaderViewDelegate2, MyBestellungCell2Delegate {
+
+    
     
     // VARS
     //
@@ -26,8 +29,10 @@ class MyBestellungCell: UITableViewCell, UITableViewDelegate, UITableViewDataSou
     var sections = Int()
     var rows = Int()
     
+    
     var sections2 = Int()
     var rows2 = Int()
+    var kommenar = String()
     
     var delegate: MyBestellungCellDelegate?
 
@@ -56,6 +61,13 @@ class MyBestellungCell: UITableViewCell, UITableViewDelegate, UITableViewDataSou
         delegate?.passItemPlus(sender: self)
     }
     
+    func cellmyItemKommenAendern(sender: MyBestellungCell2) {
+        sections2 = sender.sections2
+        rows2 = sender.rows2
+        kommenar = sender.kommentarLbl.text
+        delegate?.passKommentarAendern(sender: self)
+    }
+    
     // Tabelle
     func numberOfSections(in tableView: UITableView) -> Int {
         print(bestellteItemsDictionary, sections, "4439iewjdskx")
@@ -76,7 +88,7 @@ class MyBestellungCell: UITableViewCell, UITableViewDelegate, UITableViewDataSou
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if bestellteItemsDictionary[sections].expanded2[indexPath.section] != false {
-            return CGFloat(bestellteItemsDictionary[sections].items[indexPath.section].count*93)
+           return CGFloat(149)
             
         }
         else {
@@ -120,12 +132,13 @@ class MyBestellungCell: UITableViewCell, UITableViewDelegate, UITableViewDataSou
                     var preis = bestellteItemsDictionary[sections].preis[indexPath.section]
                     var liter = bestellteItemsDictionary[sections].liter[indexPath.section]
                     var menge = bestellteItemsDictionary[sections].menge[indexPath.section]
-
+                    var kommentare = bestellteItemsDictionary[sections].kommentar[indexPath.section]
 //                    section2 = indexPath.section
 //                    row2 = indexPath.row
                     cell.sections2 = indexPath.section
                     cell.rows2 = indexPath.row
                     cell.myItemName.text = item[indexPath.row]
+                    cell.kommentarLbl.text = kommentare[indexPath.row]
                     let preisFormat = String(format: "%.2f", arguments: [preis[indexPath.row]])
 
                     cell.myItemPreis.text = "\(preisFormat) €"

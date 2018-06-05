@@ -197,8 +197,8 @@ class RegistrierungVC: UIViewController, UITextFieldDelegate {
                                 }))
                                 self.present(alertSchonRegistriert, animated: true, completion: nil)
                             } else {
-                                self.addUserToFirebase(name: self.userFbID, email: self.userFbEmail)
-                                self.AddFacebookUser(name: self.userFbID, email: self.userFbEmail)
+                                self.addUserToFirebase(name: self.userFbName, email: self.userFbEmail)
+                                self.AddFacebookUser(name: self.userFbName, email: self.userFbEmail)
                             }
                                 
                             

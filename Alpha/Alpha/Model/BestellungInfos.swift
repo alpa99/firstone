@@ -13,6 +13,8 @@ class BestellungInfos: NSObject {
     var itemName: String?
     var itemPreis: Double?
     var itemMenge: Int?
+    var itemKommentar: String?
+    var itemLiter: String?
     var fromUserID: String?
     var toKellnerID: String?
     var timeStamp: Double?
@@ -24,6 +26,8 @@ class BestellungInfos: NSObject {
         self.itemName = dictionary["Name"] as? String ?? ""
         self.itemMenge = dictionary["Menge"] as? Int ?? 0
         self.itemPreis = dictionary["Preis"] as? Double ?? 0.0
+        self.itemKommentar = dictionary["Kommentar"] as? String ?? "kein Kommentar"
+        self.itemLiter = dictionary["Liter"] as? String ?? "kein Liter"
         self.fromUserID = dictionary["fromUserID"] as? String ?? ""
         self.toKellnerID = dictionary["toKellnerID"] as? String ?? ""
         self.timeStamp = dictionary["timeStamp"] as? Double ?? 0.0

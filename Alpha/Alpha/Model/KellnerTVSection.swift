@@ -17,11 +17,12 @@ struct KellnerTVSection {
     var items: [[[String]]]
     var preis: [[[Double]]]
     var liter: [[[String]]]
+    var kommentar: [[[String]]]
     var menge: [[[Int]]]
     var expanded2: [[Bool]]
     var expanded: Bool
     
-    init(BestellungID: String, tischnummer: String, timeStamp: Double, Kategorie: [String], Unterkategorie: [[String]], items: [[[String]]], preis: [[[Double]]], liter: [[[String]]], menge: [[[Int]]], expanded2: [[Bool]], expanded: Bool) {
+    init(BestellungID: String, tischnummer: String, timeStamp: Double, Kategorie: [String], Unterkategorie: [[String]], items: [[[String]]], preis: [[[Double]]], liter: [[[String]]], kommentar: [[[String]]], menge: [[[Int]]], expanded2: [[Bool]], expanded: Bool) {
         self.BestellungID = BestellungID
         self.Tischnummer = tischnummer
         self.TimeStamp = timeStamp
@@ -30,6 +31,7 @@ struct KellnerTVSection {
         self.items = items
         self.preis = preis
         self.liter = liter
+        self.kommentar = kommentar
         self.menge = menge
         self.expanded2 = expanded2
         self.expanded = expanded

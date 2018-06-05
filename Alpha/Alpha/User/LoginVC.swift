@@ -305,12 +305,22 @@ class LoginVC: UIViewController, UITextFieldDelegate {
         print("jvvzbjhbhjhbj")
         Auth.auth().addStateDidChangeListener { (auth, user) in
             if user != nil {
-                print("yes")
-                self.segueToTabBar()
+                var ref: DatabaseReference?
+                ref = Database.database().reference()
+                ref?.child("Kellner").observeSingleEvent(of: .value, with: { (snapshot) in
+                    if snapshot.hasChild((user?.uid)!) {
+                            print("kellner")
+                        } else {
+                            self.segueToTabBar()
+
+                                     }
+                    
+                    
+                }, withCancel: nil)
             } else {
                 print("no")
             }
         }
+    
     }
-
 }

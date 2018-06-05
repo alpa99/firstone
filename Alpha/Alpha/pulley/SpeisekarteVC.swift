@@ -12,9 +12,18 @@ import Firebase
 import FirebaseAuth
 import CoreLocation
 
-class SpeisekarteVC: UIViewController, UITableViewDataSource, UITableViewDelegate, PulleyDrawerViewControllerDelegate, ExpandableHeaderViewDelegate, PageObservation {
+
+
+class SpeisekarteVC: UIViewController, UITableViewDataSource, UITableViewDelegate, PulleyDrawerViewControllerDelegate, ExpandableHeaderViewDelegate, PageObservation, SpeisekarteDelegate {
+    func reloadUnterkategorie(sender: SpeisekarteCelle) {
+        print("jallladflsdf")
+        sections = sender.sections
+        SpeisekarteTableView.beginUpdates()
+        SpeisekarteTableView.reloadRows(at: [IndexPath(row: 0, section: sender.sectioncell)], with: .automatic)
+        SpeisekarteTableView.endUpdates()
+    }
     
-    
+
         var parentPageViewController: PageViewController!
     
         var barname = " "
@@ -190,13 +199,23 @@ class SpeisekarteVC: UIViewController, UITableViewDataSource, UITableViewDelegat
         }
         
         func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+            var heightForRowAt: Int?
+
             if (sections[indexPath.section].expanded) {
-                return CGFloat(sections[indexPath.section].items.count * 44 + sections[indexPath.section].Unterkategorie.count*70)
+                
+                heightForRowAt = (sections[indexPath.section].Unterkategorie.count*60)
+                for expandend in sections[indexPath.section].expanded2 {
+                    if expandend == true {
+                        heightForRowAt = heightForRowAt! + sections[indexPath.section].items[indexPath.row].count*36
+                    }
+                }
+                
             }
             else {
-                return 0
+                heightForRowAt = 0
             }
-            
+            return CGFloat(heightForRowAt!)
+
         }
         
         func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
@@ -230,23 +249,29 @@ class SpeisekarteVC: UIViewController, UITableViewDataSource, UITableViewDelegat
         
         let cell = Bundle.main.loadNibNamed("SpeisekarteCelle", owner: self, options: nil)?.first as! SpeisekarteCelle
         cell.backgroundColor = UIColor.clear
-        
-        cell.unterkategorien.append(sections[indexPath.section])
+        cell.delegate = self
+        cell.sections = sections
         cell.items = sections[indexPath.section].items
         cell.preise = sections[indexPath.section].preis
         cell.liters = sections[indexPath.section].liter
         cell.beschreibungen = sections[indexPath.section].beschreibung
-        cell.section = indexPath.section
+        cell.sectioncell = indexPath.section
         return cell
-    
-       
-        
     }
 
         
         
         func toggleSection(tableView: UITableView, header: ExpandableHeaderView, section: Int) {
-                sections[section].expanded = !sections[section].expanded
+
+            
+                for i in 0..<sections.count{
+                    if i == section {
+                        sections[section].expanded = !sections[section].expanded
+                    } else {
+                        sections[i].expanded = false
+                        
+                    }
+                }
                 
                 SpeisekarteTableView.beginUpdates()
 
@@ -255,11 +280,6 @@ class SpeisekarteVC: UIViewController, UITableViewDataSource, UITableViewDelegat
                 SpeisekarteTableView.endUpdates()
 
         }
-    
-    
-    
-    
-    
    
     // PULLEY
     
@@ -276,9 +296,8 @@ class SpeisekarteVC: UIViewController, UITableViewDataSource, UITableViewDelegat
     }
 
     
-    // OTHERS
-    
 
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -287,11 +306,6 @@ class SpeisekarteVC: UIViewController, UITableViewDataSource, UITableViewDelegat
       barnameLbl.text = barname
        
        getKategorien()
-
-        
-//    getUnterkategorien()
-       
-
     }
 
     override func didReceiveMemoryWarning() {

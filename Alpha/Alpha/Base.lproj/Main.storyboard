@@ -1267,13 +1267,10 @@
                     <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="HbQ-p0-KbN">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </view>
-                    <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                    <vibrancyEffect>
-                        <blurEffect style="light"/>
-                    </vibrancyEffect>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <blurEffect style="light"/>
                 </visualEffectView>
                 <view contentMode="scaleToFill" id="XLX-RF-Q49">
                     <rect key="frame" x="0.0" y="0.0" width="290" height="415"/>
@@ -1388,14 +1385,14 @@
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Xhe-9R-9oH">
-                            <rect key="frame" x="16" y="174" width="208" height="47"/>
+                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" keyboardDismissMode="onDrag" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Xhe-9R-9oH">
+                            <rect key="frame" x="19" y="174" width="208" height="47"/>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="47" id="Dl6-iZ-4Ng"/>
                             </constraints>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                            <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            <textInputTraits key="textInputTraits" autocapitalizationType="sentences" keyboardAppearance="alert" enablesReturnKeyAutomatically="YES"/>
                         </textView>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MgL-ck-P5m">
                             <rect key="frame" x="140" y="227" width="84" height="32"/>
@@ -2119,10 +2116,9 @@
         <image name="tabrechts_leer" width="40" height="40"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="bq2-aa-Yyw"/>
         <segue reference="lCL-4T-GHF"/>
         <segue reference="Ofz-12-wQ9"/>
         <segue reference="5QQ-s3-zh5"/>
-        <segue reference="tKO-Qv-DSi"/>
+        <segue reference="LaO-lI-cXB"/>
     </inferredMetricsTieBreakers>
 </document>

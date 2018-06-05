@@ -12,10 +12,12 @@ protocol MyBestellungCell2Delegate {
     func cellMyItemEntfernen(sender: MyBestellungCell2)
     func cellMyItemMengePlusAction(sender: MyBestellungCell2)
     func cellmyItemMengeMinusAction(sender: MyBestellungCell2)
+    func cellmyItemKommenAendern(sender: MyBestellungCell2)
     
 }
 
-class MyBestellungCell2: UITableViewCell {
+
+class MyBestellungCell2: UITableViewCell, UITextViewDelegate {
     
     var delegate: MyBestellungCell2Delegate?
     
@@ -28,6 +30,9 @@ class MyBestellungCell2: UITableViewCell {
     @IBOutlet weak var myItemPreis: UILabel!
     
     @IBOutlet weak var myItemMenge: UILabel!
+    @IBOutlet weak var kommentarLbl: UITextView!
+    
+    
     
     @IBOutlet weak var myItemLiter: UILabel!
     @IBOutlet weak var myItemMengeMinus: UIButton!
@@ -44,10 +49,22 @@ class MyBestellungCell2: UITableViewCell {
         delegate?.cellMyItemEntfernen(sender: self)
     }
     
+    func textViewDidEndEditing(_ textView: UITextView) {
+        delegate?.cellmyItemKommenAendern(sender: self)
+    }
+    
+    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+        if text == "\n" { textView.resignFirstResponder()
+            return false
+        }
+        
+        return true
+    }
 
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        kommentarLbl.delegate = self
         // Initialization code
     }
 

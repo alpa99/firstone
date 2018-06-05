@@ -30,7 +30,6 @@ class KellnerCell2: UITableViewCell, UITableViewDelegate, UITableViewDataSource,
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         var items = Bestellungen[Cell1Section].items[Cell2Section]
-        print(Bestellungen[Cell1Section].BestellungID)
         return items[Cell2Row].count
         
     }
@@ -45,7 +44,7 @@ class KellnerCell2: UITableViewCell, UITableViewDelegate, UITableViewDataSource,
         var expanded2 = Bestellungen[Cell1Section].expanded2[Cell2Section]
         if expanded2[indexPath.section] != false {
             
-            return 46
+            return 86
             
         }
         else {
@@ -81,27 +80,25 @@ class KellnerCell2: UITableViewCell, UITableViewDelegate, UITableViewDataSource,
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = Bundle.main.loadNibNamed("KellnerCell3", owner: self, options: nil)?.first as! KellnerCell3
-        print(Bestellungen)
-        print(Cell1Section,Cell2Section,Cell2Row, indexPath)
         
         var Items = Bestellungen[Cell1Section].items[Cell2Section]
         var Preise = Bestellungen[Cell1Section].preis[Cell2Section]
         var Mengen = Bestellungen[Cell1Section].menge[Cell2Section]
+        var Kommentare = Bestellungen[Cell1Section].kommentar[Cell2Section]
         
         var newItems = Items[Cell2Row]
         var newPreise = Preise[Cell2Row]
         var newMengen = Mengen[Cell2Row]
+        var newKommentare = Kommentare[Cell2Row]
         
         
         cell.itemName.text = newItems[indexPath.row]
-        print(newItems, "newItems")
-        print(newPreise, "newPreise")
-        print(indexPath, "ipath")
+
         let preisFormat = String(format: "%.2f", arguments: [newPreise[indexPath.row]])
 
         cell.itemPreis.text = "\(preisFormat) €"
         cell.itemMenge.text = String(newMengen[indexPath.row])
-        
+        cell.kommentarTextView.text = newKommentare[indexPath.row]
         return cell
     }
     

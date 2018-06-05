@@ -16,21 +16,24 @@ protocol BestellungVC2Delegate {
   
 }
 class BestellungVC2: UIViewController, UITableViewDataSource, UITableViewDelegate, ExpandableHeaderViewDelegate, BestellenCellDelegate, MyBestellungCellDelegate, PageObservation2, CLLocationManagerDelegate, UITextViewDelegate {
+
+    
+
    
     // VARS
-
+   
     var barname = "NewBar"
     var baradresse = " "
     var tischnummer = 0
     var KellnerID = ""
     var placeholder = "Hier haben Sie Platz für besondere Wünsche. Bitte äußern Sie nur Wünsche bezüglich der Zutaten."
-    var kommentar = String()
     
     var BestellungKategorien = [String]()
     var BestellungUnterkategorien = [[String]]()
     var BestellungItemsNamen = [[[String]]]()
     var BestellungItemsPreise = [[[Double]]]()
     var BestellungItemsLiter = [[[String]]]()
+    var BestellungItemsKommentar = [[[String]]]()
     var BestellungItemsMengen = [[[Int]]]()
     var BestellungItemsExpanded2 = [[Bool]]()
     
@@ -77,6 +80,7 @@ class BestellungVC2: UIViewController, UITableViewDataSource, UITableViewDelegat
     @IBOutlet weak var itemPreisLbl: UILabel!
     @IBOutlet weak var itemLiterLbl: UILabel!
     @IBOutlet weak var itemCountLbl: UILabel!
+    
     @IBOutlet weak var myBestellungTV: UITableView!
     @IBOutlet weak var bestellungTableView: UITableView!
     @IBOutlet var myBestellungView: UIView!
@@ -105,6 +109,7 @@ class BestellungVC2: UIViewController, UITableViewDataSource, UITableViewDelegat
 //                let distanceint = Int(distancebar!)
 //                if distanceint < 150{
 //                print("distance ist ok")
+
                     self.seugueAbschicken()
                     self.handleBestellung()
 //                }else{
@@ -124,6 +129,7 @@ class BestellungVC2: UIViewController, UITableViewDataSource, UITableViewDelegat
     @IBAction func dismissPopUp(_ sender: Any) {
         animateOut()
         bestellungaktualisieren()
+
     }
     
     @IBAction func aktualisierungAbbrechen(_ sender: Any) {
@@ -144,7 +150,7 @@ class BestellungVC2: UIViewController, UITableViewDataSource, UITableViewDelegat
 
         for Kategorie in BestellungKategorien {
             let section = BestellungKategorien.index(of: Kategorie)
-            setSectionsBestellung(Kategorie: Kategorie, Unterkategorie: BestellungUnterkategorien[section!], items: BestellungItemsNamen[section!], preis: BestellungItemsPreise[section!], liter: BestellungItemsLiter[section!], menge: BestellungItemsMengen[section!], expanded2: BestellungItemsExpanded2[section!])
+            setSectionsBestellung(Kategorie: Kategorie, Unterkategorie: BestellungUnterkategorien[section!], items: BestellungItemsNamen[section!], preis: BestellungItemsPreise[section!], liter: BestellungItemsLiter[section!], kommentar: BestellungItemsKommentar[section!], menge: BestellungItemsMengen[section!], expanded2: BestellungItemsExpanded2[section!])
     
         }
         myBestellungTV.reloadData()
@@ -339,16 +345,26 @@ class BestellungVC2: UIViewController, UITableViewDataSource, UITableViewDelegat
                 var items = Bestellung.items[UnterkategorieSection!]
                 var mengen = Bestellung.menge[UnterkategorieSection!]
                 var preise = Bestellung.preis[UnterkategorieSection!]
+                var kommentar = Bestellung.kommentar[UnterkategorieSection!]
                 
                 for i in 0 ..< items.count {
                  
                     let bestellungName = ["Name": items[i]]
                     let bestellungMenge = ["Menge": mengen[i]]
                     let bestellungPreis = ["Preis": preise[i]]
-                    childRef?.child(Bestellung.Kategorie).child(Unterkategorie).child(items[i]).updateChildValues(bestellungName)
-                    childRef?.child(Bestellung.Kategorie).child(Unterkategorie).child(items[i]).updateChildValues(bestellungMenge)
-                    childRef?.child(Bestellung.Kategorie).child(Unterkategorie).child(items[i]).updateChildValues(bestellungPreis)
+                    let bestellungKommentar = ["Kommentar": kommentar[i]]
+                    if i > 0 && items[i] == items[i-1]{
+                        childRef?.child(Bestellung.Kategorie).child(Unterkategorie).child(items[i]+"\(i)").updateChildValues(bestellungName)
+                        childRef?.child(Bestellung.Kategorie).child(Unterkategorie).child(items[i]+"\(i)").updateChildValues(bestellungMenge)
+                        childRef?.child(Bestellung.Kategorie).child(Unterkategorie).child(items[i]+"\(i)").updateChildValues(bestellungPreis)
+                        childRef?.child(Bestellung.Kategorie).child(Unterkategorie).child(items[i]+"\(i)").updateChildValues(bestellungKommentar)
 
+                    } else {
+                        childRef?.child(Bestellung.Kategorie).child(Unterkategorie).child(items[i]).updateChildValues(bestellungName)
+                        childRef?.child(Bestellung.Kategorie).child(Unterkategorie).child(items[i]).updateChildValues(bestellungMenge)
+                        childRef?.child(Bestellung.Kategorie).child(Unterkategorie).child(items[i]).updateChildValues(bestellungPreis)
+                        childRef?.child(Bestellung.Kategorie).child(Unterkategorie).child(items[i]).updateChildValues(bestellungKommentar)
+                    }
 
                 }
 
@@ -386,14 +402,7 @@ class BestellungVC2: UIViewController, UITableViewDataSource, UITableViewDelegat
     }
 
     func animateIn(){
-        
-        if(kommentar == "") {
-            self.kommentarTextView.text = placeholder
-            self.kommentarTextView.textColor = .lightGray
-        } else {
-            self.kommentarTextView.text = kommentar
-            self.kommentarTextView.textColor = .black
-        }
+       
         self.bestellungVCView.addSubview(visualEffectView)
         visualEffectView.center = self.bestellungVCView.center
         self.bestellungVCView.addSubview(addItemView)
@@ -422,6 +431,8 @@ class BestellungVC2: UIViewController, UITableViewDataSource, UITableViewDelegat
         }){ (success:Bool) in
             self.addItemView.removeFromSuperview()
             self.visualEffectView.removeFromSuperview()
+            self.kommentarTextView.text = self.placeholder
+            self.kommentarTextView.textColor = UIColor.white
         }
 
     }
@@ -458,9 +469,9 @@ class BestellungVC2: UIViewController, UITableViewDataSource, UITableViewDelegat
         self.bestellungTableView.reloadData()
     }
     
-    func setSectionsBestellung(Kategorie: String, Unterkategorie: [String], items: [[String]], preis: [[Double]], liter: [[String]], menge: [[Int]], expanded2: [Bool]){
+    func setSectionsBestellung(Kategorie: String, Unterkategorie: [String], items: [[String]], preis: [[Double]], liter: [[String]], kommentar: [[String]], menge: [[Int]], expanded2: [Bool]){
         self.bestellteItemsDictionary
-            .append(bestellungTVSection(Kategorie: Kategorie, Unterkategorie: Unterkategorie, items: items, preis: preis, liter: liter, menge: menge, expanded2: expanded2, expanded: true))
+            .append(bestellungTVSection(Kategorie: Kategorie, Unterkategorie: Unterkategorie, items: items, preis: preis, liter: liter, kommentar: kommentar, menge: menge, expanded2: expanded2, expanded: true))
     }
 
 
@@ -496,10 +507,10 @@ class BestellungVC2: UIViewController, UITableViewDataSource, UITableViewDelegat
         if tableView == bestellungTableView{
             if (sections[indexPath.section].expanded) {
 
-                heightForRowAt = (sections[indexPath.section].Unterkategorie.count*50)
+                heightForRowAt = (sections[indexPath.section].Unterkategorie.count*60)
                 for expandend in sections[indexPath.section].expanded2 {
                     if expandend == true {
-                        heightForRowAt = heightForRowAt! + sections[indexPath.section].items[indexPath.row].count*50
+                        heightForRowAt = heightForRowAt! + sections[indexPath.section].items[indexPath.row].count*36
                     }
                 }
 
@@ -512,10 +523,13 @@ class BestellungVC2: UIViewController, UITableViewDataSource, UITableViewDelegat
 
         if tableView == myBestellungTV{
             if (bestellteItemsDictionary[indexPath.section].expanded) {
-                heightForRowAt = 190
-
-//
-//                heightForRowAt = (bestellteItemsDictionary[indexPath.section].Unterkategorie.count*36) + bestellteItemsDictionary[indexPath.section].items[indexPath.row].count*70
+                heightForRowAt = (bestellteItemsDictionary[indexPath.section].Unterkategorie.count*60)
+                for expandend in bestellteItemsDictionary[indexPath.section].expanded2 {
+                    if expandend == true {
+                        heightForRowAt = heightForRowAt! + bestellteItemsDictionary[indexPath.section].items[indexPath.row].count*149
+                    }
+                }
+                
             }
             else {
                 heightForRowAt = 0
@@ -658,7 +672,6 @@ class BestellungVC2: UIViewController, UITableViewDataSource, UITableViewDelegat
         bestellungTableView.reloadRows(at: [IndexPath(row: 0, section: sender.cellIndexPathSection)], with: .automatic)
         
         bestellungTableView.endUpdates()
-//        self.bestellungTableView.reloadData()
         
     }
     
@@ -706,6 +719,10 @@ class BestellungVC2: UIViewController, UITableViewDataSource, UITableViewDelegat
                 BestellungItemsPreise.append([[Double(itemPreisLbl.text!)!]])
                 BestellungItemsLiter.append([[itemLiterLbl.text!]])
                 BestellungItemsMengen.append([[Int(itemCountLbl.text!)!]])
+                if kommentarTextView.text == placeholder || kommentarTextView.text == "" {
+                    BestellungItemsKommentar.append([["kein Kommentar"]])
+                } else {
+                    BestellungItemsKommentar.append([[kommentarTextView.text!]]) }
                 BestellungItemsExpanded2.append([true])
                 
                 //"kat, ukat, i gibt es nicht"
@@ -714,11 +731,15 @@ class BestellungVC2: UIViewController, UITableViewDataSource, UITableViewDelegat
                 // unterkategorie gibt es nicht
                 if !BestellungUnterkategorien[BestellungKategorien.index(of: KategorieLbl.text!)!].contains(UnterkategorieLbl.text!) {
                     BestellungUnterkategorien[BestellungKategorien.index(of: KategorieLbl.text!)!].append(UnterkategorieLbl.text!)
-                    
                     BestellungItemsNamen[BestellungKategorien.index(of: KategorieLbl.text!)!].append([itemNameLbl.text!])
-                    
                     BestellungItemsPreise[BestellungKategorien.index(of: KategorieLbl.text!)!].append([Double(itemPreisLbl.text!)!])
                     BestellungItemsLiter[BestellungKategorien.index(of: KategorieLbl.text!)!].append([itemLiterLbl.text!])
+                    if kommentarTextView.text == placeholder || kommentarTextView.text == "" {
+                        BestellungItemsKommentar[BestellungKategorien.index(of: KategorieLbl.text!)!].append(["kein Kommentar"])
+                    } else {
+                        BestellungItemsKommentar[BestellungKategorien.index(of: KategorieLbl.text!)!].append([kommentarTextView.text!])
+
+                    }
                     BestellungItemsMengen[BestellungKategorien.index(of: KategorieLbl.text!)!].append([Int(itemCountLbl.text!)!])
                     BestellungItemsExpanded2[BestellungKategorien.index(of: KategorieLbl.text!)!].append(true)
                     
@@ -729,12 +750,12 @@ class BestellungVC2: UIViewController, UITableViewDataSource, UITableViewDelegat
                     var itemsNamenInSection = BestellungItemsNamen[BestellungKategorien.index(of: KategorieLbl.text!)!]
                     var itemsPreiseInSection = BestellungItemsPreise[BestellungKategorien.index(of: KategorieLbl.text!)!]
                     var itemsLiterInSection = BestellungItemsLiter[BestellungKategorien.index(of: KategorieLbl.text!)!]
+                    var itemsKommentarInSection = BestellungItemsKommentar[BestellungKategorien.index(of: KategorieLbl.text!)!]
                     var itemsMengenInSection = BestellungItemsMengen[BestellungKategorien.index(of: KategorieLbl.text!)!]
-                    
                     let unterkategorie = BestellungUnterkategorien[BestellungKategorien.index(of: KategorieLbl.text!)!]
                     
-                    if !itemsNamenInSection[unterkategorie.index(of: UnterkategorieLbl.text!)!].contains(itemNameLbl.text!) {
-                        
+//                    if !itemsNamenInSection[unterkategorie.index(of: UnterkategorieLbl.text!)!].contains(itemNameLbl.text!) {
+                    
                         itemsNamenInSection[unterkategorie.index(of: UnterkategorieLbl.text!)!].append(itemNameLbl.text!)
                         BestellungItemsNamen[BestellungKategorien.index(of: KategorieLbl.text!)!] = itemsNamenInSection
                         
@@ -743,21 +764,29 @@ class BestellungVC2: UIViewController, UITableViewDataSource, UITableViewDelegat
                         
                         itemsLiterInSection[unterkategorie.index(of: UnterkategorieLbl.text!)!].append(itemLiterLbl.text!)
                         BestellungItemsLiter[BestellungKategorien.index(of: KategorieLbl.text!)!] = itemsLiterInSection
+                    
+                    if kommentarTextView.text == placeholder || kommentarTextView.text == "" {
+                        itemsKommentarInSection[unterkategorie.index(of: UnterkategorieLbl.text!)!].append("kein Kommentar")
+                    } else {
+                        itemsKommentarInSection[unterkategorie.index(of: UnterkategorieLbl.text!)!].append(kommentarTextView.text!)
+
+                    }
+                        BestellungItemsKommentar[BestellungKategorien.index(of: KategorieLbl.text!)!] = itemsKommentarInSection
                         
                         itemsMengenInSection[unterkategorie.index(of: UnterkategorieLbl.text!)!].append(Int(itemCountLbl.text!)!)
                         BestellungItemsMengen[BestellungKategorien.index(of: KategorieLbl.text!)!] = itemsMengenInSection
                         
                         
-                    } else {
-                        let ItemNameInRow = itemsNamenInSection[unterkategorie.index(of: UnterkategorieLbl.text!)!].index(of: itemNameLbl.text!)
-                        var ItemMengeInRow = itemsMengenInSection[unterkategorie.index(of: UnterkategorieLbl.text!)!]
-                        ItemMengeInRow[ItemNameInRow!] = Int(itemCountLbl.text!)!
-                        itemsMengenInSection[unterkategorie.index(of: UnterkategorieLbl.text!)!] = ItemMengeInRow
-                        BestellungItemsMengen[BestellungKategorien.index(of: KategorieLbl.text!)!] = itemsMengenInSection
-                        
-                        // item gibt es
-                        
-                    }
+//                    } else {
+//                        let ItemNameInRow = itemsNamenInSection[unterkategorie.index(of: UnterkategorieLbl.text!)!].index(of: itemNameLbl.text!)
+//                        var ItemMengeInRow = itemsMengenInSection[unterkategorie.index(of: UnterkategorieLbl.text!)!]
+//                        ItemMengeInRow[ItemNameInRow!] = Int(itemCountLbl.text!)!
+//                        itemsMengenInSection[unterkategorie.index(of: UnterkategorieLbl.text!)!] = ItemMengeInRow
+//                        BestellungItemsMengen[BestellungKategorien.index(of: KategorieLbl.text!)!] = itemsMengenInSection
+//                        // hier weiter machen
+//                        // item gibt es
+//
+//                    }
                 }
             }
 
@@ -766,6 +795,8 @@ class BestellungVC2: UIViewController, UITableViewDataSource, UITableViewDelegat
             itemLiter.removeAll()
             
         }
+        print(BestellungItemsNamen, "item")
+        print(BestellungItemsKommentar, "kommi")
         i = 1
     }
     
@@ -828,7 +859,6 @@ class BestellungVC2: UIViewController, UITableViewDataSource, UITableViewDelegat
             BestellungItemsPreise[sender.sections] = preisInSection
             BestellungItemsLiter[sender.sections] = literInSection
             BestellungItemsMengen[sender.sections] = mengeInSection
-            
             bestellteItemsDictionary[sender.sections].items = itemsInSection
             bestellteItemsDictionary[sender.sections].preis = preisInSection
             bestellteItemsDictionary[sender.sections].liter = literInSection
@@ -867,55 +897,62 @@ class BestellungVC2: UIViewController, UITableViewDataSource, UITableViewDelegat
                     dismissMyBestellungView()
                     
                 }
-                
             }
-            
-            
-            
         }
-        
-        
-        
-        
         sender.bestellteItemsDictionary = bestellteItemsDictionary
         myBestellungTV.reloadData()
-        
+    
     }
 
+    func passKommentarAendern(sender: MyBestellungCell) {
+        var kommentarInSection = bestellteItemsDictionary[sender.sections].kommentar
+        
+        var newKommentarInSection = kommentarInSection[sender.sections2]
+            newKommentarInSection[sender.rows2] = sender.kommenar
+            kommentarInSection[sender.sections2] = newKommentarInSection
+            BestellungItemsKommentar[sender.sections] = kommentarInSection
+            bestellteItemsDictionary[sender.sections].kommentar = kommentarInSection
+            myBestellungTV.reloadData()
+        
+    }
+    
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         let touch: UITouch? = touches.first
-
+        if self.view.subviews.contains(addItemView) {
+            self.view.endEditing(true)
+        }
         if touch?.view != addItemView && touch?.view != myBestellungView {
             dismissMyBestellungView()
             animateOut()
-            
-
         }
+        
     }
     
     func textViewShouldBeginEditing(_ textView: UITextView) -> Bool {
         self.kommentarTextView.textColor = .black
-        if(self.kommentarTextView.text == placeholder) {
-            self.kommentarTextView.text = ""
+        self.kommentarTextView.text = ""
+        return true
+    }
+    
+    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+        if text == "\n" { textView.resignFirstResponder()
+            return false
         }
         
         return true
     }
-    func textViewDidEndEditing(_ textView: UITextView) {
-        kommentar = kommentarTextView.text
-        if(kommentarTextView.text == "") {
-            self.kommentarTextView.text = placeholder
-            self.kommentarTextView.textColor = .lightGray
-        }
-    }
-    
 
     
     override func viewDidLoad() {
         super.viewDidLoad()
+
         kommentarTextView.delegate = self
+        kommentarTextView.backgroundColor = UIColor(red: 255/255, green: 255/255, blue: 255/255, alpha: 0.5)
+        kommentarTextView.textColor = .white
+        kommentarTextView.text = placeholder
         bestellungTableView.reloadData()
         addItemView.backgroundColor = UIColor(patternImage: UIImage(named: "hintergrund")!)
+        myBestellungView.backgroundColor = UIColor(patternImage: UIImage(named: "hintergrund")!)
         self.barname = parentPageViewController2.name
         self.baradresse = parentPageViewController2.adresse
         self.tischnummer = parentPageViewController2.tischnummer

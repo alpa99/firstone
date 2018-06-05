@@ -33,6 +33,7 @@ class MeineBestellungVC: UIViewController, UITableViewDataSource, UITableViewDel
     
     var BestellungItemsNamen = [String: [[[String]]]]()
     var BestellungItemsPreise = [String: [[[Double]]]]()
+    var BestellungItemKommentar = [String: [[[String]]]]()
     var BestellungItemsMengen = [String: [[[Int]]]]()
     var Tischnummer = [String: String]()
     var Angenommen = [String: String]()
@@ -377,7 +378,7 @@ class MeineBestellungVC: UIViewController, UITableViewDataSource, UITableViewDel
             if self.bestellungIDs.count == self.BestellungKategorien.count {
                 
                 for i in 0..<self.bestellungIDs.count {
-                    self.setSectionsMeineBestellung(BestellungID: self.bestellungIDs[i], tischnummer: self.Tischnummer[self.bestellungIDs[i]]!, TimeStamp: self.TimeStamp[self.bestellungIDs[i]]!, Kategorie: self.BestellungKategorien[self.bestellungIDs[i]]!, Unterkategorie: self.BestellungUnterkategorien[self.bestellungIDs[i]]!, items: self.BestellungItemsNamen[self.bestellungIDs[i]]!, preis: self.BestellungItemsPreise[self.bestellungIDs[i]]!, liter: [[["String"]]], menge: self.BestellungItemsMengen[self.bestellungIDs[i]]!, expanded2: self.BestellungExpanded2[self.bestellungIDs[i]]!, expanded: true)
+                    self.setSectionsMeineBestellung(BestellungID: self.bestellungIDs[i], tischnummer: self.Tischnummer[self.bestellungIDs[i]]!, TimeStamp: self.TimeStamp[self.bestellungIDs[i]]!, Kategorie: self.BestellungKategorien[self.bestellungIDs[i]]!, Unterkategorie: self.BestellungUnterkategorien[self.bestellungIDs[i]]!, items: self.BestellungItemsNamen[self.bestellungIDs[i]]!, preis: self.BestellungItemsPreise[self.bestellungIDs[i]]!, liter: [[["String"]]], kommentar: self.BestellungItemKommentar[self.bestellungIDs[i]]!, menge: self.BestellungItemsMengen[self.bestellungIDs[i]]!, expanded2: self.BestellungExpanded2[self.bestellungIDs[i]]!, expanded: true)
                     if self.Bestellungen.count == self.bestellungIDs.count{
                         self.meineBestellungTV.reloadData()
                     }
@@ -390,8 +391,8 @@ class MeineBestellungVC: UIViewController, UITableViewDataSource, UITableViewDel
     }
     
     
-    func setSectionsMeineBestellung(BestellungID: String, tischnummer: String, TimeStamp: Double, Kategorie: [String], Unterkategorie: [[String]], items: [[[String]]], preis: [[[Double]]], liter: [[[String]]], menge: [[[Int]]], expanded2: [[Bool]], expanded: Bool){
-        self.Bestellungen.append(KellnerTVSection(BestellungID: BestellungID, tischnummer: tischnummer, timeStamp: TimeStamp, Kategorie: Kategorie, Unterkategorie: Unterkategorie, items: items, preis: preis, liter: liter, menge: menge, expanded2: expanded2, expanded: expanded))
+    func setSectionsMeineBestellung(BestellungID: String, tischnummer: String, TimeStamp: Double, Kategorie: [String], Unterkategorie: [[String]], items: [[[String]]], preis: [[[Double]]], liter: [[[String]]], kommentar: [[[String]]], menge: [[[Int]]], expanded2: [[Bool]], expanded: Bool){
+        self.Bestellungen.append(KellnerTVSection(BestellungID: BestellungID, tischnummer: tischnummer, timeStamp: TimeStamp, Kategorie: Kategorie, Unterkategorie: Unterkategorie, items: items, preis: preis, liter: liter, kommentar: kommentar, menge: menge, expanded2: expanded2, expanded: expanded))
         print(Bestellungen)
         
         

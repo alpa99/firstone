@@ -55,7 +55,7 @@ class KellnerCell: UITableViewCell, UITableViewDelegate, UITableViewDataSource, 
             
             let items = Bestellungen[Cell1Section].items[indexPath.section]
             let newitems = items[indexPath.row]
-            return CGFloat(newitems.count*46+50)
+            return CGFloat(newitems.count*86+50)
             
         }
         else {
@@ -83,10 +83,8 @@ class KellnerCell: UITableViewCell, UITableViewDelegate, UITableViewDataSource, 
         header.customInit(tableView: tableView, title: Bestellungen[Cell1Section].Kategorie[section], section: section, delegate: self as ExpandableHeaderViewDelegate2)
         return header
         
-        
     }
-    
-    
+
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = Bundle.main.loadNibNamed("KellnerCell2", owner: self, options: nil)?.first as! KellnerCell2
@@ -94,11 +92,7 @@ class KellnerCell: UITableViewCell, UITableViewDelegate, UITableViewDataSource, 
         cell.Bestellungen = Bestellungen
         cell.Cell2Section = indexPath.section
         cell.Cell2Row = indexPath.row
-        //        var Unterkategorien = Bestellungen[Cell1Section].Unterkategorie[indexPath.section]
-        //        var items = Bestellungen[Cell1Section].items[indexPath.section]
-        //        print(Bestellungen[Cell1Section].Unterkategorie[indexPath.section])
-        //        print(indexPath.section)
-        //        print(indexPath.row)
+
         return cell
     }
     

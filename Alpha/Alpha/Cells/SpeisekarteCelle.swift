@@ -8,19 +8,24 @@
 
 import UIKit
 
+protocol SpeisekarteDelegate {
+    func reloadUnterkategorie(sender: SpeisekarteCelle)
+}
+
 class SpeisekarteCelle: UITableViewCell, UITableViewDataSource, UITableViewDelegate, ExpandableHeaderViewDelegate2 {
 
 
     // VARS
-    var unterkategorien = [ExpandTVSection2]()
+    var sections = [ExpandTVSection2]()
     var items = [[String]]()
     var preise = [[Double]]()
     var liters = [[String]]()
     var beschreibungen = [[String]]()
-    var section = Int()
+    var sectioncell = Int()
     var section2 = 0
     var row = 0
     var i = 0
+    var delegate: SpeisekarteDelegate?
     
     // OUTLETS
     
@@ -31,13 +36,15 @@ class SpeisekarteCelle: UITableViewCell, UITableViewDataSource, UITableViewDeleg
     
     // Tabelle
     func numberOfSections(in tableView: UITableView) -> Int {
-        return unterkategorien[0].Unterkategorie.count
-        
+        print(sections, "erekrkjejkkejekr")
+
+        return sections[sectioncell].Unterkategorie.count
+
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        return unterkategorien[0].items[section].count
+        return sections[sectioncell].items[section].count
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
@@ -45,8 +52,8 @@ class SpeisekarteCelle: UITableViewCell, UITableViewDataSource, UITableViewDeleg
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        if unterkategorien[0].expanded2[indexPath.section] != false {
-            return CGFloat(46)}
+        if sections[sectioncell].expanded2[indexPath.section] != false {
+            return CGFloat(60)}
         else {
             return 0
             
@@ -67,7 +74,7 @@ class SpeisekarteCelle: UITableViewCell, UITableViewDataSource, UITableViewDeleg
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let header = ExpandableHeaderView2()
         
-            header.customInit(tableView: tableView, title:  unterkategorien[section2].Unterkategorie[section], section: section, delegate: self as ExpandableHeaderViewDelegate2)
+            header.customInit(tableView: tableView, title:  sections[sectioncell].Unterkategorie[section], section: section, delegate: self as ExpandableHeaderViewDelegate2)
             return header
 
         
@@ -80,12 +87,12 @@ class SpeisekarteCelle: UITableViewCell, UITableViewDataSource, UITableViewDeleg
         let cell = Bundle.main.loadNibNamed("SpeisekarteCelle2", owner: self, options: nil)?.first as! SpeisekarteCelle2
 
 //        cell.itemLbl.text = "cell.itemLbl.text"
-        if unterkategorien[0].expanded2[indexPath.section] != false {
+        if sections[sectioncell].expanded2[indexPath.section] != false {
 
-        var item = unterkategorien[0].items[indexPath.section]
-        var preis = unterkategorien[0].preis[indexPath.section]
-        var liter = unterkategorien[0].liter[indexPath.section]
-        var beschreibung = unterkategorien[0].beschreibung[indexPath.section]
+        var item = sections[sectioncell].items[indexPath.section]
+        var preis = sections[sectioncell].preis[indexPath.section]
+        var liter = sections[sectioncell].liter[indexPath.section]
+        var beschreibung = sections[sectioncell].beschreibung[indexPath.section]
         cell.itemLbl.text = item[indexPath.row]
         let preisFormat = String(format: "%.2f", arguments: [preis[indexPath.row]])
         cell.PreisLbl.text = "\(preisFormat) €"
@@ -107,18 +114,36 @@ class SpeisekarteCelle: UITableViewCell, UITableViewDataSource, UITableViewDeleg
             cell.itemLbl.isHidden = true
             cell.PreisLbl.isHidden = true
             cell.LiterLbl.isHidden = true
+            cell.beschreibungLbl.isHidden = true
             return cell
         }
     }
     
     
     func toggleSection(tableView: UITableView, header: ExpandableHeaderView2, section: Int) {
-        unterkategorien[0].expanded2[section] = !unterkategorien[0].expanded2[section]
-        SpeisekarteTV.beginUpdates()
-        for i in 0..<unterkategorien[0].items[section].count {
-            SpeisekarteTV.reloadRows(at: [IndexPath(row: i, section: section)], with: .automatic)
-//            SpeisekarteTV2.reloadSections(IndexSet(i), with: .automatic)
+        
+
+        for i in 0..<sections[sectioncell].Unterkategorie.count{
+            if i == section {
+                sections[sectioncell].expanded2[i] = !sections[sectioncell].expanded2[i]
+            } else {
+                sections[sectioncell].expanded2[i] = false
+                
+            }
         }
+        
+        SpeisekarteTV.beginUpdates()
+        let indexSet = NSMutableIndexSet()
+        for i in 0..<sections[sectioncell].items[section].count {
+            SpeisekarteTV.reloadRows(at: [IndexPath(row: i, section: section)], with: .automatic)
+        }
+        for i in 0..<sections[sectioncell].Unterkategorie.count{
+            if i != section{
+                indexSet.add(i)}
+        }
+        SpeisekarteTV.reloadSections(indexSet as IndexSet, with: .automatic)
+        delegate?.reloadUnterkategorie(sender: self)
+        
         SpeisekarteTV.endUpdates()
         
     }
