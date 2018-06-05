@@ -62,10 +62,13 @@ class DetailVC: UIViewController, PulleyDrawerViewControllerDelegate, PageObserv
         slideshow.backgroundColor = UIColor.white
 
         slideshow.slideshowInterval = 0.0
-        slideshow.pageControlPosition = PageControlPosition.insideScrollView
-        slideshow.pageControl.currentPageIndicatorTintColor = UIColor(red: 185.0/255.0, green: 170.0/255.0, blue: 140.0/255.0, alpha: 1.0)
-        slideshow.pageControl.pageIndicatorTintColor = UIColor(red: 90.0/255.0, green: 90.0/255.0, blue: 90.0/255.0, alpha: 1.0)
-   
+        slideshow.pageIndicatorPosition = .init(horizontal: .center, vertical: .bottom)
+        
+        let pageControl = UIPageControl()
+        pageControl.currentPageIndicatorTintColor = UIColor(red: 185.0/255.0, green: 170.0/255.0, blue: 140.0/255.0, alpha: 1.0)
+        pageControl.pageIndicatorTintColor = UIColor(red: 90.0/255.0, green: 90.0/255.0, blue: 90.0/255.0, alpha: 1.0)
+        slideshow.pageIndicator = pageControl
+        
         
         slideshow.contentScaleMode = UIViewContentMode.scaleAspectFill
         

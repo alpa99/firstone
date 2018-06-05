@@ -1513,7 +1513,7 @@
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="hintergrund" translatesAutoresizingMaskIntoConstraints="NO" id="2y5-22-9kt">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="910"/>
                             </imageView>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vPZ-U3-fKa">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vPZ-U3-fKa">
                                 <rect key="frame" x="0.0" y="60" width="375" height="850"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XT3-ss-KWX">
@@ -1838,7 +1838,7 @@
                                 </constraints>
                             </view>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="UfE-2g-B3z" firstAttribute="bottom" secondItem="Azo-S7-7OP" secondAttribute="bottom" id="0Af-C8-0Ya"/>
                             <constraint firstItem="M9W-8E-IMa" firstAttribute="trailing" secondItem="Azo-S7-7OP" secondAttribute="trailing" id="7Uv-bS-0XR"/>
@@ -2057,8 +2057,6 @@
     <inferredMetricsTieBreakers>
         <segue reference="lCL-4T-GHF"/>
         <segue reference="Ofz-12-wQ9"/>
-        <segue reference="5QQ-s3-zh5"/>
-        <segue reference="LaO-lI-cXB"/>
         <segue reference="5gR-xy-0iu"/>
         <segue reference="tKO-Qv-DSi"/>
     </inferredMetricsTieBreakers>

@@ -105,10 +105,13 @@ class DetailVC2: UIViewController, PageObservation2, CLLocationManagerDelegate{
         slideshow.backgroundColor = UIColor.white
         
         slideshow.slideshowInterval = 0.0
-        slideshow.pageIndicatorPosition = PageIndicatorPosition(horizontal: .center, vertical: .top)
+        slideshow.pageIndicatorPosition = .init(horizontal: .center, vertical: .bottom)
         
-        slideshow.pageControl.currentPageIndicatorTintColor = UIColor(red: 185.0/255.0, green: 170.0/255.0, blue: 140.0/255.0, alpha: 1.0)
-        slideshow.pageControl.pageIndicatorTintColor = UIColor(red: 90.0/255.0, green: 90.0/255.0, blue: 90.0/255.0, alpha: 1.0)
+        let pageControl = UIPageControl()
+        pageControl.currentPageIndicatorTintColor = UIColor(red: 185.0/255.0, green: 170.0/255.0, blue: 140.0/255.0, alpha: 1.0)
+        pageControl.pageIndicatorTintColor = UIColor(red: 90.0/255.0, green: 90.0/255.0, blue: 90.0/255.0, alpha: 1.0)
+        slideshow.pageIndicator = pageControl
+        
         
         
         slideshow.contentScaleMode = UIViewContentMode.scaleAspectFill
