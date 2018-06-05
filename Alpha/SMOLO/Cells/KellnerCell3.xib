@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Alignment constraints to the first baseline" minToolsVersion="6.0"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="86" id="KGk-i7-Jjw" customClass="KellnerCell3" customModule="SMOLO" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="86"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="85.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Preis" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0N3-kD-bYj" customClass="LabelWhiteS16" customModule="SMOLO" customModuleProvider="target">
+                        <rect key="frame" x="197" y="-1" width="38" height="44"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Menge" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pLI-RR-PW3" customClass="LabelWhiteS16" customModule="SMOLO" customModuleProvider="target">
+                        <rect key="frame" x="251" y="0.0" width="53" height="44"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ItemName" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mho-V3-Apv" customClass="LabelWhiteS16" customModule="SMOLO" customModuleProvider="target">
+                        <rect key="frame" x="16" y="0.0" width="79" height="44"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="hgo-TS-byk">
+                        <rect key="frame" x="16" y="39" width="288" height="36"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                    </textView>
+                </subviews>
+                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                <constraints>
+                    <constraint firstItem="hgo-TS-byk" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="28" id="7YK-HV-3qm"/>
+                    <constraint firstItem="Mho-V3-Apv" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="KyF-HI-l6G"/>
+                    <constraint firstItem="Mho-V3-Apv" firstAttribute="baseline" secondItem="pLI-RR-PW3" secondAttribute="baseline" id="MXZ-oa-pkd"/>
+                    <constraint firstItem="pLI-RR-PW3" firstAttribute="leading" secondItem="0N3-kD-bYj" secondAttribute="trailing" constant="16" id="NUK-6i-K9x"/>
+                    <constraint firstItem="Mho-V3-Apv" firstAttribute="firstBaseline" secondItem="pLI-RR-PW3" secondAttribute="firstBaseline" id="NrL-iv-9iS"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="Mho-V3-Apv" secondAttribute="bottom" constant="31" id="O47-ig-VJ4"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="0N3-kD-bYj" secondAttribute="bottom" constant="32" id="YDG-Xr-4AN"/>
+                    <constraint firstItem="Mho-V3-Apv" firstAttribute="leading" secondItem="hgo-TS-byk" secondAttribute="leading" id="crW-CC-r8a"/>
+                    <constraint firstItem="hgo-TS-byk" firstAttribute="bottom" secondItem="H2p-sc-9uM" secondAttribute="bottomMargin" id="fY6-1J-BaO"/>
+                    <constraint firstItem="0N3-kD-bYj" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="-12" id="ja0-ie-RLX"/>
+                    <constraint firstItem="pLI-RR-PW3" firstAttribute="trailing" secondItem="H2p-sc-9uM" secondAttribute="trailingMargin" id="nXq-Ta-Bpg"/>
+                    <constraint firstItem="Mho-V3-Apv" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="va4-1Z-F3E"/>
+                    <constraint firstItem="pLI-RR-PW3" firstAttribute="trailing" secondItem="hgo-TS-byk" secondAttribute="trailing" id="z96-rp-3XD"/>
+                </constraints>
+            </tableViewCellContentView>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <connections>
+                <outlet property="itemMenge" destination="pLI-RR-PW3" id="xqj-QW-df3"/>
+                <outlet property="itemName" destination="Mho-V3-Apv" id="A4K-n9-JZA"/>
+                <outlet property="itemPreis" destination="0N3-kD-bYj" id="iqK-GL-cs0"/>
+                <outlet property="kommentarTextView" destination="hgo-TS-byk" id="m3i-gL-kRQ"/>
+            </connections>
+            <point key="canvasLocation" x="34" y="77"/>
+        </tableViewCell>
+    </objects>
+</document>

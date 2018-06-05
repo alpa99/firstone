@@ -1,11 +1,11 @@
 # Uncomment the next line to define a global platform for your project
 # platform :ios, '9.0'
 
-target 'Alpha' do
+target 'SMOLO' do
   # Comment the next line if you're not using Swift and don't want to use dynamic frameworks
   use_frameworks!
 
-  # Pods for Alpha
+  # Pods for SMOLO
 pod 'Pulley'
 
 pod 'FacebookCore'
@@ -22,12 +22,12 @@ pod 'GoogleMaps'
 pod 'GooglePlaces'
 pod 'ImageSlideshow/SDWebImage'
 
-  target 'AlphaTests' do
+  target 'SMOLOTests' do
     inherit! :search_paths
     # Pods for testing
   end
 
-  target 'AlphaUITests' do
+  target 'SMOLOUITests' do
     inherit! :search_paths
     # Pods for testing
   end

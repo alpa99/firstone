@@ -133,16 +133,10 @@ static NSString *const FBSDKAppLinkInboundEvent = @"fb_al_inbound";
             openURL:(NSURL *)url
             options:(NSDictionary<UIApplicationOpenURLOptionsKey,id> *)options
 {
-    if (@available(iOS 9.0, *)) {
-        return [self application:application
-                         openURL:url
-               sourceApplication:options[UIApplicationOpenURLOptionsSourceApplicationKey]
-                      annotation:options[UIApplicationOpenURLOptionsAnnotationKey]];
-    } else {
-        return [self application:application
-                         openURL:url
-               sourceApplication:options[UIApplicationOpenURLOptionsSourceApplicationKey]
-                      annotation:options[UIApplicationOpenURLOptionsAnnotationKey]];    }
+  return [self application:application
+                   openURL:url
+         sourceApplication:options[UIApplicationOpenURLOptionsSourceApplicationKey]
+                annotation:options[UIApplicationOpenURLOptionsAnnotationKey]];
 }
 #endif
 
@@ -162,12 +156,12 @@ static NSString *const FBSDKAppLinkInboundEvent = @"fb_al_inbound";
   id<FBSDKURLOpening> pendingURLOpen = _pendingURLOpen;
 
   void (^completePendingOpenURLBlock)(void) = ^{
-      self->_pendingURLOpen = nil;
+    _pendingURLOpen = nil;
     [pendingURLOpen application:application
                         openURL:url
               sourceApplication:sourceApplication
                      annotation:annotation];
-      self->_isDismissingSafariViewController = NO;
+    _isDismissingSafariViewController = NO;
   };
   // if they completed a SFVC flow, dismiss it.
   if (_safariViewController) {
@@ -275,13 +269,9 @@ static NSString *const FBSDKAppLinkInboundEvent = @"fb_al_inbound";
     // Dispatch openURL calls to prevent hangs if we're inside the current app delegate's openURL flow already
     NSOperatingSystemVersion iOS10Version = { .majorVersion = 10, .minorVersion = 0, .patchVersion = 0 };
     if ([FBSDKInternalUtility isOSRunTimeVersionAtLeast:iOS10Version]) {
-        if (@available(iOS 10.0, *)) {
-            [[UIApplication sharedApplication] openURL:url options:@{} completionHandler:^(BOOL success) {
-                handler(success, nil);
-            }];
-        } else {
-            // Fallback on earlier versions
-        }
+      [[UIApplication sharedApplication] openURL:url options:@{} completionHandler:^(BOOL success) {
+        handler(success, nil);
+      }];
     } else {
       BOOL opened = [[UIApplication sharedApplication] openURL:url];
 
@@ -319,8 +309,8 @@ static NSString *const FBSDKAppLinkInboundEvent = @"fb_al_inbound";
   _pendingRequestCompletionBlock = [completionBlock copy];
   void (^handler)(BOOL, NSError *) = ^(BOOL openedURL, NSError *anError) {
     if (!openedURL) {
-        self->_pendingRequest = nil;
-        self->_pendingRequestCompletionBlock = nil;
+      _pendingRequest = nil;
+      _pendingRequestCompletionBlock = nil;
       NSError *openedURLError;
       if ([request.scheme hasPrefix:@"http"]) {
         openedURLError = [FBSDKError errorWithCode:FBSDKBrowserUnavailableErrorCode
@@ -364,7 +354,7 @@ static NSString *const FBSDKAppLinkInboundEvent = @"fb_al_inbound";
           if (error == nil) {
             [self application:[UIApplication sharedApplication] openURL:aURL sourceApplication:@"com.apple" annotation:nil];
           }
-            self->_authenticationSession = nil;
+          _authenticationSession = nil;
         }];
         [_authenticationSession start];
         return;
@@ -395,11 +385,11 @@ static NSString *const FBSDKAppLinkInboundEvent = @"fb_al_inbound";
       // Wait until the transition is finished before presenting SafariVC to avoid a blank screen.
       [parent.transitionCoordinator animateAlongsideTransition:NULL completion:^(id<UIViewControllerTransitionCoordinatorContext> context) {
         // Note SFVC init must occur inside block to avoid blank screen.
-          self->_safariViewController = [[SFSafariViewControllerClass alloc] initWithURL:url];
+        _safariViewController = [[SFSafariViewControllerClass alloc] initWithURL:url];
         // Disable dismissing with edge pan gesture
-          self->_safariViewController.modalPresentationStyle = UIModalPresentationOverFullScreen;
-          [self->_safariViewController performSelector:@selector(setDelegate:) withObject:self];
-          [container displayChildController:self->_safariViewController];
+        _safariViewController.modalPresentationStyle = UIModalPresentationOverFullScreen;
+        [_safariViewController performSelector:@selector(setDelegate:) withObject:self];
+        [container displayChildController:_safariViewController];
         [parent presentViewController:container animated:YES completion:nil];
       }];
     } else {

@@ -1,6 +1,6 @@
 //
 //  ScanDetailVC.swift
-//  Alpha
+//  SMOLO
 //
 //  Created by Alper Maraz on 23.10.17.
 //  Copyright © 2017 AM. All rights reserved.
