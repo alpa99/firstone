@@ -173,7 +173,7 @@ class LoginVC: UIViewController, UITextFieldDelegate {
                 }
 
                             let credential = FacebookAuthProvider.credential(withAccessToken: accessTokenString)
-                            Auth.auth().signIn(with: credential, completion: { (user, error) in
+                            Auth.auth().signInAndRetrieveData(with: credential, completion: { (user, error) in
                                 print(Auth.auth().currentUser?.uid ?? "keine uid", "UID")
                                 if error != nil {
                                     let alertNichtRegistriert = UIAlertController(title: "Registrierung fehlgeschlagen", message: "Bitte informiere info@madapp.de", preferredStyle: .alert)

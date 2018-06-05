@@ -65,10 +65,10 @@ class DrawerVC: UIViewController, PulleyDrawerViewControllerDelegate, UITableVie
     }
     
     func searchBarShouldBeginEditing(_ searchBar: UISearchBar) -> Bool {
-        return (((parent as? PulleyViewController)?.setDrawerPosition(position: .open, isAnimated: true)) != nil)
+        return (self.pulleyViewController?.setDrawerPosition(position: .open, animated: true) != nil)
     }
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        (parent as? PulleyViewController)?.setDrawerPosition(position: .open, isAnimated: true)
+    self.pulleyViewController?.setDrawerPosition(position: .open, animated: true)
     }
     
     func filteredContent (searchText: String, scope: String = "All"){
@@ -168,7 +168,7 @@ class DrawerVC: UIViewController, PulleyDrawerViewControllerDelegate, UITableVie
         print(selBarName)
         
         
-        (parent as? PulleyViewController)?.setDrawerPosition(position: .open, isAnimated: true)
+        self.pulleyViewController?.setDrawerPosition(position: .open, animated: true)
        
         
         let pagevc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "PageVC") as! PageViewController

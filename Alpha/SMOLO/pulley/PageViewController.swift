@@ -151,13 +151,13 @@ class PageViewController: UIPageViewController, UIPageViewControllerDelegate, UI
     //movePulley
     func pos1 (){
         
-        self.pulleyViewController?.setDrawerPosition(position: .collapsed, isAnimated: true)
+        self.pulleyViewController?.setDrawerPosition(position: .partiallyRevealed, animated: true)
     }
 
     
     //Back
     func goback(){
-        (parent as? PulleyViewController)?.setDrawerPosition(position: .open, isAnimated: true)
+       self.pulleyViewController?.setDrawerPosition(position: .open, animated: true)
         let drawervc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "DrawerVC") as! DrawerVC
         
         
