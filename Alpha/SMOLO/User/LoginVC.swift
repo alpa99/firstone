@@ -122,29 +122,28 @@ class LoginVC: UIViewController, UITextFieldDelegate {
         loginManager.logIn(readPermissions: [.publicProfile, .email, .userBirthday], viewController: self) { result in
             
 
-            if snapshot.hasChild(FBSDKAccessToken.current().userID) {
             switch result {
             case .failed(let error):
                 print(error.localizedDescription)
             case .cancelled:
                 print("cancelled")
             case .success(_,_,_):
-                print(2)
+                if snapshot.hasChild(FBSDKAccessToken.current().userID) {
                 self.getUserInfo {userInfo, error in
                     if let error = error {
                         print(error.localizedDescription, "ERRRRRRRRROR")
                     }
-                            self.segueToTabBar()
 
                 }
+                } else {
+                    let alertNichtRegistriert = UIAlertController(title: "Login fehlgeschlagen", message: "Bitte registriere dich zunächst.", preferredStyle: .alert)
+                    alertNichtRegistriert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+                    alertNichtRegistriert.addAction(UIAlertAction(title: "registrieren", style: .default, handler: { (action) in
+                        self.segueToRegistrieren()
+                    }))
+                    self.present(alertNichtRegistriert, animated: true, completion: nil)                                       }
             }
-            } else {
-                let alertNichtRegistriert = UIAlertController(title: "Login fehlgeschlagen", message: "Bitte registriere dich zunächst.", preferredStyle: .alert)
-                alertNichtRegistriert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-                alertNichtRegistriert.addAction(UIAlertAction(title: "registrieren", style: .default, handler: { (action) in
-                    self.segueToRegistrieren()
-                }))
-                self.present(alertNichtRegistriert, animated: true, completion: nil)                                       }
+            
                 }
            
         }, withCancel: nil)
@@ -181,7 +180,6 @@ class LoginVC: UIViewController, UITextFieldDelegate {
                                     self.present(alertNichtRegistriert, animated: true, completion: nil)
                                                                         return
                                 } else {
-                                    self.segueToTabBar()
                                 }
                                 print("fb user:", user ?? "default user")
                                 
@@ -194,25 +192,9 @@ class LoginVC: UIViewController, UITextFieldDelegate {
     }
     
     
-//    func addUserToFirebase(){
-//        var ref: DatabaseReference?
-//
-//        ref = Database.database().reference()
-//
-//        if let uid = Auth.auth().currentUser?.uid {
-//
-//        ref?.child("Users").child("\(uid)").child("Name").setValue(self.userFbName)
-//        ref?.child("Users").child("\(uid)").child("Email").setValue(self.userFbEmail)
-//
-//        segueToTabBar()
-//        }
-//    }
-    
     func segueToRegistrieren() {
         performSegue(withIdentifier: "registrieren", sender: self)
-        
     }
-
     
     func segueToTabBar(){
         self.performSegue(withIdentifier: "login", sender: self.loginBtn)
@@ -312,7 +294,6 @@ class LoginVC: UIViewController, UITextFieldDelegate {
                             print("kellner")
                         } else {
                             self.segueToTabBar()
-
                                      }
                     
                     
@@ -324,3 +305,5 @@ class LoginVC: UIViewController, UITextFieldDelegate {
     
     }
 }
+
+// login geändert
