@@ -9,7 +9,7 @@
 import UIKit
 import Firebase
 
-class LoginKellnerVC: UIViewController {
+class LoginKellnerVC: UIViewController, UITextFieldDelegate {
 
     // VARS
     
@@ -121,10 +121,29 @@ class LoginKellnerVC: UIViewController {
     }
     
     
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        
+        return true
+    }
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        let touch: UITouch? = touches.first
+        if touch?.view == self.view {
+            PasswortTextfield.resignFirstResponder()
+            KellnerIdTextfield.resignFirstResponder()
+        }
+        
+    }
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         KellnerIdTextfield.text = "i.akcam@gmx.de"
         PasswortTextfield.text = "123456"
+        KellnerIdTextfield.delegate = self
+        PasswortTextfield.delegate = self
+        KellnerIdTextfield.keyboardAppearance = UIKeyboardAppearance.dark
+        PasswortTextfield.keyboardAppearance = UIKeyboardAppearance.dark
         Auth.auth().languageCode = "de"
         loginBtn.layer.cornerRadius = 4
         GastLogin.layer.cornerRadius = 4

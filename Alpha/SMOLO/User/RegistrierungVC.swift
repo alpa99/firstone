@@ -270,6 +270,9 @@ class RegistrierungVC: UIViewController, UITextFieldDelegate {
         benutzerName.delegate = self
         emailTextField.delegate = self
         passwordTextField.delegate = self
+        benutzerName.keyboardAppearance = UIKeyboardAppearance.dark
+        emailTextField.keyboardAppearance = UIKeyboardAppearance.dark
+        passwordTextField.keyboardAppearance = UIKeyboardAppearance.dark
         agbsAkzeptiert.setImage(UIImage(named: "essen"), for: .selected)
         agbsAkzeptiert.setImage(UIImage(named: "essen-i"), for: .normal)
         AlterBtn.setImage(UIImage(named: "alkohol"), for: .selected)

@@ -21,8 +21,6 @@ class MeineBestellungVC: UIViewController, UITableViewDataSource, UITableViewDel
     var aktuellerTisch = String()
     var letzteBestellungZeit = Double()
     var userUid = String()
-
-
     
     var Bestellungen = [KellnerTVSection]()
     var BestellungenID = [String]()
@@ -98,7 +96,6 @@ class MeineBestellungVC: UIViewController, UITableViewDataSource, UITableViewDel
         }, withCancel: nil)
         
     }
-    
     
     func loadBestellungen(BestellungID: String){
         self.bestellungIDs.append(BestellungID)

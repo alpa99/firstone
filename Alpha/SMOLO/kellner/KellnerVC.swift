@@ -12,8 +12,6 @@ import Firebase
 class KellnerVC: UIViewController, UITableViewDelegate, UITableViewDataSource, ExpandableHeaderViewDelegate, kellnerCellDelegate {
 
     
-    
-    
     // VARS
     var Bestellungen = [KellnerTVSection]()
     var bestellungIDs = [String]()
@@ -578,10 +576,10 @@ class KellnerVC: UIViewController, UITableViewDelegate, UITableViewDataSource, E
         self.view.addSubview(viewProblem)
         viewProblem.translatesAutoresizingMaskIntoConstraints = false
         self.view.addConstraints([
-            NSLayoutConstraint(item: viewProblem, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .width, multiplier: 1.0, constant: 400),
-            NSLayoutConstraint(item: viewProblem, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .height, multiplier: 1.0, constant: 200),
+            NSLayoutConstraint(item: viewProblem, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .width, multiplier: 1.0, constant: 240),
+            NSLayoutConstraint(item: viewProblem, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .height, multiplier: 1.0, constant: 218),
             NSLayoutConstraint(item: viewProblem, attribute: .centerX, relatedBy: .equal, toItem: self.view, attribute: .centerX, multiplier: 1.0, constant: 0),
-            NSLayoutConstraint(item: viewProblem, attribute: .centerY, relatedBy: .equal, toItem: self.view, attribute: .centerY, multiplier: 1.0, constant: 0),
+            NSLayoutConstraint(item: viewProblem, attribute: .centerY, relatedBy: .equal, toItem: self.view, attribute: .centerY, multiplier: 1.0, constant: -100),
             ])
         
 
@@ -804,7 +802,7 @@ class KellnerVC: UIViewController, UITableViewDelegate, UITableViewDataSource, E
     override func viewDidLoad() {
         
         super.viewDidLoad()
-
+        problemTextView.keyboardAppearance = UIKeyboardAppearance.dark
         problemTextView.alpha = 0.5
         viewProblem.backgroundColor = UIColor(patternImage: UIImage(named: "hintergrund")!)
         barnameLbl.text = Barname
