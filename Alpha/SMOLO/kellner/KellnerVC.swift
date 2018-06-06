@@ -504,7 +504,7 @@ class KellnerVC: UIViewController, UITableViewDelegate, UITableViewDataSource, E
             let fromUserID = self.Bestellungen[problemSection].fromUserID
             var datref: DatabaseReference!
             datref = Database.database().reference()
-           let childdatref  = datref.child("ProblemMeldungenKellner").child(Barname).child(KellnerID)
+           let childdatref  = datref.child("ProblemMeldungenKellner").child(KellnerID)
             let childchilddatref = childdatref.childByAutoId()
             childchilddatref.child("Information").updateChildValues(["Problemtext" : problemTextView.text!, "BestellungID": self.Bestellungen[problemSection].BestellungID, "tischnummer": problemTisch, "fromUserID": fromUserID, "TimeStamp": problemTimeStamp])
            
@@ -534,7 +534,7 @@ class KellnerVC: UIViewController, UITableViewDelegate, UITableViewDataSource, E
     childchilddatref.child("Bestellung").child(Bestellung.Kategorie[i]).child(Unterkategorie).child(item[x]).updateChildValues(bestellungMenge)
     childchilddatref.child("Bestellung").child(Bestellung.Kategorie[i]).child(Unterkategorie).child(item[x]).updateChildValues(bestellungPreis)
     childchilddatref.child("Bestellung").child(Bestellung.Kategorie[i]).child(Unterkategorie).child(item[x]).updateChildValues(bestellungKommentar)
-
+                        
                     }
                 }
             }

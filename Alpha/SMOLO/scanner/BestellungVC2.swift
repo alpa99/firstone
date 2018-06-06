@@ -354,18 +354,12 @@ class BestellungVC2: UIViewController, UITableViewDataSource, UITableViewDelegat
                     let bestellungMenge = ["Menge": mengen[i]]
                     let bestellungPreis = ["Preis": preise[i]]
                     let bestellungKommentar = ["Kommentar": kommentar[i]]
-                    if i > 0 && items[i] == items[i-1]{
-                        childRef?.child(Bestellung.Kategorie).child(Unterkategorie).child(items[i]+"\(i)").updateChildValues(bestellungName)
-                        childRef?.child(Bestellung.Kategorie).child(Unterkategorie).child(items[i]+"\(i)").updateChildValues(bestellungMenge)
-                        childRef?.child(Bestellung.Kategorie).child(Unterkategorie).child(items[i]+"\(i)").updateChildValues(bestellungPreis)
-                        childRef?.child(Bestellung.Kategorie).child(Unterkategorie).child(items[i]+"\(i)").updateChildValues(bestellungKommentar)
-
-                    } else {
-                        childRef?.child(Bestellung.Kategorie).child(Unterkategorie).child(items[i]).updateChildValues(bestellungName)
-                        childRef?.child(Bestellung.Kategorie).child(Unterkategorie).child(items[i]).updateChildValues(bestellungMenge)
-                        childRef?.child(Bestellung.Kategorie).child(Unterkategorie).child(items[i]).updateChildValues(bestellungPreis)
-                        childRef?.child(Bestellung.Kategorie).child(Unterkategorie).child(items[i]).updateChildValues(bestellungKommentar)
-                    }
+                    let childchildref = childRef?.child(Bestellung.Kategorie).child(Unterkategorie).childByAutoId()
+                        childchildref?.updateChildValues(bestellungName)
+                        childchildref?.updateChildValues(bestellungMenge)
+                        childchildref?.updateChildValues(bestellungPreis)
+                        childchildref?.updateChildValues(bestellungKommentar)
+                    
 
                 }
 

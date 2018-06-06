@@ -293,6 +293,7 @@ class LoginVC: UIViewController, UITextFieldDelegate {
                     if snapshot.hasChild((user?.uid)!) {
                             print("kellner")
                         } else {
+                        print("segue to tabbar")
                             self.segueToTabBar()
                                      }
                     
