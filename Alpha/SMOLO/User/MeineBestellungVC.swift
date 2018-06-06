@@ -20,7 +20,7 @@ class MeineBestellungVC: UIViewController, UITableViewDataSource, UITableViewDel
     var aktuelleBar = String()
     var aktuellerTisch = String()
     var letzteBestellungZeit = Double()
-    let userUid = Auth.auth().currentUser?.uid
+    var userUid = String()
 
 
     
@@ -68,7 +68,7 @@ class MeineBestellungVC: UIViewController, UITableViewDataSource, UITableViewDel
     func loadAktuelleBar(){
         var datref: DatabaseReference!
         datref = Database.database().reference()
-        datref.child("Users").child(userUid!).observeSingleEvent(of: .value, with: { (snapshotAktuell) in
+        datref.child("Users").child(userUid).observeSingleEvent(of: .value, with: { (snapshotAktuell) in
             print(snapshotAktuell, "aktuell")
             if let dictionary = snapshotAktuell.value as? [String: AnyObject]{
                 let userinfos = UserInfos(dictionary: dictionary)
@@ -80,7 +80,7 @@ class MeineBestellungVC: UIViewController, UITableViewDataSource, UITableViewDel
                 print(userinfos.aktuelleBar!)
                 self.aktuellerTisch = userinfos.aktuellerTisch!
                 self.letzteBestellungZeit = userinfos.letzteBestellungZeit!
-                self.loadBestellungenKeys(userUid: self.userUid!)
+                self.loadBestellungenKeys(userUid: self.userUid)
 
             }
         }, withCancel: nil)
@@ -102,17 +102,18 @@ class MeineBestellungVC: UIViewController, UITableViewDataSource, UITableViewDel
     
     func loadBestellungen(BestellungID: String){
         self.bestellungIDs.append(BestellungID)
-        
+        print(BestellungID, "bestllung ID")
         var datref: DatabaseReference!
-        datref.child("Bestellungen").child(aktuelleBar).child(BestellungID).observeSingleEvent(of: .value) { (snapshot) in
+        datref = Database.database().reference()
 
+        datref.child("Bestellungen").child(aktuelleBar).child(BestellungID).observeSingleEvent(of: .value) { (snapshot) in
         for key in (snapshot.children.allObjects as? [DataSnapshot])! {
             if key.key == "Information" {
                 if let dictionary = key.value as? [String: AnyObject]{
                     
                     let bestellungInfos = BestellungInfos(dictionary: dictionary)
                     self.Tischnummer.updateValue(bestellungInfos.tischnummer!, forKey: BestellungID)
-                    self.Angenommen.updateValue(bestellungInfos.Status!, forKey: BestellungID)
+                    self.Status.updateValue(bestellungInfos.Status!, forKey: BestellungID)
                     self.FromUserID.updateValue(bestellungInfos.fromUserID!, forKey: BestellungID)
                     self.TimeStamp.updateValue(bestellungInfos.timeStamp!, forKey: BestellungID)
                     
@@ -433,14 +434,23 @@ class MeineBestellungVC: UIViewController, UITableViewDataSource, UITableViewDel
                 
             }
         }
-            print(self.bestellungIDs, "self.bestellungIDs")
-            print(self.BestellungKategorien, "self.BestellungKategorien")
-            
-            
+//            print(self.bestellungIDs, "self.bestellungIDs")
+//            print(self.BestellungKategorien, "self.BestellungKategorien")
+//            print(self.BestellungUnterkategorien, "BestellungUnterkategorien")
+//            print(self.BestellungItemsNamen, "BestellungItemsNamen")
+//            print(self.BestellungItemsLiter, "BestellungItemsLiter")
+//            print(self.BestellungItemsKommentar, "BestellungItemsKommentar")
+//            print(self.BestellungItemsMengen, "BestellungItemsMengen")
+//            print(self.BestellungItemsPreise, "BestellungItemsPreise")
+//            print(self.BestellungExpanded2, "BestellungExpanded2")
+//
+//
             if self.bestellungIDs.count == self.BestellungKategorien.count {
                 
-                for i in 0..<self.bestellungIDs.count {
-                    self.setSectionsMeineBestellung(BestellungID: self.bestellungIDs[i], tischnummer: self.Tischnummer[self.bestellungIDs[i]]!, TimeStamp: self.TimeStamp[self.bestellungIDs[i]]!, Kategorie: self.BestellungKategorien[self.bestellungIDs[i]]!, Unterkategorie: self.BestellungUnterkategorien[self.bestellungIDs[i]]!, items: self.BestellungItemsNamen[self.bestellungIDs[i]]!, preis: self.BestellungItemsPreise[self.bestellungIDs[i]]!, liter: [[["String"]]], kommentar: self.BestellungItemKommentar[self.bestellungIDs[i]]!, menge: self.BestellungItemsMengen[self.bestellungIDs[i]]!, expanded2: self.BestellungExpanded2[self.bestellungIDs[i]]!, expanded: true)
+
+                
+                for id in self.bestellungIDs {
+                    self.setSectionsKellnerBestellung(BestellungID: id, tischnummer: self.Tischnummer[id]!, fromUserID: self.FromUserID[id]!, TimeStamp: self.TimeStamp[id]!, Kategorie: self.BestellungKategorien[id]!, Unterkategorie: self.BestellungUnterkategorien[id]!, items: self.BestellungItemsNamen[id]!, preis: self.BestellungItemsPreise[id]!, liter: self.BestellungItemsLiter[id]!, kommentar: self.BestellungItemsKommentar[id]!, menge: self.BestellungItemsMengen[id]!, expanded2: self.BestellungExpanded2[id]!, expanded: true)
                     if self.Bestellungen.count == self.bestellungIDs.count{
                         self.meineBestellungTV.reloadData()
                     }
@@ -453,12 +463,11 @@ class MeineBestellungVC: UIViewController, UITableViewDataSource, UITableViewDel
     }
     
     
-    func setSectionsMeineBestellung(BestellungID: String, tischnummer: String, TimeStamp: Double, Kategorie: [String], Unterkategorie: [[String]], items: [[[String]]], preis: [[[Double]]], liter: [[[String]]], kommentar: [[[String]]], menge: [[[Int]]], expanded2: [[Bool]], expanded: Bool){
-        self.Bestellungen.append(KellnerTVSection(BestellungID: BestellungID, tischnummer: tischnummer, timeStamp: TimeStamp, Kategorie: Kategorie, Unterkategorie: Unterkategorie, items: items, preis: preis, liter: liter, kommentar: kommentar, menge: menge, expanded2: expanded2, expanded: expanded))
-        print(Bestellungen)
-        
-        
+    
+    func setSectionsKellnerBestellung(BestellungID: String, tischnummer: String, fromUserID: String, TimeStamp: Double, Kategorie: [String], Unterkategorie: [[String]], items: [[[String]]], preis: [[[Double]]], liter: [[[String]]], kommentar: [[[String]]], menge: [[[Int]]], expanded2: [[Bool]], expanded: Bool){
+        self.Bestellungen.append(KellnerTVSection(BestellungID: BestellungID, tischnummer: tischnummer, fromUserID: fromUserID, timeStamp: TimeStamp, Kategorie: Kategorie, Unterkategorie: Unterkategorie, items: items, preis: preis, liter: liter, kommentar: kommentar, menge: menge, expanded2: expanded2, expanded: expanded))
     }
+    
     
     
     // TABLE
@@ -559,7 +568,8 @@ class MeineBestellungVC: UIViewController, UITableViewDataSource, UITableViewDel
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        print(Auth.auth().currentUser?.uid ?? "keineuid")
+        userUid = (Auth.auth().currentUser?.uid)!
         loadAktuelleBar()
 
 

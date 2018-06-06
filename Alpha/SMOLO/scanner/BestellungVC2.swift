@@ -338,11 +338,12 @@ class BestellungVC2: UIViewController, UITableViewDataSource, UITableViewDelegat
             let childRef = ref?.childByAutoId()
 
         for Bestellung in self.bestellteItemsDictionary {
+            
             let Unterkategorien = Bestellung.Unterkategorie
-
             for Unterkategorie in Bestellung.Unterkategorie {
                 let UnterkategorieSection = Unterkategorien.index(of: Unterkategorie)
                 var items = Bestellung.items[UnterkategorieSection!]
+            
                 var mengen = Bestellung.menge[UnterkategorieSection!]
                 var preise = Bestellung.preis[UnterkategorieSection!]
                 var kommentar = Bestellung.kommentar[UnterkategorieSection!]
@@ -775,18 +776,7 @@ class BestellungVC2: UIViewController, UITableViewDataSource, UITableViewDelegat
                         
                         itemsMengenInSection[unterkategorie.index(of: UnterkategorieLbl.text!)!].append(Int(itemCountLbl.text!)!)
                         BestellungItemsMengen[BestellungKategorien.index(of: KategorieLbl.text!)!] = itemsMengenInSection
-                        
-                        
-//                    } else {
-//                        let ItemNameInRow = itemsNamenInSection[unterkategorie.index(of: UnterkategorieLbl.text!)!].index(of: itemNameLbl.text!)
-//                        var ItemMengeInRow = itemsMengenInSection[unterkategorie.index(of: UnterkategorieLbl.text!)!]
-//                        ItemMengeInRow[ItemNameInRow!] = Int(itemCountLbl.text!)!
-//                        itemsMengenInSection[unterkategorie.index(of: UnterkategorieLbl.text!)!] = ItemMengeInRow
-//                        BestellungItemsMengen[BestellungKategorien.index(of: KategorieLbl.text!)!] = itemsMengenInSection
-//                        // hier weiter machen
-//                        // item gibt es
-//
-//                    }
+
                 }
             }
 
