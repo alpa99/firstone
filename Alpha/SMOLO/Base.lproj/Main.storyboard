@@ -1011,12 +1011,10 @@
             </objects>
             <point key="canvasLocation" x="486.95652173913049" y="792.39130434782612"/>
         </scene>
-        <!--EinstellungenVC View Controller-->
+        <!--EinstellungenVC-->
         <scene sceneID="pzj-yX-V5M">
             <objects>
-                <exit id="SG5-w0-8kG" userLabel="Exit" sceneMemberID="exit"/>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="asY-36-jtr" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <viewController id="5h5-QF-pPl" customClass="EinstellungenVCViewController" customModule="SMOLO" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="5h5-QF-pPl" customClass="EinstellungenVC" customModule="SMOLO" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Nbx-nw-P5X">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1083,6 +1081,8 @@
                         <viewLayoutGuide key="safeArea" id="Xa6-GV-uam"/>
                     </view>
                 </viewController>
+                <exit id="SG5-w0-8kG" userLabel="Exit" sceneMemberID="exit"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="asY-36-jtr" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="486.95652173913049" y="1509.7826086956522"/>
         </scene>
