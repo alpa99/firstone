@@ -12,8 +12,6 @@ import Firebase
 class KellnerVC: UIViewController, UITableViewDelegate, UITableViewDataSource, ExpandableHeaderViewDelegate, kellnerCellDelegate {
 
     
-    
-    
     // VARS
     var Bestellungen = [KellnerTVSection]()
     var bestellungIDs = [String]()
@@ -34,6 +32,9 @@ class KellnerVC: UIViewController, UITableViewDelegate, UITableViewDataSource, E
     var Barname = String()
     var KellnerID = String()
     var viewBestellungID = String()
+    
+    var problemSection = 0
+    var problemRow = 0
     
     // OUTLETS
     
@@ -430,7 +431,7 @@ class KellnerVC: UIViewController, UITableViewDelegate, UITableViewDataSource, E
             if self.bestellungIDs.count == self.BestellungKategorien.count {
                 
                 for i in 0..<self.bestellungIDs.count {
-                    self.setSectionsKellnerBestellung(BestellungID: self.bestellungIDs[i], tischnummer: self.Tischnummer[self.bestellungIDs[i]]!, TimeStamp: self.TimeStamp[self.bestellungIDs[i]]!, Kategorie: self.BestellungKategorien[self.bestellungIDs[i]]!, Unterkategorie: self.BestellungUnterkategorien[self.bestellungIDs[i]]!, items: self.BestellungItemsNamen[self.bestellungIDs[i]]!, preis: self.BestellungItemsPreise[self.bestellungIDs[i]]!, liter: self.BestellungItemsLiter[self.bestellungIDs[i]]!, kommentar: self.BestellungItemsKommentar[self.bestellungIDs[i]]!, menge: self.BestellungItemsMengen[self.bestellungIDs[i]]!, expanded2: self.BestellungExpanded2[self.bestellungIDs[i]]!, expanded: false)
+                    self.setSectionsKellnerBestellung(BestellungID: self.bestellungIDs[i], tischnummer: self.Tischnummer[self.bestellungIDs[i]]!, fromUserID: self.FromUserID[self.bestellungIDs[i]]!, TimeStamp: self.TimeStamp[self.bestellungIDs[i]]!, Kategorie: self.BestellungKategorien[self.bestellungIDs[i]]!, Unterkategorie: self.BestellungUnterkategorien[self.bestellungIDs[i]]!, items: self.BestellungItemsNamen[self.bestellungIDs[i]]!, preis: self.BestellungItemsPreise[self.bestellungIDs[i]]!, liter: self.BestellungItemsLiter[self.bestellungIDs[i]]!, kommentar: self.BestellungItemsKommentar[self.bestellungIDs[i]]!, menge: self.BestellungItemsMengen[self.bestellungIDs[i]]!, expanded2: self.BestellungExpanded2[self.bestellungIDs[i]]!, expanded: false)
                     if self.Bestellungen.count == self.bestellungIDs.count{
                         self.bestellungenTV.reloadData()
                     }
@@ -443,14 +444,11 @@ class KellnerVC: UIViewController, UITableViewDelegate, UITableViewDataSource, E
     }
     
     
-    func setSectionsKellnerBestellung(BestellungID: String, tischnummer: String, TimeStamp: Double, Kategorie: [String], Unterkategorie: [[String]], items: [[[String]]], preis: [[[Double]]], liter: [[[String]]], kommentar: [[[String]]], menge: [[[Int]]], expanded2: [[Bool]], expanded: Bool){
-        self.Bestellungen.append(KellnerTVSection(BestellungID: BestellungID, tischnummer: tischnummer, timeStamp: TimeStamp, Kategorie: Kategorie, Unterkategorie: Unterkategorie, items: items, preis: preis, liter: liter, kommentar: kommentar, menge: menge, expanded2: expanded2, expanded: expanded))
-        
-        
+    func setSectionsKellnerBestellung(BestellungID: String, tischnummer: String, fromUserID: String, TimeStamp: Double, Kategorie: [String], Unterkategorie: [[String]], items: [[[String]]], preis: [[[Double]]], liter: [[[String]]], kommentar: [[[String]]], menge: [[[Int]]], expanded2: [[Bool]], expanded: Bool){
+        self.Bestellungen.append(KellnerTVSection(BestellungID: BestellungID, tischnummer: tischnummer, fromUserID: fromUserID, timeStamp: TimeStamp, Kategorie: Kategorie, Unterkategorie: Unterkategorie, items: items, preis: preis, liter: liter, kommentar: kommentar, menge: menge, expanded2: expanded2, expanded: expanded))
     }
     
-    
-        func removeBestellung(KellnerID: String, BestellungID: String){
+    func removeBestellung(KellnerID: String, BestellungID: String){
             var datref: DatabaseReference!
             datref = Database.database().reference()
             print(BestellungID, "BestellungIDBestellungIDBestellungID")
@@ -464,7 +462,6 @@ class KellnerVC: UIViewController, UITableViewDelegate, UITableViewDataSource, E
     
         func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
             let delete = deleteAction(at: indexPath)
-    
             return UISwipeActionsConfiguration(actions: [delete])
         }
     
@@ -472,23 +469,84 @@ class KellnerVC: UIViewController, UITableViewDelegate, UITableViewDataSource, E
             let action = UIContextualAction(style: .normal, title: "Problem") { (action, view, completion) in
                 completion(true)
                 print(self.Bestellungen[indexPath.section].BestellungID)
+                self.problemSection = indexPath.section
+                self.problemRow = indexPath.row
                 self.viewBestellungID = self.Bestellungen[indexPath.section].BestellungID
                 self.animateInProblem()
-
             }
             return action
         }
     
     
+    func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let annehmen = tischumbuchen(at: indexPath)
+        annehmen.backgroundColor = UIColor.green
+        return UISwipeActionsConfiguration(actions: [annehmen])
+    }
     
+    func tischumbuchen(at indexPath: IndexPath) -> UIContextualAction {
+        let action = UIContextualAction(style: .destructive, title: "annehmen") { (action, view, completion) in
+            completion(true)
+            self.animateInTisch()
+        }
+        return action
+    }
+
     @IBAction func viewProblemAbbrechen(_ sender: Any) {
         animateOutProblem()
     }
     @IBAction func viewProblemAbschicken(_ sender: Any) {
+        if problemTextView.text != "" {
+            let problemTisch = self.Bestellungen[problemSection].Tischnummer
+            let problemTimeStamp = self.Bestellungen[problemSection].TimeStamp
+            let fromUserID = self.Bestellungen[problemSection].fromUserID
+            var datref: DatabaseReference!
+            datref = Database.database().reference()
+           let childdatref  = datref.child("ProblemMeldungenKellner").child(KellnerID)
+            let childchilddatref = childdatref.childByAutoId()
+            childchilddatref.child("Information").updateChildValues(["Problemtext" : problemTextView.text!, "BestellungID": self.Bestellungen[problemSection].BestellungID, "tischnummer": problemTisch, "fromUserID": fromUserID, "TimeStamp": problemTimeStamp])
+           
+
+                let Bestellung = Bestellungen[problemSection]
+            for i in 0..<Bestellung.Kategorie.count{
+            let Unterkategorien = Bestellung.Unterkategorie[i]
+            
+                for Unterkategorie in Unterkategorien {
+                    let UnterkategorieSection = Unterkategorien.index(of: Unterkategorie)
+                    var items = Bestellung.items[i]
+                    var item = items[UnterkategorieSection!]
+                    var mengen = Bestellung.menge[i]
+                    var menge = mengen[UnterkategorieSection!]
+                    var preise = Bestellung.preis[i]
+                    var preis = preise[UnterkategorieSection!]
+                    var kommentare = Bestellung.kommentar[i]
+                    var kommentar = kommentare[UnterkategorieSection!]
+                    for x in 0 ..< items.count {
+
+                        let bestellungName = ["Name": item[x]]
+                        let bestellungMenge = ["Menge": menge[x]]
+                        let bestellungPreis = ["Preis": preis[x]]
+                        let bestellungKommentar = ["Kommentar": kommentar[x]]
+
+    childchilddatref.child("Bestellung").child(Bestellung.Kategorie[i]).child(Unterkategorie).child(item[x]).updateChildValues(bestellungName)
+    childchilddatref.child("Bestellung").child(Bestellung.Kategorie[i]).child(Unterkategorie).child(item[x]).updateChildValues(bestellungMenge)
+    childchilddatref.child("Bestellung").child(Bestellung.Kategorie[i]).child(Unterkategorie).child(item[x]).updateChildValues(bestellungPreis)
+    childchilddatref.child("Bestellung").child(Bestellung.Kategorie[i]).child(Unterkategorie).child(item[x]).updateChildValues(bestellungKommentar)
+                        
+                    }
+                }
+            }
+            
+            animateOutProblem()
+        }
+        else {
+            let alertKeineBestellung = UIAlertController(title: "problem beschreiben", message: "Gib eine neue Tischnummer an", preferredStyle: .alert)
+            alertKeineBestellung.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+            self.present(alertKeineBestellung, animated: true, completion: nil)        }
+        
         animateOutProblem()
     }
  
-    
     @IBAction func viewTischumbuchenAbbrechen(_ sender: Any) {
         animateOutTisch()
     }
@@ -518,10 +576,10 @@ class KellnerVC: UIViewController, UITableViewDelegate, UITableViewDataSource, E
         self.view.addSubview(viewProblem)
         viewProblem.translatesAutoresizingMaskIntoConstraints = false
         self.view.addConstraints([
-            NSLayoutConstraint(item: viewProblem, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .width, multiplier: 1.0, constant: 400),
-            NSLayoutConstraint(item: viewProblem, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .height, multiplier: 1.0, constant: 200),
+            NSLayoutConstraint(item: viewProblem, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .width, multiplier: 1.0, constant: 240),
+            NSLayoutConstraint(item: viewProblem, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .height, multiplier: 1.0, constant: 218),
             NSLayoutConstraint(item: viewProblem, attribute: .centerX, relatedBy: .equal, toItem: self.view, attribute: .centerX, multiplier: 1.0, constant: 0),
-            NSLayoutConstraint(item: viewProblem, attribute: .centerY, relatedBy: .equal, toItem: self.view, attribute: .centerY, multiplier: 1.0, constant: 0),
+            NSLayoutConstraint(item: viewProblem, attribute: .centerY, relatedBy: .equal, toItem: self.view, attribute: .centerY, multiplier: 1.0, constant: -100),
             ])
         
 
@@ -578,31 +636,14 @@ class KellnerVC: UIViewController, UITableViewDelegate, UITableViewDataSource, E
             self.visualeffekt.removeFromSuperview()
         }
     }
-    
-        func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-            let annehmen = tischumbuchen(at: indexPath)
-            annehmen.backgroundColor = UIColor.green
-    
-    
-            return UISwipeActionsConfiguration(actions: [annehmen])
-        }
-    
+
     func annehmen(sender: KellnerCell) {
         self.removeBestellung(KellnerID: self.KellnerID, BestellungID:
             self.Bestellungen[sender.Cell1Section].BestellungID)
         self.reload()
     }
     
-        func tischumbuchen(at indexPath: IndexPath) -> UIContextualAction {
-            let action = UIContextualAction(style: .destructive, title: "annehmen") { (action, view, completion) in
-                completion(true)
-    
-            self.animateInTisch()
-    
-            }
-    
-            return action
-        }
+
     
     // TABLE
     
@@ -724,6 +765,18 @@ class KellnerVC: UIViewController, UITableViewDelegate, UITableViewDataSource, E
         bestellungenTV.endUpdates()
     }
     
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        let touch: UITouch? = touches.first
+
+        if touch?.view != viewProblem && touch?.view != viewTischumbuchen {
+            animateOutTisch()
+            animateOutProblem()
+        }
+    }
+    
+    
+    
     // Others
     
     func reload(){
@@ -749,29 +802,10 @@ class KellnerVC: UIViewController, UITableViewDelegate, UITableViewDataSource, E
     override func viewDidLoad() {
         
         super.viewDidLoad()
-
+        problemTextView.keyboardAppearance = UIKeyboardAppearance.dark
         problemTextView.alpha = 0.5
         viewProblem.backgroundColor = UIColor(patternImage: UIImage(named: "hintergrund")!)
-        viewTischumbuchen.backgroundColor = UIColor(patternImage: UIImage(named: "hintergrund")!)
-        //init toolbar
-        let toolbarProblem:UIToolbar = UIToolbar(frame: CGRect(x: 0, y: 0,  width: self.view.frame.size.width, height: 30))
-        let toolbarTisch:UIToolbar = UIToolbar(frame: CGRect(x: 0, y: 0,  width: self.view.frame.size.width, height: 30))
-
-        //create left side empty space so that done button set on right side
-        let flexSpace = UIBarButtonItem(barButtonSystemItem:    .flexibleSpace, target: nil, action: nil)
-        let doneBtnProblem: UIBarButtonItem = UIBarButtonItem(title: "Fertig", style: .done, target: self, action: #selector(animateOutProblem))
-        let doneBtnTisch: UIBarButtonItem = UIBarButtonItem(title: "Fertig", style: .done, target: self, action: #selector(animateOutTisch))
-
-        toolbarProblem.setItems([flexSpace, doneBtnProblem], animated: false)
-        toolbarProblem.sizeToFit()
-        toolbarTisch.setItems([flexSpace, doneBtnTisch], animated: false)
-        toolbarTisch.sizeToFit()
-        //setting toolbar as inputAccessoryView
-        self.problemTextView.inputAccessoryView = toolbarProblem
-        self.umbuchenTextfield.inputAccessoryView = toolbarTisch
-        
         barnameLbl.text = Barname
-        
         loadBestellungenKeys()
         
                 logoutBtn.layer.cornerRadius = 4
@@ -780,8 +814,6 @@ class KellnerVC: UIViewController, UITableViewDelegate, UITableViewDataSource, E
                 refreshControl.attributedTitle = NSAttributedString(string: title)
                 refreshControl.addTarget(self, action: #selector(refreshOptions(sender:)), for: .valueChanged)
                 bestellungenTV.refreshControl = refreshControl
-        
-        
     }
 
 

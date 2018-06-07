@@ -207,9 +207,11 @@ class LoginVC: UIViewController, UITextFieldDelegate {
         visualEffect.center = self.view.center
         visualEffect.bounds.size = self.view.bounds.size
         self.view.addSubview(passwortVergessenView)
+        passwortVergessenView.backgroundColor = UIColor(patternImage: UIImage(named: "hintergrund")!)
+        passwortVergessenView.center = self.view.center
         passwortVergessenView.transform = CGAffineTransform.init(scaleX: 1.3, y: 1.3)
         passwortVergessenView.alpha = 0
-        
+        passwortTextfield.becomeFirstResponder()
         UIView.animate(withDuration: 0.2) {
             self.passwortVergessenView.alpha = 1
             self.passwortVergessenView.transform = CGAffineTransform.identity
@@ -221,6 +223,8 @@ class LoginVC: UIViewController, UITextFieldDelegate {
     }
     
     func passwortVergessenViewDismiss(){
+        passwortTextfield.resignFirstResponder()
+
         UIView.animate(withDuration: 0.1, animations: {
             self.passwortVergessenView.transform = CGAffineTransform.init(scaleX: 1.3, y: 1.3)
             self.passwortVergessenView.alpha = 0
@@ -232,21 +236,24 @@ class LoginVC: UIViewController, UITextFieldDelegate {
     @IBAction func passwortResetTapped(_ sender: Any) {
         Auth.auth().fetchProviders(forEmail: passwortVergessenEmail.text!) { (loginProvider, error) in
             if error != nil {
-                let alertController = UIAlertController(title: "Fehler", message: "Es ist ein Fehler passiert. \(String(describing: error))", preferredStyle: .alert)
+                let alertController = UIAlertController(title: "Fehler", message: "Es ist ein Fehler passiert. \(String(describing: error?.localizedDescription ?? "unbekanterfehler"))", preferredStyle: .alert)
                 
                 let defaultAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
                 alertController.addAction(defaultAction)
                 
                 self.present(alertController, animated: true, completion: nil)            } else {
-                if loginProvider![0] == "password" {
+                
+                if loginProvider != nil && loginProvider![0] == "password" {
                     Auth.auth().sendPasswordReset(withEmail: self.passwortVergessenEmail.text!) { (error) in
                 if error != nil {
-                    print(error?.localizedDescription ?? "anderer error", "passwort reset")
+
+                    self.alert(title: "Fehler", message: "\(String(describing: error?.localizedDescription))", actiontitle: "OK")
+                    
                 } else {
                     self.passwortVergessenViewDismiss()
                 }
                     }} else {
-                    
+                    self.alert(title: "Fehler", message: "Diese Email existiert nicht", actiontitle: "OK")
                 }
                 
             }
@@ -262,17 +269,39 @@ class LoginVC: UIViewController, UITextFieldDelegate {
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
+        if textField == passwortTextfield {
+            passwortVergessenViewDismiss()
+        }
+        
         return true
     }
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        self.view.endEditing(true)
+        let touch: UITouch? = touches.first
+        if touch?.view != passwortVergessenView {
+            passwortVergessenViewDismiss()
+            emailTextfield.resignFirstResponder()
+            passwortTextfield.resignFirstResponder()
+        }
+        
     }
+    
+    func alert(title: String, message: String, actiontitle: String) {
+        let alertNichtRegistriert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        alertNichtRegistriert.addAction(UIAlertAction(title: actiontitle, style: .default, handler: nil))
+        self.present(alertNichtRegistriert, animated: true, completion: nil)
+    }
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        Auth.auth().languageCode = "de"
         emailTextfield.keyboardType = UIKeyboardType.emailAddress
         emailTextfield.delegate = self
         passwortTextfield.delegate = self
+        passwortVergessenEmail.delegate = self
+        emailTextfield.keyboardAppearance = UIKeyboardAppearance.dark
+        passwortTextfield.keyboardAppearance = UIKeyboardAppearance.dark
+        passwortVergessenEmail.keyboardAppearance = UIKeyboardAppearance.dark
         loginBtn.layer.cornerRadius = 4
         kellnerLogin.layer.cornerRadius = 4
         checkIfUserIsSignedIn()
@@ -293,6 +322,7 @@ class LoginVC: UIViewController, UITextFieldDelegate {
                     if snapshot.hasChild((user?.uid)!) {
                             print("kellner")
                         } else {
+                        print("segue to tabbar")
                             self.segueToTabBar()
                                      }
                     
