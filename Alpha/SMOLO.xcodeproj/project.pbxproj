@@ -93,6 +93,7 @@
 		FCBCA28E5975849AF85ED466 /* Pods_SMOLOTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D92BA6E8AA26233EE5256989 /* Pods_SMOLOTests.framework */; };
 		FD0DDBFC204B1CD200E40E81 /* pin.png in Resources */ = {isa = PBXBuildFile; fileRef = FD0DDBFB204B1CD200E40E81 /* pin.png */; };
 		FD0DDC00204E0F6E00E40E81 /* Bilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD0DDBFF204E0F6E00E40E81 /* Bilder.swift */; };
+		FD7DDBFB20C970C8008CDE12 /* EinstellungenVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD7DDBFA20C970C8008CDE12 /* EinstellungenVC.swift */; };
 		FD9A43CF20AB4FFB00FFD947 /* BarItems.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD9A43CE20AB4FFB00FFD947 /* BarItems.swift */; };
 		FDF6E3C820517A1800CDF509 /* myBestellung.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDF6E3C720517A1800CDF509 /* myBestellung.swift */; };
 		FF80403D46CB28555C94CA04 /* Pods_SMOLO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A57EBBF91158C1B719B66FE6 /* Pods_SMOLO.framework */; };
@@ -215,6 +216,7 @@
 		EA15B0E38B10A65CA61D6CB7 /* Pods-SMOLOUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SMOLOUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-SMOLOUITests/Pods-SMOLOUITests.release.xcconfig"; sourceTree = "<group>"; };
 		FD0DDBFB204B1CD200E40E81 /* pin.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pin.png; sourceTree = SOURCE_ROOT; };
 		FD0DDBFF204E0F6E00E40E81 /* Bilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bilder.swift; sourceTree = "<group>"; };
+		FD7DDBFA20C970C8008CDE12 /* EinstellungenVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EinstellungenVC.swift; sourceTree = "<group>"; };
 		FD9A43CE20AB4FFB00FFD947 /* BarItems.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarItems.swift; sourceTree = "<group>"; };
 		FDF6E3C720517A1800CDF509 /* myBestellung.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = myBestellung.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -301,6 +303,7 @@
 				081461F31F9927FA00121943 /* LoginVC.swift */,
 				0895B3621F9B5F28007D97DE /* UserVC.swift */,
 				08E0F454205FDABC002435DE /* MeineBestellungVC.swift */,
+				FD7DDBFA20C970C8008CDE12 /* EinstellungenVC.swift */,
 			);
 			path = User;
 			sourceTree = "<group>";
@@ -745,6 +748,7 @@
 				08E0F451205FD625002435DE /* Button.swift in Sources */,
 				085B23DC205349DB00D50FE3 /* bezahlenCell2.swift in Sources */,
 				08EF4C4E1F9D2AC000F01096 /* SpeisekarteInfos.swift in Sources */,
+				FD7DDBFB20C970C8008CDE12 /* EinstellungenVC.swift in Sources */,
 				949AB0B520AB84F5005F85C7 /* KellnerAlleBestellungenVC.swift in Sources */,
 				08EF4C4C1F9D006700F01096 /* ExpandableHeaderView.swift in Sources */,
 				949AB0B320AB82B6005F85C7 /* LabelWhiteS30.swift in Sources */,
@@ -968,11 +972,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = NR8A659GLT;
+				DEVELOPMENT_TEAM = 84R3VSG74G;
 				INFOPLIST_FILE = SMOLO/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = AM.SMOLO12;
+				PRODUCT_BUNDLE_IDENTIFIER = AM.SMOLO1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -985,11 +989,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = NR8A659GLT;
+				DEVELOPMENT_TEAM = 84R3VSG74G;
 				INFOPLIST_FILE = SMOLO/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = AM.SMOLO12;
+				PRODUCT_BUNDLE_IDENTIFIER = AM.SMOLO1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

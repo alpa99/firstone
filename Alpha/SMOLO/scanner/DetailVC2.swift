@@ -64,7 +64,11 @@ class DetailVC2: UIViewController, PageObservation2, CLLocationManagerDelegate{
     
     @IBOutlet weak var slideshow: ImageSlideshow!
     
-  
+    @IBOutlet weak var topstack: UIStackView!
+    
+    @IBOutlet weak var bottomstack: UIStackView!
+    
+    
     
 //    @IBAction func adresseclick(_ sender: UIButton) {
 //
@@ -97,6 +101,9 @@ class DetailVC2: UIViewController, PageObservation2, CLLocationManagerDelegate{
         self.barname = parentPageViewController2.name
         fetchData()
         self.adressebtn.setTitle(adresse, for: .normal)
+        
+        self.topstack.spacing = (self.view.frame.width - CGFloat(236.0))/CGFloat(4.0)
+        self.bottomstack.spacing = (self.view.frame.width - CGFloat(236.0))/CGFloat(4.0)
         
         fetchPicsCount()
         fetchData()

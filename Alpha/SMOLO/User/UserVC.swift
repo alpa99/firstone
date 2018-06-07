@@ -18,27 +18,10 @@ class UserVC: UIViewController {
         performSegue(withIdentifier: "meinebestellungen", sender: self)
     }
     
-    @IBAction func logOutTapped(_ sender: Any){
-//        let loginManager = LoginManager()
-//        loginManager.logOut()
-        if Auth.auth().currentUser?.uid != nil {
-            do
-            { try Auth.auth().signOut()
+    @IBAction func einstellungen(_ sender: Any) {
+        performSegue(withIdentifier: "einstellungen", sender: self)
+    }
 
-            }
-            catch let error as NSError
-            { print(error.localizedDescription) }
-        }
-
-    }
-    
-    
-    @IBAction func accloeschenTapped(_ sender: Any) {
-        
-    }
-    
-    @IBAction func passwortaenddern(_ sender: Any) {
-    }
     
     
     // OTHERS
