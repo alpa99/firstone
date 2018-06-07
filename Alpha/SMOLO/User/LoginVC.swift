@@ -54,12 +54,7 @@ class LoginVC: UIViewController, UITextFieldDelegate {
                 
                 
                 if error == nil {
-                    if (Auth.auth().currentUser?.isEmailVerified)! {
-                    print("You have successfully logged in")
-                    
-                        self.segueToTabBar()
-                        
-                    } else {
+                    if !(Auth.auth().currentUser?.isEmailVerified)! {
                         if Auth.auth().currentUser?.uid != nil {
                             do
                             { try Auth.auth().signOut()            }
@@ -72,6 +67,14 @@ class LoginVC: UIViewController, UITextFieldDelegate {
                         alertController.addAction(defaultAction)
                         
                         self.present(alertController, animated: true, completion: nil)
+                    print("login fehler")
+                    
+                        
+                    } else {
+                        
+                        print("You have successfully logged in")
+
+                    
                     }
                     
                 } else {
@@ -313,23 +316,57 @@ class LoginVC: UIViewController, UITextFieldDelegate {
         // Dispose of any resources that can be recreated.
     }
     private func checkIfUserIsSignedIn() {
-        print("jvvzbjhbhjhbj")
+        
+//
+//            Auth.auth().fetchProviders(forEmail: passwortVergessenEmail.text!) { (loginProvider, error) in
+//                if error != nil {
+//
+//                    if loginProvider != nil && loginProvider![0] == "password" {
+//                        if (Auth.auth().currentUser?.isEmailVerified)! {
+//                            self.segueToTabBar()
+//                        } else {
+//                            self.alert(title: "Email bestätigen", message: "Bitte bestätige deine Email um Smolo zu nutzen.", actiontitle: "Ok")
+//                        }
+//
+//                    } else if loginProvider != nil && loginProvider![0] == "facebook.com"{
+//                        print("facebookuseer")
+//                        self.segueToTabBar()
+//                    }
+//
+//                } else {
+//                    self.alert(title: "Feler", message: (error?.localizedDescription)!, actiontitle: "Ok")
+//                }
+//            }
+        
+
         Auth.auth().addStateDidChangeListener { (auth, user) in
             if user != nil {
                 var ref: DatabaseReference?
                 ref = Database.database().reference()
                 ref?.child("Kellner").observeSingleEvent(of: .value, with: { (snapshot) in
                     if snapshot.hasChild((user?.uid)!) {
-                            print("kellner")
-                        } else {
-                        print("segue to tabbar")
-                            self.segueToTabBar()
+                        
+                    } else {
+                        auth.fetchProviders(forEmail: (user?.email)!) { (loginProvider, error) in
+                            if error != nil {
+                                self.alert(title: "Feler", message: (error?.localizedDescription)!, actiontitle: "Ok")
+                                
+                            } else {
+                                if loginProvider != nil && loginProvider![0] == "password" {
+                                    if (Auth.auth().currentUser?.isEmailVerified)! {
+                                        self.segueToTabBar()
+                                    } else {
+                                        self.alert(title: "Email bestätigen", message: "Bitte bestätige deine Email um Smolo zu nutzen.", actiontitle: "Ok")
+                                    }
+                                    
+                                } else if loginProvider != nil && loginProvider![0] == "facebook.com"{
+                                    print("facebookuseer")
+                                    self.segueToTabBar()
+                                }
+                            }
+                        }
                                      }
-                    
-                    
                 }, withCancel: nil)
-            } else {
-                print("no")
             }
         }
     
