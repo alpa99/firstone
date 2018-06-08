@@ -1,0 +1,101 @@
+[debug] [2018-06-08T12:08:23.947Z] ----------------------------------------------------------------------
+[debug] [2018-06-08T12:08:23.949Z] Command:       /usr/local/bin/node /Users/alpermaraz/.npm-packages/bin/firebase deploy --only functions
+[debug] [2018-06-08T12:08:23.949Z] CLI Version:   3.18.6
+[debug] [2018-06-08T12:08:23.949Z] Platform:      darwin
+[debug] [2018-06-08T12:08:23.949Z] Node Version:  v8.11.2
+[debug] [2018-06-08T12:08:23.949Z] Time:          Fri Jun 08 2018 14:08:23 GMT+0200 (CEST)
+[debug] [2018-06-08T12:08:23.949Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2018-06-08T12:08:23.959Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2018-06-08T12:08:23.959Z] > authorizing via signed-in user
+[debug] [2018-06-08T12:08:23.961Z] >>> HTTP REQUEST GET https://admin.firebase.com/v1/projects/orderloc-151af  
+  
+ Fri Jun 08 2018 14:08:23 GMT+0200 (CEST)
+[debug] [2018-06-08T12:08:24.704Z] <<< HTTP RESPONSE 200
+[debug] [2018-06-08T12:08:24.705Z] >>> HTTP REQUEST GET https://admin.firebase.com/v1/database/orderloc-151af/tokens  
+  
+ Fri Jun 08 2018 14:08:24 GMT+0200 (CEST)
+[debug] [2018-06-08T12:08:25.543Z] <<< HTTP RESPONSE 200
+[info] 
+[info] === Deploying to 'orderloc-151af'...
+[info] 
+[info] i  deploying functions
+[info] Running command: npm --prefix "$RESOURCE_DIR" run lint
+[info] ✔  functions: Finished running predeploy script.
+[debug] [2018-06-08T12:08:29.948Z] > [functions] package.json contents: {
+  "name": "functions",
+  "description": "Cloud Functions for Firebase",
+  "scripts": {
+    "lint": "eslint .",
+    "serve": "firebase serve --only functions",
+    "shell": "firebase functions:shell",
+    "start": "npm run shell",
+    "deploy": "firebase deploy --only functions",
+    "logs": "firebase functions:log"
+  },
+  "dependencies": {
+    "firebase-admin": "~5.12.1",
+    "firebase-functions": "^1.0.3"
+  },
+  "devDependencies": {
+    "eslint": "^4.12.0",
+    "eslint-plugin-promise": "^3.6.0"
+  },
+  "private": true
+}
+[info] i  functions: ensuring necessary APIs are enabled...
+[debug] [2018-06-08T12:08:29.949Z] >>> HTTP REQUEST GET https://servicemanagement.googleapis.com/v1/services/cloudfunctions.googleapis.com/projectSettings/orderloc-151af?view=CONSUMER_VIEW  
+  
+ Fri Jun 08 2018 14:08:29 GMT+0200 (CEST)
+[debug] [2018-06-08T12:08:29.949Z] >>> HTTP REQUEST GET https://servicemanagement.googleapis.com/v1/services/runtimeconfig.googleapis.com/projectSettings/orderloc-151af?view=CONSUMER_VIEW  
+  
+ Fri Jun 08 2018 14:08:29 GMT+0200 (CEST)
+[debug] [2018-06-08T12:08:31.078Z] <<< HTTP RESPONSE 200
+[debug] [2018-06-08T12:08:31.089Z] <<< HTTP RESPONSE 200
+[info] ✔  functions: all necessary APIs are enabled
+[debug] [2018-06-08T12:08:31.090Z] >>> HTTP REQUEST GET https://cloudresourcemanager.googleapis.com/v1/projects/orderloc-151af  
+  
+ Fri Jun 08 2018 14:08:31 GMT+0200 (CEST)
+[debug] [2018-06-08T12:08:32.000Z] <<< HTTP RESPONSE 200
+[debug] [2018-06-08T12:08:32.001Z] >>> HTTP REQUEST GET https://mobilesdk-pa.googleapis.com/v1/projects/501253656224:getServerAppConfig  
+  
+ Fri Jun 08 2018 14:08:32 GMT+0200 (CEST)
+[debug] [2018-06-08T12:08:32.506Z] <<< HTTP RESPONSE 200
+[info] i  functions: preparing functions directory for uploading...
+[debug] [2018-06-08T12:08:32.508Z] >>> HTTP REQUEST GET https://runtimeconfig.googleapis.com/v1beta1/projects/orderloc-151af/configs  
+  
+ Fri Jun 08 2018 14:08:32 GMT+0200 (CEST)
+[debug] [2018-06-08T12:08:32.751Z] <<< HTTP RESPONSE 200
+[info] i  functions: packaged functions (49.36 KB) for uploading
+[debug] [2018-06-08T12:08:32.961Z] >>> HTTP REQUEST POST https://cloudfunctions.googleapis.com/v1/projects/orderloc-151af/locations/us-central1/functions:generateUploadUrl  
+  
+ Fri Jun 08 2018 14:08:32 GMT+0200 (CEST)
+[debug] [2018-06-08T12:09:03.165Z] <<< HTTP RESPONSE 503
+[debug] [2018-06-08T12:09:03.165Z] <<< HTTP RESPONSE BODY {
+  "error": {
+    "code": 503,
+    "message": "The service is currently unavailable.",
+    "status": "UNAVAILABLE"
+  }
+}
+
+[debug] [2018-06-08T12:09:03.167Z] TypeError: Cannot create property 'error' on string '{
+  "error": {
+    "code": 503,
+    "message": "The service is currently unavailable.",
+    "status": "UNAVAILABLE"
+  }
+}
+'
+    at module.exports (/Users/alpermaraz/.npm-packages/lib/node_modules/firebase-tools/lib/responseToError.js:11:16)
+    at Request._callback (/Users/alpermaraz/.npm-packages/lib/node_modules/firebase-tools/lib/api.js:47:25)
+    at Request.self.callback (/Users/alpermaraz/.npm-packages/lib/node_modules/firebase-tools/node_modules/request/request.js:185:22)
+    at emitTwo (events.js:126:13)
+    at Request.emit (events.js:214:7)
+    at Request.<anonymous> (/Users/alpermaraz/.npm-packages/lib/node_modules/firebase-tools/node_modules/request/request.js:1157:10)
+    at emitOne (events.js:116:13)
+    at Request.emit (events.js:211:7)
+    at IncomingMessage.<anonymous> (/Users/alpermaraz/.npm-packages/lib/node_modules/firebase-tools/node_modules/request/request.js:1079:12)
+    at Object.onceWrapper (events.js:313:30)
+[error] 
+[error] Error: An unexpected error has occurred.

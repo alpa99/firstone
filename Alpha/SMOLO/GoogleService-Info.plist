@@ -7,9 +7,9 @@
 	<key>AD_UNIT_ID_FOR_INTERSTITIAL_TEST</key>
 	<string>ca-app-pub-3940256099942544/4411468910</string>
 	<key>CLIENT_ID</key>
-	<string>501253656224-1bspq3hdjse1pqnko5781jh5q4t9difj.apps.googleusercontent.com</string>
+	<string>501253656224-ebn8i4o06ksc5rk8fl9mm0en6gs712c3.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.501253656224-1bspq3hdjse1pqnko5781jh5q4t9difj</string>
+	<string>com.googleusercontent.apps.501253656224-ebn8i4o06ksc5rk8fl9mm0en6gs712c3</string>
 	<key>API_KEY</key>
 	<string>AIzaSyCZqQ44SrJBemeSncbLYK5ni_t1OaQVjTs</string>
 	<key>GCM_SENDER_ID</key>
@@ -33,7 +33,7 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:501253656224:ios:81841a95ab382e7f</string>
+	<string>1:501253656224:ios:87fed96470908939</string>
 	<key>DATABASE_URL</key>
 	<string>https://orderloc-151af.firebaseio.com</string>
 </dict>

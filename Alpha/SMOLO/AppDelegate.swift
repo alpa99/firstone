@@ -9,9 +9,11 @@
 import UIKit
 import Firebase
 import FacebookCore
+import UserNotifications
+import FirebaseMessaging
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate {
 
     var window: UIWindow?
 
@@ -22,6 +24,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
          SDKApplicationDelegate.shared.application(application, didFinishLaunchingWithOptions: launchOptions)
         let myColor = UIColor(red: 90.0/255.0, green: 90.0/255.0, blue: 90.0/255.0, alpha: 1.0)
         UINavigationBar.appearance().tintColor = myColor
+        
+        if #available(iOS 10.0, *){
+            
+            UNUserNotificationCenter.current().delegate = self as? UNUserNotificationCenterDelegate
+            let authOption: UNAuthorizationOptions = [.alert, .badge, .sound]
+            UNUserNotificationCenter.current().requestAuthorization(options: authOption, completionHandler: {(_, _) in })
+        }else{
+            
+            let settings: UIUserNotificationSettings = UIUserNotificationSettings(types: [.alert, .badge, .sound], categories: nil)
+            application.registerUserNotificationSettings(settings)
+        }
+        application.registerForRemoteNotifications()
+        
         return true
     }
     

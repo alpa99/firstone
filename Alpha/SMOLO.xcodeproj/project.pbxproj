@@ -70,7 +70,6 @@
 		4EC247E01F98F90500910AA8 /* SMOLOTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EC247DF1F98F90500910AA8 /* SMOLOTests.swift */; };
 		4EC247EB1F98F90500910AA8 /* SMOLOUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EC247EA1F98F90500910AA8 /* SMOLOUITests.swift */; };
 		4EC247FA1F98FE6A00910AA8 /* QRBereich.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EC247F91F98FE6A00910AA8 /* QRBereich.swift */; };
-		4EC247FE1F99377100910AA8 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4EC247FD1F99377100910AA8 /* GoogleService-Info.plist */; };
 		4EC248001F9950CE00910AA8 /* DrawerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EC247FF1F9950CE00910AA8 /* DrawerVC.swift */; };
 		4EC248021F9950E700910AA8 /* LocationVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EC248011F9950E700910AA8 /* LocationVC.swift */; };
 		4EEB60831FDF2BAB0003BA0E /* PageViewController2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EEB60821FDF2BAB0003BA0E /* PageViewController2.swift */; };
@@ -94,6 +93,7 @@
 		FD0DDBFC204B1CD200E40E81 /* pin.png in Resources */ = {isa = PBXBuildFile; fileRef = FD0DDBFB204B1CD200E40E81 /* pin.png */; };
 		FD0DDC00204E0F6E00E40E81 /* Bilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD0DDBFF204E0F6E00E40E81 /* Bilder.swift */; };
 		FD7DDBFB20C970C8008CDE12 /* EinstellungenVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD7DDBFA20C970C8008CDE12 /* EinstellungenVC.swift */; };
+		FD7DDC0020CA8EB8008CDE12 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = FD7DDBFF20CA8EB8008CDE12 /* GoogleService-Info.plist */; };
 		FD9A43CF20AB4FFB00FFD947 /* BarItems.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD9A43CE20AB4FFB00FFD947 /* BarItems.swift */; };
 		FDF6E3C820517A1800CDF509 /* myBestellung.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDF6E3C720517A1800CDF509 /* myBestellung.swift */; };
 		FF80403D46CB28555C94CA04 /* Pods_SMOLO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A57EBBF91158C1B719B66FE6 /* Pods_SMOLO.framework */; };
@@ -188,7 +188,6 @@
 		4EC247EA1F98F90500910AA8 /* SMOLOUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SMOLOUITests.swift; sourceTree = "<group>"; };
 		4EC247EC1F98F90500910AA8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4EC247F91F98FE6A00910AA8 /* QRBereich.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRBereich.swift; sourceTree = "<group>"; };
-		4EC247FD1F99377100910AA8 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		4EC247FF1F9950CE00910AA8 /* DrawerVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawerVC.swift; sourceTree = "<group>"; };
 		4EC248011F9950E700910AA8 /* LocationVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationVC.swift; sourceTree = "<group>"; };
 		4EEB60821FDF2BAB0003BA0E /* PageViewController2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageViewController2.swift; sourceTree = "<group>"; };
@@ -217,6 +216,8 @@
 		FD0DDBFB204B1CD200E40E81 /* pin.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pin.png; sourceTree = SOURCE_ROOT; };
 		FD0DDBFF204E0F6E00E40E81 /* Bilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bilder.swift; sourceTree = "<group>"; };
 		FD7DDBFA20C970C8008CDE12 /* EinstellungenVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EinstellungenVC.swift; sourceTree = "<group>"; };
+		FD7DDBFC20CA86D9008CDE12 /* SMOLO.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SMOLO.entitlements; sourceTree = "<group>"; };
+		FD7DDBFF20CA8EB8008CDE12 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		FD9A43CE20AB4FFB00FFD947 /* BarItems.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarItems.swift; sourceTree = "<group>"; };
 		FDF6E3C720517A1800CDF509 /* myBestellung.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = myBestellung.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -344,12 +345,13 @@
 		4EC247C91F98F90500910AA8 /* SMOLO */ = {
 			isa = PBXGroup;
 			children = (
+				FD7DDBFC20CA86D9008CDE12 /* SMOLO.entitlements */,
 				4EC247CA1F98F90500910AA8 /* AppDelegate.swift */,
 				4EC247CE1F98F90500910AA8 /* Main.storyboard */,
 				4EC247D31F98F90500910AA8 /* LaunchScreen.storyboard */,
 				4EC247D61F98F90500910AA8 /* Info.plist */,
+				FD7DDBFF20CA8EB8008CDE12 /* GoogleService-Info.plist */,
 				4EC247D11F98F90500910AA8 /* Assets.xcassets */,
-				4EC247FD1F99377100910AA8 /* GoogleService-Info.plist */,
 				4EC247F81F98FE5700910AA8 /* Model */,
 				08E0F44D205FD4C4002435DE /* User */,
 				4EC5C4B91FFC0A39008CE449 /* kellner */,
@@ -535,6 +537,11 @@
 					4EC247C61F98F90500910AA8 = {
 						CreatedOnToolsVersion = 9.0;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.Push = {
+								enabled = 1;
+							};
+						};
 					};
 					4EC247DA1F98F90500910AA8 = {
 						CreatedOnToolsVersion = 9.0;
@@ -579,7 +586,6 @@
 				085B23DD205349DB00D50FE3 /* bezahlenCell2.xib in Resources */,
 				08DB093B2062E4D1007848E4 /* BestellenCell.xib in Resources */,
 				9417B590207CFDD7008817FC /* KellnerCell2.xib in Resources */,
-				4EC247FE1F99377100910AA8 /* GoogleService-Info.plist in Resources */,
 				4EC247D21F98F90500910AA8 /* Assets.xcassets in Resources */,
 				FD0DDBFC204B1CD200E40E81 /* pin.png in Resources */,
 				08462FFB205E6C8100AECA59 /* SpeisekarteCell.xib in Resources */,
@@ -594,6 +600,7 @@
 				08210EE61FB83AE300EABA32 /* BestellenCell2.xib in Resources */,
 				08DB092B2061415B007848E4 /* SpeisekarteCelle.xib in Resources */,
 				08210EE21FB7B09000EABA32 /* KellnerCell.xib in Resources */,
+				FD7DDC0020CA8EB8008CDE12 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -971,12 +978,13 @@
 			baseConfigurationReference = 6639B3E49BB97F15D4F1FC24 /* Pods-SMOLO.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = SMOLO/SMOLO.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = F5638PLTRY;
 				INFOPLIST_FILE = SMOLO/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = AM.SMOLO1;
+				PRODUCT_BUNDLE_IDENTIFIER = AM.SMOLO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -988,12 +996,13 @@
 			baseConfigurationReference = 809CF401238084F1706DE109 /* Pods-SMOLO.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = SMOLO/SMOLO.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = F5638PLTRY;
 				INFOPLIST_FILE = SMOLO/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = AM.SMOLO1;
+				PRODUCT_BUNDLE_IDENTIFIER = AM.SMOLO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

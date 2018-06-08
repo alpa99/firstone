@@ -1087,6 +1087,7 @@
                         <outlet property="passwortTextfield2" destination="I4X-RF-6PC" id="nt7-D8-dl1"/>
                         <outlet property="passwortView" destination="tGy-6e-uyl" id="XnP-XD-lCc"/>
                         <outlet property="visualEffekt" destination="UaM-0d-54n" id="9Xc-RJ-7wG"/>
+                        <segue destination="SG5-w0-8kG" kind="unwind" identifier="unwind" unwindAction="unwindSegue:" id="ICz-UI-Eq3"/>
                     </connections>
                 </viewController>
                 <exit id="SG5-w0-8kG" userLabel="Exit" sceneMemberID="exit"/>
