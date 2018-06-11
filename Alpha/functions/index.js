@@ -3,25 +3,25 @@ const admin = require('firebase-admin');
 
 admin.initializeApp(functions.config().firebase);
 // database tree
-exports.sendPushNotification = functions.database.ref('/Bestellungen/{id}').onWrite(event =>{
-            const payload = {
-            notification: {
-            title: 'Neue Bestellung',
-            body: 'Tischnummer 99',
-            badge: '1',
-            sound: 'default',
-                }
-                                                                                
-            };
-        return admin.database().ref('fcmToken').once('value').then(allToken => {
-            if (allToken.val()){
-            const token = Object.keys(allToken.val());
-            console.log(`token? ${token}`);
-            return admin.messaging().sendToDevice(token, payload).then(response =>{
-            return null;
-            });
-        }
-                                                                                                                                           
-        return null;
-        });
-                                                                                    });
+exports.sendNewBestellung = functions.database.ref('/Bestellungen/{id}').onWrite(event=>{
+    const uuid = event.params.id;
+                                                                                         
+    console.log('User to send notification', uuid);
+                                                                                         
+    var ref = admin.database().ref(`Users/${uuid}/token`);
+    return ref.once("value", function(snapshot){
+                                                                                                         
+    const payload = {
+    notification: {
+    title: 'Neue Bestellung',
+    body: 'Tap here to check it out!'
+    }
+    };
+                                                                                                         
+    admin.messaging().sendToDevice(snapshot.val(), payload)
+                                                                                                         
+    },
+    function (errorObject) {
+    console.log("The read failed: " + errorObject.code);
+    });
+})
