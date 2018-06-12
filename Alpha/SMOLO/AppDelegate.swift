@@ -11,18 +11,23 @@ import Firebase
 import FacebookCore
 import UserNotifications
 import FirebaseMessaging
+import GoogleMobileAds
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate {
+    
+    
+    
 
     var window: UIWindow?
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
+        // Override point for customization after application launch. ca-app-pub-9477880000646212~6104942849
         FirebaseApp.configure()
-        GADMobileAds.configure(withApplicationID: "ca-app-pub-9477880000646212~6104942849")
+        GADMobileAds.configure(withApplicationID: "ca-app-pub-3940256099942544~1458002511")
         
+      
          SDKApplicationDelegate.shared.application(application, didFinishLaunchingWithOptions: launchOptions)
         let myColor = UIColor(red: 90.0/255.0, green: 90.0/255.0, blue: 90.0/255.0, alpha: 1.0)
         UINavigationBar.appearance().tintColor = myColor

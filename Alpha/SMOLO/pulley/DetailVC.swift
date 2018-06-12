@@ -33,6 +33,9 @@ class DetailVC: UIViewController, PulleyDrawerViewControllerDelegate, PageObserv
     var it9 = String ()
     var it10 = String ()
 
+    
+    
+    
     var adresse = String ()
     var picture = String ()
     var parentPageViewController: PageViewController!
@@ -59,6 +62,7 @@ class DetailVC: UIViewController, PulleyDrawerViewControllerDelegate, PageObserv
         fetchData()
         fetchInfos()
         fetchText()
+        fetchTimes()
         slideshow.backgroundColor = UIColor.white
 
         slideshow.slideshowInterval = 0.0
@@ -123,6 +127,15 @@ class DetailVC: UIViewController, PulleyDrawerViewControllerDelegate, PageObserv
     @IBOutlet weak var icon8: UIImageView!
     @IBOutlet weak var icon9: UIImageView!
     @IBOutlet weak var icon10: UIImageView!
+    
+    
+    @IBOutlet weak var Montag: UILabel!
+    @IBOutlet weak var Dienstag: UILabel!
+    @IBOutlet weak var Mittwoch: UILabel!
+    @IBOutlet weak var Donnerstag: UILabel!
+    @IBOutlet weak var Freitag: UILabel!
+    @IBOutlet weak var Samstag: UILabel!
+    @IBOutlet weak var Sonntag: UILabel!
     
     @IBOutlet weak var maintxt: UILabel!
     
@@ -194,7 +207,6 @@ class DetailVC: UIViewController, PulleyDrawerViewControllerDelegate, PageObserv
     
     func fetchData () {
         
-        print("vgv", barname)
         var ref: DatabaseReference!
         self.Namelbl.text = self.barname
         ref = Database.database().reference()
@@ -204,9 +216,6 @@ class DetailVC: UIViewController, PulleyDrawerViewControllerDelegate, PageObserv
                 let bar = BarInfos(dictionary: dictionary)
                 
                 self.bars.append(bar)
-                self.picture.append(bar.Bild!)
-                print(self.picture)
-                print("Adresse", bar.Adresse ?? "")
                 self.adressebtn.setTitle(bar.Adresse, for: .normal)
                 self.tel.setTitle(bar.telnum, for: .normal)
                 self.adresse = bar.Adresse!
@@ -214,7 +223,26 @@ class DetailVC: UIViewController, PulleyDrawerViewControllerDelegate, PageObserv
             }} , withCancel: nil)
         
     }
-    
+    func fetchTimes () {
+        
+        var ref: DatabaseReference!
+        ref = Database.database().reference()
+        ref.child("BarInfo").child("\(barname)").child("Öffnungszeiten").observe(.value, with: { (snapshot) in
+            
+            if let dictionary = snapshot.value as? [String: AnyObject]{
+                let bar = Oeffnungszeiten(dictionary: dictionary)
+                
+                self.Montag.text = bar.Montag
+                self.Dienstag.text = bar.Dienstag
+                self.Mittwoch.text = bar.Mittwoch
+                self.Donnerstag.text = bar.Donnerstag
+                self.Freitag.text = bar.Freitag
+                self.Samstag.text = bar.Samstag
+                self.Sonntag.text = bar.Sonntag
+
+            }} , withCancel: nil)
+        
+    }
     func fetchInfos () {
         
         print("INFOS", barname)

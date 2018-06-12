@@ -94,6 +94,7 @@
 		FD0DDC00204E0F6E00E40E81 /* Bilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD0DDBFF204E0F6E00E40E81 /* Bilder.swift */; };
 		FD7DDBFB20C970C8008CDE12 /* EinstellungenVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD7DDBFA20C970C8008CDE12 /* EinstellungenVC.swift */; };
 		FD7DDC0020CA8EB8008CDE12 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = FD7DDBFF20CA8EB8008CDE12 /* GoogleService-Info.plist */; };
+		FD7DDC0220CEBE69008CDE12 /* Oeffnungszeiten.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD7DDC0120CEBE69008CDE12 /* Oeffnungszeiten.swift */; };
 		FD9A43CF20AB4FFB00FFD947 /* BarItems.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD9A43CE20AB4FFB00FFD947 /* BarItems.swift */; };
 		FDF6E3C820517A1800CDF509 /* myBestellung.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDF6E3C720517A1800CDF509 /* myBestellung.swift */; };
 		FF80403D46CB28555C94CA04 /* Pods_SMOLO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A57EBBF91158C1B719B66FE6 /* Pods_SMOLO.framework */; };
@@ -218,6 +219,7 @@
 		FD7DDBFA20C970C8008CDE12 /* EinstellungenVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EinstellungenVC.swift; sourceTree = "<group>"; };
 		FD7DDBFC20CA86D9008CDE12 /* SMOLO.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SMOLO.entitlements; sourceTree = "<group>"; };
 		FD7DDBFF20CA8EB8008CDE12 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		FD7DDC0120CEBE69008CDE12 /* Oeffnungszeiten.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Oeffnungszeiten.swift; sourceTree = "<group>"; };
 		FD9A43CE20AB4FFB00FFD947 /* BarItems.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarItems.swift; sourceTree = "<group>"; };
 		FDF6E3C720517A1800CDF509 /* myBestellung.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = myBestellung.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -409,6 +411,7 @@
 				9417B595207CFEC9008817FC /* ExpandleHeaderView3.swift */,
 				08EAEA69206079920095F75F /* SpeisekarteInformation.swift */,
 				FD9A43CE20AB4FFB00FFD947 /* BarItems.swift */,
+				FD7DDC0120CEBE69008CDE12 /* Oeffnungszeiten.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -774,6 +777,7 @@
 				08C881691F9963F100AD8F20 /* BarAnnotation.swift in Sources */,
 				94F5EA91208F4F530086A014 /* LabelWhiteS16.swift in Sources */,
 				9417B58F207CFDD7008817FC /* KellnerCell2.swift in Sources */,
+				FD7DDC0220CEBE69008CDE12 /* Oeffnungszeiten.swift in Sources */,
 				FDF6E3C820517A1800CDF509 /* myBestellung.swift in Sources */,
 				FD0DDC00204E0F6E00E40E81 /* Bilder.swift in Sources */,
 				08EF4C401F9CF0FE00F01096 /* BestellungInfos.swift in Sources */,

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Firebase
 
 class PageViewController2: UIPageViewController, UIPageViewControllerDelegate, UIPageViewControllerDataSource {
     
@@ -14,6 +15,7 @@ class PageViewController2: UIPageViewController, UIPageViewControllerDelegate, U
     var adresse = " "
     var tischnummer = 0
     var KellnerID = ""
+    var barname = ""
     
     var pageControl = UIPageControl()
     
@@ -22,9 +24,8 @@ class PageViewController2: UIPageViewController, UIPageViewControllerDelegate, U
     
     
     override func viewDidLoad() {
-        print(name, "hierpageview")
-          print(adresse, "pageveiw!!!!!!!!")
-        self.navigationItem.title = name
+        print(name)
+        self.navigationItem.title = barname
         super.viewDidLoad()
         self.dataSource = self
         self.delegate = self
@@ -50,6 +51,21 @@ class PageViewController2: UIPageViewController, UIPageViewControllerDelegate, U
             
             
         }
+        
+    }
+    func fetchData () {
+        
+        var ref: DatabaseReference!
+        ref = Database.database().reference()
+        ref.child("BarInfo").child("\(name)").observe(.value, with: { (snapshot) in
+            
+            if let dictionary = snapshot.value as? [String: AnyObject]{
+                let bar = BarInfos(dictionary: dictionary)
+                
+               self.navigationItem.title = bar.Name!
+                self.name = bar.Name!
+                
+            }} , withCancel: nil)
         
     }
     
