@@ -65,6 +65,8 @@ class EinstellungenVC: UIViewController, UITextFieldDelegate {
                                         }
                                         // zurück zum Login ALPER
                                         
+                                        self.performSegue(withIdentifier: "unwind", sender: self)
+                                        
                                     } else {
                                         self.alert(title: "Feler", message: (error?.localizedDescription)!, actiontitle: "Ok")
                                         

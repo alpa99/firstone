@@ -334,6 +334,35 @@ class LoginVC: UIViewController, UITextFieldDelegate {
         // Dispose of any resources that can be recreated.
     }
     private func checkIfUserIsSignedIn() {
+<<<<<<< HEAD
+=======
+        
+//
+//            Auth.auth().fetchProviders(forEmail: passwortVergessenEmail.text!) { (loginProvider, error) in
+//                if error != nil {
+//
+//                    if loginProvider != nil && loginProvider![0] == "password" {
+//                        if (Auth.auth().currentUser?.isEmailVerified)! {
+//                            self.segueToTabBar()
+//                        } else {
+//                            self.alert(title: "Email bestätigen", message: "Bitte bestätige deine Email um Smolo zu nutzen.", actiontitle: "Ok")
+//                        }
+//
+//                    } else if loginProvider != nil && loginProvider![0] == "facebook.com"{
+//                        print("facebookuseer")
+//                        self.segueToTabBar()
+//                    }
+//
+//                } else {
+//                    self.alert(title: "Feler", message: (error?.localizedDescription)!, actiontitle: "Ok")
+//                }
+//            }
+        
+        let sv = UIViewController.displaySpinner(onView: self.view)
+        
+        DispatchQueue.global(qos: .background).async {
+
+>>>>>>> 906b6f101b7194c2a82da01321fa802b83c3a2f7
         Auth.auth().addStateDidChangeListener { (auth, user) in
             print("lade anfang")
 
@@ -342,6 +371,7 @@ class LoginVC: UIViewController, UITextFieldDelegate {
                 ref = Database.database().reference()
                 ref?.child("Kellner").observeSingleEvent(of: .value, with: { (snapshot) in
                     if snapshot.hasChild((user?.uid)!) {
+<<<<<<< HEAD
                         // KELlner war eingeloggt
                         print("lade ende")
 
@@ -352,31 +382,80 @@ class LoginVC: UIViewController, UITextFieldDelegate {
                                 print("lade ende")
 
                                 self.alert(title: "Feler", message: (error?.localizedDescription)!, actiontitle: "Ok")
+=======
+                        DispatchQueue.main.async {
+                            // Main thread, called after the previous code:
+                            // hide your progress bar here
+                            UIViewController.removeSpinner(spinner: sv)
+                        }
+                        
+                    } else {
+                        auth.fetchProviders(forEmail: (user?.email)!) { (loginProvider, error) in
+                            if error != nil { DispatchQueue.main.async {
+                                // Main thread, called after the previous code:
+                                // hide your progress bar here
+                                UIViewController.removeSpinner(spinner: sv)
+>>>>>>> 906b6f101b7194c2a82da01321fa802b83c3a2f7
                                 
+                                self.alert(title: "Feler", message: (error?.localizedDescription)!, actiontitle: "Ok")
+                                }
                             } else {
                                 if loginProvider != nil && loginProvider![0] == "password" {
                                     if (Auth.auth().currentUser?.isEmailVerified)! {
+<<<<<<< HEAD
                                         print("lade ende")
 
+=======
+                                        DispatchQueue.main.async {
+                                            // Main thread, called after the previous code:
+                                            // hide your progress bar here
+                                            UIViewController.removeSpinner(spinner: sv)
+                                        
+>>>>>>> 906b6f101b7194c2a82da01321fa802b83c3a2f7
                                         self.segueToTabBar()
+                                        }
                                     } else {
+<<<<<<< HEAD
                                         print("lade ende")
 
+=======
+                                        DispatchQueue.main.async {
+                                            // Main thread, called after the previous code:
+                                            // hide your progress bar here
+                                            UIViewController.removeSpinner(spinner: sv)
+>>>>>>> 906b6f101b7194c2a82da01321fa802b83c3a2f7
                                         self.alert(title: "Email bestätigen", message: "Bitte bestätige deine Email um Smolo zu nutzen.", actiontitle: "Ok")
+                                    }
                                     }
                                     
                                 } else if loginProvider != nil && loginProvider![0] == "facebook.com"{
+                                    DispatchQueue.main.async {
+                                        // Main thread, called after the previous code:
+                                        // hide your progress bar here
+                                        UIViewController.removeSpinner(spinner: sv)
                                     print("facebookuseer")
                                     print("lade ende")
                                     self.userIsEnabled()
                                     self.segueToTabBar()
+                                    }
                                 }
                             }
                         }
                                      }
                 }, withCancel: nil)
+<<<<<<< HEAD
             } else {
                 print("lade ende")
+=======
+            }else {
+                DispatchQueue.main.async {
+                    // Main thread, called after the previous code:
+                    // hide your progress bar here
+                    UIViewController.removeSpinner(spinner: sv)
+                }
+                
+            }
+>>>>>>> 906b6f101b7194c2a82da01321fa802b83c3a2f7
             }
         }
     
@@ -384,3 +463,26 @@ class LoginVC: UIViewController, UITextFieldDelegate {
 }
 
 // login geändert
+
+extension UIViewController{
+class func displaySpinner(onView : UIView) -> UIView {
+    let spinnerView = UIView.init(frame: onView.bounds)
+    spinnerView.backgroundColor = UIColor.init(red: 0.5, green: 0.5, blue: 0.5, alpha: 0.5)
+    let ai = UIActivityIndicatorView.init(activityIndicatorStyle: .whiteLarge)
+    ai.startAnimating()
+    ai.center = spinnerView.center
+    
+    DispatchQueue.main.async {
+        spinnerView.addSubview(ai)
+        onView.addSubview(spinnerView)
+    }
+    
+    return spinnerView
+}
+
+class func removeSpinner(spinner :UIView) {
+    DispatchQueue.main.async {
+        spinner.removeFromSuperview()
+    }
+}
+}

@@ -203,8 +203,6 @@ class DetailVC2: UIViewController, PageObservation2, CLLocationManagerDelegate{
                 let bar = BarInfos(dictionary: dictionary)
                 
                 self.bars.append(bar)
-                self.picture.append(bar.Bild!)
-                print(self.picture)
                 print("Adresse", bar.Adresse ?? "")
                 self.adressebtn.setTitle(bar.Adresse, for: .normal)
                 

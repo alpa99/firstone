@@ -20,6 +20,7 @@ class QRScanner: UIViewController, AVCaptureMetadataOutputObjectsDelegate, CLLoc
     var qrbar = [QRBereich]()
     var qrbarname = ""
     var qrbaradresse = ""
+    var barname = ""
     var KellnerID = ""
     var video = AVCaptureVideoPreviewLayer()
     let session = AVCaptureSession()
@@ -117,11 +118,13 @@ class QRScanner: UIViewController, AVCaptureMetadataOutputObjectsDelegate, CLLoc
                             tischnummer = ergebnis - barnummer
                             qrbar = [QRBereich]()
                             qrbarname = ""
+                            barname = ""
                             fetchData()
                         }else {
                             let alert = UIAlertController(title: "Fehler", message: "Dies ist kein Smolo-Code", preferredStyle: .alert)
                             alert.addAction(UIAlertAction(title: "Abbrechen", style: .default, handler:{ (action) in self.session.startRunning()}))
                             qrbarname = ""
+                            barname = ""
                             qrbaradresse = ""
                             ergebnis = 0
                             barnummer = 0
@@ -147,7 +150,7 @@ class QRScanner: UIViewController, AVCaptureMetadataOutputObjectsDelegate, CLLoc
             if let dict = snapshot.value as? [String: AnyObject]{
                 let qrbar = QRBereich(dictionary: dict)
                 self.qrbarname.append(qrbar.Name!)
-                self.qrbaradresse.append(qrbar.Adresse!)
+                self.barname.append(qrbar.DispName!)
                 self.KellnerID = qrbar.KellnerID!
                 
                 
@@ -175,6 +178,7 @@ class QRScanner: UIViewController, AVCaptureMetadataOutputObjectsDelegate, CLLoc
                 let alert = UIAlertController(title: "Fehler", message: "Dies ist kein Smolo-Code", preferredStyle: .alert)
                 alert.addAction(UIAlertAction(title: "Abbrechen", style: .default, handler:{ (action) in self.session.startRunning()}))
                 self.qrbarname = ""
+                self.barname = ""
                 self.qrbaradresse = ""
                 self.ergebnis = 0
                 self.barnummer = 0
@@ -196,12 +200,11 @@ class QRScanner: UIViewController, AVCaptureMetadataOutputObjectsDelegate, CLLoc
     
         print(locat, "LOCAT")
         let distancebar = self.locationManager.location?.distance(from: locat)
-        print (distancebar!, " entfernung")
         let distanceint = Int(distancebar!)
         
         if distanceint < 250 {
             
-            let alert = UIAlertController(title: "Erfolgreich", message: "Du bist bei \(self.qrbarname)!", preferredStyle: .alert)
+            let alert = UIAlertController(title: "Erfolgreich", message: "Du bist bei \(self.barname)!", preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "Weiter", style: .default, handler:{ (action) in self.performSegue(withIdentifier: "scansegue", sender: self)}))
             
             self.present(alert, animated: true, completion: nil)
@@ -211,6 +214,7 @@ class QRScanner: UIViewController, AVCaptureMetadataOutputObjectsDelegate, CLLoc
             alert.addAction(UIAlertAction(title: "Abbrechen", style: .default, handler:{ (action) in self.session.startRunning()}))
             
             qrbarname = ""
+            barname = ""
             qrbaradresse = ""
             ergebnis = 0
             barnummer = 0
@@ -227,7 +231,7 @@ class QRScanner: UIViewController, AVCaptureMetadataOutputObjectsDelegate, CLLoc
         if segue.identifier == "scansegue"{
             let vc = segue.destination as! PageViewController2
             vc.name = qrbarname
-            print(qrbaradresse, "scanner!!!!!!!!")
+            vc.barname = barname
             vc.adresse = qrbaradresse
             vc.tischnummer = tischnummer
             vc.KellnerID = KellnerID

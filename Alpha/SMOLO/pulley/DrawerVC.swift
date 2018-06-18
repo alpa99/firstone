@@ -75,7 +75,7 @@ class DrawerVC: UIViewController, PulleyDrawerViewControllerDelegate, UITableVie
         
         filteredbars = bars.filter { bar in
 
-            return (bar.Name?.lowercased().contains(searchText.lowercased()))!
+            return ((bar.Name?.lowercased().contains(searchText.lowercased()))! || (bar.Stadtteil?.lowercased().contains(searchText.lowercased()))!)
             
         }
         BarTV.reloadData()
@@ -142,13 +142,13 @@ class DrawerVC: UIViewController, PulleyDrawerViewControllerDelegate, UITableVie
             }})
 
         cell.barName.text = bar.Name
-        
+        cell.stadtName.text = bar.Stadtteil
         return cell
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
  
-        return 112.0
+        return 90.0
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
