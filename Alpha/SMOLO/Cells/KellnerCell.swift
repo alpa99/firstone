@@ -27,6 +27,8 @@ class KellnerCell: UITableViewCell, UITableViewDelegate, UITableViewDataSource, 
     
     @IBOutlet weak var annehmen: UIButton!
     
+    @IBOutlet weak var gesamtPreisLbl: UILabel!
+    
     @IBAction func annehmenTapped(_ sender: Any) {
         delegate?.annehmen(sender: self)
     }
@@ -52,10 +54,16 @@ class KellnerCell: UITableViewCell, UITableViewDelegate, UITableViewDataSource, 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
 
         if Bestellungen[Cell1Section].expanded != false {
-            
+            var extrasCount = 0
             let items = Bestellungen[Cell1Section].items[indexPath.section]
+            var extras = Bestellungen[Cell1Section].extras[indexPath.section]
+            var newextras = extras[indexPath.row]
+            for extras in newextras {
+                    extrasCount = extrasCount + extras.count
+                
+            }
             let newitems = items[indexPath.row]
-            return CGFloat(newitems.count*86+50)
+            return CGFloat(newitems.count*118+50+extrasCount*44)
             
         }
         else {

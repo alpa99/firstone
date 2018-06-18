@@ -293,6 +293,22 @@ class LoginVC: UIViewController, UITextFieldDelegate {
         alertNichtRegistriert.addAction(UIAlertAction(title: actiontitle, style: .default, handler: nil))
         self.present(alertNichtRegistriert, animated: true, completion: nil)
     }
+    
+    func userIsEnabled(){
+        let user = Auth.auth().currentUser
+        var ref: DatabaseReference!
+        ref = Database.database().reference()
+        print(1234)
+        ref.child("Users").child((user?.uid)!).observeSingleEvent(of: .value, with: { (snapshot) in
+            print(snapshot, 345678)
+            if let dictionary = snapshot.value as? [String: AnyObject]{
+                print(5678)
+                let userinfos = UserInfos(dictionary: dictionary)
+                print(userinfos.Enabled!)
+            }
+        }, withCancel: nil)
+        
+    }
 
     
     override func viewDidLoad() {
@@ -310,12 +326,16 @@ class LoginVC: UIViewController, UITextFieldDelegate {
         checkIfUserIsSignedIn()
 
     }
+    
+
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     private func checkIfUserIsSignedIn() {
+<<<<<<< HEAD
+=======
         
 //
 //            Auth.auth().fetchProviders(forEmail: passwortVergessenEmail.text!) { (loginProvider, error) in
@@ -342,12 +362,27 @@ class LoginVC: UIViewController, UITextFieldDelegate {
         
         DispatchQueue.global(qos: .background).async {
 
+>>>>>>> 906b6f101b7194c2a82da01321fa802b83c3a2f7
         Auth.auth().addStateDidChangeListener { (auth, user) in
+            print("lade anfang")
+
             if user != nil {
                 var ref: DatabaseReference?
                 ref = Database.database().reference()
                 ref?.child("Kellner").observeSingleEvent(of: .value, with: { (snapshot) in
                     if snapshot.hasChild((user?.uid)!) {
+<<<<<<< HEAD
+                        // KELlner war eingeloggt
+                        print("lade ende")
+
+                        
+                    } else {
+                        auth.fetchProviders(forEmail: (user?.email)!) { (loginProvider, error) in
+                            if error != nil {
+                                print("lade ende")
+
+                                self.alert(title: "Feler", message: (error?.localizedDescription)!, actiontitle: "Ok")
+=======
                         DispatchQueue.main.async {
                             // Main thread, called after the previous code:
                             // hide your progress bar here
@@ -360,24 +395,35 @@ class LoginVC: UIViewController, UITextFieldDelegate {
                                 // Main thread, called after the previous code:
                                 // hide your progress bar here
                                 UIViewController.removeSpinner(spinner: sv)
+>>>>>>> 906b6f101b7194c2a82da01321fa802b83c3a2f7
                                 
                                 self.alert(title: "Feler", message: (error?.localizedDescription)!, actiontitle: "Ok")
                                 }
                             } else {
                                 if loginProvider != nil && loginProvider![0] == "password" {
                                     if (Auth.auth().currentUser?.isEmailVerified)! {
+<<<<<<< HEAD
+                                        print("lade ende")
+
+=======
                                         DispatchQueue.main.async {
                                             // Main thread, called after the previous code:
                                             // hide your progress bar here
                                             UIViewController.removeSpinner(spinner: sv)
                                         
+>>>>>>> 906b6f101b7194c2a82da01321fa802b83c3a2f7
                                         self.segueToTabBar()
                                         }
                                     } else {
+<<<<<<< HEAD
+                                        print("lade ende")
+
+=======
                                         DispatchQueue.main.async {
                                             // Main thread, called after the previous code:
                                             // hide your progress bar here
                                             UIViewController.removeSpinner(spinner: sv)
+>>>>>>> 906b6f101b7194c2a82da01321fa802b83c3a2f7
                                         self.alert(title: "Email bestätigen", message: "Bitte bestätige deine Email um Smolo zu nutzen.", actiontitle: "Ok")
                                     }
                                     }
@@ -388,6 +434,8 @@ class LoginVC: UIViewController, UITextFieldDelegate {
                                         // hide your progress bar here
                                         UIViewController.removeSpinner(spinner: sv)
                                     print("facebookuseer")
+                                    print("lade ende")
+                                    self.userIsEnabled()
                                     self.segueToTabBar()
                                     }
                                 }
@@ -395,6 +443,10 @@ class LoginVC: UIViewController, UITextFieldDelegate {
                         }
                                      }
                 }, withCancel: nil)
+<<<<<<< HEAD
+            } else {
+                print("lade ende")
+=======
             }else {
                 DispatchQueue.main.async {
                     // Main thread, called after the previous code:
@@ -403,6 +455,7 @@ class LoginVC: UIViewController, UITextFieldDelegate {
                 }
                 
             }
+>>>>>>> 906b6f101b7194c2a82da01321fa802b83c3a2f7
             }
         }
     

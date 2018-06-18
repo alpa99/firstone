@@ -17,27 +17,28 @@ protocol MyBestellungCell2Delegate {
 }
 
 
-class MyBestellungCell2: UITableViewCell, UITextViewDelegate {
+class MyBestellungCell2: UITableViewCell, UITextViewDelegate, UITableViewDelegate, UITableViewDataSource{
+
     
     var delegate: MyBestellungCell2Delegate?
-    
     var sections2 = Int()
     var rows2 = Int()
-    
+    var extrasNamen = [String]()
+    var extrasPreise = [Double]()
     
     @IBOutlet weak var myItemName: UILabel!
-    
     @IBOutlet weak var myItemPreis: UILabel!
-    
     @IBOutlet weak var myItemMenge: UILabel!
     @IBOutlet weak var kommentarLbl: UITextView!
-    
-    
     
     @IBOutlet weak var myItemLiter: UILabel!
     @IBOutlet weak var myItemMengeMinus: UIButton!
     @IBOutlet weak var myItemMengePlus: UIButton!
     @IBOutlet weak var myItemEntfernen: UIButton!
+    
+    @IBOutlet weak var extrasTV: UITableView!
+    
+    
 
     @IBAction func myItemMengeMinusAction(_ sender: Any) {
         delegate?.cellmyItemMengeMinusAction(sender: self)
@@ -60,6 +61,29 @@ class MyBestellungCell2: UITableViewCell, UITextViewDelegate {
         
         return true
     }
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return extrasNamen.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = Bundle.main.loadNibNamed("ExtrasCell", owner: self, options: nil)?.first as! ExtrasCell
+        cell.extraLbl.text = extrasNamen[indexPath.row]
+        let preisFormat = String(format: "%.2f", arguments: [extrasPreise[indexPath.row]])
+        cell.extraPreis.text = "\(preisFormat) €"
+        return cell
+    }
+    
+    override func layoutSubviews()
+    {
+        super.layoutSubviews()
+        extrasTV.delegate = self
+        extrasTV.dataSource = self
+    }
+    
 
     
     override func awakeFromNib() {
