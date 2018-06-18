@@ -133,12 +133,17 @@ class MyBestellungCell: UITableViewCell, UITableViewDelegate, UITableViewDataSou
                     var liter = bestellteItemsDictionary[sections].liter[indexPath.section]
                     var menge = bestellteItemsDictionary[sections].menge[indexPath.section]
                     var kommentare = bestellteItemsDictionary[sections].kommentar[indexPath.section]
+                    var extras = bestellteItemsDictionary[sections].extras[indexPath.section]
+                    var extrasPreise = bestellteItemsDictionary[sections].extrasPreise[indexPath.section]
+                
 //                    section2 = indexPath.section
 //                    row2 = indexPath.row
                     cell.sections2 = indexPath.section
                     cell.rows2 = indexPath.row
                     cell.myItemName.text = item[indexPath.row]
                     cell.kommentarLbl.text = kommentare[indexPath.row]
+                    cell.extrasNamen = extras[indexPath.row]
+                    cell.extrasPreise = extrasPreise[indexPath.row]
                     let preisFormat = String(format: "%.2f", arguments: [preis[indexPath.row]])
 
                     cell.myItemPreis.text = "\(preisFormat) €"

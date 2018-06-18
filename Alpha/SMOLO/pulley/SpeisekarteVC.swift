@@ -81,7 +81,7 @@ class SpeisekarteVC: UIViewController, UITableViewDataSource, UITableViewDelegat
             
             for key in (snapshotUnterkategorieItem.children.allObjects as? [DataSnapshot])! {
                 let snapshotItem = snapshotUnterkategorieItem.childSnapshot(forPath: key.key)
-
+                if key.key != "Extras" {
                 if self.Unterkategorien[Kategorie] != nil {
                     self.Unterkategorien[Kategorie]?.append(key.key)
                     self.Expanded[Kategorie]?.append(false)
@@ -92,7 +92,6 @@ class SpeisekarteVC: UIViewController, UITableViewDataSource, UITableViewDelegat
                             var newpreis = self.Preis[Kategorie]
                             var newliter = self.Liter[Kategorie]
                             var newbeschreibung = self.Beschreibung[Kategorie]
-
                             if (self.Items[Kategorie]?.count)! < (self.Unterkategorien[Kategorie]?.count)! {
                                 newitems?.append([item.Name!])
                                 newpreis?.append([item.Preis!])
@@ -103,11 +102,7 @@ class SpeisekarteVC: UIViewController, UITableViewDataSource, UITableViewDelegat
                                 self.Preis[Kategorie] = newpreis
                                 self.Liter[Kategorie] = newliter
                                 self.Beschreibung[Kategorie] = newbeschreibung
-
-
-                                
-                            }
-                            else {
+                            } else {
                                 newitems![(self.Unterkategorien[Kategorie]?.index(of: key.key))!].append(item.Name!)
                                 self.Items[Kategorie] = newitems
                                 newpreis![(self.Unterkategorien[Kategorie]?.index(of: key.key))!].append(item.Preis!)
@@ -116,63 +111,50 @@ class SpeisekarteVC: UIViewController, UITableViewDataSource, UITableViewDelegat
                                 self.Liter[Kategorie] = newliter
                                 newbeschreibung![(self.Unterkategorien[Kategorie]?.index(of: key.key))!].append(item.Beschreibung!)
                                 self.Beschreibung[Kategorie] = newbeschreibung
-                                
-
                             }
-                            
-
                         }
-                        
                     }
-                    
                 } else {
-                    
                     self.Unterkategorien.updateValue([key.key], forKey: Kategorie)
                     self.Expanded.updateValue([false], forKey: Kategorie)
-                    
                     for items in (snapshotItem.children.allObjects as? [DataSnapshot])!{
                         if let dictionary = items.value as? [String: AnyObject]{
                             let item = SpeisekarteInformation(dictionary: dictionary)
-
                             if self.Items[Kategorie] != nil{
                                 var newItems = self.Items[Kategorie]
                                     newItems![(self.Unterkategorien[Kategorie]?.index(of: key.key))!].append(item.Name!)
                                     self.Items[Kategorie] = newItems
-                               
                                 var newPreis = self.Preis[Kategorie]
                                 newPreis![(self.Unterkategorien[Kategorie]?.index(of: key.key))!].append(item.Preis!)
                                 self.Preis[Kategorie] = newPreis
-                               
                                 var newLiter = self.Liter[Kategorie]
                                 newLiter![(self.Unterkategorien[Kategorie]?.index(of: key.key))!].append(item.Liter!)
                                 self.Liter[Kategorie] = newLiter
-                                
                                 var newBeschreibung = self.Beschreibung[Kategorie]
                                 newBeschreibung![(self.Unterkategorien[Kategorie]?.index(of: key.key))!].append(item.Beschreibung!)
                                 self.Beschreibung[Kategorie] = newBeschreibung
-                                
                             } else {
                                 self.Items.updateValue([[item.Name!]], forKey: Kategorie)
                                 self.Preis.updateValue([[item.Preis!]], forKey: Kategorie)
                                 self.Liter.updateValue([[item.Liter!]], forKey: Kategorie)
                                 self.Beschreibung.updateValue([[item.Beschreibung!]], forKey: Kategorie)
-
-
-
-
                             }
-
                         }
-                        
                     }
+                    }
+                    
+                }
+                else {
+                    print(key.key, "EEEEXXXTRAS2")
                 }
             }
-
             if self.Unterkategorien.count == self.Kategorien.count {
                 for kategorie in self.Kategorien {
                     self.setSectionsSpeisekarte(Kategorie: kategorie, Unterkategorie: self.Unterkategorien[kategorie]!, items: self.Items[kategorie]!, preis: self.Preis[kategorie]!, liter: self.Liter[kategorie]!, beschreibung: self.Beschreibung[kategorie]!, verfuegbarkeit: [self.Expanded[kategorie]!], expanded2: self.Expanded[kategorie]!)
                 }
+                
             }
+            
         }, withCancel: nil)
     }
 

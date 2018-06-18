@@ -293,6 +293,22 @@ class LoginVC: UIViewController, UITextFieldDelegate {
         alertNichtRegistriert.addAction(UIAlertAction(title: actiontitle, style: .default, handler: nil))
         self.present(alertNichtRegistriert, animated: true, completion: nil)
     }
+    
+    func userIsEnabled(){
+        let user = Auth.auth().currentUser
+        var ref: DatabaseReference!
+        ref = Database.database().reference()
+        print(1234)
+        ref.child("Users").child((user?.uid)!).observeSingleEvent(of: .value, with: { (snapshot) in
+            print(snapshot, 345678)
+            if let dictionary = snapshot.value as? [String: AnyObject]{
+                print(5678)
+                let userinfos = UserInfos(dictionary: dictionary)
+                print(userinfos.Enabled!)
+            }
+        }, withCancel: nil)
+        
+    }
 
     
     override func viewDidLoad() {
@@ -310,63 +326,57 @@ class LoginVC: UIViewController, UITextFieldDelegate {
         checkIfUserIsSignedIn()
 
     }
+    
+
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     private func checkIfUserIsSignedIn() {
-        
-//
-//            Auth.auth().fetchProviders(forEmail: passwortVergessenEmail.text!) { (loginProvider, error) in
-//                if error != nil {
-//
-//                    if loginProvider != nil && loginProvider![0] == "password" {
-//                        if (Auth.auth().currentUser?.isEmailVerified)! {
-//                            self.segueToTabBar()
-//                        } else {
-//                            self.alert(title: "Email bestätigen", message: "Bitte bestätige deine Email um Smolo zu nutzen.", actiontitle: "Ok")
-//                        }
-//
-//                    } else if loginProvider != nil && loginProvider![0] == "facebook.com"{
-//                        print("facebookuseer")
-//                        self.segueToTabBar()
-//                    }
-//
-//                } else {
-//                    self.alert(title: "Feler", message: (error?.localizedDescription)!, actiontitle: "Ok")
-//                }
-//            }
-        
-
         Auth.auth().addStateDidChangeListener { (auth, user) in
+            print("lade anfang")
+
             if user != nil {
                 var ref: DatabaseReference?
                 ref = Database.database().reference()
                 ref?.child("Kellner").observeSingleEvent(of: .value, with: { (snapshot) in
                     if snapshot.hasChild((user?.uid)!) {
+                        // KELlner war eingeloggt
+                        print("lade ende")
+
                         
                     } else {
                         auth.fetchProviders(forEmail: (user?.email)!) { (loginProvider, error) in
                             if error != nil {
+                                print("lade ende")
+
                                 self.alert(title: "Feler", message: (error?.localizedDescription)!, actiontitle: "Ok")
                                 
                             } else {
                                 if loginProvider != nil && loginProvider![0] == "password" {
                                     if (Auth.auth().currentUser?.isEmailVerified)! {
+                                        print("lade ende")
+
                                         self.segueToTabBar()
                                     } else {
+                                        print("lade ende")
+
                                         self.alert(title: "Email bestätigen", message: "Bitte bestätige deine Email um Smolo zu nutzen.", actiontitle: "Ok")
                                     }
                                     
                                 } else if loginProvider != nil && loginProvider![0] == "facebook.com"{
                                     print("facebookuseer")
+                                    print("lade ende")
+                                    self.userIsEnabled()
                                     self.segueToTabBar()
                                 }
                             }
                         }
                                      }
                 }, withCancel: nil)
+            } else {
+                print("lade ende")
             }
         }
     

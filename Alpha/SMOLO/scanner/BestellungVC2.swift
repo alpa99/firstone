@@ -15,11 +15,10 @@ protocol BestellungVC2Delegate {
     func reloaddas(sender: Any)
   
 }
-class BestellungVC2: UIViewController, UITableViewDataSource, UITableViewDelegate, ExpandableHeaderViewDelegate, BestellenCellDelegate, MyBestellungCellDelegate, PageObservation2, CLLocationManagerDelegate, UITextViewDelegate {
+class BestellungVC2: UIViewController, UITableViewDataSource, UITableViewDelegate, ExpandableHeaderViewDelegate, BestellenCellDelegate, MyBestellungCellDelegate, PageObservation2, CLLocationManagerDelegate, UITextViewDelegate, ExtraCellDelegate {
 
     
 
-   
     // VARS
    
     var barname = "NewBar"
@@ -36,6 +35,11 @@ class BestellungVC2: UIViewController, UITableViewDataSource, UITableViewDelegat
     var BestellungItemsKommentar = [[[String]]]()
     var BestellungItemsMengen = [[[Int]]]()
     var BestellungItemsExpanded2 = [[Bool]]()
+    var BestellungExtrasName = [[[[String]]]]()
+    var BestellungExtrasPreise = [[[[Double]]]]()
+
+    var extrasNamen = [String]()
+    var extrasPreise = [Double]()
     
     var delegate: bestellenCell2Delegate?
     
@@ -54,6 +58,10 @@ class BestellungVC2: UIViewController, UITableViewDataSource, UITableViewDelegat
     var Beschreibung = [String: [[String]]]()
     var Verfuegbarkeit = [String: [[Bool]]]()
     var Expanded = [String: [Bool]]()
+    
+    var Extras = [String: [String]]()
+    var ExtrasPreise = [String: [Double]]()
+    var ExtrasVerfuegbarkeit = [String: [Bool]]()
 
     var bestellteItemsDictionary = [bestellungTVSection]()
     var locationManager = CLLocationManager()
@@ -80,7 +88,6 @@ class BestellungVC2: UIViewController, UITableViewDataSource, UITableViewDelegat
     @IBOutlet weak var itemPreisLbl: UILabel!
     @IBOutlet weak var itemLiterLbl: UILabel!
     @IBOutlet weak var itemCountLbl: UILabel!
-    
     @IBOutlet weak var myBestellungTV: UITableView!
     @IBOutlet weak var bestellungTableView: UITableView!
     @IBOutlet var myBestellungView: UIView!
@@ -91,7 +98,10 @@ class BestellungVC2: UIViewController, UITableViewDataSource, UITableViewDelegat
     
     @IBOutlet weak var kommentarTextView: UITextView!
     
-    
+    // Extras
+    @IBOutlet var extrasView: UIView!
+    @IBOutlet weak var extrasTV: UITableView!
+    @IBOutlet weak var ExtrasHinzufügenBtn: UIButton!
     
     // ACTIONS
     
@@ -125,7 +135,41 @@ class BestellungVC2: UIViewController, UITableViewDataSource, UITableViewDelegat
 
     }
 
-
+    @IBAction func openExtras(_ sender: Any) {
+        extrasTV.reloadData()
+        self.bestellungVCView.addSubview(extrasView)
+        extrasView.center = self.bestellungVCView.center
+        extrasView.transform = CGAffineTransform.init(scaleX: 1.3, y: 1.3)
+        extrasView.alpha = 0
+        UIView.animate(withDuration: 0.2) {
+            self.extrasView.alpha = 1
+            self.extrasView.transform = CGAffineTransform.identity
+        }
+        
+    }
+    
+    @IBAction func closeExtras(_ sender: Any) {
+        extrasPreise.removeAll()
+        extrasNamen.removeAll()
+        UIView.animate(withDuration: 0.5, animations: {
+            self.extrasView.transform = CGAffineTransform.init(scaleX: 1.3, y: 1.3)
+            self.extrasView.alpha = 0
+        }){ (success:Bool) in
+            self.extrasView.removeFromSuperview()
+        }
+    }
+    
+    @IBAction func extrasHinzufuegen(_ sender: Any) {
+        UIView.animate(withDuration: 0.5, animations: {
+            self.extrasView.transform = CGAffineTransform.init(scaleX: 1.3, y: 1.3)
+            self.extrasView.alpha = 0
+        }){ (success:Bool) in
+            self.extrasView.removeFromSuperview()
+        }
+    }
+    
+    
+    
     @IBAction func dismissPopUp(_ sender: Any) {
         animateOut()
         bestellungaktualisieren()
@@ -150,11 +194,9 @@ class BestellungVC2: UIViewController, UITableViewDataSource, UITableViewDelegat
 
         for Kategorie in BestellungKategorien {
             let section = BestellungKategorien.index(of: Kategorie)
-            setSectionsBestellung(Kategorie: Kategorie, Unterkategorie: BestellungUnterkategorien[section!], items: BestellungItemsNamen[section!], preis: BestellungItemsPreise[section!], liter: BestellungItemsLiter[section!], kommentar: BestellungItemsKommentar[section!], menge: BestellungItemsMengen[section!], expanded2: BestellungItemsExpanded2[section!])
-    
+            setSectionsBestellung(Kategorie: Kategorie, Unterkategorie: BestellungUnterkategorien[section!], items: BestellungItemsNamen[section!], preis: BestellungItemsPreise[section!], liter: BestellungItemsLiter[section!], kommentar: BestellungItemsKommentar[section!], extras: BestellungExtrasName[section!], extrasPreise: BestellungExtrasPreise[section!], menge: BestellungItemsMengen[section!], expanded2: BestellungItemsExpanded2[section!])
         }
         myBestellungTV.reloadData()
-            
                 self.bestellungVCView.addSubview(visualEffectView)
                 visualEffectView.center = self.bestellungVCView.center
                 self.bestellungVCView.addSubview(self.myBestellungView)
@@ -184,7 +226,7 @@ class BestellungVC2: UIViewController, UITableViewDataSource, UITableViewDelegat
         datref.child("Speisekarten").child("\(self.barname)").observeSingleEvent(of: .value, with: { (snapshotKategorie) in
             for key in (snapshotKategorie.children.allObjects as? [DataSnapshot])! {
                 
-                if !self.Kategorien.contains(key.key) {
+                if !self.Kategorien.contains(key.key){
                     self.Kategorien.append(key.key)
                     self.getUnterKategorienItems(Kategorie: key.key)
                 }
@@ -200,7 +242,7 @@ class BestellungVC2: UIViewController, UITableViewDataSource, UITableViewDelegat
             
             for key in (snapshotUnterkategorieItem.children.allObjects as? [DataSnapshot])! {
                 let snapshotItem = snapshotUnterkategorieItem.childSnapshot(forPath: key.key)
-                
+                if key.key != "Extras" {
                 if self.Unterkategorien[Kategorie] != nil {
                     self.Unterkategorien[Kategorie]?.append(key.key)
                     self.Expanded[Kategorie]?.append(false)
@@ -212,25 +254,17 @@ class BestellungVC2: UIViewController, UITableViewDataSource, UITableViewDelegat
                             var newliter = self.Liter[Kategorie]
                             var newbeschreibung = self.Beschreibung[Kategorie]
                             var newverfuegbarkeit = self.Verfuegbarkeit[Kategorie]
-
-                            
                             if (self.Items[Kategorie]?.count)! < (self.Unterkategorien[Kategorie]?.count)! {
                                 newitems?.append([item.Name!])
                                 newpreis?.append([item.Preis!])
                                 newliter?.append([item.Liter!])
                                 newbeschreibung?.append([item.Beschreibung!])
                                 newverfuegbarkeit?.append([item.Verfuegbarkeit!])
-
-
-                                
                                 self.Items[Kategorie] = newitems
                                 self.Preis[Kategorie] = newpreis
                                 self.Liter[Kategorie] = newliter
                                 self.Beschreibung[Kategorie] = newbeschreibung
                                 self.Verfuegbarkeit[Kategorie] = newverfuegbarkeit
-
-                                
-                                
                             }
                             else {
                                 newitems![(self.Unterkategorien[Kategorie]?.index(of: key.key))!].append(item.Name!)
@@ -243,19 +277,12 @@ class BestellungVC2: UIViewController, UITableViewDataSource, UITableViewDelegat
                                 self.Beschreibung[Kategorie] = newbeschreibung
                                 newverfuegbarkeit![(self.Unterkategorien[Kategorie]?.index(of: key.key))!].append(item.Verfuegbarkeit!)
                                 self.Verfuegbarkeit[Kategorie] = newverfuegbarkeit
-                                
                             }
-                            
-                            
                         }
-                        
                     }
-                    
                 } else {
-                    
                     self.Unterkategorien.updateValue([key.key], forKey: Kategorie)
                     self.Expanded.updateValue([false], forKey: Kategorie)
-                    
                     for items in (snapshotItem.children.allObjects as? [DataSnapshot])!{
                         if let dictionary = items.value as? [String: AnyObject]{
                             let item = SpeisekarteInformation(dictionary: dictionary)
@@ -264,11 +291,9 @@ class BestellungVC2: UIViewController, UITableViewDataSource, UITableViewDelegat
                                 var newItems = self.Items[Kategorie]
                                 newItems![(self.Unterkategorien[Kategorie]?.index(of: key.key))!].append(item.Name!)
                                 self.Items[Kategorie] = newItems
-                                
                                 var newPreis = self.Preis[Kategorie]
                                 newPreis![(self.Unterkategorien[Kategorie]?.index(of: key.key))!].append(item.Preis!)
                                 self.Preis[Kategorie] = newPreis
-                                
                                 var newLiter = self.Liter[Kategorie]
                                 newLiter![(self.Unterkategorien[Kategorie]?.index(of: key.key))!].append(item.Liter!)
                                 self.Liter[Kategorie] = newLiter
@@ -278,33 +303,40 @@ class BestellungVC2: UIViewController, UITableViewDataSource, UITableViewDelegat
                                 var newVerfuegbarkeit = self.Verfuegbarkeit[Kategorie]
                                 newVerfuegbarkeit![(self.Unterkategorien[Kategorie]?.index(of: key.key))!].append(item.Verfuegbarkeit!)
                                 self.Verfuegbarkeit[Kategorie] = newVerfuegbarkeit
-                                
                             } else {
                                 self.Items.updateValue([[item.Name!]], forKey: Kategorie)
                                 self.Preis.updateValue([[item.Preis!]], forKey: Kategorie)
                                 self.Liter.updateValue([[item.Liter!]], forKey: Kategorie)
                                 self.Beschreibung.updateValue([[item.Beschreibung!]], forKey: Kategorie)
                                 self.Verfuegbarkeit.updateValue([[item.Verfuegbarkeit!]], forKey: Kategorie)
-
-                                
-                                
                             }
-                            
                         }
-                        
                     }
                 }
             }
-            
+            else {
+                    let snapshotExtra = snapshotUnterkategorieItem.childSnapshot(forPath: key.key)
+                    for extras in (snapshotExtra.children.allObjects as? [DataSnapshot])!{
+                        if let dictionary = extras.value as? [String: AnyObject]{
+                            let extra = SpeisekarteInformation(dictionary: dictionary)
+                            if self.Extras[Kategorie] != nil {
+                                self.Extras[Kategorie]?.append(extra.Name!)
+                                self.ExtrasPreise[Kategorie]?.append(extra.Preis!)
+                            } else {
+                                self.Extras.updateValue([extra.Name!], forKey: Kategorie)
+                                self.ExtrasPreise.updateValue([extra.Preis!], forKey: Kategorie)
+                            }
+                        }
+                    }
+                    print(self.Extras, "extras")
+                }
+            }
             if self.Unterkategorien.count == self.Kategorien.count {
-
                 for kategorie in self.Kategorien {
                     self.setSectionsSpeisekarte(Kategorie: kategorie, Unterkategorie: self.Unterkategorien[kategorie]!, items: self.Items[kategorie]!, preis: self.Preis[kategorie]!, liter: self.Liter[kategorie]!, beschreibung: self.Beschreibung[kategorie]!, verfuegbarkeit:  self.Verfuegbarkeit[kategorie]!, expanded2: self.Expanded[kategorie]!)
                 }
                 print(self.sections, "sections")
             }
-            
-            
         }, withCancel: nil)
         
         
@@ -347,7 +379,9 @@ class BestellungVC2: UIViewController, UITableViewDataSource, UITableViewDelegat
                 var mengen = Bestellung.menge[UnterkategorieSection!]
                 var preise = Bestellung.preis[UnterkategorieSection!]
                 var kommentar = Bestellung.kommentar[UnterkategorieSection!]
-                
+                var extrasNamen = Bestellung.extras[UnterkategorieSection!]
+                var extrasPreise = Bestellung.extrasPreise[UnterkategorieSection!]
+
                 for i in 0 ..< items.count {
                  
                     let bestellungName = ["Name": items[i]]
@@ -359,13 +393,15 @@ class BestellungVC2: UIViewController, UITableViewDataSource, UITableViewDelegat
                         childchildref?.updateChildValues(bestellungMenge)
                         childchildref?.updateChildValues(bestellungPreis)
                         childchildref?.updateChildValues(bestellungKommentar)
-                    
+                    let bestellungItemId = childchildref?.key
+                    childchildref?.updateChildValues(["bestellungItemId" : bestellungItemId!])
+                    let extraPreis = extrasPreise[i]
+                    for x in extrasNamen[i]{
+                        let preis = extraPreis[extrasNamen[i].index(of: x)!]
+                        childchildref?.child("Extras").child("Extra \(extrasNamen[i].index(of: x)!)").updateChildValues(["Name" : x])
+                        childchildref?.child("Extras").child("Extra \(extrasNamen[i].index(of: x)!)").updateChildValues(["Preis" : preis])
 
-                }
-
-            }
-
-        }
+                    } } } }
         
             childRef?.child("Information").updateChildValues(values)
         let userBestellungenRef = Database.database().reference().child("userBestellungen").child(fromUserID!)
@@ -464,9 +500,10 @@ class BestellungVC2: UIViewController, UITableViewDataSource, UITableViewDelegat
         self.bestellungTableView.reloadData()
     }
     
-    func setSectionsBestellung(Kategorie: String, Unterkategorie: [String], items: [[String]], preis: [[Double]], liter: [[String]], kommentar: [[String]], menge: [[Int]], expanded2: [Bool]){
+    func setSectionsBestellung(Kategorie: String, Unterkategorie: [String], items: [[String]], preis: [[Double]], liter: [[String]], kommentar: [[String]], extras: [[[String]]], extrasPreise: [[[Double]]],menge: [[Int]], expanded2: [Bool]){
         self.bestellteItemsDictionary
-            .append(bestellungTVSection(Kategorie: Kategorie, Unterkategorie: Unterkategorie, items: items, preis: preis, liter: liter, kommentar: kommentar, menge: menge, expanded2: expanded2, expanded: true))
+            .append(bestellungTVSection(Kategorie: Kategorie, Unterkategorie: Unterkategorie, items: items, preis: preis, liter: liter, kommentar: kommentar, extras: extras, extrasPreise: extrasPreise, menge: menge, expanded2: expanded2, expanded: true))
+        print(bestellteItemsDictionary, "njejkejekj")
     }
 
 
@@ -478,12 +515,26 @@ class BestellungVC2: UIViewController, UITableViewDataSource, UITableViewDelegat
         if tableView == myBestellungTV{
             numberOfSections = bestellteItemsDictionary.count
         }
-        
-        
+        if tableView == extrasTV {
+            numberOfSections = 1
+        }
         return numberOfSections!
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+        var numberOfRowsInSections: Int?
+        if tableView == extrasTV {
+            if self.Extras.keys.contains(KategorieLbl.text!) {
+                print(self.Extras, "EXTRAS")
+                print(KategorieLbl.text!)
+                numberOfRowsInSections = self.Extras[KategorieLbl.text!]?.count
+                
+            } else {
+                numberOfRowsInSections = 1
+            }
+        } else {
+            numberOfRowsInSections = 1
+        }
+        return numberOfRowsInSections!
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
@@ -492,6 +543,8 @@ class BestellungVC2: UIViewController, UITableViewDataSource, UITableViewDelegat
             heightForHeaderInSection = 36        }
         if tableView == myBestellungTV{
             heightForHeaderInSection = 36        }
+        if tableView == extrasTV{
+            heightForHeaderInSection = 44        }
         return CGFloat(heightForHeaderInSection!)
         
     }
@@ -531,6 +584,10 @@ class BestellungVC2: UIViewController, UITableViewDataSource, UITableViewDelegat
             }
 
         }
+        
+        if tableView == extrasTV {
+            heightForRowAt = 44
+        }
 
 
         return CGFloat(heightForRowAt!)
@@ -548,6 +605,10 @@ class BestellungVC2: UIViewController, UITableViewDataSource, UITableViewDelegat
         if tableView == myBestellungTV{
             heightForFooterInSection = 15
         }
+        if tableView == extrasTV{
+            heightForFooterInSection = 15
+        }
+        
         
         return CGFloat(heightForFooterInSection!)
     }
@@ -579,6 +640,10 @@ class BestellungVC2: UIViewController, UITableViewDataSource, UITableViewDelegat
             header.customInit(tableView: tableView, title: bestellteItemsDictionary[section].Kategorie, section: section, delegate: self as ExpandableHeaderViewDelegate)
         }
         
+        if tableView == myBestellungTV{
+            header.customInit(tableView: tableView, title: "Extras", section: section, delegate: self as ExpandableHeaderViewDelegate)
+        }
+        
         
         
         return header
@@ -606,21 +671,41 @@ class BestellungVC2: UIViewController, UITableViewDataSource, UITableViewDelegat
             cellIndexPathSection = indexPath.section
             return cell
 
-        }
-        
-        else {
+        } else if tableView == myBestellungTV {
              let cell = Bundle.main.loadNibNamed("MyBestellungCell", owner: self, options: nil)?.first as! MyBestellungCell
             cell.delegate = self
             cell.bestellteItemsDictionary = bestellteItemsDictionary
             cell.sections = indexPath.section
-            
             return cell
+        } else {
+            let cell = Bundle.main.loadNibNamed("ExtrasCell", owner: self, options: nil)?.first as! ExtrasCell
+            cell.delegate = self
+            if self.Extras.keys.contains(KategorieLbl.text!) {
+                
+                var extras = self.Extras[KategorieLbl.text!]
+                var extraspreise = self.ExtrasPreise[KategorieLbl.text!]
+                cell.extraRow = indexPath.row
+                cell.extraLbl.text = extras?[indexPath.row]
+                if extrasNamen.contains((extras?[indexPath.row])!) {
+                    cell.extraSelect.isSelected = true
+                } else {
+                    cell.extraSelect.isSelected = false
 
+                }
+                let preisFormat = String(format: "%.2f", arguments: [(extraspreise?[indexPath.row])!])
+                
+                cell.extraPreis.text = preisFormat
+            } else {
+                cell.extraLbl.text = "keine Extras"
+                ExtrasHinzufügenBtn.isHidden = true
+                cell.extraPreis.isHidden = true
+                cell.extraSelect.isHidden = true
+            }
+
+            return cell
         }
-    
     }
     
-
     func toggleSection(tableView: UITableView, header: ExpandableHeaderView, section: Int) {
         if tableView == bestellungTableView {
         
@@ -629,17 +714,12 @@ class BestellungVC2: UIViewController, UITableViewDataSource, UITableViewDelegat
                 sections[section].expanded = !sections[section].expanded
             } else {
                 sections[i].expanded = false
-
             }
         }
-        
-        
             bestellungTableView.beginUpdates()
-        bestellungTableView.reloadRows(at: [IndexPath(row: 0, section: section)], with: .automatic)
-        
+            bestellungTableView.reloadRows(at: [IndexPath(row: 0, section: section)], with: .automatic)
             bestellungTableView.endUpdates()
         }
-        
 //        if tableView == myBestellungTV {
 //
 //            for i in 0..<bestellteItemsDictionary.count{
@@ -656,18 +736,29 @@ class BestellungVC2: UIViewController, UITableViewDataSource, UITableViewDelegat
 //
 //            myBestellungTV.endUpdates()
 //        }
-
     }
     
     // OTHERS
+    
+    func selectExtra(sender: ExtrasCell) {
+        if sender.extraSelect.isSelected == true {
+            extrasPreise.remove(at: extrasNamen.index(of: sender.extraLbl.text!)!)
+            
+            extrasNamen.remove(at: extrasNamen.index(of: sender.extraLbl.text!)!)
+            sender.extraSelect.isSelected = !sender.extraSelect.isSelected
+        } else {
+            extrasNamen.append(sender.extraLbl.text!)
+            extrasPreise.append(Double(sender.extraPreis.text!)!)
+            sender.extraSelect.isSelected = !sender.extraSelect.isSelected
+        }
+    }
+    
     
     func reloadUnterkategorie(sender: BestellenCell) {
         sections = sender.unterkategorien
         bestellungTableView.beginUpdates()
         bestellungTableView.reloadRows(at: [IndexPath(row: 0, section: sender.cellIndexPathSection)], with: .automatic)
-        
         bestellungTableView.endUpdates()
-        
     }
     
     func pass(sender: BestellenCell) {
@@ -711,9 +802,19 @@ class BestellungVC2: UIViewController, UITableViewDataSource, UITableViewDelegat
                 BestellungKategorien.append(KategorieLbl.text!)
                 BestellungUnterkategorien.append([UnterkategorieLbl.text!])
                 BestellungItemsNamen.append([[itemNameLbl.text!]])
+            
                 BestellungItemsPreise.append([[Double(itemPreisLbl.text!)!]])
                 BestellungItemsLiter.append([[itemLiterLbl.text!]])
                 BestellungItemsMengen.append([[Int(itemCountLbl.text!)!]])
+                if extrasNamen.isEmpty {
+                    BestellungExtrasName.append([[["keine Extras"]]])
+                    BestellungExtrasPreise.append([[[0.0]]])
+                } else {
+                BestellungExtrasName.append([[extrasNamen]])
+                    BestellungExtrasPreise.append([[extrasPreise]])
+                    
+                }
+                
                 if kommentarTextView.text == placeholder || kommentarTextView.text == "" {
                     BestellungItemsKommentar.append([["kein Kommentar"]])
                 } else {
@@ -729,6 +830,16 @@ class BestellungVC2: UIViewController, UITableViewDataSource, UITableViewDelegat
                     BestellungItemsNamen[BestellungKategorien.index(of: KategorieLbl.text!)!].append([itemNameLbl.text!])
                     BestellungItemsPreise[BestellungKategorien.index(of: KategorieLbl.text!)!].append([Double(itemPreisLbl.text!)!])
                     BestellungItemsLiter[BestellungKategorien.index(of: KategorieLbl.text!)!].append([itemLiterLbl.text!])
+                    
+                    if extrasNamen.isEmpty {
+                        BestellungExtrasName[BestellungKategorien.index(of: KategorieLbl.text!)!].append([["keine Extras"]])
+                        BestellungExtrasPreise[BestellungKategorien.index(of: KategorieLbl.text!)!].append([[0.0]])
+                    } else {
+                        BestellungExtrasName[BestellungKategorien.index(of: KategorieLbl.text!)!].append([extrasNamen])
+                        BestellungExtrasPreise[BestellungKategorien.index(of: KategorieLbl.text!)!].append([extrasPreise])
+                        
+                    }
+                    
                     if kommentarTextView.text == placeholder || kommentarTextView.text == "" {
                         BestellungItemsKommentar[BestellungKategorien.index(of: KategorieLbl.text!)!].append(["kein Kommentar"])
                     } else {
@@ -747,6 +858,8 @@ class BestellungVC2: UIViewController, UITableViewDataSource, UITableViewDelegat
                     var itemsLiterInSection = BestellungItemsLiter[BestellungKategorien.index(of: KategorieLbl.text!)!]
                     var itemsKommentarInSection = BestellungItemsKommentar[BestellungKategorien.index(of: KategorieLbl.text!)!]
                     var itemsMengenInSection = BestellungItemsMengen[BestellungKategorien.index(of: KategorieLbl.text!)!]
+                    var extrasName = BestellungExtrasName[BestellungKategorien.index(of: KategorieLbl.text!)!]
+                    var extraPreis = BestellungExtrasPreise[BestellungKategorien.index(of: KategorieLbl.text!)!]
                     let unterkategorie = BestellungUnterkategorien[BestellungKategorien.index(of: KategorieLbl.text!)!]
                     
 //                    if !itemsNamenInSection[unterkategorie.index(of: UnterkategorieLbl.text!)!].contains(itemNameLbl.text!) {
@@ -759,6 +872,17 @@ class BestellungVC2: UIViewController, UITableViewDataSource, UITableViewDelegat
                         
                         itemsLiterInSection[unterkategorie.index(of: UnterkategorieLbl.text!)!].append(itemLiterLbl.text!)
                         BestellungItemsLiter[BestellungKategorien.index(of: KategorieLbl.text!)!] = itemsLiterInSection
+                    
+                    if extrasNamen.isEmpty {
+                        extrasName[unterkategorie.index(of: UnterkategorieLbl.text!)!].append(["keine Extras"])
+                        extraPreis[unterkategorie.index(of: UnterkategorieLbl.text!)!].append([0.0])
+                    } else {
+                        extrasName[unterkategorie.index(of: UnterkategorieLbl.text!)!].append(extrasNamen)
+                        extraPreis[unterkategorie.index(of: UnterkategorieLbl.text!)!].append(extrasPreise)
+                    }
+                    BestellungExtrasPreise[BestellungKategorien.index(of: KategorieLbl.text!)!] = extraPreis
+                    BestellungExtrasName[BestellungKategorien.index(of: KategorieLbl.text!)!] = extrasName
+                    
                     
                     if kommentarTextView.text == placeholder || kommentarTextView.text == "" {
                         itemsKommentarInSection[unterkategorie.index(of: UnterkategorieLbl.text!)!].append("kein Kommentar")
@@ -777,10 +901,11 @@ class BestellungVC2: UIViewController, UITableViewDataSource, UITableViewDelegat
             itemNamen.removeAll()
             itemPreise.removeAll()
             itemLiter.removeAll()
+            extrasNamen.removeAll()
+            extrasPreise.removeAll()
             
         }
-        print(BestellungItemsNamen, "item")
-        print(BestellungItemsKommentar, "kommi")
+
         i = 1
     }
     
@@ -905,7 +1030,8 @@ class BestellungVC2: UIViewController, UITableViewDataSource, UITableViewDelegat
         if self.view.subviews.contains(addItemView) {
             self.view.endEditing(true)
         }
-        if touch?.view != addItemView && touch?.view != myBestellungView {
+        
+        if touch?.view != addItemView && touch?.view != myBestellungView && !self.view.subviews.contains(extrasView) {
             dismissMyBestellungView()
             animateOut()
         }

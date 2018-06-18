@@ -43,9 +43,9 @@ class KellnerCell2: UITableViewCell, UITableViewDelegate, UITableViewDataSource,
         
         var expanded2 = Bestellungen[Cell1Section].expanded2[Cell2Section]
         if expanded2[indexPath.section] != false {
-            
-            return 86
-            
+            var extra = Bestellungen[Cell1Section].extras[Cell2Section]
+            var newextra = extra[Cell2Row]
+            return (CGFloat(118 + newextra[indexPath.row].count*44))
         }
         else {
             return 0
@@ -85,17 +85,23 @@ class KellnerCell2: UITableViewCell, UITableViewDelegate, UITableViewDataSource,
         var Preise = Bestellungen[Cell1Section].preis[Cell2Section]
         var Mengen = Bestellungen[Cell1Section].menge[Cell2Section]
         var Kommentare = Bestellungen[Cell1Section].kommentar[Cell2Section]
-        
         var newItems = Items[Cell2Row]
         var newPreise = Preise[Cell2Row]
         var newMengen = Mengen[Cell2Row]
         var newKommentare = Kommentare[Cell2Row]
-        
+        var Extras = Bestellungen[Cell1Section].extras[Cell2Section]
+        var newExtras = Extras[Cell2Row]
+        var newnewExtras = newExtras[indexPath.row]
+        var ExtrasPreise = Bestellungen[Cell1Section].extrasPreis[Cell2Section]
+        var newExtrasPreise = ExtrasPreise[Cell2Row]
+        print(newExtras, newExtrasPreise, indexPath.row)
+        var newnewExtrasPreise = newExtrasPreise[indexPath.row]
         
         cell.itemName.text = newItems[indexPath.row]
-
+        cell.extras = newnewExtras
+        cell.extrasPreise = newnewExtrasPreise
+        
         let preisFormat = String(format: "%.2f", arguments: [newPreise[indexPath.row]])
-
         cell.itemPreis.text = "\(preisFormat) €"
         cell.itemMenge.text = String(newMengen[indexPath.row])
         cell.kommentarTextView.text = newKommentare[indexPath.row]

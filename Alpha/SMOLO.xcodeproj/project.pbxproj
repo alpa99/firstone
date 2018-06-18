@@ -88,6 +88,8 @@
 		949AB0B520AB84F5005F85C7 /* KellnerAlleBestellungenVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 949AB0B420AB84F5005F85C7 /* KellnerAlleBestellungenVC.swift */; };
 		94BDC36820B00DEF000BFB10 /* UserInfos.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94BDC36720B00DEF000BFB10 /* UserInfos.swift */; };
 		94CA7F4E20BF04AF00C3D1F4 /* RegistrierungVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94CA7F4D20BF04AF00C3D1F4 /* RegistrierungVC.swift */; };
+		94EFB9AC20CD5535003028CD /* ExtrasCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94EFB9AA20CD5535003028CD /* ExtrasCell.swift */; };
+		94EFB9AD20CD5535003028CD /* ExtrasCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 94EFB9AB20CD5535003028CD /* ExtrasCell.xib */; };
 		94F5EA91208F4F530086A014 /* LabelWhiteS16.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94F5EA90208F4F530086A014 /* LabelWhiteS16.swift */; };
 		CC7293123DD294CC7591DAA2 /* Pods_SMOLOUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AC56C89A3508D2D118AE9C1D /* Pods_SMOLOUITests.framework */; };
 		FCBCA28E5975849AF85ED466 /* Pods_SMOLOTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D92BA6E8AA26233EE5256989 /* Pods_SMOLOTests.framework */; };
@@ -209,6 +211,8 @@
 		949AB0B420AB84F5005F85C7 /* KellnerAlleBestellungenVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KellnerAlleBestellungenVC.swift; sourceTree = "<group>"; };
 		94BDC36720B00DEF000BFB10 /* UserInfos.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfos.swift; sourceTree = "<group>"; };
 		94CA7F4D20BF04AF00C3D1F4 /* RegistrierungVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrierungVC.swift; sourceTree = "<group>"; };
+		94EFB9AA20CD5535003028CD /* ExtrasCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtrasCell.swift; sourceTree = "<group>"; };
+		94EFB9AB20CD5535003028CD /* ExtrasCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ExtrasCell.xib; sourceTree = "<group>"; };
 		94F5EA90208F4F530086A014 /* LabelWhiteS16.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelWhiteS16.swift; sourceTree = "<group>"; };
 		A57EBBF91158C1B719B66FE6 /* Pods_SMOLO.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SMOLO.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		AC56C89A3508D2D118AE9C1D /* Pods_SMOLOUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SMOLOUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -292,6 +296,8 @@
 				08DB09292061415B007848E4 /* SpeisekarteCelle.xib */,
 				08DB09322061D806007848E4 /* SpeisekarteCelle2.swift */,
 				08DB09332061D806007848E4 /* SpeisekarteCelle2.xib */,
+				94EFB9AA20CD5535003028CD /* ExtrasCell.swift */,
+				94EFB9AB20CD5535003028CD /* ExtrasCell.xib */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -593,6 +599,7 @@
 				4EC247D01F98F90500910AA8 /* Main.storyboard in Resources */,
 				08210EE61FB83AE300EABA32 /* BestellenCell2.xib in Resources */,
 				08DB092B2061415B007848E4 /* SpeisekarteCelle.xib in Resources */,
+				94EFB9AD20CD5535003028CD /* ExtrasCell.xib in Resources */,
 				08210EE21FB7B09000EABA32 /* KellnerCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -750,6 +757,7 @@
 				08EF4C4E1F9D2AC000F01096 /* SpeisekarteInfos.swift in Sources */,
 				FD7DDBFB20C970C8008CDE12 /* EinstellungenVC.swift in Sources */,
 				949AB0B520AB84F5005F85C7 /* KellnerAlleBestellungenVC.swift in Sources */,
+				94EFB9AC20CD5535003028CD /* ExtrasCell.swift in Sources */,
 				08EF4C4C1F9D006700F01096 /* ExpandableHeaderView.swift in Sources */,
 				949AB0B320AB82B6005F85C7 /* LabelWhiteS30.swift in Sources */,
 				4EC248001F9950CE00910AA8 /* DrawerVC.swift in Sources */,

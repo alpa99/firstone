@@ -68,9 +68,6 @@ class EinstellungenVC: UIViewController, UITextFieldDelegate {
                                     } else {
                                         self.alert(title: "Feler", message: (error?.localizedDescription)!, actiontitle: "Ok")
                                         
-                                        print(error?.localizedDescription)
-
-
                                     }
                                 })
 
@@ -100,6 +97,12 @@ class EinstellungenVC: UIViewController, UITextFieldDelegate {
     }
     
     @IBAction func accLoeschen(_ sender: Any) {
+        
+        let user = Auth.auth().currentUser
+        var ref: DatabaseReference?
+        ref = Database.database().reference()
+        ref?.child((user?.uid)!).updateChildValues(["Enabled" : false])
+        ref?.child("userLoeschen").updateChildValues([(user?.uid)!: "Acc Löschen"])
         animateOutAcc()
     }
     

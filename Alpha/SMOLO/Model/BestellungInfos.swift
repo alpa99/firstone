@@ -20,6 +20,7 @@ class BestellungInfos: NSObject {
     var timeStamp: Double?
     var tischnummer: String?
     var Status: String?
+    var bestellungItemId: String?
     
     
     init(dictionary: [String: Any]) {
@@ -33,6 +34,7 @@ class BestellungInfos: NSObject {
         self.timeStamp = dictionary["timeStamp"] as? Double ?? 0.0
         self.tischnummer = dictionary["tischnummer"] as? String ?? "leer"
         self.Status = dictionary["Status"] as? String ?? "Fehler"
+        self.bestellungItemId = dictionary["bestellungItemId"] as? String ?? "NoID"
         }
 
 }
