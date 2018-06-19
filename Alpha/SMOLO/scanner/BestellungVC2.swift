@@ -16,22 +16,14 @@ protocol BestellungVC2Delegate {
     func reloaddas(sender: Any)
   
 }
-<<<<<<< HEAD
-class BestellungVC2: UIViewController, UITableViewDataSource, UITableViewDelegate, ExpandableHeaderViewDelegate, BestellenCellDelegate, MyBestellungCellDelegate, PageObservation2, CLLocationManagerDelegate, UITextViewDelegate, ExtraCellDelegate {
-=======
-class BestellungVC2: UIViewController, UITableViewDataSource, UITableViewDelegate, ExpandableHeaderViewDelegate, BestellenCellDelegate, MyBestellungCellDelegate, PageObservation2, CLLocationManagerDelegate, UITextViewDelegate, GADRewardBasedVideoAdDelegate {
-  
-    
-   
-    
->>>>>>> 906b6f101b7194c2a82da01321fa802b83c3a2f7
+class BestellungVC2: UIViewController, UITableViewDataSource, UITableViewDelegate, ExpandableHeaderViewDelegate, BestellenCellDelegate, MyBestellungCellDelegate, PageObservation2, CLLocationManagerDelegate, UITextViewDelegate, ExtraCellDelegate, GADInterstitialDelegate {
+
 
     
     
 
     // VARS
-    var rewardBasedAd: GADRewardBasedVideoAd!
-
+    var interstitial: GADInterstitial!
     var barname = "NewBar"
     var baradresse = " "
     var tischnummer = 0
@@ -353,17 +345,14 @@ class BestellungVC2: UIViewController, UITableViewDataSource, UITableViewDelegat
         
     }
     
-    func rewardBasedVideoAd(_ rewardBasedVideoAd: GADRewardBasedVideoAd, didRewardUserWith reward: GADAdReward) {
-        performSegue(withIdentifier: "wirdabgeschickt", sender: self)
-        
-    }
+  
 
 
     func seugueAbschicken(){
-        if GADRewardBasedVideoAd.sharedInstance().isReady == true {
-            GADRewardBasedVideoAd.sharedInstance().present(fromRootViewController: self)
+        if interstitial.isReady {
+            interstitial.present(fromRootViewController: self)
         }
-//        performSegue(withIdentifier: "wirdabgeschickt", sender: self)
+        performSegue(withIdentifier: "wirdabgeschickt", sender: self)
     }
     
     
@@ -1070,23 +1059,21 @@ class BestellungVC2: UIViewController, UITableViewDataSource, UITableViewDelegat
     
     //ADMOB-Werbung
     
-//    func createAndLoadInterstitial() -> GADInterstitial {
-//        let interstitial = GADInterstitial(adUnitID: "ca-app-pub-3940256099942544/4411468910")
-//        interstitial.delegate = self
-//        interstitial.load(GADRequest())
-//        return interstitial
-//    }
-//
-//    func interstitialDidDismissScreen(_ ad: GADInterstitial) {
-//        interstitial = createAndLoadInterstitial()
-//    }
+    func createAndLoadInterstitial() -> GADInterstitial {
+        let interstitial = GADInterstitial(adUnitID: "ca-app-pub-3940256099942544/4411468910")
+        interstitial.delegate = self
+        interstitial.load(GADRequest())
+        return interstitial
+    }
+
+    func interstitialDidDismissScreen(_ ad: GADInterstitial) {
+        interstitial = createAndLoadInterstitial()
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        rewardBasedAd = GADRewardBasedVideoAd.sharedInstance()
-        rewardBasedAd.delegate = self
-        rewardBasedAd.load(GADRequest(), withAdUnitID: "ca-app-pub-3940256099942544/1712485313")
+        interstitial = createAndLoadInterstitial()
         
         kommentarTextView.delegate = self
         kommentarTextView.backgroundColor = UIColor(red: 255/255, green: 255/255, blue: 255/255, alpha: 0.5)

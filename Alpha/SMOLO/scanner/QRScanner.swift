@@ -10,6 +10,7 @@ import UIKit
 import Firebase
 import AVFoundation
 import CoreLocation
+import GoogleMobileAds
 
 
 
@@ -33,6 +34,9 @@ class QRScanner: UIViewController, AVCaptureMetadataOutputObjectsDelegate, CLLoc
     var light = 0
     
     // OUTLETS
+    
+    @IBOutlet weak var topbanner: GADBannerView!
+    
     @IBOutlet weak var square: UIImageView!
     @IBOutlet weak var flashlight: UIButton!
     @IBAction func flash(_ sender: UIButton) {
@@ -243,8 +247,10 @@ class QRScanner: UIViewController, AVCaptureMetadataOutputObjectsDelegate, CLLoc
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-       
+        //ca-app-pub-9477880000646212/8826370724
+        self.topbanner.adUnitID = "ca-app-pub-3940256099942544/2934735716"
+        self.topbanner.rootViewController = self
+        self.topbanner.load(GADRequest())
         
         locationManager.requestWhenInUseAuthorization()
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
