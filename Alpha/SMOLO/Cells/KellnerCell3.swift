@@ -27,11 +27,10 @@ class KellnerCell3: UITableViewCell, UITableViewDelegate, UITableViewDataSource 
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = Bundle.main.loadNibNamed("ExtrasCell", owner: self, options: nil)?.first as! ExtrasCell
-        cell.extraLbl.text = extras[indexPath.row]
+        let cell = Bundle.main.loadNibNamed("KellnerExtrasCell", owner: self, options: nil)?.first as! KellnerExtrasCell
+        cell.extrasNameLbl.text = extras[indexPath.row]
         let preisFormat = String(format: "%.2f", arguments: [extrasPreise[indexPath.row]])
-
-        cell.extraPreis.text = "\(preisFormat) €"
+        cell.extrasPreisLbl.text = "\(preisFormat) €"
         return cell
     }
     

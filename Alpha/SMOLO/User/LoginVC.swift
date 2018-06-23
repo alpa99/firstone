@@ -13,8 +13,6 @@ import FacebookLogin
 import FBSDKCoreKit
 import FBSDKLoginKit
 import FirebaseAuth
-import SafariServices
-
 class LoginVC: UIViewController, UITextFieldDelegate {
     
     // VARS
@@ -98,10 +96,6 @@ class LoginVC: UIViewController, UITextFieldDelegate {
         segueToRegistrieren()
     }
     
-    @IBAction func openAGBs(_ sender: Any) {
-        let agbsLink = SFSafariViewController(url: URL(string: "http://www.madapp.de/books/agbs.html")!)
-        self.present(agbsLink, animated: true, completion: nil)
-    }
     
     @IBAction func loginTapped(_ sender: UIButton) {
         print("1")
@@ -334,35 +328,12 @@ class LoginVC: UIViewController, UITextFieldDelegate {
         // Dispose of any resources that can be recreated.
     }
     private func checkIfUserIsSignedIn() {
-<<<<<<< HEAD
-=======
-        
-//
-//            Auth.auth().fetchProviders(forEmail: passwortVergessenEmail.text!) { (loginProvider, error) in
-//                if error != nil {
-//
-//                    if loginProvider != nil && loginProvider![0] == "password" {
-//                        if (Auth.auth().currentUser?.isEmailVerified)! {
-//                            self.segueToTabBar()
-//                        } else {
-//                            self.alert(title: "Email bestätigen", message: "Bitte bestätige deine Email um Smolo zu nutzen.", actiontitle: "Ok")
-//                        }
-//
-//                    } else if loginProvider != nil && loginProvider![0] == "facebook.com"{
-//                        print("facebookuseer")
-//                        self.segueToTabBar()
-//                    }
-//
-//                } else {
-//                    self.alert(title: "Feler", message: (error?.localizedDescription)!, actiontitle: "Ok")
-//                }
-//            }
+
         
         let sv = UIViewController.displaySpinner(onView: self.view)
         
         DispatchQueue.global(qos: .background).async {
 
->>>>>>> 906b6f101b7194c2a82da01321fa802b83c3a2f7
         Auth.auth().addStateDidChangeListener { (auth, user) in
             print("lade anfang")
 
@@ -371,18 +342,7 @@ class LoginVC: UIViewController, UITextFieldDelegate {
                 ref = Database.database().reference()
                 ref?.child("Kellner").observeSingleEvent(of: .value, with: { (snapshot) in
                     if snapshot.hasChild((user?.uid)!) {
-<<<<<<< HEAD
-                        // KELlner war eingeloggt
-                        print("lade ende")
 
-                        
-                    } else {
-                        auth.fetchProviders(forEmail: (user?.email)!) { (loginProvider, error) in
-                            if error != nil {
-                                print("lade ende")
-
-                                self.alert(title: "Feler", message: (error?.localizedDescription)!, actiontitle: "Ok")
-=======
                         DispatchQueue.main.async {
                             // Main thread, called after the previous code:
                             // hide your progress bar here
@@ -395,35 +355,26 @@ class LoginVC: UIViewController, UITextFieldDelegate {
                                 // Main thread, called after the previous code:
                                 // hide your progress bar here
                                 UIViewController.removeSpinner(spinner: sv)
->>>>>>> 906b6f101b7194c2a82da01321fa802b83c3a2f7
-                                
+                        
                                 self.alert(title: "Feler", message: (error?.localizedDescription)!, actiontitle: "Ok")
                                 }
                             } else {
                                 if loginProvider != nil && loginProvider![0] == "password" {
                                     if (Auth.auth().currentUser?.isEmailVerified)! {
-<<<<<<< HEAD
-                                        print("lade ende")
 
-=======
                                         DispatchQueue.main.async {
                                             // Main thread, called after the previous code:
                                             // hide your progress bar here
                                             UIViewController.removeSpinner(spinner: sv)
                                         
->>>>>>> 906b6f101b7194c2a82da01321fa802b83c3a2f7
                                         self.segueToTabBar()
                                         }
                                     } else {
-<<<<<<< HEAD
-                                        print("lade ende")
 
-=======
                                         DispatchQueue.main.async {
                                             // Main thread, called after the previous code:
                                             // hide your progress bar here
                                             UIViewController.removeSpinner(spinner: sv)
->>>>>>> 906b6f101b7194c2a82da01321fa802b83c3a2f7
                                         self.alert(title: "Email bestätigen", message: "Bitte bestätige deine Email um Smolo zu nutzen.", actiontitle: "Ok")
                                     }
                                     }
@@ -443,10 +394,7 @@ class LoginVC: UIViewController, UITextFieldDelegate {
                         }
                                      }
                 }, withCancel: nil)
-<<<<<<< HEAD
-            } else {
-                print("lade ende")
-=======
+
             }else {
                 DispatchQueue.main.async {
                     // Main thread, called after the previous code:
@@ -455,7 +403,6 @@ class LoginVC: UIViewController, UITextFieldDelegate {
                 }
                 
             }
->>>>>>> 906b6f101b7194c2a82da01321fa802b83c3a2f7
             }
         }
     

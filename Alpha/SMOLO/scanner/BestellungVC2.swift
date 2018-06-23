@@ -645,7 +645,7 @@ class BestellungVC2: UIViewController, UITableViewDataSource, UITableViewDelegat
             header.customInit(tableView: tableView, title: bestellteItemsDictionary[section].Kategorie, section: section, delegate: self as ExpandableHeaderViewDelegate)
         }
         
-        if tableView == myBestellungTV{
+        if tableView == extrasTV{
             header.customInit(tableView: tableView, title: "Extras", section: section, delegate: self as ExpandableHeaderViewDelegate)
         }
         
@@ -1082,6 +1082,7 @@ class BestellungVC2: UIViewController, UITableViewDataSource, UITableViewDelegat
         bestellungTableView.reloadData()
         addItemView.backgroundColor = UIColor(patternImage: UIImage(named: "hintergrund")!)
         myBestellungView.backgroundColor = UIColor(patternImage: UIImage(named: "hintergrund")!)
+        extrasView.backgroundColor = UIColor(patternImage: UIImage(named: "hintergrund")!)
         self.barname = parentPageViewController2.name
         self.baradresse = parentPageViewController2.adresse
         self.tischnummer = parentPageViewController2.tischnummer

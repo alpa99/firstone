@@ -6,6 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Alignment constraints to the first baseline" minToolsVersion="6.0"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -23,24 +24,12 @@
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Preis" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Uok-5z-0vt">
                         <rect key="frame" x="262" y="12" width="42" height="21"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="42" id="Y2B-qP-ZS4"/>
+                            <constraint firstAttribute="width" constant="42" id="TX6-DX-fI4"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Bws-ho-75N">
-                        <rect key="frame" x="16" y="11" width="30" height="22"/>
-                        <constraints>
-                            <constraint firstAttribute="width" constant="30" id="jaf-rg-3Ru"/>
-                        </constraints>
-                        <state key="normal">
-                            <color key="titleColor" red="0.72549019607843135" green="0.66666666666666663" blue="0.5490196078431373" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        </state>
-                        <connections>
-                            <action selector="extraSelected:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="07R-Hx-hqH"/>
-                        </connections>
-                    </button>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hallo" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wo5-BK-7tI">
                         <rect key="frame" x="54" y="12" width="200" height="21"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -48,16 +37,28 @@
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Bws-ho-75N">
+                        <rect key="frame" x="16" y="7" width="30" height="30"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="30" id="jJj-4O-r8E"/>
+                        </constraints>
+                        <state key="normal" image="bestätigen"/>
+                        <connections>
+                            <action selector="extraSelected:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="07R-Hx-hqH"/>
+                        </connections>
+                    </button>
                 </subviews>
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 <constraints>
-                    <constraint firstItem="Uok-5z-0vt" firstAttribute="leading" secondItem="wo5-BK-7tI" secondAttribute="trailing" constant="8" symbolic="YES" id="2ky-Ix-4Mc"/>
-                    <constraint firstItem="wo5-BK-7tI" firstAttribute="baseline" secondItem="Uok-5z-0vt" secondAttribute="baseline" id="P7o-Bp-6bv"/>
-                    <constraint firstItem="wo5-BK-7tI" firstAttribute="bottom" secondItem="H2p-sc-9uM" secondAttribute="bottomMargin" id="U07-M5-TKe"/>
-                    <constraint firstItem="wo5-BK-7tI" firstAttribute="leading" secondItem="Bws-ho-75N" secondAttribute="trailing" constant="8" symbolic="YES" id="ZGQ-dP-hhr"/>
-                    <constraint firstItem="Bws-ho-75N" firstAttribute="centerY" secondItem="wo5-BK-7tI" secondAttribute="centerY" id="c7G-uv-a0O"/>
-                    <constraint firstItem="Uok-5z-0vt" firstAttribute="trailing" secondItem="H2p-sc-9uM" secondAttribute="trailingMargin" id="sCy-h6-BxN"/>
-                    <constraint firstItem="Bws-ho-75N" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="tkY-Qr-vci"/>
+                    <constraint firstItem="Uok-5z-0vt" firstAttribute="trailing" secondItem="H2p-sc-9uM" secondAttribute="trailingMargin" id="9zA-Fr-8bV"/>
+                    <constraint firstItem="Bws-ho-75N" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="Qx1-Ex-acI"/>
+                    <constraint firstItem="wo5-BK-7tI" firstAttribute="baseline" secondItem="Uok-5z-0vt" secondAttribute="baseline" id="RCJ-GO-iPL"/>
+                    <constraint firstItem="wo5-BK-7tI" firstAttribute="leading" secondItem="Bws-ho-75N" secondAttribute="trailing" constant="8" symbolic="YES" id="Sf5-Vu-r9X"/>
+                    <constraint firstItem="Bws-ho-75N" firstAttribute="centerY" secondItem="wo5-BK-7tI" secondAttribute="centerY" id="cce-gz-cnP"/>
+                    <constraint firstItem="wo5-BK-7tI" firstAttribute="firstBaseline" secondItem="Uok-5z-0vt" secondAttribute="firstBaseline" id="g8p-PP-Gd8"/>
+                    <constraint firstItem="wo5-BK-7tI" firstAttribute="bottom" secondItem="H2p-sc-9uM" secondAttribute="bottomMargin" id="jEM-3c-08c"/>
+                    <constraint firstItem="Bws-ho-75N" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="-4" id="kBi-uU-yE5"/>
+                    <constraint firstItem="Uok-5z-0vt" firstAttribute="leading" secondItem="wo5-BK-7tI" secondAttribute="trailing" constant="8" symbolic="YES" id="zJd-Sk-xNj"/>
                 </constraints>
             </tableViewCellContentView>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -69,4 +70,7 @@
             </connections>
         </tableViewCell>
     </objects>
+    <resources>
+        <image name="bestätigen" width="227" height="227"/>
+    </resources>
 </document>
