@@ -21,29 +21,30 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dRb-bx-JYb">
-                        <rect key="frame" x="16" y="11" width="214" height="22"/>
+                        <rect key="frame" x="16" y="11" width="253" height="22"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="R7X-rv-0BT">
-                        <rect key="frame" x="238" y="6" width="69" height="30"/>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="R7X-rv-0BT">
+                        <rect key="frame" x="277" y="1" width="30" height="40"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="69" id="ujm-Pt-Yxy"/>
+                            <constraint firstAttribute="width" constant="30" id="EZN-3O-2vY"/>
                         </constraints>
-                        <state key="normal" title="Verfügbar"/>
+                        <state key="normal" image="checkbox-i"/>
                         <connections>
                             <action selector="verfuegbarBtnTapped:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="1Xj-Vh-0nK"/>
                         </connections>
                     </button>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="dRb-bx-JYb" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="Utv-Ko-7cF"/>
-                    <constraint firstItem="dRb-bx-JYb" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="ax2-Ib-Q3H"/>
-                    <constraint firstItem="R7X-rv-0BT" firstAttribute="leading" secondItem="dRb-bx-JYb" secondAttribute="trailing" constant="8" symbolic="YES" id="bAA-Y1-jVx"/>
-                    <constraint firstItem="R7X-rv-0BT" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="fwW-6Z-ByL"/>
-                    <constraint firstItem="dRb-bx-JYb" firstAttribute="bottom" secondItem="H2p-sc-9uM" secondAttribute="bottomMargin" id="iYg-Gm-L0q"/>
-                    <constraint firstAttribute="trailingMargin" secondItem="R7X-rv-0BT" secondAttribute="trailing" constant="-3" id="upU-1S-HNq"/>
+                    <constraint firstItem="R7X-rv-0BT" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="9FD-fI-4tP"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="R7X-rv-0BT" secondAttribute="trailing" constant="-3" id="D6h-PI-G4M"/>
+                    <constraint firstItem="dRb-bx-JYb" firstAttribute="bottom" secondItem="H2p-sc-9uM" secondAttribute="bottomMargin" id="DDW-ut-fdg"/>
+                    <constraint firstItem="dRb-bx-JYb" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="GaK-Nz-WhR"/>
+                    <constraint firstItem="dRb-bx-JYb" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="n1Z-Hb-prM"/>
+                    <constraint firstItem="R7X-rv-0BT" firstAttribute="leading" secondItem="dRb-bx-JYb" secondAttribute="trailing" constant="8" id="nYn-mR-QJ3"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
@@ -53,4 +54,7 @@
             </connections>
         </tableViewCell>
     </objects>
+    <resources>
+        <image name="checkbox-i" width="40" height="40"/>
+    </resources>
 </document>

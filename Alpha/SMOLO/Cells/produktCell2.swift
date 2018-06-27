@@ -26,6 +26,9 @@ class produktCell2: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        verfuegbarBtn.setImage(UIImage(named: "checkbox"), for: .normal)
+        verfuegbarBtn.setImage(UIImage(named: "checkbox-i"), for: .selected)
+
         itemNameLbl.textColor = UIColor.white
         itemNameLbl.font = UIFont(name: "Verdana", size: 15.0)
     }
