@@ -273,12 +273,12 @@ class RegistrierungVC: UIViewController, UITextFieldDelegate {
         benutzerName.keyboardAppearance = UIKeyboardAppearance.dark
         emailTextField.keyboardAppearance = UIKeyboardAppearance.dark
         passwordTextField.keyboardAppearance = UIKeyboardAppearance.dark
-        agbsAkzeptiert.setImage(UIImage(named: "essen-i"), for: .selected)
-        agbsAkzeptiert.setImage(UIImage(named: "essen"), for: .normal)
-        AlterBtn.setImage(UIImage(named: "essen-i"), for: .selected)
-        AlterBtn.setImage(UIImage(named: "essen"), for: .normal)
-        datenschutzAkzeptiert.setImage(UIImage(named: "essen-i"), for: .selected)
-        datenschutzAkzeptiert.setImage(UIImage(named: "essen"), for: .normal)
+        agbsAkzeptiert.setImage(UIImage(named: "checkbox-i"), for: .normal)
+        agbsAkzeptiert.setImage(UIImage(named: "checkbox"), for: .selected)
+        AlterBtn.setImage(UIImage(named: "checkbox-i"), for: .normal)
+        AlterBtn.setImage(UIImage(named: "checkbox"), for: .selected)
+        datenschutzAkzeptiert.setImage(UIImage(named: "checkbox-i"), for: .normal)
+        datenschutzAkzeptiert.setImage(UIImage(named: "checkbox"), for: .selected)
         self.view.backgroundColor = UIColor(patternImage: UIImage(named: "hintergrund")!)
 
 

@@ -309,6 +309,7 @@ class ProdukteVC: UIViewController, UITableViewDataSource, UITableViewDelegate,E
     override func viewDidLoad() {
         super.viewDidLoad()
         getKategorien()
+        
 
         // Do any additional setup after loading the view.
     }

@@ -100,11 +100,9 @@ class produktCell: UITableViewCell, UITableViewDataSource, UITableViewDelegate, 
             cell.itemNameLbl.text = item[indexPath.row]
             cell.verfuegbarBtn.tintColor = UIColor.white
             if verfuegbarkeit[indexPath.row] {
-                cell.verfuegbarBtn.setTitle("nicht verfügbar", for: .normal)
-                cell.verfuegbarBtn.backgroundColor = UIColor.gray
+                cell.verfuegbarBtn.isSelected = false
             } else {
-            cell.verfuegbarBtn.setTitle("verfügbar", for: .normal)
-                cell.verfuegbarBtn.backgroundColor = UIColor.green
+            cell.verfuegbarBtn.isSelected = true
 
             }
             return cell
