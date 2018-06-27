@@ -103,9 +103,15 @@ class EinstellungenVC: UIViewController, UITextFieldDelegate {
         let user = Auth.auth().currentUser
         var ref: DatabaseReference?
         ref = Database.database().reference()
-        ref?.child((user?.uid)!).updateChildValues(["Enabled" : false])
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy/MM/dd HH:mm"
+        let DayOne = formatter.date(from: "2018/05/15 12:00")
+        let timestamp = Double(NSDate().timeIntervalSince(DayOne!))
+        ref?.child((user?.uid)!).updateChildValues(["Enabled" : false, "timeStamp": timestamp])
         ref?.child("userLoeschen").updateChildValues([(user?.uid)!: "Acc Löschen"])
+        
         animateOutAcc()
+        alert(title: "Dein Account wird gelöscht", message: "Dein Account wird in einigen Stunden gelöscht. Um dies zu verhindern, kannst du dich erneut einloggen.", actiontitle: "OK")
     }
     
     // Funcs
@@ -123,6 +129,8 @@ class EinstellungenVC: UIViewController, UITextFieldDelegate {
         
         passwortTextfield1.keyboardType = UIKeyboardType.default
         passwortTextfield1.becomeFirstResponder()
+        altesPasswortTextfield.keyboardType = UIKeyboardType.default
+        altesPasswortTextfield.becomeFirstResponder()
 
         
         UIView.animate(withDuration: 0.2) {
@@ -190,6 +198,8 @@ func alert(title: String, message: String, actiontitle: String) {
         passwortTextfield2.keyboardAppearance = UIKeyboardAppearance.dark
         passwortView.backgroundColor = UIColor(patternImage: UIImage(named: "hintergrund")!)
         AccountLoeschen.backgroundColor = UIColor(patternImage: UIImage(named: "hintergrund")!)
+        self.navigationController?.navigationBar.tintColor = UIColor.white
+        self.navigationItem.title = "Einstellungen"
         // Do any additional setup after loading the view.
     }
 

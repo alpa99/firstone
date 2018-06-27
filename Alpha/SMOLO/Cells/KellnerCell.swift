@@ -29,6 +29,9 @@ class KellnerCell: UITableViewCell, UITableViewDelegate, UITableViewDataSource, 
     
     @IBOutlet weak var gesamtPreisLbl: UILabel!
     
+    @IBOutlet weak var gesamtPreisText: UILabel!
+    
+    
     @IBAction func annehmenTapped(_ sender: Any) {
         delegate?.annehmen(sender: self)
     }
@@ -57,7 +60,7 @@ class KellnerCell: UITableViewCell, UITableViewDelegate, UITableViewDataSource, 
             var extrasCount = 0
             let items = Bestellungen[Cell1Section].items[indexPath.section]
             var extras = Bestellungen[Cell1Section].extras[indexPath.section]
-            var newextras = extras[indexPath.row]
+            let newextras = extras[indexPath.row]
             for extras in newextras {
                     extrasCount = extrasCount + extras.count
                 
@@ -100,7 +103,18 @@ class KellnerCell: UITableViewCell, UITableViewDelegate, UITableViewDataSource, 
         cell.Bestellungen = Bestellungen
         cell.Cell2Section = indexPath.section
         cell.Cell2Row = indexPath.row
-
+        
+        if Bestellungen[Cell1Section].expanded == true {
+            gesamtPreisLbl.isHidden = false
+            gesamtPreisText.isHidden = false
+            timeLbl.isHidden = false
+        } else {
+            gesamtPreisLbl.isHidden = true
+            gesamtPreisText.isHidden = true
+            timeLbl.isHidden = true
+            
+        }
+        
         return cell
     }
     

@@ -10,8 +10,8 @@ import UIKit
 import Firebase
 
 class KellnerVC: UIViewController, UITableViewDelegate, UITableViewDataSource, ExpandableHeaderViewDelegate, kellnerCellDelegate {
+  
 
-    
     // VARS
     var Bestellungen = [KellnerTVSection]()
     var bestellungIDs = [String]()
@@ -728,7 +728,7 @@ class KellnerVC: UIViewController, UITableViewDelegate, UITableViewDataSource, E
             for unterkategorie in Bestellungen[indexPath.section].Unterkategorie {
                     UnterkategorieCount = UnterkategorieCount + unterkategorie.count
             }
-            return CGFloat(kategorieCount*40 + UnterkategorieCount*50 + itemsCount*118 + extraCount*50)
+            return CGFloat(kategorieCount*40 + UnterkategorieCount*50 + itemsCount*120 + extraCount*50)
         }
         else {
             return 0
@@ -781,16 +781,21 @@ class KellnerVC: UIViewController, UITableViewDelegate, UITableViewDataSource, E
         
         if Bestellungen[indexPath.section].expanded == false {
             cell.timeLbl.isHidden = true
+            cell.gesamtPreisLbl.isHidden = true
+
         } else {
+            cell.gesamtPreisLbl.isHidden = false
             cell.timeLbl.isHidden = false
         }
         var ItemsPreis = 0.0
         var ExtraPreis = 0.0
         
         for itemsPreise in  Bestellungen[indexPath.section].preis {
+           var mengen = Bestellungen[indexPath.section].menge
+
             for itemPreise in itemsPreise {
+               
                 for preis in itemPreise {
-                    
                     ItemsPreis = ItemsPreis + preis
                 }
             
@@ -808,7 +813,9 @@ class KellnerVC: UIViewController, UITableViewDelegate, UITableViewDataSource, E
         }
         
         cell.gesamtPreisLbl.text = "\(ExtraPreis+ItemsPreis) €"
-        
+    
+     ItemsPreis = 0.0
+     ExtraPreis = 0.0
         return cell
         
     }
@@ -856,6 +863,8 @@ class KellnerVC: UIViewController, UITableViewDelegate, UITableViewDataSource, E
          BestellungItemsNamen.removeAll()
          BestellungItemsPreise.removeAll()
          BestellungItemsMengen.removeAll()
+         BestellungenItemsExtrasNamen.removeAll()
+        BestellungenItemsExtrasPreise.removeAll()
          Tischnummer.removeAll()
          Angenommen.removeAll()
          FromUserID.removeAll()

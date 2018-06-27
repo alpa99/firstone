@@ -21,15 +21,15 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kRd-g4-rLx">
-                        <rect key="frame" x="0.0" y="11" width="257" height="21"/>
+                        <rect key="frame" x="0.0" y="11" width="239" height="21"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Lcm-tf-Kny">
-                        <rect key="frame" x="265" y="12" width="55" height="21"/>
+                        <rect key="frame" x="247" y="12" width="73" height="21"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="55" id="Cv4-bb-N6N"/>
+                            <constraint firstAttribute="width" constant="73" id="Nly-3B-Hol"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="textColor"/>
@@ -38,11 +38,11 @@
                 </subviews>
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 <constraints>
-                    <constraint firstAttribute="trailing" secondItem="Lcm-tf-Kny" secondAttribute="trailing" id="2eC-6D-gjo"/>
-                    <constraint firstItem="Lcm-tf-Kny" firstAttribute="bottom" secondItem="H2p-sc-9uM" secondAttribute="bottomMargin" id="Xaf-HH-Naa"/>
-                    <constraint firstItem="kRd-g4-rLx" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="fDa-mc-VLP"/>
-                    <constraint firstItem="Lcm-tf-Kny" firstAttribute="leading" secondItem="kRd-g4-rLx" secondAttribute="trailing" constant="8" symbolic="YES" id="qBR-d8-71O"/>
-                    <constraint firstItem="kRd-g4-rLx" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="ydv-vp-ZKW"/>
+                    <constraint firstAttribute="trailing" secondItem="Lcm-tf-Kny" secondAttribute="trailing" id="81B-29-Zsq"/>
+                    <constraint firstItem="kRd-g4-rLx" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="UMm-V2-egs"/>
+                    <constraint firstItem="Lcm-tf-Kny" firstAttribute="bottom" secondItem="H2p-sc-9uM" secondAttribute="bottomMargin" id="biT-A8-T1b"/>
+                    <constraint firstItem="kRd-g4-rLx" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="iB3-rJ-K5b"/>
+                    <constraint firstItem="Lcm-tf-Kny" firstAttribute="leading" secondItem="kRd-g4-rLx" secondAttribute="trailing" constant="8" symbolic="YES" id="rwM-3Z-yHE"/>
                 </constraints>
             </tableViewCellContentView>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
