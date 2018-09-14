@@ -70,7 +70,7 @@ class EinstellungenVC: UIViewController, UITextFieldDelegate {
                                     } else {
                                         self.alert(title: "Feler", message: (error?.localizedDescription)!, actiontitle: "Ok")
                                         
-                                    }
+                                     }
                                 })
 
                             }
