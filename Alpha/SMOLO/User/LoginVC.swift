@@ -32,6 +32,32 @@ class LoginVC: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var passwortVergessenLbl: UILabel!
     @IBOutlet weak var passwortVergessenEmail: UITextField!
     
+    // Constraints Y-Richtung
+    @IBOutlet weak var fo: NSLayoutConstraint!
+    @IBOutlet weak var fu: NSLayoutConstraint!
+    
+    @IBOutlet weak var so: NSLayoutConstraint!
+    @IBOutlet weak var su: NSLayoutConstraint!
+    
+    
+    @IBOutlet weak var fh: NSLayoutConstraint!
+    
+    @IBOutlet weak var sh: NSLayoutConstraint!
+    
+    @IBOutlet weak var eh: NSLayoutConstraint!
+    
+    @IBOutlet weak var ph: NSLayoutConstraint!
+    
+    @IBOutlet weak var pvh: NSLayoutConstraint!
+    
+    @IBOutlet weak var eah: NSLayoutConstraint!
+    
+    @IBOutlet weak var stackview: UIStackView!
+    
+    @IBOutlet weak var stackviewh: NSLayoutConstraint!
+    
+    
+    // Constraints X-Richtung
     
     // ACTIONS
     
@@ -303,8 +329,21 @@ class LoginVC: UIViewController, UITextFieldDelegate {
         }, withCancel: nil)
         
     }
+    override func viewWillAppear(_ animated: Bool) {
+        fo.constant = 57/588*self.view.frame.size.height
+        fu.constant = 71/588*self.view.frame.size.height
+        so.constant = 36/588*self.view.frame.size.height
+        su.constant = 113/588*self.view.frame.size.height
+        fh.constant = 36/588*self.view.frame.size.height
+        sh.constant = 36/588*self.view.frame.size.height
+        stackview.spacing = 18/588*self.view.frame.size.height
+        stackviewh.constant = 198/588*self.view.frame.size.height
+        eh.constant = 36/588*self.view.frame.size.height
+        ph.constant = 36/588*self.view.frame.size.height
+        pvh.constant = 36/588*self.view.frame.size.height
+        eah.constant = 36/588*self.view.frame.size.height
 
-    
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         Auth.auth().languageCode = "de"
