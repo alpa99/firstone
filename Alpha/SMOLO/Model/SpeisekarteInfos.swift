@@ -12,14 +12,10 @@ class SpeisekarteInfos: NSObject {
     var Name: String?
     var Preis: Int?
     
-    
     init(dictionary: [String: Any]) {
         self.Genre = dictionary["Genre"] as? String ?? ""
         self.Name = dictionary["Name"] as? String ?? ""
         self.Preis = dictionary["Preis"] as? Int ?? 0
-        
-        
-        
     }
 }
 

@@ -60,14 +60,11 @@ class LoginKellnerVC: UIViewController, UITextFieldDelegate {
                                 { try Auth.auth().signOut()            }
                                 catch let error as NSError
                                 {
-    
-                                    print(error.localizedDescription) }
+               print(error.localizedDescription) }
                             }
                             print("kein Kellner Login")
                         }
-
                     }, withCancel: nil)
-
                 } else {
                         //Tells the user that there is an error and then gets firebase to tell them the error
                         let alertController = UIAlertController(title: "Error", message: error?.localizedDescription, preferredStyle: .alert)
