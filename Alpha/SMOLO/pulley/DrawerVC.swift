@@ -203,7 +203,8 @@ class DrawerVC: UIViewController, PulleyDrawerViewControllerDelegate, UITableVie
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
+        self.view.backgroundColor = UIColor.gray
+
         BarTV.delegate = self
         BarTV.dataSource = self
         BarTV.register(barCell.self, forCellReuseIdentifier: cellID)

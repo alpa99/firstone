@@ -86,6 +86,7 @@ class PageViewController2: UIPageViewController, UIPageViewControllerDelegate, U
         // User is on the first view controller and swiped left to loop to
         // the last view controller.
         guard previousIndex >= 0 else {
+            
             // return orderedViewControllers.last
             // Uncommment the line below, remove the line above if you don't want the page control to loop.
             return nil

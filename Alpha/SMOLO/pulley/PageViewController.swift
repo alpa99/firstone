@@ -104,8 +104,12 @@ class PageViewController: UIPageViewController, UIPageViewControllerDelegate, UI
         print("hallo1")
 
         guard let viewControllerIndex = orderedViewControllers.index(of: viewController) else {
+            print("hahahaa1")
+
             return nil
         }
+        
+        if viewControllerIndex == 0 {
         let previousIndex = viewControllerIndex - 1
         
         // User is on the first view controller and swiped left to loop to
@@ -113,14 +117,24 @@ class PageViewController: UIPageViewController, UIPageViewControllerDelegate, UI
         guard previousIndex >= 0 else {
            // return orderedViewControllers.last
             // Uncommment the line below, remove the line above if you don't want the page control to loop.
-            
+            print("hahahaa2")
+
              return nil
         }
         
         guard orderedViewControllers.count > previousIndex else {
+            print("hahahaa3")
+
             return nil
         }
+            print("hahahaa4")
+
         return orderedViewControllers[previousIndex]
+        } else {
+            print("NEeeee")
+            return orderedViewControllers[viewControllerIndex]
+
+        }
     }
     
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {

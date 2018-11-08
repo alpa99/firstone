@@ -23,7 +23,6 @@ class LoginVC: UIViewController, UITextFieldDelegate {
     
     // OUTLETS
     @IBOutlet weak var loginBtn: UIButton!
-    @IBOutlet weak var kellnerLogin: UIButton!
     @IBOutlet weak var emailTextfield: UITextField!
     @IBOutlet weak var passwortTextfield: UITextField!
     
@@ -355,7 +354,6 @@ class LoginVC: UIViewController, UITextFieldDelegate {
         passwortTextfield.keyboardAppearance = UIKeyboardAppearance.dark
         passwortVergessenEmail.keyboardAppearance = UIKeyboardAppearance.dark
         loginBtn.layer.cornerRadius = 4
-        kellnerLogin.layer.cornerRadius = 4
         checkIfUserIsSignedIn()
 
     }
