@@ -225,9 +225,6 @@ class QRScanner: UIViewController, AVCaptureMetadataOutputObjectsDelegate, CLLoc
             tischnummer = 0
             self.present(alert, animated: true, completion: nil)
             
-            
-            
-            
             }
     }
     
@@ -239,8 +236,6 @@ class QRScanner: UIViewController, AVCaptureMetadataOutputObjectsDelegate, CLLoc
             vc.adresse = qrbaradresse
             vc.tischnummer = tischnummer
             vc.KellnerID = KellnerID
-            
-            
         }
     }
     // OTHERS

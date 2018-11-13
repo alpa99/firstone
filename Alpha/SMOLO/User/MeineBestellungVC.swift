@@ -11,17 +11,18 @@ import Firebase
 
 
 class MeineBestellungVC: UIViewController, UITableViewDataSource, UITableViewDelegate, ExpandableHeaderViewDelegate, kellnerCellDelegate{
+    
     func bewerten(sender: KellnerCell) {
         print("esfdedasxy")
         
         print(aktuelleBar, "difji")
         let bewertvc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "BewertungVC") as! BewertungVC
         bewertvc.bestelltebar = aktuelleBar
-        performSegue(withIdentifier: "BewertungVC", sender: self)
-        
+        self.performSegue(withIdentifier: "BewertungVC", sender: self)
     }
-     func prepare(for segue: UIStoryboardSegue, sender: KellnerCell) {
-        if segue.identifier == "BewertungVC"{
+    
+     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "BewertungVC" {
             let vc = segue.destination as! BewertungVC
            vc.bestelltebar = aktuelleBar
             print(aktuelleBar, "difji")
