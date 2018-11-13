@@ -81,12 +81,14 @@ class MeineBestellungVC: UIViewController, UITableViewDataSource, UITableViewDel
         var datref: DatabaseReference!
         datref = Database.database().reference()
         datref.child("userBestellungen").child(userUid).observe(.childAdded, with: { (snapshot) in
-
+print(snapshot, "snapshot")
             if let dictionary = snapshot.value as? [String: AnyObject]{
                 let bestellungInfos = BestellungInfos(dictionary: dictionary)
                 if bestellungInfos.Status == "versendet" {
                     self.bestellungIDs.append(snapshot.key)
+                    print(self.bestellungIDs, "bestellungIDs")
                     self.loadBestellungen(BestellungID: snapshot.key)
+                    
                 }
             }
         }, withCancel: nil)
@@ -94,11 +96,11 @@ class MeineBestellungVC: UIViewController, UITableViewDataSource, UITableViewDel
     }
     
     func loadBestellungen(BestellungID: String){
-        self.bestellungIDs.append(BestellungID)
         var datref: DatabaseReference!
         datref = Database.database().reference()
         datref.child("Bestellungen").child(aktuelleBar).child(BestellungID).observeSingleEvent(of: .value) { (snapshot) in
         for key in (snapshot.children.allObjects as? [DataSnapshot])! {
+            print(snapshot.children.allObjects, "all objects")
             if key.key == "Information" {
                 if let dictionary = key.value as? [String: AnyObject]{
                     
@@ -577,11 +579,16 @@ class MeineBestellungVC: UIViewController, UITableViewDataSource, UITableViewDel
                 
             }
         }
+print("hahah")
+            print(self.bestellungIDs, "ids")
+            print(self.BestellungKategorien, "BestellungKategorien")
 
             if self.bestellungIDs.count == self.BestellungKategorien.count {
                 for id in self.bestellungIDs {
                     self.setSectionsKellnerBestellung(BestellungID: id, tischnummer: self.Tischnummer[id]!, fromUserID: self.FromUserID[id]!, TimeStamp: self.TimeStamp[id]!, Kategorie: self.BestellungKategorien[id]!, Unterkategorie: self.BestellungUnterkategorien[id]!, items: self.BestellungItemsNamen[id]!, preis: self.BestellungItemsPreise[id]!, liter: self.BestellungItemsLiter[id]!, extras: self.BestellungenItemsExtrasNamen[id]!, extrasPreis: self.BestellungenItemsExtrasPreise[id]!, kommentar: self.BestellungItemsKommentar[id]!, menge: self.BestellungItemsMengen[id]!, expanded2: self.BestellungExpanded2[id]!, expanded: true)
+                    print("yyyy")
                     if self.Bestellungen.count == self.bestellungIDs.count{
+                        print("xxxx")
                         self.meineBestellungTV.reloadData()
                     }
                     

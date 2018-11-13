@@ -18,10 +18,6 @@ protocol BestellungVC2Delegate {
 }
 class BestellungVC2: UIViewController, UITableViewDataSource, UITableViewDelegate, ExpandableHeaderViewDelegate, BestellenCellDelegate, MyBestellungCellDelegate, PageObservation2, CLLocationManagerDelegate, UITextViewDelegate, ExtraCellDelegate, GADInterstitialDelegate {
 
-
-    
-    
-
     // VARS
     var interstitial: GADInterstitial!
     var barname = "NewBar"

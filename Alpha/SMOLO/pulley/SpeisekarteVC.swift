@@ -15,6 +15,7 @@ import CoreLocation
 
 
 class SpeisekarteVC: UIViewController, UITableViewDataSource, UITableViewDelegate, PulleyDrawerViewControllerDelegate, ExpandableHeaderViewDelegate, PageObservation, SpeisekarteDelegate {
+    
     func reloadUnterkategorie(sender: SpeisekarteCelle) {
         print("jallladflsdf")
         sections = sender.sections
@@ -69,7 +70,6 @@ class SpeisekarteVC: UIViewController, UITableViewDataSource, UITableViewDelegat
                     }
 
         }, withCancel: nil)
-
 
         }
 
@@ -184,11 +184,11 @@ class SpeisekarteVC: UIViewController, UITableViewDataSource, UITableViewDelegat
             var heightForRowAt: Int?
 
             if (sections[indexPath.section].expanded) {
-                
                 heightForRowAt = (sections[indexPath.section].Unterkategorie.count*60)
                 for expandend in sections[indexPath.section].expanded2 {
                     if expandend == true {
-                        heightForRowAt = heightForRowAt! + sections[indexPath.section].items[indexPath.row].count*36
+                        print("dsfdfd")
+    heightForRowAt = heightForRowAt! + sections[indexPath.section].items[indexPath.row].count*36
                     }
                 }
                 
@@ -219,8 +219,6 @@ class SpeisekarteVC: UIViewController, UITableViewDataSource, UITableViewDelegat
         header.layer.cornerRadius = 5
         header.layer.backgroundColor = UIColor.clear.cgColor
             header.customInit(tableView: tableView, title: sections[section].Kategorie, section: section, delegate: self as ExpandableHeaderViewDelegate)
-        
-        
         return header
     }
     
@@ -245,7 +243,6 @@ class SpeisekarteVC: UIViewController, UITableViewDataSource, UITableViewDelegat
         
         func toggleSection(tableView: UITableView, header: ExpandableHeaderView, section: Int) {
 
-            
                 for i in 0..<sections.count{
                     if i == section {
                         sections[section].expanded = !sections[section].expanded
@@ -254,13 +251,9 @@ class SpeisekarteVC: UIViewController, UITableViewDataSource, UITableViewDelegat
                         
                     }
                 }
-                
                 SpeisekarteTableView.beginUpdates()
-
-                    SpeisekarteTableView.reloadRows(at: [IndexPath(row: 0, section: section)], with: .automatic)
-                
+                SpeisekarteTableView.reloadRows(at: [IndexPath(row: 0, section: section)], with: .automatic)
                 SpeisekarteTableView.endUpdates()
-
         }
    
     // PULLEY
@@ -276,10 +269,6 @@ class SpeisekarteVC: UIViewController, UITableViewDataSource, UITableViewDelegat
     func supportedDrawerPositions() -> [PulleyPosition] {
         return PulleyPosition.all
     }
-
-    
-
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
