@@ -14,7 +14,6 @@ import GoogleMobileAds
 
 protocol BestellungVC2Delegate {
     func reloaddas(sender: Any)
-  
 }
 class BestellungVC2: UIViewController, UITableViewDataSource, UITableViewDelegate, ExpandableHeaderViewDelegate, BestellenCellDelegate, MyBestellungCellDelegate, PageObservation2, CLLocationManagerDelegate, UITextViewDelegate, ExtraCellDelegate, GADInterstitialDelegate {
 
@@ -283,6 +282,7 @@ class BestellungVC2: UIViewController, UITableViewDataSource, UITableViewDelegat
                             }
                         }
                     }
+                    
                 } else {
                     self.Unterkategorien.updateValue([key.key], forKey: Kategorie)
                     self.Expanded.updateValue([false], forKey: Kategorie)

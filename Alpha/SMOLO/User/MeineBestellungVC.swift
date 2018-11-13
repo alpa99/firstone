@@ -10,13 +10,31 @@ import UIKit
 import Firebase
 
 
-class MeineBestellungVC: UIViewController, UITableViewDataSource, UITableViewDelegate, ExpandableHeaderViewDelegate {
+class MeineBestellungVC: UIViewController, UITableViewDataSource, UITableViewDelegate, ExpandableHeaderViewDelegate, kellnerCellDelegate{
+    func bewerten(sender: KellnerCell) {
+        print("esfdedasxy")
+        
+        print(aktuelleBar, "difji")
+        let bewertvc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "BewertungVC") as! BewertungVC
+        bewertvc.bestelltebar = aktuelleBar
+        performSegue(withIdentifier: "BewertungVC", sender: self)
+        
+    }
+     func prepare(for segue: UIStoryboardSegue, sender: KellnerCell) {
+        if segue.identifier == "BewertungVC"{
+            let vc = segue.destination as! BewertungVC
+           vc.bestelltebar = aktuelleBar
+            print(aktuelleBar, "difji")
+        }
+    }
+    
     func toggleSection(tableView: UITableView, header: ExpandableHeaderView, section: Int) {
         
     }
     
     
     // VARS
+    var delegate: kellnerCellDelegate?
     var aktuelleBar = String()
     var aktuellerTisch = String()
     var letzteBestellungZeit = Double()
@@ -50,9 +68,12 @@ class MeineBestellungVC: UIViewController, UITableViewDataSource, UITableViewDel
     // OUTLETS
     
     @IBOutlet weak var meineBestellungTV: UITableView!
+    @IBOutlet weak var Bewerten: UIButton!
     
     
     // ACTIONS
+    
+  
     
 
     func loadAktuelleBar(){
@@ -84,7 +105,11 @@ class MeineBestellungVC: UIViewController, UITableViewDataSource, UITableViewDel
 
             if let dictionary = snapshot.value as? [String: AnyObject]{
                 let bestellungInfos = BestellungInfos(dictionary: dictionary)
+                print(snapshot.value, "jsdfkjsdkklsdfds")
+                print(snapshot.key, "jsdfkjsdkklsdfds")
+
                 if bestellungInfos.Status == "versendet" {
+                    print("jhgewfew1")
                     self.bestellungIDs.append(snapshot.key)
                     self.loadBestellungen(BestellungID: snapshot.key)
                 }
@@ -94,12 +119,15 @@ class MeineBestellungVC: UIViewController, UITableViewDataSource, UITableViewDel
     }
     
     func loadBestellungen(BestellungID: String){
-        self.bestellungIDs.append(BestellungID)
         var datref: DatabaseReference!
         datref = Database.database().reference()
         datref.child("Bestellungen").child(aktuelleBar).child(BestellungID).observeSingleEvent(of: .value) { (snapshot) in
+            print(snapshot)
+
         for key in (snapshot.children.allObjects as? [DataSnapshot])! {
             if key.key == "Information" {
+                print("jhgewfew2")
+
                 if let dictionary = key.value as? [String: AnyObject]{
                     
                     let bestellungInfos = BestellungInfos(dictionary: dictionary)
@@ -583,6 +611,12 @@ class MeineBestellungVC: UIViewController, UITableViewDataSource, UITableViewDel
                     self.setSectionsKellnerBestellung(BestellungID: id, tischnummer: self.Tischnummer[id]!, fromUserID: self.FromUserID[id]!, TimeStamp: self.TimeStamp[id]!, Kategorie: self.BestellungKategorien[id]!, Unterkategorie: self.BestellungUnterkategorien[id]!, items: self.BestellungItemsNamen[id]!, preis: self.BestellungItemsPreise[id]!, liter: self.BestellungItemsLiter[id]!, extras: self.BestellungenItemsExtrasNamen[id]!, extrasPreis: self.BestellungenItemsExtrasPreise[id]!, kommentar: self.BestellungItemsKommentar[id]!, menge: self.BestellungItemsMengen[id]!, expanded2: self.BestellungExpanded2[id]!, expanded: true)
                     if self.Bestellungen.count == self.bestellungIDs.count{
                         self.meineBestellungTV.reloadData()
+//                        if self.bestellungIDs.count != 0 {
+//                            self.Bewerten.setTitle("Bitte bewerte deine Produkte", for: UIControlState.normal)
+//                        } else{
+//                            self.Bewerten.setTitle("empty", for: UIControlState.normal)
+//                        }
+                        
                     }
                     
                 }
@@ -595,6 +629,7 @@ class MeineBestellungVC: UIViewController, UITableViewDataSource, UITableViewDel
     
     func setSectionsKellnerBestellung(BestellungID: String, tischnummer: String, fromUserID: String, TimeStamp: Double, Kategorie: [String], Unterkategorie: [[String]], items: [[[String]]], preis: [[[Double]]], liter: [[[String]]], extras: [[[[String]]]], extrasPreis: [[[[Double]]]], kommentar: [[[String]]], menge: [[[Int]]], expanded2: [[Bool]], expanded: Bool){
         self.Bestellungen.append(KellnerTVSection(BestellungID: BestellungID, tischnummer: tischnummer, fromUserID: fromUserID, timeStamp: TimeStamp, Kategorie: Kategorie, Unterkategorie: Unterkategorie, items: items, preis: preis, liter: liter, extras: extras, extrasPreis: extrasPreis, kommentar: kommentar, menge: menge, expanded2: expanded2, expanded: expanded))
+        self.meineBestellungTV.reloadData()
     }
     
     
@@ -602,6 +637,7 @@ class MeineBestellungVC: UIViewController, UITableViewDataSource, UITableViewDel
     // TABLE
     func numberOfSections(in tableView: UITableView) -> Int {
         return self.Bestellungen.count
+        
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 1
@@ -672,11 +708,12 @@ class MeineBestellungVC: UIViewController, UITableViewDataSource, UITableViewDel
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = Bundle.main.loadNibNamed("KellnerCell", owner: self, options: nil)?.first as! KellnerCell
-        
+        print(Bestellungen, "Bestellungen")
         cell.Bestellungen = Bestellungen
         cell.Cell1Section = indexPath.section
         cell.bestellungID = Bestellungen[indexPath.section].BestellungID
         cell.annehmen.setTitle("Status: \(Status[Bestellungen[indexPath.section].BestellungID]!)", for: .normal)
+        cell.delegate = self
         
         if Status[Bestellungen[indexPath.section].BestellungID] != "versendet" {
             cell.annehmen.backgroundColor = UIColor.green
@@ -697,6 +734,7 @@ class MeineBestellungVC: UIViewController, UITableViewDataSource, UITableViewDel
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         print(Auth.auth().currentUser?.uid ?? "keineuid")
         userUid = (Auth.auth().currentUser?.uid)!
         loadAktuelleBar()

@@ -9,10 +9,7 @@
 import UIKit
 
 class BestellungAbschickenVC: UIViewController {
-    
-    
-
-    
+        
     @IBAction func zuMeinenBestellungenSegue(_ sender: Any) {
         self.tabBarController?.selectedIndex = 2
     }

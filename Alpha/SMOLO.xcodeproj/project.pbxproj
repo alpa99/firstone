@@ -83,6 +83,8 @@
 		FCBCA28E5975849AF85ED466 /* Pods_SMOLOTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D92BA6E8AA26233EE5256989 /* Pods_SMOLOTests.framework */; };
 		FD0DDBFC204B1CD200E40E81 /* pin.png in Resources */ = {isa = PBXBuildFile; fileRef = FD0DDBFB204B1CD200E40E81 /* pin.png */; };
 		FD0DDC00204E0F6E00E40E81 /* Bilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD0DDBFF204E0F6E00E40E81 /* Bilder.swift */; };
+		FD4E42452195AB9200362536 /* BewertungVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD4E42442195AB9200362536 /* BewertungVC.swift */; };
+		FD6CDA4F21957A4300F7FE62 /* Bewertungskategorien.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD6CDA4E21957A4200F7FE62 /* Bewertungskategorien.swift */; };
 		FD7DDBFB20C970C8008CDE12 /* EinstellungenVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD7DDBFA20C970C8008CDE12 /* EinstellungenVC.swift */; };
 		FD7DDC0020CA8EB8008CDE12 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = FD7DDBFF20CA8EB8008CDE12 /* GoogleService-Info.plist */; };
 		FD7DDC0220CEBE69008CDE12 /* Oeffnungszeiten.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD7DDC0120CEBE69008CDE12 /* Oeffnungszeiten.swift */; };
@@ -198,6 +200,8 @@
 		EA15B0E38B10A65CA61D6CB7 /* Pods-SMOLOUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SMOLOUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-SMOLOUITests/Pods-SMOLOUITests.release.xcconfig"; sourceTree = "<group>"; };
 		FD0DDBFB204B1CD200E40E81 /* pin.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pin.png; sourceTree = SOURCE_ROOT; };
 		FD0DDBFF204E0F6E00E40E81 /* Bilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bilder.swift; sourceTree = "<group>"; };
+		FD4E42442195AB9200362536 /* BewertungVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BewertungVC.swift; sourceTree = "<group>"; };
+		FD6CDA4E21957A4200F7FE62 /* Bewertungskategorien.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bewertungskategorien.swift; sourceTree = "<group>"; };
 		FD7DDBFA20C970C8008CDE12 /* EinstellungenVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EinstellungenVC.swift; sourceTree = "<group>"; };
 		FD7DDBFC20CA86D9008CDE12 /* SMOLO.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SMOLO.entitlements; sourceTree = "<group>"; };
 		FD7DDBFF20CA8EB8008CDE12 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -286,6 +290,7 @@
 				08E0F454205FDABC002435DE /* MeineBestellungVC.swift */,
 				FD7DDBFA20C970C8008CDE12 /* EinstellungenVC.swift */,
 				945D1B3220E2DD3200CC0BC2 /* FeedbackVC.swift */,
+				FD4E42442195AB9200362536 /* BewertungVC.swift */,
 			);
 			path = User;
 			sourceTree = "<group>";
@@ -390,6 +395,7 @@
 				08EAEA69206079920095F75F /* SpeisekarteInformation.swift */,
 				FD9A43CE20AB4FFB00FFD947 /* BarItems.swift */,
 				FD7DDC0120CEBE69008CDE12 /* Oeffnungszeiten.swift */,
+				FD6CDA4E21957A4200F7FE62 /* Bewertungskategorien.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -411,8 +417,8 @@
 			children = (
 				4EC247CC1F98F90500910AA8 /* QRScanner.swift */,
 				4E3728401FE3E34E000DAF97 /* DetailVC2.swift */,
-				08EF4C471F9CFE9800F01096 /* BestellungVC2.swift */,
 				4EEB60821FDF2BAB0003BA0E /* PageViewController2.swift */,
+				08EF4C471F9CFE9800F01096 /* BestellungVC2.swift */,
 				087796DD204AFA410066D6F5 /* BestellungAbschickenVC.swift */,
 			);
 			path = scanner;
@@ -710,6 +716,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FD4E42452195AB9200362536 /* BewertungVC.swift in Sources */,
 				082A6F12206D642700B8C43D /* MyBestellungCell.swift in Sources */,
 				945D1B3320E2DD3200CC0BC2 /* FeedbackVC.swift in Sources */,
 				947CD6EE20DE3E9000165139 /* KellnerExtrasCell.swift in Sources */,
@@ -744,6 +751,7 @@
 				FD0DDC00204E0F6E00E40E81 /* Bilder.swift in Sources */,
 				08EF4C401F9CF0FE00F01096 /* BestellungInfos.swift in Sources */,
 				08EAEA6A206079920095F75F /* SpeisekarteInformation.swift in Sources */,
+				FD6CDA4F21957A4300F7FE62 /* Bewertungskategorien.swift in Sources */,
 				087796DE204AFA410066D6F5 /* BestellungAbschickenVC.swift in Sources */,
 				08DB09372061D95C007848E4 /* ExpandleHeaderView2.swift in Sources */,
 				08DB092A2061415B007848E4 /* SpeisekarteCelle.swift in Sources */,
