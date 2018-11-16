@@ -13,19 +13,17 @@ import Firebase
 class MeineBestellungVC: UIViewController, UITableViewDataSource, UITableViewDelegate, ExpandableHeaderViewDelegate, kellnerCellDelegate{
     
     func bewerten(sender: KellnerCell) {
-        print("esfdedasxy")
-        
-        print(aktuelleBar, "difji")
-        let bewertvc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "BewertungVC") as! BewertungVC
-        bewertvc.bestelltebar = aktuelleBar
+        bewertenBestellung = [Bestellungen[sender.Cell1Section]]
         self.performSegue(withIdentifier: "BewertungVC", sender: self)
     }
+    
+   
     
      override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "BewertungVC" {
             let vc = segue.destination as! BewertungVC
            vc.bestelltebar = aktuelleBar
-            print(aktuelleBar, "difji")
+            vc.Bestellungen = bewertenBestellung
         }
     }
     
@@ -35,6 +33,7 @@ class MeineBestellungVC: UIViewController, UITableViewDataSource, UITableViewDel
     
     
     // VARS
+    var bewertenBestellung = [KellnerTVSection]()
     var delegate: kellnerCellDelegate?
     var aktuelleBar = String()
     var aktuellerTisch = String()
@@ -81,7 +80,6 @@ class MeineBestellungVC: UIViewController, UITableViewDataSource, UITableViewDel
         var datref: DatabaseReference!
         datref = Database.database().reference()
         datref.child("Users").child(userUid).observeSingleEvent(of: .value, with: { (snapshotAktuell) in
-            print(snapshotAktuell, "aktuell")
             if let dictionary = snapshotAktuell.value as? [String: AnyObject]{
                 let userinfos = UserInfos(dictionary: dictionary)
                 print(self.aktuelleBar)
@@ -106,11 +104,8 @@ class MeineBestellungVC: UIViewController, UITableViewDataSource, UITableViewDel
 print(snapshot, "snapshot")
             if let dictionary = snapshot.value as? [String: AnyObject]{
                 let bestellungInfos = BestellungInfos(dictionary: dictionary)
-                print(snapshot.value, "jsdfkjsdkklsdfds")
-                print(snapshot.key, "jsdfkjsdkklsdfds")
 
                 if bestellungInfos.Status == "versendet" {
-                    print("jhgewfew1")
                     self.bestellungIDs.append(snapshot.key)
                     print(self.bestellungIDs, "bestellungIDs")
                     self.loadBestellungen(BestellungID: snapshot.key)
@@ -128,7 +123,6 @@ print(snapshot, "snapshot")
             print(snapshot)
 
         for key in (snapshot.children.allObjects as? [DataSnapshot])! {
-            print(snapshot.children.allObjects, "all objects")
             if key.key == "Information" {
                 print("jhgewfew2")
 
@@ -640,7 +634,7 @@ print("hahah")
         self.Bestellungen.append(KellnerTVSection(BestellungID: BestellungID, tischnummer: tischnummer, fromUserID: fromUserID, timeStamp: TimeStamp, Kategorie: Kategorie, Unterkategorie: Unterkategorie, items: items, preis: preis, liter: liter, extras: extras, extrasPreis: extrasPreis, kommentar: kommentar, menge: menge, expanded2: expanded2, expanded: expanded))
         self.meineBestellungTV.reloadData()
     }
-    
+ 
     
     
     // TABLE
@@ -717,7 +711,6 @@ print("hahah")
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = Bundle.main.loadNibNamed("KellnerCell", owner: self, options: nil)?.first as! KellnerCell
-        print(Bestellungen, "Bestellungen")
         cell.Bestellungen = Bestellungen
         cell.Cell1Section = indexPath.section
         cell.bestellungID = Bestellungen[indexPath.section].BestellungID

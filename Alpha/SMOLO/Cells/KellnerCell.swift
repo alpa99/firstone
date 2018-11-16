@@ -19,6 +19,7 @@ class KellnerCell: UITableViewCell, UITableViewDelegate, UITableViewDataSource, 
     var Cell1Section = Int()
     var bestellungID = String()
     var delegate: kellnerCellDelegate?
+    var BewertenBestellung = [KellnerTVSection]()
     
     @IBOutlet weak var bewertung: UIButton!
     
@@ -34,6 +35,7 @@ class KellnerCell: UITableViewCell, UITableViewDelegate, UITableViewDataSource, 
     @IBOutlet weak var gesamtPreisText: UILabel!
     
     @IBAction func bewertung(_ sender: Any) {
+        BewertenBestellung = [Bestellungen[Cell1Section]]
         delegate?.bewerten(sender: self)
     }
 
