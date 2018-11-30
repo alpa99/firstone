@@ -91,6 +91,10 @@ class KellnerCell2: UITableViewCell, UITableViewDelegate, UITableViewDataSource,
         var newKommentare = Kommentare[Cell2Row]
         var Extras = Bestellungen[Cell1Section].extras[Cell2Section]
         var newExtras = Extras[Cell2Row]
+        print(Bestellungen, "bestellung")
+        print(Extras, "Extras")
+        print(Cell2Row, "Cell2Row")
+        print(indexPath.row, "indexPath.row")
         var newnewExtras = newExtras[indexPath.row]
         var ExtrasPreise = Bestellungen[Cell1Section].extrasPreis[Cell2Section]
         var newExtrasPreise = ExtrasPreise[Cell2Row]

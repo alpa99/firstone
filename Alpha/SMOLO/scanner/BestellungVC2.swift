@@ -419,7 +419,9 @@ class BestellungVC2: UIViewController, UITableViewDataSource, UITableViewDelegat
 
     }
 
-
+    func preisBerechnen(){
+        print(self.bestellteItemsDictionary, "dictionary")
+    }
 
 
     @IBAction func funcItemPlusTapped(_ sender: Any) {

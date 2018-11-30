@@ -24,7 +24,6 @@ class UserVC: UIViewController {
 
     @IBAction func feedback(_ sender: Any) {
         performSegue(withIdentifier: "feedback", sender: self)
-
     }
     
     

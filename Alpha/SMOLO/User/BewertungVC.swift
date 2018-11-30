@@ -140,7 +140,7 @@ class BewertungVC: UIViewController/*, UITableViewDataSource, UITableViewDelegat
                         print(self.BewUKat, "2")
                         print(self.Items, "3")
 
-                        self.setSectionsBewertbar(timeStamp: 1234.5, Kategorie: kategorie, Unterkategorie: self.BewUKat[kategorie]!, items: self.Items[kategorie]!)
+//                        self.setSectionsBewertbar(timeStamp: 1234.5, Kategorie: kategorie, Unterkategorie: self.BewUKat[kategorie]!, items: self.Items[kategorie]!)
                         print(self.Bewertbar, 123455665432)
                     }
                     
