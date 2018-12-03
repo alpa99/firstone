@@ -24,7 +24,8 @@ class BewertungVC: UIViewController/*, UITableViewDataSource, UITableViewDelegat
     var bestelltebar = " "
     var Bestellungen = [KellnerTVSection]()
     var Bewertbar = [BewertungSection]()
-    
+    var Matchbar = [BewertungSection]()
+
 //
 //    func toggleSection(tableView: UITableView, header: ExpandableHeaderView, section: Int) {
 //        
@@ -52,10 +53,11 @@ class BewertungVC: UIViewController/*, UITableViewDataSource, UITableViewDelegat
     var KellnerID = String()
     
     var Items = [String: [[String]]]()
-
+    var MatchItems = [String: [[String]]]()
+    
     var BewUKat = [String: [String]]()
     var BewKat = [String]()
-    var MatchUKat = [String]()
+    var MatchUKat = [String: [String]]()
     var MatchKat = [String]()
     var katcounter = 0
     var fetchcounter = 0
@@ -65,7 +67,7 @@ class BewertungVC: UIViewController/*, UITableViewDataSource, UITableViewDelegat
 
     // ACTIONS
 
-    func fetchUnterkategorie(){
+    func fetchKategorie(){
         var datref: DatabaseReference!
         datref = Database.database().reference()
         datref.child("Speisekarten").child(bestelltebar).observe(.childAdded, with: { (snapshot) in
@@ -97,81 +99,111 @@ class BewertungVC: UIViewController/*, UITableViewDataSource, UITableViewDelegat
         
         var datref: DatabaseReference!
         datref = Database.database().reference()
-        datref.child("Speisekarten").child(bestelltebar).child(Kategorie).observe(.childAdded, with: { (snapshot) in
+        datref.child("Speisekarten").child(bestelltebar).child(Kategorie).observeSingleEvent(of: .value, with: { (snapshot) in
             for key in (snapshot.children.allObjects as? [DataSnapshot])! {
                 let snapshotItem = snapshot.childSnapshot(forPath: key.key)
                 if key.key != "Extras" {
-                    if self.BewUKat[Kategorie] != nil {
-                        self.BewUKat[Kategorie]?.append(key.key)
-                        for items in (snapshotItem.children.allObjects as? [DataSnapshot])!{
-                            if let dictionary = items.value as? [String: AnyObject]{
-                                let item = SpeisekarteInformation(dictionary: dictionary)
-                                var newitems = self.Items[Kategorie]
-                                if (self.Items[Kategorie]?.count)! < (self.BewUKat[Kategorie]?.count)!{
-                                    newitems?.append([item.Name!])
-                                    self.Items[Kategorie] = newitems
-                                } else{
-                                    newitems![(self.BewUKat[Kategorie]?.index(of: key.key))!].append(item.Name!)
-                                    self.Items[Kategorie] = newitems
-                                }
-                            }
-                        }
-                        
-                    }else{
-                        self.BewUKat.updateValue([key.key], forKey: Kategorie)
-                        for items in (snapshotItem.children.allObjects as? [DataSnapshot])!{
-                            if let dictionary = items.value as? [String: AnyObject]{
-                                let item = SpeisekarteInformation(dictionary: dictionary)
-                                if self.Items[Kategorie] != nil{
-                                    var newItems = self.Items[Kategorie]
-                                    newItems![(self.BewUKat[Kategorie]?.index(of: key.key))!].append(item.Name!)
-                                    self.Items[Kategorie] = newItems
-                                } else {
-                                    self.Items.updateValue([[item.Name!]], forKey: Kategorie)
-                                }
-                            }
-                        }
-                    }
-                }
-                if self.BewUKat.count == self.BewKat.count {
-                    print(self.BewKat,"0")
-                    for kategorie in self.BewKat {
-                        print(kategorie, "1")
-                        print(self.BewUKat, "2")
-                        print(self.Items, "3")
-
-//                        self.setSectionsBewertbar(timeStamp: 1234.5, Kategorie: kategorie, Unterkategorie: self.BewUKat[kategorie]!, items: self.Items[kategorie]!)
-                        print(self.Bewertbar, 123455665432)
-                    }
+                    if let bewertungValue = key.value as? [String: AnyObject]{
+                        for bewertbar in bewertungValue {
+                            if bewertbar.key == "Bewertbar" {
+                                if let bewertbarvalue = bewertbar.value as? Bool {
+                                    let bewertbarVar = bewertbarvalue
+                                    if bewertbarVar == true {
+                                        
+                                        if self.BewUKat[Kategorie] != nil {
+                                            self.BewUKat[Kategorie]?.append(key.key)
+                                            for items in (snapshotItem.children.allObjects as? [DataSnapshot])!{
+                                                if let dictionary = items.value as? [String: AnyObject]{
+                                                    let item = SpeisekarteInformation(dictionary: dictionary)
+                                                    var newitems = self.Items[Kategorie]
+                                                    if (self.Items[Kategorie]?.count)! < (self.BewUKat[Kategorie]?.count)!{
+                                                        newitems?.append([item.Name!])
+                                                        self.Items[Kategorie] = newitems
+                                                    } else{
+                                                        newitems![(self.BewUKat[Kategorie]?.index(of: key.key))!].append(item.Name!)
+                                                        self.Items[Kategorie] = newitems
+                                                    }
+                                                }
+                                            }
+                                            
+                                        }else{
+                                            self.BewUKat.updateValue([key.key], forKey: Kategorie)
+                                            for items in (snapshotItem.children.allObjects as? [DataSnapshot])!{
+                                                print(snapshotItem.children.allObjects as? [DataSnapshot], "Das willst du sehen")
+                                                if let dictionary = items.value as? [String: AnyObject]{
+                                                    let item = SpeisekarteInformation(dictionary: dictionary)
+                                                    if self.Items[Kategorie] != nil{
+                                                        var newItems = self.Items[Kategorie]
+                                                        newItems![(self.BewUKat[Kategorie]?.index(of: key.key))!].append(item.Name!)
+                                                        self.Items[Kategorie] = newItems
+                                                    } else {
+                                                        self.Items.updateValue([[item.Name!]], forKey: Kategorie)
+                                                    }
+                                                }
+                                            }
+                                            
+                                        }
+                                    }}}}}}
+            }
+            if self.BewUKat.count == self.BewKat.count {
+                print(self.BewKat,"0")
+                for kategorie in self.BewKat {
+                    print(kategorie, "1")
+                    print(self.BewUKat, "2")
+                    print(self.Items, "3")
                     
+                    //                        self.setSectionsBewertbar(timeStamp: 1234.5, Kategorie: kategorie, Unterkategorie: self.BewUKat[kategorie]!, items: self.Items[kategorie]!)
+                    print(self.Bewertbar, 123455665432)
                 }
+                self.matchKategorie()
             }
         }, withCancel: nil)
         
     }
     
+    func matchKategorie (){
+        print (Bestellungen[0].Kategorie, Bestellungen[0].Unterkategorie, "ich wurde geprinted")
+        for kat in Bestellungen[0].Kategorie{
+            if BewKat.contains(kat){
+                self.MatchKat.append(kat)
+                print(MatchKat, "MATCHKAT")
+                self.matchUnterkategorie(Kategorie: kat)
+            } } }
     
-//    func searchformatch (){
-//        katcounter = Bestellungen[0].Unterkategorie.count
-//        print (Bestellungen[0].Kategorie, Bestellungen[0].Unterkategorie, "ich wurde geprinted")
-//        for kat in Bestellungen[0].Kategorie{
-//            if BewKat.contains(kat){
-//                if MatchKat.contains(kat){}else {
-//                    MatchKat.append(kat)
-//                    print(MatchKat, "matchKAT")
-//                    for ukat in Bestellungen[0].Unterkategorie{
-//                        katcounter -= 1
-//                        for i in ukat {
-//                            if BewUKat.contains(i) {
-//                                if MatchUKat.contains(i){
-//                                    print("hier geh ich rein")
-//                                }else{
-//                                    MatchUKat.append(i)
-//                                    print(MatchUKat, "matchUKAT")
-//                                    if katcounter == 0{
-//                                        self.prepareVote()
-//                                        print("now i vote")
-//                                    } } } } } } } } }
+    func matchUnterkategorie (Kategorie: String){
+        let index = Bestellungen[0].Kategorie.index(of: Kategorie)
+        let a = Bestellungen[0].Unterkategorie[index!]
+        for ukat in a{
+            print( ukat, "ukat" )
+            if (BewUKat[Kategorie]?.contains(ukat))!{
+                if self.MatchUKat[Kategorie] != nil {
+                    
+                    self.MatchUKat[Kategorie]?.append(ukat)
+                    print( MatchUKat, "MatchUKAT1")
+                    print(Bestellungen[0].items, "ITEMSSS")
+                    //                    if self.MatchItems[Kategorie] != nil{
+                    //                        var newItems = self.MatchItems[Kategorie]
+                    //                        newItems![(self.MatchUKat[Kategorie]?.index(of: ukat))!].append(item.Name!)
+                    //                        self.MatchItems[Kategorie] = newItems
+                    //
+                    //                    } else {
+                    //                        self.Items.updateValue([[item.Name!]], forKey: Kategorie)
+                    //                    }
+                    
+                }else{
+                    self.MatchUKat.updateValue([ukat], forKey: Kategorie)
+                    //self.MatchItems.updateValue([[String]], forKey: Kategorie)
+                    print( MatchUKat, "MatchUKAT2")
+                    print(Bestellungen[0].items, "ITEMSSS")
+                    if self.MatchItems[Kategorie] != nil{
+                        // self.MatchItems[Kategorie]?.append(Bestellungen[0].items)
+                    }
+                    
+                }
+            }
+        }
+        
+    }
 //    func prepareVote (){
 //        print(MatchKat, "MatchKat")
 //        print(MatchUKat, "MatchUKat")
@@ -191,10 +223,13 @@ class BewertungVC: UIViewController/*, UITableViewDataSource, UITableViewDelegat
 
 //
     
+    
     func setSectionsBewertbar(timeStamp: Double, Kategorie: String, Unterkategorie: [String], items: [[String]]){
         self.Bewertbar.append(BewertungSection(timeStamp: timeStamp, Kategorie: Kategorie, Unterkategorie: Unterkategorie, items: items))
     }
-    
+    func setSectionsMatchbar(timeStamp: Double, Kategorie: String, Unterkategorie: [String], items: [[String]]){
+        self.Matchbar.append(BewertungSection(timeStamp: timeStamp, Kategorie: Kategorie, Unterkategorie: Unterkategorie, items: items))
+    }
     
 //    func setSectionsKellnerBestellung(BestellungID: String, tischnummer: String, fromUserID: String, TimeStamp: Double, Kategorie: [String], Unterkategorie: [[String]], items: [[[String]]], preis: [[[Double]]], liter: [[[String]]], extras: [[[[String]]]], extrasPreis: [[[[Double]]]], kommentar: [[[String]]], menge: [[[Int]]], expanded2: [[Bool]], expanded: Bool){
 //        self.Bestellungen.append(KellnerTVSection(BestellungID: BestellungID, tischnummer: tischnummer, fromUserID: fromUserID, timeStamp: TimeStamp, Kategorie: Kategorie, Unterkategorie: Unterkategorie, items: items, preis: preis, liter: liter, extras: extras, extrasPreis: extrasPreis, kommentar: kommentar, menge: menge, expanded2: expanded2, expanded: expanded))
@@ -308,7 +343,7 @@ class BewertungVC: UIViewController/*, UITableViewDataSource, UITableViewDelegat
 //        userUid = (Auth.auth().currentUser?.uid)!
 //        loadAktuelleBar()
         self.view.backgroundColor = UIColor(patternImage: UIImage(named: "hintergrund")!)
-        fetchUnterkategorie()
+        fetchKategorie()
 
     }
     override func viewDidAppear(_ animated: Bool) {
