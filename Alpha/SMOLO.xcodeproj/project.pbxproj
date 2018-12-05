@@ -84,6 +84,8 @@
 		FCBCA28E5975849AF85ED466 /* Pods_SMOLOTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D92BA6E8AA26233EE5256989 /* Pods_SMOLOTests.framework */; };
 		FD0DDBFC204B1CD200E40E81 /* pin.png in Resources */ = {isa = PBXBuildFile; fileRef = FD0DDBFB204B1CD200E40E81 /* pin.png */; };
 		FD0DDC00204E0F6E00E40E81 /* Bilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD0DDBFF204E0F6E00E40E81 /* Bilder.swift */; };
+		FD167ED521B6F46E00BF1DAA /* BewertungTVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD167ED321B6F46E00BF1DAA /* BewertungTVCell.swift */; };
+		FD167ED621B6F46E00BF1DAA /* BewertungTVCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FD167ED421B6F46E00BF1DAA /* BewertungTVCell.xib */; };
 		FD4E42452195AB9200362536 /* BewertungVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD4E42442195AB9200362536 /* BewertungVC.swift */; };
 		FD7DDBFB20C970C8008CDE12 /* EinstellungenVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD7DDBFA20C970C8008CDE12 /* EinstellungenVC.swift */; };
 		FD7DDC0020CA8EB8008CDE12 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = FD7DDBFF20CA8EB8008CDE12 /* GoogleService-Info.plist */; };
@@ -201,6 +203,8 @@
 		EA15B0E38B10A65CA61D6CB7 /* Pods-SMOLOUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SMOLOUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-SMOLOUITests/Pods-SMOLOUITests.release.xcconfig"; sourceTree = "<group>"; };
 		FD0DDBFB204B1CD200E40E81 /* pin.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pin.png; sourceTree = SOURCE_ROOT; };
 		FD0DDBFF204E0F6E00E40E81 /* Bilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bilder.swift; sourceTree = "<group>"; };
+		FD167ED321B6F46E00BF1DAA /* BewertungTVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BewertungTVCell.swift; sourceTree = "<group>"; };
+		FD167ED421B6F46E00BF1DAA /* BewertungTVCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BewertungTVCell.xib; sourceTree = "<group>"; };
 		FD4E42442195AB9200362536 /* BewertungVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BewertungVC.swift; sourceTree = "<group>"; };
 		FD7DDBFA20C970C8008CDE12 /* EinstellungenVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EinstellungenVC.swift; sourceTree = "<group>"; };
 		FD7DDBFC20CA86D9008CDE12 /* SMOLO.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SMOLO.entitlements; sourceTree = "<group>"; };
@@ -277,6 +281,8 @@
 				947CD6ED20DE3E8F00165139 /* KellnerExtrasCell.xib */,
 				94EFB9AA20CD5535003028CD /* ExtrasCell.swift */,
 				94EFB9AB20CD5535003028CD /* ExtrasCell.xib */,
+				FD167ED321B6F46E00BF1DAA /* BewertungTVCell.swift */,
+				FD167ED421B6F46E00BF1DAA /* BewertungTVCell.xib */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -555,6 +561,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				08DB09352061D806007848E4 /* SpeisekarteCelle2.xib in Resources */,
+				FD167ED621B6F46E00BF1DAA /* BewertungTVCell.xib in Resources */,
 				9417B594207CFDEB008817FC /* KellnerCell3.xib in Resources */,
 				4EC247D51F98F90500910AA8 /* LaunchScreen.storyboard in Resources */,
 				085B23DD205349DB00D50FE3 /* bezahlenCell2.xib in Resources */,
@@ -747,6 +754,7 @@
 				94F5EA91208F4F530086A014 /* LabelWhiteS16.swift in Sources */,
 				9417B58F207CFDD7008817FC /* KellnerCell2.swift in Sources */,
 				FD7DDC0220CEBE69008CDE12 /* Oeffnungszeiten.swift in Sources */,
+				FD167ED521B6F46E00BF1DAA /* BewertungTVCell.swift in Sources */,
 				FDF6E3C820517A1800CDF509 /* myBestellung.swift in Sources */,
 				FD0DDC00204E0F6E00E40E81 /* Bilder.swift in Sources */,
 				388D4C56219F093E005184F3 /* BewertungSection.swift in Sources */,

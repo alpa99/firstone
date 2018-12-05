@@ -18,13 +18,23 @@ import UIKit
 import Firebase
 
 
-class BewertungVC: UIViewController/*, UITableViewDataSource, UITableViewDelegate, ExpandableHeaderViewDelegate*/{
+class BewertungVC: UIViewController, UITableViewDataSource, UITableViewDelegate, ExpandableHeaderViewDelegate{
+    
+    func toggleSection(tableView: UITableView, header: ExpandableHeaderView, section: Int) {
+        <#code#>
+    }
+    
+  
 
     
     var bestelltebar = " "
     var Bestellungen = [KellnerTVSection]()
     var Bewertbar = [BewertungSection]()
     var Matchbar = [BewertungSection]()
+    
+    
+    @IBOutlet weak var BewerungTV: UITableView!
+    
 
 //
 //    func toggleSection(tableView: UITableView, header: ExpandableHeaderView, section: Int) {
@@ -152,7 +162,7 @@ class BewertungVC: UIViewController/*, UITableViewDataSource, UITableViewDelegat
                     print(self.BewUKat, "2")
                     print(self.Items, "3")
                     
-                    //                        self.setSectionsBewertbar(timeStamp: 1234.5, Kategorie: kategorie, Unterkategorie: self.BewUKat[kategorie]!, items: self.Items[kategorie]!)
+                    self.setSectionsBewertbar(timeStamp: 1234.5, Kategorie: kategorie, Unterkategorie: self.BewUKat[kategorie]!, items: self.Items[kategorie]!)
                     print(self.Bewertbar, 123455665432)
                 }
                 self.matchKategorie()
@@ -174,6 +184,8 @@ class BewertungVC: UIViewController/*, UITableViewDataSource, UITableViewDelegat
         let index = Bestellungen[0].Kategorie.index(of: Kategorie)
         let a = Bestellungen[0].Unterkategorie[index!]
         for ukat in a{
+            let indexBB = Bestellungen[0].Unterkategorie.index(of: [ukat])
+            
             print( ukat, "ukat" )
             if (BewUKat[Kategorie]?.contains(ukat))!{
                 if self.MatchUKat[Kategorie] != nil {
@@ -181,14 +193,18 @@ class BewertungVC: UIViewController/*, UITableViewDataSource, UITableViewDelegat
                     self.MatchUKat[Kategorie]?.append(ukat)
                     print( MatchUKat, "MatchUKAT1")
                     print(Bestellungen[0].items, "ITEMSSS")
-                    //                    if self.MatchItems[Kategorie] != nil{
-                    //                        var newItems = self.MatchItems[Kategorie]
-                    //                        newItems![(self.MatchUKat[Kategorie]?.index(of: ukat))!].append(item.Name!)
-                    //                        self.MatchItems[Kategorie] = newItems
-                    //
-                    //                    } else {
-                    //                        self.Items.updateValue([[item.Name!]], forKey: Kategorie)
-                    //                    }
+                if self.MatchItems[Kategorie] != nil{
+                    var AAA = Bestellungen[0].items
+                    var BBB = AAA[index!]
+                    let CCC = BBB[indexBB!]
+                    
+                    self.MatchItems[Kategorie]?.append(CCC)
+                }else{
+                    var DDD = Bestellungen[0].items
+                    let EEE = DDD[index!]
+                    
+                    self.MatchItems.updateValue(EEE, forKey: Kategorie)
+                }
                     
                 }else{
                     self.MatchUKat.updateValue([ukat], forKey: Kategorie)
@@ -196,12 +212,31 @@ class BewertungVC: UIViewController/*, UITableViewDataSource, UITableViewDelegat
                     print( MatchUKat, "MatchUKAT2")
                     print(Bestellungen[0].items, "ITEMSSS")
                     if self.MatchItems[Kategorie] != nil{
-                        // self.MatchItems[Kategorie]?.append(Bestellungen[0].items)
+                        var AAA = Bestellungen[0].items
+                        var BBB = AAA[index!]
+                        let CCC = BBB[indexBB!]
+                    
+                         self.MatchItems[Kategorie]?.append(CCC)
+                    }else{
+                        var DDD = Bestellungen[0].items
+                        let EEE = DDD[index!]
+
+                        self.MatchItems.updateValue(EEE, forKey: Kategorie)
                     }
                     
                 }
             }
         }
+        if self.MatchUKat.count == self.MatchKat.count {
+            print(self.MatchKat,"000")
+            for kategorie in self.MatchKat {
+                print(kategorie, "111")
+                print(self.MatchUKat, "222")
+                print(self.MatchItems, "333")
+
+                self.setSectionsMatchbar(timeStamp: 1234.5, Kategorie: kategorie, Unterkategorie: self.MatchUKat[kategorie]!, items: self.MatchItems[kategorie]!)
+                print(self.Matchbar, 123443222222)
+            }}
         
     }
 //    func prepareVote (){
@@ -335,6 +370,32 @@ class BewertungVC: UIViewController/*, UITableViewDataSource, UITableViewDelegat
 //        return cell
 //    }
 
+    
+    // TABLEVIEW
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 1
+    }
+
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = Bundle.main.loadNibNamed("BewertungTVCell", owner: self, options: nil)?.first as! BewertungTVCell
+
+        cell.backgroundColor = UIColor.clear
+
+        cell.unterkategorien = Matchbar
+        cell.items = Matchbar[indexPath.section].items
+
+
+//        cell.cellIndexPathSection = indexPath.section
+//
+//        cell.delegate = self
+//        cellIndexPathRow = indexPath.row
+//        cellIndexPathSection = indexPath.section
+        return cell
+    }
+    
+    
+    
     
     
     override func viewDidLoad() {
