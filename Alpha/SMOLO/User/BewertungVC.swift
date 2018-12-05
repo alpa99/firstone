@@ -18,13 +18,8 @@ import UIKit
 import Firebase
 
 
-class BewertungVC: UIViewController, UITableViewDataSource, UITableViewDelegate, ExpandableHeaderViewDelegate{
+class BewertungVC: UIViewController, UITableViewDataSource, UITableViewDelegate{
     
-    func toggleSection(tableView: UITableView, header: ExpandableHeaderView, section: Int) {
-        <#code#>
-    }
-    
-  
 
     
     var bestelltebar = " "

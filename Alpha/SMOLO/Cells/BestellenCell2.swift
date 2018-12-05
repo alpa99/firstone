@@ -37,6 +37,7 @@ class BestellenCell2: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         beschreibungLbl.textColor = UIColor.white
+        addBtn.setImage(UIImage(named: "plus_weis"), for: .normal)
 
         ItemLbl.font = UIFont(name: "Verdana", size: 15.0)
         viewAdd.layer.cornerRadius = 4
