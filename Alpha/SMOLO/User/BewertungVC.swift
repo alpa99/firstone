@@ -18,7 +18,13 @@ import UIKit
 import Firebase
 
 
-class BewertungVC: UIViewController, UITableViewDataSource, UITableViewDelegate{
+class BewertungVC: UIViewController, UITableViewDataSource, UITableViewDelegate, ExpandableHeaderViewDelegate{
+    
+    func toggleSection(tableView: UITableView, header: ExpandableHeaderView, section: Int) {
+        print("ahhahahah")
+    }
+    
+  
     
 
     
@@ -28,7 +34,6 @@ class BewertungVC: UIViewController, UITableViewDataSource, UITableViewDelegate{
     var Matchbar = [BewertungSection]()
     
     
-    @IBOutlet weak var BewerungTV: UITableView!
     
 
 //
@@ -66,10 +71,15 @@ class BewertungVC: UIViewController, UITableViewDataSource, UITableViewDelegate{
     var MatchKat = [String]()
     var katcounter = 0
     var fetchcounter = 0
+    
+    
+    var cellIndexPathSection = 0
+    var cellIndexPathRow = 0
+    
     // OUTLETS
 
     @IBOutlet weak var BewertungTV: UITableView!
-
+    
     // ACTIONS
 
     func fetchKategorie(){
@@ -153,12 +163,9 @@ class BewertungVC: UIViewController, UITableViewDataSource, UITableViewDelegate{
             if self.BewUKat.count == self.BewKat.count {
                 print(self.BewKat,"0")
                 for kategorie in self.BewKat {
-                    print(kategorie, "1")
-                    print(self.BewUKat, "2")
-                    print(self.Items, "3")
+                   
                     
                     self.setSectionsBewertbar(timeStamp: 1234.5, Kategorie: kategorie, Unterkategorie: self.BewUKat[kategorie]!, items: self.Items[kategorie]!)
-                    print(self.Bewertbar, 123455665432)
                 }
                 self.matchKategorie()
             }
@@ -168,225 +175,139 @@ class BewertungVC: UIViewController, UITableViewDataSource, UITableViewDelegate{
     
     func matchKategorie (){
         print (Bestellungen[0].Kategorie, Bestellungen[0].Unterkategorie, "ich wurde geprinted")
+        var counter = 0
         for kat in Bestellungen[0].Kategorie{
+            counter += 1
             if BewKat.contains(kat){
                 self.MatchKat.append(kat)
-                print(MatchKat, "MATCHKAT")
-                self.matchUnterkategorie(Kategorie: kat)
+                print(counter,Bestellungen[0].Kategorie.count, "zähler")
+                if counter == Bestellungen[0].Kategorie.count{
+                    print("passiertlo")
+                    self.matchUnterkategorie(Kategorie: MatchKat)}
             } } }
     
-    func matchUnterkategorie (Kategorie: String){
-        let index = Bestellungen[0].Kategorie.index(of: Kategorie)
+    func matchUnterkategorie (Kategorie: [String]){
+        for k in Kategorie{
+        let index = Bestellungen[0].Kategorie.index(of: k)
         let a = Bestellungen[0].Unterkategorie[index!]
         for ukat in a{
-            let indexBB = Bestellungen[0].Unterkategorie.index(of: [ukat])
-            
-            print( ukat, "ukat" )
-            if (BewUKat[Kategorie]?.contains(ukat))!{
-                if self.MatchUKat[Kategorie] != nil {
+            let indexBB = a.index(of: ukat)
+            if (BewUKat[k]?.contains(ukat))!{
+                if self.MatchUKat[k] != nil {
                     
-                    self.MatchUKat[Kategorie]?.append(ukat)
-                    print( MatchUKat, "MatchUKAT1")
-                    print(Bestellungen[0].items, "ITEMSSS")
-                if self.MatchItems[Kategorie] != nil{
+                    self.MatchUKat[k]?.append(ukat)
+                if self.MatchItems[k] != nil{
                     var AAA = Bestellungen[0].items
                     var BBB = AAA[index!]
                     let CCC = BBB[indexBB!]
-                    
-                    self.MatchItems[Kategorie]?.append(CCC)
+                    self.MatchItems[k]?.append(CCC)
                 }else{
                     var DDD = Bestellungen[0].items
                     let EEE = DDD[index!]
-                    
-                    self.MatchItems.updateValue(EEE, forKey: Kategorie)
-                }
-                    
+                    self.MatchItems.updateValue(EEE, forKey: k) }
                 }else{
-                    self.MatchUKat.updateValue([ukat], forKey: Kategorie)
+                    self.MatchUKat.updateValue([ukat], forKey: k)
                     //self.MatchItems.updateValue([[String]], forKey: Kategorie)
-                    print( MatchUKat, "MatchUKAT2")
-                    print(Bestellungen[0].items, "ITEMSSS")
-                    if self.MatchItems[Kategorie] != nil{
+                    if self.MatchItems[k] != nil{
                         var AAA = Bestellungen[0].items
                         var BBB = AAA[index!]
                         let CCC = BBB[indexBB!]
-                    
-                         self.MatchItems[Kategorie]?.append(CCC)
-                    }else{
+                         self.MatchItems[k]?.append(CCC) }else{
                         var DDD = Bestellungen[0].items
                         let EEE = DDD[index!]
-
-                        self.MatchItems.updateValue(EEE, forKey: Kategorie)
-                    }
-                    
-                }
-            }
+                        self.MatchItems.updateValue(EEE, forKey: k)
+                    } }  }  }
+        print(self.MatchKat.count, self.MatchUKat.count, "tttttt")
         }
         if self.MatchUKat.count == self.MatchKat.count {
-            print(self.MatchKat,"000")
             for kategorie in self.MatchKat {
-                print(kategorie, "111")
-                print(self.MatchUKat, "222")
-                print(self.MatchItems, "333")
-
                 self.setSectionsMatchbar(timeStamp: 1234.5, Kategorie: kategorie, Unterkategorie: self.MatchUKat[kategorie]!, items: self.MatchItems[kategorie]!)
-                print(self.Matchbar, 123443222222)
             }}
         
     }
-//    func prepareVote (){
-//        print(MatchKat, "MatchKat")
-//        print(MatchUKat, "MatchUKat")
-//        print(Bestellungen[0].Kategorie, "bestellungkats")
-//        for a in MatchKat{
-//        var x = Bestellungen[0].Kategorie.index(of: a)
-//            for c in MatchUKat{
-//                print(a, "aaaaa")
-//                print(x, "xxxxx")
-//                print(c, "ccccc" )
-//            var b = Bestellungen[0].Unterkategorie[x!].index(of: c)
-//                var items = Bestellungen[0].items[x!]
-//                print(items, b ?? "hier soll b sein", "hallo")
-//                for item in items[b!] {
-//                    print(item , "DIE NAMEN ?!")
-//                } } } }
 
-//
     
     
     func setSectionsBewertbar(timeStamp: Double, Kategorie: String, Unterkategorie: [String], items: [[String]]){
         self.Bewertbar.append(BewertungSection(timeStamp: timeStamp, Kategorie: Kategorie, Unterkategorie: Unterkategorie, items: items))
+        
     }
     func setSectionsMatchbar(timeStamp: Double, Kategorie: String, Unterkategorie: [String], items: [[String]]){
         self.Matchbar.append(BewertungSection(timeStamp: timeStamp, Kategorie: Kategorie, Unterkategorie: Unterkategorie, items: items))
+        BewertungTV.reloadData()
     }
     
-//    func setSectionsKellnerBestellung(BestellungID: String, tischnummer: String, fromUserID: String, TimeStamp: Double, Kategorie: [String], Unterkategorie: [[String]], items: [[[String]]], preis: [[[Double]]], liter: [[[String]]], extras: [[[[String]]]], extrasPreis: [[[[Double]]]], kommentar: [[[String]]], menge: [[[Int]]], expanded2: [[Bool]], expanded: Bool){
-//        self.Bestellungen.append(KellnerTVSection(BestellungID: BestellungID, tischnummer: tischnummer, fromUserID: fromUserID, timeStamp: TimeStamp, Kategorie: Kategorie, Unterkategorie: Unterkategorie, items: items, preis: preis, liter: liter, extras: extras, extrasPreis: extrasPreis, kommentar: kommentar, menge: menge, expanded2: expanded2, expanded: expanded))
-//        self.BewertungTV.reloadData()
-//    }
-//
-//
-//
-//    // TABLE
-//    func numberOfSections(in tableView: UITableView) -> Int {
-//        return self.Bestellungen.count
-//
-//    }
-//    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//        return 1
-//    }
-//
-//    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-//        var heightForHeaderInSection: Int?
-//
-//        heightForHeaderInSection = 36
-//        return CGFloat(heightForHeaderInSection!)
-//
-//    }
-//
-//    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-//
-//
-//
-//        if (Bestellungen[indexPath.section].expanded) {
-//            let kategorieCount = Bestellungen[indexPath.section].Kategorie.count
-//            var UnterkategorieCount = 0
-//            var itemsCount = 0
-//            for items in  Bestellungen[indexPath.section].items {
-//                for item in items {
-//                    itemsCount = itemsCount + item.count
-//                }
-//            }
-//            for unterkategorie in Bestellungen[indexPath.section].Unterkategorie {
-//                UnterkategorieCount = UnterkategorieCount + unterkategorie.count
-//
-//            }
-//            print(itemsCount, "itemscount")
-//            print(kategorieCount, "kategorieCount")
-//            print(UnterkategorieCount, "UnterkategorieCount")
-//            return CGFloat(kategorieCount*40 + UnterkategorieCount*50 + itemsCount*86+50)
-//
-//
-//        }
-//        else {
-//            return 0
-//        }
-//
-//    }
-//
-//    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-//
-//        return 15
-//
-//    }
-//
-//    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-//        let view = UIView()
-//        view.backgroundColor = UIColor.clear
-//        return view
-//    }
-//
-//    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-//
-//
-//        let header = ExpandableHeaderView()
-//        header.contentView.layer.cornerRadius = 10
-//        header.contentView.layer.backgroundColor = UIColor.clear.cgColor
-//        header.layer.cornerRadius = 10
-//        header.layer.backgroundColor = UIColor.clear.cgColor
-//
-//        header.customInit(tableView: tableView, title: Bestellungen[section].Tischnummer, section: section, delegate: self as! ExpandableHeaderViewDelegate)
-//        return header
-//    }
-//
-//    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-//        let cell = Bundle.main.loadNibNamed("KellnerCell", owner: self, options: nil)?.first as! KellnerCell
-//        print(Bestellungen, "Bestellungen")
-//        cell.Bestellungen = Bestellungen
-//        cell.Cell1Section = indexPath.section
-//        cell.bestellungID = Bestellungen[indexPath.section].BestellungID
-//        cell.annehmen.setTitle("Status: \(Status[Bestellungen[indexPath.section].BestellungID]!)", for: .normal)
-//
-//        if Status[Bestellungen[indexPath.section].BestellungID] != "versendet" {
-//            cell.annehmen.backgroundColor = UIColor.green
-//        } else {
-//            cell.annehmen.backgroundColor = UIColor.gray
-//        }
-//
-//        let formatter = DateFormatter()
-//        formatter.dateFormat = "yyyy/MM/dd HH:mm"
-//        let DayOne = formatter.date(from: "2018/05/15 12:00")
-//        let timeStampDate = NSDate(timeInterval: self.Bestellungen[indexPath.section].TimeStamp, since: DayOne!)
-//        let dateFormatter = DateFormatter()
-//        dateFormatter.dateFormat = "HH:mm"
-//
-//        cell.timeLbl.text = "\(dateFormatter.string(from: timeStampDate as Date)) Uhr"
-//        return cell
-//    }
 
-    
-    // TABLEVIEW
+//  TABLEVIEW
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+
+        let header = ExpandableHeaderView()
+        header.contentView.layer.cornerRadius = 5
+        header.contentView.layer.backgroundColor = UIColor.clear.cgColor
+
+        header.layer.cornerRadius = 5
+        header.layer.backgroundColor = UIColor.clear.cgColor
+print(section, "sectiom")
+print(MatchKat, "matchkat")
+        header.customInit(tableView: tableView, title: MatchKat[section], section: section, delegate: self as! ExpandableHeaderViewDelegate)
+
+
+        return header
+    }
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return MatchKat.count
+
+    }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 1
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
         let cell = Bundle.main.loadNibNamed("BewertungTVCell", owner: self, options: nil)?.first as! BewertungTVCell
-
         cell.backgroundColor = UIColor.clear
-
+//
         cell.unterkategorien = Matchbar
+        print(Matchbar, "matchbar222")
+        print(indexPath.section, indexPath)
         cell.items = Matchbar[indexPath.section].items
 
 
-//        cell.cellIndexPathSection = indexPath.section
+        cell.cellIndexPathSection = indexPath.section
 //
 //        cell.delegate = self
-//        cellIndexPathRow = indexPath.row
-//        cellIndexPathSection = indexPath.section
+        cellIndexPathRow = indexPath.row
+        cellIndexPathSection = indexPath.section
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        var heightForHeaderInSection: Int?
+            heightForHeaderInSection = 36
+    
+        return CGFloat(heightForHeaderInSection!)
+        
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+     
+        return 500
+        
+    }
+    
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        
+        var heightForFooterInSection: Int?
+        heightForFooterInSection = 15
+     
+        return CGFloat(heightForFooterInSection!)
+    }
+    
+    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        let view = UIView()
+        view.backgroundColor = UIColor.clear
+        return view
     }
     
     
@@ -395,7 +316,6 @@ class BewertungVC: UIViewController, UITableViewDataSource, UITableViewDelegate{
     
     override func viewDidLoad() {
         super.viewDidLoad()
-//        print(Auth.auth().currentUser?.uid ?? "keineuid")
 //        userUid = (Auth.auth().currentUser?.uid)!
 //        loadAktuelleBar()
         self.view.backgroundColor = UIColor(patternImage: UIImage(named: "hintergrund")!)
@@ -411,17 +331,7 @@ class BewertungVC: UIViewController, UITableViewDataSource, UITableViewDelegate{
 //        super.didReceiveMemoryWarning()
 //        // Dispose of any resources that can be recreated.
 //    }
-//
-//
-//    /*
-//     // MARK: - Navigation
-//
-//     // In a storyboard-based application, you will often want to do a little preparation before navigation
-//     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//     // Get the new view controller using segue.destinationViewController.
-//     // Pass the selected object to the new view controller.
-//     }
-//     */
+
 
 }
 

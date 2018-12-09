@@ -12,33 +12,33 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="75" id="KGk-i7-Jjw" customClass="BewertungTVCell" customModule="SMOLO" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="337" height="75"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="179" id="KGk-i7-Jjw" customClass="BewertungTVCell" customModule="SMOLO" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="337" height="179"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="337" height="74.5"/>
+                <rect key="frame" x="0.0" y="0.0" width="337" height="178.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mg6-DH-SYq">
-                        <rect key="frame" x="16" y="11" width="105" height="21"/>
-                        <constraints>
-                            <constraint firstAttribute="width" constant="105" id="wr8-pO-9Dj"/>
-                        </constraints>
-                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                        <nil key="textColor"/>
-                        <nil key="highlightedColor"/>
-                    </label>
+                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="waK-EM-duX">
+                        <rect key="frame" x="0.0" y="0.0" width="337" height="178.5"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </tableView>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="mg6-DH-SYq" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="9TO-Wp-KSL"/>
-                    <constraint firstItem="mg6-DH-SYq" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="Uc7-qd-qWA"/>
+                    <constraint firstAttribute="trailing" secondItem="waK-EM-duX" secondAttribute="trailing" id="T0x-S8-4GN"/>
+                    <constraint firstItem="waK-EM-duX" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="hp1-Qs-UTv"/>
+                    <constraint firstAttribute="bottom" secondItem="waK-EM-duX" secondAttribute="bottom" id="p8U-mc-KNz"/>
+                    <constraint firstItem="waK-EM-duX" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="qoK-LA-aTZ"/>
+                    <constraint firstItem="waK-EM-duX" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="x0p-bh-tGU"/>
+                    <constraint firstAttribute="trailing" secondItem="waK-EM-duX" secondAttribute="trailing" id="xZA-UG-9G6"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
-                <outlet property="ItemName" destination="mg6-DH-SYq" id="OUc-eF-nP2"/>
+                <outlet property="BewertenCellTV" destination="waK-EM-duX" id="WTc-Cb-oSy"/>
             </connections>
-            <point key="canvasLocation" x="151.19999999999999" y="167.76611694152925"/>
+            <point key="canvasLocation" x="-282.39999999999998" y="164.16791604197903"/>
         </tableViewCell>
     </objects>
 </document>

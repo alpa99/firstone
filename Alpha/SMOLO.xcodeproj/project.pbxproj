@@ -86,6 +86,8 @@
 		FD0DDC00204E0F6E00E40E81 /* Bilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD0DDBFF204E0F6E00E40E81 /* Bilder.swift */; };
 		FD167ED521B6F46E00BF1DAA /* BewertungTVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD167ED321B6F46E00BF1DAA /* BewertungTVCell.swift */; };
 		FD167ED621B6F46E00BF1DAA /* BewertungTVCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FD167ED421B6F46E00BF1DAA /* BewertungTVCell.xib */; };
+		FD4166A021BD605100B5692B /* BewertungTVCell2.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD41669E21BD605100B5692B /* BewertungTVCell2.swift */; };
+		FD4166A121BD605100B5692B /* BewertungTVCell2.xib in Resources */ = {isa = PBXBuildFile; fileRef = FD41669F21BD605100B5692B /* BewertungTVCell2.xib */; };
 		FD4E42452195AB9200362536 /* BewertungVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD4E42442195AB9200362536 /* BewertungVC.swift */; };
 		FD7DDBFB20C970C8008CDE12 /* EinstellungenVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD7DDBFA20C970C8008CDE12 /* EinstellungenVC.swift */; };
 		FD7DDC0020CA8EB8008CDE12 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = FD7DDBFF20CA8EB8008CDE12 /* GoogleService-Info.plist */; };
@@ -205,6 +207,8 @@
 		FD0DDBFF204E0F6E00E40E81 /* Bilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bilder.swift; sourceTree = "<group>"; };
 		FD167ED321B6F46E00BF1DAA /* BewertungTVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BewertungTVCell.swift; sourceTree = "<group>"; };
 		FD167ED421B6F46E00BF1DAA /* BewertungTVCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BewertungTVCell.xib; sourceTree = "<group>"; };
+		FD41669E21BD605100B5692B /* BewertungTVCell2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BewertungTVCell2.swift; sourceTree = "<group>"; };
+		FD41669F21BD605100B5692B /* BewertungTVCell2.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BewertungTVCell2.xib; sourceTree = "<group>"; };
 		FD4E42442195AB9200362536 /* BewertungVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BewertungVC.swift; sourceTree = "<group>"; };
 		FD7DDBFA20C970C8008CDE12 /* EinstellungenVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EinstellungenVC.swift; sourceTree = "<group>"; };
 		FD7DDBFC20CA86D9008CDE12 /* SMOLO.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SMOLO.entitlements; sourceTree = "<group>"; };
@@ -283,6 +287,8 @@
 				94EFB9AB20CD5535003028CD /* ExtrasCell.xib */,
 				FD167ED321B6F46E00BF1DAA /* BewertungTVCell.swift */,
 				FD167ED421B6F46E00BF1DAA /* BewertungTVCell.xib */,
+				FD41669E21BD605100B5692B /* BewertungTVCell2.swift */,
+				FD41669F21BD605100B5692B /* BewertungTVCell2.xib */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -575,6 +581,7 @@
 				082A6F13206D642700B8C43D /* MyBestellungCell.xib in Resources */,
 				4EC247D01F98F90500910AA8 /* Main.storyboard in Resources */,
 				08210EE61FB83AE300EABA32 /* BestellenCell2.xib in Resources */,
+				FD4166A121BD605100B5692B /* BewertungTVCell2.xib in Resources */,
 				08DB092B2061415B007848E4 /* SpeisekarteCelle.xib in Resources */,
 				94EFB9AD20CD5535003028CD /* ExtrasCell.xib in Resources */,
 				08210EE21FB7B09000EABA32 /* KellnerCell.xib in Resources */,
@@ -765,6 +772,7 @@
 				08DB092A2061415B007848E4 /* SpeisekarteCelle.swift in Sources */,
 				08EF4C4A1F9CFFA500F01096 /* ExpandTVSection.swift in Sources */,
 				94BDC36820B00DEF000BFB10 /* UserInfos.swift in Sources */,
+				FD4166A021BD605100B5692B /* BewertungTVCell2.swift in Sources */,
 				08DB093A2062E4D1007848E4 /* BestellenCell2.swift in Sources */,
 				0895B3631F9B5F28007D97DE /* UserVC.swift in Sources */,
 				4E6020491F9E2F88001B2909 /* ScanDetailVC.swift in Sources */,
