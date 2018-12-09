@@ -1030,7 +1030,7 @@ class BestellungVC2: UIViewController, UITableViewDataSource, UITableViewDelegat
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         let touch: UITouch? = touches.first
-        if self.view.subviews.contains(addItemView) {
+        if self.view.subviews.contains(addItemView) || self.view.subviews.contains(myBestellungView) {
             self.view.endEditing(true)
         }
         
@@ -1091,7 +1091,9 @@ class BestellungVC2: UIViewController, UITableViewDataSource, UITableViewDelegat
         visualEffectView.bounds = self.bestellungVCView.bounds
 
 
-        addItemView.layer.cornerRadius = 5
+        addItemView.layer.cornerRadius = 10
+        myBestellungView.layer.cornerRadius = 10
+        extrasView.layer.cornerRadius = 10
 //
 //        locationManager.requestWhenInUseAuthorization()
 //        locationManager.desiredAccuracy = kCLLocationAccuracyBest

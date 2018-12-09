@@ -25,8 +25,11 @@ class ExtrasCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        extraSelect.setImage(UIImage(named: "checkbox"), for: .normal)
-        extraSelect.setImage(UIImage(named: "checkbox-i"), for: .selected)
+        extraLbl.textColor = UIColor.white
+        extraPreis.textColor = UIColor.white
+
+        extraSelect.setImage(UIImage(named: "checkbox-i"), for: .normal)
+        extraSelect.setImage(UIImage(named: "checkbox"), for: .selected)
         // Initialization code
     }
 
