@@ -94,20 +94,12 @@ class BewertungVC: UIViewController, UITableViewDataSource, UITableViewDelegate,
                                 if let bewertbarvalue = bewertbar.value as? Bool {
                                     let bewertbarVar = bewertbarvalue
                                     if bewertbarVar == true {
-                                        print(snapshot.key, "key")
-                                        print(uSnapshots.keys, "KEYS")
+                                      
                                         if !self.BewKat.contains(snapshot.key){
                                             self.BewKat.append(snapshot.key)
                                             self.getUnterkategorie(Kategorie: snapshot.key)
                                         }
-                                       
-//                                        self.BewUKat.append(uSnapshot.key)
-//                                        print(self.BewKat, "count1")
-//                                        print(self.BewUKat, "BewUKat")
-//                                        print(snapshot.key , "1")
-//                                        print(uSnapshots.keys , "2")
-//                                        self.searchformatch()
-                                       
+                       
                                     } } } } } } } }, withCancel: nil) }
     
     func getUnterkategorie(Kategorie: String){
@@ -144,7 +136,7 @@ class BewertungVC: UIViewController, UITableViewDataSource, UITableViewDelegate,
                                         }else{
                                             self.BewUKat.updateValue([key.key], forKey: Kategorie)
                                             for items in (snapshotItem.children.allObjects as? [DataSnapshot])!{
-                                                print(snapshotItem.children.allObjects as? [DataSnapshot], "Das willst du sehen")
+                                                
                                                 if let dictionary = items.value as? [String: AnyObject]{
                                                     let item = SpeisekarteInformation(dictionary: dictionary)
                                                     if self.Items[Kategorie] != nil{
@@ -161,7 +153,6 @@ class BewertungVC: UIViewController, UITableViewDataSource, UITableViewDelegate,
                                     }}}}}}
             }
             if self.BewUKat.count == self.BewKat.count {
-                print(self.BewKat,"0")
                 for kategorie in self.BewKat {
                    
                     
@@ -174,15 +165,12 @@ class BewertungVC: UIViewController, UITableViewDataSource, UITableViewDelegate,
     }
     
     func matchKategorie (){
-        print (Bestellungen[0].Kategorie, Bestellungen[0].Unterkategorie, "ich wurde geprinted")
         var counter = 0
         for kat in Bestellungen[0].Kategorie{
             counter += 1
             if BewKat.contains(kat){
                 self.MatchKat.append(kat)
-                print(counter,Bestellungen[0].Kategorie.count, "zähler")
                 if counter == Bestellungen[0].Kategorie.count{
-                    print("passiertlo")
                     self.matchUnterkategorie(Kategorie: MatchKat)}
             } } }
     
@@ -190,6 +178,7 @@ class BewertungVC: UIViewController, UITableViewDataSource, UITableViewDelegate,
         for k in Kategorie{
         let index = Bestellungen[0].Kategorie.index(of: k)
         let a = Bestellungen[0].Unterkategorie[index!]
+            
         for ukat in a{
             let indexBB = a.index(of: ukat)
             if (BewUKat[k]?.contains(ukat))!{
@@ -204,7 +193,9 @@ class BewertungVC: UIViewController, UITableViewDataSource, UITableViewDelegate,
                 }else{
                     var DDD = Bestellungen[0].items
                     let EEE = DDD[index!]
-                    self.MatchItems.updateValue(EEE, forKey: k) }
+                    let FFF = EEE[indexBB!]
+                    
+                    self.MatchItems.updateValue([FFF], forKey: k) }
                 }else{
                     self.MatchUKat.updateValue([ukat], forKey: k)
                     //self.MatchItems.updateValue([[String]], forKey: Kategorie)
@@ -215,9 +206,10 @@ class BewertungVC: UIViewController, UITableViewDataSource, UITableViewDelegate,
                          self.MatchItems[k]?.append(CCC) }else{
                         var DDD = Bestellungen[0].items
                         let EEE = DDD[index!]
-                        self.MatchItems.updateValue(EEE, forKey: k)
+                        let FFF = EEE[indexBB!]
+                        
+                        self.MatchItems.updateValue([FFF], forKey: k)
                     } }  }  }
-        print(self.MatchKat.count, self.MatchUKat.count, "tttttt")
         }
         if self.MatchUKat.count == self.MatchKat.count {
             for kategorie in self.MatchKat {
@@ -247,8 +239,6 @@ class BewertungVC: UIViewController, UITableViewDataSource, UITableViewDelegate,
 
         header.layer.cornerRadius = 5
         header.layer.backgroundColor = UIColor.clear.cgColor
-print(section, "sectiom")
-print(MatchKat, "matchkat")
         header.customInit(tableView: tableView, title: MatchKat[section], section: section, delegate: self as! ExpandableHeaderViewDelegate)
 
 
@@ -291,8 +281,9 @@ print(MatchKat, "matchkat")
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-     
-        return 500
+       print(Matchbar[indexPath.section].Unterkategorie[indexPath.row].count,"somerice")
+        
+        return CGFloat(Matchbar[indexPath.section].items[indexPath.row].count*80)
         
     }
     
