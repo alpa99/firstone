@@ -53,10 +53,10 @@ class QRScanner: UIViewController, AVCaptureMetadataOutputObjectsDelegate, CLLoc
     func myButtonTapped(){
         if flashlight.isSelected == true {
             flashlight.isSelected = false
-            flashlight.setImage(#imageLiteral(resourceName: "Tablinks"), for: UIControlState.normal)
+            flashlight.setImage(#imageLiteral(resourceName: "flashlight-i"), for: UIControlState.normal)
         }else {
             flashlight.isSelected = true
-            flashlight.setImage(#imageLiteral(resourceName: "tablinks_leer"), for: UIControlState.normal)
+            flashlight.setImage(#imageLiteral(resourceName: "flashlight"), for: UIControlState.normal)
         }
     }
     
