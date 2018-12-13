@@ -22,6 +22,7 @@ pod 'Firebase/AdMob'
 pod 'GoogleMaps'
 pod 'GooglePlaces'
 pod 'ImageSlideshow/SDWebImage'
+pod 'Cosmos', '~> 17.0'
 
   target 'SMOLOTests' do
     inherit! :search_paths

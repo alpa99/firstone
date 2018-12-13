@@ -5,6 +5,7 @@ PODS:
   - Bolts/AppLinks (1.9.0):
     - Bolts/Tasks
   - Bolts/Tasks (1.9.0)
+  - Cosmos (17.0.0)
   - FacebookCore (0.3.0):
     - Bolts (~> 1.8)
     - FBSDKCoreKit (~> 4.27)
@@ -93,6 +94,7 @@ PODS:
   - SDWebImage/Core (4.4.0)
 
 DEPENDENCIES:
+  - Cosmos (~> 17.0)
   - FacebookCore
   - FacebookLogin
   - Firebase
@@ -110,6 +112,7 @@ DEPENDENCIES:
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
     - Bolts
+    - Cosmos
     - FacebookCore
     - FacebookLogin
     - FBSDKCoreKit
@@ -136,6 +139,7 @@ SPEC REPOS:
 
 SPEC CHECKSUMS:
   Bolts: ac6567323eac61e203f6a9763667d0f711be34c8
+  Cosmos: 309e489f21ffc91a1eeecfebef7f817cd2fcfba6
   FacebookCore: 3ffa190a3f1f96cec0e44d3fc221bc322c595ffa
   FacebookLogin: 0af839ea858faef99550d16596b87b4a8e8906e6
   FBSDKCoreKit: 572b047a7e029bc44542bcf8a59414e7ff2b543e
@@ -160,6 +164,6 @@ SPEC CHECKSUMS:
   Pulley: d3d144a0323b65b8aa1dd601d515d08481103034
   SDWebImage: b534502786e43dde36dfcaee89356fe6df30e203
 
-PODFILE CHECKSUM: 2c33131370c9c49f246adc909a36ffdb45423f73
+PODFILE CHECKSUM: 0192066cfab9428a44e7eaebbbe75a8ab43b2a3b
 
 COCOAPODS: 1.5.3
