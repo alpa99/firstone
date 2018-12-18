@@ -21,6 +21,7 @@ class MeineBestellungVC: UIViewController, UITableViewDataSource, UITableViewDel
     
      override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "BewertungVC" {
+            print(bewertenBestellung, "die Bestellunghier")
             let vc = segue.destination as! BewertungVC
            vc.bestelltebar = aktuelleBar
             vc.Bestellungen = bewertenBestellung

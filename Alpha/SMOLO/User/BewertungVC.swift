@@ -94,7 +94,7 @@ class BewertungVC: UIViewController, UITableViewDataSource, UITableViewDelegate,
                                 if let bewertbarvalue = bewertbar.value as? Bool {
                                     let bewertbarVar = bewertbarvalue
                                     if bewertbarVar == true {
-                                      
+                                      print(snapshot.key, "lanilani")
                                         if !self.BewKat.contains(snapshot.key){
                                             self.BewKat.append(snapshot.key)
                                             self.getUnterkategorie(Kategorie: snapshot.key)
@@ -165,11 +165,19 @@ class BewertungVC: UIViewController, UITableViewDataSource, UITableViewDelegate,
     }
     
     func matchKategorie (){
+        print("Bestellungen loo", BewKat)
         var counter = 0
         for kat in Bestellungen[0].Kategorie{
             counter += 1
             if BewKat.contains(kat){
-                self.MatchKat.append(kat)
+                let index = Bestellungen[0].Kategorie.index(of: kat)
+                let a = Bestellungen[0].Unterkategorie[index!]
+                for u in a{
+                    if (BewUKat[kat]?.contains(u))!{
+                        self.MatchKat.append(kat)
+
+                    }
+                }
                 if counter == Bestellungen[0].Kategorie.count{
                     self.matchUnterkategorie(Kategorie: MatchKat)}
             } } }
@@ -183,22 +191,22 @@ class BewertungVC: UIViewController, UITableViewDataSource, UITableViewDelegate,
             let indexBB = a.index(of: ukat)
             if (BewUKat[k]?.contains(ukat))!{
                 if self.MatchUKat[k] != nil {
-                    
+
                     self.MatchUKat[k]?.append(ukat)
                 if self.MatchItems[k] != nil{
                     var AAA = Bestellungen[0].items
                     var BBB = AAA[index!]
                     let CCC = BBB[indexBB!]
+
                     self.MatchItems[k]?.append(CCC)
                 }else{
                     var DDD = Bestellungen[0].items
                     let EEE = DDD[index!]
                     let FFF = EEE[indexBB!]
-                    
+
                     self.MatchItems.updateValue([FFF], forKey: k) }
                 }else{
                     self.MatchUKat.updateValue([ukat], forKey: k)
-                    //self.MatchItems.updateValue([[String]], forKey: Kategorie)
                     if self.MatchItems[k] != nil{
                         var AAA = Bestellungen[0].items
                         var BBB = AAA[index!]
@@ -207,14 +215,20 @@ class BewertungVC: UIViewController, UITableViewDataSource, UITableViewDelegate,
                         var DDD = Bestellungen[0].items
                         let EEE = DDD[index!]
                         let FFF = EEE[indexBB!]
-                        
+                        print("test4")
+
                         self.MatchItems.updateValue([FFF], forKey: k)
                     } }  }  }
         }
+        print(MatchUKat.count, MatchKat.count, "Test5")
+        print(MatchUKat, MatchKat, "test3")
         if self.MatchUKat.count == self.MatchKat.count {
-            for kategorie in self.MatchKat {
+            for kategorie in self.MatchUKat.keys {
                 self.setSectionsMatchbar(timeStamp: 1234.5, Kategorie: kategorie, Unterkategorie: self.MatchUKat[kategorie]!, items: self.MatchItems[kategorie]!)
-            }}
+                print(Matchbar, "dieWahrheit")
+            }
+        
+    }
         
     }
 
@@ -283,7 +297,7 @@ class BewertungVC: UIViewController, UITableViewDataSource, UITableViewDelegate,
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
        print(Matchbar[indexPath.section].Unterkategorie[indexPath.row].count,"somerice")
         
-        return CGFloat(Matchbar[indexPath.section].items[indexPath.row].count*80)
+        return CGFloat(Matchbar[indexPath.section].items[indexPath.row].count*200)
         
     }
     

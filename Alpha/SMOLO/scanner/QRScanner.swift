@@ -255,6 +255,7 @@ class QRScanner: UIViewController, AVCaptureMetadataOutputObjectsDelegate, CLLoc
         let captureDevice = AVCaptureDevice.default(for: AVMediaType.video)
         
         do {
+
             let input = try AVCaptureDeviceInput(device: captureDevice!)
             session.addInput(input)
         }

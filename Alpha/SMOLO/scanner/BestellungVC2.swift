@@ -451,6 +451,7 @@ class BestellungVC2: UIViewController, UITableViewDataSource, UITableViewDelegat
             self.addItemView.alpha = 1
             self.addItemView.transform = CGAffineTransform.identity
         }
+        
 
     }
 
@@ -1029,15 +1030,15 @@ class BestellungVC2: UIViewController, UITableViewDataSource, UITableViewDelegat
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        let touch: UITouch? = touches.first
+       // let touch: UITouch? = touches.first
         if self.view.subviews.contains(addItemView) || self.view.subviews.contains(myBestellungView) {
             self.view.endEditing(true)
         }
-        
-        if touch?.view != addItemView && touch?.view != myBestellungView && !self.view.subviews.contains(extrasView) {
-            dismissMyBestellungView()
-            animateOut()
-        }
+
+//        if /*touch?.view != addItemView && */touch?.view != myBestellungView && !self.view.subviews.contains(extrasView) {
+//            dismissMyBestellungView()
+//           // animateOut()
+//        }
         
     }
     
