@@ -12,24 +12,22 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="100" id="KGk-i7-Jjw" customClass="BewertungTVCell2" customModule="SMOLO" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="320" height="100"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="126" id="KGk-i7-Jjw" customClass="BewertungTVCell2" customModule="SMOLO" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="125"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="320" height="99.5"/>
+                <rect key="frame" x="0.0" y="0.0" width="320" height="124.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="209-h2-gk3" customClass="LabelWhite" customModule="SMOLO" customModuleProvider="target">
-                        <rect key="frame" x="16" y="11" width="149" height="21"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="209-h2-gk3" customClass="LabelWhite" customModule="SMOLO" customModuleProvider="target">
+                        <rect key="frame" x="16" y="11" width="288" height="21"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bdJ-uP-ZjK" customClass="CosmosView" customModule="Cosmos">
-                        <rect key="frame" x="16" y="58" width="170" height="31"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <view contentMode="scaleAspectFill" translatesAutoresizingMaskIntoConstraints="NO" id="bdJ-uP-ZjK" customClass="CosmosView" customModule="Cosmos">
+                        <rect key="frame" x="16" y="40" width="127" height="23"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <userDefinedRuntimeAttributes>
                             <userDefinedRuntimeAttribute type="color" keyPath="filledColor">
                                 <color key="value" red="0.72549019607843135" green="0.66666666666666663" blue="0.5490196078431373" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -46,16 +44,51 @@
                             <userDefinedRuntimeAttribute type="color" keyPath="filledBorderColor">
                                 <color key="value" red="0.72549019609999998" green="0.66666666669999997" blue="0.54901960780000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="number" keyPath="rating">
+                                <real key="value" value="0.0"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="number" keyPath="starSize">
+                                <real key="value" value="23"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="number" keyPath="totalStars">
+                                <integer key="value" value="5"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="number" keyPath="starMargin">
+                                <real key="value" value="3"/>
+                            </userDefinedRuntimeAttribute>
                         </userDefinedRuntimeAttributes>
                     </view>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3jT-xy-6Hx">
+                        <rect key="frame" x="16" y="79" width="80" height="30"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="30" id="cM8-Sw-2TW"/>
+                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="80" id="uQ7-LR-OmY"/>
+                            <constraint firstAttribute="width" constant="80" id="yFH-Dg-LOX"/>
+                        </constraints>
+                        <state key="normal" title="Abschicken"/>
+                        <connections>
+                            <action selector="Absenden:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="qh1-QZ-3sd"/>
+                        </connections>
+                    </button>
                 </subviews>
+                <constraints>
+                    <constraint firstItem="209-h2-gk3" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="5zt-tY-O8z"/>
+                    <constraint firstItem="3jT-xy-6Hx" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="LA0-9M-G0a"/>
+                    <constraint firstItem="3jT-xy-6Hx" firstAttribute="top" secondItem="bdJ-uP-ZjK" secondAttribute="bottom" constant="16" id="TNF-8h-7G6"/>
+                    <constraint firstItem="bdJ-uP-ZjK" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="fPc-kA-iLY"/>
+                    <constraint firstItem="209-h2-gk3" firstAttribute="trailing" secondItem="H2p-sc-9uM" secondAttribute="trailingMargin" id="fYU-ok-d3D"/>
+                    <constraint firstItem="bdJ-uP-ZjK" firstAttribute="top" secondItem="209-h2-gk3" secondAttribute="bottom" constant="8" id="nyO-EK-2Hn"/>
+                    <constraint firstItem="209-h2-gk3" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="uew-gE-Ye6"/>
+                </constraints>
             </tableViewCellContentView>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
+                <outlet property="Abschicken" destination="3jT-xy-6Hx" id="Ykm-c2-Q2L"/>
+                <outlet property="Cosmos" destination="bdJ-uP-ZjK" id="ril-Kk-jKz"/>
                 <outlet property="ItemLbl" destination="209-h2-gk3" id="vIr-2t-yaK"/>
             </connections>
-            <point key="canvasLocation" x="-88" y="107"/>
+            <point key="canvasLocation" x="-88" y="117.84107946026987"/>
         </tableViewCell>
         <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" id="Og8-I2-DBE">
             <rect key="frame" x="0.0" y="-1" width="118" height="30"/>
