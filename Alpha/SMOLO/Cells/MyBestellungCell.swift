@@ -28,7 +28,11 @@ class MyBestellungCell: UITableViewCell, UITableViewDelegate, UITableViewDataSou
     var liters = [[String]]()
     var sections = Int()
     var rows = Int()
-    
+    var Kategorie = String()
+    var Extras = [String: [String]]()
+    var ExtrasPreise = [String: [Double]]()
+
+
     
     var sections2 = Int()
     var rows2 = Int()
@@ -126,14 +130,16 @@ class MyBestellungCell: UITableViewCell, UITableViewDelegate, UITableViewDataSou
         let cell = Bundle.main.loadNibNamed("MyBestellungCell2", owner: self, options: nil)?.first as! MyBestellungCell2
         cell.delegate = self
         cell.backgroundColor = UIColor.clear
+        print(bestellteItemsDictionary, "tetetete")
                 if bestellteItemsDictionary[sections].expanded2[indexPath.section] != false {
-        
+                    
                     var item = bestellteItemsDictionary[sections].items[indexPath.section]
                     var preis = bestellteItemsDictionary[sections].preis[indexPath.section]
                     var liter = bestellteItemsDictionary[sections].liter[indexPath.section]
                     var menge = bestellteItemsDictionary[sections].menge[indexPath.section]
                     var kommentare = bestellteItemsDictionary[sections].kommentar[indexPath.section]
                     var extras = bestellteItemsDictionary[sections].extras[indexPath.section]
+                    print(extras, "hwehwhehwehwe")
                     var extrasPreise = bestellteItemsDictionary[sections].extrasPreise[indexPath.section]
                 
 //                    section2 = indexPath.section
@@ -144,6 +150,10 @@ class MyBestellungCell: UITableViewCell, UITableViewDelegate, UITableViewDataSou
                     cell.kommentarLbl.text = kommentare[indexPath.row]
                     cell.extrasNamen = extras[indexPath.row]
                     cell.extrasPreise = extrasPreise[indexPath.row]
+                    cell.Kategorie = self.Kategorie
+                    cell.Extras = self.Extras
+                    cell.ExtrasPreise = self.ExtrasPreise
+
                     let preisFormat = String(format: "%.2f", arguments: [preis[indexPath.row]])
 
                     cell.myItemPreis.text = "\(preisFormat) €"

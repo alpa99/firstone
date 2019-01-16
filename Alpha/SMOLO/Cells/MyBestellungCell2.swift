@@ -19,12 +19,19 @@ protocol MyBestellungCell2Delegate {
 
 class MyBestellungCell2: UITableViewCell, UITextViewDelegate, UITableViewDelegate, UITableViewDataSource{
 
+
     
     var delegate: MyBestellungCell2Delegate?
     var sections2 = Int()
     var rows2 = Int()
     var extrasNamen = [String]()
     var extrasPreise = [Double]()
+    var Kategorie = String()
+    var Extras = [String: [String]]()
+    var ExtrasPreise = [String: [Double]]()
+
+
+
     
     @IBOutlet weak var myItemName: UILabel!
     @IBOutlet weak var myItemPreis: UILabel!
@@ -68,14 +75,42 @@ class MyBestellungCell2: UITableViewCell, UITextViewDelegate, UITableViewDelegat
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return extrasNamen.count
     }
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 44
+    }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = Bundle.main.loadNibNamed("ExtrasCell", owner: self, options: nil)?.first as! ExtrasCell
-        cell.extraLbl.text = extrasNamen[indexPath.row]
+        let cell = Bundle.main.loadNibNamed("KellnerExtrasCell", owner: self, options: nil)?.first as! KellnerExtrasCell
+        cell.extrasNameLbl.text = extrasNamen[indexPath.row]
+                    if self.Extras.keys.contains(Kategorie) {
+        
+                        var extras = self.Extras[Kategorie]
+                        var extraspreise = self.ExtrasPreise[Kategorie]
+                        cell.extraRow = indexPath.row
+                        cell.extrasNameLbl.text = extras?[indexPath.row]
+//                        if extrasNamen.contains((extras?[indexPath.row])!) {
+//                            cell.extraSelect.isSelected = true
+//                        } else {
+//                            cell.extraSelect.isSelected = false
+//
+//                        }
+                        let preisFormat = String(format: "%.2f", arguments: [(extraspreise?[indexPath.row])!])
+        
+                        cell.extrasPreisLbl.text = preisFormat
+                    } else {
+                        cell.extrasNameLbl.text = "keine Extras"
+//                        ExtrasHinzufügenBtn.isHidden = true
+                        cell.extrasPreisLbl.isHidden = true
+//                        cell.extraSelect.isHidden = true
+                    }
+        
+    
         let preisFormat = String(format: "%.2f", arguments: [extrasPreise[indexPath.row]])
-        cell.extraPreis.text = "\(preisFormat) €"
+        cell.extrasPreisLbl.text = "\(preisFormat) €"
         return cell
     }
+    
+   
     
     override func layoutSubviews()
     {

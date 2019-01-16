@@ -57,9 +57,18 @@ class DetailVC2: UIViewController, PageObservation2, CLLocationManagerDelegate{
     @IBOutlet weak var icon9: UIImageView!
     @IBOutlet weak var icon10: UIImageView!
     
+    @IBOutlet weak var Montag:    UILabel!
+    @IBOutlet weak var Dienstag: UILabel!
+    @IBOutlet weak var Mittwoch: UILabel!
+    @IBOutlet weak var Donnerstag: UILabel!
+    @IBOutlet weak var Freitag: UILabel!
+    @IBOutlet weak var Samstag: UILabel!
+    @IBOutlet weak var Sonntag: UILabel!
+    
+    
     @IBOutlet weak var maintxt: UILabel!
     
-    @IBOutlet weak var adressebtn: UIButton!
+//    @IBOutlet weak var adressebtn: UIButton!
     
     
     @IBOutlet weak var slideshow: ImageSlideshow!
@@ -67,6 +76,7 @@ class DetailVC2: UIViewController, PageObservation2, CLLocationManagerDelegate{
     @IBOutlet weak var topstack: UIStackView!
     
     @IBOutlet weak var bottomstack: UIStackView!
+    
     
     
     
@@ -100,15 +110,15 @@ class DetailVC2: UIViewController, PageObservation2, CLLocationManagerDelegate{
         super.viewDidLoad()
         self.barname = parentPageViewController2.name
         fetchData()
-        self.adressebtn.setTitle(adresse, for: .normal)
+//        self.adressebtn.setTitle(adresse, for: .normal)
         
         self.topstack.spacing = (self.view.frame.width - CGFloat(236.0))/CGFloat(4.0)
         self.bottomstack.spacing = (self.view.frame.width - CGFloat(236.0))/CGFloat(4.0)
         
         fetchPicsCount()
-        fetchData()
         fetchInfos()
         fetchText()
+        fetchTimes()
         slideshow.backgroundColor = UIColor.white
         
         slideshow.slideshowInterval = 0.0
@@ -196,6 +206,7 @@ class DetailVC2: UIViewController, PageObservation2, CLLocationManagerDelegate{
     func fetchData () {
         
         var ref: DatabaseReference!
+        self.NameLbl.text = self.barname
         ref = Database.database().reference()
         ref.child("BarInfo").child("\(barname)").observe(.value, with: { (snapshot) in
             
@@ -204,9 +215,30 @@ class DetailVC2: UIViewController, PageObservation2, CLLocationManagerDelegate{
                 
                 self.bars.append(bar)
                 print("Adresse", bar.Adresse ?? "")
-                self.adressebtn.setTitle(bar.Adresse, for: .normal)
+//                self.adressebtn.setTitle(bar.Adresse, for: .normal)
+
+//                self.adresse = bar.Adresse!
+            }} , withCancel: nil)
+        
+    }
+    
+    func fetchTimes () {
+        
+        var ref: DatabaseReference!
+        ref = Database.database().reference()
+        ref.child("BarInfo").child("\(barname)").child("Öffnungszeiten").observe(.value, with: { (snapshot) in
+            
+            if let dictionary = snapshot.value as? [String: AnyObject]{
+                let bar = Oeffnungszeiten(dictionary: dictionary)
                 
-                self.adresse = bar.Adresse!
+                self.Montag.text = bar.Montag
+                self.Dienstag.text = bar.Dienstag
+                self.Mittwoch.text = bar.Mittwoch
+                self.Donnerstag.text = bar.Donnerstag
+                self.Freitag.text = bar.Freitag
+                self.Samstag.text = bar.Samstag
+                self.Sonntag.text = bar.Sonntag
+                
             }} , withCancel: nil)
         
     }
