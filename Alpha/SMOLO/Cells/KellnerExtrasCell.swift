@@ -9,6 +9,7 @@
 import UIKit
 
 class KellnerExtrasCell: UITableViewCell {
+    var extraRow = 0
 
     @IBOutlet weak var extrasNameLbl: UILabel!
     

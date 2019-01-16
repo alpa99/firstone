@@ -595,6 +595,9 @@
                                 <state key="normal" title="Datenschutzbestimmungen">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
+                                <connections>
+                                    <action selector="datenschutz:" destination="5h5-QF-pPl" eventType="touchUpInside" id="iqi-UZ-BsT"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZUI-Qv-Qs5" customClass="Button" customModule="SMOLO" customModuleProvider="target">
                                 <rect key="frame" x="44" y="269" width="232" height="30"/>
@@ -606,6 +609,9 @@
                                 <state key="normal" title="Allgemeine Geschäftsbedinungen">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
+                                <connections>
+                                    <action selector="agbs:" destination="5h5-QF-pPl" eventType="touchUpInside" id="pCJ-cU-dCJ"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Zjh-Tn-J6T">
                                 <rect key="frame" x="132.5" y="438" width="55" height="30"/>
@@ -640,6 +646,9 @@
                                 <state key="normal" title="Impressum">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
+                                <connections>
+                                    <action selector="impressum:" destination="5h5-QF-pPl" eventType="touchUpInside" id="4J4-lL-PSK"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mjz-uf-XnY">
                                 <rect key="frame" x="101" y="388" width="118" height="30"/>
@@ -2496,15 +2505,14 @@
                     </view>
                     <size key="freeformSize" width="375" height="1025"/>
                     <connections>
-                        <outlet property="Dienstag" destination="LEP-T4-F8I" id="hfd-s4-a51"/>
-                        <outlet property="Donnerstag" destination="LB6-y9-kd2" id="O8k-5h-52Y"/>
-                        <outlet property="Freitag" destination="3ue-dX-0tx" id="Kkt-Os-OH1"/>
-                        <outlet property="Mittwoch" destination="88Z-7x-pJS" id="G4G-tB-66D"/>
-                        <outlet property="Montag" destination="JTM-Gp-Ffd" id="b8a-a3-bpk"/>
-                        <outlet property="NameLbl" destination="6kK-bb-FbK" id="Mk0-gK-FEt"/>
-                        <outlet property="Namelbl" destination="6kK-bb-FbK" id="2sP-UW-3Nu"/>
-                        <outlet property="Samstag" destination="aff-IW-ffC" id="CTD-FI-XiJ"/>
-                        <outlet property="Sonntag" destination="bdD-jb-f26" id="OW5-Z7-h0d"/>
+                        <outlet property="Dienstag" destination="LEP-T4-F8I" id="F1W-JF-zMt"/>
+                        <outlet property="Donnerstag" destination="LB6-y9-kd2" id="KXZ-wp-s0g"/>
+                        <outlet property="Freitag" destination="3ue-dX-0tx" id="GAh-E7-uZm"/>
+                        <outlet property="Mittwoch" destination="88Z-7x-pJS" id="rjk-nz-rLQ"/>
+                        <outlet property="Montag" destination="JTM-Gp-Ffd" id="6BX-Kh-LWB"/>
+                        <outlet property="NameLbl" destination="6kK-bb-FbK" id="fSe-82-YmF"/>
+                        <outlet property="Samstag" destination="aff-IW-ffC" id="ogt-Y0-oeK"/>
+                        <outlet property="Sonntag" destination="bdD-jb-f26" id="OXF-Zi-d2C"/>
                         <outlet property="bottomstack" destination="hJN-Fn-D4A" id="bdo-WK-KXg"/>
                         <outlet property="icon1" destination="iHq-4I-fSe" id="EIL-ur-fPq"/>
                         <outlet property="icon10" destination="Ac0-KI-cbB" id="gid-nt-8TB"/>

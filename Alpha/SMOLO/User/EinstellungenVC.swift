@@ -10,6 +10,7 @@ import UIKit
 import Firebase
 import FirebaseAuth
 import FacebookLogin
+import SafariServices
 
 class EinstellungenVC: UIViewController, UITextFieldDelegate {
 
@@ -25,6 +26,22 @@ class EinstellungenVC: UIViewController, UITextFieldDelegate {
     
 
     // Actions
+    
+    @IBAction func datenschutz(_ sender: Any) {
+        let agbsLink = SFSafariViewController(url: URL(string: "http://madapp.de/smolo/agbs-datenschutz.html")!)
+        self.present(agbsLink, animated: true, completion: nil)
+    }
+    
+    @IBAction func agbs(_ sender: Any) {
+        let agbsLink = SFSafariViewController(url: URL(string: "http://madapp.de/smolo/agbs-datenschutz.html")!)
+        self.present(agbsLink, animated: true, completion: nil)
+    }
+    
+    @IBAction func impressum(_ sender: Any) {
+        let agbsLink = SFSafariViewController(url: URL(string: "http://madapp.de")!)
+        self.present(agbsLink, animated: true, completion: nil)
+    }
+    
     @IBAction func passwortAbbrechen(_ sender: Any) {
         animateOutPasswort()
     }

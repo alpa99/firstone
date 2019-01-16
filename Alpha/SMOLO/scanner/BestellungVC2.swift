@@ -15,7 +15,7 @@ import GoogleMobileAds
 protocol BestellungVC2Delegate {
     func reloaddas(sender: Any)
 }
-class BestellungVC2: UIViewController, UITableViewDataSource, UITableViewDelegate, ExpandableHeaderViewDelegate, BestellenCellDelegate, MyBestellungCellDelegate, PageObservation2, CLLocationManagerDelegate, UITextViewDelegate, ExtraCellDelegate, GADInterstitialDelegate {
+class BestellungVC2: UIViewController, UITableViewDataSource, UITableViewDelegate, ExpandableHeaderViewDelegate, BestellenCellDelegate, MyBestellungCellDelegate, PageObservation2, ExtraCellDelegate, CLLocationManagerDelegate, UITextViewDelegate, GADInterstitialDelegate {
 
     // VARS
     var interstitial: GADInterstitial!
@@ -675,17 +675,23 @@ class BestellungVC2: UIViewController, UITableViewDataSource, UITableViewDelegat
             cellIndexPathSection = indexPath.section
             return cell
 
-        } else if tableView == myBestellungTV {
+        } else if tableView == myBestellungTV{
              let cell = Bundle.main.loadNibNamed("MyBestellungCell", owner: self, options: nil)?.first as! MyBestellungCell
             cell.delegate = self
             cell.bestellteItemsDictionary = bestellteItemsDictionary
             cell.sections = indexPath.section
+            cell.Kategorie = KategorieLbl.text!
+            cell.Extras = self.Extras
+            cell.ExtrasPreise = self.ExtrasPreise
+
+
             return cell
-        } else {
+        }
+        else {
             let cell = Bundle.main.loadNibNamed("ExtrasCell", owner: self, options: nil)?.first as! ExtrasCell
             cell.delegate = self
             if self.Extras.keys.contains(KategorieLbl.text!) {
-                
+
                 var extras = self.Extras[KategorieLbl.text!]
                 var extraspreise = self.ExtrasPreise[KategorieLbl.text!]
                 cell.extraRow = indexPath.row
@@ -697,7 +703,7 @@ class BestellungVC2: UIViewController, UITableViewDataSource, UITableViewDelegat
 
                 }
                 let preisFormat = String(format: "%.2f", arguments: [(extraspreise?[indexPath.row])!])
-                
+
                 cell.extraPreis.text = preisFormat
             } else {
                 cell.extraLbl.text = "keine Extras"
