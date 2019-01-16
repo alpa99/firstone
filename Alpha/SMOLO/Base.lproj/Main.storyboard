@@ -571,7 +571,7 @@
                     <connections>
                         <segue destination="5h5-QF-pPl" kind="show" identifier="einstellungen" id="WF7-qE-nsH"/>
                         <segue destination="RA1-99-WyY" kind="show" identifier="feedback" id="V9q-6m-7pd"/>
-                        <segue destination="JcB-IK-hdl" kind="show" identifier="meinebestellung" id="zL7-qa-yKN"/>
+                        <segue destination="JcB-IK-hdl" kind="show" identifier="meinebestellungen" id="zL7-qa-yKN"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FfX-KQ-cr5" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -2544,6 +2544,7 @@
         <image name="uhrzeit" width="40" height="40"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="zL7-qa-yKN"/>
         <segue reference="lCL-4T-GHF"/>
         <segue reference="Ofz-12-wQ9"/>
     </inferredMetricsTieBreakers>
