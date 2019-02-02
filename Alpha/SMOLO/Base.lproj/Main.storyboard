@@ -2579,6 +2579,7 @@
         <image name="uhrzeit" width="40" height="40"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="zL7-qa-yKN"/>
         <segue reference="lCL-4T-GHF"/>
         <segue reference="Ofz-12-wQ9"/>
     </inferredMetricsTieBreakers>
