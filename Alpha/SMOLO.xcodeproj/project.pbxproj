@@ -47,6 +47,7 @@
 		08EF4C4A1F9CFFA500F01096 /* ExpandTVSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EF4C491F9CFFA500F01096 /* ExpandTVSection.swift */; };
 		08EF4C4C1F9D006700F01096 /* ExpandableHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EF4C4B1F9D006700F01096 /* ExpandableHeaderView.swift */; };
 		08EF4C4E1F9D2AC000F01096 /* SpeisekarteInfos.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EF4C4D1F9D2AC000F01096 /* SpeisekarteInfos.swift */; };
+		3871370E21F91910008AB388 /* BestellungÜbersichtVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3871370D21F91910008AB388 /* BestellungÜbersichtVC.swift */; };
 		388D4C56219F093E005184F3 /* BewertungSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 388D4C55219F093E005184F3 /* BewertungSection.swift */; };
 		4E1664BC1FBC6D340038EFB5 /* DetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E1664BB1FBC6D340038EFB5 /* DetailVC.swift */; };
 		4E1664BE1FBF12020038EFB5 /* votevc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E1664BD1FBF12020038EFB5 /* votevc.swift */; };
@@ -157,6 +158,7 @@
 		08EF4C4D1F9D2AC000F01096 /* SpeisekarteInfos.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeisekarteInfos.swift; sourceTree = "<group>"; };
 		1EA076F87397E3B0B510A4B4 /* Pods-SMOLOTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SMOLOTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-SMOLOTests/Pods-SMOLOTests.release.xcconfig"; sourceTree = "<group>"; };
 		3266058303F90426C7363152 /* Pods-SMOLOTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SMOLOTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SMOLOTests/Pods-SMOLOTests.debug.xcconfig"; sourceTree = "<group>"; };
+		3871370D21F91910008AB388 /* BestellungÜbersichtVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BestellungÜbersichtVC.swift"; sourceTree = "<group>"; };
 		388D4C55219F093E005184F3 /* BewertungSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BewertungSection.swift; sourceTree = "<group>"; };
 		4E1664BB1FBC6D340038EFB5 /* DetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailVC.swift; sourceTree = "<group>"; };
 		4E1664BD1FBF12020038EFB5 /* votevc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = votevc.swift; sourceTree = "<group>"; };
@@ -432,6 +434,7 @@
 				4EEB60821FDF2BAB0003BA0E /* PageViewController2.swift */,
 				08EF4C471F9CFE9800F01096 /* BestellungVC2.swift */,
 				087796DD204AFA410066D6F5 /* BestellungAbschickenVC.swift */,
+				3871370D21F91910008AB388 /* BestellungÜbersichtVC.swift */,
 			);
 			path = scanner;
 			sourceTree = "<group>";
@@ -750,6 +753,7 @@
 				949AB0B320AB82B6005F85C7 /* LabelWhiteS30.swift in Sources */,
 				4EC248001F9950CE00910AA8 /* DrawerVC.swift in Sources */,
 				08210EE51FB83AE300EABA32 /* BestellenCell.swift in Sources */,
+				3871370E21F91910008AB388 /* BestellungÜbersichtVC.swift in Sources */,
 				4EC247CD1F98F90500910AA8 /* QRScanner.swift in Sources */,
 				08C881671F9962EB00AD8F20 /* BarInfos.swift in Sources */,
 				4EC247CB1F98F90500910AA8 /* AppDelegate.swift in Sources */,

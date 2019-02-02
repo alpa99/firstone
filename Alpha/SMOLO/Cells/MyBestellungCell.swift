@@ -128,7 +128,7 @@ class MyBestellungCell: UITableViewCell, UITableViewDelegate, UITableViewDataSou
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = Bundle.main.loadNibNamed("MyBestellungCell2", owner: self, options: nil)?.first as! MyBestellungCell2
-        cell.delegate = self
+//        cell.delegate = self
         cell.backgroundColor = UIColor.clear
         print(bestellteItemsDictionary, "tetetete")
                 if bestellteItemsDictionary[sections].expanded2[indexPath.section] != false {

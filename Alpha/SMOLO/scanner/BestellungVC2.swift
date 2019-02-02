@@ -186,6 +186,7 @@ class BestellungVC2: UIViewController, UITableViewDataSource, UITableViewDelegat
     
 
     // FUNCTIONS
+
     
     @IBAction func bestellungPrüfen(_ sender: Any) {
         if BestellungKategorien.count != 0{
@@ -194,20 +195,24 @@ class BestellungVC2: UIViewController, UITableViewDataSource, UITableViewDelegat
             let section = BestellungKategorien.index(of: Kategorie)
             setSectionsBestellung(Kategorie: Kategorie, Unterkategorie: BestellungUnterkategorien[section!], items: BestellungItemsNamen[section!], preis: BestellungItemsPreise[section!], liter: BestellungItemsLiter[section!], kommentar: BestellungItemsKommentar[section!], extras: BestellungExtrasName[section!], extrasPreise: BestellungExtrasPreise[section!], menge: BestellungItemsMengen[section!], expanded2: BestellungItemsExpanded2[section!])
         }
-        myBestellungTV.reloadData()
-                self.bestellungVCView.addSubview(visualEffectView)
-                visualEffectView.center = self.bestellungVCView.center
-                self.bestellungVCView.addSubview(self.myBestellungView)
-                self.myBestellungView.center = self.bestellungVCView.center
-                self.myBestellungView.transform = CGAffineTransform.init(scaleX: 1.3, y: 1.3)
-                self.myBestellungView.alpha = 0
-                UIView.animate(withDuration: 0.2) {
-        
-                    self.visualEffectView.effect = self.effect
-                    self.myBestellungView.alpha = 1.0
-                    self.myBestellungView.transform = CGAffineTransform.identity
+            
+            performSegue(withIdentifier: "meineBestellung", sender: self)
+//        myBestellungTV.reloadData()
+//                self.bestellungVCView.addSubview(visualEffectView)
+//                visualEffectView.center = self.bestellungVCView.center
+//                self.bestellungVCView.addSubview(self.myBestellungView)
+//                self.myBestellungView.center = self.bestellungVCView.center
+//                self.myBestellungView.transform = CGAffineTransform.init(scaleX: 1.3, y: 1.3)
+//                self.myBestellungView.alpha = 0
+//                UIView.animate(withDuration: 0.2) {
+//
+//                    self.visualEffectView.effect = self.effect
+//                    self.myBestellungView.alpha = 1.0
+//                    self.myBestellungView.transform = CGAffineTransform.identity
 
-            }
+//            }
+             
+        
         } else {
             let alertKeineBestellung = UIAlertController(title: "Bestellung überprüfen", message: "Deine Bestellung ist leer", preferredStyle: .alert)
             alertKeineBestellung.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
@@ -686,8 +691,7 @@ class BestellungVC2: UIViewController, UITableViewDataSource, UITableViewDelegat
 
 
             return cell
-        }
-        else {
+        }        else {
             let cell = Bundle.main.loadNibNamed("ExtrasCell", owner: self, options: nil)?.first as! ExtrasCell
             cell.delegate = self
             if self.Extras.keys.contains(KategorieLbl.text!) {
