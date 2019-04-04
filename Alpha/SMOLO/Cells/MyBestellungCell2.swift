@@ -19,19 +19,20 @@ protocol MyBestellungCell2Delegate {
 
 class MyBestellungCell2: UITableViewCell, UITextViewDelegate, UITableViewDelegate, UITableViewDataSource{
 
-
+    var bestellteItemsDictionary = [bestellungTVSection]()
+    var Cell1Section = Int()
+    var Cell2Section = Int()
+    var Cell2Row = Int()
     
     var delegate: MyBestellungCell2Delegate?
-    var sections2 = Int()
-    var rows2 = Int()
     var extrasNamen = [String]()
     var extrasPreise = [Double]()
     var Kategorie = String()
     var Extras = [String: [String]]()
     var ExtrasPreise = [String: [Double]]()
+//
 
-
-
+    @IBOutlet weak var extrasTV: UITableView!
     
     @IBOutlet weak var myItemName: UILabel!
     @IBOutlet weak var myItemPreis: UILabel!
@@ -42,10 +43,6 @@ class MyBestellungCell2: UITableViewCell, UITextViewDelegate, UITableViewDelegat
     @IBOutlet weak var myItemMengeMinus: UIButton!
     @IBOutlet weak var myItemMengePlus: UIButton!
     @IBOutlet weak var myItemEntfernen: UIButton!
-    
-    @IBOutlet weak var extrasTV: UITableView!
-    
-    
 
     @IBAction func myItemMengeMinusAction(_ sender: Any) {
         delegate?.cellmyItemMengeMinusAction(sender: self)
@@ -55,6 +52,7 @@ class MyBestellungCell2: UITableViewCell, UITextViewDelegate, UITableViewDelegat
     }
     @IBAction func myItemEntfernenAction(_ sender: Any) {
         delegate?.cellMyItemEntfernen(sender: self)
+        print("11")
     }
     
     func textViewDidEndEditing(_ textView: UITextView) {
@@ -74,6 +72,7 @@ class MyBestellungCell2: UITableViewCell, UITextViewDelegate, UITableViewDelegat
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         print(extrasNamen, "ferfwd")
+        
         return extrasNamen.count
     }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -81,9 +80,14 @@ class MyBestellungCell2: UITableViewCell, UITextViewDelegate, UITableViewDelegat
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        
         let cell = Bundle.main.loadNibNamed("KellnerExtrasCell", owner: self, options: nil)?.first as! KellnerExtrasCell
-        cell.extrasNameLbl.text = "ewfwefwe"
-//        cell.extrasNameLbl.text = extrasNamen[indexPath.row]
+        cell.backgroundColor = UIColor.clear
+        cell.extrasNameLbl.text = extrasNamen[indexPath.row]
+        let preisFormat = String(format: "%.2f", arguments: [(extrasPreise[indexPath.row])])
+        cell.extrasPreisLbl.text = "\(preisFormat) €"
+        
 //                    if self.Extras.keys.contains(Kategorie) {
 //
 //                        var extras = self.Extras[Kategorie]
@@ -105,10 +109,7 @@ class MyBestellungCell2: UITableViewCell, UITextViewDelegate, UITableViewDelegat
 //                        cell.extrasPreisLbl.isHidden = true
 ////                        cell.extraSelect.isHidden = true
 //                    }
-//
-//
-//        let preisFormat = String(format: "%.2f", arguments: [extrasPreise[indexPath.row]])
-//        cell.extrasPreisLbl.text = "\(preisFormat) €"
+
         return cell
     }
     
@@ -117,6 +118,7 @@ class MyBestellungCell2: UITableViewCell, UITextViewDelegate, UITableViewDelegat
     override func layoutSubviews()
     {
         super.layoutSubviews()
+        
         extrasTV.delegate = self
         extrasTV.dataSource = self
     }
@@ -126,8 +128,7 @@ class MyBestellungCell2: UITableViewCell, UITextViewDelegate, UITableViewDelegat
     override func awakeFromNib() {
         super.awakeFromNib()
         kommentarLbl.delegate = self
-        extrasTV.delegate = self
-        extrasTV.dataSource = self
+
         // Initialization code
     }
 

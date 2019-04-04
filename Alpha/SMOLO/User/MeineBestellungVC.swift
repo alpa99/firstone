@@ -623,6 +623,7 @@ print(snapshot, "snapshot")
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = Bundle.main.loadNibNamed("KellnerCell", owner: self, options: nil)?.first as! KellnerCell
         cell.Bestellungen = Bestellungen
+        print(Bestellungen, "Bestellungen")
         cell.Cell1Section = indexPath.section
         cell.bestellungID = Bestellungen[indexPath.section].BestellungID
         cell.annehmen.setTitle("Status: \(Status[Bestellungen[indexPath.section].BestellungID]!)", for: .normal)

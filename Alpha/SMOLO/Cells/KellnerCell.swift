@@ -23,7 +23,6 @@ class KellnerCell: UITableViewCell, UITableViewDelegate, UITableViewDataSource, 
     
     @IBOutlet weak var bewertung: UIButton!
     
-
     @IBOutlet weak var timeLbl: UILabel!
     
     @IBOutlet weak var KellnerCelleTV: UITableView!

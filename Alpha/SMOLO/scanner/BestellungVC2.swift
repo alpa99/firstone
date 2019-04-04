@@ -209,9 +209,9 @@ class BestellungVC2: UIViewController, UITableViewDataSource, UITableViewDelegat
 //                    self.visualEffectView.effect = self.effect
 //                    self.myBestellungView.alpha = 1.0
 //                    self.myBestellungView.transform = CGAffineTransform.identity
-
+//
 //            }
-             
+            
         
         } else {
             let alertKeineBestellung = UIAlertController(title: "Bestellung überprüfen", message: "Deine Bestellung ist leer", preferredStyle: .alert)
@@ -220,6 +220,16 @@ class BestellungVC2: UIViewController, UITableViewDataSource, UITableViewDelegat
         }
     }
     
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "meineBestellung" {
+            let vc = segue.destination as! BestellungÜbersichtVC
+            vc.bestellteItemsDictionary = bestellteItemsDictionary
+
+            bestellteItemsDictionary.removeAll()
+        }
+    }
+ 
     
     
     func getKategorien (){
@@ -367,7 +377,7 @@ class BestellungVC2: UIViewController, UITableViewDataSource, UITableViewDelegat
         let timestamp = Double(NSDate().timeIntervalSince(DayOne!))
 
         let fromUserID = Auth.auth().currentUser?.uid
-        let values = ["Barname": barname ,"toKellnerID": KellnerID, "tischnummer": "\(tischnummer)", "fromUserID": fromUserID! , "timeStamp": timestamp, "Status": "versendet"] as [String : Any]
+        let values = ["Barname": barname ,"toKellner ID": KellnerID, "tischnummer": "\(tischnummer)", "fromUserID": fromUserID! , "timeStamp": timestamp, "Status": "versendet"] as [String : Any]
         let userRef = Database.database().reference().child("Users").child(fromUserID!)
         userRef.updateChildValues(["akutelleBar" : barname, "letzteBestellungZeit": timestamp])
 

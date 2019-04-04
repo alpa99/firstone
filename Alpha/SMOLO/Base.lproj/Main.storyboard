@@ -1652,10 +1652,9 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="ftJ-Vr-mwg">
-                                <rect key="frame" x="16" y="20" width="288" height="471"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="ftJ-Vr-mwg">
+                                <rect key="frame" x="0.0" y="20" width="320" height="518"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <connections>
                                     <outlet property="dataSource" destination="UPx-km-WsB" id="IEP-mm-xC1"/>
                                     <outlet property="delegate" destination="UPx-km-WsB" id="E7v-FC-G5B"/>
@@ -1663,8 +1662,17 @@
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="mpM-Fx-oAe" firstAttribute="trailing" secondItem="ftJ-Vr-mwg" secondAttribute="trailing" id="I5L-ln-7ea"/>
+                            <constraint firstItem="mpM-Fx-oAe" firstAttribute="bottom" secondItem="ftJ-Vr-mwg" secondAttribute="bottom" constant="30" id="XDG-34-4hL"/>
+                            <constraint firstItem="ftJ-Vr-mwg" firstAttribute="leading" secondItem="mpM-Fx-oAe" secondAttribute="leading" id="f24-yH-iT2"/>
+                            <constraint firstItem="ftJ-Vr-mwg" firstAttribute="top" secondItem="mpM-Fx-oAe" secondAttribute="top" id="kVv-UR-Wt2"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="mpM-Fx-oAe"/>
                     </view>
+                    <connections>
+                        <outlet property="uebersichtTV" destination="ftJ-Vr-mwg" id="f0U-MZ-aim"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cGT-Fn-Czk" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -2579,7 +2587,6 @@
         <image name="uhrzeit" width="40" height="40"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="zL7-qa-yKN"/>
         <segue reference="lCL-4T-GHF"/>
         <segue reference="Ofz-12-wQ9"/>
     </inferredMetricsTieBreakers>
