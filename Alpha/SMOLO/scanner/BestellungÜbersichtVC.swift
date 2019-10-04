@@ -15,7 +15,7 @@ class BestellungÜbersichtVC: UIViewController, UITableViewDelegate, UITableView
     var Extras = [String: [String]]()
     var ExtrasPreise = [String: [Double]]()
     
-    
+    var BestellungKategorien = [String]()
     var BestellungUnterkategorien = [[String]]()
     var BestellungItemsNamen = [[[String]]]()
     var BestellungItemsPreise = [[[Double]]]()
@@ -29,6 +29,18 @@ class BestellungÜbersichtVC: UIViewController, UITableViewDelegate, UITableView
     
     @IBOutlet weak var uebersichtTV: UITableView!
     
+    
+    @IBAction func abschicken(_ sender: Any) {
+        let alertKeineBestellung = UIAlertController(title: "Bestellung abschicken", message: "Bist du dir Sicher? Es gibt kein zurück.", preferredStyle: .alert)
+        alertKeineBestellung.addAction(UIAlertAction(title: "Abschicken", style: .default, handler: { (UIAlertAction) in
+            print("ok")
+        }))
+        alertKeineBestellung.addAction(UIAlertAction(title: "Abbrechen", style: .default, handler: { (UIAlertAction) in
+            print("abbrechen")
+        }))
+        // segue und handleBestellung fehlen
+        self.present(alertKeineBestellung, animated: true, completion: nil)
+    }
     
     func toggleSection(tableView: UITableView, header: ExpandableHeaderView, section: Int) {
         print("BestellungÜbersicht")
@@ -67,7 +79,11 @@ class BestellungÜbersichtVC: UIViewController, UITableViewDelegate, UITableView
             bestellteItemsDictionary[sender.sections].menge = mengeInSection
             
         }  else {
-            
+            print(BestellungUnterkategorien, "234354312")
+            print(BestellungItemsNamen, "234354312")
+
+
+            print(BestellungItemsNamen, sender.sections, sender.sections2, "NAMENS")
             BestellungItemsNamen[sender.sections].remove(at: sender.sections2)
             BestellungItemsPreise[sender.sections].remove(at: sender.sections2)
             BestellungItemsLiter[sender.sections].remove(at: sender.sections2)
@@ -83,35 +99,65 @@ class BestellungÜbersichtVC: UIViewController, UITableViewDelegate, UITableView
             bestellteItemsDictionary[sender.sections].expanded2.remove(at: sender.sections2)
             
             if bestellteItemsDictionary[sender.sections].Unterkategorie.count == 0{
-                bestellteItemsDictionary.remove(at: sender.sections)
-                BestellungKategorien.remove(at: sender.sections)
-                BestellungItemsNamen.remove(at: sender.sections)
-                BestellungItemsMengen.remove(at: sender.sections)
-                BestellungItemsLiter.remove(at: sender.sections)
-                BestellungItemsPreise.remove(at: sender.sections)
-                BestellungUnterkategorien.remove(at: sender.sections)
-                BestellungItemsExpanded2.remove(at: sender.sections)
+                    bestellteItemsDictionary.remove(at: sender.sections)
+                sender.bestellteItemsDictionary = bestellteItemsDictionary
+                
                 
                 if bestellteItemsDictionary.count == 0 {
-                    print("leeer")
-                } } }
-        sender.bestellteItemsDictionary = bestellteItemsDictionary
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5, execute: {
+                        self.navigationController?.popViewController(animated: true)
+                    })
+                }
+                
+            } }
+   
         uebersichtTV.reloadData()
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+    
+        let BestellungVC2 = self.storyboard?.instantiateViewController(withIdentifier: "BestellungVC2") as! BestellungVC2
+        
+        BestellungVC2.BestellungKategorien = BestellungKategorien
+        BestellungVC2.BestellungUnterkategorien = BestellungUnterkategorien
+        BestellungVC2.BestellungItemsNamen = BestellungItemsNamen
+        BestellungVC2.BestellungItemsPreise = BestellungItemsPreise
+        BestellungVC2.BestellungItemsLiter = BestellungItemsLiter
+        BestellungVC2.BestellungExtrasName = BestellungExtrasName
+        BestellungVC2.BestellungExtrasPreise = BestellungExtrasPreise
+        BestellungVC2.BestellungItemsMengen = BestellungItemsMengen
+        BestellungVC2.BestellungItemsExpanded2 = BestellungItemsExpanded2
+    }
+    
     func passItemPlus(sender: MyBestellungCell) {
-        print(1)
+        let i = 1
+        var mengeInSection = bestellteItemsDictionary[sender.sections].menge
+        var newmengeInSection = mengeInSection[sender.sections2]
+        newmengeInSection[sender.rows2] = newmengeInSection[sender.rows2] + i
+        mengeInSection[sender.sections2] = newmengeInSection
+        BestellungItemsMengen[sender.sections] = mengeInSection
+        bestellteItemsDictionary[sender.sections].menge = mengeInSection
+        uebersichtTV.reloadData()
+        
     }
     
     func passItemMinus(sender: MyBestellungCell) {
-        print(4)
+        var mengeInSection = bestellteItemsDictionary[sender.sections].menge
+        
+        var newmengeInSection = mengeInSection[sender.sections2]
+        let i = 1
+        if newmengeInSection[sender.rows2] > 1{
+            newmengeInSection[sender.rows2] = newmengeInSection[sender.rows2] - i
+            mengeInSection[sender.sections2] = newmengeInSection
+            BestellungItemsMengen[sender.sections] = mengeInSection
+            bestellteItemsDictionary[sender.sections].menge = mengeInSection
+            uebersichtTV.reloadData()
+        }
     }
     
     func passKommentarAendern(sender: MyBestellungCell) {
         print(3)
     }
-    
-
     
     func numberOfSections(in tableView: UITableView) -> Int {
         return bestellteItemsDictionary.count
@@ -202,6 +248,7 @@ class BestellungÜbersichtVC: UIViewController, UITableViewDelegate, UITableView
         cell.bestellteItemsDictionary = bestellteItemsDictionary
         print(bestellteItemsDictionary, "bestellteItemsDictionary")
         cell.Cell1Section = indexPath.section
+        print(BestellungItemsNamen, "halllooooo")
 //        cell.delegate = self as! MyBestellungCellDelegate
 
         

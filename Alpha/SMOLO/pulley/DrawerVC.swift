@@ -67,6 +67,7 @@ class DrawerVC: UIViewController, PulleyDrawerViewControllerDelegate, UITableVie
     func searchBarShouldBeginEditing(_ searchBar: UISearchBar) -> Bool {
         return (self.pulleyViewController?.setDrawerPosition(position: .open, animated: true) != nil)
     }
+    
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
     self.pulleyViewController?.setDrawerPosition(position: .open, animated: true)
     }
@@ -86,8 +87,6 @@ class DrawerVC: UIViewController, PulleyDrawerViewControllerDelegate, UITableVie
     func updateSearchResults(for: UISearchController){
         filteredContent(searchText: searchController.searchBar.text!)
         print(4)
-
-
     }
     
     // TABLEVIEW FUNCS
@@ -215,7 +214,7 @@ class DrawerVC: UIViewController, PulleyDrawerViewControllerDelegate, UITableVie
         searchController.searchBar.searchBarStyle = .prominent
         searchController.searchBar.tintColor = .white
 
-        if let txfSearchField = searchController.searchBar.value(forKey: "_searchField") as? UITextField {
+        if let txfSearchField = searchController.searchBar.searchTextField as? UITextField {
             txfSearchField.textColor = .white
             txfSearchField.borderStyle = .roundedRect
             txfSearchField.backgroundColor = UIColor(red: 90.0/255.0, green: 90.0/255.0, blue: 90.0/255.0, alpha: 1.0)

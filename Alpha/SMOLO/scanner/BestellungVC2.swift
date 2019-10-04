@@ -15,7 +15,7 @@ import GoogleMobileAds
 protocol BestellungVC2Delegate {
     func reloaddas(sender: Any)
 }
-class BestellungVC2: UIViewController, UITableViewDataSource, UITableViewDelegate, ExpandableHeaderViewDelegate, BestellenCellDelegate, MyBestellungCellDelegate, PageObservation2, ExtraCellDelegate, CLLocationManagerDelegate, UITextViewDelegate, GADInterstitialDelegate {
+class BestellungVC2: UIViewController, UITableViewDataSource, UITableViewDelegate, ExpandableHeaderViewDelegate, BestellenCellDelegate, PageObservation2, ExtraCellDelegate, CLLocationManagerDelegate, UITextViewDelegate, GADInterstitialDelegate {
 
     // VARS
     var interstitial: GADInterstitial!
@@ -35,7 +35,7 @@ class BestellungVC2: UIViewController, UITableViewDataSource, UITableViewDelegat
     var BestellungItemsExpanded2 = [[Bool]]()
     var BestellungExtrasName = [[[[String]]]]()
     var BestellungExtrasPreise = [[[[Double]]]]()
-
+    var test = String()
     var extrasNamen = [String]()
     var extrasPreise = [Double]()
     
@@ -118,7 +118,6 @@ class BestellungVC2: UIViewController, UITableViewDataSource, UITableViewDelegat
 //                if distanceint < 150{
 //                print("distance ist ok")
 
-                    self.seugueAbschicken()
                     self.handleBestellung()
 //                }else{
 //                    print ("distance ist nicht ok ")
@@ -171,7 +170,6 @@ class BestellungVC2: UIViewController, UITableViewDataSource, UITableViewDelegat
     @IBAction func dismissPopUp(_ sender: Any) {
         animateOut()
         bestellungaktualisieren()
-
     }
     
     @IBAction func aktualisierungAbbrechen(_ sender: Any) {
@@ -190,10 +188,14 @@ class BestellungVC2: UIViewController, UITableViewDataSource, UITableViewDelegat
     
     @IBAction func bestellungPrüfen(_ sender: Any) {
         if BestellungKategorien.count != 0{
+            print(bestellteItemsDictionary, 3449876)
+            print(BestellungUnterkategorien, "BestellungUnterkategorien")
+            print(BestellungItemsNamen, 23544323234)
 
-        for Kategorie in BestellungKategorien {
+            for Kategorie in BestellungKategorien {
             let section = BestellungKategorien.index(of: Kategorie)
             setSectionsBestellung(Kategorie: Kategorie, Unterkategorie: BestellungUnterkategorien[section!], items: BestellungItemsNamen[section!], preis: BestellungItemsPreise[section!], liter: BestellungItemsLiter[section!], kommentar: BestellungItemsKommentar[section!], extras: BestellungExtrasName[section!], extrasPreise: BestellungExtrasPreise[section!], menge: BestellungItemsMengen[section!], expanded2: BestellungItemsExpanded2[section!])
+            
         }
             
             performSegue(withIdentifier: "meineBestellung", sender: self)
@@ -225,8 +227,19 @@ class BestellungVC2: UIViewController, UITableViewDataSource, UITableViewDelegat
         if segue.identifier == "meineBestellung" {
             let vc = segue.destination as! BestellungÜbersichtVC
             vc.bestellteItemsDictionary = bestellteItemsDictionary
-
+            vc.BestellungKategorien = BestellungKategorien
+            vc.BestellungUnterkategorien = BestellungUnterkategorien
+            vc.BestellungItemsNamen = BestellungItemsNamen
+            vc.BestellungItemsPreise = BestellungItemsPreise
+            vc.BestellungItemsLiter = BestellungItemsLiter
+            vc.BestellungExtrasName = BestellungExtrasName
+            vc.BestellungExtrasPreise = BestellungExtrasPreise
+            vc.BestellungItemsMengen = BestellungItemsMengen
+            vc.BestellungItemsExpanded2 = BestellungItemsExpanded2
             bestellteItemsDictionary.removeAll()
+
+//            bestellteItemsDictionary.removeAll()
+            
         }
     }
  
@@ -359,13 +372,7 @@ class BestellungVC2: UIViewController, UITableViewDataSource, UITableViewDelegat
   
 
 
-    func seugueAbschicken(){
-        if interstitial.isReady {
-            interstitial.present(fromRootViewController: self)
-        }
-        performSegue(withIdentifier: "wirdabgeschickt", sender: self)
-    }
-    
+
     
 
     func handleBestellung(){
@@ -520,6 +527,8 @@ class BestellungVC2: UIViewController, UITableViewDataSource, UITableViewDelegat
     }
     
     func setSectionsBestellung(Kategorie: String, Unterkategorie: [String], items: [[String]], preis: [[Double]], liter: [[String]], kommentar: [[String]], extras: [[[String]]], extrasPreise: [[[Double]]],menge: [[Int]], expanded2: [Bool]){
+        print(bestellteItemsDictionary, "3243342v34f34f3fdfddf")
+
         self.bestellteItemsDictionary
             .append(bestellungTVSection(Kategorie: Kategorie, Unterkategorie: Unterkategorie, items: items, preis: preis, liter: liter, kommentar: kommentar, extras: extras, extrasPreise: extrasPreise, menge: menge, expanded2: expanded2, expanded: true))
         print(bestellteItemsDictionary, "njejkejekj")
@@ -690,17 +699,17 @@ class BestellungVC2: UIViewController, UITableViewDataSource, UITableViewDelegat
             cellIndexPathSection = indexPath.section
             return cell
 
-        } else if tableView == myBestellungTV{
-             let cell = Bundle.main.loadNibNamed("MyBestellungCell", owner: self, options: nil)?.first as! MyBestellungCell
-            cell.delegate = self
-            cell.bestellteItemsDictionary = bestellteItemsDictionary
-            cell.sections = indexPath.section
-            cell.Kategorie = KategorieLbl.text!
-            cell.Extras = self.Extras
-            cell.ExtrasPreise = self.ExtrasPreise
-
-
-            return cell
+//        } else if tableView == myBestellungTV{
+//             let cell = Bundle.main.loadNibNamed("MyBestellungCell", owner: self, options: nil)?.first as! MyBestellungCell
+//            cell.delegate = self
+//            cell.bestellteItemsDictionary = bestellteItemsDictionary
+//            cell.sections = indexPath.section
+//            cell.Kategorie = KategorieLbl.text!
+//            cell.Extras = self.Extras
+//            cell.ExtrasPreise = self.ExtrasPreise
+//
+//
+//            return cell
         }        else {
             let cell = Bundle.main.loadNibNamed("ExtrasCell", owner: self, options: nil)?.first as! ExtrasCell
             cell.delegate = self
@@ -820,7 +829,7 @@ class BestellungVC2: UIViewController, UITableViewDataSource, UITableViewDelegat
     
     func bestellungaktualisieren(){
         if i > 0{
-            
+            print("jajajajajaj")
             // kategorie gibt es nicht
             if !BestellungKategorien.contains(KategorieLbl.text!){
                 BestellungKategorien.append(KategorieLbl.text!)
@@ -934,108 +943,108 @@ class BestellungVC2: UIViewController, UITableViewDataSource, UITableViewDelegat
     }
     
     
-    func passItemPlus(sender: MyBestellungCell) {
-        
-        let i = 1
-        var mengeInSection = bestellteItemsDictionary[sender.sections].menge
-        var newmengeInSection = mengeInSection[sender.sections2]
-        newmengeInSection[sender.rows2] = newmengeInSection[sender.rows2] + i
-        mengeInSection[sender.sections2] = newmengeInSection
-        BestellungItemsMengen[sender.sections] = mengeInSection
-        bestellteItemsDictionary[sender.sections].menge = mengeInSection
-        myBestellungTV.reloadData()
-        
-    }
-    
-    func passItemMinus(sender: MyBestellungCell) {
-        var mengeInSection = bestellteItemsDictionary[sender.sections].menge
-        
-        var newmengeInSection = mengeInSection[sender.sections2]
-        let i = 1
-        if newmengeInSection[sender.rows2] > 1{
-            newmengeInSection[sender.rows2] = newmengeInSection[sender.rows2] - i
-            mengeInSection[sender.sections2] = newmengeInSection
-            BestellungItemsMengen[sender.sections] = mengeInSection
-            bestellteItemsDictionary[sender.sections].menge = mengeInSection
-            myBestellungTV.reloadData()
-        }
-        
-        
-    }
-    
-    
-    
+//    func passItemPlus(sender: MyBestellungCell) {
+//
+//        let i = 1
+//        var mengeInSection = bestellteItemsDictionary[sender.sections].menge
+//        var newmengeInSection = mengeInSection[sender.sections2]
+//        newmengeInSection[sender.rows2] = newmengeInSection[sender.rows2] + i
+//        mengeInSection[sender.sections2] = newmengeInSection
+//        BestellungItemsMengen[sender.sections] = mengeInSection
+//        bestellteItemsDictionary[sender.sections].menge = mengeInSection
+//        myBestellungTV.reloadData()
+//
+//    }
+//
+//    func passItemMinus(sender: MyBestellungCell) {
+//        var mengeInSection = bestellteItemsDictionary[sender.sections].menge
+//
+//        var newmengeInSection = mengeInSection[sender.sections2]
+//        let i = 1
+//        if newmengeInSection[sender.rows2] > 1{
+//            newmengeInSection[sender.rows2] = newmengeInSection[sender.rows2] - i
+//            mengeInSection[sender.sections2] = newmengeInSection
+//            BestellungItemsMengen[sender.sections] = mengeInSection
+//            bestellteItemsDictionary[sender.sections].menge = mengeInSection
+//            myBestellungTV.reloadData()
+//        }
+//
+//
+//    }
+//
     
     
-    func passItemEntfernen(sender: MyBestellungCell) {
-        var itemsInSection = bestellteItemsDictionary[sender.sections].items
-        var preisInSection = bestellteItemsDictionary[sender.sections].preis
-        var literInSection = bestellteItemsDictionary[sender.sections].liter
-        var mengeInSection = bestellteItemsDictionary[sender.sections].menge
-        var newitemsInSection = itemsInSection[sender.sections2]
-        var newpreisInSection = preisInSection[sender.sections2]
-        var newliterInSection = literInSection[sender.sections2]
-        var newmengeInSection = mengeInSection[sender.sections2]
-        
-        newitemsInSection.remove(at: sender.rows2)
-        newliterInSection.remove(at: sender.rows2)
-        newpreisInSection.remove(at: sender.rows2)
-        newmengeInSection.remove(at: sender.rows2)
-        
-        if newitemsInSection.count != 0{
-            
-            itemsInSection[sender.sections2] = newitemsInSection
-            preisInSection[sender.sections2] = newpreisInSection
-            literInSection[sender.sections2] = newliterInSection
-            mengeInSection[sender.sections2] = newmengeInSection
-            BestellungItemsNamen[sender.sections] = itemsInSection
-            BestellungItemsPreise[sender.sections] = preisInSection
-            BestellungItemsLiter[sender.sections] = literInSection
-            BestellungItemsMengen[sender.sections] = mengeInSection
-            bestellteItemsDictionary[sender.sections].items = itemsInSection
-            bestellteItemsDictionary[sender.sections].preis = preisInSection
-            bestellteItemsDictionary[sender.sections].liter = literInSection
-            bestellteItemsDictionary[sender.sections].menge = mengeInSection
-            
-        }  else {
-            
-            BestellungItemsNamen[sender.sections].remove(at: sender.sections2)
-            BestellungItemsPreise[sender.sections].remove(at: sender.sections2)
-            BestellungItemsLiter[sender.sections].remove(at: sender.sections2)
-            BestellungItemsMengen[sender.sections].remove(at: sender.sections2)
-            BestellungUnterkategorien[sender.sections].remove(at: sender.sections2)
-            BestellungItemsExpanded2[sender.sections].remove(at: sender.sections2)
-            
-            
-            bestellteItemsDictionary[sender.sections].items.remove(at: sender.sections2)
-            bestellteItemsDictionary[sender.sections].preis.remove(at: sender.sections2)
-            bestellteItemsDictionary[sender.sections].liter.remove(at: sender.sections2)
-            bestellteItemsDictionary[sender.sections].menge.remove(at: sender.sections2)
-            bestellteItemsDictionary[sender.sections].Unterkategorie.remove(at: sender.sections2)
-            bestellteItemsDictionary[sender.sections].expanded2.remove(at: sender.sections2)
-            
-            
-            if bestellteItemsDictionary[sender.sections].Unterkategorie.count == 0{
-                bestellteItemsDictionary.remove(at: sender.sections)
-                BestellungKategorien.remove(at: sender.sections)
-                BestellungItemsNamen.remove(at: sender.sections)
-                BestellungItemsMengen.remove(at: sender.sections)
-                BestellungItemsLiter.remove(at: sender.sections)
-                BestellungItemsPreise.remove(at: sender.sections)
-                BestellungUnterkategorien.remove(at: sender.sections)
-                BestellungItemsExpanded2.remove(at: sender.sections)
-                
-                
-                if bestellteItemsDictionary.count == 0 {
-                    dismissMyBestellungView()
-                    
-                }
-            }
-        }
-        sender.bestellteItemsDictionary = bestellteItemsDictionary
-        myBestellungTV.reloadData()
     
-    }
+    
+//    func passItemEntfernen(sender: MyBestellungCell) {
+//        var itemsInSection = bestellteItemsDictionary[sender.sections].items
+//        var preisInSection = bestellteItemsDictionary[sender.sections].preis
+//        var literInSection = bestellteItemsDictionary[sender.sections].liter
+//        var mengeInSection = bestellteItemsDictionary[sender.sections].menge
+//        var newitemsInSection = itemsInSection[sender.sections2]
+//        var newpreisInSection = preisInSection[sender.sections2]
+//        var newliterInSection = literInSection[sender.sections2]
+//        var newmengeInSection = mengeInSection[sender.sections2]
+//
+//        newitemsInSection.remove(at: sender.rows2)
+//        newliterInSection.remove(at: sender.rows2)
+//        newpreisInSection.remove(at: sender.rows2)
+//        newmengeInSection.remove(at: sender.rows2)
+//
+//        if newitemsInSection.count != 0{
+//
+//            itemsInSection[sender.sections2] = newitemsInSection
+//            preisInSection[sender.sections2] = newpreisInSection
+//            literInSection[sender.sections2] = newliterInSection
+//            mengeInSection[sender.sections2] = newmengeInSection
+//            BestellungItemsNamen[sender.sections] = itemsInSection
+//            BestellungItemsPreise[sender.sections] = preisInSection
+//            BestellungItemsLiter[sender.sections]njejkejekj = literInSection
+//            BestellungItemsMengen[sender.sections] = mengeInSection
+//            bestellteItemsDictionary[sender.sections].items = itemsInSection
+//            bestellteItemsDictionary[sender.sections].preis = preisInSection
+//            bestellteItemsDictionary[sender.sections].liter = literInSection
+//            bestellteItemsDictionary[sender.sections].menge = mengeInSection
+//
+//        }  else {
+//
+//            BestellungItemsNamen[sender.sections].remove(at: sender.sections2)
+//            BestellungItemsPreise[sender.sections].remove(at: sender.sections2)
+//            BestellungItemsLiter[sender.sections].remove(at: sender.sections2)
+//            BestellungItemsMengen[sender.sections].remove(at: sender.sections2)
+//            BestellungUnterkategorien[sender.sections].remove(at: sender.sections2)
+//            BestellungItemsExpanded2[sender.sections].remove(at: sender.sections2)
+//
+//
+//            bestellteItemsDictionary[sender.sections].items.remove(at: sender.sections2)
+//            bestellteItemsDictionary[sender.sections].preis.remove(at: sender.sections2)
+//            bestellteItemsDictionary[sender.sections].liter.remove(at: sender.sections2)
+//            bestellteItemsDictionary[sender.sections].menge.remove(at: sender.sections2)
+//            bestellteItemsDictionary[sender.sections].Unterkategorie.remove(at: sender.sections2)
+//            bestellteItemsDictionary[sender.sections].expanded2.remove(at: sender.sections2)
+//
+//
+//            if bestellteItemsDictionary[sender.sections].Unterkategorie.count == 0{
+//                bestellteItemsDictionary.remove(at: sender.sections)
+//                BestellungKategorien.remove(at: sender.sections)
+//                BestellungItemsNamen.remove(at: sender.sections)
+//                BestellungItemsMengen.remove(at: sender.sections)
+//                BestellungItemsLiter.remove(at: sender.sections)
+//                BestellungItemsPreise.remove(at: sender.sections)
+//                BestellungUnterkategorien.remove(at: sender.sections)
+//                BestellungItemsExpanded2.remove(at: sender.sections)
+//
+//
+//                if bestellteItemsDictionary.count == 0 {
+//                    dismissMyBestellungView()
+//
+//                }
+//            }
+//        }
+//        sender.bestellteItemsDictionary = bestellteItemsDictionary
+//        myBestellungTV.reloadData()
+//
+//    }
 
     func passKommentarAendern(sender: MyBestellungCell) {
         var kommentarInSection = bestellteItemsDictionary[sender.sections].kommentar
@@ -1123,7 +1132,9 @@ class BestellungVC2: UIViewController, UITableViewDataSource, UITableViewDelegat
         getKategorien()
 
     }
-   
+    override func viewDidAppear(_ animated: Bool) {
+        print(BestellungItemsNamen, "didappearnamen")
+    }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
