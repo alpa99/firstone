@@ -103,13 +103,13 @@ class SpeisekarteVC: UIViewController, UITableViewDataSource, UITableViewDelegat
                                 self.Liter[Kategorie] = newliter
                                 self.Beschreibung[Kategorie] = newbeschreibung
                             } else {
-                                newitems![(self.Unterkategorien[Kategorie]?.index(of: key.key))!].append(item.Name!)
+                                newitems![(self.Unterkategorien[Kategorie]?.firstIndex(of: key.key))!].append(item.Name!)
                                 self.Items[Kategorie] = newitems
-                                newpreis![(self.Unterkategorien[Kategorie]?.index(of: key.key))!].append(item.Preis!)
+                                newpreis![(self.Unterkategorien[Kategorie]?.firstIndex(of: key.key))!].append(item.Preis!)
                                 self.Preis[Kategorie] = newpreis
-                                newliter![(self.Unterkategorien[Kategorie]?.index(of: key.key))!].append(item.Liter!)
+                                newliter![(self.Unterkategorien[Kategorie]?.firstIndex(of: key.key))!].append(item.Liter!)
                                 self.Liter[Kategorie] = newliter
-                                newbeschreibung![(self.Unterkategorien[Kategorie]?.index(of: key.key))!].append(item.Beschreibung!)
+                                newbeschreibung![(self.Unterkategorien[Kategorie]?.firstIndex(of: key.key))!].append(item.Beschreibung!)
                                 self.Beschreibung[Kategorie] = newbeschreibung
                             }
                         }
@@ -122,16 +122,16 @@ class SpeisekarteVC: UIViewController, UITableViewDataSource, UITableViewDelegat
                             let item = SpeisekarteInformation(dictionary: dictionary)
                             if self.Items[Kategorie] != nil{
                                 var newItems = self.Items[Kategorie]
-                                    newItems![(self.Unterkategorien[Kategorie]?.index(of: key.key))!].append(item.Name!)
+                                    newItems![(self.Unterkategorien[Kategorie]?.firstIndex(of: key.key))!].append(item.Name!)
                                     self.Items[Kategorie] = newItems
                                 var newPreis = self.Preis[Kategorie]
-                                newPreis![(self.Unterkategorien[Kategorie]?.index(of: key.key))!].append(item.Preis!)
+                                newPreis![(self.Unterkategorien[Kategorie]?.firstIndex(of: key.key))!].append(item.Preis!)
                                 self.Preis[Kategorie] = newPreis
                                 var newLiter = self.Liter[Kategorie]
-                                newLiter![(self.Unterkategorien[Kategorie]?.index(of: key.key))!].append(item.Liter!)
+                                newLiter![(self.Unterkategorien[Kategorie]?.firstIndex(of: key.key))!].append(item.Liter!)
                                 self.Liter[Kategorie] = newLiter
                                 var newBeschreibung = self.Beschreibung[Kategorie]
-                                newBeschreibung![(self.Unterkategorien[Kategorie]?.index(of: key.key))!].append(item.Beschreibung!)
+                                newBeschreibung![(self.Unterkategorien[Kategorie]?.firstIndex(of: key.key))!].append(item.Beschreibung!)
                                 self.Beschreibung[Kategorie] = newBeschreibung
                             } else {
                                 self.Items.updateValue([[item.Name!]], forKey: Kategorie)

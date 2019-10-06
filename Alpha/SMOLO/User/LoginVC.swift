@@ -127,7 +127,7 @@ class LoginVC: UIViewController, UITextFieldDelegate {
         if (FBSDKAccessToken.current() == nil) {
             print("nil")
         } else {
-            print(FBSDKAccessToken.current())
+            print(FBSDKAccessToken.current()!)
         }
         let loginManager = LoginManager()
         var ref: DatabaseReference?
@@ -452,7 +452,7 @@ extension UIViewController{
 class func displaySpinner(onView : UIView) -> UIView {
     let spinnerView = UIView.init(frame: onView.bounds)
     spinnerView.backgroundColor = UIColor.init(red: 0.5, green: 0.5, blue: 0.5, alpha: 0.5)
-    let ai = UIActivityIndicatorView.init(activityIndicatorStyle: .whiteLarge)
+    let ai = UIActivityIndicatorView.init(style: .whiteLarge)
     ai.startAnimating()
     ai.center = spinnerView.center
     

@@ -56,18 +56,18 @@ class ScanDetailVC: UIViewController {
         print(scanbarname,"dfadffdjidf")
         let detVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "DetailVC") as! DetailVC
         detVC.barname = scanbarname
-        self.addChildViewController(detVC)
+        self.addChild(detVC)
         self.scrollView.addSubview(detVC.view)
-        detVC.didMove(toParentViewController: self)
+        detVC.didMove(toParent: self)
         detVC.view.frame = scrollView.bounds
 
         
         let speiseVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "SpeisekarteVC") as! SpeisekarteVC
         
         speiseVC.barname = scanbarname
-        self.addChildViewController(speiseVC)
+        self.addChild(speiseVC)
         self.scrollView.addSubview(speiseVC.view)
-        speiseVC.didMove(toParentViewController: self)
+        speiseVC.didMove(toParent: self)
         speiseVC.view.frame = scrollView.bounds
         
         var speiseFrame: CGRect = speiseVC.view.frame

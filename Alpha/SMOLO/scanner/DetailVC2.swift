@@ -131,7 +131,7 @@ class DetailVC2: UIViewController, PageObservation2, CLLocationManagerDelegate{
         
         
         
-        slideshow.contentScaleMode = UIViewContentMode.scaleAspectFill
+        slideshow.contentScaleMode = UIView.ContentMode.scaleAspectFill
         
         
         let recognizer = UITapGestureRecognizer(target: self, action: #selector(DetailVC.didTap))

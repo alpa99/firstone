@@ -74,7 +74,7 @@ class DetailVC: UIViewController, PulleyDrawerViewControllerDelegate, PageObserv
         slideshow.pageIndicator = pageControl
         
         
-        slideshow.contentScaleMode = UIViewContentMode.scaleAspectFill
+        slideshow.contentScaleMode = UIView.ContentMode.scaleAspectFill
         
        
         print(sdWebImageSource, "source111")

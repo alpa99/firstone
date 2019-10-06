@@ -77,20 +77,20 @@ class LocationVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate
     }
     func centerMapOnPin (selectedPin: CLLocation){
         print("HIERBIN ich II")
-        let newregion = MKCoordinateRegionMakeWithDistance(selectedPin.coordinate, 0.5*regionRadius, 0.5*regionRadius)
+        let newregion = MKCoordinateRegion.init(center: selectedPin.coordinate, latitudinalMeters: 0.5*regionRadius, longitudinalMeters: 0.5*regionRadius)
        
         map.setRegion(newregion, animated: true)
     }
     
     func mapViewDidFinishLoadingMap (mapView: MKMapView, selectedPin: CLLocation) {
-        let newregion = MKCoordinateRegionMakeWithDistance(selectedPin.coordinate, regionRadius, regionRadius)
+        let newregion = MKCoordinateRegion.init(center: selectedPin.coordinate, latitudinalMeters: regionRadius, longitudinalMeters: regionRadius)
         map.setRegion(newregion, animated: true)
     }
 
     func centerMapOnLocation(){
         
 // let coordinateRegion = MKCoordinateRegionMakeWithDistance((locationManager.location?.coordinate)!, regionRadius, regionRadius)
-   let coordinateRegion = MKCoordinateRegionMakeWithDistance(testLocation.coordinate, 2*regionRadius, 2*regionRadius)
+   let coordinateRegion = MKCoordinateRegion.init(center: testLocation.coordinate, latitudinalMeters: 2*regionRadius, longitudinalMeters: 2*regionRadius)
 
         map.setRegion(coordinateRegion, animated: true)
         locationManager.stopUpdatingLocation()
@@ -191,7 +191,7 @@ class LocationVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate
     
     override func viewDidAppear(_ animated: Bool){
         locationAuthStatus()
-        print("Hierdiemap", map)
+        print("Hierdiemap", map!)
 
     }
     

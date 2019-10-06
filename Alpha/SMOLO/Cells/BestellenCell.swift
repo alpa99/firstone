@@ -103,10 +103,10 @@ class BestellenCell: UITableViewCell, UITableViewDelegate, UITableViewDataSource
         //        cell.itemLbl.text = "cell.itemLbl.text"
         if unterkategorien[cellIndexPathSection].expanded2[indexPath.section] != false {
             
-            var item = unterkategorien[cellIndexPathSection].items[indexPath.section]
-            var preis = unterkategorien[cellIndexPathSection].preis[indexPath.section]
-            var liter = unterkategorien[cellIndexPathSection].liter[indexPath.section]
-            var beschreibung = unterkategorien[cellIndexPathSection].beschreibung[indexPath.section]
+            let item = unterkategorien[cellIndexPathSection].items[indexPath.section]
+            let preis = unterkategorien[cellIndexPathSection].preis[indexPath.section]
+            let liter = unterkategorien[cellIndexPathSection].liter[indexPath.section]
+            let beschreibung = unterkategorien[cellIndexPathSection].beschreibung[indexPath.section]
             section2 = indexPath.section
             row2 = indexPath.row
             cell.section2 = indexPath.section
