@@ -80,7 +80,7 @@ class BewertungTVCell: UITableViewCell, UITableViewDelegate, UITableViewDataSour
       //  cell.delegate = self
         cell.backgroundColor = UIColor.clear
             print(unterkategorien, cellIndexPathSection, indexPath.section, "000000")
-            var item = unterkategorien[cellIndexPathSection].items[indexPath.section]
+        let item = unterkategorien[cellIndexPathSection].items[indexPath.section]
            
             section2 = indexPath.section
             row2 = indexPath.row

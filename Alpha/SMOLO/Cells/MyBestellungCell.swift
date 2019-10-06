@@ -93,8 +93,8 @@ class MyBestellungCell: UITableViewCell, UITableViewDelegate, UITableViewDataSou
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if bestellteItemsDictionary[Cell1Section].expanded != false {
-            var a = bestellteItemsDictionary[Cell1Section].extras[indexPath.section]
-            var b = a[indexPath.row].count*44
+            let a = bestellteItemsDictionary[Cell1Section].extras[indexPath.section]
+            let b = a[indexPath.row].count*44
             return CGFloat(171+b)
         }
         else {

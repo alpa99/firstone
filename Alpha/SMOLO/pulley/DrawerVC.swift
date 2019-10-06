@@ -214,7 +214,7 @@ class DrawerVC: UIViewController, PulleyDrawerViewControllerDelegate, UITableVie
         searchController.searchBar.searchBarStyle = .prominent
         searchController.searchBar.tintColor = .white
 
-        if let txfSearchField = searchController.searchBar.searchTextField as? UITextField {
+        if let txfSearchField = searchController.searchBar.value(forKey: "_searchField") as? UITextField {
             txfSearchField.textColor = .white
             txfSearchField.borderStyle = .roundedRect
             txfSearchField.backgroundColor = UIColor(red: 90.0/255.0, green: 90.0/255.0, blue: 90.0/255.0, alpha: 1.0)
@@ -262,8 +262,4 @@ class barCell: UITableViewCell {
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
-    
 }
-
-

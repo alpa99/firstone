@@ -194,13 +194,13 @@ class BewertungVC: UIViewController, UITableViewDataSource, UITableViewDelegate,
 
                     self.MatchUKat[k]?.append(ukat)
                 if self.MatchItems[k] != nil{
-                    var AAA = Bestellungen[0].items
-                    var BBB = AAA[index!]
+                    let AAA = Bestellungen[0].items
+                    let BBB = AAA[index!]
                     let CCC = BBB[indexBB!]
 
                     self.MatchItems[k]?.append(CCC)
                 }else{
-                    var DDD = Bestellungen[0].items
+                    let DDD = Bestellungen[0].items
                     let EEE = DDD[index!]
                     let FFF = EEE[indexBB!]
 
@@ -208,11 +208,11 @@ class BewertungVC: UIViewController, UITableViewDataSource, UITableViewDelegate,
                 }else{
                     self.MatchUKat.updateValue([ukat], forKey: k)
                     if self.MatchItems[k] != nil{
-                        var AAA = Bestellungen[0].items
-                        var BBB = AAA[index!]
+                        let AAA = Bestellungen[0].items
+                        let BBB = AAA[index!]
                         let CCC = BBB[indexBB!]
                          self.MatchItems[k]?.append(CCC) }else{
-                        var DDD = Bestellungen[0].items
+                        let DDD = Bestellungen[0].items
                         let EEE = DDD[index!]
                         let FFF = EEE[indexBB!]
                         print("test4")
@@ -253,7 +253,7 @@ class BewertungVC: UIViewController, UITableViewDataSource, UITableViewDelegate,
 
         header.layer.cornerRadius = 5
         header.layer.backgroundColor = UIColor.clear.cgColor
-        header.customInit(tableView: tableView, title: MatchKat[section], section: section, delegate: self as! ExpandableHeaderViewDelegate)
+        header.customInit(tableView: tableView, title: MatchKat[section], section: section, delegate: self as ExpandableHeaderViewDelegate)
 
 
         return header

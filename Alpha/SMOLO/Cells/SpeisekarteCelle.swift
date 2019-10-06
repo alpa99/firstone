@@ -89,10 +89,10 @@ class SpeisekarteCelle: UITableViewCell, UITableViewDataSource, UITableViewDeleg
 //        cell.itemLbl.text = "cell.itemLbl.text"
         if sections[sectioncell].expanded2[indexPath.section] != false {
 
-        var item = sections[sectioncell].items[indexPath.section]
-        var preis = sections[sectioncell].preis[indexPath.section]
-        var liter = sections[sectioncell].liter[indexPath.section]
-        var beschreibung = sections[sectioncell].beschreibung[indexPath.section]
+            let item = sections[sectioncell].items[indexPath.section]
+            let preis = sections[sectioncell].preis[indexPath.section]
+            let liter = sections[sectioncell].liter[indexPath.section]
+            let beschreibung = sections[sectioncell].beschreibung[indexPath.section]
         cell.itemLbl.text = item[indexPath.row]
         let preisFormat = String(format: "%.2f", arguments: [preis[indexPath.row]])
         cell.PreisLbl.text = "\(preisFormat) €"
