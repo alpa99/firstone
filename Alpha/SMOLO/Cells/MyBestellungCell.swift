@@ -137,15 +137,15 @@ class MyBestellungCell: UITableViewCell, UITableViewDelegate, UITableViewDataSou
         cell.Cell2Section = indexPath.section
         cell.Cell2Row = indexPath.row
         cell.delegate = self
-        var extrasNamen = bestellteItemsDictionary[Cell1Section].extras[indexPath.section]
+        let extrasNamen = bestellteItemsDictionary[Cell1Section].extras[indexPath.section]
         cell.extrasNamen = extrasNamen[indexPath.row]
-        var item = bestellteItemsDictionary[Cell1Section].items[indexPath.section]
-        var extrasPreise = bestellteItemsDictionary[Cell1Section].extrasPreise[indexPath.section]
+        let item = bestellteItemsDictionary[Cell1Section].items[indexPath.section]
+        let extrasPreise = bestellteItemsDictionary[Cell1Section].extrasPreise[indexPath.section]
         cell.extrasPreise = extrasPreise[indexPath.row]
-        var preis = bestellteItemsDictionary[Cell1Section].preis[indexPath.section]
-        var liter = bestellteItemsDictionary[Cell1Section].liter[indexPath.section]
-        var menge = bestellteItemsDictionary[Cell1Section].menge[indexPath.section]
-        var kommentare = bestellteItemsDictionary[Cell1Section].kommentar[indexPath.section]
+        let preis = bestellteItemsDictionary[Cell1Section].preis[indexPath.section]
+        let liter = bestellteItemsDictionary[Cell1Section].liter[indexPath.section]
+        let menge = bestellteItemsDictionary[Cell1Section].menge[indexPath.section]
+        let kommentare = bestellteItemsDictionary[Cell1Section].kommentar[indexPath.section]
         
         let preisFormat = String(format: "%.2f", arguments: [(preis[indexPath.row])])
 

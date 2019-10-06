@@ -79,7 +79,7 @@ class BewertungTVCell: UITableViewCell, UITableViewDelegate, UITableViewDataSour
         let cell = Bundle.main.loadNibNamed("BewertungTVCell2", owner: self, options: nil)?.first as! BewertungTVCell2
       //  cell.delegate = self
         cell.backgroundColor = UIColor.clear
-            print(unterkategorien, cellIndexPathSection, indexPath.section, "000000")
+            
         let item = unterkategorien[cellIndexPathSection].items[indexPath.section]
            
             section2 = indexPath.section

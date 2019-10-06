@@ -127,7 +127,7 @@ class BewertungVC: UIViewController, UITableViewDataSource, UITableViewDelegate,
                                                         newitems?.append([item.Name!])
                                                         self.Items[Kategorie] = newitems
                                                     } else{
-                                                        newitems![(self.BewUKat[Kategorie]?.index(of: key.key))!].append(item.Name!)
+                                                        newitems![(self.BewUKat[Kategorie]?.firstIndex(of: key.key))!].append(item.Name!)
                                                         self.Items[Kategorie] = newitems
                                                     }
                                                 }
@@ -141,7 +141,7 @@ class BewertungVC: UIViewController, UITableViewDataSource, UITableViewDelegate,
                                                     let item = SpeisekarteInformation(dictionary: dictionary)
                                                     if self.Items[Kategorie] != nil{
                                                         var newItems = self.Items[Kategorie]
-                                                        newItems![(self.BewUKat[Kategorie]?.index(of: key.key))!].append(item.Name!)
+                                                        newItems![(self.BewUKat[Kategorie]?.firstIndex(of: key.key))!].append(item.Name!)
                                                         self.Items[Kategorie] = newItems
                                                     } else {
                                                         self.Items.updateValue([[item.Name!]], forKey: Kategorie)
@@ -170,7 +170,7 @@ class BewertungVC: UIViewController, UITableViewDataSource, UITableViewDelegate,
         for kat in Bestellungen[0].Kategorie{
             counter += 1
             if BewKat.contains(kat){
-                let index = Bestellungen[0].Kategorie.index(of: kat)
+                let index = Bestellungen[0].Kategorie.firstIndex(of: kat)
                 let a = Bestellungen[0].Unterkategorie[index!]
                 for u in a{
                     if (BewUKat[kat]?.contains(u))!{
@@ -184,11 +184,11 @@ class BewertungVC: UIViewController, UITableViewDataSource, UITableViewDelegate,
     
     func matchUnterkategorie (Kategorie: [String]){
         for k in Kategorie{
-        let index = Bestellungen[0].Kategorie.index(of: k)
+        let index = Bestellungen[0].Kategorie.firstIndex(of: k)
         let a = Bestellungen[0].Unterkategorie[index!]
             
         for ukat in a{
-            let indexBB = a.index(of: ukat)
+            let indexBB = a.firstIndex(of: ukat)
             if (BewUKat[k]?.contains(ukat))!{
                 if self.MatchUKat[k] != nil {
 

@@ -53,10 +53,10 @@ class QRScanner: UIViewController, AVCaptureMetadataOutputObjectsDelegate, CLLoc
     func myButtonTapped(){
         if flashlight.isSelected == true {
             flashlight.isSelected = false
-            flashlight.setImage(#imageLiteral(resourceName: "flashlight-i"), for: UIControlState.normal)
+            flashlight.setImage(#imageLiteral(resourceName: "flashlight-i"), for: UIControl.State.normal)
         }else {
             flashlight.isSelected = true
-            flashlight.setImage(#imageLiteral(resourceName: "flashlight"), for: UIControlState.normal)
+            flashlight.setImage(#imageLiteral(resourceName: "flashlight"), for: UIControl.State.normal)
         }
     }
     
@@ -91,11 +91,11 @@ class QRScanner: UIViewController, AVCaptureMetadataOutputObjectsDelegate, CLLoc
         print("lego")
         if CLLocationManager.authorizationStatus() != .authorizedWhenInUse{
             let alert = UIAlertController(title: "Fehler", message: "Wir benötigen zuerst deinen        Standort", preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "Einstellungen", style: UIAlertActionStyle.default, handler: { (alert: UIAlertAction!) in
+            alert.addAction(UIAlertAction(title: "Einstellungen", style: UIAlertAction.Style.default, handler: { (alert: UIAlertAction!) in
                 print("")
-                if let url = URL(string:UIApplicationOpenSettingsURLString) {
+                if let url = URL(string:UIApplication.openSettingsURLString) {
                     if UIApplication.shared.canOpenURL(url) {
-                        UIApplication.shared.open(url, options: [:], completionHandler: nil
+                        UIApplication.shared.open(url, options: convertToUIApplicationOpenExternalURLOptionsKeyDictionary([:]), completionHandler: nil
                         )}
                 }
             }))
@@ -271,8 +271,8 @@ class QRScanner: UIViewController, AVCaptureMetadataOutputObjectsDelegate, CLLoc
         video = AVCaptureVideoPreviewLayer(session: session)
         video.frame = view.layer.bounds
         view.layer.addSublayer(video)
-        self.view.bringSubview(toFront: square)
-        self.view.bringSubview(toFront: flashlight)
+        self.view.bringSubviewToFront(square)
+        self.view.bringSubviewToFront(flashlight)
         session.startRunning()
         
         
@@ -298,3 +298,8 @@ class QRScanner: UIViewController, AVCaptureMetadataOutputObjectsDelegate, CLLoc
     
 }
 
+
+// Helper function inserted by Swift 4.2 migrator.
+fileprivate func convertToUIApplicationOpenExternalURLOptionsKeyDictionary(_ input: [String: Any]) -> [UIApplication.OpenExternalURLOptionsKey: Any] {
+	return Dictionary(uniqueKeysWithValues: input.map { key, value in (UIApplication.OpenExternalURLOptionsKey(rawValue: key), value)})
+}

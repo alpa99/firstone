@@ -167,22 +167,22 @@ print(snapshot, "snapshot")
                                             self.BestellungItemsLiter[BestellungID] = newLiters
                                             print(self.BestellungItemsNamen, "1111") } else {
                                             print(self.BestellungItemsNamen, "2220")
-                                            var newnewItem = newItems![(self.BestellungKategorien[BestellungID]?.index(of: key.key))!]
-                                            var newnewPreise = newPreise![(self.BestellungKategorien[BestellungID]?.index(of: key.key))!]
-                                            var newnewMengen = newMengen![(self.BestellungKategorien[BestellungID]?.index(of: key.key))!]
-                                            var newnewKommentare = newKommentare![(self.BestellungKategorien[BestellungID]?.index(of: key.key))!]
-                                            var newnewLiters = newLiters![(self.BestellungKategorien[BestellungID]?.index(of: key.key))!]
-                                            let newx = x![(self.BestellungKategorien[BestellungID]?.index(of: key.key))!]
-                                            newnewItem[newx.index(of: children.key)!].append(iteminfodic.itemName!)
-                                            newnewPreise[newx.index(of: children.key)!].append(Double(iteminfodic.itemPreis!))
-                                            newnewMengen[newx.index(of: children.key)!].append(iteminfodic.itemMenge!)
-                                            newnewKommentare[newx.index(of: children.key)!].append(iteminfodic.itemKommentar!)
-                                            newnewLiters[newx.index(of: children.key)!].append(iteminfodic.itemLiter!)
-                                            newItems![(self.BestellungKategorien[BestellungID]?.index(of: key.key))!] = newnewItem
-                                            newPreise![(self.BestellungKategorien[BestellungID]?.index(of: key.key))!] = newnewPreise
-                                            newMengen![(self.BestellungKategorien[BestellungID]?.index(of: key.key))!] = newnewMengen
-                                            newKommentare![(self.BestellungKategorien[BestellungID]?.index(of: key.key))!] = newnewKommentare
-                                            newLiters![(self.BestellungKategorien[BestellungID]?.index(of: key.key))!] = newnewLiters
+                                            var newnewItem = newItems![(self.BestellungKategorien[BestellungID]?.firstIndex(of: key.key))!]
+                                            var newnewPreise = newPreise![(self.BestellungKategorien[BestellungID]?.firstIndex(of: key.key))!]
+                                            var newnewMengen = newMengen![(self.BestellungKategorien[BestellungID]?.firstIndex(of: key.key))!]
+                                            var newnewKommentare = newKommentare![(self.BestellungKategorien[BestellungID]?.firstIndex(of: key.key))!]
+                                            var newnewLiters = newLiters![(self.BestellungKategorien[BestellungID]?.firstIndex(of: key.key))!]
+                                            let newx = x![(self.BestellungKategorien[BestellungID]?.firstIndex(of: key.key))!]
+                                            newnewItem[newx.firstIndex(of: children.key)!].append(iteminfodic.itemName!)
+                                            newnewPreise[newx.firstIndex(of: children.key)!].append(Double(iteminfodic.itemPreis!))
+                                            newnewMengen[newx.firstIndex(of: children.key)!].append(iteminfodic.itemMenge!)
+                                            newnewKommentare[newx.firstIndex(of: children.key)!].append(iteminfodic.itemKommentar!)
+                                            newnewLiters[newx.firstIndex(of: children.key)!].append(iteminfodic.itemLiter!)
+                                            newItems![(self.BestellungKategorien[BestellungID]?.firstIndex(of: key.key))!] = newnewItem
+                                            newPreise![(self.BestellungKategorien[BestellungID]?.firstIndex(of: key.key))!] = newnewPreise
+                                            newMengen![(self.BestellungKategorien[BestellungID]?.firstIndex(of: key.key))!] = newnewMengen
+                                            newKommentare![(self.BestellungKategorien[BestellungID]?.firstIndex(of: key.key))!] = newnewKommentare
+                                            newLiters![(self.BestellungKategorien[BestellungID]?.firstIndex(of: key.key))!] = newnewLiters
                                             self.BestellungItemsNamen[BestellungID] = newItems
                                             self.BestellungItemsPreise[BestellungID] = newPreise
                                             self.BestellungItemsMengen[BestellungID] = newMengen
@@ -215,15 +215,15 @@ print(snapshot, "snapshot")
                                                             print(self.BestellungenItemsExtrasNamen, "extras32")
                                                             
                                                         }} else {
-                                                        var newnewExtras = newExtras![(self.BestellungKategorien[BestellungID]?.index(of: key.key))!]
-                                                        var newnewPreis = newPreis![(self.BestellungKategorien[BestellungID]?.index(of: key.key))!]
+                                                        var newnewExtras = newExtras![(self.BestellungKategorien[BestellungID]?.firstIndex(of: key.key))!]
+                                                        var newnewPreis = newPreis![(self.BestellungKategorien[BestellungID]?.firstIndex(of: key.key))!]
                                                         if self.extrasString.count == extrasSnap.childrenCount && self.extrasPreis.count == extrasSnap.childrenCount {
                                                             print(self.BestellungenItemsExtrasNamen, "extras33")
-                                                            let newx = x![(self.BestellungKategorien[BestellungID]?.index(of: key.key))!]
-                                                            newnewExtras[newx.index(of: children.key)!].append(self.extrasString)
-                                                            newnewPreis[newx.index(of: children.key)!].append(self.extrasPreis)
-                                                            newExtras![(self.BestellungKategorien[BestellungID]?.index(of: key.key))!] = newnewExtras
-                                                            newPreis![(self.BestellungKategorien[BestellungID]?.index(of: key.key))!] = newnewPreis
+                                                            let newx = x![(self.BestellungKategorien[BestellungID]?.firstIndex(of: key.key))!]
+                                                            newnewExtras[newx.firstIndex(of: children.key)!].append(self.extrasString)
+                                                            newnewPreis[newx.firstIndex(of: children.key)!].append(self.extrasPreis)
+                                                            newExtras![(self.BestellungKategorien[BestellungID]?.firstIndex(of: key.key))!] = newnewExtras
+                                                            newPreis![(self.BestellungKategorien[BestellungID]?.firstIndex(of: key.key))!] = newnewPreis
                                                             self.BestellungenItemsExtrasPreise[BestellungID] = newPreis
                                                             self.BestellungenItemsExtrasNamen[BestellungID] = newExtras
                                                             self.extrasString.removeAll()
@@ -232,8 +232,8 @@ print(snapshot, "snapshot")
                                                             
                                                         }}}}} }}
                             } else {
-                                x![(self.BestellungKategorien[BestellungID]?.index(of: key.key))!].append(children.key)
-                                expandend2![(self.BestellungKategorien[BestellungID]?.index(of: key.key))!].append(true)
+                                x![(self.BestellungKategorien[BestellungID]?.firstIndex(of: key.key))!].append(children.key)
+                                expandend2![(self.BestellungKategorien[BestellungID]?.firstIndex(of: key.key))!].append(true)
                                 self.BestellungUnterkategorien.updateValue(x!, forKey: BestellungID)
                                 self.BestellungExpanded2.updateValue(expandend2!, forKey: BestellungID)
                                 for Item in (childsnapshotItem.children.allObjects as? [DataSnapshot])! {
@@ -245,12 +245,12 @@ print(snapshot, "snapshot")
                                         var newMengen = self.BestellungItemsMengen[BestellungID]
                                         var newKommentare = self.BestellungItemsKommentar[BestellungID]
                                         var newLiter = self.BestellungItemsLiter[BestellungID]
-                                        var newnewItem = newItems![(self.BestellungKategorien[BestellungID]?.index(of: key.key))!]
-                                        var newnewPreise = newPreise![(self.BestellungKategorien[BestellungID]?.index(of: key.key))!]
-                                        var newnewMengen = newMengen![(self.BestellungKategorien[BestellungID]?.index(of: key.key))!]
-                                        var newnewKommentare = newKommentare![(self.BestellungKategorien[BestellungID]?.index(of: key.key))!]
-                                        var newnewLiters = newLiter![(self.BestellungKategorien[BestellungID]?.index(of: key.key))!]
-                                        let newx = x![(self.BestellungKategorien[BestellungID]?.index(of: key.key))!]
+                                        var newnewItem = newItems![(self.BestellungKategorien[BestellungID]?.firstIndex(of: key.key))!]
+                                        var newnewPreise = newPreise![(self.BestellungKategorien[BestellungID]?.firstIndex(of: key.key))!]
+                                        var newnewMengen = newMengen![(self.BestellungKategorien[BestellungID]?.firstIndex(of: key.key))!]
+                                        var newnewKommentare = newKommentare![(self.BestellungKategorien[BestellungID]?.firstIndex(of: key.key))!]
+                                        var newnewLiters = newLiter![(self.BestellungKategorien[BestellungID]?.firstIndex(of: key.key))!]
+                                        let newx = x![(self.BestellungKategorien[BestellungID]?.firstIndex(of: key.key))!]
                                         if newnewItem.count < newx.count {
                                             print(self.BestellungItemsNamen, "5550")
                                             newnewItem.append([iteminfodic.itemName!])
@@ -258,11 +258,11 @@ print(snapshot, "snapshot")
                                             newnewMengen.append([iteminfodic.itemMenge!])
                                             newnewKommentare.append([iteminfodic.itemKommentar!])
                                             newnewLiters.append([iteminfodic.itemLiter!])
-                                            newItems![(self.BestellungKategorien[BestellungID]?.index(of: key.key))!] = newnewItem
-                                            newPreise![(self.BestellungKategorien[BestellungID]?.index(of: key.key))!] = newnewPreise
-                                            newMengen![(self.BestellungKategorien[BestellungID]?.index(of: key.key))!] = newnewMengen
-                                            newKommentare![(self.BestellungKategorien[BestellungID]?.index(of: key.key))!] = newnewKommentare
-                                            newLiter![(self.BestellungKategorien[BestellungID]?.index(of: key.key))!] = newnewLiters
+                                            newItems![(self.BestellungKategorien[BestellungID]?.firstIndex(of: key.key))!] = newnewItem
+                                            newPreise![(self.BestellungKategorien[BestellungID]?.firstIndex(of: key.key))!] = newnewPreise
+                                            newMengen![(self.BestellungKategorien[BestellungID]?.firstIndex(of: key.key))!] = newnewMengen
+                                            newKommentare![(self.BestellungKategorien[BestellungID]?.firstIndex(of: key.key))!] = newnewKommentare
+                                            newLiter![(self.BestellungKategorien[BestellungID]?.firstIndex(of: key.key))!] = newnewLiters
                                             self.BestellungItemsNamen[BestellungID] = newItems
                                             self.BestellungItemsPreise[BestellungID] = newPreise
                                             self.BestellungItemsMengen[BestellungID] = newMengen
@@ -271,16 +271,16 @@ print(snapshot, "snapshot")
                                             print(self.BestellungItemsNamen, "5555")
                                         } else {
                                             print(self.BestellungItemsNamen, "6660")
-                                            newnewItem[newx.index(of: children.key)!].append(iteminfodic.itemName!)
-                                            newnewPreise[newx.index(of: children.key)!].append(Double(iteminfodic.itemPreis!))
-                                            newnewMengen[newx.index(of: children.key)!].append(iteminfodic.itemMenge!)
-                                            newnewKommentare[newx.index(of: children.key)!].append(iteminfodic.itemKommentar!)
-                                            newnewLiters[newx.index(of: children.key)!].append(iteminfodic.itemLiter!)
-                                            newItems![(self.BestellungKategorien[BestellungID]?.index(of: key.key))!] = newnewItem
-                                            newPreise![(self.BestellungKategorien[BestellungID]?.index(of: key.key))!] = newnewPreise
-                                            newMengen![(self.BestellungKategorien[BestellungID]?.index(of: key.key))!] = newnewMengen
-                                            newKommentare![(self.BestellungKategorien[BestellungID]?.index(of: key.key))!] = newnewKommentare
-                                            newLiter![(self.BestellungKategorien[BestellungID]?.index(of: key.key))!] = newnewLiters
+                                            newnewItem[newx.firstIndex(of: children.key)!].append(iteminfodic.itemName!)
+                                            newnewPreise[newx.firstIndex(of: children.key)!].append(Double(iteminfodic.itemPreis!))
+                                            newnewMengen[newx.firstIndex(of: children.key)!].append(iteminfodic.itemMenge!)
+                                            newnewKommentare[newx.firstIndex(of: children.key)!].append(iteminfodic.itemKommentar!)
+                                            newnewLiters[newx.firstIndex(of: children.key)!].append(iteminfodic.itemLiter!)
+                                            newItems![(self.BestellungKategorien[BestellungID]?.firstIndex(of: key.key))!] = newnewItem
+                                            newPreise![(self.BestellungKategorien[BestellungID]?.firstIndex(of: key.key))!] = newnewPreise
+                                            newMengen![(self.BestellungKategorien[BestellungID]?.firstIndex(of: key.key))!] = newnewMengen
+                                            newKommentare![(self.BestellungKategorien[BestellungID]?.firstIndex(of: key.key))!] = newnewKommentare
+                                            newLiter![(self.BestellungKategorien[BestellungID]?.firstIndex(of: key.key))!] = newnewLiters
                                             self.BestellungItemsNamen[BestellungID] = newItems
                                             self.BestellungItemsPreise[BestellungID] = newPreise
                                             self.BestellungItemsMengen[BestellungID] = newMengen
@@ -298,18 +298,18 @@ print(snapshot, "snapshot")
                                                 if let dictionary = extra.value as? [String: AnyObject]{
                                                     let extraInfo = BestellungInfos(dictionary: dictionary)
                                                     var newExtras = self.BestellungenItemsExtrasNamen[BestellungID]
-                                                    var newnewExtras = newExtras![(self.BestellungKategorien[BestellungID]?.index(of: key.key))!]
+                                                    var newnewExtras = newExtras![(self.BestellungKategorien[BestellungID]?.firstIndex(of: key.key))!]
                                                     var newPreis = self.BestellungenItemsExtrasPreise[BestellungID]
-                                                    var newnewPreis = newPreis![(self.BestellungKategorien[BestellungID]?.index(of: key.key))!]
-                                                    let newx = x![(self.BestellungKategorien[BestellungID]?.index(of: key.key))!]
+                                                    var newnewPreis = newPreis![(self.BestellungKategorien[BestellungID]?.firstIndex(of: key.key))!]
+                                                    let newx = x![(self.BestellungKategorien[BestellungID]?.firstIndex(of: key.key))!]
                                                     if newnewExtras.count  < newx.count{
                                                         print(self.BestellungenItemsExtrasNamen, "extras21")
                                                         self.extrasString.append(extraInfo.itemName!)
                                                         self.extrasPreis.append(extraInfo.itemPreis!)
                                                         newnewExtras.append([self.extrasString])
                                                         newnewPreis.append([self.extrasPreis])
-                                                        newExtras![(self.BestellungKategorien[BestellungID]?.index(of: key.key))!] = newnewExtras
-                                                        newPreis![(self.BestellungKategorien[BestellungID]?.index(of: key.key))!] = newnewPreis
+                                                        newExtras![(self.BestellungKategorien[BestellungID]?.firstIndex(of: key.key))!] = newnewExtras
+                                                        newPreis![(self.BestellungKategorien[BestellungID]?.firstIndex(of: key.key))!] = newnewPreis
                                                         self.BestellungenItemsExtrasNamen[BestellungID] = newExtras
                                                         self.BestellungenItemsExtrasPreise[BestellungID] = newPreis
                                                         self.extrasPreis.removeAll()
@@ -320,10 +320,10 @@ print(snapshot, "snapshot")
                                                         self.extrasPreis.append(extraInfo.itemPreis!)
                                                         if self.extrasString.count == extrasSnap.childrenCount && self.extrasPreis.count == extrasSnap.childrenCount{
                                                             print(self.BestellungenItemsExtrasNamen, "extras23")
-                                                            newnewExtras[newx.index(of: children.key)!].append(self.extrasString)
-                                                            newnewPreis[newx.index(of: children.key)!].append(self.extrasPreis)
-                                                            newExtras![(self.BestellungKategorien[BestellungID]?.index(of: key.key))!] = newnewExtras
-                                                            newPreis![(self.BestellungKategorien[BestellungID]?.index(of: key.key))!] = newnewPreis
+                                                            newnewExtras[newx.firstIndex(of: children.key)!].append(self.extrasString)
+                                                            newnewPreis[newx.firstIndex(of: children.key)!].append(self.extrasPreis)
+                                                            newExtras![(self.BestellungKategorien[BestellungID]?.firstIndex(of: key.key))!] = newnewExtras
+                                                            newPreis![(self.BestellungKategorien[BestellungID]?.firstIndex(of: key.key))!] = newnewPreis
                                                             self.BestellungenItemsExtrasNamen[BestellungID] = newExtras
                                                             self.BestellungenItemsExtrasPreise[BestellungID] = newPreis
                                                             self.extrasPreis.removeAll()
@@ -337,8 +337,8 @@ print(snapshot, "snapshot")
                             if self.BestellungUnterkategorien[BestellungID] != nil {
                                 var x = self.BestellungUnterkategorien[BestellungID]
                                 var expanded2 = self.BestellungExpanded2[BestellungID]
-                                x![(self.BestellungKategorien[BestellungID]?.index(of: key.key))!].append(children.key)
-                                expanded2![(self.BestellungKategorien[BestellungID]?.index(of: key.key))!].append(true)
+                                x![(self.BestellungKategorien[BestellungID]?.firstIndex(of: key.key))!].append(children.key)
+                                expanded2![(self.BestellungKategorien[BestellungID]?.firstIndex(of: key.key))!].append(true)
                                 self.BestellungUnterkategorien.updateValue(x!, forKey: BestellungID)
                                 self.BestellungExpanded2.updateValue(expanded2!, forKey: BestellungID)
                                 for Item in (childsnapshotItem.children.allObjects as? [DataSnapshot])! {
@@ -353,12 +353,12 @@ print(snapshot, "snapshot")
                                             var newMengen = self.BestellungItemsMengen[BestellungID]
                                             var newKommentare = self.BestellungItemsKommentar[BestellungID]
                                             var newLiters = self.BestellungItemsLiter[BestellungID]
-                                            var newnewItems = newItems![(self.BestellungKategorien[BestellungID]?.index(of: key.key))!]
-                                            var newnewPreise = newPreise![(self.BestellungKategorien[BestellungID]?.index(of: key.key))!]
-                                            var newnewMengen = newMengen![(self.BestellungKategorien[BestellungID]?.index(of: key.key))!]
-                                            var newnewKommentare = newKommentare![(self.BestellungKategorien[BestellungID]?.index(of: key.key))!]
-                                            var newnewLiters = newLiters![(self.BestellungKategorien[BestellungID]?.index(of: key.key))!]
-                                            let newx = x![(self.BestellungKategorien[BestellungID]?.index(of: key.key))!]
+                                            var newnewItems = newItems![(self.BestellungKategorien[BestellungID]?.firstIndex(of: key.key))!]
+                                            var newnewPreise = newPreise![(self.BestellungKategorien[BestellungID]?.firstIndex(of: key.key))!]
+                                            var newnewMengen = newMengen![(self.BestellungKategorien[BestellungID]?.firstIndex(of: key.key))!]
+                                            var newnewKommentare = newKommentare![(self.BestellungKategorien[BestellungID]?.firstIndex(of: key.key))!]
+                                            var newnewLiters = newLiters![(self.BestellungKategorien[BestellungID]?.firstIndex(of: key.key))!]
+                                            let newx = x![(self.BestellungKategorien[BestellungID]?.firstIndex(of: key.key))!]
                                             if newnewItems.count < newx.count {
                                                 print(self.BestellungItemsNamen, "3331")
                                                 newnewItems.append([iteminfodic.itemName!])
@@ -366,11 +366,11 @@ print(snapshot, "snapshot")
                                                 newnewMengen.append([iteminfodic.itemMenge!])
                                                 newnewKommentare.append([iteminfodic.itemKommentar!])
                                                 newnewLiters.append([iteminfodic.itemLiter!])
-                                                newItems![(self.BestellungKategorien[BestellungID]?.index(of: key.key))!] = newnewItems
-                                                newPreise![(self.BestellungKategorien[BestellungID]?.index(of: key.key))!] = newnewPreise
-                                                newMengen![(self.BestellungKategorien[BestellungID]?.index(of: key.key))!] = newnewMengen
-                                                newKommentare![(self.BestellungKategorien[BestellungID]?.index(of: key.key))!] = newnewKommentare
-                                                newLiters![(self.BestellungKategorien[BestellungID]?.index(of: key.key))!] = newnewLiters
+                                                newItems![(self.BestellungKategorien[BestellungID]?.firstIndex(of: key.key))!] = newnewItems
+                                                newPreise![(self.BestellungKategorien[BestellungID]?.firstIndex(of: key.key))!] = newnewPreise
+                                                newMengen![(self.BestellungKategorien[BestellungID]?.firstIndex(of: key.key))!] = newnewMengen
+                                                newKommentare![(self.BestellungKategorien[BestellungID]?.firstIndex(of: key.key))!] = newnewKommentare
+                                                newLiters![(self.BestellungKategorien[BestellungID]?.firstIndex(of: key.key))!] = newnewLiters
                                                 self.BestellungItemsNamen[BestellungID] = newItems
                                                 self.BestellungItemsPreise[BestellungID] = newPreise
                                                 self.BestellungItemsMengen[BestellungID] = newMengen
@@ -378,16 +378,16 @@ print(snapshot, "snapshot")
                                                 self.BestellungItemsLiter[BestellungID] = newLiters
                                                 print(self.BestellungItemsNamen, "3333")} else {
                                                 print(self.BestellungItemsNamen, "4440")
-                                                newnewItems[newx.index(of: children.key)!].append(iteminfodic.itemName!)
-                                                newnewPreise[newx.index(of: children.key)!].append(Double(iteminfodic.itemPreis!))
-                                                newnewMengen[newx.index(of: children.key)!].append(iteminfodic.itemMenge!)
-                                                newnewKommentare[newx.index(of: children.key)!].append(iteminfodic.itemKommentar!)
-                                                newnewLiters[newx.index(of: children.key)!].append(iteminfodic.itemLiter!)
-                                                newItems![(self.BestellungKategorien[BestellungID]?.index(of: key.key))!] = newnewItems
-                                                newPreise![(self.BestellungKategorien[BestellungID]?.index(of: key.key))!] = newnewPreise
-                                                newMengen![(self.BestellungKategorien[BestellungID]?.index(of: key.key))!] = newnewMengen
-                                                newKommentare![(self.BestellungKategorien[BestellungID]?.index(of: key.key))!] = newnewKommentare
-                                                newLiters![(self.BestellungKategorien[BestellungID]?.index(of: key.key))!] = newnewLiters
+                                                newnewItems[newx.firstIndex(of: children.key)!].append(iteminfodic.itemName!)
+                                                newnewPreise[newx.firstIndex(of: children.key)!].append(Double(iteminfodic.itemPreis!))
+                                                newnewMengen[newx.firstIndex(of: children.key)!].append(iteminfodic.itemMenge!)
+                                                newnewKommentare[newx.firstIndex(of: children.key)!].append(iteminfodic.itemKommentar!)
+                                                newnewLiters[newx.firstIndex(of: children.key)!].append(iteminfodic.itemLiter!)
+                                                newItems![(self.BestellungKategorien[BestellungID]?.firstIndex(of: key.key))!] = newnewItems
+                                                newPreise![(self.BestellungKategorien[BestellungID]?.firstIndex(of: key.key))!] = newnewPreise
+                                                newMengen![(self.BestellungKategorien[BestellungID]?.firstIndex(of: key.key))!] = newnewMengen
+                                                newKommentare![(self.BestellungKategorien[BestellungID]?.firstIndex(of: key.key))!] = newnewKommentare
+                                                newLiters![(self.BestellungKategorien[BestellungID]?.firstIndex(of: key.key))!] = newnewLiters
                                                 self.BestellungItemsNamen[BestellungID] = newItems
                                                 self.BestellungItemsPreise[BestellungID] = newPreise
                                                 self.BestellungItemsMengen[BestellungID] = newMengen
@@ -405,17 +405,17 @@ print(snapshot, "snapshot")
                                                 if let dictionary = extra.value as? [String: AnyObject]{
                                                     let extraInfo = BestellungInfos(dictionary: dictionary)
                                                     var newExtras = self.BestellungenItemsExtrasNamen[BestellungID]
-                                                    var newnewExtras = newExtras![(self.BestellungKategorien[BestellungID]?.index(of: key.key))!]
+                                                    var newnewExtras = newExtras![(self.BestellungKategorien[BestellungID]?.firstIndex(of: key.key))!]
                                                     var newPreis = self.BestellungenItemsExtrasPreise[BestellungID]
-                                                    var newnewPreis = newPreis![(self.BestellungKategorien[BestellungID]?.index(of: key.key))!]
+                                                    var newnewPreis = newPreis![(self.BestellungKategorien[BestellungID]?.firstIndex(of: key.key))!]
                                                     self.extrasString.append(extraInfo.itemName!)
                                                     self.extrasPreis.append(extraInfo.itemPreis!)
                                                     if self.extrasString.count == extrasSnap.childrenCount && self.extrasPreis.count == extrasSnap.childrenCount {
                                                         print(self.BestellungenItemsExtrasNamen, "extras11")
                                                         
-                                                        var a = self.BestellungUnterkategorien[BestellungID]!
-                                                        let b = a[(self.BestellungKategorien[BestellungID]?.index(of: key.key))!]
-                                                        let c = b.index(of: children.key)
+                                                        let a = self.BestellungUnterkategorien[BestellungID]!
+                                                        let b = a[(self.BestellungKategorien[BestellungID]?.firstIndex(of: key.key))!]
+                                                        let c = b.firstIndex(of: children.key)
                                                         if newnewExtras.count < c!+1 {
                                                             newnewExtras.append([self.extrasString])
                                                             newnewPreis.append([self.extrasPreis])
@@ -426,8 +426,8 @@ print(snapshot, "snapshot")
                                                             
                                                             newnewExtras[c!].append(self.extrasString)
                                                             newnewPreis[c!].append(self.extrasPreis) }
-                                                        newExtras![(self.BestellungKategorien[BestellungID]?.index(of: key.key))!] = newnewExtras
-                                                        newPreis![(self.BestellungKategorien[BestellungID]?.index(of: key.key))!] = newnewPreis
+                                                        newExtras![(self.BestellungKategorien[BestellungID]?.firstIndex(of: key.key))!] = newnewExtras
+                                                        newPreis![(self.BestellungKategorien[BestellungID]?.firstIndex(of: key.key))!] = newnewPreis
                                                         self.BestellungenItemsExtrasNamen[BestellungID] = newExtras
                                                         self.BestellungenItemsExtrasPreise[BestellungID] = newPreis
                                                         self.extrasString.removeAll()
@@ -448,21 +448,21 @@ print(snapshot, "snapshot")
                                             var newMengen = self.BestellungItemsMengen[BestellungID]
                                             var newKommentare = self.BestellungItemsKommentar[BestellungID]
                                             var newLiters = self.BestellungItemsLiter[BestellungID]
-                                            var newnewItems = newItems![(self.BestellungKategorien[BestellungID]?.index(of: key.key))!]
-                                            var newnewPreise = newPreise![(self.BestellungKategorien[BestellungID]?.index(of: key.key))!]
-                                            var newnewMengen = newMengen![(self.BestellungKategorien[BestellungID]?.index(of: key.key))!]
-                                            var newnewKommentare = newKommentare![(self.BestellungKategorien[BestellungID]?.index(of: key.key))!]
-                                            var newnewLiters = newLiters![(self.BestellungKategorien[BestellungID]?.index(of: key.key))!]
-                                            newnewItems[(self.BestellungUnterkategorien[BestellungID]?.index(of: [children.key]))!].append(iteminfodic.itemName!)
-                                            newnewPreise[(self.BestellungUnterkategorien[BestellungID]?.index(of: [children.key]))!].append(Double(iteminfodic.itemPreis!))
-                                            newnewMengen[(self.BestellungUnterkategorien[BestellungID]?.index(of: [children.key]))!].append(iteminfodic.itemMenge!)
-                                            newnewKommentare[(self.BestellungUnterkategorien[BestellungID]?.index(of: [children.key]))!].append(iteminfodic.itemKommentar!)
-                                            newnewLiters[(self.BestellungUnterkategorien[BestellungID]?.index(of: [children.key]))!].append(iteminfodic.itemLiter!)
-                                            newItems![(self.BestellungKategorien[BestellungID]?.index(of: key.key))!] = newnewItems
-                                            newPreise![(self.BestellungKategorien[BestellungID]?.index(of: key.key))!] = newnewPreise
-                                            newMengen![(self.BestellungKategorien[BestellungID]?.index(of: key.key))!] = newnewMengen
-                                            newKommentare![(self.BestellungKategorien[BestellungID]?.index(of: key.key))!] = newnewKommentare
-                                            newLiters![(self.BestellungKategorien[BestellungID]?.index(of: key.key))!] = newnewLiters
+                                            var newnewItems = newItems![(self.BestellungKategorien[BestellungID]?.firstIndex(of: key.key))!]
+                                            var newnewPreise = newPreise![(self.BestellungKategorien[BestellungID]?.firstIndex(of: key.key))!]
+                                            var newnewMengen = newMengen![(self.BestellungKategorien[BestellungID]?.firstIndex(of: key.key))!]
+                                            var newnewKommentare = newKommentare![(self.BestellungKategorien[BestellungID]?.firstIndex(of: key.key))!]
+                                            var newnewLiters = newLiters![(self.BestellungKategorien[BestellungID]?.firstIndex(of: key.key))!]
+                                            newnewItems[(self.BestellungUnterkategorien[BestellungID]?.firstIndex(of: [children.key]))!].append(iteminfodic.itemName!)
+                                            newnewPreise[(self.BestellungUnterkategorien[BestellungID]?.firstIndex(of: [children.key]))!].append(Double(iteminfodic.itemPreis!))
+                                            newnewMengen[(self.BestellungUnterkategorien[BestellungID]?.firstIndex(of: [children.key]))!].append(iteminfodic.itemMenge!)
+                                            newnewKommentare[(self.BestellungUnterkategorien[BestellungID]?.firstIndex(of: [children.key]))!].append(iteminfodic.itemKommentar!)
+                                            newnewLiters[(self.BestellungUnterkategorien[BestellungID]?.firstIndex(of: [children.key]))!].append(iteminfodic.itemLiter!)
+                                            newItems![(self.BestellungKategorien[BestellungID]?.firstIndex(of: key.key))!] = newnewItems
+                                            newPreise![(self.BestellungKategorien[BestellungID]?.firstIndex(of: key.key))!] = newnewPreise
+                                            newMengen![(self.BestellungKategorien[BestellungID]?.firstIndex(of: key.key))!] = newnewMengen
+                                            newKommentare![(self.BestellungKategorien[BestellungID]?.firstIndex(of: key.key))!] = newnewKommentare
+                                            newLiters![(self.BestellungKategorien[BestellungID]?.firstIndex(of: key.key))!] = newnewLiters
                                             self.BestellungItemsNamen[BestellungID] = newItems
                                             self.BestellungItemsPreise[BestellungID] = newPreise
                                             self.BestellungItemsMengen[BestellungID] = newMengen
@@ -488,18 +488,18 @@ print(snapshot, "snapshot")
                                                     let extraInfo = BestellungInfos(dictionary: dictionary)
                                                     if self.BestellungenItemsExtrasNamen[BestellungID] != nil {
                                                         var newExtras = self.BestellungenItemsExtrasNamen[BestellungID]
-                                                        var newnewExtras = newExtras![(self.BestellungKategorien[BestellungID]?.index(of: key.key))!]
+                                                        var newnewExtras = newExtras![(self.BestellungKategorien[BestellungID]?.firstIndex(of: key.key))!]
                                                         self.extrasString.append(extraInfo.itemName!)
                                                         var newPreis = self.BestellungenItemsExtrasPreise[BestellungID]
-                                                        var newnewPreis = newPreis![(self.BestellungKategorien[BestellungID]?.index(of: key.key))!]
+                                                        var newnewPreis = newPreis![(self.BestellungKategorien[BestellungID]?.firstIndex(of: key.key))!]
                                                         self.extrasPreis.append(extraInfo.itemPreis!)
                                                         if self.extrasString.count == extrasSnap.childrenCount && self.extrasPreis.count == extrasSnap.childrenCount{
                                                             print(self.BestellungenItemsExtrasNamen, "extras01")
-                                                            newnewExtras[(self.BestellungUnterkategorien[BestellungID]?.index(of: [children.key]))!].append(self.extrasString)
-                                                            newExtras![(self.BestellungKategorien[BestellungID]?.index(of: key.key))!] = newnewExtras
+                                                            newnewExtras[(self.BestellungUnterkategorien[BestellungID]?.firstIndex(of: [children.key]))!].append(self.extrasString)
+                                                            newExtras![(self.BestellungKategorien[BestellungID]?.firstIndex(of: key.key))!] = newnewExtras
                                                             self.BestellungenItemsExtrasNamen[BestellungID] = newExtras
-                                                            newnewPreis[(self.BestellungUnterkategorien[BestellungID]?.index(of: [children.key]))!].insert(self.extrasPreis, at: 0)
-                                                            newPreis![(self.BestellungKategorien[BestellungID]?.index(of: key.key))!] = newnewPreis
+                                                            newnewPreis[(self.BestellungUnterkategorien[BestellungID]?.firstIndex(of: [children.key]))!].insert(self.extrasPreis, at: 0)
+                                                            newPreis![(self.BestellungKategorien[BestellungID]?.firstIndex(of: key.key))!] = newnewPreis
                                                             self.BestellungenItemsExtrasPreise[BestellungID] = newPreis
                                                             self.extrasString.removeAll()
                                                             self.extrasPreis.removeAll()

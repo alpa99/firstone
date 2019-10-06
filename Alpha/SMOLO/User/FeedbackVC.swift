@@ -24,7 +24,7 @@ class FeedbackVC: UIViewController, UITextFieldDelegate {
             let DayOne = formatter.date(from: "2018/05/15 12:00")
             let timestamp = Double(NSDate().timeIntervalSince(DayOne!))
             
-            ref?.child("Feedback").child((user?.uid)!).childByAutoId().updateChildValues(["Feedback" : feedbackTextview.text, "timeStamp": timestamp])
+            ref?.child("Feedback").child((user?.uid)!).childByAutoId().updateChildValues(["Feedback" : feedbackTextview.text!, "timeStamp": timestamp])
             let alertFeedbacksend = UIAlertController(title: "Feedback", message: "Vielen Dank für dein Feedback.", preferredStyle: .alert)
             alertFeedbacksend.addAction(UIAlertAction(title: "Bitteschön :)", style: .default, handler: { (alert) in
                 

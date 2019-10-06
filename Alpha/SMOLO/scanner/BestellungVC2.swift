@@ -193,7 +193,7 @@ class BestellungVC2: UIViewController, UITableViewDataSource, UITableViewDelegat
             print(BestellungItemsNamen, 23544323234)
 
             for Kategorie in BestellungKategorien {
-            let section = BestellungKategorien.index(of: Kategorie)
+            let section = BestellungKategorien.firstIndex(of: Kategorie)
             setSectionsBestellung(Kategorie: Kategorie, Unterkategorie: BestellungUnterkategorien[section!], items: BestellungItemsNamen[section!], preis: BestellungItemsPreise[section!], liter: BestellungItemsLiter[section!], kommentar: BestellungItemsKommentar[section!], extras: BestellungExtrasName[section!], extrasPreise: BestellungExtrasPreise[section!], menge: BestellungItemsMengen[section!], expanded2: BestellungItemsExpanded2[section!])
             
         }
@@ -293,15 +293,15 @@ class BestellungVC2: UIViewController, UITableViewDataSource, UITableViewDelegat
                                 self.Verfuegbarkeit[Kategorie] = newverfuegbarkeit
                             }
                             else {
-                                newitems![(self.Unterkategorien[Kategorie]?.index(of: key.key))!].append(item.Name!)
+                                newitems![(self.Unterkategorien[Kategorie]?.firstIndex(of: key.key))!].append(item.Name!)
                                 self.Items[Kategorie] = newitems
-                                newpreis![(self.Unterkategorien[Kategorie]?.index(of: key.key))!].append(item.Preis!)
+                                newpreis![(self.Unterkategorien[Kategorie]?.firstIndex(of: key.key))!].append(item.Preis!)
                                 self.Preis[Kategorie] = newpreis
-                                newliter![(self.Unterkategorien[Kategorie]?.index(of: key.key))!].append(item.Liter!)
+                                newliter![(self.Unterkategorien[Kategorie]?.firstIndex(of: key.key))!].append(item.Liter!)
                                 self.Liter[Kategorie] = newliter
-                                newbeschreibung![(self.Unterkategorien[Kategorie]?.index(of: key.key))!].append(item.Beschreibung!)
+                                newbeschreibung![(self.Unterkategorien[Kategorie]?.firstIndex(of: key.key))!].append(item.Beschreibung!)
                                 self.Beschreibung[Kategorie] = newbeschreibung
-                                newverfuegbarkeit![(self.Unterkategorien[Kategorie]?.index(of: key.key))!].append(item.Verfuegbarkeit!)
+                                newverfuegbarkeit![(self.Unterkategorien[Kategorie]?.firstIndex(of: key.key))!].append(item.Verfuegbarkeit!)
                                 self.Verfuegbarkeit[Kategorie] = newverfuegbarkeit
                             }
                         }
@@ -316,19 +316,19 @@ class BestellungVC2: UIViewController, UITableViewDataSource, UITableViewDelegat
                             
                             if self.Items[Kategorie] != nil{
                                 var newItems = self.Items[Kategorie]
-                                newItems![(self.Unterkategorien[Kategorie]?.index(of: key.key))!].append(item.Name!)
+                                newItems![(self.Unterkategorien[Kategorie]?.firstIndex(of: key.key))!].append(item.Name!)
                                 self.Items[Kategorie] = newItems
                                 var newPreis = self.Preis[Kategorie]
-                                newPreis![(self.Unterkategorien[Kategorie]?.index(of: key.key))!].append(item.Preis!)
+                                newPreis![(self.Unterkategorien[Kategorie]?.firstIndex(of: key.key))!].append(item.Preis!)
                                 self.Preis[Kategorie] = newPreis
                                 var newLiter = self.Liter[Kategorie]
-                                newLiter![(self.Unterkategorien[Kategorie]?.index(of: key.key))!].append(item.Liter!)
+                                newLiter![(self.Unterkategorien[Kategorie]?.firstIndex(of: key.key))!].append(item.Liter!)
                                 self.Liter[Kategorie] = newLiter
                                 var newBeschreibung = self.Beschreibung[Kategorie]
-                                newBeschreibung![(self.Unterkategorien[Kategorie]?.index(of: key.key))!].append(item.Beschreibung!)
+                                newBeschreibung![(self.Unterkategorien[Kategorie]?.firstIndex(of: key.key))!].append(item.Beschreibung!)
                                 self.Beschreibung[Kategorie] = newBeschreibung
                                 var newVerfuegbarkeit = self.Verfuegbarkeit[Kategorie]
-                                newVerfuegbarkeit![(self.Unterkategorien[Kategorie]?.index(of: key.key))!].append(item.Verfuegbarkeit!)
+                                newVerfuegbarkeit![(self.Unterkategorien[Kategorie]?.firstIndex(of: key.key))!].append(item.Verfuegbarkeit!)
                                 self.Verfuegbarkeit[Kategorie] = newVerfuegbarkeit
                             } else {
                                 self.Items.updateValue([[item.Name!]], forKey: Kategorie)
@@ -396,14 +396,14 @@ class BestellungVC2: UIViewController, UITableViewDataSource, UITableViewDelegat
             
             let Unterkategorien = Bestellung.Unterkategorie
             for Unterkategorie in Bestellung.Unterkategorie {
-                let UnterkategorieSection = Unterkategorien.index(of: Unterkategorie)
-                var items = Bestellung.items[UnterkategorieSection!]
+                let UnterkategorieSection = Unterkategorien.firstIndex(of: Unterkategorie)
+                let items = Bestellung.items[UnterkategorieSection!]
             
-                var mengen = Bestellung.menge[UnterkategorieSection!]
-                var preise = Bestellung.preis[UnterkategorieSection!]
-                var kommentar = Bestellung.kommentar[UnterkategorieSection!]
-                var extrasNamen = Bestellung.extras[UnterkategorieSection!]
-                var extrasPreise = Bestellung.extrasPreise[UnterkategorieSection!]
+                let mengen = Bestellung.menge[UnterkategorieSection!]
+                let preise = Bestellung.preis[UnterkategorieSection!]
+                let kommentar = Bestellung.kommentar[UnterkategorieSection!]
+                let extrasNamen = Bestellung.extras[UnterkategorieSection!]
+                let extrasPreise = Bestellung.extrasPreise[UnterkategorieSection!]
 
                 for i in 0 ..< items.count {
                  
@@ -420,9 +420,9 @@ class BestellungVC2: UIViewController, UITableViewDataSource, UITableViewDelegat
                     childchildref?.updateChildValues(["bestellungItemId" : bestellungItemId!])
                     let extraPreis = extrasPreise[i]
                     for x in extrasNamen[i]{
-                        let preis = extraPreis[extrasNamen[i].index(of: x)!]
-                        childchildref?.child("Extras").child("Extra \(extrasNamen[i].index(of: x)!)").updateChildValues(["Name" : x])
-                        childchildref?.child("Extras").child("Extra \(extrasNamen[i].index(of: x)!)").updateChildValues(["Preis" : preis])
+                        let preis = extraPreis[extrasNamen[i].firstIndex(of: x)!]
+                        childchildref?.child("Extras").child("Extra \(extrasNamen[i].firstIndex(of: x)!)").updateChildValues(["Name" : x])
+                        childchildref?.child("Extras").child("Extra \(extrasNamen[i].firstIndex(of: x)!)").updateChildValues(["Preis" : preis])
 
                     } } } }
         
@@ -715,8 +715,8 @@ class BestellungVC2: UIViewController, UITableViewDataSource, UITableViewDelegat
             cell.delegate = self
             if self.Extras.keys.contains(KategorieLbl.text!) {
 
-                var extras = self.Extras[KategorieLbl.text!]
-                var extraspreise = self.ExtrasPreise[KategorieLbl.text!]
+                let extras = self.Extras[KategorieLbl.text!]
+                let extraspreise = self.ExtrasPreise[KategorieLbl.text!]
                 cell.extraRow = indexPath.row
                 cell.extraLbl.text = extras?[indexPath.row]
                 if extrasNamen.contains((extras?[indexPath.row])!) {
@@ -775,9 +775,9 @@ class BestellungVC2: UIViewController, UITableViewDataSource, UITableViewDelegat
     
     func selectExtra(sender: ExtrasCell) {
         if sender.extraSelect.isSelected == true {
-            extrasPreise.remove(at: extrasNamen.index(of: sender.extraLbl.text!)!)
+            extrasPreise.remove(at: extrasNamen.firstIndex(of: sender.extraLbl.text!)!)
             
-            extrasNamen.remove(at: extrasNamen.index(of: sender.extraLbl.text!)!)
+            extrasNamen.remove(at: extrasNamen.firstIndex(of: sender.extraLbl.text!)!)
             sender.extraSelect.isSelected = !sender.extraSelect.isSelected
         } else {
             extrasNamen.append(sender.extraLbl.text!)
@@ -858,75 +858,75 @@ class BestellungVC2: UIViewController, UITableViewDataSource, UITableViewDelegat
                 // kategorie gibt es
             } else {
                 // unterkategorie gibt es nicht
-                if !BestellungUnterkategorien[BestellungKategorien.index(of: KategorieLbl.text!)!].contains(UnterkategorieLbl.text!) {
-                    BestellungUnterkategorien[BestellungKategorien.index(of: KategorieLbl.text!)!].append(UnterkategorieLbl.text!)
-                    BestellungItemsNamen[BestellungKategorien.index(of: KategorieLbl.text!)!].append([itemNameLbl.text!])
-                    BestellungItemsPreise[BestellungKategorien.index(of: KategorieLbl.text!)!].append([Double(itemPreisLbl.text!)!])
-                    BestellungItemsLiter[BestellungKategorien.index(of: KategorieLbl.text!)!].append([itemLiterLbl.text!])
+                if !BestellungUnterkategorien[BestellungKategorien.firstIndex(of: KategorieLbl.text!)!].contains(UnterkategorieLbl.text!) {
+                    BestellungUnterkategorien[BestellungKategorien.firstIndex(of: KategorieLbl.text!)!].append(UnterkategorieLbl.text!)
+                    BestellungItemsNamen[BestellungKategorien.firstIndex(of: KategorieLbl.text!)!].append([itemNameLbl.text!])
+                    BestellungItemsPreise[BestellungKategorien.firstIndex(of: KategorieLbl.text!)!].append([Double(itemPreisLbl.text!)!])
+                    BestellungItemsLiter[BestellungKategorien.firstIndex(of: KategorieLbl.text!)!].append([itemLiterLbl.text!])
                     
                     if extrasNamen.isEmpty {
-                        BestellungExtrasName[BestellungKategorien.index(of: KategorieLbl.text!)!].append([["keine Extras"]])
-                        BestellungExtrasPreise[BestellungKategorien.index(of: KategorieLbl.text!)!].append([[0.0]])
+                        BestellungExtrasName[BestellungKategorien.firstIndex(of: KategorieLbl.text!)!].append([["keine Extras"]])
+                        BestellungExtrasPreise[BestellungKategorien.firstIndex(of: KategorieLbl.text!)!].append([[0.0]])
                     } else {
-                        BestellungExtrasName[BestellungKategorien.index(of: KategorieLbl.text!)!].append([extrasNamen])
-                        BestellungExtrasPreise[BestellungKategorien.index(of: KategorieLbl.text!)!].append([extrasPreise])
+                        BestellungExtrasName[BestellungKategorien.firstIndex(of: KategorieLbl.text!)!].append([extrasNamen])
+                        BestellungExtrasPreise[BestellungKategorien.firstIndex(of: KategorieLbl.text!)!].append([extrasPreise])
                         
                     }
                     
                     if kommentarTextView.text == placeholder || kommentarTextView.text == "" {
-                        BestellungItemsKommentar[BestellungKategorien.index(of: KategorieLbl.text!)!].append(["kein Kommentar"])
+                        BestellungItemsKommentar[BestellungKategorien.firstIndex(of: KategorieLbl.text!)!].append(["kein Kommentar"])
                     } else {
-                        BestellungItemsKommentar[BestellungKategorien.index(of: KategorieLbl.text!)!].append([kommentarTextView.text!])
+                        BestellungItemsKommentar[BestellungKategorien.firstIndex(of: KategorieLbl.text!)!].append([kommentarTextView.text!])
 
                     }
-                    BestellungItemsMengen[BestellungKategorien.index(of: KategorieLbl.text!)!].append([Int(itemCountLbl.text!)!])
-                    BestellungItemsExpanded2[BestellungKategorien.index(of: KategorieLbl.text!)!].append(true)
+                    BestellungItemsMengen[BestellungKategorien.firstIndex(of: KategorieLbl.text!)!].append([Int(itemCountLbl.text!)!])
+                    BestellungItemsExpanded2[BestellungKategorien.firstIndex(of: KategorieLbl.text!)!].append(true)
                     
                     // ukat, i gibt es nicht"
                     
                 } else {
                     // item gibt es nicht
-                    var itemsNamenInSection = BestellungItemsNamen[BestellungKategorien.index(of: KategorieLbl.text!)!]
-                    var itemsPreiseInSection = BestellungItemsPreise[BestellungKategorien.index(of: KategorieLbl.text!)!]
-                    var itemsLiterInSection = BestellungItemsLiter[BestellungKategorien.index(of: KategorieLbl.text!)!]
-                    var itemsKommentarInSection = BestellungItemsKommentar[BestellungKategorien.index(of: KategorieLbl.text!)!]
-                    var itemsMengenInSection = BestellungItemsMengen[BestellungKategorien.index(of: KategorieLbl.text!)!]
-                    var extrasName = BestellungExtrasName[BestellungKategorien.index(of: KategorieLbl.text!)!]
-                    var extraPreis = BestellungExtrasPreise[BestellungKategorien.index(of: KategorieLbl.text!)!]
-                    let unterkategorie = BestellungUnterkategorien[BestellungKategorien.index(of: KategorieLbl.text!)!]
+                    var itemsNamenInSection = BestellungItemsNamen[BestellungKategorien.firstIndex(of: KategorieLbl.text!)!]
+                    var itemsPreiseInSection = BestellungItemsPreise[BestellungKategorien.firstIndex(of: KategorieLbl.text!)!]
+                    var itemsLiterInSection = BestellungItemsLiter[BestellungKategorien.firstIndex(of: KategorieLbl.text!)!]
+                    var itemsKommentarInSection = BestellungItemsKommentar[BestellungKategorien.firstIndex(of: KategorieLbl.text!)!]
+                    var itemsMengenInSection = BestellungItemsMengen[BestellungKategorien.firstIndex(of: KategorieLbl.text!)!]
+                    var extrasName = BestellungExtrasName[BestellungKategorien.firstIndex(of: KategorieLbl.text!)!]
+                    var extraPreis = BestellungExtrasPreise[BestellungKategorien.firstIndex(of: KategorieLbl.text!)!]
+                    let unterkategorie = BestellungUnterkategorien[BestellungKategorien.firstIndex(of: KategorieLbl.text!)!]
                     
 //                    if !itemsNamenInSection[unterkategorie.index(of: UnterkategorieLbl.text!)!].contains(itemNameLbl.text!) {
                     
-                        itemsNamenInSection[unterkategorie.index(of: UnterkategorieLbl.text!)!].append(itemNameLbl.text!)
-                        BestellungItemsNamen[BestellungKategorien.index(of: KategorieLbl.text!)!] = itemsNamenInSection
+                        itemsNamenInSection[unterkategorie.firstIndex(of: UnterkategorieLbl.text!)!].append(itemNameLbl.text!)
+                        BestellungItemsNamen[BestellungKategorien.firstIndex(of: KategorieLbl.text!)!] = itemsNamenInSection
                         
-                        itemsPreiseInSection[unterkategorie.index(of: UnterkategorieLbl.text!)!].append(Double(itemPreisLbl.text!)!)
-                        BestellungItemsPreise[BestellungKategorien.index(of: KategorieLbl.text!)!] = itemsPreiseInSection
+                        itemsPreiseInSection[unterkategorie.firstIndex(of: UnterkategorieLbl.text!)!].append(Double(itemPreisLbl.text!)!)
+                        BestellungItemsPreise[BestellungKategorien.firstIndex(of: KategorieLbl.text!)!] = itemsPreiseInSection
                         
-                        itemsLiterInSection[unterkategorie.index(of: UnterkategorieLbl.text!)!].append(itemLiterLbl.text!)
-                        BestellungItemsLiter[BestellungKategorien.index(of: KategorieLbl.text!)!] = itemsLiterInSection
+                        itemsLiterInSection[unterkategorie.firstIndex(of: UnterkategorieLbl.text!)!].append(itemLiterLbl.text!)
+                        BestellungItemsLiter[BestellungKategorien.firstIndex(of: KategorieLbl.text!)!] = itemsLiterInSection
                     
                     if extrasNamen.isEmpty {
-                        extrasName[unterkategorie.index(of: UnterkategorieLbl.text!)!].append(["keine Extras"])
-                        extraPreis[unterkategorie.index(of: UnterkategorieLbl.text!)!].append([0.0])
+                        extrasName[unterkategorie.firstIndex(of: UnterkategorieLbl.text!)!].append(["keine Extras"])
+                        extraPreis[unterkategorie.firstIndex(of: UnterkategorieLbl.text!)!].append([0.0])
                     } else {
-                        extrasName[unterkategorie.index(of: UnterkategorieLbl.text!)!].append(extrasNamen)
-                        extraPreis[unterkategorie.index(of: UnterkategorieLbl.text!)!].append(extrasPreise)
+                        extrasName[unterkategorie.firstIndex(of: UnterkategorieLbl.text!)!].append(extrasNamen)
+                        extraPreis[unterkategorie.firstIndex(of: UnterkategorieLbl.text!)!].append(extrasPreise)
                     }
-                    BestellungExtrasPreise[BestellungKategorien.index(of: KategorieLbl.text!)!] = extraPreis
-                    BestellungExtrasName[BestellungKategorien.index(of: KategorieLbl.text!)!] = extrasName
+                    BestellungExtrasPreise[BestellungKategorien.firstIndex(of: KategorieLbl.text!)!] = extraPreis
+                    BestellungExtrasName[BestellungKategorien.firstIndex(of: KategorieLbl.text!)!] = extrasName
                     
                     
                     if kommentarTextView.text == placeholder || kommentarTextView.text == "" {
-                        itemsKommentarInSection[unterkategorie.index(of: UnterkategorieLbl.text!)!].append("kein Kommentar")
+                        itemsKommentarInSection[unterkategorie.firstIndex(of: UnterkategorieLbl.text!)!].append("kein Kommentar")
                     } else {
-                        itemsKommentarInSection[unterkategorie.index(of: UnterkategorieLbl.text!)!].append(kommentarTextView.text!)
+                        itemsKommentarInSection[unterkategorie.firstIndex(of: UnterkategorieLbl.text!)!].append(kommentarTextView.text!)
 
                     }
-                        BestellungItemsKommentar[BestellungKategorien.index(of: KategorieLbl.text!)!] = itemsKommentarInSection
+                        BestellungItemsKommentar[BestellungKategorien.firstIndex(of: KategorieLbl.text!)!] = itemsKommentarInSection
                         
-                        itemsMengenInSection[unterkategorie.index(of: UnterkategorieLbl.text!)!].append(Int(itemCountLbl.text!)!)
-                        BestellungItemsMengen[BestellungKategorien.index(of: KategorieLbl.text!)!] = itemsMengenInSection
+                        itemsMengenInSection[unterkategorie.firstIndex(of: UnterkategorieLbl.text!)!].append(Int(itemCountLbl.text!)!)
+                        BestellungItemsMengen[BestellungKategorien.firstIndex(of: KategorieLbl.text!)!] = itemsMengenInSection
 
                 }
             }
