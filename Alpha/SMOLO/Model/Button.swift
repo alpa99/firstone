@@ -10,14 +10,14 @@ import UIKit
 
 class Button: UIButton {
 
-    let goldColor = UIColor.init(red: 185.0/255.0, green: 170.0/255.0, blue: 140.0/255.0, alpha: 1.0)
+    let goldColor = UIColor.init(red: 185.0/255.0, green: 170.0/255.0, blue: 140.0/255.0, alpha: 0.65)
     
     override func awakeFromNib() {
         super.awakeFromNib()
         self.tintColor = UIColor.white
-        self.layer.cornerRadius = 4
+        self.layer.cornerRadius = 0
     
-        self.titleLabel?.font = UIFont(name: "Helvetica", size: 20)
+        self.titleLabel?.font = UIFont(name: "Helvetica Neue", size: 20)
         
         if self.titleLabel?.text == "zurück"  {
             self.layer.backgroundColor = UIColor.clear.cgColor
