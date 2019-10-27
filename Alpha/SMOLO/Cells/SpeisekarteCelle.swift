@@ -36,7 +36,7 @@ class SpeisekarteCelle: UITableViewCell, UITableViewDataSource, UITableViewDeleg
     
     // Tabelle
     func numberOfSections(in tableView: UITableView) -> Int {
-        print(sections, "erekrkjejkkejekr")
+       
 
         return sections[sectioncell].Unterkategorie.count
 
