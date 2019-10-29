@@ -231,11 +231,19 @@ class QRScanner: UIViewController, AVCaptureMetadataOutputObjectsDelegate, CLLoc
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "scansegue"{
             let vc = segue.destination as! PageViewController2
-            vc.name = qrbarname
-            vc.barname = barname
-            vc.adresse = qrbaradresse
-            vc.tischnummer = tischnummer
-            vc.KellnerID = KellnerID
+           // löschen
+            vc.name = "Huqa"
+            vc.barname = "Huqa"
+            vc.adresse = "keine Adresse"
+            vc.tischnummer = 10
+            vc.KellnerID = "NTWigzmLBMPHf5qFeVbNgPjXGUu1"
+            
+            // kommentartion entfernen
+//            vc.name = qrbarname
+//            vc.barname = barname
+//            vc.adresse = qrbaradresse
+//            vc.tischnummer = tischnummer
+//            vc.KellnerID = KellnerID
         }
     }
     // OTHERS
@@ -275,6 +283,8 @@ class QRScanner: UIViewController, AVCaptureMetadataOutputObjectsDelegate, CLLoc
         self.view.bringSubviewToFront(flashlight)
         session.startRunning()
         
+        performSegue(withIdentifier: "scansegue", sender: self)
+        //zum löschen perform anpassen und zeile diese hier drüber löshcen
         
     }
     
@@ -297,6 +307,7 @@ class QRScanner: UIViewController, AVCaptureMetadataOutputObjectsDelegate, CLLoc
     
     
 }
+
 
 
 // Helper function inserted by Swift 4.2 migrator.

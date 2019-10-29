@@ -39,7 +39,7 @@ class MyBestellungCell: UITableViewCell, UITableViewDelegate, UITableViewDataSou
     
     var sections2 = Int()
     var rows2 = Int()
-    var kommenar = String()
+    var kommentar = String()
     
 //    var delegate: MyBestellungCellDelegate?
 
@@ -67,12 +67,15 @@ class MyBestellungCell: UITableViewCell, UITableViewDelegate, UITableViewDataSou
         sections2 = sender.Cell2Section
         rows2 = sender.Cell2Row
         delegate?.passItemPlus(sender: self)
+        print("mybestelungcellneu")
     }
     
     func cellmyItemKommenAendern(sender: MyBestellungCell2) {
         sections2 = sender.Cell2Section
         rows2 = sender.Cell2Row
-        kommenar = sender.kommentarLbl.text
+        kommentar = sender.kommentarLbl.text
+        print(kommentar, "2 k text")
+        
         delegate?.passKommentarAendern(sender: self)
     }
     
@@ -84,6 +87,7 @@ class MyBestellungCell: UITableViewCell, UITableViewDelegate, UITableViewDataSou
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
+        print(bestellteItemsDictionary, Cell1Section, section, "HALALLALA")
         return bestellteItemsDictionary[Cell1Section].items[section].count
     }
     
@@ -99,7 +103,6 @@ class MyBestellungCell: UITableViewCell, UITableViewDelegate, UITableViewDataSou
         }
         else {
             return 0
-            
         }
     }
     

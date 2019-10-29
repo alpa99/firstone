@@ -47,8 +47,12 @@ class MyBestellungCell2: UITableViewCell, UITextViewDelegate, UITableViewDelegat
     @IBAction func myItemMengeMinusAction(_ sender: Any) {
         delegate?.cellmyItemMengeMinusAction(sender: self)
     }
+    
     @IBAction func myItemMengePlusAction(_ sender: Any) {
+        print("holla neu")
         delegate?.cellMyItemMengePlusAction(sender: self)
+        print("holla neu2")
+
     }
     @IBAction func myItemEntfernenAction(_ sender: Any) {
         delegate?.cellMyItemEntfernen(sender: self)
@@ -56,7 +60,14 @@ class MyBestellungCell2: UITableViewCell, UITextViewDelegate, UITableViewDelegat
     }
     
     func textViewDidEndEditing(_ textView: UITextView) {
+        print(kommentarLbl.text, "1 k text")
         delegate?.cellmyItemKommenAendern(sender: self)
+    }
+    func textViewShouldEndEditing(_ textView: UITextView) -> Bool {
+        print("hgjhkj")
+    print(kommentarLbl.text, "1 k text")
+    delegate?.cellmyItemKommenAendern(sender: self)
+        return true
     }
     
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
@@ -80,7 +91,6 @@ class MyBestellungCell2: UITableViewCell, UITextViewDelegate, UITableViewDelegat
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
         
         let cell = Bundle.main.loadNibNamed("KellnerExtrasCell", owner: self, options: nil)?.first as! KellnerExtrasCell
         cell.backgroundColor = UIColor.clear
@@ -123,12 +133,11 @@ class MyBestellungCell2: UITableViewCell, UITextViewDelegate, UITableViewDelegat
         extrasTV.dataSource = self
     }
     
-
+   
     
     override func awakeFromNib() {
         super.awakeFromNib()
         kommentarLbl.delegate = self
-
         // Initialization code
     }
 

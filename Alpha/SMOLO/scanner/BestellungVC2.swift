@@ -15,9 +15,24 @@ import GoogleMobileAds
 protocol BestellungVC2Delegate {
     func reloaddas(sender: Any)
 }
-class BestellungVC2: UIViewController, UITableViewDataSource, UITableViewDelegate, ExpandableHeaderViewDelegate, BestellenCellDelegate, PageObservation2, ExtraCellDelegate, CLLocationManagerDelegate, UITextViewDelegate, GADInterstitialDelegate {
-
+class BestellungVC2: UIViewController, UITableViewDataSource, UITableViewDelegate, ExpandableHeaderViewDelegate, BestellenCellDelegate, PageObservation2, ExtraCellDelegate, CLLocationManagerDelegate, UITextViewDelegate, GADInterstitialDelegate, BestellungÜbersichtDelegate {
+    func passChanges(Kategorien: [String], Unterkategorien: [[String]], ItemsNamen: [[[String]]], ItemsPreise: [[[Double]]], ItemsLiter: [[[String]]], ItemsKommentar: [[[String]]], ItemsMenge: [[[Int]]], ItemsExpanded2: [[Bool]], ExtrasName: [[[[String]]]], ExtrasPreise: [[[[Double]]]]) {
+        
+        BestellungKategorien = Kategorien
+        BestellungUnterkategorien = Unterkategorien
+        BestellungItemsNamen = ItemsNamen
+        BestellungItemsPreise = ItemsPreise
+        BestellungItemsLiter = ItemsLiter
+        BestellungItemsKommentar = ItemsKommentar
+        BestellungItemsMengen = ItemsMenge
+        BestellungItemsExpanded2 = ItemsExpanded2
+        BestellungExtrasName = ExtrasName
+        BestellungExtrasPreise = ExtrasPreise
+        
+    }
+    
     // VARS
+    var test = "ok"
     var interstitial: GADInterstitial!
     var barname = "NewBar"
     var baradresse = " "
@@ -35,7 +50,6 @@ class BestellungVC2: UIViewController, UITableViewDataSource, UITableViewDelegat
     var BestellungItemsExpanded2 = [[Bool]]()
     var BestellungExtrasName = [[[[String]]]]()
     var BestellungExtrasPreise = [[[[Double]]]]()
-    var test = String()
     var extrasNamen = [String]()
     var extrasPreise = [Double]()
     
@@ -187,15 +201,20 @@ class BestellungVC2: UIViewController, UITableViewDataSource, UITableViewDelegat
 
     
     @IBAction func bestellungPrüfen(_ sender: Any) {
+        print(BestellungUnterkategorien, BestellungItemsNamen, BestellungItemsPreise, BestellungItemsLiter, BestellungItemsKommentar, BestellungExtrasName, BestellungExtrasPreise, BestellungItemsMengen, BestellungItemsExpanded2, "prüfen")
+        
+        
         if BestellungKategorien.count != 0{
-            print(bestellteItemsDictionary, 3449876)
-            print(BestellungUnterkategorien, "BestellungUnterkategorien")
-            print(BestellungItemsNamen, 23544323234)
-
+            print(BestellungKategorien, 3449876)
+           
+                
             for Kategorie in BestellungKategorien {
             let section = BestellungKategorien.firstIndex(of: Kategorie)
-            setSectionsBestellung(Kategorie: Kategorie, Unterkategorie: BestellungUnterkategorien[section!], items: BestellungItemsNamen[section!], preis: BestellungItemsPreise[section!], liter: BestellungItemsLiter[section!], kommentar: BestellungItemsKommentar[section!], extras: BestellungExtrasName[section!], extrasPreise: BestellungExtrasPreise[section!], menge: BestellungItemsMengen[section!], expanded2: BestellungItemsExpanded2[section!])
-            
+                print(Kategorie, section!, "kategorie, Section")
+                
+                print(BestellungUnterkategorien, BestellungItemsNamen, BestellungItemsPreise, BestellungItemsLiter, BestellungItemsKommentar, BestellungExtrasName, BestellungExtrasPreise, BestellungItemsMengen, BestellungItemsExpanded2)
+                
+                setSectionsBestellung(Kategorie: Kategorie, Unterkategorie: BestellungUnterkategorien[section!], items: BestellungItemsNamen[section!], preis: BestellungItemsPreise[section!], liter: BestellungItemsLiter[section!], kommentar: BestellungItemsKommentar[section!], extras: BestellungExtrasName[section!], extrasPreise: BestellungExtrasPreise[section!], menge: BestellungItemsMengen[section!], expanded2: BestellungItemsExpanded2[section!])
         }
             
             performSegue(withIdentifier: "meineBestellung", sender: self)
@@ -226,6 +245,8 @@ class BestellungVC2: UIViewController, UITableViewDataSource, UITableViewDelegat
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "meineBestellung" {
             let vc = segue.destination as! BestellungÜbersichtVC
+            vc.test = "test 1"
+            
             vc.bestellteItemsDictionary = bestellteItemsDictionary
             vc.BestellungKategorien = BestellungKategorien
             vc.BestellungUnterkategorien = BestellungUnterkategorien
@@ -236,10 +257,10 @@ class BestellungVC2: UIViewController, UITableViewDataSource, UITableViewDelegat
             vc.BestellungExtrasPreise = BestellungExtrasPreise
             vc.BestellungItemsMengen = BestellungItemsMengen
             vc.BestellungItemsExpanded2 = BestellungItemsExpanded2
+            vc.BestellungItemsKommentar = BestellungItemsKommentar
             bestellteItemsDictionary.removeAll()
+            vc.delegate = self
 
-//            bestellteItemsDictionary.removeAll()
-            
         }
     }
  
@@ -355,26 +376,18 @@ class BestellungVC2: UIViewController, UITableViewDataSource, UITableViewDelegat
                             }
                         }
                     }
-                    print(self.Extras, "extras")
                 }
             }
             if self.Unterkategorien.count == self.Kategorien.count {
                 for kategorie in self.Kategorien {
                     self.setSectionsSpeisekarte(Kategorie: kategorie, Unterkategorie: self.Unterkategorien[kategorie]!, items: self.Items[kategorie]!, preis: self.Preis[kategorie]!, liter: self.Liter[kategorie]!, beschreibung: self.Beschreibung[kategorie]!, verfuegbarkeit:  self.Verfuegbarkeit[kategorie]!, expanded2: self.Expanded[kategorie]!)
                 }
-                print(self.sections, "sections")
             }
         }, withCancel: nil)
         
         
     }
     
-  
-
-
-
-    
-
     func handleBestellung(){
         var ref: DatabaseReference!
 
@@ -442,7 +455,6 @@ class BestellungVC2: UIViewController, UITableViewDataSource, UITableViewDelegat
     }
 
     func preisBerechnen(){
-        print(self.bestellteItemsDictionary, "dictionary")
     }
 
 
@@ -527,11 +539,9 @@ class BestellungVC2: UIViewController, UITableViewDataSource, UITableViewDelegat
     }
     
     func setSectionsBestellung(Kategorie: String, Unterkategorie: [String], items: [[String]], preis: [[Double]], liter: [[String]], kommentar: [[String]], extras: [[[String]]], extrasPreise: [[[Double]]],menge: [[Int]], expanded2: [Bool]){
-        print(bestellteItemsDictionary, "3243342v34f34f3fdfddf")
 
         self.bestellteItemsDictionary
             .append(bestellungTVSection(Kategorie: Kategorie, Unterkategorie: Unterkategorie, items: items, preis: preis, liter: liter, kommentar: kommentar, extras: extras, extrasPreise: extrasPreise, menge: menge, expanded2: expanded2, expanded: true))
-        print(bestellteItemsDictionary, "njejkejekj")
     }
 
 
@@ -552,8 +562,7 @@ class BestellungVC2: UIViewController, UITableViewDataSource, UITableViewDelegat
         var numberOfRowsInSections: Int?
         if tableView == extrasTV {
             if self.Extras.keys.contains(KategorieLbl.text!) {
-                print(self.Extras, "EXTRAS")
-                print(KategorieLbl.text!)
+
                 numberOfRowsInSections = self.Extras[KategorieLbl.text!]?.count
                 
             } else {
@@ -707,8 +716,6 @@ class BestellungVC2: UIViewController, UITableViewDataSource, UITableViewDelegat
 //            cell.Kategorie = KategorieLbl.text!
 //            cell.Extras = self.Extras
 //            cell.ExtrasPreise = self.ExtrasPreise
-//
-//
 //            return cell
         }        else {
             let cell = Bundle.main.loadNibNamed("ExtrasCell", owner: self, options: nil)?.first as! ExtrasCell
@@ -804,7 +811,6 @@ class BestellungVC2: UIViewController, UITableViewDataSource, UITableViewDelegat
         
         if verfuegbarkeit[sender.row2] {
         if itemNamen[sender.row2] == "Tabakmix" {
-            print(itemNamen[sender.row2], "MISCHEN")
         } else {
         let preisFormat = String(format: "%.2f", arguments: [itemPreise[sender.row2]])
         itemPreisLbl.text = preisFormat
@@ -822,20 +828,33 @@ class BestellungVC2: UIViewController, UITableViewDataSource, UITableViewDelegat
             let alertKeineBestellung = UIAlertController(title: "nicht Verfügbar", message: "Es tut uns Leid. Dieses Produkt ist derzeit nicht Verfügbar.", preferredStyle: .alert)
             alertKeineBestellung.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
             self.present(alertKeineBestellung, animated: true, completion: nil)
-
         }
     }
     
+    func bestellungaktualisieren2(){
+
+        let BestellungÜ = self.storyboard?.instantiateViewController(withIdentifier: "BestellungÜbersichtVC") as! BestellungÜbersichtVC
+        
+//                bestellteItemsDictionary = BestellungÜ.bestellteItemsDictionary
+//                BestellungKategorien = BestellungÜ.BestellungKategorien
+//                BestellungUnterkategorien = BestellungÜ.BestellungUnterkategorien
+//                BestellungItemsNamen = BestellungÜ.BestellungItemsNamen
+//                BestellungItemsPreise = BestellungÜ.BestellungItemsPreise
+//                BestellungItemsLiter = BestellungÜ.BestellungItemsLiter
+//                BestellungExtrasName = BestellungÜ.BestellungExtrasName
+//                BestellungExtrasPreise = BestellungÜ.BestellungExtrasPreise
+//                BestellungItemsMengen = BestellungÜ.BestellungItemsMengen
+//                BestellungItemsExpanded2 = BestellungÜ.BestellungItemsExpanded2
+
+    }
     
     func bestellungaktualisieren(){
         if i > 0{
-            print("jajajajajaj")
             // kategorie gibt es nicht
             if !BestellungKategorien.contains(KategorieLbl.text!){
                 BestellungKategorien.append(KategorieLbl.text!)
                 BestellungUnterkategorien.append([UnterkategorieLbl.text!])
                 BestellungItemsNamen.append([[itemNameLbl.text!]])
-            
                 BestellungItemsPreise.append([[Double(itemPreisLbl.text!)!]])
                 BestellungItemsLiter.append([[itemLiterLbl.text!]])
                 BestellungItemsMengen.append([[Int(itemCountLbl.text!)!]])
@@ -999,7 +1018,7 @@ class BestellungVC2: UIViewController, UITableViewDataSource, UITableViewDelegat
 //            mengeInSection[sender.sections2] = newmengeInSection
 //            BestellungItemsNamen[sender.sections] = itemsInSection
 //            BestellungItemsPreise[sender.sections] = preisInSection
-//            BestellungItemsLiter[sender.sections]njejkejekj = literInSection
+//            BestellungItemsLiter[sender.sections] = literInSection
 //            BestellungItemsMengen[sender.sections] = mengeInSection
 //            bestellteItemsDictionary[sender.sections].items = itemsInSection
 //            bestellteItemsDictionary[sender.sections].preis = preisInSection
@@ -1047,13 +1066,13 @@ class BestellungVC2: UIViewController, UITableViewDataSource, UITableViewDelegat
 //    }
 
     func passKommentarAendern(sender: MyBestellungCell) {
-        var kommentarInSection = bestellteItemsDictionary[sender.sections].kommentar
+        var kommentarInSection = bestellteItemsDictionary[sender.Cell1Section].kommentar
         
         var newKommentarInSection = kommentarInSection[sender.sections2]
-            newKommentarInSection[sender.rows2] = sender.kommenar
+            newKommentarInSection[sender.rows2] = sender.kommentar
             kommentarInSection[sender.sections2] = newKommentarInSection
-            BestellungItemsKommentar[sender.sections] = kommentarInSection
-            bestellteItemsDictionary[sender.sections].kommentar = kommentarInSection
+            BestellungItemsKommentar[sender.Cell1Section] = kommentarInSection
+            bestellteItemsDictionary[sender.Cell1Section].kommentar = kommentarInSection
             myBestellungTV.reloadData()
         
     }
@@ -1100,6 +1119,7 @@ class BestellungVC2: UIViewController, UITableViewDataSource, UITableViewDelegat
     
     override func viewDidLoad() {
         super.viewDidLoad()
+
         
         interstitial = createAndLoadInterstitial()
         
@@ -1132,13 +1152,8 @@ class BestellungVC2: UIViewController, UITableViewDataSource, UITableViewDelegat
         getKategorien()
 
     }
-    override func viewDidAppear(_ animated: Bool) {
-        print(BestellungItemsNamen, "didappearnamen")
-    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
 }
-
-
-

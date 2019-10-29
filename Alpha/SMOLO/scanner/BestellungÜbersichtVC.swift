@@ -8,12 +8,18 @@
 
 import UIKit
 
-class BestellungÜbersichtVC: UIViewController, UITableViewDelegate, UITableViewDataSource, MyBestellungCellDelegate, ExpandableHeaderViewDelegate {
+protocol BestellungÜbersichtDelegate {
+    func passChanges(Kategorien: [String], Unterkategorien: [[String]], ItemsNamen: [[[String]]],ItemsPreise: [[[Double]]], ItemsLiter: [[[String]]], ItemsKommentar: [[[String]]], ItemsMenge: [[[Int]]], ItemsExpanded2: [[Bool]], ExtrasName: [[[[String]]]], ExtrasPreise: [[[[Double]]]])
+}
+
+class BestellungÜbersichtVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UINavigationControllerDelegate, MyBestellungCellDelegate, ExpandableHeaderViewDelegate, UITextFieldDelegate {
     
+    var test = "geht?"
     var bestellteItemsDictionary = [bestellungTVSection]()
     var Kategorie = String()
     var Extras = [String: [String]]()
     var ExtrasPreise = [String: [Double]]()
+    
     
     var BestellungKategorien = [String]()
     var BestellungUnterkategorien = [[String]]()
@@ -26,6 +32,7 @@ class BestellungÜbersichtVC: UIViewController, UITableViewDelegate, UITableView
     var BestellungExtrasName = [[[[String]]]]()
     var BestellungExtrasPreise = [[[[Double]]]]()
     
+    var delegate: BestellungÜbersichtDelegate?
     
     @IBOutlet weak var uebersichtTV: UITableView!
     
@@ -43,66 +50,152 @@ class BestellungÜbersichtVC: UIViewController, UITableViewDelegate, UITableView
     }
     
     func toggleSection(tableView: UITableView, header: ExpandableHeaderView, section: Int) {
-        print("BestellungÜbersicht")
+        print(section, "hallo")
         
     }
     
     func passItemEntfernen(sender: MyBestellungCell) {
+        print(sender.Cell1Section, "Cell1Section")
         print(bestellteItemsDictionary, sender.sections, sender.sections2, sender.rows2, BestellungItemsNamen)
-        var itemsInSection = bestellteItemsDictionary[sender.sections].items
-        var preisInSection = bestellteItemsDictionary[sender.sections].preis
-        var literInSection = bestellteItemsDictionary[sender.sections].liter
-        var mengeInSection = bestellteItemsDictionary[sender.sections].menge
+//        var kategorieInSection = bestellteItemsDictionary[sender.sections].Kategorie
+        var unterkategorieInSection = bestellteItemsDictionary[sender.Cell1Section].Unterkategorie
+//        var expandedInSection = bestellteItemsDictionary[sender.sections].expanded
+//        var expanded2InSection = bestellteItemsDictionary[sender.sections].expanded2
+        var itemsInSection = bestellteItemsDictionary[sender.Cell1Section].items
+        var preisInSection = bestellteItemsDictionary[sender.Cell1Section].preis
+        var literInSection = bestellteItemsDictionary[sender.Cell1Section].liter
+        var mengeInSection = bestellteItemsDictionary[sender.Cell1Section].menge
+        var kommentarInSection = bestellteItemsDictionary[sender.Cell1Section].kommentar
+        var extrasInSection = bestellteItemsDictionary[sender.Cell1Section].extras
+        var extrasPreiseInSection = bestellteItemsDictionary[sender.Cell1Section].extrasPreise
+        print(sender.sections, sender.sections2, sender.rows, sender.rows2, "was ist richtig?")
+        print(itemsInSection, 32456543)
+        
+        var newunterkategorieInSection = unterkategorieInSection[sender.sections2]
         var newitemsInSection = itemsInSection[sender.sections2]
         var newpreisInSection = preisInSection[sender.sections2]
         var newliterInSection = literInSection[sender.sections2]
         var newmengeInSection = mengeInSection[sender.sections2]
+        var newKommentarInSection = kommentarInSection[sender.sections2]
+        var newextrasInSection = extrasInSection[sender.sections2]
+        var newextrasPreiseInSection = extrasPreiseInSection[sender.sections2]
+
+        
+//        var newkategorieInSection = kategorieInSection
+//        var newexpandedInSection = expandedInSection
+//        var newexpanded2InSection = expanded2InSection[sender.sections2]
+
+        print(newitemsInSection, "test 101")
+        print(newunterkategorieInSection, "test 102")
         
         newitemsInSection.remove(at: sender.rows2)
         newliterInSection.remove(at: sender.rows2)
         newpreisInSection.remove(at: sender.rows2)
         newmengeInSection.remove(at: sender.rows2)
+        newKommentarInSection.remove(at: sender.rows2)
+        newextrasInSection.remove(at: sender.rows2)
+        newextrasPreiseInSection.remove(at: sender.rows2)
+        
+        print(newitemsInSection, "test 201")
+        print(newunterkategorieInSection, "test 202")
+
         
         if newitemsInSection.count != 0{
-            
+            print("if")
             itemsInSection[sender.sections2] = newitemsInSection
             preisInSection[sender.sections2] = newpreisInSection
             literInSection[sender.sections2] = newliterInSection
             mengeInSection[sender.sections2] = newmengeInSection
-            BestellungItemsNamen[sender.sections] = itemsInSection
-            BestellungItemsPreise[sender.sections] = preisInSection
-            BestellungItemsLiter[sender.sections] = literInSection
-            BestellungItemsMengen[sender.sections] = mengeInSection
-            bestellteItemsDictionary[sender.sections].items = itemsInSection
-            bestellteItemsDictionary[sender.sections].preis = preisInSection
-            bestellteItemsDictionary[sender.sections].liter = literInSection
-            bestellteItemsDictionary[sender.sections].menge = mengeInSection
+            kommentarInSection[sender.sections2] = newKommentarInSection
+            extrasInSection[sender.sections2] = newextrasInSection
+            extrasPreiseInSection[sender.sections2] = newextrasPreiseInSection
+            
+            BestellungItemsNamen[sender.Cell1Section] = itemsInSection
+            BestellungItemsPreise[sender.Cell1Section] = preisInSection
+            BestellungItemsLiter[sender.Cell1Section] = literInSection
+            BestellungItemsMengen[sender.Cell1Section] = mengeInSection
+            BestellungItemsKommentar[sender.Cell1Section] = kommentarInSection
+            BestellungExtrasName[sender.Cell1Section] = extrasInSection
+            BestellungExtrasPreise[sender.Cell1Section] = extrasPreiseInSection
+            
+            bestellteItemsDictionary[sender.Cell1Section].items = itemsInSection
+            bestellteItemsDictionary[sender.Cell1Section].preis = preisInSection
+            bestellteItemsDictionary[sender.Cell1Section].liter = literInSection
+            bestellteItemsDictionary[sender.Cell1Section].menge = mengeInSection
+            bestellteItemsDictionary[sender.Cell1Section].kommentar = kommentarInSection
+            bestellteItemsDictionary[sender.Cell1Section].extras = extrasInSection
+            bestellteItemsDictionary[sender.Cell1Section].extrasPreise = extrasPreiseInSection
             
         }  else {
-            print(BestellungUnterkategorien, "234354312")
-            print(BestellungItemsNamen, "234354312")
-
-
-            print(BestellungItemsNamen, sender.sections, sender.sections2, "NAMENS")
-            BestellungItemsNamen[sender.sections].remove(at: sender.sections2)
-            BestellungItemsPreise[sender.sections].remove(at: sender.sections2)
-            BestellungItemsLiter[sender.sections].remove(at: sender.sections2)
-            BestellungItemsMengen[sender.sections].remove(at: sender.sections2)
-            BestellungUnterkategorien[sender.sections].remove(at: sender.sections2)
-            BestellungItemsExpanded2[sender.sections].remove(at: sender.sections2)
+            unterkategorieInSection.remove(at: sender.sections2)
+            print(BestellungItemsNamen, sender.sections, sender.sections2, sender.rows, sender.rows2, sender.Cell1Section, "ELSE 1")
             
-            bestellteItemsDictionary[sender.sections].items.remove(at: sender.sections2)
-            bestellteItemsDictionary[sender.sections].preis.remove(at: sender.sections2)
-            bestellteItemsDictionary[sender.sections].liter.remove(at: sender.sections2)
-            bestellteItemsDictionary[sender.sections].menge.remove(at: sender.sections2)
-            bestellteItemsDictionary[sender.sections].Unterkategorie.remove(at: sender.sections2)
-            bestellteItemsDictionary[sender.sections].expanded2.remove(at: sender.sections2)
+            var newBestellungNamen = BestellungItemsNamen[sender.Cell1Section]
+            var newBestellungPreise = BestellungItemsPreise[sender.Cell1Section]
+            var newBestellungLiter = BestellungItemsLiter[sender.Cell1Section]
+            var newBestellungMengen = BestellungItemsMengen[sender.Cell1Section]
+            var newBestellungKommentar = BestellungItemsKommentar[sender.Cell1Section]
+            var newBestellungExtrasName = BestellungExtrasName[sender.Cell1Section]
+            var newBestellungExtrasPreise = BestellungExtrasPreise[sender.Cell1Section]
+            var newBestellungExpanded2 = BestellungItemsExpanded2[sender.Cell1Section]
             
-            if bestellteItemsDictionary[sender.sections].Unterkategorie.count == 0{
-                    bestellteItemsDictionary.remove(at: sender.sections)
+            newBestellungNamen.remove(at: sender.sections2)
+            newBestellungPreise.remove(at: sender.sections2)
+            newBestellungLiter.remove(at: sender.sections2)
+            newBestellungMengen.remove(at: sender.sections2)
+            newBestellungKommentar.remove(at: sender.sections2)
+            newBestellungExtrasName.remove(at: sender.sections2)
+            newBestellungExtrasPreise.remove(at: sender.sections2)
+            newBestellungExpanded2.remove(at: sender.sections2)
+            
+            BestellungItemsNamen[sender.Cell1Section] = newBestellungNamen
+            BestellungItemsPreise[sender.Cell1Section] = newBestellungPreise
+            BestellungItemsLiter[sender.Cell1Section] = newBestellungLiter
+            BestellungItemsMengen[sender.Cell1Section] = newBestellungMengen
+            BestellungItemsKommentar[sender.Cell1Section] = newBestellungKommentar
+            BestellungExtrasName[sender.Cell1Section] = newBestellungExtrasName
+            BestellungExtrasPreise[sender.Cell1Section] = newBestellungExtrasPreise
+            BestellungItemsExpanded2[sender.Cell1Section] = newBestellungExpanded2
+            BestellungUnterkategorien[sender.Cell1Section].remove(at: sender.sections2)
+        
+            
+            print(BestellungItemsNamen, "ELSE 1")
+
+            print(bestellteItemsDictionary[sender.Cell1Section].items, "ELSE 2")
+
+            bestellteItemsDictionary[sender.Cell1Section].items.remove(at: sender.sections2)
+            bestellteItemsDictionary[sender.Cell1Section].preis.remove(at: sender.sections2)
+            bestellteItemsDictionary[sender.Cell1Section].liter.remove(at: sender.sections2)
+            bestellteItemsDictionary[sender.Cell1Section].menge.remove(at: sender.sections2)
+            bestellteItemsDictionary[sender.Cell1Section].expanded2.remove(at: sender.sections2)
+            bestellteItemsDictionary[sender.Cell1Section].Unterkategorie = unterkategorieInSection
+            bestellteItemsDictionary[sender.Cell1Section].kommentar.remove(at: sender.sections2)
+            bestellteItemsDictionary[sender.Cell1Section].extras.remove(at: sender.sections2)
+            bestellteItemsDictionary[sender.Cell1Section].extrasPreise.remove(at: sender.sections2)
+        
+            print(bestellteItemsDictionary[sender.Cell1Section].items, "ELSE 2")
+
+            
+            if bestellteItemsDictionary[sender.Cell1Section].Unterkategorie.count == 0{
+                print(bestellteItemsDictionary, BestellungKategorien, sender.sections, "ELSE 3")
+                print(BestellungItemsNamen, sender.sections, sender.sections2, sender.rows, sender.rows2, "namen")
+                bestellteItemsDictionary.remove(at: sender.Cell1Section)
+                BestellungKategorien.remove(at: sender.Cell1Section)
+                BestellungItemsNamen.remove(at: sender.Cell1Section)
+                BestellungItemsPreise.remove(at: sender.Cell1Section)
+                BestellungItemsLiter.remove(at: sender.Cell1Section)
+                BestellungItemsMengen.remove(at: sender.Cell1Section)
+                BestellungItemsKommentar.remove(at: sender.Cell1Section)
+                BestellungExtrasName.remove(at: sender.Cell1Section)
+                BestellungExtrasPreise.remove(at: sender.Cell1Section)
+                BestellungItemsExpanded2.remove(at: sender.Cell1Section)
+                BestellungUnterkategorien.remove(at: sender.Cell1Section)
+                
+                
+                print(bestellteItemsDictionary, BestellungKategorien, BestellungUnterkategorien, sender.sections, "ELSE 3")
+
                 sender.bestellteItemsDictionary = bestellteItemsDictionary
-                
-                
+            
                 if bestellteItemsDictionary.count == 0 {
                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.5, execute: {
                         self.navigationController?.popViewController(animated: true)
@@ -110,54 +203,95 @@ class BestellungÜbersichtVC: UIViewController, UITableViewDelegate, UITableView
                 }
                 
             } }
-   
+   print(BestellungItemsNamen, BestellungKategorien, "entefrnne tst")
+        
         uebersichtTV.reloadData()
     }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-    
-        let BestellungVC2 = self.storyboard?.instantiateViewController(withIdentifier: "BestellungVC2") as! BestellungVC2
+    override func willMove(toParent parent: UIViewController?) {
+                let BestellungVC2 = self.storyboard?.instantiateViewController(withIdentifier: "BestellungVC2") as! BestellungVC2
+        print(BestellungKategorien, "haja324r1111sjsaj")
+        print(BestellungUnterkategorien, "hajas123jsaj")
+        print(BestellungItemsNamen, "hajasj2453saj")
         
-        BestellungVC2.BestellungKategorien = BestellungKategorien
-        BestellungVC2.BestellungUnterkategorien = BestellungUnterkategorien
-        BestellungVC2.BestellungItemsNamen = BestellungItemsNamen
-        BestellungVC2.BestellungItemsPreise = BestellungItemsPreise
-        BestellungVC2.BestellungItemsLiter = BestellungItemsLiter
-        BestellungVC2.BestellungExtrasName = BestellungExtrasName
-        BestellungVC2.BestellungExtrasPreise = BestellungExtrasPreise
-        BestellungVC2.BestellungItemsMengen = BestellungItemsMengen
-        BestellungVC2.BestellungItemsExpanded2 = BestellungItemsExpanded2
+        self.delegate?.passChanges(Kategorien: BestellungKategorien, Unterkategorien: BestellungUnterkategorien, ItemsNamen: BestellungItemsNamen, ItemsPreise: BestellungItemsPreise, ItemsLiter: BestellungItemsLiter, ItemsKommentar: BestellungItemsKommentar, ItemsMenge: BestellungItemsMengen, ItemsExpanded2: BestellungItemsExpanded2, ExtrasName: BestellungExtrasName, ExtrasPreise: BestellungExtrasPreise)
+
+        print(BestellungItemsKommentar, "kommentar12")
+                BestellungVC2.bestellteItemsDictionary = bestellteItemsDictionary
+                BestellungVC2.BestellungKategorien = BestellungKategorien
+                BestellungVC2.BestellungUnterkategorien = BestellungUnterkategorien
+                BestellungVC2.BestellungItemsNamen = BestellungItemsNamen
+                BestellungVC2.BestellungItemsPreise = BestellungItemsPreise
+                BestellungVC2.BestellungItemsLiter = BestellungItemsLiter
+                BestellungVC2.BestellungExtrasName = BestellungExtrasName
+                BestellungVC2.BestellungExtrasPreise = BestellungExtrasPreise
+                BestellungVC2.BestellungItemsMengen = BestellungItemsMengen
+                BestellungVC2.BestellungItemsExpanded2 = BestellungItemsExpanded2
+                BestellungVC2.BestellungItemsKommentar = BestellungItemsKommentar
+        
+
+
+        BestellungVC2.bestellungaktualisieren2()
     }
+
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+
+//        let BestellungVC2 = self.storyboard?.instantiateViewController(withIdentifier: "BestellungVC2") as! BestellungVC2
+//        print(BestellungVC2.BestellungItemsMengen, BestellungItemsMengen, "HIER 1")
+//
+//        BestellungVC2.BestellungKategorien = BestellungKategorien
+//        BestellungVC2.BestellungUnterkategorien = BestellungUnterkategorien
+//        BestellungVC2.BestellungItemsNamen = BestellungItemsNamen
+//        BestellungVC2.BestellungItemsPreise = BestellungItemsPreise
+//        BestellungVC2.BestellungItemsLiter = BestellungItemsLiter
+//        BestellungVC2.BestellungExtrasName = BestellungExtrasName
+//        BestellungVC2.BestellungExtrasPreise = BestellungExtrasPreise
+//        BestellungVC2.BestellungItemsMengen = BestellungItemsMengen
+//        BestellungVC2.BestellungItemsExpanded2 = BestellungItemsExpanded2
+//        print(BestellungVC2.BestellungItemsMengen, BestellungItemsMengen, "HIER 2")
+    }
+
     
     func passItemPlus(sender: MyBestellungCell) {
         let i = 1
-        var mengeInSection = bestellteItemsDictionary[sender.sections].menge
+        var mengeInSection = bestellteItemsDictionary[sender.Cell1Section].menge
         var newmengeInSection = mengeInSection[sender.sections2]
         newmengeInSection[sender.rows2] = newmengeInSection[sender.rows2] + i
         mengeInSection[sender.sections2] = newmengeInSection
-        BestellungItemsMengen[sender.sections] = mengeInSection
-        bestellteItemsDictionary[sender.sections].menge = mengeInSection
+        BestellungItemsMengen[sender.Cell1Section] = mengeInSection
+        bestellteItemsDictionary[sender.Cell1Section].menge = mengeInSection
         uebersichtTV.reloadData()
-        
     }
     
+
     func passItemMinus(sender: MyBestellungCell) {
-        var mengeInSection = bestellteItemsDictionary[sender.sections].menge
+        var mengeInSection = bestellteItemsDictionary[sender.Cell1Section].menge
         
         var newmengeInSection = mengeInSection[sender.sections2]
         let i = 1
         if newmengeInSection[sender.rows2] > 1{
             newmengeInSection[sender.rows2] = newmengeInSection[sender.rows2] - i
             mengeInSection[sender.sections2] = newmengeInSection
-            BestellungItemsMengen[sender.sections] = mengeInSection
-            bestellteItemsDictionary[sender.sections].menge = mengeInSection
+            BestellungItemsMengen[sender.Cell1Section] = mengeInSection
+            bestellteItemsDictionary[sender.Cell1Section].menge = mengeInSection
             uebersichtTV.reloadData()
         }
     }
     
     func passKommentarAendern(sender: MyBestellungCell) {
-        print(3)
+        print(sender.kommentar, "3 k text")
+        var KommentareItems = BestellungItemsKommentar[sender.Cell1Section]
+        var NewKommentareItems = KommentareItems[sender.sections2]
+//        print(NewKommentareItems[sender.rows2], "wefwef")
+//        print(BestellungItemsKommentar, "kommis")
+        NewKommentareItems[sender.rows2] = sender.kommentar
+        KommentareItems[sender.sections2] = NewKommentareItems
+        BestellungItemsKommentar[sender.Cell1Section] = KommentareItems
+        print(BestellungItemsKommentar, "kommentar lo")
+ 
     }
+    
+
     
     func numberOfSections(in tableView: UITableView) -> Int {
         return bestellteItemsDictionary.count
@@ -246,7 +380,7 @@ class BestellungÜbersichtVC: UIViewController, UITableViewDelegate, UITableView
         let cell = Bundle.main.loadNibNamed("MyBestellungCell", owner: self, options: nil)?.first as! MyBestellungCell
         cell.delegate = self
         cell.bestellteItemsDictionary = bestellteItemsDictionary
-        print(bestellteItemsDictionary, "bestellteItemsDictionary")
+        print(bestellteItemsDictionary, "33333333")
         cell.Cell1Section = indexPath.section
         print(BestellungItemsNamen, "halllooooo")
 //        cell.delegate = self as! MyBestellungCellDelegate
@@ -302,16 +436,17 @@ class BestellungÜbersichtVC: UIViewController, UITableViewDelegate, UITableView
 //
     }
     
+  
 
-    
-    
     override func viewDidLoad() {
+        
         self.navigationItem.title = "Deine Bestellung"
 
         self.view.backgroundColor = UIColor(patternImage: UIImage(named: "hintergrund")!)
 
         super.viewDidLoad()
-
+        navigationController?.delegate = self
+print(test, "geht? / test1")
 
     }
 }

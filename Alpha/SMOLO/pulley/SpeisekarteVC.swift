@@ -164,8 +164,6 @@ class SpeisekarteVC: UIViewController, UITableViewDataSource, UITableViewDelegat
         self.sections.append(ExpandTVSection2(Kategorie: Kategorie, Unterkategorie: Unterkategorie, items: items, preis: preis, liter: liter, beschreibung: beschreibung, verfuegbarkeit: verfuegbarkeit, expanded2: expanded2, expanded: false))
             self.SpeisekarteTableView.reloadData()
         }
-
-        
         func numberOfSections(in tableView: UITableView) -> Int {
 
             return sections.count
@@ -282,7 +280,4 @@ class SpeisekarteVC: UIViewController, UITableViewDataSource, UITableViewDelegat
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
-    
-
-
 }
