@@ -24,7 +24,7 @@ class SpeisekarteVC: UIViewController, UITableViewDataSource, UITableViewDelegat
         SpeisekarteTableView.endUpdates()
     }
     
-
+    
         var parentPageViewController: PageViewController!
     
         var barname = " "
@@ -49,6 +49,66 @@ class SpeisekarteVC: UIViewController, UITableViewDataSource, UITableViewDelegat
         parentPageViewController.goback()
             }
     
+    //Zusatzstoffe
+    var stoffanzahl = 1
+    var kurzel = [String]()
+    var stoffname = [String]()
+    @IBOutlet var ZusatzstoffeView: UIView!
+    
+    @IBOutlet weak var ZusatzstoffeTV: UITableView!
+    
+    @IBAction func info(_ sender: UIButton) {
+        
+        ZusatzstoffeTV.backgroundColor = .clear
+        self.SpeiseVCView.addSubview(visualeffect)
+        visualeffect.center = self.SpeiseVCView.center
+        self.SpeiseVCView.addSubview(ZusatzstoffeView)
+        ZusatzstoffeView.center = self.SpeiseVCView.center
+        ZusatzstoffeView.transform = CGAffineTransform.init(scaleX: 1.0, y: 1.0)
+        ZusatzstoffeView.alpha = 0
+        UIView.animate(withDuration: 0.2) {
+            self.visualeffect.effect = self.effect
+            self.ZusatzstoffeView.alpha = 1
+            self.ZusatzstoffeView.transform = CGAffineTransform.identity
+        }}
+    
+    @IBAction func DismissInfo(_ sender: UIButton) {
+       dismissZusatzstoffeVC()
+    }
+    
+    var effect: UIVisualEffect!
+
+    @IBOutlet var visualeffect: UIVisualEffectView!
+    
+    func dismissZusatzstoffeVC (){
+        UIView.animate(withDuration: 0.5, animations: {
+            self.ZusatzstoffeView.transform = CGAffineTransform.init(scaleX: 1.0, y: 1.0)
+            self.ZusatzstoffeView.alpha = 0
+            self.visualeffect.effect = nil
+            }){ (success:Bool) in
+            self.ZusatzstoffeView.removeFromSuperview()
+            self.visualeffect.removeFromSuperview()
+            }
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        let touch: UITouch? = touches.first
+          
+        if touch?.view != ZusatzstoffeView && self.view.subviews.contains(ZusatzstoffeView) {
+           dismissZusatzstoffeVC()
+        }
+    }
+    
+    func fetchInhalte () {
+          print("fetchInhalte")
+          var ref: DatabaseReference!
+          ref = Database.database().reference()
+        ref.child("BarInfo").child("\(barname)").child("Zusatzstoffe").observe(.childAdded, with: { (snapshot) in
+            self.kurzel.append(snapshot.key)
+            self.stoffname.append(snapshot.value as! String)
+          //  print(snapshot.key, "und", snapshot.value!)
+              } , withCancel: nil)
+      }
     
         // FUNCTIONS
     func getParentPageViewController(parentRef: PageViewController) {
@@ -165,21 +225,43 @@ class SpeisekarteVC: UIViewController, UITableViewDataSource, UITableViewDelegat
             self.SpeisekarteTableView.reloadData()
         }
         func numberOfSections(in tableView: UITableView) -> Int {
+            var numberOfSections: Int?
 
-            return sections.count
+            if tableView == ZusatzstoffeTV{
+                numberOfSections = 1
+            }
+            if tableView == SpeisekarteTableView{
+                numberOfSections = sections.count }
+            return numberOfSections!
         }
+    
         func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+            var rownumber = 1
             
-            return 1
-            
+            if tableView == ZusatzstoffeTV{
+                print(kurzel.count, "kurzelzahl")
+                rownumber = kurzel.count
+            }
+            if tableView == SpeisekarteTableView{
+                rownumber = 1
+            }
+            return rownumber
         }
         
         func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-            return 36
+            var headerheigt = 0
+            if tableView == SpeisekarteTableView{
+                headerheigt = 36
+            }
+            if tableView == ZusatzstoffeView{
+                headerheigt = 0
+            }
+            return CGFloat(headerheigt)
         }
         
         func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
             var heightForRowAt: Int?
+            if tableView == SpeisekarteTableView{
 
             if (sections[indexPath.section].expanded) {
                 heightForRowAt = (sections[indexPath.section].Unterkategorie.count*60)
@@ -193,13 +275,22 @@ class SpeisekarteVC: UIViewController, UITableViewDataSource, UITableViewDelegat
             }
             else {
                 heightForRowAt = 0
+                }}else{
+                heightForRowAt = 36
             }
             return CGFloat(heightForRowAt!)
 
         }
         
         func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-            return 15
+            var heighti: Int?
+            if tableView == SpeisekarteTableView{
+                heighti = 15
+            }
+            if tableView == ZusatzstoffeTV{
+                heighti = 0
+            }
+            return CGFloat(heighti!)
             
         }
         
@@ -225,6 +316,19 @@ class SpeisekarteVC: UIViewController, UITableViewDataSource, UITableViewDelegat
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
+        if tableView == ZusatzstoffeTV{
+            let cell = tableView.dequeueReusableCell(withIdentifier: "ZusatzstoffCell", for: indexPath)
+            cell.backgroundColor = .clear
+            cell.textLabel?.textColor = .white
+            cell.textLabel?.font = UIFont(name: "Helvetica Neue", size: 17.0)
+            
+            print(kurzel, "kurzel")
+            print(indexPath.section)
+            cell.textLabel?.text = "\(kurzel[indexPath.row]) - \(stoffname[indexPath.row])"
+            
+            return cell
+        }else{
+        
         let cell = Bundle.main.loadNibNamed("SpeisekarteCelle", owner: self, options: nil)?.first as! SpeisekarteCelle
         cell.backgroundColor = UIColor.clear
         cell.delegate = self
@@ -234,7 +338,9 @@ class SpeisekarteVC: UIViewController, UITableViewDataSource, UITableViewDelegat
         cell.liters = sections[indexPath.section].liter
         cell.beschreibungen = sections[indexPath.section].beschreibung
         cell.sectioncell = indexPath.section
-        return cell
+        
+            return cell}
+        
     }
 
         
@@ -272,11 +378,16 @@ class SpeisekarteVC: UIViewController, UITableViewDataSource, UITableViewDelegat
         super.viewDidLoad()
         SpeisekarteTableView.reloadData()
         self.barname = parentPageViewController.name
-      barnameLbl.text = barname
-       
-       getKategorien()
+        barnameLbl.text = barname
+        ZusatzstoffeView.layer.cornerRadius = 5
+        ZusatzstoffeView.backgroundColor = UIColor(patternImage: UIImage(named: "hintergrund")!)
+        effect = visualeffect.effect
+        visualeffect.effect = nil
+        visualeffect.bounds = self.SpeiseVCView.bounds
+        getKategorien()
+        fetchInhalte()
     }
-
+ 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }

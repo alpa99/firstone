@@ -32,7 +32,7 @@ class BestellungVC2: UIViewController, UITableViewDataSource, UITableViewDelegat
     }
     
     // VARS
-    var test = "ok"
+
     var interstitial: GADInterstitial!
     var barname = "NewBar"
     var baradresse = " "
