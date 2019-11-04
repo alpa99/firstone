@@ -1051,7 +1051,7 @@
                                 <rect key="frame" x="57" y="183" width="206" height="202"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4xM-ZE-Q9t">
-                                <rect key="frame" x="130" y="419" width="60" height="60"/>
+                                <rect key="frame" x="100" y="359" width="120" height="120"/>
                                 <state key="normal" image="flashlight-i">
                                     <attributedString key="attributedTitle"/>
                                 </state>
@@ -1433,9 +1433,24 @@
                                     <action selector="bestellungPrüfen:" destination="Yts-F3-2fU" eventType="touchUpInside" id="HAs-j2-vcc"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lEc-nW-cpx">
+                                <rect key="frame" x="255" y="7" width="49" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="49" id="Cgn-QH-Eij"/>
+                                    <constraint firstAttribute="height" constant="30" id="qra-wb-DhA"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="16"/>
+                                <state key="normal" title="Info">
+                                    <color key="titleColor" red="0.72549019609999998" green="0.66666666669999997" blue="0.54901960780000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="Infobtn:" destination="Yts-F3-2fU" eventType="touchUpInside" id="Atg-a0-wdz"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="yw1-aG-qeX" firstAttribute="trailing" secondItem="lEc-nW-cpx" secondAttribute="trailing" constant="16" id="1Mv-R1-mfy"/>
                             <constraint firstItem="yw1-aG-qeX" firstAttribute="bottom" secondItem="jqS-Z5-0Ia" secondAttribute="bottom" constant="20" id="29v-TG-8KQ"/>
                             <constraint firstItem="yw1-aG-qeX" firstAttribute="trailing" secondItem="jqS-Z5-0Ia" secondAttribute="trailing" constant="70" id="55h-qY-8Tb"/>
                             <constraint firstItem="hJS-mq-vZI" firstAttribute="bottom" secondItem="yw1-aG-qeX" secondAttribute="bottom" id="LjL-1Q-ie8"/>
@@ -1447,6 +1462,7 @@
                             <constraint firstItem="hJS-mq-vZI" firstAttribute="trailing" secondItem="yw1-aG-qeX" secondAttribute="trailing" id="gab-RI-D8e"/>
                             <constraint firstItem="LGv-5b-phS" firstAttribute="leading" secondItem="yw1-aG-qeX" secondAttribute="leading" constant="16" id="ojf-YM-ABf"/>
                             <constraint firstItem="yw1-aG-qeX" firstAttribute="trailing" secondItem="LGv-5b-phS" secondAttribute="trailing" constant="16" id="qXk-Ik-DDb"/>
+                            <constraint firstItem="lEc-nW-cpx" firstAttribute="top" secondItem="yw1-aG-qeX" secondAttribute="top" constant="7" id="txO-FK-7Mr"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="yw1-aG-qeX"/>
                     </view>
@@ -1454,6 +1470,8 @@
                         <outlet property="ExtrasHinzufügenBtn" destination="TQK-KE-c8a" id="3Gr-6S-auv"/>
                         <outlet property="KategorieLbl" destination="E24-zW-0Ty" id="9LJ-4d-zYx"/>
                         <outlet property="UnterkategorieLbl" destination="OSJ-Lh-YYJ" id="U4y-i1-fgr"/>
+                        <outlet property="ZusatzstoffeTV2" destination="UkC-iW-U8J" id="dVD-Ad-ZTk"/>
+                        <outlet property="ZusatzstoffeView" destination="oRa-fL-XPG" id="Bwn-W9-i3c"/>
                         <outlet property="addItemView" destination="Z91-jV-uAB" id="f2X-F0-wj7"/>
                         <outlet property="aktualisierungAbbrechen" destination="CGG-P8-hVw" id="OKY-Ub-cad"/>
                         <outlet property="bestellungTableView" destination="LGv-5b-phS" id="eZ6-Sf-Unr"/>
@@ -1473,6 +1491,48 @@
                         <segue destination="UPx-km-WsB" kind="show" identifier="meineBestellung" id="3Bl-2u-yet"/>
                     </connections>
                 </viewController>
+                <view contentMode="scaleToFill" id="oRa-fL-XPG" userLabel="Zusatzstoffe">
+                    <rect key="frame" x="0.0" y="0.0" width="310" height="480"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <subviews>
+                        <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="UkC-iW-U8J" userLabel="ZusatzstoffeTV2">
+                            <rect key="frame" x="0.0" y="58" width="310" height="422"/>
+                            <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                            <inset key="separatorInset" minX="15" minY="0.0" maxX="10" maxY="0.0"/>
+                            <prototypes>
+                                <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="ZusatzstoffCell2" id="h24-kE-0pq">
+                                    <rect key="frame" x="0.0" y="28" width="310" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="h24-kE-0pq" id="dbX-tN-Tai">
+                                        <rect key="frame" x="0.0" y="0.0" width="310" height="43.5"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                    </tableViewCellContentView>
+                                </tableViewCell>
+                            </prototypes>
+                            <connections>
+                                <outlet property="dataSource" destination="Yts-F3-2fU" id="rOo-aB-75R"/>
+                                <outlet property="delegate" destination="Yts-F3-2fU" id="pOw-wi-NoL"/>
+                            </connections>
+                        </tableView>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Zusatzstoffe und Allergene" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5oK-Mm-FeW">
+                            <rect key="frame" x="54" y="20" width="211" height="21"/>
+                            <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="17"/>
+                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                    <constraints>
+                        <constraint firstItem="UkC-iW-U8J" firstAttribute="leading" secondItem="BKJ-Iy-5vh" secondAttribute="leading" id="CyM-du-Z0T"/>
+                        <constraint firstItem="UkC-iW-U8J" firstAttribute="trailing" secondItem="BKJ-Iy-5vh" secondAttribute="trailing" id="Iqo-cw-sze"/>
+                        <constraint firstItem="UkC-iW-U8J" firstAttribute="top" secondItem="5oK-Mm-FeW" secondAttribute="bottom" constant="17" id="crw-RR-Olg"/>
+                        <constraint firstItem="UkC-iW-U8J" firstAttribute="bottom" secondItem="BKJ-Iy-5vh" secondAttribute="bottom" id="egr-Ve-Dr5"/>
+                        <constraint firstItem="5oK-Mm-FeW" firstAttribute="top" secondItem="BKJ-Iy-5vh" secondAttribute="top" constant="20" id="kus-Hq-yWg"/>
+                        <constraint firstItem="BKJ-Iy-5vh" firstAttribute="trailing" secondItem="5oK-Mm-FeW" secondAttribute="trailing" constant="45" id="rhr-MR-DX4"/>
+                        <constraint firstItem="5oK-Mm-FeW" firstAttribute="leading" secondItem="BKJ-Iy-5vh" secondAttribute="leading" constant="54" id="wh3-gO-tqo"/>
+                    </constraints>
+                    <viewLayoutGuide key="safeArea" id="BKJ-Iy-5vh"/>
+                </view>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lv3-yq-TAT" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <swipeGestureRecognizer direction="right" id="QR6-bj-0Ow">
                     <connections>
@@ -1744,7 +1804,7 @@
                     <viewLayoutGuide key="safeArea" id="biD-UO-8Gu"/>
                 </view>
             </objects>
-            <point key="canvasLocation" x="5223" y="1402"/>
+            <point key="canvasLocation" x="5221.875" y="1401.7605633802816"/>
         </scene>
         <!--BestellungÜbersichtVC-->
         <scene sceneID="BJc-wN-UWU">

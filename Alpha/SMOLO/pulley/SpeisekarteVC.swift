@@ -323,7 +323,7 @@ class SpeisekarteVC: UIViewController, UITableViewDataSource, UITableViewDelegat
             cell.textLabel?.font = UIFont(name: "Helvetica Neue", size: 17.0)
             
             print(kurzel, "kurzel")
-            print(indexPath.section)
+            
             cell.textLabel?.text = "\(kurzel[indexPath.row]) - \(stoffname[indexPath.row])"
             
             return cell

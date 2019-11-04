@@ -110,6 +110,49 @@ class BestellungVC2: UIViewController, UITableViewDataSource, UITableViewDelegat
     
     @IBOutlet weak var kommentarTextView: UITextView!
     
+    //Zusatzstoffe
+    var stoffanzahl = 1
+    var kurzel = [String]()
+    var stoffname = [String]()
+    
+    @IBOutlet var ZusatzstoffeView: UIView!
+    @IBOutlet weak var ZusatzstoffeTV2: UITableView!
+    
+    @IBAction func Infobtn(_ sender: Any) {
+        ZusatzstoffeTV2.backgroundColor = .clear
+              self.bestellungVCView.addSubview(visualEffectView)
+              visualEffectView.center = self.bestellungVCView.center
+              self.bestellungVCView.addSubview(ZusatzstoffeView)
+              ZusatzstoffeView.center = self.bestellungVCView.center
+              ZusatzstoffeView.transform = CGAffineTransform.init(scaleX: 1.0, y: 1.0)
+              ZusatzstoffeView.alpha = 0
+              UIView.animate(withDuration: 0.2) {
+                  self.visualEffectView.effect = self.effect
+                  self.ZusatzstoffeView.alpha = 1
+                self.ZusatzstoffeView.transform = CGAffineTransform.identity}
+    }
+    func dismissZusatzstoffeVC (){
+         UIView.animate(withDuration: 0.5, animations: {
+             self.ZusatzstoffeView.transform = CGAffineTransform.init(scaleX: 1.0, y: 1.0)
+             self.ZusatzstoffeView.alpha = 0
+             self.visualEffectView.effect = nil
+             }){ (success:Bool) in
+             self.ZusatzstoffeView.removeFromSuperview()
+             self.visualEffectView.removeFromSuperview()
+             }
+     }
+    
+    func fetchInhalte () {
+           print("fetchInhalte")
+           var ref: DatabaseReference!
+           ref = Database.database().reference()
+         ref.child("BarInfo").child("\(barname)").child("Zusatzstoffe").observe(.childAdded, with: { (snapshot) in
+             self.kurzel.append(snapshot.key)
+             self.stoffname.append(snapshot.value as! String)
+             print(snapshot.key, "und", snapshot.value!)
+               } , withCancel: nil)
+       }
+    
     // Extras
     @IBOutlet var extrasView: UIView!
     @IBOutlet weak var extrasTV: UITableView!
@@ -556,6 +599,9 @@ class BestellungVC2: UIViewController, UITableViewDataSource, UITableViewDelegat
         if tableView == extrasTV {
             numberOfSections = 1
         }
+        if tableView == ZusatzstoffeTV2{
+            numberOfSections = 1
+                   }
         return numberOfSections!
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -568,21 +614,28 @@ class BestellungVC2: UIViewController, UITableViewDataSource, UITableViewDelegat
             } else {
                 numberOfRowsInSections = 1
             }
-        } else {
+        }
+            if tableView == ZusatzstoffeTV2{
+                           numberOfRowsInSections = kurzel.count
+                       }
+        else {
             numberOfRowsInSections = 1
         }
         return numberOfRowsInSections!
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        var heightForHeaderInSection: Int?
+        var heightForHeaderInSection = 0
         if tableView == bestellungTableView{
             heightForHeaderInSection = 36        }
         if tableView == myBestellungTV{
             heightForHeaderInSection = 36        }
         if tableView == extrasTV{
             heightForHeaderInSection = 44        }
-        return CGFloat(heightForHeaderInSection!)
+        if tableView == ZusatzstoffeView{
+            heightForHeaderInSection = 0
+                   }
+        return CGFloat(heightForHeaderInSection)
         
     }
     
@@ -591,21 +644,17 @@ class BestellungVC2: UIViewController, UITableViewDataSource, UITableViewDelegat
         var heightForRowAt: Int?
         if tableView == bestellungTableView{
             if (sections[indexPath.section].expanded) {
-
                 heightForRowAt = (sections[indexPath.section].Unterkategorie.count*60)
                 for expandend in sections[indexPath.section].expanded2 {
                     if expandend == true {
                         heightForRowAt = heightForRowAt! + sections[indexPath.section].items[indexPath.row].count*36
                     }
                 }
-
             }
             else {
                 heightForRowAt = 0
             }
-
         }
-
         if tableView == myBestellungTV{
             if (bestellteItemsDictionary[indexPath.section].expanded) {
                 heightForRowAt = (bestellteItemsDictionary[indexPath.section].Unterkategorie.count*60)
@@ -614,26 +663,23 @@ class BestellungVC2: UIViewController, UITableViewDataSource, UITableViewDelegat
                         heightForRowAt = heightForRowAt! + bestellteItemsDictionary[indexPath.section].items[indexPath.row].count*149
                     }
                 }
-                
             }
             else {
                 heightForRowAt = 0
             }
-
         }
-        
         if tableView == extrasTV {
             heightForRowAt = 44
         }
-
-
+        if tableView == ZusatzstoffeTV2 {
+            heightForRowAt = 44
+        }
         return CGFloat(heightForRowAt!)
-
     }
     
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         
-        var heightForFooterInSection: Int?
+        var heightForFooterInSection = 0
         if tableView == bestellungTableView{
         
             heightForFooterInSection = 15
@@ -645,9 +691,11 @@ class BestellungVC2: UIViewController, UITableViewDataSource, UITableViewDelegat
         if tableView == extrasTV{
             heightForFooterInSection = 15
         }
+        if tableView == ZusatzstoffeTV2{
+            heightForFooterInSection = 0
+                   }
         
-        
-        return CGFloat(heightForFooterInSection!)
+        return CGFloat(heightForFooterInSection)
     }
     
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
@@ -690,7 +738,18 @@ class BestellungVC2: UIViewController, UITableViewDataSource, UITableViewDelegat
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
+        if tableView == ZusatzstoffeTV2 {
+                 let cell = tableView.dequeueReusableCell(withIdentifier: "ZusatzstoffCell2", for: indexPath)
+                 cell.backgroundColor = .clear
+                 cell.textLabel?.textColor = .white
+                 cell.textLabel?.font = UIFont(name: "Helvetica Neue", size: 17.0)
+                 
+                 print(kurzel, "kurzel")
         
+                 cell.textLabel?.text = "\(kurzel[indexPath.row]) - \(stoffname[indexPath.row])"
+                 
+                 return cell
+        }
         if tableView == bestellungTableView {
             let cell = Bundle.main.loadNibNamed("BestellenCell", owner: self, options: nil)?.first as! BestellenCell
             
@@ -1078,7 +1137,7 @@ class BestellungVC2: UIViewController, UITableViewDataSource, UITableViewDelegat
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-       // let touch: UITouch? = touches.first
+        let touch: UITouch? = touches.first
         if self.view.subviews.contains(addItemView) || self.view.subviews.contains(myBestellungView) {
             self.view.endEditing(true)
         }
@@ -1087,7 +1146,9 @@ class BestellungVC2: UIViewController, UITableViewDataSource, UITableViewDelegat
 //            dismissMyBestellungView()
 //           // animateOut()
 //        }
-        
+        if touch?.view != ZusatzstoffeView && self.view.subviews.contains(ZusatzstoffeView) {
+           dismissZusatzstoffeVC()
+        }
     }
     
     func textViewShouldBeginEditing(_ textView: UITextView) -> Bool {
@@ -1135,7 +1196,10 @@ class BestellungVC2: UIViewController, UITableViewDataSource, UITableViewDelegat
         self.baradresse = parentPageViewController2.adresse
         self.tischnummer = parentPageViewController2.tischnummer
         self.KellnerID = parentPageViewController2.KellnerID
-
+        
+        ZusatzstoffeView.layer.cornerRadius = 5
+        ZusatzstoffeView.backgroundColor = UIColor(patternImage: UIImage(named: "hintergrund")!)
+        
         effect = visualEffectView.effect
         visualEffectView.effect = nil
         visualEffectView.bounds = self.bestellungVCView.bounds
@@ -1148,7 +1212,7 @@ class BestellungVC2: UIViewController, UITableViewDataSource, UITableViewDelegat
 //        locationManager.requestWhenInUseAuthorization()
 //        locationManager.desiredAccuracy = kCLLocationAccuracyBest
 //        locationManager.delegate = self
-        
+        fetchInhalte()
         getKategorien()
 
     }
