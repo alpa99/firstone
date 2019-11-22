@@ -31,11 +31,17 @@ class BestellungÜbersichtVC: UIViewController, UITableViewDelegate, UITableView
     var BestellungItemsExpanded2 = [[Bool]]()
     var BestellungExtrasName = [[[[String]]]]()
     var BestellungExtrasPreise = [[[[Double]]]]()
+    var ItemsPreis = [Double]()
+    var ItemsMenge = [Double]()
+    var ExtraPreis = [Double]()
+    var gesamtpreislabel = 0.0
+
     
     var delegate: BestellungÜbersichtDelegate?
     
     @IBOutlet weak var uebersichtTV: UITableView!
     
+    @IBOutlet weak var gesamtPreisLbl: UILabel!
     
     @IBAction func abschicken(_ sender: Any) {
         let alertKeineBestellung = UIAlertController(title: "Bestellung abschicken", message: "Bist du dir Sicher? Es gibt kein zurück.", preferredStyle: .alert)
@@ -420,23 +426,42 @@ class BestellungÜbersichtVC: UIViewController, UITableViewDelegate, UITableView
 //        cell.myItemPreis.text = "\(preisFormat) €"
 //        cell.myItemMenge.text = String(newMengen[indexPath.row])
 //        cell.kommentarLbl.text = newKommentare[indexPath.row]
-
-
-        return cell
         
-//        let cell = Bundle.main.loadNibNamed("MyBestellungCell2", owner: self, options: nil)?.first as! MyBestellungCell2
-////        cell.delegate = self
-//        cell.bestellteItemsDictionary = bestellteItemsDictionary
-//        cell.sections2 = indexPath.section
-//
-//        cell.Extras = self.Extras
-//        cell.ExtrasPreise = self.ExtrasPreise
-//
-//
-//
-    }
-    
-  
+            gesamtpreisBerechnen(section: indexPath.section, row: indexPath.row)
+            
+            return cell
+            }
+            
+            func gesamtpreisBerechnen(section: Int, row: Int) {
+                
+                for extrasPreise in bestellteItemsDictionary[section].extrasPreise {
+                    for extrasPreis in extrasPreise {
+                        for extraPreis in extrasPreis {
+                            ExtraPreis.append(extraPreis)
+                            }}}
+                
+                for itemsPreise in  bestellteItemsDictionary[section].preis {
+                    for itemPreise in itemsPreise {
+                            ItemsPreis.append(itemPreise)
+                        }}
+                
+                for itemsMengen in  bestellteItemsDictionary[section].menge {
+                    for itemsMenge in itemsMengen {
+                            ItemsMenge.append(Double(itemsMenge))
+                        }}
+                teilPreis(itemPreis: ItemsPreis, extrasPreis: ExtraPreis, menge: ItemsMenge)
+            }
+        
+            func teilPreis(itemPreis: [Double], extrasPreis: [Double], menge: [Double]) {
+                for i in 0..<itemPreis.count{
+                    gesamtpreislabel += (itemPreis[i]+extrasPreis[i])*menge[i]
+                    print(menge, itemPreis, extrasPreis, "variablen")
+                    print(gesamtpreislabel, "preiiiis")
+                    gesamtPreisLbl.text = "\(String(format: "%.2f", gesamtpreislabel)) €"
+                        
+                   
+                }
+            }
 
     override func viewDidLoad() {
         

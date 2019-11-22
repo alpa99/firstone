@@ -12,26 +12,7 @@ import Firebase
 
 class MeineBestellungVC: UIViewController, UITableViewDataSource, UITableViewDelegate, ExpandableHeaderViewDelegate, kellnerCellDelegate{
     
-    func bewerten(sender: KellnerCell) {
-        bewertenBestellung = [Bestellungen[sender.Cell1Section]]
-        self.performSegue(withIdentifier: "BewertungVC", sender: self)
-    }
-    
    
-    
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "BewertungVC" {
-            print(bewertenBestellung, "die Bestellunghier")
-            let vc = segue.destination as! BewertungVC
-           vc.bestelltebar = aktuelleBar
-            vc.Bestellungen = bewertenBestellung
-        }
-    }
-    
-    func toggleSection(tableView: UITableView, header: ExpandableHeaderView, section: Int) {
-        
-    }
-    
     
     // VARS
     var bewertenBestellung = [KellnerTVSection]()
@@ -62,8 +43,11 @@ class MeineBestellungVC: UIViewController, UITableViewDataSource, UITableViewDel
     var TimeStamp = [String: Double]()
     var extrasString = [String]()
     var extrasPreis = [Double]()
-    
     var KellnerID = String()
+    var ItemsPreis = [Double]()
+    var ItemsMenge = [Double]()
+    var ExtraPreis = [Double]()
+    var gesamtpreislabel = 0.0
 
 
     // OUTLETS
@@ -73,7 +57,26 @@ class MeineBestellungVC: UIViewController, UITableViewDataSource, UITableViewDel
     
     
     // ACTIONS
-    
+    func bewerten(sender: KellnerCell) {
+           bewertenBestellung = [Bestellungen[sender.Cell1Section]]
+           self.performSegue(withIdentifier: "BewertungVC", sender: self)
+       }
+       
+      
+       
+        override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+           if segue.identifier == "BewertungVC" {
+               print(bewertenBestellung, "die Bestellunghier")
+               let vc = segue.destination as! BewertungVC
+              vc.bestelltebar = aktuelleBar
+               vc.Bestellungen = bewertenBestellung
+           }
+       }
+       
+       func toggleSection(tableView: UITableView, header: ExpandableHeaderView, section: Int) {
+           
+       }
+       
   
     
 
@@ -643,8 +646,49 @@ print(snapshot, "snapshot")
         dateFormatter.dateFormat = "HH:mm"
         
         cell.timeLbl.text = "\(dateFormatter.string(from: timeStampDate as Date)) Uhr"
+        ExtraPreis.removeAll()
+        ItemsPreis.removeAll()
+        ItemsMenge.removeAll()
+        gesamtpreisBerechnen(section: indexPath.section, row: indexPath.row)
+        cell.gesamtPreisLbl.text = "\(String(format: "%.2f", gesamtpreislabel)) €"
+
         return cell
-    }
+        }
+        
+        func gesamtpreisBerechnen(section: Int, row: Int) {
+            gesamtpreislabel = 0.0
+            ExtraPreis.removeAll()
+            ItemsPreis.removeAll()
+            ItemsMenge.removeAll()
+            
+            for extrasPreise in Bestellungen[section].extrasPreis {
+                for extrasPreis in extrasPreise {
+                    for extraPreis in extrasPreis {
+                        for preis in extraPreis {
+                            ExtraPreis.append(preis)
+                        }}}}
+            
+            for itemsPreise in  Bestellungen[section].preis {
+                for itemPreise in itemsPreise {
+                    for preis in itemPreise {
+                        ItemsPreis.append(preis)
+                    }}}
+            
+            for itemsMengen in  Bestellungen[section].menge {
+                for itemsMenge in itemsMengen {
+                    for menge in itemsMenge {
+                        ItemsMenge.append(Double(menge))
+                    }}}
+            teilPreis(itemPreis: ItemsPreis, extrasPreis: ExtraPreis, menge: ItemsMenge)
+        }
+    
+        func teilPreis(itemPreis: [Double], extrasPreis: [Double], menge: [Double]) {
+            for i in 0..<itemPreis.count{
+                gesamtpreislabel += (itemPreis[i]+extrasPreis[i])*menge[i]
+                print(menge, itemPreis, extrasPreis, "variablen")
+                print(gesamtpreislabel, "preiiiis")
+            }
+        }
     
     override func viewDidLoad() {
         super.viewDidLoad()
