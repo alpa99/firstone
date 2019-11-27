@@ -301,6 +301,10 @@ class BestellungVC2: UIViewController, UITableViewDataSource, UITableViewDelegat
             vc.BestellungItemsMengen = BestellungItemsMengen
             vc.BestellungItemsExpanded2 = BestellungItemsExpanded2
             vc.BestellungItemsKommentar = BestellungItemsKommentar
+            vc.barname = barname
+            vc.baradresse = baradresse
+            vc.KellnerID = KellnerID
+            vc.tischnummer = tischnummer
             bestellteItemsDictionary.removeAll()
             vc.delegate = self
 

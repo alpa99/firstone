@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Firebase
 
 protocol BestellungÜbersichtDelegate {
     func passChanges(Kategorien: [String], Unterkategorien: [[String]], ItemsNamen: [[[String]]],ItemsPreise: [[[Double]]], ItemsLiter: [[[String]]], ItemsKommentar: [[[String]]], ItemsMenge: [[[Int]]], ItemsExpanded2: [[Bool]], ExtrasName: [[[[String]]]], ExtrasPreise: [[[[Double]]]])
@@ -19,7 +20,10 @@ class BestellungÜbersichtVC: UIViewController, UITableViewDelegate, UITableView
     var Kategorie = String()
     var Extras = [String: [String]]()
     var ExtrasPreise = [String: [Double]]()
-    
+    var barname = "NewBar"
+    var baradresse = " "
+    var tischnummer = 0
+    var KellnerID = ""
     
     var BestellungKategorien = [String]()
     var BestellungUnterkategorien = [[String]]()
@@ -47,6 +51,7 @@ class BestellungÜbersichtVC: UIViewController, UITableViewDelegate, UITableView
         let alertKeineBestellung = UIAlertController(title: "Bestellung abschicken", message: "Bist du dir Sicher? Es gibt kein zurück.", preferredStyle: .alert)
         alertKeineBestellung.addAction(UIAlertAction(title: "Abschicken", style: .default, handler: { (UIAlertAction) in
             print("ok")
+            self.handleBestellung()
         }))
         alertKeineBestellung.addAction(UIAlertAction(title: "Abbrechen", style: .default, handler: { (UIAlertAction) in
             print("abbrechen")
@@ -256,7 +261,73 @@ class BestellungÜbersichtVC: UIViewController, UITableViewDelegate, UITableView
 //        BestellungVC2.BestellungItemsExpanded2 = BestellungItemsExpanded2
 //        print(BestellungVC2.BestellungItemsMengen, BestellungItemsMengen, "HIER 2")
     }
+    
+    func handleBestellung(){
+           var ref: DatabaseReference!
 
+           let formatter = DateFormatter()
+           formatter.dateFormat = "yyyy/MM/dd HH:mm"
+           let DayOne = formatter.date(from: "2018/05/15 12:00")
+           let timestamp = Double(NSDate().timeIntervalSince(DayOne!))
+
+           let fromUserID = Auth.auth().currentUser?.uid
+           let values = ["Barname": barname ,"toKellner ID": KellnerID, "tischnummer": "\(tischnummer)", "fromUserID": fromUserID! , "timeStamp": timestamp, "Status": "versendet"] as [String : Any]
+           let userRef = Database.database().reference().child("Users").child(fromUserID!)
+           userRef.updateChildValues(["akutelleBar" : barname, "letzteBestellungZeit": timestamp])
+
+               ref = Database.database().reference().child("Bestellungen").child(barname)
+           
+               let childRef = ref?.childByAutoId()
+
+           for Bestellung in self.bestellteItemsDictionary {
+               
+               let Unterkategorien = Bestellung.Unterkategorie
+               for Unterkategorie in Bestellung.Unterkategorie {
+                   let UnterkategorieSection = Unterkategorien.firstIndex(of: Unterkategorie)
+                   let items = Bestellung.items[UnterkategorieSection!]
+               
+                   let mengen = Bestellung.menge[UnterkategorieSection!]
+                   let preise = Bestellung.preis[UnterkategorieSection!]
+                   let kommentar = Bestellung.kommentar[UnterkategorieSection!]
+                   let extrasNamen = Bestellung.extras[UnterkategorieSection!]
+                   let extrasPreise = Bestellung.extrasPreise[UnterkategorieSection!]
+
+                   for i in 0 ..< items.count {
+                    
+                       let bestellungName = ["Name": items[i]]
+                       let bestellungMenge = ["Menge": mengen[i]]
+                       let bestellungPreis = ["Preis": preise[i]]
+                       let bestellungKommentar = ["Kommentar": kommentar[i]]
+                       let childchildref = childRef?.child(Bestellung.Kategorie).child(Unterkategorie).childByAutoId()
+                           childchildref?.updateChildValues(bestellungName)
+                           childchildref?.updateChildValues(bestellungMenge)
+                           childchildref?.updateChildValues(bestellungPreis)
+                           childchildref?.updateChildValues(bestellungKommentar)
+                       let bestellungItemId = childchildref?.key
+                       childchildref?.updateChildValues(["bestellungItemId" : bestellungItemId!])
+                       let extraPreis = extrasPreise[i]
+                       for x in extrasNamen[i]{
+                           let preis = extraPreis[extrasNamen[i].firstIndex(of: x)!]
+                           childchildref?.child("Extras").child("Extra \(extrasNamen[i].firstIndex(of: x)!)").updateChildValues(["Name" : x])
+                           childchildref?.child("Extras").child("Extra \(extrasNamen[i].firstIndex(of: x)!)").updateChildValues(["Preis" : preis])
+
+                       } } } }
+           
+               childRef?.child("Information").updateChildValues(values)
+           let userBestellungenRef = Database.database().reference().child("userBestellungen").child(fromUserID!)
+           let userProfil = Database.database().reference().child("Users").child(fromUserID!)
+           let bestellungID = childRef?.key
+           
+               userBestellungenRef.child(bestellungID!).updateChildValues(["BestellungsID": bestellungID!, "abgeschlossen": false])
+               userBestellungenRef.child(bestellungID!).updateChildValues(values)
+           userProfil.updateChildValues(["aktuelleBar" : barname, "aktuellerTisch": tischnummer, "letzteBestellungZeit": timestamp])
+       
+
+               let kellnerBestellungenRef = Database.database().reference().child("userBestellungen").child(KellnerID)
+           kellnerBestellungenRef.child(bestellungID!).updateChildValues(["Status": "versendet", "fromUserID": fromUserID!, "tischnummer": "\(tischnummer)"] )
+
+       }
+       
     
     func passItemPlus(sender: MyBestellungCell) {
         let i = 1
@@ -426,7 +497,8 @@ class BestellungÜbersichtVC: UIViewController, UITableViewDelegate, UITableView
 //        cell.myItemPreis.text = "\(preisFormat) €"
 //        cell.myItemMenge.text = String(newMengen[indexPath.row])
 //        cell.kommentarLbl.text = newKommentare[indexPath.row]
-        
+            gesamtpreislabel = 0.0
+         
             gesamtpreisBerechnen(section: indexPath.section, row: indexPath.row)
             
             return cell
@@ -449,13 +521,18 @@ class BestellungÜbersichtVC: UIViewController, UITableViewDelegate, UITableView
                     for itemsMenge in itemsMengen {
                             ItemsMenge.append(Double(itemsMenge))
                         }}
-                teilPreis(itemPreis: ItemsPreis, extrasPreis: ExtraPreis, menge: ItemsMenge)
+                
+//                if bestellteItemsDictionary[section].menge.count == ItemsMenge.count {
+                    teilPreis(itemPreis: ItemsPreis, extrasPreis: ExtraPreis, menge: ItemsMenge)
+                    
+                
             }
         
             func teilPreis(itemPreis: [Double], extrasPreis: [Double], menge: [Double]) {
+                gesamtpreislabel = 0.0
                 for i in 0..<itemPreis.count{
                     gesamtpreislabel += (itemPreis[i]+extrasPreis[i])*menge[i]
-                    print(menge, itemPreis, extrasPreis, "variablen")
+                    print(menge[i], itemPreis[i], extrasPreis[i], "variablen")
                     print(gesamtpreislabel, "preiiiis")
                     gesamtPreisLbl.text = "\(String(format: "%.2f", gesamtpreislabel)) €"
                         
@@ -464,7 +541,9 @@ class BestellungÜbersichtVC: UIViewController, UITableViewDelegate, UITableView
             }
 
     override func viewDidLoad() {
-        
+        ExtraPreis.removeAll()
+        ItemsPreis.removeAll()
+        ItemsMenge.removeAll()
         self.navigationItem.title = "Deine Bestellung"
 
         self.view.backgroundColor = UIColor(patternImage: UIImage(named: "hintergrund")!)
