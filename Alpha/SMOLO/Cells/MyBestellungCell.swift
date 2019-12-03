@@ -47,6 +47,7 @@ class MyBestellungCell: UITableViewCell, UITableViewDelegate, UITableViewDataSou
     
     @IBOutlet weak var myBestellungTV: UITableView!
 
+    
     func cellMyItemEntfernen(sender: MyBestellungCell2) {
         sections2 = sender.Cell2Section
         rows2 = sender.Cell2Row
