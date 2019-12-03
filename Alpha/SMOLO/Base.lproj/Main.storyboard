@@ -1051,7 +1051,7 @@
                                 <rect key="frame" x="57" y="183" width="206" height="202"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4xM-ZE-Q9t">
-                                <rect key="frame" x="130" y="419" width="60" height="60"/>
+                                <rect key="frame" x="100" y="359" width="120" height="120"/>
                                 <state key="normal" image="flashlight-i">
                                     <attributedString key="attributedTitle"/>
                                 </state>
