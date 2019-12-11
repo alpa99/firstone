@@ -236,7 +236,6 @@ class BestellungVC2: UIViewController, UITableViewDataSource, UITableViewDelegat
 
     @IBAction func dismissMyBestellungView(_ sender: Any) {
         dismissMyBestellungView()
-        
     }
     
 
@@ -651,7 +650,8 @@ class BestellungVC2: UIViewController, UITableViewDataSource, UITableViewDelegat
                 heightForRowAt = (sections[indexPath.section].Unterkategorie.count*60)
                 for expandend in sections[indexPath.section].expanded2 {
                     if expandend == true {
-                        heightForRowAt = heightForRowAt! + sections[indexPath.section].items[indexPath.row].count*36
+                        heightForRowAt = 500
+                            //heightForRowAt! + sections[indexPath.section].items[indexPath.row].count*36
                     }
                 }
             }
