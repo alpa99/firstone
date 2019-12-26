@@ -625,6 +625,7 @@ class BestellungVC2: UIViewController, UITableViewDataSource, UITableViewDelegat
         else {
             numberOfRowsInSections = 1
         }
+        
         return numberOfRowsInSections!
     }
     
