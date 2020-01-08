@@ -10,6 +10,11 @@ pod 'Pulley'
 
 pod 'FacebookCore'
 pod 'FacebookLogin'
+pod 'FacebookSDK'
+pod 'FacebookSDK/LoginKit'
+pod 'FacebookSDK/ShareKit'
+pod 'FacebookSDK/PlacesKit'
+pod 'FBSDKMessengerShareKit'
 
 pod 'Firebase/Core'
 pod 'Firebase/Database'

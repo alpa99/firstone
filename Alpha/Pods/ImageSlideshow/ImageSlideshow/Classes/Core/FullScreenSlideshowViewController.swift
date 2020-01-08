@@ -13,11 +13,11 @@ open class FullScreenSlideshowViewController: UIViewController {
     open var slideshow: ImageSlideshow = {
         let slideshow = ImageSlideshow()
         slideshow.zoomEnabled = true
-        slideshow.contentScaleMode = UIView.ContentMode.scaleAspectFit
-         slideshow.pageIndicatorPosition = .init(horizontal: .center, vertical: .bottom)
+        slideshow.contentScaleMode = UIViewContentMode.scaleAspectFit
+        slideshow.pageIndicatorPosition = PageIndicatorPosition(horizontal: .center, vertical: .bottom)
         // turns off the timer
         slideshow.slideshowInterval = 0
-        slideshow.autoresizingMask = [UIView.AutoresizingMask.flexibleWidth, UIView.AutoresizingMask.flexibleHeight]
+        slideshow.autoresizingMask = [UIViewAutoresizing.flexibleWidth, UIViewAutoresizing.flexibleHeight]
 
         return slideshow
     }()
@@ -49,6 +49,15 @@ open class FullScreenSlideshowViewController: UIViewController {
 
     fileprivate var isInit = true
 
+    convenience init() {
+        self.init(nibName:nil, bundle:nil)
+
+        if #available(iOS 13.0, *) {
+            self.modalPresentationStyle = .fullScreen
+            self.isModalInPresentation = true
+        }
+    }
+
     override open func viewDidLoad() {
         super.viewDidLoad()
 
@@ -62,8 +71,8 @@ open class FullScreenSlideshowViewController: UIViewController {
         view.addSubview(slideshow)
 
         // close button configuration
-        closeButton.setImage(UIImage(named: "ic_cross_white", in: Bundle(for: type(of: self)), compatibleWith: nil), for: UIControl.State())
-        closeButton.addTarget(self, action: #selector(FullScreenSlideshowViewController.close), for: UIControl.Event.touchUpInside)
+        closeButton.setImage(UIImage(named: "ic_cross_white", in: Bundle(for: type(of: self)), compatibleWith: nil), for: UIControlState())
+        closeButton.addTarget(self, action: #selector(FullScreenSlideshowViewController.close), for: UIControlEvents.touchUpInside)
         view.addSubview(closeButton)
     }
 
