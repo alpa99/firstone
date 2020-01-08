@@ -287,7 +287,7 @@
 				08DB09392062E4D1007848E4 /* BestellenCell.xib */,
 				08DB09382062E4D1007848E4 /* BestellenCell2.swift */,
 				08210EE41FB83AE300EABA32 /* BestellenCell2.xib */,
-				38235DC222063B2D003BC44C /* Löschen */,
+				38235DC222063B2D003BC44C /* Löschen */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -316,7 +316,7 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		38235DC222063B2D003BC44C /* Löschen */ = {
+		38235DC222063B2D003BC44C /* Löschen */ = {
 			isa = PBXGroup;
 			children = (
 				085B23D62053113F00D50FE3 /* bezahlenCell.swift */,
@@ -988,7 +988,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 84R3VSG74G;
 				INFOPLIST_FILE = SMOLO/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.4;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = AM.SMOLO1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1006,7 +1006,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 84R3VSG74G;
 				INFOPLIST_FILE = SMOLO/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.4;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = AM.SMOLO1;
 				PRODUCT_NAME = "$(TARGET_NAME)";

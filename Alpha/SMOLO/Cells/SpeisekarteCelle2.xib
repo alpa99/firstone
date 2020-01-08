@@ -1,12 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina4_7" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14868" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14824"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -17,17 +14,17 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="77"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="320" height="76.5"/>
+                <rect key="frame" x="0.0" y="0.0" width="320" height="77"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Preis" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1Eg-wP-xwz">
-                        <rect key="frame" x="230" y="36" width="74" height="21"/>
+                        <rect key="frame" x="231" y="36" width="74" height="21"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Liter" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0j2-de-bwj">
-                        <rect key="frame" x="252" y="11" width="52" height="21"/>
+                        <rect key="frame" x="253" y="11" width="52" height="21"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="52" id="Cld-td-q32"/>
                         </constraints>
@@ -36,13 +33,13 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Item" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hVH-U7-Q16">
-                        <rect key="frame" x="16" y="11" width="241" height="21"/>
+                        <rect key="frame" x="15" y="11" width="243" height="21"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5zd-Ck-hTA">
-                        <rect key="frame" x="16" y="34" width="241" height="25"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5zd-Ck-hTA">
+                        <rect key="frame" x="15" y="34" width="243" height="32"/>
                         <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="12"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
@@ -60,7 +57,7 @@
                     <constraint firstItem="hVH-U7-Q16" firstAttribute="trailing" secondItem="5zd-Ck-hTA" secondAttribute="trailing" id="cFu-Aw-GQb"/>
                     <constraint firstItem="hVH-U7-Q16" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="ct8-fb-IQu"/>
                     <constraint firstItem="hVH-U7-Q16" firstAttribute="leading" secondItem="5zd-Ck-hTA" secondAttribute="leading" id="k5s-G4-zEN"/>
-                    <constraint firstItem="5zd-Ck-hTA" firstAttribute="centerY" secondItem="1Eg-wP-xwz" secondAttribute="centerY" id="s0C-Ek-QvS"/>
+                    <constraint firstItem="5zd-Ck-hTA" firstAttribute="centerY" secondItem="1Eg-wP-xwz" secondAttribute="centerY" constant="3.5" id="s0C-Ek-QvS"/>
                     <constraint firstItem="5zd-Ck-hTA" firstAttribute="top" secondItem="hVH-U7-Q16" secondAttribute="bottom" constant="2" id="sPZ-GR-Af7"/>
                 </constraints>
             </tableViewCellContentView>
@@ -72,7 +69,7 @@
                 <outlet property="beschreibungLbl" destination="5zd-Ck-hTA" id="IfI-xP-dRT"/>
                 <outlet property="itemLbl" destination="hVH-U7-Q16" id="eoN-tB-Uhf"/>
             </connections>
-            <point key="canvasLocation" x="115" y="80.5"/>
+            <point key="canvasLocation" x="113.59999999999999" y="79.610194902548727"/>
         </tableViewCell>
     </objects>
 </document>
