@@ -86,6 +86,7 @@ class KellnerCell: UITableViewCell, UITableViewDelegate, UITableViewDataSource, 
     
     
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+
         let view = UIView()
         view.backgroundColor = UIColor.clear
         return view
@@ -94,7 +95,7 @@ class KellnerCell: UITableViewCell, UITableViewDelegate, UITableViewDataSource, 
         let header = ExpandableHeaderView2()
         
         
-        header.customInit(tableView: tableView, title: Bestellungen[Cell1Section].Kategorie[section], section: section, delegate: self as ExpandableHeaderViewDelegate2)
+        header.customInit(tableView: tableView, title: Bestellungen[Cell1Section].Kategorie[section], color: UIColor.white, section: section, delegate: self as ExpandableHeaderViewDelegate2)
         return header
         
     }

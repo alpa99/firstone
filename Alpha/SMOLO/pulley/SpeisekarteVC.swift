@@ -124,13 +124,23 @@ class SpeisekarteVC: UIViewController, UITableViewDataSource, UITableViewDelegat
     func getKategorien (){
             var datref: DatabaseReference!
             datref = Database.database().reference()
+        print("HOLLLAA")
+        print(self.barname, "barname")
 
+        datref.child("Speisekarten").observeSingleEvent(of: .value, with: { (snapshotKategorie) in
+            for key in (snapshotKategorie.children.allObjects as? [DataSnapshot])! {
+                print(key, "KEY")
+                    }
+
+        }, withCancel: nil)
         datref.child("Speisekarten").child("\(self.barname)").observeSingleEvent(of: .value, with: { (snapshotKategorie) in
             for key in (snapshotKategorie.children.allObjects as? [DataSnapshot])! {
-
+                print(key, "Key")
+                print(self.barname, "barname")
                         if !self.Kategorien.contains(key.key) {
                             self.Kategorien.append(key.key)
                             self.getUnterKategorienItems(Kategorie: key.key)
+                            print(self.Kategorien, "KARS")
                         }
                     }
 
@@ -267,7 +277,10 @@ class SpeisekarteVC: UIViewController, UITableViewDataSource, UITableViewDelegat
         func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
             var heightForRowAt: Int?
             if tableView == SpeisekarteTableView{
-
+               if  sections[indexPath.section].Unterkategorie[indexPath.row] == "leer"{
+                sections[indexPath.section].expanded2[indexPath.row] = true
+                }
+                
             if (sections[indexPath.section].expanded) {
                 heightForRowAt = (sections[indexPath.section].Unterkategorie.count*(36+15))
                 for expandend in sections[indexPath.section].expanded2 {

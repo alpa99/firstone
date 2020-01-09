@@ -127,7 +127,7 @@ class MyBestellungCell: UITableViewCell, UITableViewDelegate, UITableViewDataSou
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let header = ExpandableHeaderView2()
         
-        header.customInit(tableView: tableView, title:  bestellteItemsDictionary[Cell1Section].Unterkategorie[section] , section: section, delegate: self as ExpandableHeaderViewDelegate2)
+        header.customInit(tableView: tableView, title:  bestellteItemsDictionary[Cell1Section].Unterkategorie[section], color: UIColor.white , section: section, delegate: self as ExpandableHeaderViewDelegate2)
         return header
         
         
