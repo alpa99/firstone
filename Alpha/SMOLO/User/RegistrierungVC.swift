@@ -94,7 +94,7 @@ class RegistrierungVC: UIViewController, UITextFieldDelegate {
             catch let error as NSError
             { print(error.localizedDescription) }
             }
-        loginManager.logIn(readPermissions: [.publicProfile, .email, .userBirthday], viewController: self) { result in
+            loginManager.logIn(permissions: [.publicProfile, .email, .userBirthday], viewController: self) { result in
             
             switch result {
             case .failed(let error):
@@ -228,10 +228,10 @@ class RegistrierungVC: UIViewController, UITextFieldDelegate {
     func AddFacebookUser(name: String, email: String){
         var ref: DatabaseReference?
         ref = Database.database().reference()
-        ref?.child("FacebookUsers").child(FBSDKAccessToken.current().userID).child("FacebookID").setValue(FBSDKAccessToken.current().userID)
-        ref?.child("FacebookUsers").child(FBSDKAccessToken.current().userID).child("FirebaseUid").setValue(Auth.auth().currentUser?.uid)
-        ref?.child("FacebookUsers").child(FBSDKAccessToken.current().userID).child("Name").setValue(name)
-        ref?.child("FacebookUsers").child(FBSDKAccessToken.current().userID).child("Email").setValue(email)
+        ref?.child("FacebookUsers").child(AccessToken.current!.userID).child("FacebookID").setValue(AccessToken.current?.userID)
+        ref?.child("FacebookUsers").child(AccessToken.current!.userID).child("FirebaseUid").setValue(Auth.auth().currentUser?.uid)
+        ref?.child("FacebookUsers").child(AccessToken.current!.userID).child("Name").setValue(name)
+        ref?.child("FacebookUsers").child(AccessToken.current!.userID).child("Email").setValue(email)
         segueToTabBar()
 
         }
