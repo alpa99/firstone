@@ -124,10 +124,10 @@ class LoginVC: UIViewController, UITextFieldDelegate {
     
     @IBAction func loginTapped(_ sender: UIButton) {
         print("1")
-        if (FBSDKAccessToken.current() == nil) {
+        if (AccessToken.current == nil) {
             print("nil")
         } else {
-            print(FBSDKAccessToken.current()!)
+            print(AccessToken.current!)
         }
         let loginManager = LoginManager()
         var ref: DatabaseReference?
@@ -141,7 +141,7 @@ class LoginVC: UIViewController, UITextFieldDelegate {
                     catch let error as NSError
                     { print(error.localizedDescription) }
                 }
-        loginManager.logIn(readPermissions: [.publicProfile, .email, .userBirthday], viewController: self) { result in
+            loginManager.logIn(permissions: [.publicProfile, .email, .userBirthday], viewController: self) { result in
             
 
             switch result {
@@ -150,7 +150,7 @@ class LoginVC: UIViewController, UITextFieldDelegate {
             case .cancelled:
                 print("cancelled")
             case .success(_,_,_):
-                if snapshot.hasChild(FBSDKAccessToken.current().userID) {
+                if snapshot.hasChild(AccessToken.current!.userID) {
                 self.getUserInfo {userInfo, error in
                     if let error = error {
                         print(error.localizedDescription, "ERRRRRRRRROR")

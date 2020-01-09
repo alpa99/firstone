@@ -28,7 +28,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate {
         GADMobileAds.configure(withApplicationID: "ca-app-pub-3940256099942544~1458002511")
         
       
-         SDKApplicationDelegate.shared.application(application, didFinishLaunchingWithOptions: launchOptions)
+         ApplicationDelegate.shared.application(application, didFinishLaunchingWithOptions: launchOptions)
         let myColor = UIColor(red: 90.0/255.0, green: 90.0/255.0, blue: 90.0/255.0, alpha: 1.0)
         UINavigationBar.appearance().tintColor = myColor
         
@@ -48,7 +48,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate {
     }
     
     func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
-        return SDKApplicationDelegate.shared.application(app, open: url, options: options)
+        return ApplicationDelegate.shared.application(app, open: url, options: options)
         
     }
     func applicationWillResignActive(_ application: UIApplication) {

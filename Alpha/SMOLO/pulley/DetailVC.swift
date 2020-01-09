@@ -63,7 +63,7 @@ class DetailVC: UIViewController, PulleyDrawerViewControllerDelegate, PageObserv
         fetchInfos()
         fetchText()
         fetchTimes()
-        slideshow.backgroundColor = UIColor.white
+        slideshow.backgroundColor = UIColor.clear
 
         slideshow.slideshowInterval = 0.0
         slideshow.pageIndicatorPosition = .init(horizontal: .center, vertical: .bottom)
@@ -80,6 +80,17 @@ class DetailVC: UIViewController, PulleyDrawerViewControllerDelegate, PageObserv
         print(sdWebImageSource, "source111")
         let recognizer = UITapGestureRecognizer(target: self, action: #selector(DetailVC.didTap))
         slideshow.addGestureRecognizer(recognizer)
+        
+        self.icon1.image = #imageLiteral(resourceName: "alkohol")
+        self.icon2.image = #imageLiteral(resourceName: "essen")
+        self.icon3.image = #imageLiteral(resourceName: "wlan")
+        self.icon4.image = #imageLiteral(resourceName: "parken")
+        self.icon5.image = UIImage(named: "kartenzahlung")
+        self.icon6.image = #imageLiteral(resourceName: "spiele")
+        self.icon7.image = #imageLiteral(resourceName: "sporttv")
+        self.icon8.image = #imageLiteral(resourceName: "shisha")
+        self.icon9.image = UIImage(named: "rauchen")
+        self.icon10.image = #imageLiteral(resourceName: "terasse")
     }
     
     @objc func didTap() {
@@ -256,73 +267,73 @@ class DetailVC: UIViewController, PulleyDrawerViewControllerDelegate, PageObserv
             
             self.it1.append(it.item1!)
             if self.it1 == "t" {
-                self.icon1.image = #imageLiteral(resourceName: "alkohol")
+                self.icon10.alpha = 1.0
             }
             if self.it1 == "f" {
-                self.icon1.image = #imageLiteral(resourceName: "alkohol-i")
+                self.icon10.alpha = 0.2
             }
             self.it2.append(it.item2!)
             if self.it2 == "t" {
-                self.icon2.image = #imageLiteral(resourceName: "essen")
+                self.icon10.alpha = 1.0
             }
             if self.it2 == "f" {
-                self.icon2.image = #imageLiteral(resourceName: "essen-i")
+                self.icon10.alpha = 0.2
             }
             self.it3.append(it.item3!)
             if self.it3 == "t" {
-                self.icon3.image = #imageLiteral(resourceName: "wlan")
+                self.icon10.alpha = 1.0
             }
             if self.it3 == "f" {
-                self.icon3.image = #imageLiteral(resourceName: "wlan-i")
+                self.icon10.alpha = 0.2
             }
             self.it4.append(it.item4!)
             if self.it4 == "t" {
-                self.icon4.image = #imageLiteral(resourceName: "parken")
+                self.icon4.alpha = 1.0
             }
             if self.it4 == "f" {
-                self.icon4.image = #imageLiteral(resourceName: "parken-i")
+                self.icon4.alpha = 0.2
             }
             self.it5.append(it.item5!)
             if self.it5 == "t" {
-                self.icon5.image = #imageLiteral(resourceName: "kartenzahlung")
+                self.icon10.alpha = 1.0
             }
             if self.it5 == "f" {
-                self.icon5.image = #imageLiteral(resourceName: "kartenzahlung-i")
+                self.icon10.alpha = 0.2
             }
             self.it6.append(it.item6!)
             if self.it6 == "t" {
-                self.icon6.image = #imageLiteral(resourceName: "spiele")
+                self.icon10.alpha = 1.0
             }
             if self.it6 == "f" {
-                self.icon6.image = #imageLiteral(resourceName: "spiele-i")
+                self.icon10.alpha = 0.2
             }
             self.it7.append(it.item7!)
             if self.it7 == "t" {
-                self.icon7.image = #imageLiteral(resourceName: "sporttv")
+                self.icon10.alpha = 1.0
             }
             if self.it7 == "f" {
-                self.icon7.image = #imageLiteral(resourceName: "sporttv-i")
+                self.icon10.alpha = 0.2
             }
             self.it8.append(it.item8!)
             if self.it8 == "t" {
-                self.icon8.image = #imageLiteral(resourceName: "shisha")
+                self.icon10.alpha = 1.0
             }
             if self.it8 == "f" {
-                self.icon8.image = #imageLiteral(resourceName: "shisha-i")
+                self.icon10.alpha = 0.2
             }
             self.it9.append(it.item9!)
             if self.it9 == "t" {
-                self.icon9.image = #imageLiteral(resourceName: "rauchen")
+                self.icon9.alpha = 1.0
             }
             if self.it9 == "f" {
-                self.icon9.image = #imageLiteral(resourceName: "rauchen-i")
+                self.icon9.alpha = 0.2
             }
             self.it10.append(it.item10!)
             if self.it10 == "t" {
-                self.icon10.image = #imageLiteral(resourceName: "terasse")
+                self.icon10.alpha = 1.0
             }
             if self.it10 == "f" {
-                self.icon10.image = #imageLiteral(resourceName: "terasse-i")
+                self.icon10.alpha = 0.2
             }
             
         }}, withCancel: nil)

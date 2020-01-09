@@ -53,11 +53,12 @@ class BestellungÜbersichtVC: UIViewController, UITableViewDelegate, UITableView
         alertKeineBestellung.addAction(UIAlertAction(title: "Abschicken", style: .default, handler: { (UIAlertAction) in
             print("ok")
             self.handleBestellung()
+            self.performSegue(withIdentifier: "wirdabgeschickt", sender: self)
+            
         }))
         alertKeineBestellung.addAction(UIAlertAction(title: "Abbrechen", style: .default, handler: { (UIAlertAction) in
             print("abbrechen")
         }))
-        // segue und handleBestellung fehlen
         self.present(alertKeineBestellung, animated: true, completion: nil)
     }
     

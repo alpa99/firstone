@@ -8,7 +8,9 @@
 [![License](https://img.shields.io/cocoapods/l/ImageSlideshow.svg?style=flat)](http://cocoapods.org/pods/ImageSlideshow)
 [![Platform](https://img.shields.io/cocoapods/p/ImageSlideshow.svg?style=flat)](http://cocoapods.org/pods/ImageSlideshow)
 
-![](https://dzwonsemrish7.cloudfront.net/items/3R3i0G2N0s3V2y3X1E15/ezgif.com-crop.gif)
+
+
+![](https://dzwonsemrish7.cloudfront.net/items/2R06283n040V3P3p0i42/ezgif.com-optimize.gif)
 
 ## 📱 Example
 
@@ -21,14 +23,14 @@ ImageSlideshow is available through [CocoaPods](http://cocoapods.org). To instal
 it, simply add the following line to your Podfile:
 
 ```ruby
-pod 'ImageSlideshow', '~> 1.6'
+pod 'ImageSlideshow', '~> 1.8.1'
 ```
 
 ### Carthage
 To integrate ImageSlideshow into your Xcode project using Carthage, specify it in your Cartfile:
 
 ```ruby
-github "zvonicek/ImageSlideshow" ~> 1.6
+github "zvonicek/ImageSlideshow" ~> 1.8.1
 ```
 
 Carthage does not include InputSources for external providers (due to dependency on those providers) so you need to grab the one you need from `ImageSlideshow/Classes/InputSources` manually.
@@ -57,7 +59,7 @@ Set images by using ```setImageInputs``` method on ```ImageSlideshow``` instance
 | [AFNetworking](https://github.com/AFNetworking/AFNetworking)  | AFURLSource      | `pod "ImageSlideshow/AFURL"`      |
 | [SDWebImage](https://github.com/rs/SDWebImage)                | SDWebImageSource | `pod "ImageSlideshow/SDWebImage"` |
 | [Kingfisher](https://github.com/onevcat/Kingfisher)           | KingfisherSource | `pod "ImageSlideshow/Kingfisher"` |
-| [Parse](https://github.com/ParsePlatform/Parse-SDK-iOS-OSX)   | ParseSource      | `pod "ImageSlideshow/ParseSource"`|
+| [Parse](https://github.com/ParsePlatform/Parse-SDK-iOS-OSX)   | ParseSource      | `pod "ImageSlideshow/Parse"`      |
 
 
 ```swift

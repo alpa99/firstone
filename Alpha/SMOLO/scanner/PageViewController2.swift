@@ -31,11 +31,11 @@ class PageViewController2: UIPageViewController, UIPageViewControllerDelegate, U
         self.dataSource = self
         self.delegate = self
         
-        let detailvc =  UIStoryboard(name: "Main", bundle: nil) .
-            instantiateViewController(withIdentifier: "DetailVC2") as! DetailVC2
-        let detvc = detailvc as PageObservation2
-        detvc.getParentPageViewController2(parentRef2: self)
-        orderedViewControllers.append(detailvc)
+//        let detailvc =  UIStoryboard(name: "Main", bundle: nil) .
+//            instantiateViewController(withIdentifier: "DetailVC2") as! DetailVC2
+//        let detvc = detailvc as PageObservation2
+//        detvc.getParentPageViewController2(parentRef2: self)
+//        orderedViewControllers.append(detailvc)
 
 
         let bestellvc =  UIStoryboard(name: "Main", bundle: nil) .
