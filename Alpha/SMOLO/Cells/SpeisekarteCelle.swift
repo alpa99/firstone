@@ -49,7 +49,13 @@ class SpeisekarteCelle: UITableViewCell, UITableViewDataSource, UITableViewDeleg
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 36
+        if sections[sectioncell].Unterkategorie[section] == "leer" {
+            return 1
+            
+        } else {
+            return 36
+        }
+            
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -73,8 +79,12 @@ class SpeisekarteCelle: UITableViewCell, UITableViewDataSource, UITableViewDeleg
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let header = ExpandableHeaderView2()
+       
+        header.customInit(tableView: tableView, title:  sections[sectioncell].Unterkategorie[section], color: UIColor.white, section: section, delegate: self as ExpandableHeaderViewDelegate2)
+        if sections[sectioncell].Unterkategorie[section] == "leer" {
+            header.textLabel?.textColor = UIColor.clear
+        }
         
-            header.customInit(tableView: tableView, title:  sections[sectioncell].Unterkategorie[section], section: section, delegate: self as ExpandableHeaderViewDelegate2)
             return header
     }
     

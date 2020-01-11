@@ -34,9 +34,10 @@ class ExpandableHeaderView2: UITableViewHeaderFooterView {
         delegate?.toggleSection(tableView: tableView, header: self, section: cell.section)
     }
     
-    func customInit(tableView: UITableView, title: String, section: Int, delegate: ExpandableHeaderViewDelegate2) {
+    func customInit(tableView: UITableView, title: String, color: UIColor, section: Int, delegate: ExpandableHeaderViewDelegate2) {
         
         self.textLabel?.text = title
+        self.textLabel?.textColor = color
         self.section = section
         self.delegate = delegate
         self.tableView = tableView
@@ -48,11 +49,15 @@ class ExpandableHeaderView2: UITableViewHeaderFooterView {
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        self.textLabel?.textColor = UIColor.white
+        
+//        self.textLabel?.textColor = UIColor.white
         self.textLabel?.font = UIFont(name: "Verdana-Bold", size: 20.0)
         self.textLabel?.textAlignment = .left
         self.textLabel?.backgroundColor = UIColor.clear
         self.layer.backgroundColor = UIColor.clear.cgColor
+        self.tableView.headerView(forSection: self.section)?.backgroundView?.backgroundColor = UIColor.clear
+        self.textLabel?.frame = self.layer.frame
+
 //        self.contentView.backgroundColor = UIColor.clear
         
 //        self.backgroundColor = UIColor.clear

@@ -27,7 +27,7 @@
 		<key>FBSDKCoreKit.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>5</integer>
+			<integer>1</integer>
 		</dict>
 		<key>FBSDKLoginKit.xcscheme</key>
 		<dict>
@@ -38,6 +38,26 @@
 		<dict>
 			<key>orderHint</key>
 			<integer>6</integer>
+		</dict>
+		<key>FBSDKMarketingKit.xcscheme_^#shared#^_</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>7</integer>
+		</dict>
+		<key>FBSDKMessengerShareKit.xcscheme_^#shared#^_</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>8</integer>
+		</dict>
+		<key>FBSDKPlacesKit.xcscheme_^#shared#^_</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>9</integer>
+		</dict>
+		<key>FBSDKShareKit.xcscheme_^#shared#^_</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>10</integer>
 		</dict>
 		<key>FacebookCore.xcscheme</key>
 		<dict>
@@ -59,6 +79,26 @@
 			<key>orderHint</key>
 			<integer>4</integer>
 		</dict>
+		<key>FacebookSDK.xcscheme_^#shared#^_</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>5</integer>
+		</dict>
+		<key>Firebase.xcscheme_^#shared#^_</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>11</integer>
+		</dict>
+		<key>FirebaseAnalytics.xcscheme_^#shared#^_</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>12</integer>
+		</dict>
+		<key>FirebaseAnalyticsInterop.xcscheme_^#shared#^_</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>13</integer>
+		</dict>
 		<key>FirebaseAuth.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
@@ -67,7 +107,12 @@
 		<key>FirebaseAuth.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>7</integer>
+			<integer>14</integer>
+		</dict>
+		<key>FirebaseAuthInterop.xcscheme_^#shared#^_</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>15</integer>
 		</dict>
 		<key>FirebaseCore.xcscheme</key>
 		<dict>
@@ -77,7 +122,17 @@
 		<key>FirebaseCore.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>8</integer>
+			<integer>16</integer>
+		</dict>
+		<key>FirebaseCoreDiagnostics.xcscheme_^#shared#^_</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>17</integer>
+		</dict>
+		<key>FirebaseCoreDiagnosticsInterop.xcscheme_^#shared#^_</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>18</integer>
 		</dict>
 		<key>FirebaseDatabase.xcscheme</key>
 		<dict>
@@ -87,7 +142,12 @@
 		<key>FirebaseDatabase.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>9</integer>
+			<integer>19</integer>
+		</dict>
+		<key>FirebaseInstanceID.xcscheme_^#shared#^_</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>20</integer>
 		</dict>
 		<key>FirebaseMessaging.xcscheme</key>
 		<dict>
@@ -97,7 +157,7 @@
 		<key>FirebaseMessaging.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>10</integer>
+			<integer>21</integer>
 		</dict>
 		<key>FirebaseStorage.xcscheme</key>
 		<dict>
@@ -107,7 +167,7 @@
 		<key>FirebaseStorage.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>11</integer>
+			<integer>22</integer>
 		</dict>
 		<key>GTMSessionFetcher.xcscheme</key>
 		<dict>
@@ -117,7 +177,37 @@
 		<key>GTMSessionFetcher.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>13</integer>
+			<integer>30</integer>
+		</dict>
+		<key>Google-Mobile-Ads-SDK.xcscheme_^#shared#^_</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>23</integer>
+		</dict>
+		<key>GoogleAppMeasurement.xcscheme_^#shared#^_</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>24</integer>
+		</dict>
+		<key>GoogleDataTransport.xcscheme_^#shared#^_</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>25</integer>
+		</dict>
+		<key>GoogleDataTransportCCTSupport.xcscheme_^#shared#^_</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>26</integer>
+		</dict>
+		<key>GoogleMaps.xcscheme_^#shared#^_</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>27</integer>
+		</dict>
+		<key>GooglePlaces.xcscheme_^#shared#^_</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>28</integer>
 		</dict>
 		<key>GoogleToolboxForMac.xcscheme</key>
 		<dict>
@@ -129,6 +219,11 @@
 			<key>orderHint</key>
 			<integer>12</integer>
 		</dict>
+		<key>GoogleUtilities.xcscheme_^#shared#^_</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>29</integer>
+		</dict>
 		<key>ImageSlideshow.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
@@ -137,7 +232,7 @@
 		<key>ImageSlideshow.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>14</integer>
+			<integer>31</integer>
 		</dict>
 		<key>Pods-SMOLO.xcscheme</key>
 		<dict>
@@ -147,7 +242,7 @@
 		<key>Pods-SMOLO.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>17</integer>
+			<integer>34</integer>
 		</dict>
 		<key>Pods-SMOLOTests.xcscheme</key>
 		<dict>
@@ -157,7 +252,7 @@
 		<key>Pods-SMOLOTests.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>18</integer>
+			<integer>35</integer>
 		</dict>
 		<key>Pods-SMOLOUITests.xcscheme</key>
 		<dict>
@@ -167,7 +262,7 @@
 		<key>Pods-SMOLOUITests.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>19</integer>
+			<integer>36</integer>
 		</dict>
 		<key>Protobuf.xcscheme</key>
 		<dict>
@@ -177,7 +272,7 @@
 		<key>Protobuf.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>20</integer>
+			<integer>37</integer>
 		</dict>
 		<key>Pulley.xcscheme</key>
 		<dict>
@@ -187,7 +282,7 @@
 		<key>Pulley.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>21</integer>
+			<integer>38</integer>
 		</dict>
 		<key>SDWebImage.xcscheme</key>
 		<dict>
@@ -197,7 +292,7 @@
 		<key>SDWebImage.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>22</integer>
+			<integer>39</integer>
 		</dict>
 		<key>leveldb-library.xcscheme</key>
 		<dict>
@@ -207,7 +302,7 @@
 		<key>leveldb-library.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>15</integer>
+			<integer>32</integer>
 		</dict>
 		<key>nanopb.xcscheme</key>
 		<dict>
@@ -217,7 +312,7 @@
 		<key>nanopb.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>16</integer>
+			<integer>33</integer>
 		</dict>
 	</dict>
 </dict>

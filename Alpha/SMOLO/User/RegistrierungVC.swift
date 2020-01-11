@@ -159,7 +159,7 @@ class RegistrierungVC: UIViewController, UITextFieldDelegate {
     
     
     func getUserInfo(completion: @escaping (_ : [String: Any]?, _ : Error?) -> Void) {
-        
+/*
         
         let request = GraphRequest(graphPath: "me", parameters: ["fields": "id,name,email"])
         
@@ -210,6 +210,7 @@ class RegistrierungVC: UIViewController, UITextFieldDelegate {
                 })
             }
         }
+ */
     }
     
     func addUserToFirebase(name: String, email: String){

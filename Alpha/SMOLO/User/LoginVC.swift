@@ -180,36 +180,42 @@ class LoginVC: UIViewController, UITextFieldDelegate {
         
         print(5)
         let request = GraphRequest(graphPath: "me", parameters: ["fields": "id,name,email"])
-
-        request.start{ response, result in
-            switch result {
-            case .failed(let error):
-                completion(nil, error)
-            case .success(let graphResponse):
-                print(6)
-                completion(graphResponse.dictionaryValue, nil)
-                let accessToken = FBSDKAccessToken.current()
-                guard let accessTokenString = accessToken?.tokenString else {
-                    return
-                }
-
-                            let credential = FacebookAuthProvider.credential(withAccessToken: accessTokenString)
-                            Auth.auth().signInAndRetrieveData(with: credential, completion: { (user, error) in
-                                print(Auth.auth().currentUser?.uid ?? "keine uid", "UID")
-                                if error != nil {
-                                    let alertNichtRegistriert = UIAlertController(title: "Registrierung fehlgeschlagen", message: "Bitte informiere info@madapp.de", preferredStyle: .alert)
-                                    alertNichtRegistriert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-                                    self.present(alertNichtRegistriert, animated: true, completion: nil)
-                                                                        return
-                                } else {
-                                }
-                                print("fb user:", user ?? "default user")
-                                
-                            })
+        
+        request.start { (connection, result, error) in
+            print(connection ?? "c", "connection")
+            print(result ?? "r", "result")
+            print(error ?? "e", "error")
 
 
-            }
         }
+//        request.start{ response, result in
+//            switch result {
+//            case .failed(let error):
+//                completion(nil, error)
+//            case .success(let graphResponse):
+//                completion(graphResponse.dictionaryValue, nil)
+//                let accessToken = FBSDKAccessToken.current()
+//                guard let accessTokenString = accessToken?.tokenString else {
+//                    return
+//                }
+//
+//                            let credential = FacebookAuthProvider.credential(withAccessToken: accessTokenString)
+//                            Auth.auth().signInAndRetrieveData(with: credential, completion: { (user, error) in
+//                                print(Auth.auth().currentUser?.uid ?? "keine uid", "UID")
+//                                if error != nil {
+//                                    let alertNichtRegistriert = UIAlertController(title: "Registrierung fehlgeschlagen", message: "Bitte informiere info@madapp.de", preferredStyle: .alert)
+//                                    alertNichtRegistriert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+//                                    self.present(alertNichtRegistriert, animated: true, completion: nil)
+//                                                                        return
+//                                } else {
+//                                }
+//                                print("fb user:", user ?? "default user")
+//
+//                            })
+//
+//
+//            }
+//        }
         
     }
     
