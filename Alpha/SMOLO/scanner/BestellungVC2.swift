@@ -10,12 +10,12 @@ import Firebase
 import FBSDKLoginKit
 import FirebaseAuth
 import CoreLocation
-import GoogleMobileAds
+//import GoogleMobileAds
 
 protocol BestellungVC2Delegate {
     func reloaddas(sender: Any)
 }
-class BestellungVC2: UIViewController, UITableViewDataSource, UITableViewDelegate, ExpandableHeaderViewDelegate, BestellenCellDelegate, PageObservation2, ExtraCellDelegate, CLLocationManagerDelegate, UITextViewDelegate, GADInterstitialDelegate, BestellungÜbersichtDelegate {
+class BestellungVC2: UIViewController, UITableViewDataSource, UITableViewDelegate, ExpandableHeaderViewDelegate, BestellenCellDelegate, PageObservation2, ExtraCellDelegate, CLLocationManagerDelegate, UITextViewDelegate, /*GADInterstitialDelegate,*/ BestellungÜbersichtDelegate {
     func passChanges(Kategorien: [String], Unterkategorien: [[String]], ItemsNamen: [[[String]]], ItemsPreise: [[[Double]]], ItemsLiter: [[[String]]], ItemsKommentar: [[[String]]], ItemsMenge: [[[Int]]], ItemsExpanded2: [[Bool]], ExtrasName: [[[[String]]]], ExtrasPreise: [[[[Double]]]]) {
         
         BestellungKategorien = Kategorien
@@ -33,7 +33,7 @@ class BestellungVC2: UIViewController, UITableViewDataSource, UITableViewDelegat
     
     // VARS
 
-    var interstitial: GADInterstitial!
+   // var interstitial: GADInterstitial!
     var barname = "NewBar"
     var baradresse = " "
     var tischnummer = 0
@@ -1172,22 +1172,22 @@ class BestellungVC2: UIViewController, UITableViewDataSource, UITableViewDelegat
     
     //ADMOB-Werbung
     
-    func createAndLoadInterstitial() -> GADInterstitial {
-        let interstitial = GADInterstitial(adUnitID: "ca-app-pub-3940256099942544/4411468910")
-        interstitial.delegate = self
-        interstitial.load(GADRequest())
-        return interstitial
-    }
-
-    func interstitialDidDismissScreen(_ ad: GADInterstitial) {
-        interstitial = createAndLoadInterstitial()
-    }
+//    func createAndLoadInterstitial() -> GADInterstitial {
+//        let interstitial = GADInterstitial(adUnitID: "ca-app-pub-3940256099942544/4411468910")
+//        interstitial.delegate = self
+//        interstitial.load(GADRequest())
+//        return interstitial
+//    }
+//
+//    func interstitialDidDismissScreen(_ ad: GADInterstitial) {
+//        interstitial = createAndLoadInterstitial()
+//    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         
-        interstitial = createAndLoadInterstitial()
+       // interstitial = createAndLoadInterstitial()
         
         kommentarTextView.delegate = self
         kommentarTextView.backgroundColor = UIColor(red: 255/255, green: 255/255, blue: 255/255, alpha: 0.5)

@@ -11,7 +11,7 @@ import Firebase
 import FacebookCore
 import UserNotifications
 import FirebaseMessaging
-import GoogleMobileAds
+//import GoogleMobileAds
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate {
@@ -25,7 +25,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch. ca-app-pub-9477880000646212~6104942849
         FirebaseApp.configure()
-        GADMobileAds.configure(withApplicationID: "ca-app-pub-3940256099942544~1458002511")
+      //  GADMobileAds.configure(withApplicationID: "ca-app-pub-3940256099942544~1458002511")
         
       
          ApplicationDelegate.shared.application(application, didFinishLaunchingWithOptions: launchOptions)
