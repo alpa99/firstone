@@ -13,6 +13,8 @@ protocol MyBestellungCell2Delegate {
     func cellMyItemMengePlusAction(sender: MyBestellungCell2)
     func cellmyItemMengeMinusAction(sender: MyBestellungCell2)
     func cellmyItemKommenAendern(sender: MyBestellungCell2)
+    func disableBackBtn(sender: MyBestellungCell2)
+    
     
 }
 
@@ -58,15 +60,14 @@ class MyBestellungCell2: UITableViewCell, UITextViewDelegate, UITableViewDelegat
         delegate?.cellMyItemEntfernen(sender: self)
         print("11")
     }
-    
-    func textViewDidEndEditing(_ textView: UITextView) {
-        print(kommentarLbl.text, "1 k text")
-        delegate?.cellmyItemKommenAendern(sender: self)
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        delegate?.disableBackBtn(sender: self)
     }
+    
     func textViewShouldEndEditing(_ textView: UITextView) -> Bool {
-        print("hgjhkj")
-    print(kommentarLbl.text, "1 k text")
-    delegate?.cellmyItemKommenAendern(sender: self)
+        delegate?.cellmyItemKommenAendern(sender: self)
+        delegate?.disableBackBtn(sender: self)
+
         return true
     }
     
