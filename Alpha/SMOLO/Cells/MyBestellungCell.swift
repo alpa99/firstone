@@ -13,11 +13,12 @@ protocol MyBestellungCellDelegate {
     func passItemPlus(sender: MyBestellungCell)
     func passItemMinus(sender: MyBestellungCell)
     func passKommentarAendern(sender: MyBestellungCell)
-    func passDisableBackBtn(sender: MyBestellungCell)
     
 }
 
 class MyBestellungCell: UITableViewCell, UITableViewDelegate, UITableViewDataSource, ExpandableHeaderViewDelegate2, MyBestellungCell2Delegate {
+
+    
     
     // VARS
     //
@@ -78,11 +79,6 @@ class MyBestellungCell: UITableViewCell, UITableViewDelegate, UITableViewDataSou
         
         delegate?.passKommentarAendern(sender: self)
     }
-    
-    func disableBackBtn(sender: MyBestellungCell2) {
-        delegate?.passDisableBackBtn(sender: self)
-       }
-    
     
     // Tabelle
     func numberOfSections(in tableView: UITableView) -> Int {

@@ -14,7 +14,6 @@ protocol BestellungÜbersichtDelegate {
 }
 
 class BestellungÜbersichtVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UINavigationControllerDelegate, MyBestellungCellDelegate, ExpandableHeaderViewDelegate, UITextFieldDelegate {
-   
     
     var test = "geht?"
     var bestellteItemsDictionary = [bestellungTVSection]()
@@ -222,8 +221,7 @@ class BestellungÜbersichtVC: UIViewController, UITableViewDelegate, UITableView
     }
     
     override func willMove(toParent parent: UIViewController?) {
-    
-        let BestellungVC2 = self.storyboard?.instantiateViewController(withIdentifier: "BestellungVC2") as! BestellungVC2
+                let BestellungVC2 = self.storyboard?.instantiateViewController(withIdentifier: "BestellungVC2") as! BestellungVC2
         print(BestellungKategorien, "haja324r1111sjsaj")
         print(BestellungUnterkategorien, "hajas123jsaj")
         print(BestellungItemsNamen, "hajasj2453saj")
@@ -371,19 +369,6 @@ class BestellungÜbersichtVC: UIViewController, UITableViewDelegate, UITableView
  
     }
     
-    func passDisableBackBtn(sender: MyBestellungCell) {
-        
-        if navigationController?.navigationBar.isUserInteractionEnabled == true {
-            navigationController?.navigationBar.isUserInteractionEnabled = false
-            navigationController?.navigationBar.tintColor = UIColor.lightGray
-        }
-            
-        else if navigationController?.navigationBar.isUserInteractionEnabled == false {
-            navigationController?.navigationBar.isUserInteractionEnabled = true
-            navigationController?.navigationBar.tintColor = UIColor.white
-        }
-       }
-       
 
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -418,6 +403,7 @@ class BestellungÜbersichtVC: UIViewController, UITableViewDelegate, UITableView
                 countExtras = extra.count
             }
         }
+        
         return CGFloat(36+countUKat*36+countItems*171+countExtras*44)
 //
 //        if (Bestellungen[indexPath.section].expanded) {

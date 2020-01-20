@@ -1213,7 +1213,6 @@ class BestellungVC2: UIViewController, UITableViewDataSource, UITableViewDelegat
         addItemView.layer.cornerRadius = 10
         myBestellungView.layer.cornerRadius = 10
         extrasView.layer.cornerRadius = 10
-        
 //
 //        locationManager.requestWhenInUseAuthorization()
 //        locationManager.desiredAccuracy = kCLLocationAccuracyBest

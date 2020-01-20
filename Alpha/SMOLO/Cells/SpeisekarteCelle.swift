@@ -10,7 +10,6 @@ import UIKit
 
 protocol SpeisekarteDelegate {
     func reloadUnterkategorie(sender: SpeisekarteCelle)
-    func passItemSection(ItemSection: Int)
 }
 
 class SpeisekarteCelle: UITableViewCell, UITableViewDataSource, UITableViewDelegate, ExpandableHeaderViewDelegate2 {
@@ -49,6 +48,7 @@ class SpeisekarteCelle: UITableViewCell, UITableViewDataSource, UITableViewDeleg
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+<<<<<<< HEAD
         if sections[sectioncell].Unterkategorie[section] == "leer" {
             return 1
             
@@ -56,19 +56,23 @@ class SpeisekarteCelle: UITableViewCell, UITableViewDataSource, UITableViewDeleg
             return 36
         }
             
+=======
+        return 50
+>>>>>>> parent of 1f8e8f4b... Bestellübersicht verbessert
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        print(indexPath, "INDEXPATH CELL2")
         if sections[sectioncell].expanded2[indexPath.section] != false {
             return CGFloat(60)}
         else {
             return 0
+            
         }
     }
     
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         return 15
+        
     }
     
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
@@ -86,6 +90,8 @@ class SpeisekarteCelle: UITableViewCell, UITableViewDataSource, UITableViewDeleg
         }
         
             return header
+
+        
     }
     
     
@@ -93,7 +99,7 @@ class SpeisekarteCelle: UITableViewCell, UITableViewDataSource, UITableViewDeleg
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = Bundle.main.loadNibNamed("SpeisekarteCelle2", owner: self, options: nil)?.first as! SpeisekarteCelle2
-        delegate?.passItemSection(ItemSection: indexPath.section)
+
 //        cell.itemLbl.text = "cell.itemLbl.text"
         if sections[sectioncell].expanded2[indexPath.section] != false {
 

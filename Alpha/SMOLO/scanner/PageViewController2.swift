@@ -24,8 +24,7 @@ class PageViewController2: UIPageViewController, UIPageViewControllerDelegate, U
     
     
     override func viewDidLoad() {
-        navigationController?.navigationBar.tintColor = UIColor.white
-
+        print(name)
         self.navigationItem.title = barname
         super.viewDidLoad()
         self.dataSource = self
@@ -96,6 +95,7 @@ class PageViewController2: UIPageViewController, UIPageViewControllerDelegate, U
         guard orderedViewControllers.count > previousIndex else {
             return nil
         }
+        
         return orderedViewControllers[previousIndex]
     }
     

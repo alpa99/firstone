@@ -15,7 +15,16 @@ import CoreLocation
 
 
 class SpeisekarteVC: UIViewController, UITableViewDataSource, UITableViewDelegate, PulleyDrawerViewControllerDelegate, ExpandableHeaderViewDelegate, PageObservation, SpeisekarteDelegate {
-
+    
+    func reloadUnterkategorie(sender: SpeisekarteCelle) {
+        print("jallladflsdf")
+        sections = sender.sections
+        SpeisekarteTableView.beginUpdates()
+        SpeisekarteTableView.reloadRows(at: [IndexPath(row: 0, section: sender.sectioncell)], with: .automatic)
+        SpeisekarteTableView.endUpdates()
+    }
+    
+    
         var parentPageViewController: PageViewController!
     
         var barname = " "
@@ -31,7 +40,6 @@ class SpeisekarteVC: UIViewController, UITableViewDataSource, UITableViewDelegat
         var Liter = [String: [[String]]]()
         var Beschreibung = [String: [[String]]]()
         var Expanded = [String: [Bool]]()
-        var ItemsSection = Int()
 
         // OUTLETS
         
@@ -48,19 +56,6 @@ class SpeisekarteVC: UIViewController, UITableViewDataSource, UITableViewDelegat
     @IBOutlet var ZusatzstoffeView: UIView!
     
     @IBOutlet weak var ZusatzstoffeTV: UITableView!
-    
-    
-    func reloadUnterkategorie(sender: SpeisekarteCelle) {
-           print("jallladflsdf")
-           sections = sender.sections
-           SpeisekarteTableView.beginUpdates()
-           SpeisekarteTableView.reloadRows(at: [IndexPath(row: 0, section: sender.sectioncell)], with: .automatic)
-           SpeisekarteTableView.endUpdates()
-       }
-       
-       func passItemSection(ItemSection: Int) {
-              ItemsSection = ItemSection
-          }
     
     @IBAction func info(_ sender: UIButton) {
         
@@ -282,19 +277,18 @@ class SpeisekarteVC: UIViewController, UITableViewDataSource, UITableViewDelegat
                 }
                 
             if (sections[indexPath.section].expanded) {
-                heightForRowAt = (sections[indexPath.section].Unterkategorie.count*(36+15))
+                heightForRowAt = (sections[indexPath.section].Unterkategorie.count*60)
                 for expandend in sections[indexPath.section].expanded2 {
                     if expandend == true {
-                        print(sections, indexPath.section, "sections 1111")
-                            print(sections[indexPath.section].items, ItemsSection, "sections 2222")
-    heightForRowAt = heightForRowAt! + sections[indexPath.section].items[ItemsSection].count*60
+                        print("dsfdfd")
+    heightForRowAt = heightForRowAt! + sections[indexPath.section].items[indexPath.row].count*36
                     }
                 }
+                
             }
             else {
                 heightForRowAt = 0
-                }
-                } else {
+                }}else{
                 heightForRowAt = 36
             }
             return CGFloat(heightForRowAt!)
